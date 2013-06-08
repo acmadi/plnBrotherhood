@@ -37,10 +37,9 @@
 	</table>
 </div>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/history')))  ?>
+
+
+<?php 
+    echo CHtml::button('Kembali', array('submit'=>array('site/history')))  ;                
+?>
     
-    
-
-
-
-
