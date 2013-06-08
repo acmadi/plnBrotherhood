@@ -23,3 +23,5 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 	</table>
 </div>
 
+<?php echo CHtml::button('Unggah berkas excel', array('submit'=>array('site/uploadexcel'), 'style'=>'background:url(css/bg.gif)')); ?>
+

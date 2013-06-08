@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | History';
+$this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 ?>
 
 <div>
