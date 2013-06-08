@@ -49,8 +49,13 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('history');
 	}
+        
+        public function actionDokumenhistory(){
+            $this->render('dokumenhistory');
+        }
+                
 
-	/**
+        /**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */

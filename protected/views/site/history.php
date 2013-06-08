@@ -14,7 +14,7 @@ $this->pageTitle=Yii::app()->name . ' | History';
 		<tr>
 			<td>1</td>
 			<td>Pengadaan gedung baru</td>	
-                        <td>Link dokumen</td>
+                        <td><?php echo CHtml::link('Link Dokumen',array('site/dokumenhistory'))  ?> </td>
 		</tr>
                 <tr>
 			<td>2</td>
@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name . ' | History';
 		</tr>
                 <tr>
 			<td>3</td>
-			<td>Pengadaan listrik</td>	
+			<td>Pengadaan mobil</td>	
                         <td>Link dokumen</td>
 		</tr>
                 
