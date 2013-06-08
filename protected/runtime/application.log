@@ -244,3 +244,25 @@ Stack trace:
 REQUEST_URI=/plnBrotherhood/index.php?r=site/dokumenhistory
 HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/history
 ---
+2013/06/08 12:19:55 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\helpers\CHtml.php:98)
+Stack trace:
+#0 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\helpers\CHtml.php(153): renderAttributes()
+#1 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\helpers\CHtml.php(449): tag()
+#2 D:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php(29): button()
+#3 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require()
+#4 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): SiteController->renderInternal()
+#5 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#6 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#7 D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(69): SiteController->render()
+#8 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDetailpengadaan()
+#9 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#10 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#11 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#12 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#13 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 D:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnBrotherhood/index.php?r=site/detailpengadaan
+in D:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php (29)
+in D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (69)
+in D:\xampp\htdocs\plnBrotherhood\index.php (13)

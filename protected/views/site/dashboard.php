@@ -17,7 +17,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		</tr>
 		<tr>
 			<td>1</td>
-			<td><?php echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan'))?></td>
+			<td><?php echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan')); ?></td>
 			<td>Checkpoint 1</td>
 		</tr>
 	</table>

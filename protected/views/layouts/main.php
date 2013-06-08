@@ -34,16 +34,11 @@
 			'items'=>array(
 				array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Pengadaan Lampau', 'url'=>array('/site/history'), 'visible'=>!Yii::app()->user->isGuest),
-                                array('label'=>'Masuk', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Masuk', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Keluar', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
 
 	<?php echo $content; ?>
 

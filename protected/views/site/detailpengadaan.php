@@ -26,4 +26,4 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan alat mandi';
 	
 </div>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard')))  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?>
