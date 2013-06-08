@@ -1,10 +1,10 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Dashboard';
+$this->pageTitle=Yii::app()->name . ' | Beranda';
 ?>
 
-<h2 style="margin-left:30px">Welcome, <b><?php echo CHtml::encode(Yii::app()->user->name); ?></b>!</h2>
+<h2 style="margin-left:30px">Selamat datang, <b><?php echo CHtml::encode(Yii::app()->user->name); ?></b>!</h2>
 
 <br />
 
@@ -24,5 +24,5 @@ $this->pageTitle=Yii::app()->name . ' | Dashboard';
 </div>
 
 <div>
-	<?php echo CHtml::link('See history', array('site/history'))?>
+	<?php echo CHtml::link('Lihat pengadaan yang telah selesai', array('site/history'))?>
 </div>
