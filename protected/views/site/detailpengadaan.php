@@ -22,4 +22,6 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan alat mandi';
 		</ul>
 	</p>
 	<h3>Aanwijzing: 18 Juni 2013</h3>
+	<br />
+	<?php echo CHtml::link('Kembali', array('site/dashboard')); ?>
 </div>
