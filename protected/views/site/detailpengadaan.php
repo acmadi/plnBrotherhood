@@ -7,8 +7,8 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan alat mandi';
 <br />
 
 <div id="detailpengadaan">
-	<h1>Pengadaan alat mandi</h1>
-	<br />
+	<h1>Pengadaan alat mandi</h1>	
+	<p> <?php echo CHtml::link('Lihat Dokumen',array('site/dokumengenerator'));  ?> </p>
 	<p>Pengadaan alat mandi untuk pegawai PLN di seluruh Indonesia.</p>
 	<p>Tanggal: 18 Juni 2003</p>
 	<p>Penyedia: Paper Street Soap</p>

@@ -3,7 +3,7 @@
 ?>
 
 <h4> 
-    List Dokumen Pengadaan Gedung Baru 
+    List Dokumen Pengadaan Alat Mandi
 </h4>
 
 
@@ -37,7 +37,7 @@
 	</table>
 </div>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'style'=>'background:url(css/bg.gif)'));  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan'), 'style'=>'background:url(css/bg.gif)'));  ?>
     
     
 

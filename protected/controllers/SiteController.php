@@ -66,7 +66,7 @@ class SiteController extends Controller
         }
         
         public function actionDokumengenerator(){
-            $this->render('dokumenhistory');
+            $this->render('dokumengenerator');
         }
 
                         /**
