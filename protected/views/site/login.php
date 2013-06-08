@@ -3,15 +3,13 @@
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' | Login';
+$this->pageTitle=Yii::app()->name . ' | Masuk';
 // $this->breadcrumbs=array(
 // 	'Login',
 // );
 ?>
 
-<h1>Login</h1>
-
-<p>Please fill out the following form with your login credentials:</p>
+<h1>Masuk</h1>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -22,16 +20,16 @@ $this->pageTitle=Yii::app()->name . ' | Login';
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<br />
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
+		<?php echo $form->labelEx($model,'nama pengguna'); ?>
 		<?php echo $form->textField($model,'username'); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
+		<?php echo $form->labelEx($model,'kata sandi'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
 		<!-- <p class="hint">
@@ -46,7 +44,7 @@ $this->pageTitle=Yii::app()->name . ' | Login';
 	</div> -->
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+		<?php echo CHtml::submitButton('Masuk'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
