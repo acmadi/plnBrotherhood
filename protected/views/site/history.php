@@ -4,12 +4,28 @@
 $this->pageTitle=Yii::app()->name . ' | History';
 ?>
 
-<h1>Welcome, <i><?php echo CHtml::encode(Yii::app()->user->name); ?></i>!</h1>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
+<div>
+	<table style="width:600px">
+		<tr>
+			<th style="width:50px">No</th>
+			<th style="width:450px">Pengadaan</th>
+			<th style="width:100px"></th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Pengadaan gedung baru</td>	
+                        <td>Link dokumen</td>
+		</tr>
+                <tr>
+			<td>2</td>
+			<td>Pengadaan gedung baru 2</td>	
+                        <td>Link dokumen</td>
+		</tr>
+                <tr>
+			<td>3</td>
+			<td>Pengadaan listrik</td>	
+                        <td>Link dokumen</td>
+		</tr>
+                
+	</table>
+</div>
