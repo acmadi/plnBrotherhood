@@ -23,6 +23,3 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 	</table>
 </div>
 
-<div>
-	<?php echo CHtml::link('Lihat pengadaan yang telah selesai', array('site/history'))?>
-</div>
