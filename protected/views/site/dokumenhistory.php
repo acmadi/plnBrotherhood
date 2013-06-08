@@ -12,21 +12,25 @@
 		<tr>
 			<td>1</td>
 			<td>Nota Dinas Permintaan</td>	
-                        <td>unduh</td>
+                        <td>Unduh</td>
 		</tr>
                 <tr>
 			<td>2</td>
 			<td>Nota Dinas Pengadaan</td>	
-                        <td>unduh</td>
+                        <td>Unduh</td>
 		</tr>
                 <tr>
 			<td>3</td>
 			<td>Pakta Integritas Panitia</td>	
-                        <td>unduh</td>
+                        <td>Unduh</td>
 		</tr>
                 
 	</table>
 </div>
+
+<?php echo CHtml::link('Kembali', array('site/history'))  ?>
+    
+    
 
 
 
