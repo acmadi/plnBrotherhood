@@ -65,3 +65,20 @@ Stack trace:
 REQUEST_URI=/plnBrotherhood/index.php?r=site/index
 HTTP_REFERER=http://localhost/plnBrotherhood/index.php
 ---
+2013/06/07 12:31:45 [error] [php] Use of undefined constant site - assumed 'site' (D:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php:17)
+Stack trace:
+#0 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(38): SiteController->render()
+#3 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#4 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 D:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnBrotherhood/
+in D:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (17)
+in D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (38)
+in D:\xampp\htdocs\plnBrotherhood\index.php (13)

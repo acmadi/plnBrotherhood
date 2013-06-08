@@ -15,6 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/dashboard.css" />
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -46,7 +48,7 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by PLN Brotherhood.<br/>
 		All Rights Reserved.<br/>
 		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->

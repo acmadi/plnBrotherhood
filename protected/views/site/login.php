@@ -3,10 +3,10 @@
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+$this->pageTitle=Yii::app()->name . ' | Login';
+// $this->breadcrumbs=array(
+// 	'Login',
+// );
 ?>
 
 <h1>Login</h1>
@@ -34,16 +34,16 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
+		<!-- <p class="hint">
 			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
+		</p> -->
 	</div>
 
-	<div class="row rememberMe">
+	<!-- <div class="row rememberMe">
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
 		<?php echo $form->label($model,'rememberMe'); ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
+	</div> -->
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login'); ?>
