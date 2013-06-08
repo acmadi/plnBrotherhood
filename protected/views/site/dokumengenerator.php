@@ -1,5 +1,5 @@
 <?php
-    $this->pageTitle=Yii::app()->name . ' | List Dokumen Pengadaan Gedung Baru';
+    $this->pageTitle=Yii::app()->name . ' | List Dokumen Pengadaan Alat Mandi';
 ?>
 
 <h4> 

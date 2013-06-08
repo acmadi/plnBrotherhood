@@ -82,3 +82,14 @@ REQUEST_URI=/plnBrotherhood/
 in D:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (17)
 in D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (38)
 in D:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/08 08:22:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "dokumenhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('dokumenhistory')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('dokumenhistory')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/dokumenhis...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=site/dokumenhistory
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/history
+---
