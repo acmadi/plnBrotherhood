@@ -266,3 +266,91 @@ REQUEST_URI=/plnBrotherhood/index.php?r=site/detailpengadaan
 in D:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php (29)
 in D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (69)
 in D:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/08 13:25:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:25:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:25:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:27:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:28:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:28:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:30:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detilpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detilpengadaanh...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detilpengadaanh...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detilpenga...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dokumenhistory
+---
+2013/06/08 13:31:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---

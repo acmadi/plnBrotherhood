@@ -79,6 +79,14 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('detailpengadaan');
 	}
+	
+	public function actionDetilpengadaanhistory()
+	{
+		// renders the view file 'protected/views/site/history.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('detilpengadaanhistory');
+	}
+	
 
 	/**
 	 * This is the action to handle external exceptions.

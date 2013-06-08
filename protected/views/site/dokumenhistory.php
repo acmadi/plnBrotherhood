@@ -38,5 +38,5 @@
 
 
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'style'=>'background:url(css/bg.gif)')); ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/detilpengadaanhistory'), 'style'=>'background:url(css/bg.gif)')); ?>
     
