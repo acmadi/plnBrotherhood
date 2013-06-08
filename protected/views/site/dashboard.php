@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name;
+$this->pageTitle=Yii::app()->name . ' | Dashboard';
 ?>
 
 <h2 style="margin-left:30px">Welcome, <b><?php echo CHtml::encode(Yii::app()->user->name); ?></b>!</h2>
@@ -17,8 +17,8 @@ $this->pageTitle=Yii::app()->name;
 		</tr>
 		<tr>
 			<td>1</td>
-			<td>Pengadaan alat mandi</td>
-			<td>Selesai</td>
+			<td><?php echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan'))?></td>
+			<td>Checkpoint 1</td>
 		</tr>
 	</table>
 </div>
