@@ -28,7 +28,7 @@
 	</table>
 </div>
 
-<?php echo CHtml::link('Kembali', array('site/history'))  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/history')))  ?>
     
     
 
