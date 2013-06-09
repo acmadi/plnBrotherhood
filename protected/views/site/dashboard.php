@@ -18,10 +18,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		<tr>
 			<td>1</td>
 			<td><?php
-				if (Yii::app()->user->name == 'admin') {
+				if (Yii::app()->user->name == 'panitia') {
 					echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan'));
 				}
-				else if (Yii::app()->user->name == 'demo') {
+				else if (Yii::app()->user->name == 'kadiv') {
 					echo CHtml::link('Pengadaan alat mandi', array('site/generator'));
 				}
 			?></td>

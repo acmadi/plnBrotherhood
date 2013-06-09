@@ -77,7 +77,9 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('detailpengadaan');
+		if (Yii::app()->user->name == 'panitia') {
+			$this->render('detailpengadaan');
+		}
 	}
 
 	/**
@@ -88,7 +90,10 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('generator');
+		
+		if (Yii::app()->user->name == 'kadiv') {
+			$this->render('generator');
+		}
 	}
 	
 	public function actionDetilpengadaanhistory()
