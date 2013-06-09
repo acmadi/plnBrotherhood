@@ -19,10 +19,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			<td>1</td>
 			<td><?php
 				if (Yii::app()->user->name == 'panitia') {
-					echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan'));
+					echo CHtml::link('Pengadaan alat mandi', array('site/generator'));					
 				}
 				else if (Yii::app()->user->name == 'kadiv') {
-					echo CHtml::link('Pengadaan alat mandi', array('site/generator'));
+					echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan'));
 				}
 			?></td>
 			<td>Checkpoint 1</td>
