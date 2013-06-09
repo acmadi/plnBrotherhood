@@ -24,6 +24,11 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				else if (Yii::app()->user->name == 'kadiv') {
 					echo CHtml::link('Pengadaan alat mandi', array('site/detailpengadaan'));
 				}
+				else if (Yii::app()->user->name == 'jo') {
+					echo CHtml::link('Generator Doc Pengadaan alat mandi', array('site/generator'));		
+					echo " ";
+					echo CHtml::link('Detil Pengadaan alat mandi', array('site/detailpengadaan'));
+				}
 			?></td>
 			<td>Checkpoint 1</td>
 		</tr>

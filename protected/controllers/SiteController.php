@@ -77,7 +77,7 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		if (Yii::app()->user->name == 'kadiv') {
+		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
 			$this->render('detailpengadaan');
 		}
 	}
@@ -88,56 +88,56 @@ class SiteController extends Controller
 	 */
 	public function actionGenerator()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo') {
 			$this->render('generator');
 		}
 	}
 	
 	public function actionCheckpoint2()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint2');
 		}
 	}
 	
 	public function actionCheckpoint3()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint3');
 		}
 	}
 	
 	public function actionCheckpoint4()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint4');
 		}
 	}
 	
 	public function actionCheckpoint5()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint5');
 		}
 	}
 	
 	public function actionCheckpoint6()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint6');
 		}
 	}
 	
 	public function actionCheckpoint7()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint7');
 		}
 	}
 	
 	public function actionCheckpoint8()
 	{	
-		if (Yii::app()->user->name == 'panitia') {
+		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint8');
 		}
 	}
