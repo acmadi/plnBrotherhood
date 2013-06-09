@@ -17,6 +17,7 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/dashboard.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/detailpengadaan.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/generator.css" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -39,14 +40,8 @@
 			),
 		)); ?>
 	</div><!-- mainmenu -->
-
-	<div id="sidebar">
-		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
-	</div>
 	
 	<?php echo $content; ?>
-
-	
 	
 	<div class="clear"></div>
 
