@@ -69,7 +69,7 @@ class SiteController extends Controller
             $this->render('dokumengenerator');
         }
 
-                        /**
+	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
@@ -78,6 +78,17 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('detailpengadaan');
+	}
+
+	/**
+	 * This is the default 'index' action that is invoked
+	 * when an action is not explicitly requested by users.
+	 */
+	public function actionGenerator()
+	{
+		// renders the view file 'protected/views/site/history.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('generator');
 	}
 	
 	public function actionDetilpengadaanhistory()
