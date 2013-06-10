@@ -34,8 +34,7 @@ class SiteController extends Controller
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
-		else {
-		
+		else {		
 				$model=new Pengadaan('search');
 				$model->unsetAttributes();  // clear any default values
 				if(isset($_GET['Pengadaan']))
