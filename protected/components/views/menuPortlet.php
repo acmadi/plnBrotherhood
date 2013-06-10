@@ -10,10 +10,11 @@
 		<li><?php echo CHtml::link('Penetapan Pemenang',array('site/checkpoint8')); ?></li>
     
 	<?php } else if(Yii::app()->user->name == 'kadiv'){ ?>
-		<li><?php echo CHtml::link('TOR dan RAB',array('site/generator')); ?></li>    
-		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/checkpoint2')); ?></li>
-		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/checkpoint3')); ?></li>
-		<li><?php echo CHtml::link('Nota Dinas Penetapan Pemenang',array('site/checkpoint3')); ?></li>
+		<li><?php echo CHtml::link('TOR dan RAB',array('site/generator_2')); ?></li>    
+		<li><?php echo CHtml::link('Metode Pengadaan yang Digunakan',array('site/checkpoint2_2')); ?></li>    
+		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/checkpoint3_2')); ?></li>
+		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/checkpoint4_2')); ?></li>
+		<li><?php echo CHtml::link('Nota Dinas Penetapan Pemenang',array('site/checkpoint5_2')); ?></li>
 	
 	<?php } else{?>
 	

@@ -77,25 +77,7 @@ class PengadaanController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
-	}
-	
-	public function actionBikinpengadaan(){
-		$model=new Pengadaan;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Pengadaan']))
-		{
-			$model->attributes=$_POST['Pengadaan'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_pengadaan));
-		}
-
-		$this->render('bikinpengadaan',array(
-			'model'=>$model,
-		));
-	}
+	}	
 
 	/**
 	 * Updates a particular model.

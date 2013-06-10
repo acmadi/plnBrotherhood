@@ -14,7 +14,9 @@ $this->menu=array(
 
 <h1>Pengadaans</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
+<?php $this->widget('zii.widgets.CGridView', array(
+	'dataProvider'=>new CArrayDataProvider('Pengadaan'),
+	'columns'=>array(
+		'id_pengadaan',
+	),
 )); ?>

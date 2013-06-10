@@ -35,7 +35,15 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			$this->render('dashboard');
+		
+				$model=new Pengadaan('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Pengadaan']))
+					$model->attributes=$_GET['Pengadaan'];
+
+			$this->render('dashboard',array(
+				'model'=>$model,
+			));
 		}
 	}
 
@@ -88,8 +96,15 @@ class SiteController extends Controller
 	 */
 	public function actionGenerator()
 	{	
-		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo') {
+		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo' || Yii::app()->user->name == 'kadiv') {
 			$this->render('generator');
+		}
+	}
+	
+	public function actionGenerator_2()
+	{	
+		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo' || Yii::app()->user->name == 'kadiv') {
+			$this->render('generator_2');
 		}
 	}
 	
@@ -97,6 +112,34 @@ class SiteController extends Controller
 	{	
 		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint2');
+		}
+	}
+	
+	public function actionCheckpoint2_2()
+	{	
+		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
+			$this->render('checkpoint2_2');
+		}
+	}
+	
+	public function actionCheckpoint3_2()
+	{	
+		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
+			$this->render('checkpoint3_2');
+		}
+	}
+	
+	public function actionCheckpoint4_2()
+	{	
+		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
+			$this->render('checkpoint4_2');
+		}
+	}
+	
+	public function actionCheckpoint5_2()
+	{	
+		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
+			$this->render('checkpoint5_2');
 		}
 	}
 	
