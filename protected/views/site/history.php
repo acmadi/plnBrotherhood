@@ -33,7 +33,7 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',
 			'viewButtonLabel'=>'Lihat',
-			'viewButtonUrl'=>'Yii::app()->createUrl("site/detailpengadaanhistory", array("id"=>"$data->id_pengadaan"))',
+			'viewButtonUrl'=>'Yii::app()->createUrl("site/detilpengadaanhistory", array("id"=>"$data->id_pengadaan"))',
 		),
 	),
 )); ?>

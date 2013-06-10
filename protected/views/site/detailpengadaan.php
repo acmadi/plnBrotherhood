@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Pengadaan alat mandi';
+$this->pageTitle=Yii::app()->name . ' | Detil Pengadaan';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
@@ -18,7 +18,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			echo "-";
 		}
 		else {
-			echo $cpengadaan->selesai;
+			echo $cpengadaan->tanggal_selesai;
 		}
 	?></p>
 	<p>Penyedia: <?php echo $cpengadaan->nama_penyedia; ?></p>
