@@ -2175,3 +2175,260 @@ Stack trace:
 #11 {main}
 REQUEST_URI=/plnbrotherhood/index.php?r=user
 ---
+2013/06/10 10:50:48 [error] [exception.CException] exception 'CException' with message 'Property "PengadaanController.breadcrumbs" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\protected\views\pengadaan\create.php(5): CComponent->__set('breadcrumbs', Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\protected\controllers\PengadaanController.php(79): CController->render('create', Array)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): PengadaanController->actionCreate()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('create')
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/creat...')
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#18 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/create
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 10:58:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "bikinpengadaan".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('bikinpengadaan')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:01:11 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:01:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:02:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:03:06 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:05:54 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:06:23 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:07:55 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:10:52 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:12:46 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/admin')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/admin
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=pengadaan
+---
+2013/06/10 11:15:47 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:17:40 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:21:19 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/10 11:25:28 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php:179
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\auth\CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('bikinpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('pengadaan/bikin...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/bikinpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---

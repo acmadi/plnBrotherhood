@@ -1,11 +1,21 @@
 <ul>    
-    <li><?php echo CHtml::link('Penunjukan Panitia',array('site/generator')); ?></li>    
-	<li><?php echo CHtml::link('Evaluasi Kualifikasi',array('site/checkpoint2')); ?></li>
-	<li><?php echo CHtml::link('Aanwijzing',array('site/checkpoint3')); ?></li>
-	<li><?php echo CHtml::link('Penawaran',array('site/checkpoint4')); ?></li>
-	<li><?php echo CHtml::link('Evaluasi Penawaran',array('site/checkpoint5')); ?></li>
-	<li><?php echo CHtml::link('Negosiasi dan Klarifikasi',array('site/checkpoint6')); ?></li>
-	<li><?php echo CHtml::link('Usulan Pemenang',array('site/checkpoint7')); ?></li>
-	<li><?php echo CHtml::link('Penetapan Pemenang',array('site/checkpoint8')); ?></li>
+	<?php if(Yii::app()->user->name == 'panitia'){ ?>
+		<li><?php echo CHtml::link('RKS/HPS',array('site/generator')); ?></li>    
+		<li><?php echo CHtml::link('Undangan Prakualifikasi',array('site/checkpoint2')); ?></li>
+		<li><?php echo CHtml::link('Berita Acara Evaluasi Prakualifikasi',array('site/checkpoint3')); ?></li>
+		<li><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array('site/checkpoint4')); ?></li>
+		<li><?php echo CHtml::link('Undangan Aanwijzing',array('site/checkpoint5')); ?></li>
+		<li><?php echo CHtml::link('Berita Acara Aanwijzing',array('site/checkpoint6')); ?></li>
+		<li><?php echo CHtml::link('Undangan Pembukaan Penawaran',array('site/checkpoint7')); ?></li>
+		<li><?php echo CHtml::link('Penetapan Pemenang',array('site/checkpoint8')); ?></li>
     
+	<?php } else if(Yii::app()->user->name == 'kadiv'){ ?>
+		<li><?php echo CHtml::link('TOR dan RAB',array('site/generator')); ?></li>    
+		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/checkpoint2')); ?></li>
+		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/checkpoint3')); ?></li>
+		<li><?php echo CHtml::link('Nota Dinas Penetapan Pemenang',array('site/checkpoint3')); ?></li>
+	
+	<?php } else{?>
+	
+	<?php } ?>
 </ul>
