@@ -762,3 +762,37 @@ Stack trace:
 REQUEST_URI=/plnbrotherhood/index.php
 HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
 ---
+2013/06/10 18:35:16 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php:12)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(89): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDetailpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaan
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php (12)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (89)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:41:59 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php:12)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(100): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDetailpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaan
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php (12)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (100)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)

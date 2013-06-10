@@ -148,4 +148,30 @@ class Pengadaan extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function searchBuatHistory()																//----------------------------------
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('kode_panitia',$this->kode_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('deskripsi',$this->deskripsi,true);
+		$criteria->condition = "status='Selesai'";													
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }

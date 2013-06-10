@@ -2,6 +2,8 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
+$id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <div id="pagecontent">

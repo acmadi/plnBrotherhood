@@ -4,24 +4,36 @@
 $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 ?>
 
-<div>
-	<table style="width:600px">
-		<tr>
-			<th style="width:50px">No</th>
-			<th style="width:450px">Pengadaan</th>			
-		</tr>
-		<tr>
-			<td>1</td>
-			<td><?php echo CHtml::link('Pengadaan gedung baru',array('site/detilpengadaanhistory')); ?> </td>				
-		</tr>
-                <tr>
-			<td>2</td>
-			<td>Pengadaan gedung baru 2</td>				
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>Pengadaan mobil</td>				
-		</tr>
-                
-	</table>
-</div>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'pengadaan-grid',
+	'dataProvider'=>$model->searchBuatHistory(),
+	// 'filter'=>$model,
+	'columns'=>array(
+		// 'id_pengadaan',
+		array(
+			'class'=>'CDataColumn',
+			'type'=>'number',
+			'value'=>'$row + 1',
+			'header'=>'No',
+		),
+		'nama_pengadaan',
+		// 'nama_penyedia',
+		// 'tanggal_masuk',
+		// 'tanggal_selesai',
+		'status',
+		/*
+		'biaya',
+		'nama',
+		'kode_panitia',
+		'metode_pengadaan',
+		'metode_penawaran',
+		'deskripsi',
+		*/
+		array(
+			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+			'viewButtonLabel'=>'Lihat',
+			'viewButtonUrl'=>'Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$data->id_pengadaan"))',
+		),
+	),
+)); ?>
