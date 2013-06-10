@@ -13,9 +13,17 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<p> <?php echo CHtml::link('Lihat Dokumen',array('site/dokumengenerator'));  ?> </p>
 	<p><?php echo $cpengadaan->deskripsi; ?></p>
 	<p>Tanggal masuk: <?php echo $cpengadaan->tanggal_masuk; ?></p>
+	<p>Tanggal selesai: <?php
+		if (is_null($cpengadaan->tanggal_selesai)) {
+			echo "-";
+		}
+		else {
+			echo $cpengadaan->selesai;
+		}
+	?></p>
 	<p>Penyedia: <?php echo $cpengadaan->nama_penyedia; ?></p>
 	<p><?php
-		if(is_null($cpengadaan->nama)) {
+		if (is_null($cpengadaan->nama)) {
 			echo 'Panitia: ';
 			echo $cpengadaan->kode_panitia;
 		}
