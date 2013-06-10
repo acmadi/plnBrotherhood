@@ -2,11 +2,13 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Pengadaan alat mandi';
+$id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <br />
 
-<div id="detailpengadaan">
+<div id="detailpengadaanhistory">
 	<h1>Pengadaan Gedung Baru</h1>
 
 	<p> <?php echo CHtml::link('Lihat Dokumen',array('site/dokumenhistory'));  ?> </p>

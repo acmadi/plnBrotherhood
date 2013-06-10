@@ -796,3 +796,80 @@ REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaan
 in C:\xampp\htdocs\plnBrotherhood\protected\views\site\detailpengadaan.php (12)
 in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (100)
 in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 19:44:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
+2013/06/10 19:45:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
+2013/06/10 19:46:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
+2013/06/10 19:46:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
+2013/06/10 19:46:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
+2013/06/10 19:46:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
+2013/06/10 19:46:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "detailpengadaanhistory".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('detailpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('detailpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/detailpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/detailpengadaanhistory&id=987654321
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
+---
