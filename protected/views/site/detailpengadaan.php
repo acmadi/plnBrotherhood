@@ -2,26 +2,28 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Pengadaan alat mandi';
+$id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <br />
 
 <div id="detailpengadaan">
-	<h1>Pengadaan alat mandi</h1>	
+	<h1><?php echo $cpengadaan->nama_pengadaan; ?></h1>	
 	<p> <?php echo CHtml::link('Lihat Dokumen',array('site/dokumengenerator'));  ?> </p>
-	<p>Pengadaan alat mandi untuk pegawai PLN di seluruh Indonesia.</p>
-	<p>Tanggal: 18 Juni 2003</p>
-	<p>Penyedia: Paper Street Soap</p>
-	<p>
-		Panitia: Panitia A
-		<ul>
-			<li>Kevin Indro</li>
-			<li>Kevin Alfianto</li>
-			<li>Kevin Timo</li>
-			<li>Kevin Winoto</li>
-		</ul>
-	</p>
-	<h3>Aanwijzing: 18 Juni 2013</h3>
+	<p><?php echo $cpengadaan->deskripsi; ?></p>
+	<p>Tanggal masuk: <?php echo $cpengadaan->tanggal_masuk; ?></p>
+	<p>Penyedia: <?php echo $cpengadaan->nama_penyedia; ?></p>
+	<p><?php
+		if(is_null($cpengadaan->nama)) {
+			echo 'Panitia: ';
+			echo $cpengadaan->kode_panitia;
+		}
+		else {
+			echo 'Pejabat: ';
+			echo $cpengadaan->nama;
+		}
+	?></p>
 	<br />
 	
 </div>

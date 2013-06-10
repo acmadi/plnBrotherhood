@@ -34,7 +34,8 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("site/generator")',
+			'viewButtonLabel'=>'Lihat',
+			'viewButtonUrl'=>'Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$data->id_pengadaan"))',
 		),
 	),
 )); ?>
