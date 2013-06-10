@@ -114,3 +114,651 @@ Stack trace:
 REQUEST_URI=/plnbrotherhood/index.php?r=pengadaan/index
 HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=pengadaan/create
 ---
+2013/06/10 17:46:36 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (44)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 17:48:27 [error] [php] include(Pengadasan.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(38): spl_autoload_call()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (38)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 17:49:06 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php:44)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (44)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:09:38 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'aa' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = aa.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:09:38 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'aa' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = aa' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:09:48 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = selesai.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:09:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = selesai' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:09:53 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = Selesai.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:09:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = Selesai' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:10:36 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = Selesai.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:10:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = Selesai' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:10:53 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:10:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:11:42 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:11:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:11:43 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:11:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:11:43 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:11:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:11:43 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:11:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:11:44 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:11:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:12:30 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:12:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'be' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status = be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:15:53 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:15:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:15:54 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:15:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:15:55 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:15:55 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:15:56 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:15:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:15:56 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:15:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:15:56 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:15:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== be' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status == be' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---
+2013/06/10 18:16:44 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status=Selesai.
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (40)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (46)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/10 18:16:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Selesai' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM `pengadaan` `t` WHERE status=Selesai' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:541
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php(432): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1546): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(179): CActiveRecord->count(Object(CDbCriteria))
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CActiveDataProvider.php(129): CDataProvider->getTotalItemCount()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\CBaseListView.php(107): CDataProvider->getData()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\zii\widgets\grid\CGridView.php(314): CBaseListView->init()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(147): CGridView->init()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#10 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(40): CBaseController->widget('zii.widgets.gri...', Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#15 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(46): CController->render('dashboard', Array)
+#16 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#17 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#19 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#21 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#22 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#23 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plnbrotherhood/index.php
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/login
+---

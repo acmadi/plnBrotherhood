@@ -35,11 +35,12 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {		
-				$model=new Pengadaan('search');
-				$model->unsetAttributes();  // clear any default values
-				if(isset($_GET['Pengadaan']))
-					$model->attributes=$_GET['Pengadaan'];
-
+			$model=new Pengadaan('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Pengadaan'])){
+				$model->attributes=$_GET['Pengadaan'];
+			}		
+				
 			$this->render('dashboard',array(
 				'model'=>$model,
 			));

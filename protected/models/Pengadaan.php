@@ -142,6 +142,7 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('deskripsi',$this->deskripsi,true);
+		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
