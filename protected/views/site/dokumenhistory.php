@@ -1,5 +1,7 @@
 <?php
     $this->pageTitle=Yii::app()->name . ' | List Dokumen Pengadaan Gedung Baru';
+	$id = Yii::app()->getRequest()->getQuery('id');
+	$cdokhis = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <h4> 

@@ -81,7 +81,22 @@ class SiteController extends Controller
 	}
         
         public function actionDokumenhistory(){
-            $this->render('dokumenhistory');
+		
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {		
+				$model=new Pengadaan('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Pengadaan'])){
+					$model->attributes=$_GET['Pengadaan'];
+				}		
+					
+				$this->render('dokumenhistory',array(
+					'model'=>$model,
+				));
+			}
+         
         }
         
         public function actionDokumengenerator(){
