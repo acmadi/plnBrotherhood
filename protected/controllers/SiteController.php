@@ -291,4 +291,26 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+	public function actiontambahpengadaan()
+	{	
+		if (Yii::app()->user->name == 'kadiv') {
+			
+			$model=new Pengadaan;
+
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+
+			if(isset($_POST['Pengadaan']))
+			{
+				$model->attributes=$_POST['Pengadaan'];
+				if($model->save())
+					$this->redirect(array('generator_2','id'=>$model->id_pengadaan));
+			}
+
+			$this->render('tambahpengadaan',array(
+				'model'=>$model,
+			));
+		}
+	}
 }
