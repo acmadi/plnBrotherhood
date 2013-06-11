@@ -10,7 +10,35 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
-		Checkpoint 4
+		<h1> Undangan Aanwijzing</h1>
+		
+		<p> &nbsp </p>
+
+		<p><b> Generate Undangan</b></p>
+		<form name="nosurat" id="nosurat" method="POST">
+			No Surat :<input type="text" NAME="nosurat" id="nosurat" class="text" maxlength="30" />
+		</form>
+		<form name="tanggal" id="tanggal" method="POST">
+			Tanggal Hari ini :<input type="text" NAME="tanggal" id="tanggal" class="text" maxlength="30" />
+		</form>
+		<form name="sifat" id="sifat" method="POST">
+			Sifat :<input type="text" NAME="sifat" id="sifat" class="text" maxlength="30" />
+		</form>
+		<form name="kepada" id="kepada" method="POST">
+			Kepada :<input type="text" NAME="kepada" id="kepada" class="text" maxlength="30" />
+		</form>
+		<form name="tanggalpelaksanaan" id="tanggalpelaksanaan" method="POST">
+			Tanggal pelaksanaan :<input type="text" NAME="tanggalpelaksanaan" id="tanggalpelaksanaan" class="text" maxlength="30" />
+		</form>
+		<form name="waktupelaksanaan" id="waktupelaksanaan" method="POST">
+			Waktu pelaksanaan :<input type="text" NAME="waktupelaksanaan" id="waktupelaksanaan" class="text" maxlength="30" />
+		</form><form name="tempatpelaksanaan" id="tempatpelaksanaan" method="POST">
+			Tempat pelaksanaan :<input type="text" NAME="tempatpelaksanaan" id="tempatpelaksanaan" class="text" maxlength="30" />
+		</form>
+		<p> &nbsp </p>
+		<p> &nbsp </p>
+
+		<p><input type='submit' name='generate' value='Generate Doc'></p>
 	</div>
 </div>
 
