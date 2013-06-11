@@ -50,6 +50,10 @@
 	<?php echo CHtml::encode($data->metode_penawaran); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('jenis_kualifikasi')); ?>:</b>
+	<?php echo CHtml::encode($data->jenis_kualifikasi); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('deskripsi')); ?>:</b>
 	<?php echo CHtml::encode($data->deskripsi); ?>
 	<br />

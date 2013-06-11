@@ -67,6 +67,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'jenis_kualifikasi'); ?>
+		<?php echo $form->textField($model,'jenis_kualifikasi',array('size'=>32,'maxlength'=>32)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'deskripsi'); ?>
 		<?php echo $form->textField($model,'deskripsi',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
