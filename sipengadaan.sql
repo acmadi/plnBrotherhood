@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2013 at 05:49 PM
+-- Generation Time: Jun 11, 2013 at 06:01 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 --
 
 INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `kode_panitia`, `nama`, `nama_pengadaan`, `nomor`, `hari/tanggal`) VALUES
-(987654332, '37/A/31/2013', 'A', NULL, 'Pengadaan mobil dinas', '38/A/31/2013', '2013-06-10'),
 (987654342, '42/A/31/2013', 'B', NULL, 'Pengadaan komputer', '43/A/31/2013', '2013-06-10'),
 (987654362, '42/A/32/2013', NULL, 'haniferidaputra', 'Pengadaan alat tulis', '43/A/32/2013', '2013-06-27'),
 (987654382, '42/A/33/2013', NULL, 'johannesridho', 'Pengadaan alat komunikasi', '43/A/33/2013', '2013-06-06');
@@ -105,7 +104,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
 --
 
 INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `kode_panitia`, `nama`, `surat_keputusan`) VALUES
-(987654321, '31/A/32/2013', 'administrasi', 'teknis', 10000000000, 10000000000, 'A', NULL, ''),
 (987654343, '43/A/31/2013', 'administrasi', 'teknis', 10000000000, 10000000000, 'B', NULL, ''),
 (987654363, '43/A/32/2013', 'administrasi', 'teknis', 450000000, 450000000, NULL, 'haniferidaputra', ''),
 (987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, NULL, 'johannesridho', '');
@@ -137,7 +135,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
 --
 
 INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `kode_panitia`, `nama`, `surat_keputusan`) VALUES
-(987654322, '32/A/33/2013', 4, 3, 1, 'apa ini', 'A', NULL, ''),
 (987654344, '44/A/31/2013', 4, 3, 1, 'apa ini', 'B', NULL, ''),
 (987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', NULL, 'haniferidaputra', ''),
 (987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', NULL, 'johannesridho', '');
@@ -180,7 +177,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 --
 
 INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `kode_panitia`, `nama`) VALUES
-(987654323, '33/A/34/2013', 'A', NULL),
 (987654345, '45/A/31/2013', 'B', NULL),
 (987654365, '45/A/32/2013', NULL, 'haniferidaputra'),
 (987654385, '45/A/33/2013', NULL, 'johannesridho');
@@ -563,7 +559,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 --
 
 INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `kode_panitia`, `nama`) VALUES
-(987654327, 'A', NULL),
 (987654353, 'B', NULL),
 (987654373, NULL, 'haniferidaputra'),
 (987654393, NULL, 'johannesridho');
@@ -642,21 +637,19 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `deskripsi` (`deskripsi`),
   KEY `nama_pengadaan` (`nama_pengadaan`),
   KEY `nama` (`nama`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654325 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654327 ;
 
 --
 -- Dumping data for table `pengadaan`
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `nama`, `kode_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `deskripsi`) VALUES
-(1, 'as', 'as', '2013-08-09', '2013-10-10', 'selesai', 80000, 'panitia', 'A', 'Tunjuk langsung', 'Satu sampul', '', 'apa aj'),
-(3, 'as', 'aad', '2013-08-09', '2013-10-10', 'selesai', 800, NULL, 'A', 'Tunjuk langsung', 'Satu sampul', '', 'asad'),
-(12, 'asadadad', 'adadda', '2013-08-09', '2013-10-10', 'Penunjukan panitia', 1324000000, 'panitia', 'A', 'Pemilihan Lansung', 'Satu sampul', '', 'kadnksnhkd'),
-(1223, 'Pengadaan Jo', NULL, '2013-08-09', NULL, 'Penawaran dan Evaluasi', NULL, 'panitia', 'A', 'Pemilihan Lansung', NULL, '', 'asddsdg'),
-(987654321, 'Pengadaan mobil dinas', 'Mercedes Benz', '2013-06-01', '2013-06-15', 'Selesai', 10000000000, NULL, 'A', 'Tunjuk langsung', 'Satu sampul', 'Pra Kualifikasi', 'Pengadaan mobil untuk pegawai PLN'),
-(987654322, 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, NULL, 'B', 'Pilih Langsung', 'Dua sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
-(987654323, 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 'haniferidaputra', NULL, 'Lelang', 'Dua tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
-(987654324, 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 'johannesridho', NULL, 'Tunjuk langsung', 'Dua sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN');
+(3, 'as', 'aad', '2013-08-09', '2013-10-10', 'selesai', 800, NULL, 'A', 'Penunjukan Langsung', 'Satu Sampul', '', 'asad'),
+(987654321, 'Pengadaan mobil dinas', 'Mercedes Benz', '2013-06-01', '2013-06-15', 'Selesai', 10000000000, NULL, 'A', 'Penunjukan Langsung', 'Satu Sampul', 'Pra Kualifikasi', 'Pengadaan mobil untuk pegawai PLN'),
+(987654322, 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, NULL, 'B', 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
+(987654323, 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 'haniferidaputra', NULL, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
+(987654324, 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 'johannesridho', NULL, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
+(987654326, 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, NULL, 'B', 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
 
 -- --------------------------------------------------------
 
@@ -706,7 +699,6 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 --
 
 INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `kode_panitia`, `nama`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
-(987654333, '39/A/31/2013', 'A', NULL, 'Pemberitahuan pengadaan mobil', 'Pengadaan mobil', '14'),
 (987654355, '55/A/31/2013', 'B', NULL, 'Pemberitahuan pengadaan komputer', 'Pengadaan komputer', '17'),
 (987654375, '55/A/32/2013', NULL, 'haniferidaputra', 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
 (987654395, '55/A/33/2013', NULL, 'johannesridho', 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
@@ -803,7 +795,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 --
 
 INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `kode_panitia`, `nama`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari/tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
-(987654336, 'A', NULL, '40/A/31/2013', 'Biasa', 'Pembukaan penawaran mobil dinas', '37/A/31/2013', 'Senin/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan mobil dinas', ''),
 (987654358, 'B', NULL, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer', ''),
 (987654378, NULL, 'haniferidaputra', '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
 (987654398, NULL, 'johannesridho', '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', 'Kamis/06 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
@@ -863,7 +854,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
 --
 
 INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `kode_panitia`, `nama`, `sifat`, `perihal`, `hari/tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
-(987654338, '42/A/31/2013', 'A', NULL, 'Biasa', 'Penjelsana pekerjaan pengadaan mobil dinas', 'Senin/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan mobil dinas'),
 (987654360, '60/A/31/2013', 'B', NULL, 'Biasa', 'Penjelsana pekerjaan pengadaan komputer', 'Rabu/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer'),
 (987654380, '60/A/32/2013', NULL, 'haniferidaputra', 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
 (987654400, '60/A/33/2013', NULL, 'johannesridho', 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', 'Jumat/07 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
