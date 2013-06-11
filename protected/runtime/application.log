@@ -23,3 +23,37 @@ Stack trace:
 REQUEST_URI=/plnBrotherhood/index.php?r=dokumen
 HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=gii/crud
 ---
+2013/06/11 06:54:24 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\generator_2.php:22)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(133): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionGenerator_2()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/generator_2
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\generator_2.php (22)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (133)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/11 06:58:55 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\generator_2.php:22)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(133): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionGenerator_2()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/generator_2
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\generator_2.php (22)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (133)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)

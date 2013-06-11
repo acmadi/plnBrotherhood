@@ -10,7 +10,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
-		Upload rab tor
+		
 	</div>
 </div>
 
