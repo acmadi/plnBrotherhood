@@ -19,18 +19,18 @@
 
 #sidebar li
 {
-	border-bottom:1px solid;
-}
-
-#sidebar li:hover
-{
-	background-color:#E5FFCC;
+	border-bottom:1px solid black;
 }
 
 .sudah
 {
 	background-color:lightblue;
 	font-weight:normal !important;
+}
+
+.sudah:hover
+{
+	background-color:#E5FFCC;
 }
 
 li
@@ -46,4 +46,14 @@ li
 .onprogress
 {
 	background-color:#98FB98;
+}
+
+.onprogress:hover
+{
+	background-color:#00FF00;
+}
+
+.belum
+{
+	color:#1E90FF;
 }
