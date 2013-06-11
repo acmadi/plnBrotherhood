@@ -21,6 +21,12 @@
 {
 	border-bottom:1px solid;
 }
+
+#sidebar li:hover
+{
+	background-color:#E5FFCC;
+}
+
 .sudah
 {
 	background-color:lightblue;
