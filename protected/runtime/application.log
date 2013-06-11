@@ -894,3 +894,121 @@ Stack trace:
 REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
 HTTP_REFERER=http://localhost/plnbrotherhood/index.php
 ---
+2013/06/11 18:52:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "tambahpengadaanpejabat".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('tambahpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaanpejabat
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---
+2013/06/11 18:59:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "tambahpengadaanpejabat".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('tambahpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaanpejabat
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---
+2013/06/11 19:03:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "tambahpengadaanpejabat".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('tambahpengadaan...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan...')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaanpejabat
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---
+2013/06/11 19:04:22 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(320): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actiontambahpengadaanpejabat()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaanpejabat
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php (15)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (320)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/11 19:05:34 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(320): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actiontambahpengadaanpejabat()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaanpejabat
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php (15)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (320)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/11 19:09:16 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(297): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actiontambahpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php (15)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (297)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/11 19:09:28 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(297): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actiontambahpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php (15)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (297)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/11 19:10:10 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php:15)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(297): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actiontambahpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaanpejabat.php (15)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (297)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
