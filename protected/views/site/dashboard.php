@@ -84,7 +84,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 <?php 
 	if (Yii::app()->user->name == 'kadiv') {
-		echo CHtml::button('Tambah Pengadaan', array('submit'=>array('site/generator_2'), 'style'=>'background:url(css/bg.gif)')); 
+		echo CHtml::button('Tambah Pengadaan', array('submit'=>array('site/tambahpengadaan'), 'style'=>'background:url(css/bg.gif)')); 
 	}
 ?>
 <?php echo CHtml::button('Unggah berkas excel', array('submit'=>array('site/uploadexcel'), 'style'=>'background:url(css/bg.gif)')); ?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2013 at 02:32 AM
+-- Generation Time: Jun 11, 2013 at 01:36 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -614,7 +614,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   `kode_panitia` varchar(10) DEFAULT NULL,
   `metode_pengadaan` varchar(32) NOT NULL,
   `metode_penawaran` varchar(32) DEFAULT NULL,
-  `jenis_kualifikasi` varchar(32) NOT NULL,
+  `jenis_kualifikasi` varchar(32) DEFAULT NULL,
   `deskripsi` varchar(100) NOT NULL,
   PRIMARY KEY (`id_pengadaan`),
   KEY `nama_penyedia` (`nama_penyedia`),
@@ -635,6 +635,10 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `nama`, `kode_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `deskripsi`) VALUES
+(1, 'as', 'as', '2013-08-09', '2013-10-10', 'selesai', 80000, 'panitia', 'A', 'Tunjuk langsung', 'Satu sampul', '', 'apa aj'),
+(3, 'as', 'aad', '2013-08-09', '2013-10-10', 'selesai', 800, NULL, 'A', 'Tunjuk langsung', 'Satu sampul', '', 'asad'),
+(12, 'asadadad', 'adadda', '2013-08-09', '2013-10-10', 'Penunjukan panitia', 1324000000, 'panitia', 'A', 'Pemilihan Lansung', 'Satu sampul', '', 'kadnksnhkd'),
+(1223, 'Pengadaan Jo', NULL, '2013-08-09', NULL, 'Penawaran', NULL, 'panitia', 'A', 'Pemilihan Lansung', NULL, '', 'asddsdg'),
 (987654321, 'Pengadaan mobil dinas', 'Mercedes Benz', '2013-06-01', '2013-06-15', 'Selesai', 10000000000, NULL, 'A', 'Tunjuk langsung', 'Satu sampul', 'Pra Kualifikasi', 'Pengadaan mobil untuk pegawai PLN'),
 (987654322, 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, NULL, 'B', 'Pilih Langsung', 'Dua sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
 (987654323, 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 'haniferidaputra', NULL, 'Lelang', 'Dua tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
