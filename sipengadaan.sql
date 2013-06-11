@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 11, 2013 at 01:36 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jun 11, 2013 at 05:49 PM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -154,6 +153,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_pengadaan_gagal`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -216,6 +220,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `divisi`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -223,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 --
 
 CREATE TABLE IF NOT EXISTS `dokumen` (
-  `id_dokumen` bigint(32) NOT NULL,
+  `id_dokumen` bigint(32) NOT NULL AUTO_INCREMENT,
   `tanggal` date NOT NULL,
   `tempat` varchar(20) DEFAULT NULL,
   `id_pengadaan` bigint(32) NOT NULL,
@@ -234,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `tempat` (`tempat`),
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654401 ;
 
 --
 -- Dumping data for table `dokumen`
@@ -353,6 +362,11 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form_isian_kualifikasi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -603,7 +617,7 @@ INSERT INTO `panitia` (`kode_panitia`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `pengadaan` (
-  `id_pengadaan` bigint(32) NOT NULL,
+  `id_pengadaan` bigint(32) NOT NULL AUTO_INCREMENT,
   `nama_pengadaan` varchar(100) NOT NULL,
   `nama_penyedia` varchar(32) DEFAULT NULL,
   `tanggal_masuk` date NOT NULL,
@@ -628,7 +642,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `deskripsi` (`deskripsi`),
   KEY `nama_pengadaan` (`nama_pengadaan`),
   KEY `nama` (`nama`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654325 ;
 
 --
 -- Dumping data for table `pengadaan`
@@ -638,7 +652,7 @@ INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `nama_penyedia`, `tan
 (1, 'as', 'as', '2013-08-09', '2013-10-10', 'selesai', 80000, 'panitia', 'A', 'Tunjuk langsung', 'Satu sampul', '', 'apa aj'),
 (3, 'as', 'aad', '2013-08-09', '2013-10-10', 'selesai', 800, NULL, 'A', 'Tunjuk langsung', 'Satu sampul', '', 'asad'),
 (12, 'asadadad', 'adadda', '2013-08-09', '2013-10-10', 'Penunjukan panitia', 1324000000, 'panitia', 'A', 'Pemilihan Lansung', 'Satu sampul', '', 'kadnksnhkd'),
-(1223, 'Pengadaan Jo', NULL, '2013-08-09', NULL, 'Penawaran', NULL, 'panitia', 'A', 'Pemilihan Lansung', NULL, '', 'asddsdg'),
+(1223, 'Pengadaan Jo', NULL, '2013-08-09', NULL, 'Penawaran dan Evaluasi', NULL, 'panitia', 'A', 'Pemilihan Lansung', NULL, '', 'asddsdg'),
 (987654321, 'Pengadaan mobil dinas', 'Mercedes Benz', '2013-06-01', '2013-06-15', 'Selesai', 10000000000, NULL, 'A', 'Tunjuk langsung', 'Satu sampul', 'Pra Kualifikasi', 'Pengadaan mobil untuk pegawai PLN'),
 (987654322, 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, NULL, 'B', 'Pilih Langsung', 'Dua sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
 (987654323, 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 'haniferidaputra', NULL, 'Lelang', 'Dua tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
@@ -864,6 +878,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_prakualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_prakualifikasi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1097,7 +1116,3 @@ ALTER TABLE `surat_undangan_penjelasan`
 --
 ALTER TABLE `surat_undangan_prakualifikasi`
   ADD CONSTRAINT `surat_undangan_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
