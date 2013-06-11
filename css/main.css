@@ -47,6 +47,11 @@ body
 	font-size: 200%;
 }
 
+#logo img
+{
+	width: 150px;
+}
+
 #mainmenu
 {
 	background:white url(bg.gif) repeat-x left top;

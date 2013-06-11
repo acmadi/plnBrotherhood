@@ -5,7 +5,8 @@ class MenuPortlet extends CPortlet
 {
     public function init()
     {
-        $this->title=CHtml::encode(Yii::app()->user->name);
+    	$id = Yii::app()->getRequest()->getQuery('id');
+        $this->title = Pengadaan::model()->find('id_pengadaan = "' . $id . '"')->nama_pengadaan;
         parent::init();
     }
  
