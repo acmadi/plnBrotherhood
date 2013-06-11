@@ -1,5 +1,7 @@
 <?php
-    $this->pageTitle=Yii::app()->name . ' | List Dokumen Pengadaan Gedung Baru';
+	$id = Yii::app()->getRequest()->getQuery('id');
+	$cdokhis = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+    $this->pageTitle=Yii::app()->name . ' | List Dokumen : ' . $cdokhis->nama_pengadaan;
 ?>
 
 <h4> 
@@ -34,5 +36,5 @@
 
 
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/detilpengadaanhistory'), 'style'=>'background:url(css/bg.gif)')); ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/detilpengadaanhistory', 'id'=>$id), 'style'=>'background:url(css/bg.gif)')); ?>
     

@@ -1,9 +1,11 @@
 <?php
-    $this->pageTitle=Yii::app()->name . ' | List Dokumen Pengadaan Alat Mandi';
+	$id = Yii::app()->getRequest()->getQuery('id');
+	$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+    $this->pageTitle=Yii::app()->name . ' | List Dokumen : ' . $cpengadaan->nama_pengadaan;
 ?>
 
 <h4> 
-    List Dokumen Pengadaan Alat Mandi
+    List Dokumen : <?php echo $cpengadaan->nama_pengadaan?>
 </h4>
 
 
@@ -37,7 +39,7 @@
 	</table>
 </div>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan'), 'style'=>'background:url(css/bg.gif)'));  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'style'=>'background:url(css/bg.gif)'));  ?>
     
     
 

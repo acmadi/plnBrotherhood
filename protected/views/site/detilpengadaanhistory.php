@@ -1,14 +1,14 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Detil Pengadaan';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 ?>
 
 <div id="detailpengadaanhistory">
 	<h1><?php echo $cpengadaan->nama_pengadaan; ?></h1>	
-	<p> <?php echo CHtml::link('Lihat Dokumen',array('site/dokumengenerator'));  ?> </p>
+	<p> <?php echo CHtml::link('Lihat Dokumen',array('site/dokumenhistory',"id"=>"$cpengadaan->id_pengadaan"));  ?> </p>
 	<p><?php echo $cpengadaan->deskripsi; ?></p>
 	<p>Tanggal masuk: <?php echo $cpengadaan->tanggal_masuk; ?></p>
 	<p>Tanggal selesai: <?php
