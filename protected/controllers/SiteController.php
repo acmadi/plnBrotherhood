@@ -294,9 +294,15 @@ class SiteController extends Controller
 	
 	public function actiontambahpengadaan()
 	{	
+		$this->render('tambahpengadaan');
+	}
+	
+	public function actiontambahpengadaanpejabat()
+	{	
 		if (Yii::app()->user->name == 'kadiv') {
 			
 			$model=new Pengadaan;
+			$model->status="Penunjukan Panitia";
 
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
@@ -308,7 +314,30 @@ class SiteController extends Controller
 					$this->redirect(array('generator_2','id'=>$model->id_pengadaan));
 			}
 
-			$this->render('tambahpengadaan',array(
+			$this->render('tambahpengadaanpejabat',array(
+				'model'=>$model,
+			));
+		}
+	}
+	
+	public function actiontambahpengadaanpanitia()
+	{	
+		if (Yii::app()->user->name == 'kadiv') {
+			
+			$model=new Pengadaan;
+			$model->status="Penunjukan Panitia";
+
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+
+			if(isset($_POST['Pengadaan']))
+			{
+				$model->attributes=$_POST['Pengadaan'];
+				if($model->save())
+					$this->redirect(array('generator_2','id'=>$model->id_pengadaan));
+			}
+
+			$this->render('tambahpengadaanpanitia',array(
 				'model'=>$model,
 			));
 		}
