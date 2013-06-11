@@ -11,3 +11,23 @@
 	width: 75%;
 	display: inline-block;
 }
+
+#sidebar a
+{
+	text-decoration:none;
+}
+
+#sidebar li
+{
+	border-bottom:1px solid;
+}
+.sudah
+{
+	background-color:lightblue;
+	font-weight:normal !important;
+}
+
+li
+{
+	font-weight:bold;
+}
