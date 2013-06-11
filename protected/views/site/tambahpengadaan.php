@@ -14,12 +14,10 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'id_pengadaan'); ?>
-		<?php echo $form->textField($model,'id_pengadaan',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'id_pengadaan'); ?>
-	</div>
+	
+	<?php
+		$model->id_pengadaan=>100;
+	?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nama_pengadaan'); ?>
@@ -38,9 +36,16 @@
 		<?php echo $form->textField($model,'status',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
-
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'nama'); ?>
+		<div class="form">
+			<p><input type = "radio" name="Pelaku Pengadaan" value="Pejabat Pengadaan"> Pejabat Pengadaan</p>
+			<p><input type = "radio" name="Pelaku Pengadaan" value="Panitia Pengadaan"> Panitia Pengadaan</p>
+		</div>
+	</div>
+		
+	<div class="row">
+		<?php echo $form->labelEx($model,'username pejabat'); ?>
 		<?php echo $form->textField($model,'nama',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'nama'); ?>
 	</div>
