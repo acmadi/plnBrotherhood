@@ -180,8 +180,7 @@
 		<li><?php echo CHtml::link('Berita Acara Pengadaan Gagal',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		
 	<?php } else if(Yii::app()->user->name == 'kadiv'){ ?>
-		<li><?php echo CHtml::link('TOR dan RAB',array('site/generator_2')); ?></li>
-		<li><?php echo CHtml::link('Metode Pengadaan yang Digunakan',array('site/checkpoint2_2')); ?></li>    
+		<li><?php echo CHtml::link('TOR dan RAB',array('site/generator_2')); ?></li>   
 		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/checkpoint3_2')); ?></li>
 		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/checkpoint4_2')); ?></li>
 	

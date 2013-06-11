@@ -28,33 +28,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'nama_penyedia'); ?>
-		<?php echo $form->textField($model,'nama_penyedia',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'nama_penyedia'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'tanggal_masuk'); ?>
 		<?php echo $form->textField($model,'tanggal_masuk'); ?>
 		<?php echo $form->error($model,'tanggal_masuk'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'tanggal_selesai'); ?>
-		<?php echo $form->textField($model,'tanggal_selesai'); ?>
-		<?php echo $form->error($model,'tanggal_selesai'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
 		<?php echo $form->textField($model,'status',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'status'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'biaya'); ?>
-		<?php echo $form->textField($model,'biaya',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'biaya'); ?>
 	</div>
 
 	<div class="row">
@@ -73,12 +55,6 @@
 		<?php echo $form->labelEx($model,'metode_pengadaan'); ?>
 		<?php echo $form->textField($model,'metode_pengadaan',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'metode_pengadaan'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'metode_penawaran'); ?>
-		<?php echo $form->textField($model,'metode_penawaran',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'metode_penawaran'); ?>
 	</div>
 
 	<div class="row">
