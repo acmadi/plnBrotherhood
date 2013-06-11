@@ -21,76 +21,76 @@
 				<?php if($cpengadaan->status == 'Penunjukan panitia') { ?>
 					<li><?php echo CHtml::link('Undangan Prakualifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Undangan Prakualifikasi',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Undangan Prakualifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan") ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi') { ?>
 				<?php if($cpengadaan->status == 'Penunjukan panitia') { ?>
-					<li><?php echo CHtml::link('Undangan Prakualifikasi',array('site/checkpoint2')); ?></li>
+					<li><?php echo CHtml::link('Undangan Prakualifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Berita Acara Evaluasi Prakualifikasi',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Berita Acara Evaluasi Prakualifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->status == 'Penunjukan panitia') { ?>
-				<li><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array('site/checkpoint4')); ?></li>
+				<li><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array('site/checkpoint4')); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan") ?></li>
 		<?php } ?>
 		<?php if($cpengadaan->status == 'Penunjukan panitia') { ?>
-				<li><?php echo CHtml::link('Undangan Annwijzing',array('site/checkpoint4')); ?></li>
+				<li><?php echo CHtml::link('Undangan Annwijzing',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Undangan Aanwijzing',array('site/checkpoint4')); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Undangan Aanwijzing',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		<?php if($cpengadaan->status == 'Penunjukan panitia') { ?>
-				<li><?php echo CHtml::link('Undangan Annwijzing',array('site/checkpoint4')); ?></li>
+				<li><?php echo CHtml::link('Undangan Annwijzing',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Berita Acara Aanwijzing',array('site/checkpoint4')); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Berita Acara Aanwijzing',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Satu sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Undangan Pembukaan Penawaran',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Undangan Pembukaan Penawaran',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li class='sudah'><?php echo CHtml::link('Undangan Pembukaan Penawaran',array('site/checkpoint2')); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Satu sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Berita Acara Pembukaan Penawaran',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Berita Acara Pembukaan Penawaran',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Satu sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Berita Acara Evaluasi Penawaran',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Berita Acara Evaluasi Penawaran',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Dua sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Satu',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Satu',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Satu',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Satu',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Dua sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Satu',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Satu',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Satu',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Satu',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Dua sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu',array('site/checkpoint2')); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 		<?php } ?>
 		<?php if($cpengadaan->metode_penawaran=='Dua sampul') { ?>
 				<?php if(($cpengadaan->status == 'Penunjukan panitia') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Dua',array('site/checkpoint7')); ?></li>
+					<li><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Dua',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li class='sudah'><?php echo CHtml::link('Undangan Pembukaan Penawaran Sampul Dua',array('site/checkpoint2')); ?></li>
 				<?php } ?>
