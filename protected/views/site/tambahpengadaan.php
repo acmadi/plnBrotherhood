@@ -15,10 +15,6 @@
 
 	<?php echo $form->errorSummary($model); ?>
 	
-	<?php
-		$model->id_pengadaan=>100;
-	?>
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'nama_pengadaan'); ?>
 		<?php echo $form->textField($model,'nama_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
