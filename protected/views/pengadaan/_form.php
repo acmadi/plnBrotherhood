@@ -82,6 +82,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'jenis_kualifikasi'); ?>
+		<?php echo $form->textField($model,'jenis_kualifikasi',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'jenis_kualifikasi'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'deskripsi'); ?>
 		<?php echo $form->textField($model,'deskripsi',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'deskripsi'); ?>

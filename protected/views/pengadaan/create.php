@@ -2,10 +2,10 @@
 /* @var $this PengadaanController */
 /* @var $model Pengadaan */
 
-// $this->breadcrumbs=array(
-	// 'Pengadaans'=>array('index'),
-	// 'Create',
-// );
+$this->breadcrumbs=array(
+	'Pengadaans'=>array('index'),
+	'Create',
+);
 
 $this->menu=array(
 	array('label'=>'List Pengadaan', 'url'=>array('index')),
