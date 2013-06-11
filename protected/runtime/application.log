@@ -1,0 +1,25 @@
+2013/06/11 06:17:31 [error] [exception.CException] exception 'CException' with message 'Property "DokumenController.breadcrumbs" is not defined.' in D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:173
+Stack trace:
+#0 D:\xampp\htdocs\plnBrotherhood\protected\views\dokumen\index.php(5): CComponent->__set('breadcrumbs', Array)
+#1 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('D:\xampp\htdocs...')
+#2 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#3 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#4 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#5 D:\xampp\htdocs\plnBrotherhood\protected\controllers\DokumenController.php(128): CController->render('index', Array)
+#6 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): DokumenController->actionIndex()
+#7 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#14 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#16 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('dokumen')
+#17 D:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#18 D:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=dokumen
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=gii/crud
+---
