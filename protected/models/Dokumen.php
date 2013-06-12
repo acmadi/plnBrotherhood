@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'dokumen':
  * @property string $id_dokumen
+ * @property string $nama_dokumen
  * @property string $tanggal
  * @property string $tempat
  * @property string $id_pengadaan
@@ -65,14 +66,15 @@ class Dokumen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, tanggal, id_pengadaan, status_upload, link_penyimpanan', 'required'),
-			array('id_dokumen, id_pengadaan', 'length', 'max'=>32),
+			array('nama_dokumen, tanggal, id_pengadaan, status_upload, link_penyimpanan', 'required'),
+			array('nama_dokumen', 'length', 'max'=>50),
 			array('tempat', 'length', 'max'=>20),
+			array('id_pengadaan', 'length', 'max'=>32),
 			array('status_upload', 'length', 'max'=>10),
 			array('link_penyimpanan', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, tanggal, tempat, id_pengadaan, status_upload, link_penyimpanan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload, link_penyimpanan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -118,6 +120,7 @@ class Dokumen extends CActiveRecord
 	{
 		return array(
 			'id_dokumen' => 'Id Dokumen',
+			'nama_dokumen' => 'Nama Dokumen',
 			'tanggal' => 'Tanggal',
 			'tempat' => 'Tempat',
 			'id_pengadaan' => 'Id Pengadaan',
@@ -138,30 +141,12 @@ class Dokumen extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
+		$criteria->compare('nama_dokumen',$this->nama_dokumen,true);
 		$criteria->compare('tanggal',$this->tanggal,true);
 		$criteria->compare('tempat',$this->tempat,true);
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('status_upload',$this->status_upload,true);
 		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	public function searchListDokumen($pid)
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
-		$criteria->compare('status_upload',$this->status_upload,true);
-		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
-		$criteria->condition = 'status_upload = "Selesai"';
-		$criteria->condition = 'id_pengadaan = "' . $pid . '"';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -9,6 +9,10 @@
 	<?php echo CHtml::link(CHtml::encode($data->id_dokumen), array('view', 'id'=>$data->id_dokumen)); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('nama_dokumen')); ?>:</b>
+	<?php echo CHtml::encode($data->nama_dokumen); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tanggal')); ?>:</b>
 	<?php echo CHtml::encode($data->tanggal); ?>
 	<br />

@@ -2,10 +2,10 @@
 /* @var $this DokumenController */
 /* @var $model Dokumen */
 
-// $this->breadcrumbs=array(
-// 	'Dokumens'=>array('index'),
-// 	'Create',
-// );
+$this->breadcrumbs=array(
+	'Dokumens'=>array('index'),
+	'Create',
+);
 
 $this->menu=array(
 	array('label'=>'List Dokumen', 'url'=>array('index')),

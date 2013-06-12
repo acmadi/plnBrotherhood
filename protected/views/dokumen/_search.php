@@ -17,6 +17,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'nama_dokumen'); ?>
+		<?php echo $form->textField($model,'nama_dokumen',array('size'=>50,'maxlength'=>50)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'tanggal'); ?>
 		<?php echo $form->textField($model,'tanggal'); ?>
 	</div>
