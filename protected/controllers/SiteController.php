@@ -348,7 +348,7 @@ class SiteController extends Controller
 	
 	public function actiontambahpengadaanpejabat()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$model=new Pengadaan;
 			$model->status="Penunjukan Panitia";
@@ -371,7 +371,7 @@ class SiteController extends Controller
 	
 	public function actiontambahpengadaanpanitia()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$model=new Pengadaan;
 			$model->status="Penunjukan Panitia";
