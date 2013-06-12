@@ -14,7 +14,7 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 		// 'nama_penyedia',
 		// 'tanggal_masuk',
 		// 'tanggal_selesai',
-		'status',
+		// 'status',
 		/*
 		'biaya',
 		'nama',
