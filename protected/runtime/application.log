@@ -492,3 +492,61 @@ REQUEST_URI=/plnBrotherhood/index.php?r=site/dokumengenerator&id=987654322
 in D:\xampp\htdocs\plnBrotherhood\protected\models\Dokumen.php (152)
 in D:\xampp\htdocs\plnBrotherhood\protected\views\site\dokumengenerator.php (14)
 in D:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (110)
+2013/06/12 13:34:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "uploader".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(270): CController->missingAction('uploader')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('uploader')
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/uploader')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=site/uploader
+---
+2013/06/12 13:40:20 [error] [exception.CException] exception 'CException' with message 'Alias "ext.coco.CocoWidget" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWidgetFactory.php(146): YiiBase::import('ext.coco.CocoWi...', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(SiteController), 'ext.coco.CocoWi...', Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('ext.coco.CocoWi...', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php(33): CBaseController->widget('ext.coco.CocoWi...', Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('uploader', NULL, true)
+#8 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(360): CController->render('uploader')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('uploader')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/uploader')
+#15 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=site/uploader
+---
+2013/06/12 13:41:43 [error] [exception.CException] exception 'CException' with message 'Alias "ext.coco.CocoWidget" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWidgetFactory.php(146): YiiBase::import('ext.coco.CocoWi...', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(SiteController), 'ext.coco.CocoWi...', Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('ext.coco.CocoWi...', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php(33): CBaseController->widget('ext.coco.CocoWi...', Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', NULL, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', NULL, true)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('uploader', NULL, true)
+#8 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(360): CController->render('uploader')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('uploader')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/uploader')
+#15 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=site/uploader
+---
+2013/06/12 13:44:11 [error] [application] the defined receptorClassName has not a method named -myFileReceptor-
+in C:\xampp\htdocs\plnBrotherhood\protected\components\CocoWidget.php (262)
+in C:\xampp\htdocs\plnBrotherhood\protected\components\CocoWidget.php (224)
+in C:\xampp\htdocs\plnBrotherhood\protected\components\CocoWidget.php (208)
