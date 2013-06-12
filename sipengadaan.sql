@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2013 at 06:07 AM
+-- Generation Time: Jun 12, 2013 at 06:44 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -229,17 +229,17 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 CREATE TABLE IF NOT EXISTS `dokumen` (
   `id_dokumen` bigint(32) NOT NULL AUTO_INCREMENT,
   `nama_dokumen` varchar(50) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` date DEFAULT NULL,
   `tempat` varchar(20) DEFAULT NULL,
   `id_pengadaan` bigint(32) NOT NULL,
-  `status_upload` varchar(10) NOT NULL,
-  `link_penyimpanan` varchar(100) NOT NULL,
+  `status_upload` varchar(10) DEFAULT NULL,
+  `link_penyimpanan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`),
   KEY `tanggal` (`tanggal`),
   KEY `tempat` (`tempat`),
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654401 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654407 ;
 
 --
 -- Dumping data for table `dokumen`
@@ -305,7 +305,13 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (987654397, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-09', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
 (987654398, 'Surat Undangan Pembukaan Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
 (987654399, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654400, 'Surat Undangan Penjelasan', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id');
+(987654400, 'Surat Undangan Penjelasan', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654401, 'TOR', NULL, NULL, 987654322, NULL, NULL),
+(987654402, 'RAB', NULL, NULL, 987654322, NULL, NULL),
+(987654403, 'TOR', NULL, NULL, 987654323, NULL, NULL),
+(987654404, 'RAB', NULL, NULL, 987654323, NULL, NULL),
+(987654405, 'TOR', NULL, NULL, 987654324, NULL, NULL),
+(987654406, 'RAB', NULL, NULL, 987654324, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -626,6 +632,26 @@ INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `nama_penyedia`, `tan
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `RAB`
+--
+
+CREATE TABLE IF NOT EXISTS `RAB` (
+  `id_dokumen` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `RAB`
+--
+
+INSERT INTO `RAB` (`id_dokumen`) VALUES
+(987654402),
+(987654404),
+(987654406);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rks`
 --
 
@@ -845,6 +871,26 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_prakualifikasi` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `TOR`
+--
+
+CREATE TABLE IF NOT EXISTS `TOR` (
+  `id_dokumen` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `TOR`
+--
+
+INSERT INTO `TOR` (`id_dokumen`) VALUES
+(987654401),
+(987654403),
+(987654405);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -1016,6 +1062,12 @@ ALTER TABLE `pengadaan`
   ADD CONSTRAINT `pengadaan_ibfk_2` FOREIGN KEY (`nama`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `RAB`
+--
+ALTER TABLE `RAB`
+  ADD CONSTRAINT `rab_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `rks`
 --
 ALTER TABLE `rks`
@@ -1074,3 +1126,9 @@ ALTER TABLE `surat_undangan_penjelasan`
 --
 ALTER TABLE `surat_undangan_prakualifikasi`
   ADD CONSTRAINT `surat_undangan_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `TOR`
+--
+ALTER TABLE `TOR`
+  ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
