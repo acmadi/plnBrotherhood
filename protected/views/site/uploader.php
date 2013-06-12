@@ -1,9 +1,12 @@
 <?php
     $this->pageTitle=Yii::app()->name . ' | Uploader';
+	$id = Yii::app()->getRequest()->getQuery('id');
+	$objectpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id. '"');
+	$dirUpload = 'uploads/' . $objectpengadaan->nama_pengadaan . '/';
 ?>
 
 <h4> 
-    List Dokumen Pengadaan Gedung Baru 
+    List Dokumen <?php echo $objectpengadaan->nama_pengadaan; ?>
 </h4>
 
 
@@ -12,7 +15,7 @@
 	echo '<h5>Berita acara aanwijzing</h5>';
     $this->widget('CocoWidget'
         ,array(
-            'id'=>'cocowidget1',
+            'id'=>'BeritaAcaraAanwijzing',
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -20,7 +23,7 @@
             'sizeLimit'=>2000000, // limit in server-side and in client-side
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
-			'uploadDir'=>'uploads/',
+			'uploadDir'=>$dirUpload,
 			'receptorClassName'=>'application.models.User',
 			'methodName'=>'myFileReceptor',
 			'userdata'=>$model->primaryKey,
