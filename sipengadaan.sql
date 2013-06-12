@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2013 at 05:27 PM
+-- Generation Time: Jun 12, 2013 at 05:51 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -442,8 +442,9 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   `dari` varchar(20) NOT NULL,
   `kepada` varchar(50) NOT NULL,
   `perilhal` varchar(50) NOT NULL,
-  `RAB` bigint(20) NOT NULL,
-  `targetSPK_kontrak` varchar(20) NOT NULL,
+  `RAB` varchar(20) NOT NULL,
+  `TOR_RKS` varchar(32) NOT NULL,
+  `targetSPK_kontrak` int(32) NOT NULL,
   `sumber_dana` varchar(20) NOT NULL,
   `pagu_anggaran` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
@@ -454,10 +455,10 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 -- Dumping data for table `nota_dinas_perintah_pengadaan`
 --
 
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perilhal`, `RAB`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(987654350, '51/A/31/2013', '50/A/31/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan komputer PLN', 10000000000, 'Komputer', 'Kas PLN', 'xxx'),
-(987654370, '51/A/32/2013', '50/A/32/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat tulis PLN', 450000000, 'Alat Tulis', 'Kas PLN', 'xxx'),
-(987654390, '51/A/33/2013', '50/A/33/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat komunikasi PLN', 499000000, 'Alat Komunikasi', 'Kas PLN', 'xxx');
+INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perilhal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
+(987654350, '51/A/31/2013', '50/A/31/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan komputer PLN', 'Terlampir', 'Terlampir', 70, 'Kas PLN', 'xxx'),
+(987654370, '51/A/32/2013', '50/A/32/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat tulis PLN', 'Terlampir', 'Terlampir', 50, 'Kas PLN', 'xxx'),
+(987654390, '51/A/33/2013', '50/A/33/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat komunikasi PLN', 'Terlampir', 'Terlampir', 48, 'Kas PLN', 'xxx');
 
 -- --------------------------------------------------------
 
@@ -579,7 +580,8 @@ INSERT INTO `panitia` (`id_panitia`, `kode_panitia`, `tahun`, `jumlah_panitia`, 
 (1, '1', 2013, 1, 'Aktif'),
 (2, '2', 2013, 1, 'Aktif'),
 (3, 'A', 2013, 3, 'Aktif'),
-(4, 'B', 2013, 2, 'Aktif');
+(4, 'B', 2013, 2, 'Aktif'),
+(5, 'C', 2012, 0, 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -589,13 +591,13 @@ INSERT INTO `panitia` (`id_panitia`, `kode_panitia`, `tahun`, `jumlah_panitia`, 
 
 CREATE TABLE IF NOT EXISTS `pengadaan` (
   `id_pengadaan` bigint(32) NOT NULL AUTO_INCREMENT,
+  `divisi_peminta` varchar(32) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
   `nama_penyedia` varchar(32) DEFAULT NULL,
   `tanggal_masuk` date NOT NULL,
   `tanggal_selesai` date DEFAULT NULL,
   `status` varchar(32) NOT NULL,
   `biaya` bigint(20) DEFAULT NULL,
-  `nama` varchar(32) DEFAULT NULL,
   `kode_panitia` varchar(10) NOT NULL,
   `metode_pengadaan` varchar(32) NOT NULL,
   `metode_penawaran` varchar(32) DEFAULT NULL,
@@ -611,20 +613,19 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `metode_pengadaan` (`metode_pengadaan`),
   KEY `metode_penawaran` (`metode_penawaran`),
   KEY `deskripsi` (`perihal_pengadaan`),
-  KEY `nama_pengadaan` (`nama_pengadaan`),
-  KEY `nama` (`nama`)
+  KEY `nama_pengadaan` (`nama_pengadaan`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654327 ;
 
 --
 -- Dumping data for table `pengadaan`
 --
 
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `nama`, `kode_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `perihal_pengadaan`) VALUES
-(3, 'as', 'aad', '2013-08-09', '2013-10-10', 'selesai', 800, NULL, 'A', 'Penunjukan Langsung', 'Satu Sampul', '', 'asad'),
-(987654322, 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, NULL, 'B', 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
-(987654323, 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, NULL, '1', 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
-(987654324, 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, NULL, '2', 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
-(987654326, 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, NULL, 'B', 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
+INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `kode_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `perihal_pengadaan`) VALUES
+(3, 'Divisi Umum', 'as', 'aad', '2013-08-09', '2013-10-10', 'Selesai', 800, 'A', 'Penunjukan Langsung', 'Satu Sampul', '', 'asad'),
+(987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, 'B', 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
+(987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, '1', 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
+(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, '2', 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
+(987654326, 'Divisi C', 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, 'B', 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
 
 -- --------------------------------------------------------
 
@@ -904,9 +905,9 @@ INSERT INTO `user` (`username`, `nama`, `password`, `divisi`, `status_user`) VAL
 ('gilanglaksana', 'Gilang Laksana', 'gilang', 'Divisi Umum', 'Aktif'),
 ('haniferidaputra', 'Hanif Eridaputra', 'hanif', 'Divisi Umum', 'Aktif'),
 ('irvanaditya', 'Irvan Aditya', 'irvan', 'Divisi Umum', 'Aktif'),
-('jo', 'johan', 'jo', 'Divisi Umum', 'Aktif'),
+('jo', 'johan', 'jo', 'Divisi Khusus', 'Aktif'),
 ('johannesridho', 'Johannes Ridho', 'johan', 'Divisi Umum', 'Aktif'),
-('kadiv', 'kadiv', 'kadiv', 'Divisi Umum', 'Aktif'),
+('kadiv', 'kadiv', 'kadiv', 'Divisi Umum', 'Tidak Aktif'),
 ('kevinindra', 'Kevin Indra', 'kevin', 'Divisi Umum', 'Aktif'),
 ('panitia', 'panitia', 'panitia', 'Divisi Umum', 'Aktif');
 
