@@ -100,14 +100,7 @@ class SiteController extends Controller
         }
         
         public function actionDokumengenerator(){
-			$model=new Dokumen('search');
-			$model->unsetAttributes();  // clear any default values
-			if(isset($_GET['Dokumen'])){
-				$model->attributes=$_GET['Dokumen'];
-			}	
-            $this->render('dokumengenerator', array(
-            	'model'=>$model,
-            ));
+            $this->render('dokumengenerator');
         }
 
 	/**
