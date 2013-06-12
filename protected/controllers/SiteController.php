@@ -19,6 +19,11 @@ class SiteController extends Controller
 		// 		'class'=>'CViewAction',
 		// 	),
 		// );
+		return array(
+			'coco'=>array(
+				'class'=>'CocoAction',
+			),
+		);
 	}
 
 	public $defaultAction = 'dashboard';
@@ -341,5 +346,10 @@ class SiteController extends Controller
 				'model'=>$model,
 			));
 		}
+	}
+	
+	public function actionUploader()
+	{
+		$this->render('uploader');
 	}
 }

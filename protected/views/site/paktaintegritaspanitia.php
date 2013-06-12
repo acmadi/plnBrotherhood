@@ -10,7 +10,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
-		Form generate pakta integritas
+		<?php echo CHtml::button('Buat')?>
 	</div>
 </div>
 
