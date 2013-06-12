@@ -15,6 +15,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		<p> &nbsp </p>
 
 		<p><b> Generate Undangan</b></p>
+		
 		<form name="nosurat" id="nosurat" method="POST">
 			No Surat :<input type="text" NAME="nosurat" id="nosurat" class="text" maxlength="30" />
 		</form>
@@ -23,6 +24,9 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		</form>
 		<form name="sifat" id="sifat" method="POST">
 			Sifat :<input type="text" NAME="sifat" id="sifat" class="text" maxlength="30" />
+		</form>
+		<form name="dari" id="dari" method="POST">
+			Dari :<input type="text" NAME="dari" id="dari" class="text" maxlength="30" />
 		</form>
 		<form name="kepada" id="kepada" method="POST">
 			Kepada :<input type="text" NAME="kepada" id="kepada" class="text" maxlength="30" />

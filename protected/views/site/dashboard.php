@@ -6,7 +6,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
 
-<?php if(Yii::app()->user->name == 'kadiv'){
+<?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){
 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'pengadaan-grid',
@@ -14,12 +14,6 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		// 'filter'=>$model,
 		'columns'=>array(
 			// 'id_pengadaan',
-			array(
-				'class'=>'CDataColumn',
-				'type'=>'number',
-				'value'=>'$row + 1',
-				'header'=>'No',
-			),
 			'nama_pengadaan',
 			// 'nama_penyedia',
 			// 'tanggal_masuk',
@@ -41,7 +35,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			),
 		),
 	)); 
-	}else {
+	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',
 			'dataProvider'=>$model->search(),
@@ -75,19 +69,15 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				),
 			),
 		)); 
-	
-	
 	}
-	
-	?>
+?>
 
 
 <?php 
-	if (Yii::app()->user->name == 'kadiv') {
+	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		echo CHtml::button('Tambah Pengadaan', array('submit'=>array('site/tambahpengadaan'), 'style'=>'background:url(css/bg.gif)')); 
 	}
 ?>
-<?php echo CHtml::button('Unggah berkas excel', array('submit'=>array('site/uploadexcel'), 'style'=>'background:url(css/bg.gif)')); ?>
 
 
 

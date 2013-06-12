@@ -2,10 +2,10 @@
 /* @var $this DokumenController */
 /* @var $model Dokumen */
 
-// $this->breadcrumbs=array(
-// 	'Dokumens'=>array('index'),
-// 	$model->id_dokumen,
-// );
+$this->breadcrumbs=array(
+	'Dokumens'=>array('index'),
+	$model->id_dokumen,
+);
 
 $this->menu=array(
 	array('label'=>'List Dokumen', 'url'=>array('index')),
@@ -22,6 +22,7 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_dokumen',
+		'nama_dokumen',
 		'tanggal',
 		'tempat',
 		'id_pengadaan',

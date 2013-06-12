@@ -13,13 +13,7 @@
 		'id'=>'list-dokumen-grid',
 		'dataProvider'=>$model->searchListDokumen($id),
 		'columns'=>array(
-			array(
-				'class'=>'CDataColumn',
-				'type'=>'number',
-				'value'=>'$row + 1',
-				'header'=>'No',
-			),
-			'id_dokumen',
+			'nama_dokumen',
 			array(
 				'class'=>'CButtonColumn',
 				'template'=>'{view} {update}',			

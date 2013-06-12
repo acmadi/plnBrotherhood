@@ -2,10 +2,10 @@
 /* @var $this DokumenController */
 /* @var $model Dokumen */
 
-// $this->breadcrumbs=array(
-// 	'Dokumens'=>array('index'),
-// 	'Manage',
-// );
+$this->breadcrumbs=array(
+	'Dokumens'=>array('index'),
+	'Manage',
+);
 
 $this->menu=array(
 	array('label'=>'List Dokumen', 'url'=>array('index')),
@@ -46,11 +46,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'id_dokumen',
+		'nama_dokumen',
 		'tanggal',
 		'tempat',
 		'id_pengadaan',
 		'status_upload',
+		/*
 		'link_penyimpanan',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

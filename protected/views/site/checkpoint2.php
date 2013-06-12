@@ -16,24 +16,33 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<h1> Metode Penawaran :</h1>
 	
 	<p> &nbsp </p>
+	<?php                                   
+		echo CHtml::dropDownList('jeniskualifikasi','', 
+		array(1=>'Pra Kualifikasi',2=>'Pasca Kualifikasi'),
+		array(
+			'prompt'=>'Pilih Jenis Kualifikasi :',
+			'ajax' => array(
+			'type'=>'POST', 
+			'url'=>CController::createUrl(''),
+			'update'=>'', 
+			'data'=>array('jeniskualifikasi'=>'js:this.value'),
+			))); 	 
+	?>	
+	
+	<p> &nbsp </p>
+	<?php                                   
+		echo CHtml::dropDownList('metodepenawaran','', 
+		array(1=>'Satu Sampul',2=>'Dua Sampul',3=>'Dua Tahap'),
+		array(
+			'prompt'=>'Pilih Metode Penawaran :',
+			'ajax' => array(
+			'type'=>'POST', 
+			'url'=>CController::createUrl(''),
+			'update'=>'', 
+			'data'=>array('metodepenawaran'=>'js:this.value'),
+			))); 	 
+	?>	
 
-	<p><b> Pilih metode penawaran yang anda inginkan :</b></p>
-	<form name="generator" method="post">
-            <p>Satu Sampul<input type="radio" name="metode" value="1sampul" ></p>
-            <p>Dua Sampul<input type="radio" name="metode" value="2sampul" ></p>
-            <p>Dua Tahap<input type="radio" name="metode" value="2tahap" ></p>
-</form>
-
-<p> &nbsp </p>
-<p> &nbsp </p>
-
-
-<p><b>Pilih jenis kualifikasi :</b></p>
-<form name="generator" method="post">
-
-            <p>Pra Kualifikasi<input type="radio" name="jeniskualifikasi" value="pra" ></p>
-            <p>Pasca Kualifikasi<input type="radio" name="jeniskualifikasi" value="pasca" ></p>
-</form>
 		<?php if (isset($_POST['flag_submit_x']))
 			{
 					//Code to process the flagged image
@@ -47,7 +56,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 	<p>&nbsp</p>
 	<p>&nbsp</p>	
-	<p><input type='submit' name='pilih' value='Pilih'></p>
+	<p><input type='submit' name='pilih' value='Next >>'></p>
 
 	</div>
 </div>

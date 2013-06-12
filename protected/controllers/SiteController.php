@@ -56,17 +56,6 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionUploadexcel()
-	{
-		// renders the view file 'protected/views/site/dashboard.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('uploadexcel');
-	}
-
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
 	public function actionHistory()
 	{
 		if (Yii::app()->user->isGuest) {
@@ -105,14 +94,19 @@ class SiteController extends Controller
         }
         
         public function actionDokumengenerator(){
-			$model=new Dokumen('search');
-			$model->unsetAttributes();  // clear any default values
-			if(isset($_GET['Dokumen'])){
-				$model->attributes=$_GET['Dokumen'];
-			}	
-            $this->render('dokumengenerator', array(
-            	'model'=>$model,
-            ));
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				$model=new Dokumen('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Dokumen'])){
+					$model->attributes=$_GET['Dokumen'];
+				}
+	            $this->render('dokumengenerator', array(
+	            	'model'=>$model,
+	            ));		
+	        }
         }
 
 	/**
@@ -123,8 +117,13 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
-			$this->render('detailpengadaan');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('detailpengadaan');
+			}
 		}
 	}
 
@@ -134,43 +133,73 @@ class SiteController extends Controller
 	 */
 	public function actionGenerator()
 	{	
-		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo' || Yii::app()->user->name == 'kadiv') {
-			$this->render('generator');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('generator');
+			}
 		}
 	}
 	
 	public function actionGenerator_2()
 	{	
-		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo' || Yii::app()->user->name == 'kadiv') {
-			$this->render('generator_2');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('generator_2');
+			}
 		}
 	}
 	
 	public function actionCheckpoint2()
 	{	
-		if (Yii::app()->user->name == 'panitia' || Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint2');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('checkpoint2');
+			}
 		}
 	}
 	
 	public function actiontordanrab()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
-			$this->render('tordanrab');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('tordanrab');
+			}
 		}
 	}
 	
 	public function actionnotadinasperintahpengadaan()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
-			$this->render('notadinasperintahpengadaan');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('notadinasperintahpengadaan');
+			}
 		}
 	}
 	
 	public function actionpaktaintegritaspanitia()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
-			$this->render('paktaintegritaspanitia');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('paktaintegritaspanitia');
+			}
 		}
 	}
 	
@@ -190,9 +219,17 @@ class SiteController extends Controller
 	
 	public function actionCheckpoint4()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint4');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
 		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('checkpoint4');
+			}
+		}
+		/*if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
+			$this->render('checkpoint4');
+		}*/
 	}
 	
 	public function actionCheckpoint5()
@@ -311,7 +348,7 @@ class SiteController extends Controller
 	
 	public function actiontambahpengadaanpejabat()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$model=new Pengadaan;
 			$model->status="Penunjukan Panitia";
@@ -334,7 +371,7 @@ class SiteController extends Controller
 	
 	public function actiontambahpengadaanpanitia()
 	{	
-		if (Yii::app()->user->name == 'kadiv') {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$model=new Pengadaan;
 			$model->status="Penunjukan Panitia";

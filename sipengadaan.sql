@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2013 at 06:01 PM
+-- Generation Time: Jun 12, 2013 at 06:44 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   `nama` varchar(32) DEFAULT NULL,
   `nama_pengadaan` varchar(50) NOT NULL,
   `nomor` varchar(20) NOT NULL,
-  `hari/tanggal` date NOT NULL,
+  `hari_tanggal` varchar(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
   KEY `no_RKS` (`no_RKS`),
@@ -72,10 +72,10 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 -- Dumping data for table `berita_acara_evaluasi_penawaran`
 --
 
-INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `kode_panitia`, `nama`, `nama_pengadaan`, `nomor`, `hari/tanggal`) VALUES
-(987654342, '42/A/31/2013', 'B', NULL, 'Pengadaan komputer', '43/A/31/2013', '2013-06-10'),
-(987654362, '42/A/32/2013', NULL, 'haniferidaputra', 'Pengadaan alat tulis', '43/A/32/2013', '2013-06-27'),
-(987654382, '42/A/33/2013', NULL, 'johannesridho', 'Pengadaan alat komunikasi', '43/A/33/2013', '2013-06-06');
+INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `kode_panitia`, `nama`, `nama_pengadaan`, `nomor`, `hari_tanggal`) VALUES
+(987654342, '42/A/31/2013', 'B', NULL, 'Pengadaan komputer', '43/A/31/2013', 'Senin/10 Juni 2013'),
+(987654362, '42/A/32/2013', NULL, 'haniferidaputra', 'Pengadaan alat tulis', '43/A/32/2013', 'Kamis/27 Juni 2013'),
+(987654382, '42/A/33/2013', NULL, 'johannesridho', 'Pengadaan alat komunikasi', '43/A/33/2013', 'Kamis/06 Juni 2013');
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,6 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 --
 
 INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
-(987654324, '14.00', 'Ruang rapat gedung I lantai 5', 'Negoisasi harga'),
 (987654346, '14.00', 'Ruang rapat gedung I lantai 5', 'Makan bersama'),
 (987654366, '14.00', 'Ruang rapat divisi umum', 'Penentuan pemenang'),
 (987654386, '14.00', 'Ruang rapat besar', 'Penentuan pemenang');
@@ -229,103 +228,90 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 
 CREATE TABLE IF NOT EXISTS `dokumen` (
   `id_dokumen` bigint(32) NOT NULL AUTO_INCREMENT,
-  `tanggal` date NOT NULL,
+  `nama_dokumen` varchar(50) NOT NULL,
+  `tanggal` date DEFAULT NULL,
   `tempat` varchar(20) DEFAULT NULL,
   `id_pengadaan` bigint(32) NOT NULL,
-  `status_upload` varchar(10) NOT NULL,
-  `link_penyimpanan` varchar(100) NOT NULL,
+  `status_upload` varchar(10) DEFAULT NULL,
+  `link_penyimpanan` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`),
   KEY `tanggal` (`tanggal`),
   KEY `tempat` (`tempat`),
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654401 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654407 ;
 
 --
 -- Dumping data for table `dokumen`
 --
 
-INSERT INTO `dokumen` (`id_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`, `link_penyimpanan`) VALUES
-(987654321, '2013-06-02', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654322, '2013-06-03', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654323, '2013-06-04', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654324, '2013-06-05', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654325, '2013-06-06', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654326, '2013-06-07', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654327, '2013-06-08', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654328, '2013-06-09', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654329, '2013-06-10', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654330, '2013-06-11', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654331, '2013-06-12', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654332, '2013-06-13', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654333, '2013-06-14', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654334, '2013-06-10', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654335, '2013-06-12', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654336, '2013-06-13', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654337, '2013-06-14', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654338, '2013-06-15', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654339, '2013-06-13', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654340, '2013-06-09', 'Jakarta', 987654321, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654341, '2013-06-05', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654342, '2013-06-06', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654343, '2013-06-07', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654344, '2013-06-08', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654345, '2013-06-09', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654346, '2013-06-10', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654347, '2013-06-11', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654348, '2013-06-12', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654349, '2013-06-13', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654350, '2013-06-14', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654351, '2013-06-15', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654352, '2013-06-16', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654353, '2013-06-17', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654354, '2013-06-18', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654355, '2013-06-19', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654356, '2013-06-20', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654357, '2013-06-21', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654358, '2013-06-22', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654359, '2013-06-23', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654360, '2013-06-24', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654361, '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654362, '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654363, '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654364, '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654365, '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654366, '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654367, '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654368, '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654369, '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654370, '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654371, '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654372, '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654373, '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654374, '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654375, '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654376, '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654377, '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654378, '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654379, '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654380, '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654381, '2013-06-04', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654382, '2013-06-04', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654383, '2013-06-04', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654384, '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654385, '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654386, '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654387, '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654388, '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654389, '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654390, '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654391, '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654392, '2013-06-07', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654393, '2013-06-07', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654394, '2013-06-08', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654395, '2013-06-08', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654396, '2013-06-09', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654397, '2013-06-09', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654398, '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654399, '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
-(987654400, '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id');
+INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`, `link_penyimpanan`) VALUES
+(987654341, 'RKS', '2013-06-05', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654342, 'Berita Acara Evaluasi Penawaran', '2013-06-06', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654343, 'Berita Acara Negoisasi Klarifikasi', '2013-06-07', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654344, 'Berita Acara Pembukaan Penawaran', '2013-06-08', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654345, 'Berita Acara Penjelasan', '2013-06-09', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654346, 'Daftar Hadir', '2013-06-10', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654347, 'Dokumen Penawaran', '2013-06-11', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654348, 'Nota Dinas Pemberitahuan Pemenang', '2013-06-12', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654349, 'Nota Dinas Penetapan Pemenang', '2013-06-13', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654350, 'Nota Dinas Perintah Pengadaan', '2013-06-14', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654351, 'Nota Dinas Permintaan', '2013-06-15', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654352, 'Nota Dinas Usulan Pemenang', '2013-06-16', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654353, 'Pakta Integritas Panitia 1', '2013-06-17', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654354, 'Pakta Integritas Penyedia', '2013-06-18', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654355, 'Surat Pemberitahuan Pengadaan', '2013-06-19', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654356, 'Surat Pernyataan Minat', '2013-06-20', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654357, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-21', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654358, 'Surat Undangan Pembukaan Penawaran', '2013-06-22', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654359, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-23', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654360, 'Surat Undangan Penjelasan', '2013-06-24', 'Jakarta', 987654322, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654361, 'RKS', '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654362, 'Berita Acara Evaluasi Penawaran', '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654363, 'Berita Acara Negoisasi Klarifikasi', '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654364, 'Berita Acara Pembukaan Penawaran', '2013-06-26', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654365, 'Berita Acara Penjelasan', '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654366, 'Daftar Hadir', '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654367, 'Dokumen Penawaran', '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654368, 'Nota Dinas Pemberitahuan Pemenang', '2013-06-27', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654369, 'Nota Dinas Penetapan Pemenang', '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654370, 'Nota Dinas Perintah Pengadaan', '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654371, 'Nota Dinas Permintaan', '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654372, 'Nota Dinas Usulan Pemenang', '2013-06-28', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654373, 'Pakta Integritas Panitia 1', '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654374, 'Pakta Integritas Penyedia', '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654375, 'Surat Pemberitahuan Pengadaan', '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654376, 'Surat Pernyataan Minat', '2013-06-29', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654377, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654378, 'Surat Undangan Pembukaan Penawaran', '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654379, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654380, 'Surat Undangan Penjelasan', '2013-06-30', 'Jakarta', 987654323, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654381, 'RKS', '2013-06-04', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654382, 'Berita Acara Evaluasi Penawaran', '2013-06-04', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654383, 'Berita Acara Negoisasi Klarifikasi', '2013-06-04', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654384, 'Berita Acara Pembukaan Penawaran', '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654385, 'Berita Acara Penjelasan', '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654386, 'Daftar Hadir', '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654387, 'Dokumen Penawaran', '2013-06-05', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654388, 'Nota Dinas Pemberitahuan Pemenang', '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654389, 'Nota Dinas Penetapan Pemenang', '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654390, 'Nota Dinas Perintah Pengadaan', '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654391, 'Nota Dinas Permintaan', '2013-06-06', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654392, 'Nota Dinas Usulan Pemenang', '2013-06-07', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654393, 'Pakta Integritas Panitia 1', '2013-06-07', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654394, 'Pakta Integritas Penyedia', '2013-06-08', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654395, 'Surat Pemberitahuan Pengadaan', '2013-06-08', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654396, 'Surat Pernyataan Minat', '2013-06-09', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654397, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-09', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654398, 'Surat Undangan Pembukaan Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654399, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654400, 'Surat Undangan Penjelasan', '2013-06-10', 'Jakarta', 987654324, 'Selesai', 'www.sipengadaan.pln.co.id'),
+(987654401, 'TOR', NULL, NULL, 987654322, NULL, NULL),
+(987654402, 'RAB', NULL, NULL, 987654322, NULL, NULL),
+(987654403, 'TOR', NULL, NULL, 987654323, NULL, NULL),
+(987654404, 'RAB', NULL, NULL, 987654323, NULL, NULL),
+(987654405, 'TOR', NULL, NULL, 987654324, NULL, NULL),
+(987654406, 'RAB', NULL, NULL, 987654324, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -343,7 +329,6 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
 --
 
 INSERT INTO `dokumen_penawaran` (`id_dokumen`) VALUES
-(987654339),
 (987654347),
 (987654367),
 (987654387);
@@ -414,7 +399,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
 --
 
 INSERT INTO `nota_dinas_pemberitahuan_pemenang` (`id_dokumen`, `nomor`, `dari`, `sifat`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
-(987654325, '35/A/31/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Mercedes Benz', 'Jl.mobilbagus No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-13', 'Jakarta'),
 (987654348, '48/A/31/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-13', 'Jakarta'),
 (987654368, '48/A/32/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '1234567', 450000000, '2013-06-27', 'Jakarta'),
 (987654388, '48/A/33/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-07', 'Jakarta');
@@ -449,7 +433,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
 --
 
 INSERT INTO `nota_dinas_penetapan_pemenang` (`id_dokumen`, `nomor`, `kepada`, `sifat`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`, `sumber_dana`, `jangka_waktu_berlaku`, `jangka_waktu_deadline`) VALUES
-(987654326, '34/A/31/2013', 'Mercedes Benz', 'Biasa', 'Mercedes Benz', 'Jl.mobilbagus No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-14', 'Jakarta', 'Uang Kas PLN', '7', '14'),
 (987654349, '49/A/31/2013', 'Apple', 'Biasa', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-24', 'Jakarta', 'Uang Kas PLN', '7', '14'),
 (987654369, '49/A/32/2013', 'Pilot', 'Biasa', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '1234567', 450000000, '2013-06-29', 'Jakarta', 'Uang Kas PLN', '7', '14'),
 (987654389, '49/A/33/2013', 'Samsung', 'Biasa', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-09', 'Jakarta', 'Uang Kas PLN', '7', '14');
@@ -468,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   `kepada` varchar(50) NOT NULL,
   `perilhal` varchar(50) NOT NULL,
   `RAB` bigint(20) NOT NULL,
-  `targetSPK/kontrak` varchar(20) NOT NULL,
+  `targetSPK_kontrak` varchar(20) NOT NULL,
   `sumber_dana` varchar(20) NOT NULL,
   `pagu_anggaran` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
@@ -479,8 +462,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 -- Dumping data for table `nota_dinas_perintah_pengadaan`
 --
 
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perilhal`, `RAB`, `targetSPK/kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(987654329, '40/A/31/2013', '35/A/32/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan Mobil dinas PLN', 10000000000, 'Mobil', 'Kas PLN', 'xxx'),
+INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perilhal`, `RAB`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
 (987654350, '51/A/31/2013', '50/A/31/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan komputer PLN', 10000000000, 'Komputer', 'Kas PLN', 'xxx'),
 (987654370, '51/A/32/2013', '50/A/32/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat tulis PLN', 450000000, 'Alat Tulis', 'Kas PLN', 'xxx'),
 (987654390, '51/A/33/2013', '50/A/33/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat komunikasi PLN', 499000000, 'Alat Komunikasi', 'Kas PLN', 'xxx');
@@ -503,7 +485,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 --
 
 INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`) VALUES
-(987654328, '40/A/31/2013'),
 (987654351, '51/A/31/2013'),
 (987654371, '51/A/32/2013'),
 (987654391, '51/A/33/2013');
@@ -534,7 +515,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
 --
 
 INSERT INTO `nota_dinas_usulan_pemenang` (`id_dokumen`, `nomor`, `dari`, `sifat`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
-(987654330, '35/A/32/2013', 'ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Mercedes Benz', 'Jl.mobilbagus No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-13', 'Jakarta'),
 (987654352, '52/A/31/2013', 'ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-23', 'Jakarta'),
 (987654372, '52/A/32/2013', 'ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '1234567', 450000000, '2013-06-28', 'Jakarta'),
 (987654392, '52/A/33/2013', 'ketua panitia Pengadaan barang dan jasa', 'Rahasia', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-08', 'Jakarta');
@@ -583,8 +563,7 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
 INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`, `nama_pengadaan`) VALUES
 (987654394, 'Pengadaan alat komunikasi'),
 (987654374, 'Pengadaan alat tulis'),
-(987654354, 'Pengadaan komputer'),
-(987654340, 'Pengadaan mobil dinas');
+(987654354, 'Pengadaan komputer');
 
 -- --------------------------------------------------------
 
@@ -645,11 +624,30 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `nama`, `kode_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `deskripsi`) VALUES
 (3, 'as', 'aad', '2013-08-09', '2013-10-10', 'selesai', 800, NULL, 'A', 'Penunjukan Langsung', 'Satu Sampul', '', 'asad'),
-(987654321, 'Pengadaan mobil dinas', 'Mercedes Benz', '2013-06-01', '2013-06-15', 'Selesai', 10000000000, NULL, 'A', 'Penunjukan Langsung', 'Satu Sampul', 'Pra Kualifikasi', 'Pengadaan mobil untuk pegawai PLN'),
 (987654322, 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, NULL, 'B', 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
 (987654323, 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 'haniferidaputra', NULL, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
 (987654324, 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 'johannesridho', NULL, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
 (987654326, 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, NULL, 'B', 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RAB`
+--
+
+CREATE TABLE IF NOT EXISTS `RAB` (
+  `id_dokumen` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `RAB`
+--
+
+INSERT INTO `RAB` (`id_dokumen`) VALUES
+(987654402),
+(987654404),
+(987654406);
 
 -- --------------------------------------------------------
 
@@ -669,7 +667,6 @@ CREATE TABLE IF NOT EXISTS `rks` (
 --
 
 INSERT INTO `rks` (`id_dokumen`, `nomor`) VALUES
-(987654331, '37/A/31/2013'),
 (987654341, '42/A/31/2013'),
 (987654361, '42/A/32/2013'),
 (987654381, '42/A/33/2013');
@@ -715,9 +712,9 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
   `jabatan` varchar(30) NOT NULL,
   `bertindak` varchar(30) NOT NULL,
   `alamat` varchar(100) NOT NULL,
-  `telepon/fax` varchar(20) NOT NULL,
+  `telepon_fax` varchar(20) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `kantor_pusat/unit` varchar(20) NOT NULL,
+  `kantor_pusat_unit` varchar(20) NOT NULL,
   `nama_pengadaan` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   KEY `nama_pengadaan` (`nama_pengadaan`)
@@ -727,8 +724,7 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
 -- Dumping data for table `surat_pernyataan_minat`
 --
 
-INSERT INTO `surat_pernyataan_minat` (`id_dokumen`, `nama`, `jabatan`, `bertindak`, `alamat`, `telepon/fax`, `email`, `kantor_pusat/unit`, `nama_pengadaan`) VALUES
-(987654334, 'Alamanda Kartikasari', 'Direktur bagian pemasaran', 'Mercedes Benz', 'Jl.mobilbagus No 57 Jakarta Pusat', '5432123', 'mercedes@gmail.com', 'PLN', 'Pengadaan mobil dinas'),
+INSERT INTO `surat_pernyataan_minat` (`id_dokumen`, `nama`, `jabatan`, `bertindak`, `alamat`, `telepon_fax`, `email`, `kantor_pusat_unit`, `nama_pengadaan`) VALUES
 (987654356, 'Bawang Merah', 'Direktur bagian pemasaran', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '5432123', 'apple@gmail.com', 'PLN', 'Pengadaan komputer'),
 (987654376, 'Bawang Putih', 'Direktur bagian pemasaran', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '5432123', 'pilot@gmail.com', 'PLN', 'Pengadaan alat tulis'),
 (987654396, 'Bawang Bombay', 'Direktur bagian pemasaran', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '5432123', 'samsung@gmail.com', 'PLN', 'Pengadaan alat komunikasi');
@@ -746,7 +742,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
   `perihal` varchar(100) NOT NULL,
   `kepada` varchar(30) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
-  `hari/tanggal` varchar(30) NOT NULL,
+  `hari_tanggal` varchar(30) NOT NULL,
   `waktu` varchar(14) NOT NULL,
   `tempat` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
@@ -757,8 +753,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
 -- Dumping data for table `surat_undangan_negosiasi_klarifikasi`
 --
 
-INSERT INTO `surat_undangan_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `sifat`, `perihal`, `kepada`, `nama_pengadaan`, `hari/tanggal`, `waktu`, `tempat`) VALUES
-(987654335, '39/A/33/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Mercedes Benz', 'Pengadaan mobil dinas', 'Senin/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5'),
+INSERT INTO `surat_undangan_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `sifat`, `perihal`, `kepada`, `nama_pengadaan`, `hari_tanggal`, `waktu`, `tempat`) VALUES
 (987654357, '57/A/31/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Apple', 'Pengadaan komputer', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5'),
 (987654377, '57/A/32/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Pilot', 'Pengadaan alat tulis', 'Kamis/27 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 7'),
 (987654397, '57/A/33/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Samsung', 'Pengadaan alat komunikasi', 'Sabtu/08 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50');
@@ -777,7 +772,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
   `no_RKS` varchar(20) NOT NULL,
-  `hari/tanggal` varchar(20) NOT NULL,
+  `hari_tanggal` varchar(20) NOT NULL,
   `waktu` varchar(20) NOT NULL,
   `tempat` varchar(100) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
@@ -794,7 +789,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 -- Dumping data for table `surat_undangan_pembukaan_penawaran`
 --
 
-INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `kode_panitia`, `nama`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari/tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
+INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `kode_panitia`, `nama`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
 (987654358, 'B', NULL, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer', ''),
 (987654378, NULL, 'haniferidaputra', '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
 (987654398, NULL, 'johannesridho', '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', 'Kamis/06 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
@@ -821,7 +816,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
 --
 
 INSERT INTO `surat_undangan_pengambilan_dokumen_pengadaan` (`id_dokumen`, `nomor`, `sifat`, `perihal`, `nama_pengadaan`) VALUES
-(987654337, '41/A/31/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', 'Pengadaan mobil dinas'),
 (987654359, '59/A/31/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', 'Pengadaan komputer'),
 (987654379, '59/A/32/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', 'Pengadaan alat tulis'),
 (987654399, '59/A/33/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', 'Pengadaan alat komunikasi');
@@ -839,7 +833,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   `nama` varchar(32) DEFAULT NULL,
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
-  `hari/tanggal` varchar(20) NOT NULL,
+  `hari_tanggal` varchar(20) NOT NULL,
   `waktu` varchar(20) NOT NULL,
   `tempat` varchar(100) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
@@ -853,7 +847,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
 -- Dumping data for table `surat_undangan_penjelasan`
 --
 
-INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `kode_panitia`, `nama`, `sifat`, `perihal`, `hari/tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
+INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `kode_panitia`, `nama`, `sifat`, `perihal`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
 (987654360, '60/A/31/2013', 'B', NULL, 'Biasa', 'Penjelsana pekerjaan pengadaan komputer', 'Rabu/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer'),
 (987654380, '60/A/32/2013', NULL, 'haniferidaputra', 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
 (987654400, '60/A/33/2013', NULL, 'johannesridho', 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', 'Jumat/07 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
@@ -873,6 +867,26 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_prakualifikasi` (
 -- Dumping data for table `surat_undangan_prakualifikasi`
 --
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TOR`
+--
+
+CREATE TABLE IF NOT EXISTS `TOR` (
+  `id_dokumen` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `TOR`
+--
+
+INSERT INTO `TOR` (`id_dokumen`) VALUES
+(987654401),
+(987654403),
+(987654405);
 
 -- --------------------------------------------------------
 
@@ -1009,8 +1023,8 @@ ALTER TABLE `nota_dinas_penetapan_pemenang`
 -- Constraints for table `nota_dinas_perintah_pengadaan`
 --
 ALTER TABLE `nota_dinas_perintah_pengadaan`
-  ADD CONSTRAINT `nota_dinas_perintah_pengadaan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `nota_dinas_perintah_pengadaan_ibfk_2` FOREIGN KEY (`nota_dinas_permintaan`) REFERENCES `nota_dinas_permintaan` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `nota_dinas_perintah_pengadaan_ibfk_2` FOREIGN KEY (`nota_dinas_permintaan`) REFERENCES `nota_dinas_permintaan` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `nota_dinas_perintah_pengadaan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nota_dinas_permintaan`
@@ -1048,6 +1062,12 @@ ALTER TABLE `pengadaan`
   ADD CONSTRAINT `pengadaan_ibfk_2` FOREIGN KEY (`nama`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `RAB`
+--
+ALTER TABLE `RAB`
+  ADD CONSTRAINT `rab_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `rks`
 --
 ALTER TABLE `rks`
@@ -1065,25 +1085,25 @@ ALTER TABLE `surat_pemberitahuan_pengadaan`
 -- Constraints for table `surat_pernyataan_minat`
 --
 ALTER TABLE `surat_pernyataan_minat`
-  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_2` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_2` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_negosiasi_klarifikasi`
 --
 ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
-  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_2` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_2` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_pembukaan_penawaran`
 --
 ALTER TABLE `surat_undangan_pembukaan_penawaran`
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_7` FOREIGN KEY (`nama`) REFERENCES `pengadaan` (`nama`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_3` FOREIGN KEY (`no_RKS`) REFERENCES `rks` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_4` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_6` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_6` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_7` FOREIGN KEY (`nama`) REFERENCES `pengadaan` (`nama`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_pengambilan_dokumen_pengadaan`
@@ -1096,13 +1116,19 @@ ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
 -- Constraints for table `surat_undangan_penjelasan`
 --
 ALTER TABLE `surat_undangan_penjelasan`
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_6` FOREIGN KEY (`nama`) REFERENCES `pengadaan` (`nama`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_3` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_5` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_5` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_6` FOREIGN KEY (`nama`) REFERENCES `pengadaan` (`nama`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_prakualifikasi`
 --
 ALTER TABLE `surat_undangan_prakualifikasi`
   ADD CONSTRAINT `surat_undangan_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `TOR`
+--
+ALTER TABLE `TOR`
+  ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;

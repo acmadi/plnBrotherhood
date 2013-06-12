@@ -6,7 +6,7 @@
 ?>
 <ul>
 		
-	<?php if(Yii::app()->user->name == 'panitia'){ ?>
+	<?php if(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<?php if($cpengadaan->status == 'Penunjukan Panitia') { ?>
 				<li class='onprogress' ><?php echo CHtml::link('Penunjukan Panitia',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
@@ -63,7 +63,7 @@
 				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-	<?php } else if(Yii::app()->user->name == 'kadiv'){ ?>
+	<?php } else if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<li><?php echo CHtml::link('TOR dan RAB',array('site/tordanrab',"id"=>"$cpengadaan->id_pengadaan")); ?></li>   
 		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/notadinasperintahpengadaan',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/paktaintegritaspanitia',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
