@@ -219,9 +219,17 @@ class SiteController extends Controller
 	
 	public function actionCheckpoint4()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint4');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
 		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('checkpoint4');
+			}
+		}
+		/*if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
+			$this->render('checkpoint4');
+		}*/
 	}
 	
 	public function actionCheckpoint5()
