@@ -12,7 +12,12 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 	</div>
 
 	<div id="maincontent">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		Anda berada di layar <b><?php echo $cpengadaan->nama_pengadaan; ?></b>.</br>
+		Saat ini status pengadaan telah mencapai <?php echo $cpengadaan->status; ?>. </br>
+		Untuk melanjutkan proses pengadaan, silahkan masuk ke menu <b><?php echo $cpengadaan->status; ?></b> di sebelah kiri. </br>
+		<?php if($cpengadaan->status != 'Penunjukan Panitia') { ?>
+			Apabila anda ingin mengubah data-data sebelumnya, silahkan masuk ke menu di atasnya.
+		<?php } ?>
 	</div>
 </div>
 
