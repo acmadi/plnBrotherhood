@@ -141,24 +141,24 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionCheckpoint2_2()
+	public function actiontordanrab()
 	{	
-		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint2_2');
+		if (Yii::app()->user->name == 'kadiv') {
+			$this->render('tordanrab');
 		}
 	}
 	
-	public function actionCheckpoint3_2()
+	public function actionnotadinasperintahpengadaan()
 	{	
-		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint3_2');
+		if (Yii::app()->user->name == 'kadiv') {
+			$this->render('notadinasperintahpengadaan');
 		}
 	}
 	
-	public function actionCheckpoint4_2()
+	public function actionpaktaintegritaspanitia()
 	{	
-		if (Yii::app()->user->name == 'kadiv' || Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint4_2');
+		if (Yii::app()->user->name == 'kadiv') {
+			$this->render('paktaintegritaspanitia');
 		}
 	}
 	

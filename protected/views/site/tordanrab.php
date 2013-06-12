@@ -2,8 +2,6 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
-$id = Yii::app()->getRequest()->getQuery('id');
-$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <div id="pagecontent">
@@ -12,7 +10,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	</div>
 
 	<div id="maincontent">
-		<p>Silahkan pilih dokumen yang digenerate atau upload</p>
+		TOR <?php echo CHtml::button('Unggah')?>
+		</br> RAB <?php echo CHtml::button('Unggah')?>
 	</div>
 </div>
 

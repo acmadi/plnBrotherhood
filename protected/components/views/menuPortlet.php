@@ -64,9 +64,9 @@
 		<?php } ?>
 		
 	<?php } else if(Yii::app()->user->name == 'kadiv'){ ?>
-		<li><?php echo CHtml::link('TOR dan RAB',array('site/generator_2')); ?></li>   
-		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/checkpoint3_2')); ?></li>
-		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/checkpoint4_2')); ?></li>
+		<li><?php echo CHtml::link('TOR dan RAB',array('site/tordanrab',"id"=>"$cpengadaan->id_pengadaan")); ?></li>   
+		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/notadinasperintahpengadaan',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/paktaintegritaspanitia',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
 	
 	<?php } else{?>
 	
