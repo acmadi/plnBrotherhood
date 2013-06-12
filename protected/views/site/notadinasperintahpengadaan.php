@@ -10,7 +10,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
-		Form input & generate nota dinas
+		<?php echo CHtml::button('Buat')?>
 	</div>
 </div>
 

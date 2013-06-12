@@ -12,7 +12,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	</div>
 
 	<div id="maincontent">
-		<p>Silahkan pilih dokumen yang digenerate atau upload</p>
+		<p>Silahkan pilih dokumen yang ingin dibuat atau diunggah</p>
 	</div>
 </div>
 
