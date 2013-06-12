@@ -63,6 +63,10 @@
 				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
+		</br> </br>
+		
+		<li class='unggah'><?php echo CHtml::link('Unggah Dokumen',array("site/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		
 	<?php } else if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<li><?php echo CHtml::link('TOR dan RAB',array('site/tordanrab',"id"=>"$cpengadaan->id_pengadaan")); ?></li>   
 		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/notadinasperintahpengadaan',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
@@ -71,4 +75,6 @@
 	<?php } else{?>
 	
 	<?php } ?>
+	
+	
 </ul>
