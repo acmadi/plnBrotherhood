@@ -10,12 +10,6 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 	// 'filter'=>$model,
 	'columns'=>array(
 		// 'id_pengadaan',
-		array(
-			'class'=>'CDataColumn',
-			'type'=>'number',
-			'value'=>'$row + 1',
-			'header'=>'No',
-		),
 		'nama_pengadaan',
 		// 'nama_penyedia',
 		// 'tanggal_masuk',
