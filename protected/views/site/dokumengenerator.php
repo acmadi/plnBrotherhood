@@ -19,7 +19,7 @@
 				'value'=>'$row + 1',
 				'header'=>'No',
 			),
-			'id_dokumen',
+			'nama_dokumen',
 			array(
 				'class'=>'CButtonColumn',
 				'template'=>'{view} {update}',			

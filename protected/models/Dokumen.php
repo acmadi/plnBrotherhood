@@ -157,6 +157,7 @@ class Dokumen extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
+		$criteria->compare('nama_dokumen',$this->id_dokumen,true);
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('status_upload',$this->status_upload,true);
 		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
