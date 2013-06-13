@@ -227,6 +227,7 @@ class SiteController extends Controller
 				$this->render('checkpoint4');
 			}
 		}
+		
 		/*if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint4');
 		}*/

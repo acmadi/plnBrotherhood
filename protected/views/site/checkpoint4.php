@@ -16,6 +16,8 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 		<p><b> Generate Undangan</b></p>
 		
+		<?php echo CHtml::link('Generate Word', array()); ?>
+		
 		<form name="nosurat" id="nosurat" method="POST">
 			No Surat :<input type="text" NAME="nosurat" id="nosurat" class="text" maxlength="30" />
 		</form>
