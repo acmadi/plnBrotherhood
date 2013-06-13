@@ -52,7 +52,7 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 			array('targetSPK_kontrak', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen, TOR_RKS', 'length', 'max'=>32),
 			array('nota_dinas_permintaan, nomor, dari, RAB, sumber_dana, pagu_anggaran', 'length', 'max'=>20),
-			array('kepada, perihal', 'length', 'max'=>50),
+			array('kepada, perihal', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'safe', 'on'=>'search'),

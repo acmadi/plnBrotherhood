@@ -407,6 +407,12 @@ class SiteController extends Controller
 				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
 				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
 				$NDPP->nota_dinas_permintaan=$NDP->nomor;
+				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+				if($Panitia->jenis_panitia=='Pejabat'){
+					$NDPP->kepada='Sdr '.$Panitia->nama_panitia;
+				} else {
+					$NDPP->kepada='Sdr '.(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama).' Ketua '.($Panitia->nama_panitia).' Pengadaan Barang / Jasa';
+				}
 				// $TOR->attributes=$_POST['Tor'];
 				// $RAB->attributes=$_POST['Rab'];
 						

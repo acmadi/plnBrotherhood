@@ -9,6 +9,7 @@
  * @property integer $tahun
  * @property string $jumlah_panitia
  * @property string $status_panitia
+ * @property string $jenis_panitia
  *
  * The followings are the available model relations:
  * @property Anggota[] $anggotas
@@ -42,15 +43,15 @@ class Panitia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia', 'required'),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia, jenis_panitia', 'required'),
 			array('tahun', 'numerical', 'integerOnly'=>true),
 			array('id_panitia', 'length', 'max'=>11),
 			array('nama_panitia', 'length', 'max'=>50),
-			array('jumlah_panitia', 'length', 'max'=>20),
+			array('jumlah_panitia, jenis_panitia', 'length', 'max'=>20),
 			array('status_panitia', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia', 'safe', 'on'=>'search'),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia, jenis_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +79,7 @@ class Panitia extends CActiveRecord
 			'tahun' => 'Tahun',
 			'jumlah_panitia' => 'Jumlah Panitia',
 			'status_panitia' => 'Status Panitia',
+			'jenis_panitia' => 'Jenis Panitia',
 		);
 	}
 
@@ -97,6 +99,7 @@ class Panitia extends CActiveRecord
 		$criteria->compare('tahun',$this->tahun);
 		$criteria->compare('jumlah_panitia',$this->jumlah_panitia,true);
 		$criteria->compare('status_panitia',$this->status_panitia,true);
+		$criteria->compare('jenis_panitia',$this->jenis_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
