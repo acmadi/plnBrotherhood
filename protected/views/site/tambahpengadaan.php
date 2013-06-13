@@ -46,19 +46,133 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($Pengadaan,'perihal_pengadaan'); ?>
-			<?php echo $form->textField($Pengadaan,'perihal_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
-			<?php echo $form->error($Pengadaan,'perihal_pengadaan'); ?>
-		</div>
-
+		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save'); ?>
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
+	
+	<div class="form">
+		<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'pengadaan-form',
+		'enableAjaxValidation'=>false,
+		)); ?>
+
+		<?php echo $form->errorSummary($NDP); ?>
+
+		</br>
+		<h4><b> Nota Dinas Permintaan </b></h4>
+		<div class="row">
+			<?php echo $form->labelEx($NDP,'nomor'); ?>
+			<?php echo $form->textField($NDP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDP,'nomor'); ?>
+		</div>
+		
+		<div class="row buttons">
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
+		</div>
+
+		<?php $this->endWidget(); ?>
+
+	</div><!-- form -->
+	
+	<div class="form">
+		<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'pengadaan-form',
+		'enableAjaxValidation'=>false,
+		)); ?>
+
+		<?php echo $form->errorSummary($NDPP); ?>
+
+		</br>
+		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'nomor'); ?>
+			<?php echo $form->textField($NDPP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'nomor'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'dari'); ?>
+			<?php echo $form->textField($NDPP,'dari',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'dari'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'kepada'); ?>
+			<?php echo $form->textField($NDPP,'kepada',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->error($NDPP,'kepada'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'perihal'); ?>
+			<?php echo $form->textField($NDPP,'perihal',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->error($NDPP,'perihal'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'targetSPK_kontrak'); ?>
+			<?php echo $form->textField($NDPP,'targetSPK_kontrak',array('size'=>60)); ?>
+			<?php echo $form->error($NDPP,'targetSPK_kontrak'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'sumber_dana'); ?>
+			<?php echo $form->textField($NDPP,'sumber_dana',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'sumber_dana'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'pagu_anggaran'); ?>
+			<?php echo $form->textField($NDPP,'pagu_anggaran',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'pagu_anggaran'); ?>
+		</div>
+		
+		<div class="row buttons">
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
+		</div>
+
+		<?php $this->endWidget(); ?>
+
+	</div><!-- form -->
+	
+	</br>
+	
+	<div class="form">
+		<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'pengadaan-form',
+		'enableAjaxValidation'=>false,
+		)); ?>
+
+		<?php echo $form->errorSummary($Dokumen2); ?>
+
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah TOR', array('style'=>'background:url(css/bg.gif)'));?>
+		</div>
+
+		<?php $this->endWidget(); ?>
+
+	</div><!-- form -->
+	
+	</br>
+	
+	<div class="form">
+		<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'pengadaan-form',
+		'enableAjaxValidation'=>false,
+		)); ?>
+
+		<?php echo $form->errorSummary($Dokumen3); ?>
+
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah RAB', array('style'=>'background:url(css/bg.gif)'));?>
+		</div>
+
+		<?php $this->endWidget(); ?>
+
+	</div><!-- form --
 <?php	}
 ?>
