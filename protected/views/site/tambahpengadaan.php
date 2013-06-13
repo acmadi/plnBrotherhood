@@ -2,6 +2,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
+$id = Yii::app()->getRequest()->getQuery('id');
 ?>
 <?php 
 	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
@@ -35,7 +36,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($Pengadaan,'kode_panitia'); ?>
+			<?php echo $form->labelEx($Pengadaan,'nama panitia / pejabat pengadaan'); ?>
 			<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
 			<?php echo $form->error($Pengadaan,'id_panitia'); ?>
 		</div>
@@ -44,7 +45,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 			<?php echo $form->labelEx($Pengadaan,'metode_pengadaan'); ?>
 			<?php echo $form->dropDownList($Pengadaan,'metode_pengadaan',
 			  array('Penunjukan Langsung'=>'Penunjukan Lansung','Pemilihan Langsung'=>'Pemilihan Lansung','Pelelangan'=>'Pelelangan'),
-					array('empty'=>"-----Pilih Metode Mengadaan------")); ?>
+					array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
 
