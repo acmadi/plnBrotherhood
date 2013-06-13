@@ -412,7 +412,9 @@ class SiteController extends Controller
 					$Dokumen2->save(false);
 					$Dokumen3->save(false);
 					$NDP->save(false);
-					
+					$NDPP->save(false);
+					$TOR->save(false);
+					$Rab->save(false);
 					$this->redirect(array('dashboard'));
 					//$this->redirect(array('dashboard','id'=>$Pengadaan->id_pengadaan));
 				}
