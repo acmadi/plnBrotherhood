@@ -7,12 +7,14 @@
  * @property string $username
  * @property string $nama
  * @property string $password
+ * @property string $divisi
+ * @property string $status_user
  *
  * The followings are the available model relations:
- * @property Anggota $anggota
- * @property Divisi $divisi
- * @property Pengadaan[] $pengadaans
- * @property Sekretaris $sekretaris
+ * @property Anggota[] $anggotas
+ * @property Divisi $divisi0
+ * @property Dokumen[] $dokumens
+ * @property Kdivmum $kdivmum
  */
 class User extends CActiveRecord
 {
@@ -42,13 +44,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama, password', 'required'),
+			array('username, nama, password, divisi, status_user', 'required'),
 			array('username', 'length', 'max'=>20),
-			array('nama', 'length', 'max'=>32),
+			array('nama, divisi, status_user', 'length', 'max'=>32),
 			array('password', 'length', 'max'=>24),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama, password', 'safe', 'on'=>'search'),
+			array('username, nama, password, divisi, status_user', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,10 +62,10 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'anggota' => array(self::HAS_ONE, 'Anggota', 'username'),
-			'divisi' => array(self::HAS_ONE, 'Divisi', 'username'),
-			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'nama'),
-			'sekretaris' => array(self::HAS_ONE, 'Sekretaris', 'username'),
+			'anggotas' => array(self::HAS_MANY, 'Anggota', 'username'),
+			'divisi0' => array(self::HAS_ONE, 'Divisi', 'username'),
+			'dokumens' => array(self::HAS_MANY, 'Dokumen', 'pengunggah'),
+			'kdivmum' => array(self::HAS_ONE, 'Kdivmum', 'username'),
 		);
 	}
 
@@ -76,6 +78,8 @@ class User extends CActiveRecord
 			'username' => 'Username',
 			'nama' => 'Nama',
 			'password' => 'Password',
+			'divisi' => 'Divisi',
+			'status_user' => 'Status User',
 		);
 	}
 
@@ -93,6 +97,8 @@ class User extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('nama',$this->nama,true);
 		$criteria->compare('password',$this->password,true);
+		$criteria->compare('divisi',$this->divisi,true);
+		$criteria->compare('status_user',$this->status_user,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

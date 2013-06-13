@@ -17,5 +17,13 @@
 	<?php echo CHtml::encode($data->password); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('divisi')); ?>:</b>
+	<?php echo CHtml::encode($data->divisi); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('status_user')); ?>:</b>
+	<?php echo CHtml::encode($data->status_user); ?>
+	<br />
+
 
 </div>

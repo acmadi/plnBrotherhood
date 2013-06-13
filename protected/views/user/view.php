@@ -2,10 +2,10 @@
 /* @var $this UserController */
 /* @var $model User */
 
-// $this->breadcrumbs=array(
-	// 'Users'=>array('index'),
-	// $model->username,
-// );
+$this->breadcrumbs=array(
+	'Users'=>array('index'),
+	$model->username,
+);
 
 $this->menu=array(
 	array('label'=>'List User', 'url'=>array('index')),
@@ -24,5 +24,7 @@ $this->menu=array(
 		'username',
 		'nama',
 		'password',
+		'divisi',
+		'status_user',
 	),
 )); ?>

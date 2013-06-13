@@ -17,6 +17,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'divisi_peminta'); ?>
+		<?php echo $form->textField($model,'divisi_peminta',array('size'=>32,'maxlength'=>32)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'nama_pengadaan'); ?>
 		<?php echo $form->textField($model,'nama_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
@@ -47,11 +52,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'nama'); ?>
-		<?php echo $form->textField($model,'nama',array('size'=>32,'maxlength'=>32)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'kode_panitia'); ?>
 		<?php echo $form->textField($model,'kode_panitia',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
@@ -72,8 +72,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'deskripsi'); ?>
-		<?php echo $form->textField($model,'deskripsi',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->label($model,'perihal_pengadaan'); ?>
+		<?php echo $form->textField($model,'perihal_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
 
 	<div class="row buttons">

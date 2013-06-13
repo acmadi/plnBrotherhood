@@ -33,6 +33,18 @@
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'divisi'); ?>
+		<?php echo $form->textField($model,'divisi',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'divisi'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'status_user'); ?>
+		<?php echo $form->textField($model,'status_user',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'status_user'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
