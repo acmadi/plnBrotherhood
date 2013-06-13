@@ -212,8 +212,43 @@ class SiteController extends Controller
 	
 	public function actionCheckpoint3()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint3');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='RKS';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				
+				$RKS= new Rks;
+				$RKS->id_dokumen=$Dokumen0->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Rks']))
+				{
+					$RKS->attributes=$_POST['Rks'];
+							
+					if($RKS->save(false))
+					{	
+						$Dokumen0->save(false);
+						$this->redirect(array('dashboard'));
+					}
+				}
+
+				$this->render('checkpoint3',array(
+					'Rks'=>$RKS,
+				));
+			}
 		}
 	}
 	

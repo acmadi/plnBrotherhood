@@ -17,15 +17,8 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 			'enableAjaxValidation'=>false,
 		)); ?>
 
-			<p class="note">Keterangan : <span class="required">*</span> harus diisi.</p>
 
 			<?php echo $form->errorSummary($Rks); ?>
-
-			<div class="row">
-				<?php echo $form->labelEx($Rks,'id_dokumen'); ?>
-				<?php echo $form->textField($Rks,'id_dokumen',array('size'=>32,'maxlength'=>32)); ?>
-				<?php echo $form->error($Rks,'id_dokumen'); ?>
-			</div>
 	
 			<div class="row">
 				<?php echo $form->labelEx($Rks,'nomor'); ?>
