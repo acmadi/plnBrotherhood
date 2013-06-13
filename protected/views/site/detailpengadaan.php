@@ -17,7 +17,7 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 			'attributes'=>array(
 				array(
 					'label'=>'Perihal',
-					'value'=>$cpengadaan->notaDinasPerintahPengadaan->perilhal,
+					'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
 				),
 			),
 		));
