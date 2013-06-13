@@ -9,8 +9,8 @@
 	<?php echo CHtml::link(CHtml::encode($data->id_panitia), array('view', 'id'=>$data->id_panitia)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('kode_panitia')); ?>:</b>
-	<?php echo CHtml::encode($data->kode_panitia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('nama_panitia')); ?>:</b>
+	<?php echo CHtml::encode($data->nama_panitia); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tahun')); ?>:</b>

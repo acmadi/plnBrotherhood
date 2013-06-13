@@ -2,11 +2,11 @@
 /* @var $this PanitiaController */
 /* @var $model Panitia */
 
-$this->breadcrumbs=array(
-	'Panitias'=>array('index'),
-	$model->id_panitia=>array('view','id'=>$model->id_panitia),
-	'Update',
-);
+// $this->breadcrumbs=array(
+	// 'Panitias'=>array('index'),
+	// $model->id_panitia=>array('view','id'=>$model->id_panitia),
+	// 'Update',
+// );
 
 $this->menu=array(
 	array('label'=>'List Panitia', 'url'=>array('index')),

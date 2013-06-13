@@ -22,9 +22,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'kode_panitia'); ?>
-		<?php echo $form->textField($model,'kode_panitia',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'kode_panitia'); ?>
+		<?php echo $form->labelEx($model,'nama_panitia'); ?>
+		<?php echo $form->textField($model,'nama_panitia',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'nama_panitia'); ?>
 	</div>
 
 	<div class="row">

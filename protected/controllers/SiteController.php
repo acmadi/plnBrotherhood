@@ -347,6 +347,11 @@ class SiteController extends Controller
 			
 			$Pengadaan=new Pengadaan;
 			$Pengadaan->status="Penunjukan Panitia";
+			$criteria=new CDbcriteria;
+			$criteria->select='max(id_pengadaan) AS maxId';
+			$row = $Pengadaan->model()->find($criteria);
+			$somevariable = $row['maxId'];
+			$Pengadaan->id_pengadaan=$somevariable+1;
 
 			//Uncomment the following line if AJAX validation is needed
 			//$this->performAjaxValidation($model);

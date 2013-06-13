@@ -2,10 +2,10 @@
 /* @var $this PanitiaController */
 /* @var $model Panitia */
 
-$this->breadcrumbs=array(
-	'Panitias'=>array('index'),
-	'Manage',
-);
+// $this->breadcrumbs=array(
+	// 'Panitias'=>array('index'),
+	// 'Manage',
+// );
 
 $this->menu=array(
 	array('label'=>'List Panitia', 'url'=>array('index')),
@@ -46,7 +46,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'id_panitia',
-		'kode_panitia',
+		'nama_panitia',
 		'tahun',
 		'jumlah_panitia',
 		'status_panitia',

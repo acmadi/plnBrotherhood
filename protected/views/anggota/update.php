@@ -2,11 +2,11 @@
 /* @var $this AnggotaController */
 /* @var $model Anggota */
 
-$this->breadcrumbs=array(
-	'Anggotas'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
+// $this->breadcrumbs=array(
+	// 'Anggotas'=>array('index'),
+	// $model->id=>array('view','id'=>$model->id),
+	// 'Update',
+// );
 
 $this->menu=array(
 	array('label'=>'List Anggota', 'url'=>array('index')),

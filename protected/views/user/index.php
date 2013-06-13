@@ -2,9 +2,9 @@
 /* @var $this UserController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Users',
-);
+// $this->breadcrumbs=array(
+	// 'Users',
+// );
 
 $this->menu=array(
 	array('label'=>'Create User', 'url'=>array('create')),

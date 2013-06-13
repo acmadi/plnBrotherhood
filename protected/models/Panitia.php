@@ -1,11 +1,11 @@
 <?php
 
 /**
- * This is the model class for table "Panitia".
+ * This is the model class for table "panitia".
  *
- * The followings are the available columns in table 'Panitia':
+ * The followings are the available columns in table 'panitia':
  * @property string $id_panitia
- * @property string $kode_panitia
+ * @property string $nama_panitia
  * @property integer $tahun
  * @property string $jumlah_panitia
  * @property string $status_panitia
@@ -31,7 +31,7 @@ class Panitia extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Panitia';
+		return 'panitia';
 	}
 
 	/**
@@ -42,15 +42,15 @@ class Panitia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_panitia, kode_panitia, tahun, jumlah_panitia, status_panitia', 'required'),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia', 'required'),
 			array('tahun', 'numerical', 'integerOnly'=>true),
 			array('id_panitia', 'length', 'max'=>11),
-			array('kode_panitia', 'length', 'max'=>10),
+			array('nama_panitia', 'length', 'max'=>50),
 			array('jumlah_panitia', 'length', 'max'=>20),
 			array('status_panitia', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_panitia, kode_panitia, tahun, jumlah_panitia, status_panitia', 'safe', 'on'=>'search'),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,8 +62,8 @@ class Panitia extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'anggotas' => array(self::HAS_MANY, 'Anggota', 'kode_panitia'),
-			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'kode_panitia'),
+			'anggotas' => array(self::HAS_MANY, 'Anggota', 'id_panitia'),
+			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -74,7 +74,7 @@ class Panitia extends CActiveRecord
 	{
 		return array(
 			'id_panitia' => 'Id Panitia',
-			'kode_panitia' => 'Kode Panitia',
+			'nama_panitia' => 'Nama Panitia',
 			'tahun' => 'Tahun',
 			'jumlah_panitia' => 'Jumlah Panitia',
 			'status_panitia' => 'Status Panitia',
@@ -93,7 +93,7 @@ class Panitia extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_panitia',$this->id_panitia,true);
-		$criteria->compare('kode_panitia',$this->kode_panitia,true);
+		$criteria->compare('nama_panitia',$this->nama_panitia,true);
 		$criteria->compare('tahun',$this->tahun);
 		$criteria->compare('jumlah_panitia',$this->jumlah_panitia,true);
 		$criteria->compare('status_panitia',$this->status_panitia,true);

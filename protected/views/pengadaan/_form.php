@@ -58,9 +58,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'kode_panitia'); ?>
-		<?php echo $form->textField($model,'kode_panitia',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'kode_panitia'); ?>
+		<?php echo $form->labelEx($model,'id_panitia'); ?>
+		<?php echo $form->textField($model,'id_panitia',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->error($model,'id_panitia'); ?>
 	</div>
 
 	<div class="row">

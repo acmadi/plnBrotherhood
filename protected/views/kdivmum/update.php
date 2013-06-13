@@ -2,11 +2,11 @@
 /* @var $this KdivmumController */
 /* @var $model Kdivmum */
 
-$this->breadcrumbs=array(
-	'Kdivmums'=>array('index'),
-	$model->username=>array('view','id'=>$model->username),
-	'Update',
-);
+// $this->breadcrumbs=array(
+	// 'Kdivmums'=>array('index'),
+	// $model->username=>array('view','id'=>$model->username),
+	// 'Update',
+// );
 
 $this->menu=array(
 	array('label'=>'List Kdivmum', 'url'=>array('index')),

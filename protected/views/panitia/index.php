@@ -2,9 +2,9 @@
 /* @var $this PanitiaController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Panitias',
-);
+// $this->breadcrumbs=array(
+	// 'Panitias',
+// );
 
 $this->menu=array(
 	array('label'=>'Create Panitia', 'url'=>array('create')),

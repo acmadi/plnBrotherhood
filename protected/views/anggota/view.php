@@ -2,10 +2,10 @@
 /* @var $this AnggotaController */
 /* @var $model Anggota */
 
-$this->breadcrumbs=array(
-	'Anggotas'=>array('index'),
-	$model->id,
-);
+// $this->breadcrumbs=array(
+	// 'Anggotas'=>array('index'),
+	// $model->id,
+// );
 
 $this->menu=array(
 	array('label'=>'List Anggota', 'url'=>array('index')),
@@ -25,6 +25,6 @@ $this->menu=array(
 		'username',
 		'NIP',
 		'email',
-		'kode_panitia',
+		'id_panitia',
 	),
 )); ?>

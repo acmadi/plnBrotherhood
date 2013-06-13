@@ -2,10 +2,10 @@
 /* @var $this PengadaanController */
 /* @var $model Pengadaan */
 
-$this->breadcrumbs=array(
-	'Pengadaans'=>array('index'),
-	$model->id_pengadaan,
-);
+// $this->breadcrumbs=array(
+	// 'Pengadaans'=>array('index'),
+	// $model->id_pengadaan,
+// );
 
 $this->menu=array(
 	array('label'=>'List Pengadaan', 'url'=>array('index')),
@@ -29,7 +29,7 @@ $this->menu=array(
 		'tanggal_selesai',
 		'status',
 		'biaya',
-		'kode_panitia',
+		'id_panitia',
 		'metode_pengadaan',
 		'metode_penawaran',
 		'jenis_kualifikasi',
