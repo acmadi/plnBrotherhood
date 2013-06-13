@@ -54,10 +54,6 @@
 	<?php echo CHtml::encode($data->jenis_kualifikasi); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('perihal_pengadaan')); ?>:</b>
-	<?php echo CHtml::encode($data->perihal_pengadaan); ?>
-	<br />
-
 	*/ ?>
 
 </div>

@@ -25,8 +25,8 @@
 	<?php echo CHtml::encode($data->kepada); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('perilhal')); ?>:</b>
-	<?php echo CHtml::encode($data->perilhal); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('perihal')); ?>:</b>
+	<?php echo CHtml::encode($data->perihal); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('RAB')); ?>:</b>
@@ -34,6 +34,10 @@
 	<br />
 
 	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('TOR_RKS')); ?>:</b>
+	<?php echo CHtml::encode($data->TOR_RKS); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('targetSPK_kontrak')); ?>:</b>
 	<?php echo CHtml::encode($data->targetSPK_kontrak); ?>
 	<br />

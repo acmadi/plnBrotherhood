@@ -8,9 +8,9 @@
 		
 	<?php if(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<?php if($cpengadaan->status == 'Penunjukan Panitia') { ?>
-				<li class='onprogress' ><?php echo CHtml::link('Penunjukan Panitia',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress' ><?php echo CHtml::link('Penunjukan Panitia',array("site/checkpoint3","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah' > <?php echo CHtml::link('Penunjukan Panitia',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' > <?php echo CHtml::link('Penunjukan Panitia',array("site/checkpoint3","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<?php if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi') { ?>
