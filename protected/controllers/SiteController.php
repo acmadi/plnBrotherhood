@@ -217,6 +217,14 @@ class SiteController extends Controller
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan= new Pengadaan;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_pengadaan) AS maxId';
+				$row = $Pengadaan->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Pengadaan->id_pengadaan=$somevariable;
+				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -237,16 +245,18 @@ class SiteController extends Controller
 				if(isset($_POST['Rks']))
 				{
 					$RKS->attributes=$_POST['Rks'];
+					$Pengadaan->attributes=$_POST['Pengadaan'];
 							
 					if($RKS->save(false))
 					{	
 						$Dokumen0->save(false);
+						$Pengadaan->save(false);
 						$this->redirect(array('dashboard'));
 					}
 				}
 
 				$this->render('checkpoint3',array(
-					'Rks'=>$RKS,
+					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,
 				));
 			}
 		}
