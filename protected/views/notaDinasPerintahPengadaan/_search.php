@@ -37,8 +37,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'perilhal'); ?>
-		<?php echo $form->textField($model,'perilhal',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->label($model,'perihal'); ?>
+		<?php echo $form->textField($model,'perihal',array('size'=>50,'maxlength'=>50)); ?>
 	</div>
 
 	<div class="row">
@@ -47,8 +47,13 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'TOR_RKS'); ?>
+		<?php echo $form->textField($model,'TOR_RKS',array('size'=>32,'maxlength'=>32)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'targetSPK_kontrak'); ?>
-		<?php echo $form->textField($model,'targetSPK_kontrak',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'targetSPK_kontrak'); ?>
 	</div>
 
 	<div class="row">

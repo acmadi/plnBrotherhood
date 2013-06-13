@@ -1,15 +1,15 @@
 <?php
-/* @var $this NotaDinasPerintahPengadaanController */
-/* @var $model NotaDinasPerintahPengadaan */
+/* @var $this NotaDinasPermintaanController */
+/* @var $model NotaDinasPermintaan */
 
 // $this->breadcrumbs=array(
-	// 'Nota Dinas Perintah Pengadaans'=>array('index'),
+	// 'Nota Dinas Permintaans'=>array('index'),
 	// 'Manage',
 // );
 
 $this->menu=array(
-	array('label'=>'List NotaDinasPerintahPengadaan', 'url'=>array('index')),
-	array('label'=>'Create NotaDinasPerintahPengadaan', 'url'=>array('create')),
+	array('label'=>'List NotaDinasPermintaan', 'url'=>array('index')),
+	array('label'=>'Create NotaDinasPermintaan', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#nota-dinas-perintah-pengadaan-grid').yiiGridView('update', {
+	$('#nota-dinas-permintaan-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Nota Dinas Perintah Pengadaans</h1>
+<h1>Manage Nota Dinas Permintaans</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,23 +41,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'nota-dinas-perintah-pengadaan-grid',
+	'id'=>'nota-dinas-permintaan-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id_dokumen',
-		'nota_dinas_permintaan',
 		'nomor',
-		'dari',
-		'kepada',
-		'perihal',
-		/*
-		'RAB',
-		'TOR_RKS',
-		'targetSPK_kontrak',
-		'sumber_dana',
-		'pagu_anggaran',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

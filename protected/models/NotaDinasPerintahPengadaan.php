@@ -9,9 +9,10 @@
  * @property string $nomor
  * @property string $dari
  * @property string $kepada
- * @property string $perilhal
+ * @property string $perihal
  * @property string $RAB
- * @property string $targetSPK_kontrak
+ * @property string $TOR_RKS
+ * @property integer $targetSPK_kontrak
  * @property string $sumber_dana
  * @property string $pagu_anggaran
  *
@@ -47,13 +48,14 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perilhal, RAB, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required'),
-			array('id_dokumen', 'length', 'max'=>32),
-			array('nota_dinas_permintaan, nomor, dari, RAB, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'length', 'max'=>20),
-			array('kepada, perilhal', 'length', 'max'=>50),
+			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required'),
+			array('targetSPK_kontrak', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, TOR_RKS', 'length', 'max'=>32),
+			array('nota_dinas_permintaan, nomor, dari, RAB, sumber_dana, pagu_anggaran', 'length', 'max'=>20),
+			array('kepada, perihal', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perilhal, RAB, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'safe', 'on'=>'search'),
+			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,8 +83,9 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 			'nomor' => 'Nomor',
 			'dari' => 'Dari',
 			'kepada' => 'Kepada',
-			'perilhal' => 'Perilhal',
+			'perihal' => 'Perihal',
 			'RAB' => 'Rab',
+			'TOR_RKS' => 'Tor Rks',
 			'targetSPK_kontrak' => 'Target Spk Kontrak',
 			'sumber_dana' => 'Sumber Dana',
 			'pagu_anggaran' => 'Pagu Anggaran',
@@ -105,9 +108,10 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('dari',$this->dari,true);
 		$criteria->compare('kepada',$this->kepada,true);
-		$criteria->compare('perilhal',$this->perilhal,true);
+		$criteria->compare('perihal',$this->perihal,true);
 		$criteria->compare('RAB',$this->RAB,true);
-		$criteria->compare('targetSPK_kontrak',$this->targetSPK_kontrak,true);
+		$criteria->compare('TOR_RKS',$this->TOR_RKS,true);
+		$criteria->compare('targetSPK_kontrak',$this->targetSPK_kontrak);
 		$criteria->compare('sumber_dana',$this->sumber_dana,true);
 		$criteria->compare('pagu_anggaran',$this->pagu_anggaran,true);
 

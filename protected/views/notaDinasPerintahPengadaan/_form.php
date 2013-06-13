@@ -46,9 +46,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'perilhal'); ?>
-		<?php echo $form->textField($model,'perilhal',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'perilhal'); ?>
+		<?php echo $form->labelEx($model,'perihal'); ?>
+		<?php echo $form->textField($model,'perihal',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'perihal'); ?>
 	</div>
 
 	<div class="row">
@@ -58,8 +58,14 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'TOR_RKS'); ?>
+		<?php echo $form->textField($model,'TOR_RKS',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'TOR_RKS'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'targetSPK_kontrak'); ?>
-		<?php echo $form->textField($model,'targetSPK_kontrak',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'targetSPK_kontrak'); ?>
 		<?php echo $form->error($model,'targetSPK_kontrak'); ?>
 	</div>
 
