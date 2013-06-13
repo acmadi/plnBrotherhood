@@ -2,11 +2,11 @@
 /* @var $this DokumenController */
 /* @var $model Dokumen */
 
-// $this->breadcrumbs=array(
-	// 'Dokumens'=>array('index'),
-	// $model->id_dokumen=>array('view','id'=>$model->id_dokumen),
-	// 'Update',
-// );
+$this->breadcrumbs=array(
+	'Dokumens'=>array('index'),
+	$model->id_dokumen=>array('view','id'=>$model->id_dokumen),
+	'Update',
+);
 
 $this->menu=array(
 	array('label'=>'List Dokumen', 'url'=>array('index')),

@@ -46,6 +46,18 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'waktu_upload'); ?>
+		<?php echo $form->textField($model,'waktu_upload'); ?>
+		<?php echo $form->error($model,'waktu_upload'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'pengunggah'); ?>
+		<?php echo $form->textField($model,'pengunggah',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'pengunggah'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'link_penyimpanan'); ?>
 		<?php echo $form->textField($model,'link_penyimpanan',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'link_penyimpanan'); ?>

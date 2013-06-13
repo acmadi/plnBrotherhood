@@ -352,15 +352,25 @@ class SiteController extends Controller
 			$row = $Pengadaan->model()->find($criteria);
 			$somevariable = $row['maxId'];
 			$Pengadaan->id_pengadaan=$somevariable+1;
-
+			
 			//Uncomment the following line if AJAX validation is needed
 			//$this->performAjaxValidation($model);
 
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
+				$Dokumen1=new Dokumen;
+				$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
+				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+				//$Dokumen1->save();
+				
 				if($Pengadaan->save())
-					$this->redirect(array('dashboard','id'=>$Pengadaan->id_pengadaan));
+				{		
+					$this->redirect(array('dashboard'));
+					//$this->redirect(array('dashboard','id'=>$Pengadaan->id_pengadaan));
+				}
 			}
 
 			$this->render('tambahpengadaan',array(

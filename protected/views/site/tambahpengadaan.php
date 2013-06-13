@@ -13,8 +13,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'enableAjaxValidation'=>false,
 		)); ?>
 
-		<p class="note">Keterangan : <span class="required">*</span> Harus diisi.</p>
-
 		<?php echo $form->errorSummary($Pengadaan); ?>
 
 		<div class="row">
