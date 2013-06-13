@@ -55,6 +55,11 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->error($NDP,'nomor'); ?>
 		</div>
 		
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah Nota Dinas Perintah Pengadaan', array('class'=>'sidafbutton'));?>
+		</div>
+		
+		</br>
 		</br>
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
 		<div class="row">
@@ -65,13 +70,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'dari'); ?>
-			<?php echo $form->textField($NDPP,'dari',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->dropDownList($NDPP,'dari',
+			  array('KDIVMUM'=>'KDIVMUM','MS-DAF'=>'MS-DAF'),
+					array('empty'=>"-----Pilih Pengirim Nota Dinas------")); ?>
 			<?php echo $form->error($NDPP,'dari'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'kepada'); ?>
-			<?php echo $form->textField($NDPP,'kepada',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->dropDownList($NDPP,'kepada',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
 			<?php echo $form->error($NDPP,'kepada'); ?>
 		</div>
 
@@ -82,7 +89,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'targetSPK_kontrak'); ?>
+			<?php echo $form->labelEx($NDPP,'Target SPK/Kontrak'); ?>
 			<?php echo $form->textField($NDPP,'targetSPK_kontrak',array('size'=>60)); ?>
 			<?php echo $form->error($NDPP,'targetSPK_kontrak'); ?>
 		</div>
@@ -103,21 +110,21 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</br>
 		
 		<div class="row buttons">
-			<?php echo CHtml::button('Unggah TOR', array('style'=>'background:url(css/bg.gif)'));?>
+			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
 		</div>
 		
 		</br>
 		</br>
 		
 		<div class="row buttons">
-			<?php echo CHtml::button('Unggah RAB', array('style'=>'background:url(css/bg.gif)'));?>
+			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
 		</div>
 		
 		</br>
 		</br>
-		
+
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>

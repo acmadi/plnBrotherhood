@@ -379,37 +379,46 @@ class SiteController extends Controller
 			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
-			$criteria->select='max(id_pengadaan) AS maxId';
+			$criteria->select='max(id_dokumen) AS maxId';
 			$row = $Dokumen0->model()->find($criteria);
 			$somevariable = $row['maxId'];
 			$Dokumen0->id_dokumen=$somevariable+1;
 			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
-			$DOkumen0->status_upload='Belum Selesai';
+			$Dokumen0->status_upload='Belum Selesai';
 			
 			$Dokumen1= new Dokumen;
 			$Dokumen1->id_dokumen=$somevariable+2;
 			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
 			$Dokumen1->tempat='Jakarta';
-			$DOkumen1->status_upload='Belum Selesai';
+			$Dokumen1->status_upload='Belum Selesai';
 			
 			$Dokumen2= new Dokumen;
 			$Dokumen2->id_dokumen=$somevariable+3;
 			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen2->nama_dokumen='TOR';
-			$DOkumen2->status_upload='Belum Selesai';
+			$Dokumen2->status_upload='Belum Selesai';
 			
 			$Dokumen3= new Dokumen;
 			$Dokumen3->id_dokumen=$somevariable+4;
 			$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen3->nama_dokumen='RAB';
-			$DOkumen3->status_upload='Belum Selesai';
+			$Dokumen3->status_upload='Belum Selesai';
 			
 			$NDP= new NotaDinasPermintaan;
+			$NDP->id_dokumen=$Dokumen0->id_dokumen;
+			
 			$NDPP= new NotaDinasPerintahPengadaan;
+			$NDPP->id_dokumen=$Dokumen1->id_dokumen;
+			$NDPP->RAB='Terlampir';
+			$NDPP->TOR_RKS='Terlampir';
+			
 			$TOR= new Tor;
+			$TOR->id_dokumen=$Dokumen2->id_dokumen;
+			
 			$RAB= new Rab;
+			$RAB->id_dokumen=$Dokumen2->id_dokumen;
 
 			//Uncomment the following line if AJAX validation is needed
 			//$this->performAjaxValidation($model);
@@ -417,12 +426,12 @@ class SiteController extends Controller
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
-				// $NDP->attributes=$_POST['NDP'];
-				// $NDPP->attributes=$_POST['NDPP'];
-				// $NDPP->nomor_nota_dinas_permintaan=$NDP->nomor_nota_dinas_permintaan;
-				// $TOR->attributes=$_POST['TOR'];
-				// $RAB->attributes=$_POST['Rab'];
+				$NDP->attributes=$_POST['NotaDinasPermintaan'];
+				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
 				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
+				$NDPP->nota_dinas_permintaan=$NDP->nomor;
+				// $TOR->attributes=$_POST['Tor'];
+				// $RAB->attributes=$_POST['Rab'];
 						
 				if($Pengadaan->save(false))
 				{	
@@ -430,12 +439,11 @@ class SiteController extends Controller
 					$Dokumen1->save(false);
 					$Dokumen2->save(false);
 					$Dokumen3->save(false);
-					// $NDP->save(false);
-					// $NDPP->save(false);
+					$NDP->save(false);
+					$NDPP->save(false);
 					// $TOR->save(false);
-					// $Rab->save(false);
+					// $RAB->save(false);
 					$this->redirect(array('dashboard'));
-					//$this->redirect(array('dashboard','id'=>$Pengadaan->id_pengadaan));
 				}
 			}
 
