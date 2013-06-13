@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2013 at 11:00 AM
+-- Generation Time: Jun 13, 2013 at 05:37 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 --
 
 CREATE TABLE IF NOT EXISTS `dokumen` (
-  `id_dokumen` bigint(32) NOT NULL AUTO_INCREMENT,
+  `id_dokumen` bigint(32) NOT NULL,
   `nama_dokumen` varchar(50) NOT NULL,
   `tanggal` date DEFAULT NULL,
   `tempat` varchar(20) DEFAULT NULL,
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`),
   KEY `pengunggah` (`pengunggah`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654407 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dokumen`
@@ -570,6 +570,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
   `tahun` int(11) NOT NULL,
   `jumlah_panitia` bigint(20) NOT NULL,
   `status_panitia` varchar(32) NOT NULL,
+  `jenis_panitia` varchar(20) NOT NULL,
   PRIMARY KEY (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -577,12 +578,12 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 -- Dumping data for table `panitia`
 --
 
-INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`) VALUES
-(1, 'Hanif Eridaputra', 2013, 1, 'Aktif'),
-(2, 'Johannes Ridho', 2013, 1, 'Aktif'),
-(3, 'Panitia-A', 2013, 3, 'Aktif'),
-(4, 'Panitia-B', 2013, 2, 'Aktif'),
-(5, 'Panitia-C', 2012, 0, 'Tidak Aktif');
+INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`, `jenis_panitia`) VALUES
+(1, 'Hanif Eridaputra', 2013, 1, 'Aktif', 'Pejabat'),
+(2, 'Johannes Ridho', 2013, 1, 'Aktif', 'Pejabat'),
+(3, 'Panitia-A', 2013, 3, 'Aktif', 'Panitia'),
+(4, 'Panitia-B', 2013, 2, 'Aktif', 'Panitia'),
+(5, 'Panitia-C', 2012, 0, 'Tidak Aktif', 'Panitia');
 
 -- --------------------------------------------------------
 
@@ -591,7 +592,7 @@ INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `tahun`, `jumlah_panitia`, 
 --
 
 CREATE TABLE IF NOT EXISTS `pengadaan` (
-  `id_pengadaan` bigint(32) NOT NULL AUTO_INCREMENT,
+  `id_pengadaan` bigint(32) NOT NULL,
   `divisi_peminta` varchar(32) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
   `nama_penyedia` varchar(32) DEFAULT NULL,
@@ -613,7 +614,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `metode_penawaran` (`metode_penawaran`),
   KEY `nama_pengadaan` (`nama_pengadaan`),
   KEY `id_panitia` (`id_panitia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654327 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengadaan`
