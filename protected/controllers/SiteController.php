@@ -359,15 +359,32 @@ class SiteController extends Controller
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
+				
+				$Dokumen0=new Dokumen;
+				$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				
 				$Dokumen1=new Dokumen;
 				$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
 				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-				//$Dokumen1->save();
 				
-				if($Pengadaan->save())
+				$Dokumen2=new Dokumen;
+				$Dokumen2->nama_dokumen='TOR';
+				$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
+				
+				$Dokumen3=new Dokumen;
+				$Dokumen3->nama_dokumen='RAB';
+				$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
+				
+				$NDPP=new NotaDinasPerintahPengadaan;
+						
+				if($Pengadaan->save(false))
 				{		
+					$Dokumen1->save(false);
+					$Dokumen2->save(false);
+					$Dokumen3->save(false);
 					$this->redirect(array('dashboard'));
 					//$this->redirect(array('dashboard','id'=>$Pengadaan->id_pengadaan));
 				}
