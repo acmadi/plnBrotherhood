@@ -21,8 +21,8 @@
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('kode_panitia')); ?>:</b>
-	<?php echo CHtml::encode($data->kode_panitia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_panitia')); ?>:</b>
+	<?php echo CHtml::encode($data->id_panitia); ?>
 	<br />
 
 

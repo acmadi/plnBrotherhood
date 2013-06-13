@@ -2,10 +2,10 @@
 /* @var $this PanitiaController */
 /* @var $model Panitia */
 
-$this->breadcrumbs=array(
-	'Panitias'=>array('index'),
-	$model->id_panitia,
-);
+// $this->breadcrumbs=array(
+	// 'Panitias'=>array('index'),
+	// $model->id_panitia,
+// );
 
 $this->menu=array(
 	array('label'=>'List Panitia', 'url'=>array('index')),
@@ -22,7 +22,7 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_panitia',
-		'kode_panitia',
+		'nama_panitia',
 		'tahun',
 		'jumlah_panitia',
 		'status_panitia',

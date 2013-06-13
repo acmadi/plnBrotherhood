@@ -2,11 +2,11 @@
 /* @var $this NotaDinasPerintahPengadaanController */
 /* @var $model NotaDinasPerintahPengadaan */
 
-$this->breadcrumbs=array(
-	'Nota Dinas Perintah Pengadaans'=>array('index'),
-	$model->id_dokumen=>array('view','id'=>$model->id_dokumen),
-	'Update',
-);
+// $this->breadcrumbs=array(
+	// 'Nota Dinas Perintah Pengadaans'=>array('index'),
+	// $model->id_dokumen=>array('view','id'=>$model->id_dokumen),
+	// 'Update',
+// );
 
 $this->menu=array(
 	array('label'=>'List NotaDinasPerintahPengadaan', 'url'=>array('index')),

@@ -2,9 +2,9 @@
 /* @var $this KdivmumController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Kdivmums',
-);
+// $this->breadcrumbs=array(
+	// 'Kdivmums',
+// );
 
 $this->menu=array(
 	array('label'=>'Create Kdivmum', 'url'=>array('create')),

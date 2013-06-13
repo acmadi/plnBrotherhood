@@ -2,9 +2,9 @@
 /* @var $this AnggotaController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Anggotas',
-);
+// $this->breadcrumbs=array(
+	// 'Anggotas',
+// );
 
 $this->menu=array(
 	array('label'=>'Create Anggota', 'url'=>array('create')),

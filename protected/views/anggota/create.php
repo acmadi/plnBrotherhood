@@ -2,10 +2,10 @@
 /* @var $this AnggotaController */
 /* @var $model Anggota */
 
-$this->breadcrumbs=array(
-	'Anggotas'=>array('index'),
-	'Create',
-);
+//$this->breadcrumbs=array(
+	//'Anggotas'=>array('index'),
+	//'Create',
+//);
 
 $this->menu=array(
 	array('label'=>'List Anggota', 'url'=>array('index')),

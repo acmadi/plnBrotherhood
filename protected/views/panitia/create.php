@@ -2,10 +2,10 @@
 /* @var $this PanitiaController */
 /* @var $model Panitia */
 
-$this->breadcrumbs=array(
-	'Panitias'=>array('index'),
-	'Create',
-);
+// $this->breadcrumbs=array(
+	// 'Panitias'=>array('index'),
+	// 'Create',
+// );
 
 $this->menu=array(
 	array('label'=>'List Panitia', 'url'=>array('index')),

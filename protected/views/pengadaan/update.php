@@ -2,11 +2,11 @@
 /* @var $this PengadaanController */
 /* @var $model Pengadaan */
 
-$this->breadcrumbs=array(
-	'Pengadaans'=>array('index'),
-	$model->id_pengadaan=>array('view','id'=>$model->id_pengadaan),
-	'Update',
-);
+// $this->breadcrumbs=array(
+	// 'Pengadaans'=>array('index'),
+	// $model->id_pengadaan=>array('view','id'=>$model->id_pengadaan),
+	// 'Update',
+// );
 
 $this->menu=array(
 	array('label'=>'List Pengadaan', 'url'=>array('index')),

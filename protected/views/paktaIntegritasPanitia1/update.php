@@ -2,11 +2,11 @@
 /* @var $this PaktaIntegritasPanitia1Controller */
 /* @var $model PaktaIntegritasPanitia1 */
 
-$this->breadcrumbs=array(
-	'Pakta Integritas Panitia1s'=>array('index'),
-	$model->id_dokumen=>array('view','id'=>$model->id_dokumen),
-	'Update',
-);
+// $this->breadcrumbs=array(
+	// 'Pakta Integritas Panitia1s'=>array('index'),
+	// $model->id_dokumen=>array('view','id'=>$model->id_dokumen),
+	// 'Update',
+// );
 
 $this->menu=array(
 	array('label'=>'List PaktaIntegritasPanitia1', 'url'=>array('index')),

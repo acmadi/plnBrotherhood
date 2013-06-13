@@ -2,10 +2,10 @@
 /* @var $this PengadaanController */
 /* @var $model Pengadaan */
 
-$this->breadcrumbs=array(
-	'Pengadaans'=>array('index'),
-	'Manage',
-);
+// $this->breadcrumbs=array(
+	// 'Pengadaans'=>array('index'),
+	// 'Manage',
+// );
 
 $this->menu=array(
 	array('label'=>'List Pengadaan', 'url'=>array('index')),
@@ -54,7 +54,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		/*
 		'status',
 		'biaya',
-		'kode_panitia',
+		'id_panitia',
 		'metode_pengadaan',
 		'metode_penawaran',
 		'jenis_kualifikasi',

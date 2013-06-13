@@ -36,8 +36,8 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 		
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'kode_panitia'); ?>
-			<?php echo $form->dropDownList($Pengadaan,'kode_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'kode_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
-			<?php echo $form->error($Pengadaan,'kode_panitia'); ?>
+			<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
+			<?php echo $form->error($Pengadaan,'id_panitia'); ?>
 		</div>
 
 		<div class="row">
