@@ -485,3 +485,245 @@ REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654322
 in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (29)
 in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (370)
 in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/13 12:07:25 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.divisi_peminta" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('divisi_peminta')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(150): CActiveRecord->__get('divisi_peminta')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:26 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:27 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:28 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:28 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:30 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:31 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:32 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:32 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:32 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 12:11:41 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.kode_panitia" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('kode_panitia')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\models\Pengadaan.php(157): CActiveRecord->__get('kode_panitia')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php(41): Pengadaan->search()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('dashboard', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): CController->render('dashboard', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+HTTP_REFERER=http://localhost/plnBrotherhood/index.php?r=site/login
+---
