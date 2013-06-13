@@ -2,9 +2,9 @@
 /* @var $this PaktaIntegritasPanitia1Controller */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Pakta Integritas Panitia1s',
-);
+// $this->breadcrumbs=array(
+	// 'Pakta Integritas Panitia1s',
+// );
 
 $this->menu=array(
 	array('label'=>'Create PaktaIntegritasPanitia1', 'url'=>array('create')),

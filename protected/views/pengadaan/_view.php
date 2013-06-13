@@ -9,6 +9,10 @@
 	<?php echo CHtml::link(CHtml::encode($data->id_pengadaan), array('view', 'id'=>$data->id_pengadaan)); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('divisi_peminta')); ?>:</b>
+	<?php echo CHtml::encode($data->divisi_peminta); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nama_pengadaan')); ?>:</b>
 	<?php echo CHtml::encode($data->nama_pengadaan); ?>
 	<br />
@@ -29,17 +33,13 @@
 	<?php echo CHtml::encode($data->status); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('biaya')); ?>:</b>
 	<?php echo CHtml::encode($data->biaya); ?>
 	<br />
 
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nama')); ?>:</b>
-	<?php echo CHtml::encode($data->nama); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('kode_panitia')); ?>:</b>
-	<?php echo CHtml::encode($data->kode_panitia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_panitia')); ?>:</b>
+	<?php echo CHtml::encode($data->id_panitia); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('metode_pengadaan')); ?>:</b>
@@ -54,8 +54,8 @@
 	<?php echo CHtml::encode($data->jenis_kualifikasi); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('deskripsi')); ?>:</b>
-	<?php echo CHtml::encode($data->deskripsi); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('perihal_pengadaan')); ?>:</b>
+	<?php echo CHtml::encode($data->perihal_pengadaan); ?>
 	<br />
 
 	*/ ?>

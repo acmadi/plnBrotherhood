@@ -2,10 +2,10 @@
 /* @var $this KdivmumController */
 /* @var $model Kdivmum */
 
-$this->breadcrumbs=array(
-	'Kdivmums'=>array('index'),
-	'Create',
-);
+//$this->breadcrumbs=array(
+	//'Kdivmums'=>array('index'),
+	//'Create',
+//);
 
 $this->menu=array(
 	array('label'=>'List Kdivmum', 'url'=>array('index')),

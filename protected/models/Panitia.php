@@ -1,27 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "panitia".
  *
- * The followings are the available columns in table 'user':
- * @property string $username
- * @property string $nama
- * @property string $password
- * @property string $divisi
- * @property string $status_user
+ * The followings are the available columns in table 'panitia':
+ * @property string $id_panitia
+ * @property string $nama_panitia
+ * @property integer $tahun
+ * @property string $jumlah_panitia
+ * @property string $status_panitia
  *
  * The followings are the available model relations:
  * @property Anggota[] $anggotas
- * @property Divisi $divisi0
- * @property Dokumen[] $dokumens
- * @property Kdivmum $kdivmum
+ * @property Pengadaan[] $pengadaans
  */
-class User extends CActiveRecord
+class Panitia extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Panitia the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -33,7 +31,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return 'panitia';
 	}
 
 	/**
@@ -44,13 +42,15 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama, password, divisi, status_user', 'required'),
-			array('username', 'length', 'max'=>20),
-			array('nama, divisi, status_user', 'length', 'max'=>32),
-			array('password', 'length', 'max'=>24),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia', 'required'),
+			array('tahun', 'numerical', 'integerOnly'=>true),
+			array('id_panitia', 'length', 'max'=>11),
+			array('nama_panitia', 'length', 'max'=>50),
+			array('jumlah_panitia', 'length', 'max'=>20),
+			array('status_panitia', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama, password, divisi, status_user', 'safe', 'on'=>'search'),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,10 +62,8 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'anggotas' => array(self::HAS_MANY, 'Anggota', 'username'),
-			'divisi0' => array(self::HAS_ONE, 'Divisi', 'username'),
-			'dokumens' => array(self::HAS_MANY, 'Dokumen', 'pengunggah'),
-			'kdivmum' => array(self::HAS_ONE, 'Kdivmum', 'username'),
+			'anggotas' => array(self::HAS_MANY, 'Anggota', 'id_panitia'),
+			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -75,11 +73,11 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username' => 'Username',
-			'nama' => 'Nama',
-			'password' => 'Password',
-			'divisi' => 'Divisi',
-			'status_user' => 'Status User',
+			'id_panitia' => 'Id Panitia',
+			'nama_panitia' => 'Nama Panitia',
+			'tahun' => 'Tahun',
+			'jumlah_panitia' => 'Jumlah Panitia',
+			'status_panitia' => 'Status Panitia',
 		);
 	}
 
@@ -94,11 +92,11 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('divisi',$this->divisi,true);
-		$criteria->compare('status_user',$this->status_user,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('nama_panitia',$this->nama_panitia,true);
+		$criteria->compare('tahun',$this->tahun);
+		$criteria->compare('jumlah_panitia',$this->jumlah_panitia,true);
+		$criteria->compare('status_panitia',$this->status_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

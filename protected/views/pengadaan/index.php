@@ -2,9 +2,9 @@
 /* @var $this PengadaanController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Pengadaans',
-);
+// $this->breadcrumbs=array(
+	// 'Pengadaans',
+// );
 
 $this->menu=array(
 	array('label'=>'Create Pengadaan', 'url'=>array('create')),

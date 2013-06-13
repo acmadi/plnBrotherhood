@@ -2,10 +2,10 @@
 /* @var $this PengadaanController */
 /* @var $model Pengadaan */
 
-$this->breadcrumbs=array(
-	'Pengadaans'=>array('index'),
-	$model->id_pengadaan,
-);
+// $this->breadcrumbs=array(
+	// 'Pengadaans'=>array('index'),
+	// $model->id_pengadaan,
+// );
 
 $this->menu=array(
 	array('label'=>'List Pengadaan', 'url'=>array('index')),
@@ -22,17 +22,17 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_pengadaan',
+		'divisi_peminta',
 		'nama_pengadaan',
 		'nama_penyedia',
 		'tanggal_masuk',
 		'tanggal_selesai',
 		'status',
 		'biaya',
-		'nama',
-		'kode_panitia',
+		'id_panitia',
 		'metode_pengadaan',
 		'metode_penawaran',
 		'jenis_kualifikasi',
-		'deskripsi',
+		'perihal_pengadaan',
 	),
 )); ?>

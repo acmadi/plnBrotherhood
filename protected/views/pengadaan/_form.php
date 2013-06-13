@@ -16,9 +16,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_pengadaan'); ?>
-		<?php echo $form->textField($model,'id_pengadaan',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'id_pengadaan'); ?>
+		<?php echo $form->labelEx($model,'divisi_peminta'); ?>
+		<?php echo $form->textField($model,'divisi_peminta',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'divisi_peminta'); ?>
 	</div>
 
 	<div class="row">
@@ -58,15 +58,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'nama'); ?>
-		<?php echo $form->textField($model,'nama',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'nama'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'kode_panitia'); ?>
-		<?php echo $form->textField($model,'kode_panitia',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'kode_panitia'); ?>
+		<?php echo $form->labelEx($model,'id_panitia'); ?>
+		<?php echo $form->textField($model,'id_panitia',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->error($model,'id_panitia'); ?>
 	</div>
 
 	<div class="row">
@@ -88,9 +82,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'deskripsi'); ?>
-		<?php echo $form->textField($model,'deskripsi',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'deskripsi'); ?>
+		<?php echo $form->labelEx($model,'perihal_pengadaan'); ?>
+		<?php echo $form->textField($model,'perihal_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'perihal_pengadaan'); ?>
 	</div>
 
 	<div class="row buttons">

@@ -2,10 +2,10 @@
 /* @var $this PaktaIntegritasPanitia1Controller */
 /* @var $model PaktaIntegritasPanitia1 */
 
-$this->breadcrumbs=array(
-	'Pakta Integritas Panitia1s'=>array('index'),
-	'Create',
-);
+// $this->breadcrumbs=array(
+	// 'Pakta Integritas Panitia1s'=>array('index'),
+	// 'Create',
+// );
 
 $this->menu=array(
 	array('label'=>'List PaktaIntegritasPanitia1', 'url'=>array('index')),

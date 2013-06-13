@@ -5,8 +5,12 @@
 
 <div class="view">
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('username')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->username), array('view', 'id'=>$data->username)); ?>
+	<?php echo CHtml::encode($data->username); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('NIP')); ?>:</b>
@@ -17,8 +21,8 @@
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('kode_panitia')); ?>:</b>
-	<?php echo CHtml::encode($data->kode_panitia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_panitia')); ?>:</b>
+	<?php echo CHtml::encode($data->id_panitia); ?>
 	<br />
 
 

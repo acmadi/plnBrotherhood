@@ -12,6 +12,11 @@
 )); ?>
 
 	<div class="row">
+		<?php echo $form->label($model,'id'); ?>
+		<?php echo $form->textField($model,'id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'username'); ?>
 		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
@@ -27,8 +32,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'kode_panitia'); ?>
-		<?php echo $form->textField($model,'kode_panitia',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'id_panitia'); ?>
+		<?php echo $form->textField($model,'id_panitia',array('size'=>11,'maxlength'=>11)); ?>
 	</div>
 
 	<div class="row buttons">

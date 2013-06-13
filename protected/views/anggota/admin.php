@@ -2,10 +2,10 @@
 /* @var $this AnggotaController */
 /* @var $model Anggota */
 
-$this->breadcrumbs=array(
-	'Anggotas'=>array('index'),
-	'Manage',
-);
+// $this->breadcrumbs=array(
+	// 'Anggotas'=>array('index'),
+	// 'Manage',
+// );
 
 $this->menu=array(
 	array('label'=>'List Anggota', 'url'=>array('index')),
@@ -45,10 +45,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
+		'id',
 		'username',
 		'NIP',
 		'email',
-		'kode_panitia',
+		'id_panitia',
 		array(
 			'class'=>'CButtonColumn',
 		),

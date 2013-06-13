@@ -5,14 +5,15 @@
 	$dirUpload = 'uploads/' . $objectpengadaan->nama_pengadaan . '/';
 ?>
 
-<h4> 
-    List Dokumen <?php echo $objectpengadaan->nama_pengadaan; ?>
-</h4>
-
-
-<div>
+<div id="pagecontent">
+	<div id="sidebar">
+		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+	</div>
+	
+	<div id="maincontent">
+	<div class="uploaderblock">
+	<h5>Berita Acara Aanwijzing</h5>
 	<?php
-	echo '<h5>Berita acara aanwijzing</h5>';
     $this->widget('CocoWidget'
         ,array(
             'id'=>'BeritaAcaraAanwijzing',
@@ -34,9 +35,8 @@
             'multipleFileSelection'=>true, // true or false, defaults: true
         ));
     ?>
+	</div>
+	</div>
 </div>
-
-
-
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/detilpengadaanhistory'), 'style'=>'background:url(css/bg.gif)')); ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?></div>
     

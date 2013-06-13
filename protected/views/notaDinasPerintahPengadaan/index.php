@@ -2,9 +2,9 @@
 /* @var $this NotaDinasPerintahPengadaanController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Nota Dinas Perintah Pengadaans',
-);
+// $this->breadcrumbs=array(
+	// 'Nota Dinas Perintah Pengadaans',
+// );
 
 $this->menu=array(
 	array('label'=>'Create NotaDinasPerintahPengadaan', 'url'=>array('create')),

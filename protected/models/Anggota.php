@@ -4,13 +4,14 @@
  * This is the model class for table "anggota".
  *
  * The followings are the available columns in table 'anggota':
+ * @property integer $id
  * @property string $username
  * @property string $NIP
  * @property string $email
- * @property string $kode_panitia
+ * @property string $id_panitia
  *
  * The followings are the available model relations:
- * @property Panitia $kodePanitia
+ * @property Panitia $idPanitia
  * @property User $username0
  */
 class Anggota extends CActiveRecord
@@ -41,13 +42,13 @@ class Anggota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, NIP, email, kode_panitia', 'required'),
+			array('username, NIP, email, id_panitia', 'required'),
 			array('username', 'length', 'max'=>20),
 			array('NIP, email', 'length', 'max'=>32),
-			array('kode_panitia', 'length', 'max'=>10),
+			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, NIP, email, kode_panitia', 'safe', 'on'=>'search'),
+			array('id, username, NIP, email, id_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +60,7 @@ class Anggota extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'kodePanitia' => array(self::BELONGS_TO, 'Panitia', 'kode_panitia'),
+			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
 			'username0' => array(self::BELONGS_TO, 'User', 'username'),
 		);
 	}
@@ -70,10 +71,11 @@ class Anggota extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'id' => 'ID',
 			'username' => 'Username',
 			'NIP' => 'Nip',
 			'email' => 'Email',
-			'kode_panitia' => 'Kode Panitia',
+			'id_panitia' => 'Id Panitia',
 		);
 	}
 
@@ -88,10 +90,11 @@ class Anggota extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('kode_panitia',$this->kode_panitia,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
