@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2013 at 08:25 AM
+-- Generation Time: Jun 13, 2013 at 11:00 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   `tanggal` date DEFAULT NULL,
   `tempat` varchar(20) DEFAULT NULL,
   `id_pengadaan` bigint(32) NOT NULL,
-  `status_upload` varchar(10) DEFAULT NULL,
+  `status_upload` varchar(20) DEFAULT NULL,
   `waktu_upload` time DEFAULT NULL,
   `pengunggah` varchar(32) DEFAULT NULL,
   `link_penyimpanan` varchar(100) DEFAULT NULL,
@@ -304,12 +304,12 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (987654398, 'Surat Undangan Pembukaan Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654399, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654400, 'Surat Undangan Penjelasan', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
-(987654401, 'TOR', NULL, NULL, 987654322, NULL, '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
-(987654402, 'RAB', NULL, NULL, 987654322, NULL, '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
-(987654403, 'TOR', NULL, NULL, 987654323, NULL, '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
-(987654404, 'RAB', NULL, NULL, 987654323, NULL, '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
-(987654405, 'TOR', NULL, NULL, 987654324, NULL, '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
-(987654406, 'RAB', NULL, NULL, 987654324, NULL, '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id');
+(987654401, 'TOR', NULL, NULL, 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
+(987654402, 'RAB', NULL, NULL, 987654322, 'Belum Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
+(987654403, 'TOR', NULL, NULL, 987654323, 'Belum Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
+(987654404, 'RAB', NULL, NULL, 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
+(987654405, 'TOR', NULL, NULL, 987654324, 'Belum Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
+(987654406, 'RAB', NULL, NULL, 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id');
 
 -- --------------------------------------------------------
 
