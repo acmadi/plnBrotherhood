@@ -341,54 +341,33 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 	
-	public function actiontambahpengadaan()
-	{	
-		$this->render('tambahpengadaan');
-	}
-	
-	public function actiontambahpengadaanpejabat()
+	public function actionTambahpengadaan()
 	{	
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$model=new Pengadaan;
 			$model->status="Penunjukan Panitia";
 
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
+			//Uncomment the following line if AJAX validation is needed
+			//$this->performAjaxValidation($model);
 
 			if(isset($_POST['Pengadaan']))
 			{
 				$model->attributes=$_POST['Pengadaan'];
 				if($model->save())
-					$this->redirect(array('generator_2','id'=>$model->id_pengadaan));
+					$this->redirect(array('dashboard','id'=>$model->id_pengadaan));
 			}
 
-			$this->render('tambahpengadaanpejabat',array(
+			$this->render('tambahpengadaan',array(
 				'model'=>$model,
 			));
 		}
 	}
 	
-	public function actiontambahpengadaanpanitia()
+	public function actionDetilTambahPengadaan()
 	{	
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-			
-			$model=new Pengadaan;
-			$model->status="Penunjukan Panitia";
 
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
-
-			if(isset($_POST['Pengadaan']))
-			{
-				$model->attributes=$_POST['Pengadaan'];
-				if($model->save())
-					$this->redirect(array('generator_2','id'=>$model->id_pengadaan));
-			}
-
-			$this->render('tambahpengadaanpanitia',array(
-				'model'=>$model,
-			));
 		}
 	}
 	
