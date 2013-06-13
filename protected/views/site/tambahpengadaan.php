@@ -47,22 +47,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
 		
-		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
-		</div>
-
-		<?php $this->endWidget(); ?>
-
-	</div><!-- form -->
-	
-	<div class="form">
-		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'pengadaan-form',
-		'enableAjaxValidation'=>false,
-		)); ?>
-
-		<?php echo $form->errorSummary($NDP); ?>
-
 		</br>
 		<h4><b> Nota Dinas Permintaan </b></h4>
 		<div class="row">
@@ -71,22 +55,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->error($NDP,'nomor'); ?>
 		</div>
 		
-		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
-		</div>
-
-		<?php $this->endWidget(); ?>
-
-	</div><!-- form -->
-	
-	<div class="form">
-		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'pengadaan-form',
-		'enableAjaxValidation'=>false,
-		)); ?>
-
-		<?php echo $form->errorSummary($NDPP); ?>
-
 		</br>
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
 		<div class="row">
@@ -131,6 +99,23 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->error($NDPP,'pagu_anggaran'); ?>
 		</div>
 		
+		</br>
+		</br>
+		
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah TOR', array('style'=>'background:url(css/bg.gif)'));?>
+		</div>
+		
+		</br>
+		</br>
+		
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah RAB', array('style'=>'background:url(css/bg.gif)'));?>
+		</div>
+		
+		</br>
+		</br>
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
 		</div>
@@ -139,40 +124,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 	</div><!-- form -->
 	
-	</br>
 	
-	<div class="form">
-		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'pengadaan-form',
-		'enableAjaxValidation'=>false,
-		)); ?>
-
-		<?php echo $form->errorSummary($Dokumen2); ?>
-
-		<div class="row buttons">
-			<?php echo CHtml::button('Unggah TOR', array('style'=>'background:url(css/bg.gif)'));?>
-		</div>
-
-		<?php $this->endWidget(); ?>
-
-	</div><!-- form -->
-	
-	</br>
-	
-	<div class="form">
-		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'pengadaan-form',
-		'enableAjaxValidation'=>false,
-		)); ?>
-
-		<?php echo $form->errorSummary($Dokumen3); ?>
-
-		<div class="row buttons">
-			<?php echo CHtml::button('Unggah RAB', array('style'=>'background:url(css/bg.gif)'));?>
-		</div>
-
-		<?php $this->endWidget(); ?>
-
-	</div><!-- form --
 <?php	}
 ?>
