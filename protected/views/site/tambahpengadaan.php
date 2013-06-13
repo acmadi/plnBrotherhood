@@ -103,21 +103,21 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</br>
 		
 		<div class="row buttons">
-			<?php echo CHtml::button('Unggah TOR', array('style'=>'background:url(css/bg.gif)'));?>
+			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
 		</div>
 		
 		</br>
 		</br>
 		
 		<div class="row buttons">
-			<?php echo CHtml::button('Unggah RAB', array('style'=>'background:url(css/bg.gif)'));?>
+			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
 		</div>
 		
 		</br>
 		</br>
-		
+
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('style'=>'background:url(css/bg.gif)')); ?>
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>
