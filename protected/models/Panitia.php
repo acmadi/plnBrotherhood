@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "anggota".
+ * This is the model class for table "Panitia".
  *
- * The followings are the available columns in table 'anggota':
- * @property integer $id
- * @property string $username
- * @property string $NIP
- * @property string $email
+ * The followings are the available columns in table 'Panitia':
+ * @property string $id_panitia
  * @property string $kode_panitia
+ * @property integer $tahun
+ * @property string $jumlah_panitia
+ * @property string $status_panitia
  *
  * The followings are the available model relations:
- * @property Panitia $kodePanitia
- * @property User $username0
+ * @property Anggota[] $anggotas
+ * @property Pengadaan[] $pengadaans
  */
-class Anggota extends CActiveRecord
+class Panitia extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Anggota the static model class
+	 * @return Panitia the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -31,7 +31,7 @@ class Anggota extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'anggota';
+		return 'Panitia';
 	}
 
 	/**
@@ -42,13 +42,15 @@ class Anggota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, NIP, email, kode_panitia', 'required'),
-			array('username', 'length', 'max'=>20),
-			array('NIP, email', 'length', 'max'=>32),
+			array('id_panitia, kode_panitia, tahun, jumlah_panitia, status_panitia', 'required'),
+			array('tahun', 'numerical', 'integerOnly'=>true),
+			array('id_panitia', 'length', 'max'=>11),
 			array('kode_panitia', 'length', 'max'=>10),
+			array('jumlah_panitia', 'length', 'max'=>20),
+			array('status_panitia', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, NIP, email, kode_panitia', 'safe', 'on'=>'search'),
+			array('id_panitia, kode_panitia, tahun, jumlah_panitia, status_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,8 +62,8 @@ class Anggota extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'kodePanitia' => array(self::BELONGS_TO, 'Panitia', 'kode_panitia'),
-			'username0' => array(self::BELONGS_TO, 'User', 'username'),
+			'anggotas' => array(self::HAS_MANY, 'Anggota', 'kode_panitia'),
+			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'kode_panitia'),
 		);
 	}
 
@@ -71,11 +73,11 @@ class Anggota extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'username' => 'Username',
-			'NIP' => 'Nip',
-			'email' => 'Email',
+			'id_panitia' => 'Id Panitia',
 			'kode_panitia' => 'Kode Panitia',
+			'tahun' => 'Tahun',
+			'jumlah_panitia' => 'Jumlah Panitia',
+			'status_panitia' => 'Status Panitia',
 		);
 	}
 
@@ -90,11 +92,11 @@ class Anggota extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('NIP',$this->NIP,true);
-		$criteria->compare('email',$this->email,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('kode_panitia',$this->kode_panitia,true);
+		$criteria->compare('tahun',$this->tahun);
+		$criteria->compare('jumlah_panitia',$this->jumlah_panitia,true);
+		$criteria->compare('status_panitia',$this->status_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

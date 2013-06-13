@@ -71,7 +71,7 @@ class AnggotaController extends Controller
 		{
 			$model->attributes=$_POST['Anggota'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->username));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -95,7 +95,7 @@ class AnggotaController extends Controller
 		{
 			$model->attributes=$_POST['Anggota'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->username));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(

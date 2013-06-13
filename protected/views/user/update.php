@@ -2,11 +2,11 @@
 /* @var $this UserController */
 /* @var $model User */
 
-// $this->breadcrumbs=array(
-	// 'Users'=>array('index'),
-	// $model->username=>array('view','id'=>$model->username),
-	// 'Update',
-// );
+$this->breadcrumbs=array(
+	'Users'=>array('index'),
+	$model->username=>array('view','id'=>$model->username),
+	'Update',
+);
 
 $this->menu=array(
 	array('label'=>'List User', 'url'=>array('index')),

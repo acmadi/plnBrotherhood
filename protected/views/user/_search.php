@@ -21,6 +21,16 @@
 		<?php echo $form->textField($model,'nama',array('size'=>32,'maxlength'=>32)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'divisi'); ?>
+		<?php echo $form->textField($model,'divisi',array('size'=>32,'maxlength'=>32)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'status_user'); ?>
+		<?php echo $form->textField($model,'status_user',array('size'=>32,'maxlength'=>32)); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
