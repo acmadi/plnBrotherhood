@@ -345,29 +345,23 @@ class SiteController extends Controller
 	{	
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
-			$model=new Pengadaan;
-			$model->status="Penunjukan Panitia";
+			$Pengadaan=new Pengadaan;
+			$Pengadaan->status="Penunjukan Panitia";
+			$Pengadaan->id_pengadaan=CHtml::
 
 			//Uncomment the following line if AJAX validation is needed
 			//$this->performAjaxValidation($model);
 
 			if(isset($_POST['Pengadaan']))
 			{
-				$model->attributes=$_POST['Pengadaan'];
-				if($model->save())
-					$this->redirect(array('dashboard','id'=>$model->id_pengadaan));
+				$Pengadaan->attributes=$_POST['Pengadaan'];
+				if($Pengadaan->save())
+					$this->redirect(array('dashboard','id'=>$Pengadaan->id_pengadaan));
 			}
 
 			$this->render('tambahpengadaan',array(
-				'model'=>$model,
+				'Pengadaan'=>$Pengadaan,
 			));
-		}
-	}
-	
-	public function actionDetilTambahPengadaan()
-	{	
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-
 		}
 	}
 	

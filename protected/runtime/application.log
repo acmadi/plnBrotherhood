@@ -370,3 +370,118 @@ Stack trace:
 REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
 HTTP_REFERER=http://localhost/plnbrotherhood/index.php
 ---
+2013/06/13 04:09:45 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaan.php:17)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(364): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionTambahpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaan.php (17)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (364)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/13 04:39:48 [error] [exception.CException] exception 'CException' with message 'Panitia and its behaviors do not have a method or closure named "findAllByAtributes".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:265
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(225): CComponent->__call('findAllByAtribu...', Array)
+#1 C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaan.php(39): CActiveRecord->__call('findAllByAtribu...', Array)
+#2 C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaan.php(39): Panitia->findAllByAtributes(Array)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('tambahpengadaan', Array, true)
+#7 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(364): CController->render('tambahpengadaan', Array)
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionTambahpengadaan()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#14 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---
+2013/06/13 04:40:30 [error] [exception.CDbException] exception 'CDbException' with message 'Table "Panitia" does not have a column named "0".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\schema\CDbCommandBuilder.php:591
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1481): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaan.php(39): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('tambahpengadaan', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(364): CController->render('tambahpengadaan', Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionTambahpengadaan()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---
+2013/06/13 04:41:29 [error] [exception.CDbException] exception 'CDbException' with message 'Table "Panitia" does not have a column named "0".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\schema\CDbCommandBuilder.php:591
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1481): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\plnBrotherhood\protected\views\site\tambahpengadaan.php(39): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(126): require('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): CController->renderPartial('tambahpengadaan', Array, true)
+#6 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(364): CController->render('tambahpengadaan', Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionTambahpengadaan()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan')
+#12 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#13 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---
+2013/06/13 04:46:24 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php:29)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(370): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654322
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (29)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (370)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/13 04:46:33 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php:29)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(370): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654322
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (29)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (370)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
