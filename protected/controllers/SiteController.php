@@ -74,6 +74,7 @@ class SiteController extends Controller
 		}
 	}
     
+
 		public function behaviors()
 		{
 		   return array(
@@ -96,7 +97,7 @@ class SiteController extends Controller
 			$this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Frisbee")),array("members"=>2,"pets"=>1)); // would create a block toy for rox
 			$this->renderDocx("ExampleReport.docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
 		}
-    
+		
         public function actionDokumenhistory(){
 		
 			if (Yii::app()->user->isGuest) {

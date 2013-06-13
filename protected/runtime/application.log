@@ -1,0 +1,70 @@
+2013/06/13 19:59:39 [error] [exception.CException] exception 'CException' with message 'Alias "ext.doccy.Doccy" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php(196): YiiBase::import('ext.doccy.Doccy', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(326): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(297): CComponent->attachBehavior('doccy', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(114): CComponent->attachBehaviors(Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(359): CController->__construct('site', NULL)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(276): CWebApplication->createController('')
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+---
+2013/06/13 19:59:41 [error] [exception.CException] exception 'CException' with message 'Alias "ext.doccy.Doccy" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php(196): YiiBase::import('ext.doccy.Doccy', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(326): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(297): CComponent->attachBehavior('doccy', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(114): CComponent->attachBehaviors(Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(359): CController->__construct('site', NULL)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(276): CWebApplication->createController('')
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+---
+2013/06/13 19:59:53 [error] [exception.CException] exception 'CException' with message 'Alias "ext.doccy.Doccy" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php(196): YiiBase::import('ext.doccy.Doccy', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(326): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(297): CComponent->attachBehavior('doccy', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(114): CComponent->attachBehaviors(Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(359): CController->__construct('site', NULL)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(276): CWebApplication->createController('')
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/plnBrotherhood/index.php
+---
+2013/06/13 20:00:42 [error] [exception.CException] exception 'CException' with message 'Alias "ext.doccy.Doccy" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php(196): YiiBase::import('ext.doccy.Doccy', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(326): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(297): CComponent->attachBehavior('doccy', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(114): CComponent->attachBehaviors(Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(359): CController->__construct('site', NULL)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(276): CWebApplication->createController('site/login')
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=site/login
+---
+2013/06/13 20:03:45 [error] [exception.CException] exception 'CException' with message 'Alias "ext.doccy.Doccy" is invalid. Make sure it points to an existing PHP file and the file is readable.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\YiiBase.php(196): YiiBase::import('ext.doccy.Doccy', true)
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(326): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php(297): CComponent->attachBehavior('doccy', Array)
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(114): CComponent->attachBehaviors(Array)
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(359): CController->__construct('site', NULL)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(276): CWebApplication->createController('site/login')
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/plnBrotherhood/index.php?r=site/login
+---
