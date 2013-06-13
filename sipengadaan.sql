@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 13, 2013 at 03:14 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jun 13, 2013 at 03:13 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -31,24 +30,24 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   `username` varchar(20) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `kode_panitia` (`kode_panitia`),
-  KEY `username` (`username`)
+  KEY `username` (`username`),
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `kode_panitia`) VALUES
-(1, 'kevinindra', '123456784', 'kevin@gmail.com', 'A'),
-(2, 'irvanaditya', '123456785', 'irvan@gmail.com', 'B'),
-(3, 'gilanglaksana', '123456786', 'gilang@gmail.com', 'A'),
-(4, 'johannesridho', '123456787', 'johan@gmail.com', 'B'),
-(5, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 'A'),
-(6, 'haniferidaputra', '123456788', 'he.23292@gmail.com', '1'),
-(7, 'johannesridho', '123456787', 'johan@gmail.com', '2');
+INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `id_panitia`) VALUES
+(1, 'kevinindra', '123456784', 'kevin@gmail.com', 3),
+(2, 'irvanaditya', '123456785', 'irvan@gmail.com', 4),
+(3, 'gilanglaksana', '123456786', 'gilang@gmail.com', 3),
+(4, 'johannesridho', '123456787', 'johan@gmail.com', 4),
+(5, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 3),
+(6, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 1),
+(7, 'johannesridho', '123456787', 'johan@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -59,7 +58,7 @@ INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `kode_panitia`) VALUES
 CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   `no_RKS` varchar(20) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `nama_pengadaan` varchar(50) NOT NULL,
   `nomor` varchar(20) NOT NULL,
   `hari_tanggal` varchar(32) NOT NULL,
@@ -67,17 +66,17 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   UNIQUE KEY `nomor` (`nomor`),
   KEY `no_RKS` (`no_RKS`),
   KEY `nama_pengadaan` (`nama_pengadaan`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `berita_acara_evaluasi_penawaran`
 --
 
-INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `kode_panitia`, `nama_pengadaan`, `nomor`, `hari_tanggal`) VALUES
-(987654342, '42/A/31/2013', 'B', 'Pengadaan komputer', '43/A/31/2013', 'Senin/10 Juni 2013'),
-(987654362, '42/A/32/2013', '1', 'Pengadaan alat tulis', '43/A/32/2013', 'Kamis/27 Juni 2013'),
-(987654382, '42/A/33/2013', '2', 'Pengadaan alat komunikasi', '43/A/33/2013', 'Kamis/06 Juni 2013');
+INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panitia`, `nama_pengadaan`, `nomor`, `hari_tanggal`) VALUES
+(987654342, '42/A/31/2013', 4, 'Pengadaan komputer', '43/A/31/2013', 'Senin/10 Juni 2013'),
+(987654362, '42/A/32/2013', 1, 'Pengadaan alat tulis', '43/A/32/2013', 'Kamis/27 Juni 2013'),
+(987654382, '42/A/33/2013', 2, 'Pengadaan alat komunikasi', '43/A/33/2013', 'Kamis/06 Juni 2013');
 
 -- --------------------------------------------------------
 
@@ -92,21 +91,21 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   `klarifikasi_teknis` varchar(100) NOT NULL,
   `harga_awal` bigint(20) NOT NULL,
   `harga_akhir` bigint(20) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `surat_keputusan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `berita_acara_negosiasi_klarifikasi`
 --
 
-INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `kode_panitia`, `surat_keputusan`) VALUES
-(987654343, '43/A/31/2013', 'administrasi', 'teknis', 10000000000, 10000000000, 'B', ''),
-(987654363, '43/A/32/2013', 'administrasi', 'teknis', 450000000, 450000000, '1', ''),
-(987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, '2', '');
+INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `id_panitia`, `surat_keputusan`) VALUES
+(987654343, '43/A/31/2013', 'administrasi', 'teknis', 10000000000, 10000000000, 4, ''),
+(987654363, '43/A/32/2013', 'administrasi', 'teknis', 450000000, 450000000, 1, ''),
+(987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, 2, '');
 
 -- --------------------------------------------------------
 
@@ -121,21 +120,21 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   `jumlah_penyedia_dokumen_sah` int(10) NOT NULL,
   `jumlah_penyedia_dokumen_tidak_sah` int(10) NOT NULL,
   `status_metode` varchar(10) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `surat_keputusan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `berita_acara_pembukaan_penawaran`
 --
 
-INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `kode_panitia`, `surat_keputusan`) VALUES
-(987654344, '44/A/31/2013', 4, 3, 1, 'apa ini', 'B', ''),
-(987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', '1', ''),
-(987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', '2', '');
+INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `id_panitia`, `surat_keputusan`) VALUES
+(987654344, '44/A/31/2013', 4, 3, 1, 'apa ini', 4, ''),
+(987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', 1, ''),
+(987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', 2, '');
 
 -- --------------------------------------------------------
 
@@ -148,6 +147,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_pengadaan_gagal`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -157,20 +161,20 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
 CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(20) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `berita_acara_penjelasan`
 --
 
-INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `kode_panitia`) VALUES
-(987654345, '45/A/31/2013', 'B'),
-(987654365, '45/A/32/2013', '1'),
-(987654385, '45/A/33/2013', '2');
+INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`) VALUES
+(987654345, '45/A/31/2013', 4),
+(987654365, '45/A/32/2013', 1),
+(987654385, '45/A/33/2013', 2);
 
 -- --------------------------------------------------------
 
@@ -205,6 +209,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `divisi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -313,6 +322,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dokumen_penawaran`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -323,6 +337,11 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form_isian_kualifikasi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -503,19 +522,19 @@ INSERT INTO `nota_dinas_usulan_pemenang` (`id_dokumen`, `nomor`, `dari`, `sifat`
 
 CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   `id_dokumen` bigint(32) NOT NULL,
-  `kode_panitia` varchar(20) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pakta_integritas_panitia_1`
 --
 
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `kode_panitia`) VALUES
-(987654373, '1'),
-(987654393, '2'),
-(987654353, 'B');
+INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
+(987654373, 1),
+(987654393, 2),
+(987654353, 4);
 
 -- --------------------------------------------------------
 
@@ -547,24 +566,23 @@ INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`, `nama_pengadaan`) VALUES
 
 CREATE TABLE IF NOT EXISTS `panitia` (
   `id_panitia` bigint(11) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `nama_panitia` varchar(50) NOT NULL,
   `tahun` int(11) NOT NULL,
   `jumlah_panitia` bigint(20) NOT NULL,
   `status_panitia` varchar(32) NOT NULL,
-  PRIMARY KEY (`id_panitia`),
-  KEY `kode_panitia` (`kode_panitia`)
+  PRIMARY KEY (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `panitia`
 --
 
-INSERT INTO `panitia` (`id_panitia`, `kode_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`) VALUES
-(1, '1', 2013, 1, 'Aktif'),
-(2, '2', 2013, 1, 'Aktif'),
-(3, 'A', 2013, 3, 'Aktif'),
-(4, 'B', 2013, 2, 'Aktif'),
-(5, 'C', 2012, 0, 'Tidak Aktif');
+INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`) VALUES
+(1, 'Hanif Eridaputra', 2013, 1, 'Aktif'),
+(2, 'Johannes Ridho', 2013, 1, 'Aktif'),
+(3, 'Panitia-A', 2013, 3, 'Aktif'),
+(4, 'Panitia-B', 2013, 2, 'Aktif'),
+(5, 'Panitia-C', 2012, 0, 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -581,7 +599,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   `tanggal_selesai` date DEFAULT NULL,
   `status` varchar(32) NOT NULL,
   `biaya` bigint(20) DEFAULT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `metode_pengadaan` varchar(32) NOT NULL,
   `metode_penawaran` varchar(32) DEFAULT NULL,
   `jenis_kualifikasi` varchar(32) DEFAULT NULL,
@@ -592,22 +610,22 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `tanggal_selesai` (`tanggal_selesai`),
   KEY `status` (`status`),
   KEY `biaya` (`biaya`),
-  KEY `kodepanitia` (`kode_panitia`),
   KEY `metode_pengadaan` (`metode_pengadaan`),
   KEY `metode_penawaran` (`metode_penawaran`),
   KEY `deskripsi` (`perihal_pengadaan`),
-  KEY `nama_pengadaan` (`nama_pengadaan`)
+  KEY `nama_pengadaan` (`nama_pengadaan`),
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654327 ;
 
 --
 -- Dumping data for table `pengadaan`
 --
 
-INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `kode_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `perihal_pengadaan`) VALUES
-(987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, 'B', 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
-(987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, '1', 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
-(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, '2', 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
-(987654326, 'Divisi C', 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, 'B', 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
+INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `perihal_pengadaan`) VALUES
+(987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
+(987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 1, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
+(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 2, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
+(987654326, 'Divisi C', 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, 4, 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
 
 -- --------------------------------------------------------
 
@@ -660,23 +678,23 @@ INSERT INTO `rks` (`id_dokumen`, `nomor`) VALUES
 CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(20) NOT NULL,
-  `kode_panitia` varchar(20) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `perihal` varchar(50) NOT NULL,
   `lingkup_kerja` varchar(20) NOT NULL,
   `waktu_kerja` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `surat_pemberitahuan_pengadaan`
 --
 
-INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `kode_panitia`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
-(987654355, '55/A/31/2013', 'B', 'Pemberitahuan pengadaan komputer', 'Pengadaan komputer', '17'),
-(987654375, '55/A/32/2013', '1', 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
-(987654395, '55/A/33/2013', '2', 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
+INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
+(987654355, '55/A/31/2013', 4, 'Pemberitahuan pengadaan komputer', 'Pengadaan komputer', '17'),
+(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
+(987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
 
 -- --------------------------------------------------------
 
@@ -744,7 +762,7 @@ INSERT INTO `surat_undangan_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `sifa
 
 CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
-  `kode_panitia` varchar(10) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `nomor` varchar(20) NOT NULL,
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
@@ -756,19 +774,19 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   `surat_keputusan` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
-  KEY `kode_panitia` (`kode_panitia`),
   KEY `no_RKS` (`no_RKS`),
-  KEY `nama_pengadaan` (`nama_pengadaan`)
+  KEY `nama_pengadaan` (`nama_pengadaan`),
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `surat_undangan_pembukaan_penawaran`
 --
 
-INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `kode_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
-(987654358, 'B', '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer', ''),
-(987654378, '1', '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
-(987654398, '2', '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', 'Kamis/06 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
+INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
+(987654358, 4, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer', ''),
+(987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
+(987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', 'Kamis/06 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
 
 -- --------------------------------------------------------
 
@@ -805,7 +823,7 @@ INSERT INTO `surat_undangan_pengambilan_dokumen_pengadaan` (`id_dokumen`, `nomor
 CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(20) NOT NULL,
-  `kode_panitia` varchar(20) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL,
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
   `hari_tanggal` varchar(20) NOT NULL,
@@ -814,17 +832,17 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   `nama_pengadaan` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   KEY `nama_pengadaan` (`nama_pengadaan`),
-  KEY `kode_panitia` (`kode_panitia`)
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `surat_undangan_penjelasan`
 --
 
-INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `kode_panitia`, `sifat`, `perihal`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
-(987654360, '60/A/31/2013', 'B', 'Biasa', 'Penjelsana pekerjaan pengadaan komputer', 'Rabu/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer'),
-(987654380, '60/A/32/2013', '1', 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
-(987654400, '60/A/33/2013', '2', 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', 'Jumat/07 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
+INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `sifat`, `perihal`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
+(987654360, '60/A/31/2013', 4, 'Biasa', 'Penjelsana pekerjaan pengadaan komputer', 'Rabu/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer'),
+(987654380, '60/A/32/2013', 1, 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
+(987654400, '60/A/33/2013', 2, 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', 'Jumat/07 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
 
 -- --------------------------------------------------------
 
@@ -836,6 +854,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_prakualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_prakualifikasi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -896,31 +919,31 @@ INSERT INTO `user` (`username`, `nama`, `password`, `divisi`, `status_user`) VAL
 -- Constraints for table `anggota`
 --
 ALTER TABLE `anggota`
-  ADD CONSTRAINT `anggota_ibfk_1` FOREIGN KEY (`kode_panitia`) REFERENCES `panitia` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `anggota_ibfk_3` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `anggota_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `berita_acara_evaluasi_penawaran`
 --
 ALTER TABLE `berita_acara_evaluasi_penawaran`
+  ADD CONSTRAINT `berita_acara_evaluasi_penawaran_ibfk_6` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `berita_acara_evaluasi_penawaran_ibfk_2` FOREIGN KEY (`no_RKS`) REFERENCES `rks` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `berita_acara_evaluasi_penawaran_ibfk_4` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `berita_acara_evaluasi_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `berita_acara_evaluasi_penawaran_ibfk_6` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `berita_acara_evaluasi_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `berita_acara_negosiasi_klarifikasi`
 --
 ALTER TABLE `berita_acara_negosiasi_klarifikasi`
-  ADD CONSTRAINT `berita_acara_negosiasi_klarifikasi_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `berita_acara_negosiasi_klarifikasi_ibfk_5` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `berita_acara_negosiasi_klarifikasi_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `berita_acara_negosiasi_klarifikasi_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `berita_acara_pembukaan_penawaran`
 --
 ALTER TABLE `berita_acara_pembukaan_penawaran`
-  ADD CONSTRAINT `berita_acara_pembukaan_penawaran_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `berita_acara_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `berita_acara_pembukaan_penawaran_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `berita_acara_pembukaan_penawaran_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `berita_acara_pengadaan_gagal`
@@ -932,8 +955,8 @@ ALTER TABLE `berita_acara_pengadaan_gagal`
 -- Constraints for table `berita_acara_penjelasan`
 --
 ALTER TABLE `berita_acara_penjelasan`
-  ADD CONSTRAINT `berita_acara_penjelasan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `berita_acara_penjelasan_ibfk_4` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `berita_acara_penjelasan_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `berita_acara_penjelasan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `daftar_hadir`
@@ -1011,8 +1034,8 @@ ALTER TABLE `nota_dinas_usulan_pemenang`
 -- Constraints for table `pakta_integritas_panitia_1`
 --
 ALTER TABLE `pakta_integritas_panitia_1`
-  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_4` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pakta_integritas_penyedia`
@@ -1025,7 +1048,7 @@ ALTER TABLE `pakta_integritas_penyedia`
 -- Constraints for table `pengadaan`
 --
 ALTER TABLE `pengadaan`
-  ADD CONSTRAINT `pengadaan_ibfk_1` FOREIGN KEY (`kode_panitia`) REFERENCES `panitia` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pengadaan_ibfk_1` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rab`
@@ -1043,8 +1066,8 @@ ALTER TABLE `rks`
 -- Constraints for table `surat_pemberitahuan_pengadaan`
 --
 ALTER TABLE `surat_pemberitahuan_pengadaan`
-  ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_4` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_pernyataan_minat`
@@ -1064,10 +1087,10 @@ ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
 -- Constraints for table `surat_undangan_pembukaan_penawaran`
 --
 ALTER TABLE `surat_undangan_pembukaan_penawaran`
+  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_6` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_3` FOREIGN KEY (`no_RKS`) REFERENCES `rks` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_4` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_6` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_pengambilan_dokumen_pengadaan`
@@ -1080,9 +1103,9 @@ ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
 -- Constraints for table `surat_undangan_penjelasan`
 --
 ALTER TABLE `surat_undangan_penjelasan`
+  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_5` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_3` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_5` FOREIGN KEY (`kode_panitia`) REFERENCES `pengadaan` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_prakualifikasi`
@@ -1095,7 +1118,3 @@ ALTER TABLE `surat_undangan_prakualifikasi`
 --
 ALTER TABLE `tor`
   ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
