@@ -33,4 +33,4 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 	
 </div>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'style'=>'background:url(css/bg.gif)'));  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'class'=>'sidafbutton'));  ?>

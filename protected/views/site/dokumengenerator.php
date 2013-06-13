@@ -2,6 +2,12 @@
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
     $this->pageTitle=Yii::app()->name . ' | List Dokumen : ' . $cpengadaan->nama_pengadaan;
+    $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
+    	'criteria'=>array(
+    		'condition'=>'id_pengadaan = "' . $id . '"',
+    		'order'=>'id_dokumen ASC',
+    	),
+    ));
 ?>
 
 <h4> 
@@ -11,9 +17,14 @@
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'list-dokumen-grid',
-		'dataProvider'=>$model->searchListDokumen($id),
+		'dataProvider'=>$dataProvider,
 		'columns'=>array(
 			'nama_dokumen',
+			array(
+				'class'=>'CDataColumn',
+				'header'=>'Status Unggah',
+				'value'=>'$data->status_upload',
+			),
 			array(
 				'class'=>'CButtonColumn',
 				'template'=>'{view} {update}',			
@@ -26,7 +37,7 @@
 	));
 ?>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'style'=>'background:url(css/bg.gif)'));  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'class'=>'sidafbutton'));  ?>
     
     
 
