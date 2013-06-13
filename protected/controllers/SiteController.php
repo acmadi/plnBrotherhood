@@ -352,46 +352,7 @@ class SiteController extends Controller
 			$row = $Pengadaan->model()->find($criteria);
 			$somevariable = $row['maxId'];
 			$Pengadaan->id_pengadaan=$somevariable+1;
-			
-			$Dokumen0=new Dokumen;
-			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
-			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-			$criteria=new CDbcriteria;
-			$criteria->select='max(id_dokumen) AS maxId';
-			$row = $Dokumen0->model()->find($criteria);
-			$somevariable = $row['maxId'];
-			$Dokumen0->id_dokumen=$somevariable+1;
-			
-			$Dokumen1=new Dokumen;
-			$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
-			$Dokumen1->tempat='Jakarta';
-			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen1->id_dokumen=$somevariable+2;
-			
-			$Dokumen2=new Dokumen;
-			$Dokumen2->nama_dokumen='TOR';
-			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen1->id_dokumen=$somevariable+2;			
-			
-			$Dokumen3=new Dokumen;
-			$Dokumen3->nama_dokumen='RAB';
-			$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen1->id_dokumen=$somevariable+2;
-			
-			$NDP=new NotaDinasPermintaan;
-			$NDP->id_dokumen=$Dokumen0->id_dokumen;
-			
-			$NDPP=new NotaDinasPerintahPengadaan;
-			$NDPP->id_dokumen=$Dokumen1->id_dokumen;
-			$NDPP->RAB='Terlampir';
-			$NDPP->TOR_RKS='Terlampir';
-			
-			$TOR=new Tor;
-			$TOR->id_dokumen=$Dokumen2->id_dokumen;
-			
-			$Rab=new Rab;
-			$Rab->id_dokumen=$Dokumen3->id_dokumen;			
-			
+
 			//Uncomment the following line if AJAX validation is needed
 			//$this->performAjaxValidation($model);
 
@@ -421,7 +382,7 @@ class SiteController extends Controller
 			}
 
 			$this->render('tambahpengadaan',array(
-				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen2'=>$Dokumen2,'Dokumen3'=>$Dokumen3
+				'Pengadaan'=>$Pengadaan,
 			));
 		}
 	}

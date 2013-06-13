@@ -165,31 +165,4 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
-	public function searchListDokumen($pid)
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('nama_dokumen',$this->nama_dokumen,true);
-		$criteria->compare('tanggal',$this->tanggal,true);
-		$criteria->compare('tempat',$this->tempat,true);
-		$criteria->condition = 'id_pengadaan = "' . $pid . '"';
-		$criteria->condition = 'status_upload = "Selesai"';
-		$criteria->compare('waktu_upload',$this->waktu_upload,true);
-		$criteria->compare('pengunggah',$this->pengunggah,true);
-		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
-		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('nama_dokumen',$this->id_dokumen,true);
-		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-	
-	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }
