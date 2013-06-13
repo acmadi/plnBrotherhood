@@ -347,7 +347,6 @@ class SiteController extends Controller
 			
 			$Pengadaan=new Pengadaan;
 			$Pengadaan->status="Penunjukan Panitia";
-			$Pengadaan->id_pengadaan=CHtml::
 
 			//Uncomment the following line if AJAX validation is needed
 			//$this->performAjaxValidation($model);
