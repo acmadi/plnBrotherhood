@@ -485,3 +485,40 @@ REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654322
 in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (29)
 in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (370)
 in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/13 05:18:30 [error] [exception.CException] exception 'CException' with message 'Property "Pengadaan.maxId" is not defined.' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(143): CComponent->__get('maxId')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CModel.php(595): CActiveRecord->__get('maxId')
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(353): CModel->offsetGet('maxId')
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionTambahpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php
+---
+2013/06/13 05:24:57 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`sipengadaan`.`pengadaan`, CONSTRAINT `pengadaan_ibfk_1` FOREIGN KEY (`kode_panitia`) REFERENCES `panitia` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `pengadaan` (`status`, `id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `tanggal_masuk`, `kode_panitia`, `metode_pengadaan`, `perihal_pengadaan`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7).
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (362)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/13 05:24:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`sipengadaan`.`pengadaan`, CONSTRAINT `pengadaan_ibfk_1` FOREIGN KEY (`kode_panitia`) REFERENCES `panitia` (`kode_panitia`) ON DELETE CASCADE ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `pengadaan` (`status`, `id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `tanggal_masuk`, `kode_panitia`, `metode_pengadaan`, `perihal_pengadaan`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7)' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\CDbCommand.php:357
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(1023): CDbCommand->execute()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\db\ar\CActiveRecord.php(795): CActiveRecord->insert(NULL)
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(362): CActiveRecord->save()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionTambahpengadaan()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): CController->run('tambahpengadaan')
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('site/tambahpeng...')
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=site/tambahpengadaan
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/tambahpengadaan
+---

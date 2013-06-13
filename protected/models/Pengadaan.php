@@ -192,4 +192,6 @@ class Pengadaan extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public $maxId;
 }
