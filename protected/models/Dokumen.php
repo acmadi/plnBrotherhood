@@ -165,4 +165,6 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }
