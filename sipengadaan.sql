@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2013 at 03:13 AM
+-- Generation Time: Jun 13, 2013 at 08:25 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -443,7 +443,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   `nomor` varchar(20) NOT NULL,
   `dari` varchar(20) NOT NULL,
   `kepada` varchar(50) NOT NULL,
-  `perilhal` varchar(50) NOT NULL,
+  `perihal` varchar(50) NOT NULL,
   `RAB` varchar(20) NOT NULL,
   `TOR_RKS` varchar(32) NOT NULL,
   `targetSPK_kontrak` int(32) NOT NULL,
@@ -457,7 +457,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 -- Dumping data for table `nota_dinas_perintah_pengadaan`
 --
 
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perilhal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
+INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perihal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
 (987654350, '51/A/31/2013', '50/A/31/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan komputer PLN', 'Terlampir', 'Terlampir', 70, 'Kas PLN', 'xxx'),
 (987654370, '51/A/32/2013', '50/A/32/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat tulis PLN', 'Terlampir', 'Terlampir', 50, 'Kas PLN', 'xxx'),
 (987654390, '51/A/33/2013', '50/A/33/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat komunikasi PLN', 'Terlampir', 'Terlampir', 48, 'Kas PLN', 'xxx');
@@ -603,7 +603,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   `metode_pengadaan` varchar(32) NOT NULL,
   `metode_penawaran` varchar(32) DEFAULT NULL,
   `jenis_kualifikasi` varchar(32) DEFAULT NULL,
-  `perihal_pengadaan` varchar(100) NOT NULL,
   PRIMARY KEY (`id_pengadaan`),
   KEY `nama_penyedia` (`nama_penyedia`),
   KEY `tanggal_masuk` (`tanggal_masuk`),
@@ -612,7 +611,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `biaya` (`biaya`),
   KEY `metode_pengadaan` (`metode_pengadaan`),
   KEY `metode_penawaran` (`metode_penawaran`),
-  KEY `deskripsi` (`perihal_pengadaan`),
   KEY `nama_pengadaan` (`nama_pengadaan`),
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=987654327 ;
@@ -621,11 +619,11 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 -- Dumping data for table `pengadaan`
 --
 
-INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`, `perihal_pengadaan`) VALUES
-(987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi', 'Pengadaan komputer untuk Laboratorium IT PLN'),
-(987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 1, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi', 'Pengadaan alat-alat tulis untuk kebutuhan kantor PLN'),
-(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 2, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi', 'Pengadaan alat komunikasi untuk pejabat PLN'),
-(987654326, 'Divisi C', 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, 4, 'Pemilihan Langsung', NULL, NULL, 'Lalalala');
+INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
+(987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi'),
+(987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 1, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi'),
+(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 2, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
+(987654326, 'Divisi C', 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, 4, 'Pemilihan Langsung', NULL, NULL);
 
 -- --------------------------------------------------------
 
