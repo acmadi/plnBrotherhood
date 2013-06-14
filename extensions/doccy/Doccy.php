@@ -50,7 +50,7 @@ public function actionDownload()
 	$this->doccy->phpdocx->assignNestedBlock("pets",array(array("#PETNAME#"=>"Rox")),array("members"=>2)); // would create a block pets for jane doe with the name rox
 	$this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Ball"),array("#TOYNAME#"=>"Frisbee"),array("#TOYNAME#"=>"Box")),array("members"=>1,"pets"=>1)); // would create a block toy for rex
 	$this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Frisbee")),array("members"=>2,"pets"=>1)); // would create a block toy for rox
-	$this->doccy->renderDocx("ExampleReport.docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
+	$this->renderDocx("ExampleReport.docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
 }
  *
  * @author Dino Osmanovic <dosmanovic@devlogic.eu>
@@ -140,8 +140,8 @@ class Doccy extends CBehavior
      *  @param string $filename name of the template file (file must exist)
      */
     public function newFile($filename){
-    	require_once($this->path.DIRECTORY_SEPARATOR.$this->options['docxgenFolder'].DIRECTORY_SEPARATOR."phpDocx.php");    
-    	$this->phpdocx =  new phpdocx($this->options['templatePath'].DIRECTORY_SEPARATOR.$filename); 
+    	require_once($this->path.'/'.$this->options['docxgenFolder'].'/'."phpDocx.php");    
+    	$this->phpdocx =  new phpdocx($this->options['templatePath'].'/'.$filename); 
     }
     
     /**
@@ -150,7 +150,7 @@ class Doccy extends CBehavior
      */
     public function renderDocx($filename, $forceDownload=true){
     	if ($forceDownload){
-    		$file_name=$this->options['tmp'].DIRECTORY_SEPARATOR.uniqid().$filename;
+    		$file_name=$this->options['tmp'].'/'.uniqid().$filename;
     		$mime = 'application/msword';
     		$this->phpdocx->save($file_name);
     		header('Pragma: public');
@@ -167,7 +167,7 @@ class Doccy extends CBehavior
 			unlink($file_name);
 			Yii::app()->end();
     	}else{
-    		$this->phpdocx->save($this->options['outputPath'].DIRECTORY_SEPARATOR.$filename);
+    		$this->phpdocx->save($this->options['outputPath'].'/'.$filename);
     	}
     }
 }

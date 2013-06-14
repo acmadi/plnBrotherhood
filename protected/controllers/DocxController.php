@@ -1,15 +1,17 @@
 <?php
 
-class DocxController extends Controller {
+class DocxController extends Controller
+{
 	public function behaviors()
 	{
 	   return array(
 		   'doccy' => array(
 			   'class' => 'ext.doccy.Doccy',
-			   // 'options' => array(
-					// 'templatePath' => Yii::app()->request->baseUrl . '/templates',
-					// 'outputPath' => Yii::app()->request->baseUrl . '/docs',
-			   // ),
+			   'options' => array(
+					'templatePath' => $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates',
+					'outputPath' => $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/docs',
+					'tmp' => $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/protected/runtime',
+			   ),
 		   ),
 	   );
 	}
@@ -25,7 +27,10 @@ class DocxController extends Controller {
 		//$this->doccy->phpdocx->assignNestedBlock("pets",array(array("#PETNAME#"=>"Rox")),array("members"=>2)); // would create a block pets for jane doe with the name rox
 		// $this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Ball"),array("#TOYNAME#"=>"Frisbee"),array("#TOYNAME#"=>"Box")),array("members"=>1,"pets"=>1)); // would create a block toy for rex
 		// $this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Frisbee")),array("members"=>2,"pets"=>1)); // would create a block toy for rox
-		$this->renderDocx("test.docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
+		$this->doccy->phpdocx->assign('#NOMOR#', 'a');
+		$this->doccy->phpdocx->assign('#KEPADA#', 'b');
+		$this->doccy->phpdocx->assign('#DARI#', 'c');
+		$this->renderDocx("test.docx", false); // use $forceDownload=false in order to (just) store file in the outputPath folder.
+		$this->render('download');
 	}
 }
-?>
