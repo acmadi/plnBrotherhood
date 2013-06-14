@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 13, 2013 at 06:24 PM
+-- Generation Time: Jun 14, 2013 at 04:30 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -1102,7 +1102,6 @@ ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
 -- Constraints for table `surat_undangan_penjelasan`
 --
 ALTER TABLE `surat_undangan_penjelasan`
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_3` FOREIGN KEY (`nama_pengadaan`) REFERENCES `pengadaan` (`nama_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_5` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
