@@ -207,22 +207,23 @@ class SiteController extends Controller
 					$Dokumen2->tanggal=$Dokumen1->tanggal;
 					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
 					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
+					$SUP->nama_pengadaan=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->nama_pengadaan;
 					$DH->jam=$SUP->waktu;
 					$DH->tempat_hadir=$SUP->tempat;
 					$DH->acara="Aanwijzing";
 					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
-					// $Pengadaan->status ='Penawaran dan Evaluasi';
+					$Pengadaan->status ='Penawaran dan Evaluasi';
 							
-					// if($Pengadaan->save(false))
-					// {	
-						// $Dokumen0->save(false);
-						// $Dokumen1->save(false);
-						// $Dokumen2->save(false);
-						// $SUP->save(false);
-						// $BAP->save(false);
-						// $DH->save(false);
-						// $this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
-					// }
+					if($Pengadaan->save(false))
+					{	
+						$Dokumen0->save(false);
+						$Dokumen1->save(false);
+						$Dokumen2->save(false);
+						$SUP->save(false);
+						$BAP->save(false);
+						$DH->save(false);
+						$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+					}
 				}
 
 				$this->render('aanwijzing',array(

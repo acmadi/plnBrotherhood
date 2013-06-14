@@ -23,17 +23,10 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<?php echo $form->errorSummary($SUP); ?>
 		
-		<?php
-			$Dokumen0->id_pengadaan=$id;
-			$Dokumen1->id_pengadaan=$id;
-			$Dokumen2->id_pengadaan=$id;
-			$SUP->nama_pengadaan=Pengadaan::model()->findByPk($id)->nama_pengadaan;
-		?>
-		
 		<h4><b> Pengadaan </b></h4>
 		<div class="row">
 		<?php echo $form->labelEx($Dokumen0,'id_pengadaan'); ?>
-		<?php echo $form->textField($Dokumen0,'id_pengadaan',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->dropDownList($Dokumen0,'id_pengadaan',CHtml::listData(Pengadaan::model()->findAllByPk($id), 'id_pengadaan', 'nama_pengadaan'));?>
 		<?php echo $form->error($Dokumen0,'id_pengadaan'); ?>
 		</div>
 		
@@ -94,7 +87,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($SUP->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
