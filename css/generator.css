@@ -68,3 +68,13 @@ li
 {
 	background-color:#E5FFCC;
 }
+
+.lihat
+{
+	background-color:lightblue;
+}
+
+.lihat:hover
+{
+	background-color:#E5FFCC;
+}

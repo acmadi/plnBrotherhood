@@ -268,17 +268,19 @@ class SiteController extends Controller
 				{
 					$RKS->attributes=$_POST['Rks'];
 					$Pengadaan->attributes=$_POST['Pengadaan'];
+					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
+					$Pengadaan->status ='Pengambilan Dokumen Pengadaan';
 							
 					if($RKS->save(false))
 					{	
 						$Dokumen0->save(false);
 						$Pengadaan->save(false);
-						$this->redirect(array('dashboard'));
+						$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
 					}
 				}
 
 				$this->render('checkpoint3',array(
-					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,
+					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,
 				));
 			}
 		}
