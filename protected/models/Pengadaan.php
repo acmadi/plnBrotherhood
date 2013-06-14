@@ -197,8 +197,11 @@ class Pengadaan extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 		$usern = Yii::app()->user->name;
-		$modelUser = Anggota::model()->find('username="' . $usern . '"');
-		$idpan = $modelUser->id_panitia;
+		$modelUser = Anggota::model()->findAll('username="' . $usern . '"');
+		
+		for($i=0;$i<count($modelUser);$i++){
+			$idpan[$i] = $modelUser[$i]->id_panitia;
+		};
 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -212,7 +215,13 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
 		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
-		$criteria->condition = "id_panitia=$idpan";
+		
+		$strDummy = "id_panitia=$idpan[0]";
+		for($j=1;$j<count($idpan);$j++){			
+			$strDummy = "id_panitia=$idpan[$j]" . "||" . $strDummy;			
+		};
+		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
+		$criteria->condition = $strDummy;
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
