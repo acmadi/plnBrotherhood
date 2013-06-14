@@ -8,12 +8,14 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
 
-<?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){
+<?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){		//kadiv
 
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
 		// 'filter'=>$model,
+		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
+		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			// 'id_pengadaan',
 			'nama_pengadaan',
@@ -43,19 +45,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			'metode_penawaran',
 			'deskripsi',
 			*/
-			array(
-				'class'=>'CButtonColumn',
-				'template'=>'{view}',			
-				'viewButtonLabel'=>'Lihat',
-				'viewButtonUrl'=>'Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$data->id_pengadaan"))',			
-			),
+			// array(
+				// 'class'=>'CButtonColumn',
+				// 'template'=>'{view}',			
+				// 'viewButtonLabel'=>'Lihat',
+				// 'viewButtonUrl'=>'Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$data->id_pengadaan"))',			
+			// ),
 		),
 	)); 
-	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',
 			'dataProvider'=>$model->searchBuatPanitia(),
 			// 'filter'=>$model,
+			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+
 			'columns'=>array(
 				// 'id_pengadaan',
 				'nama_pengadaan',
@@ -82,12 +87,12 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				'metode_penawaran',
 				'deskripsi',
 				*/
-				array(
-					'class'=>'CButtonColumn',
-					'template'=>'{view}',			
-					'viewButtonLabel'=>'Lihat',
-					'viewButtonUrl'=>'Yii::app()->createUrl("site/generator", array("id"=>"$data->id_pengadaan"))',			
-				),
+				// array(
+					// 'class'=>'CButtonColumn',
+					// 'template'=>'{view}',			
+					// 'viewButtonLabel'=>'Lihat',
+					// 'viewButtonUrl'=>'Yii::app()->createUrl("site/generator", array("id"=>"$data->id_pengadaan"))',			
+				// ),
 			),
 		)); 
 	}

@@ -2339,3 +2339,132 @@ Stack trace:
 REQUEST_URI=/plnbrotherhood/index.php?r=site/detilpengadaanhistory&id=987654324
 HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/history
 ---
+2013/06/14 19:11:36 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php:52)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(515): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654323
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (52)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (515)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/14 19:11:40 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php:52)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(515): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654323
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (52)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (515)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/14 19:11:43 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php:52)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(515): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654323
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (52)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (515)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/14 19:16:49 [error] [php] Undefined variable: model (C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php:52)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(515): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionUploader()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/uploader&id=987654323
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\uploader.php (52)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (515)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/14 19:25:30 [error] [php] Use of undefined constant style - assumed 'style' (C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php:59)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/dashboard
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (59)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (51)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
+2013/06/14 19:25:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "controller/action".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('controller/acti...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=controller/action&id=987654323
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/14 19:25:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "controller/action".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('controller/acti...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=controller/action&id=987654323
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/14 19:26:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "controller/action".' in C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('controller/acti...')
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\plnBrotherhood\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/plnbrotherhood/index.php?r=controller/action&id=987654323
+HTTP_REFERER=http://localhost/plnbrotherhood/index.php?r=site/dashboard
+---
+2013/06/14 19:30:17 [error] [php] Undefined variable: data (C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php:61)
+Stack trace:
+#0 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(869): SiteController->renderFile()
+#1 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(782): SiteController->renderPartial()
+#2 C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php(51): SiteController->render()
+#3 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#4 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(286): SiteController->runAction()
+#6 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#7 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(282): SiteController->run()
+#8 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\plnBrotherhood\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\plnBrotherhood\index.php(13): CWebApplication->run()
+REQUEST_URI=/plnbrotherhood/index.php?r=site/dashboard
+in C:\xampp\htdocs\plnBrotherhood\protected\views\site\dashboard.php (61)
+in C:\xampp\htdocs\plnBrotherhood\protected\controllers\SiteController.php (51)
+in C:\xampp\htdocs\plnBrotherhood\index.php (13)
