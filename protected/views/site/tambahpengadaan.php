@@ -1,8 +1,5 @@
 <?php
 /* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
-$id = Yii::app()->getRequest()->getQuery('id');
 ?>
 <?php 
 	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
