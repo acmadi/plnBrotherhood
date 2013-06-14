@@ -206,9 +206,6 @@ class Dokumen extends CActiveRecord
 	public function fileReceptor($fullFileName,$userdata)
 	{
 
-	}
-=======
-	
+	}	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
->>>>>>> bc489811b16568e9824d1adbde8e6f51bdf8d4ce
 }
