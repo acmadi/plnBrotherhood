@@ -188,5 +188,15 @@ class Pengadaan extends CActiveRecord
 		));
 	}
 	
+	public function sisaHari(){								//jo----------------------------
+		$string = $this->tanggal_selesai;		
+		$jmlday = strtotime($string);
+		
+		$string2 = $this->tanggal_masuk;
+		$jmlday2 = strtotime($string2);
+		
+		return floor(($jmlday-$jmlday2)/3600/24);
+	}
+	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }
