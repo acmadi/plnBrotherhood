@@ -33,6 +33,5 @@ $this->menu=array(
 		'metode_pengadaan',
 		'metode_penawaran',
 		'jenis_kualifikasi',
-		'perihal_pengadaan',
 	),
 )); ?>

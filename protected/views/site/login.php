@@ -44,7 +44,7 @@ $this->pageTitle=Yii::app()->name . ' | Masuk';
 	</div> -->
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Masuk', array('style'=>'background:url(css/bg.gif)')); ?>
+		<?php echo CHtml::submitButton('Masuk', array('class'=>'sidafbutton')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

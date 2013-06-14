@@ -81,12 +81,6 @@
 		<?php echo $form->error($model,'jenis_kualifikasi'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'perihal_pengadaan'); ?>
-		<?php echo $form->textField($model,'perihal_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'perihal_pengadaan'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

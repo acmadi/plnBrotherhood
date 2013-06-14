@@ -10,6 +10,8 @@
  * @property string $tempat
  * @property string $id_pengadaan
  * @property string $status_upload
+ * @property string $waktu_upload
+ * @property string $pengunggah
  * @property string $link_penyimpanan
  *
  * The followings are the available model relations:
@@ -20,6 +22,7 @@
  * @property BeritaAcaraPenjelasan $beritaAcaraPenjelasan
  * @property DaftarHadir $daftarHadir
  * @property Pengadaan $idPengadaan
+ * @property User $pengunggah0
  * @property DokumenPenawaran $dokumenPenawaran
  * @property FormIsianKualifikasi $formIsianKualifikasi
  * @property NotaDinasPemberitahuanPemenang $notaDinasPemberitahuanPemenang
@@ -29,6 +32,7 @@
  * @property NotaDinasUsulanPemenang $notaDinasUsulanPemenang
  * @property PaktaIntegritasPanitia1 $paktaIntegritasPanitia1
  * @property PaktaIntegritasPenyedia $paktaIntegritasPenyedia
+ * @property Rab $rab
  * @property Rks $rks
  * @property SuratPemberitahuanPengadaan $suratPemberitahuanPengadaan
  * @property SuratPernyataanMinat $suratPernyataanMinat
@@ -37,6 +41,7 @@
  * @property SuratUndanganPengambilanDokumenPengadaan $suratUndanganPengambilanDokumenPengadaan
  * @property SuratUndanganPenjelasan $suratUndanganPenjelasan
  * @property SuratUndanganPrakualifikasi $suratUndanganPrakualifikasi
+ * @property Tor $tor
  */
 class Dokumen extends CActiveRecord
 {
@@ -66,15 +71,16 @@ class Dokumen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama_dokumen, tanggal, id_pengadaan, status_upload, link_penyimpanan', 'required'),
+			array('nama_dokumen, id_pengadaan', 'required'),
 			array('nama_dokumen', 'length', 'max'=>50),
 			array('tempat', 'length', 'max'=>20),
-			array('id_pengadaan', 'length', 'max'=>32),
+			array('id_pengadaan, pengunggah', 'length', 'max'=>32),
 			array('status_upload', 'length', 'max'=>10),
 			array('link_penyimpanan', 'length', 'max'=>100),
+			array('tanggal, waktu_upload', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload, link_penyimpanan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload, waktu_upload, pengunggah, link_penyimpanan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -93,6 +99,7 @@ class Dokumen extends CActiveRecord
 			'beritaAcaraPenjelasan' => array(self::HAS_ONE, 'BeritaAcaraPenjelasan', 'id_dokumen'),
 			'daftarHadir' => array(self::HAS_ONE, 'DaftarHadir', 'id_dokumen'),
 			'idPengadaan' => array(self::BELONGS_TO, 'Pengadaan', 'id_pengadaan'),
+			'pengunggah0' => array(self::BELONGS_TO, 'User', 'pengunggah'),
 			'dokumenPenawaran' => array(self::HAS_ONE, 'DokumenPenawaran', 'id_dokumen'),
 			'formIsianKualifikasi' => array(self::HAS_ONE, 'FormIsianKualifikasi', 'id_dokumen'),
 			'notaDinasPemberitahuanPemenang' => array(self::HAS_ONE, 'NotaDinasPemberitahuanPemenang', 'id_dokumen'),
@@ -102,6 +109,7 @@ class Dokumen extends CActiveRecord
 			'notaDinasUsulanPemenang' => array(self::HAS_ONE, 'NotaDinasUsulanPemenang', 'id_dokumen'),
 			'paktaIntegritasPanitia1' => array(self::HAS_ONE, 'PaktaIntegritasPanitia1', 'id_dokumen'),
 			'paktaIntegritasPenyedia' => array(self::HAS_ONE, 'PaktaIntegritasPenyedia', 'id_dokumen'),
+			'rab' => array(self::HAS_ONE, 'Rab', 'id_dokumen'),
 			'rks' => array(self::HAS_ONE, 'Rks', 'id_dokumen'),
 			'suratPemberitahuanPengadaan' => array(self::HAS_ONE, 'SuratPemberitahuanPengadaan', 'id_dokumen'),
 			'suratPernyataanMinat' => array(self::HAS_ONE, 'SuratPernyataanMinat', 'id_dokumen'),
@@ -110,6 +118,7 @@ class Dokumen extends CActiveRecord
 			'suratUndanganPengambilanDokumenPengadaan' => array(self::HAS_ONE, 'SuratUndanganPengambilanDokumenPengadaan', 'id_dokumen'),
 			'suratUndanganPenjelasan' => array(self::HAS_ONE, 'SuratUndanganPenjelasan', 'id_dokumen'),
 			'suratUndanganPrakualifikasi' => array(self::HAS_ONE, 'SuratUndanganPrakualifikasi', 'id_dokumen'),
+			'tor' => array(self::HAS_ONE, 'Tor', 'id_dokumen'),
 		);
 	}
 
@@ -125,6 +134,8 @@ class Dokumen extends CActiveRecord
 			'tempat' => 'Tempat',
 			'id_pengadaan' => 'Id Pengadaan',
 			'status_upload' => 'Status Upload',
+			'waktu_upload' => 'Waktu Upload',
+			'pengunggah' => 'Pengunggah',
 			'link_penyimpanan' => 'Link Penyimpanan',
 		);
 	}
@@ -146,12 +157,15 @@ class Dokumen extends CActiveRecord
 		$criteria->compare('tempat',$this->tempat,true);
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('status_upload',$this->status_upload,true);
+		$criteria->compare('waktu_upload',$this->waktu_upload,true);
+		$criteria->compare('pengunggah',$this->pengunggah,true);
 		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+<<<<<<< HEAD
 
 	public function searchListDokumen($pid)
 	{
@@ -193,4 +207,8 @@ class Dokumen extends CActiveRecord
 	{
 
 	}
+=======
+	
+	public $maxId; //aidil---variabel untuk mencari nilai maksimum
+>>>>>>> bc489811b16568e9824d1adbde8e6f51bdf8d4ce
 }

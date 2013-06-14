@@ -27,6 +27,8 @@ $this->menu=array(
 		'tempat',
 		'id_pengadaan',
 		'status_upload',
+		'waktu_upload',
+		'pengunggah',
 		'link_penyimpanan',
 	),
 )); ?>

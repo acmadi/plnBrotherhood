@@ -10,30 +10,60 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 
 <div id="detailpengadaan">
 	<h1><?php echo $cpengadaan->nama_pengadaan; ?></h1>	
-	<p> <?php echo CHtml::link('Lihat Dokumen', array('site/dokumengenerator', 'id'=>$id));  ?> </p>
-	<p><?php echo $cpengadaan->deskripsi; ?></p>
-	<p>Tanggal masuk: <?php echo $cpengadaan->tanggal_masuk; ?></p>
-	<p>Tanggal selesai: <?php
-		if (is_null($cpengadaan->tanggal_selesai)) {
-			echo "-";
-		}
-		else {
-			echo $cpengadaan->tanggal_selesai;
-		}
-	?></p>
-	<p>Penyedia: <?php echo $cpengadaan->nama_penyedia; ?></p>
-	<p><?php
-		if (is_null($cpengadaan->nama)) {
-			echo 'Panitia: ';
-			echo $cpengadaan->kode_panitia;
-		}
-		else {
-			echo 'Pejabat: ';
-			echo $cpengadaan->nama;
-		}
-	?></p>
-	<br />
+	<?php
+		$this->widget('zii.widgets.CDetailView', array(
+			'id'=>'viewdetail',
+			'data'=>$cpengadaan,
+			'attributes'=>array(
+				array(
+					'label'=>'Pemohon',
+					'value'=>$cpengadaan->divisi_peminta,
+				),
+				array(
+					'label'=>'Perihal',
+					'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
+				),
+				array(
+					'label'=>'Pagu anggaran',
+					'value'=>$cpengadaan->notaDinasPerintahPengadaan->pagu_anggaran,
+				),
+				array(
+					'label'=>'Sumber dana',
+					'value'=>$cpengadaan->notaDinasPerintahPengadaan->sumber_dana,
+				),
+				array(
+					'label'=>'Nomor nota dinas permintaan',
+					'value'=>$cpengadaan->notaDinasPerintahPengadaan->nota_dinas_permintaan,
+				),
+				array(
+					'label'=>'Status pengadaan',
+					'value'=>$cpengadaan->status,
+				),
+				array(
+					'label'=>'Nomor kontrak',
+					'value'=>'-',
+				),
+				array(
+					'label'=>'Target kontrak',
+					'value'=>$cpengadaan->notaDinasPerintahPengadaan->targetSPK_kontrak . ' hari',
+				),
+				array(
+					'label'=>'Pelaksana',
+					'value'=>$cpengadaan->nama_penyedia,
+				),
+				array(
+					'label'=>'Nilai kontrak',
+					'value'=>$cpengadaan->biaya,
+				),
+				array(
+					'label'=>'PIC',
+					'value'=>$cpengadaan->idPanitia->nama_panitia,
+				),
+			),
+		));
+	?>
 	
 </div>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?>
+<?php echo CHtml::button('Lihat dokumen', array('submit'=>array('site/dokumengenerator', 'id'=>$id), 'class'=>'sidafbutton'));  ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?>

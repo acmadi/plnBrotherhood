@@ -1,0 +1,76 @@
+public function actionAanwijzing()
+	{	
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Undangan Anwijzing';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				
+				$Dokumen1=new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Berita Acara Anwijzing';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				
+				$Dokumen2=new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Daftar Hadir Anwijzing';
+				$Dokumen2->tempat='Jakarta';
+				$Dokumen2->status_upload='Belum Selesai';
+				
+				$SUP= new SuratUndanganPenjelasan;
+				$SUP->id_dokumen=$Dokumen0->id_dokumen;
+				
+				$BAP= new BeritaAcaraPenjelasan;
+				$BAP->id_dokumen=$Dokumen0->id_dokumen;
+				
+				$DH= new DaftarHadir;
+				$DH->id_dokumen=$Dokumen0->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPenjelasan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$Dokumen1->attributes=$_POST['Dokumen'];
+					$Dokumen2->tanggal=$Dokumen1->tanggal;
+					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
+					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
+					$SUP->nama_pengadaan=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->nama_pengadaan;
+					$SUP->id_panitia=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->id_panitia;
+					$BAP->id_panitia=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->id_panitia;
+					$DH->jam=$SUP->waktu;
+					$DH->tempat_hadir=$SUP->tempat;
+					$DH->acara="Aanwijzing";
+					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
+					$Pengadaan->status ='Penawaran dan Evaluasi';
+							
+					if($Pengadaan->save(false))
+					{	
+						$Dokumen0->save(false);
+						$Dokumen1->save(false);
+						$Dokumen2->save(false);
+						$SUP->save(false);
+						$BAP->save(false);
+						$DH->save(false);
+						$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+					}
+				}
+
+				$this->render('aanwijzing',array(
+					'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,'BAP'=>$BAP,'DH'=>$DH
+				));
+			}
+		}
+	}

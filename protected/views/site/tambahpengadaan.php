@@ -1,8 +1,5 @@
 <?php
 /* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
-$id = Yii::app()->getRequest()->getQuery('id');
 ?>
 <?php 
 	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
@@ -12,8 +9,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'id'=>'pengadaan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<p class="note">Keterangan : <span class="required">*</span> Harus diisi.</p>
 
 		<?php echo $form->errorSummary($Pengadaan); ?>
 
@@ -48,19 +43,85 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
-
+		
+		</br>
+		<h4><b> Nota Dinas Permintaan </b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($Pengadaan,'perihal_pengadaan'); ?>
-			<?php echo $form->textField($Pengadaan,'perihal_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
-			<?php echo $form->error($Pengadaan,'perihal_pengadaan'); ?>
+			<?php echo $form->labelEx($NDP,'nomor'); ?>
+			<?php echo $form->textField($NDP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDP,'nomor'); ?>
+		</div>
+		
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah Nota Dinas Perintah Pengadaan', array('class'=>'sidafbutton'));?>
+		</div>
+		
+		</br>
+		</br>
+		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'nomor'); ?>
+			<?php echo $form->textField($NDPP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'nomor'); ?>
 		</div>
 
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'dari'); ?>
+			<?php echo $form->dropDownList($NDPP,'dari',
+			  array('KDIVMUM'=>'KDIVMUM','MS-DAF'=>'MS-DAF'),
+					array('empty'=>"-----Pilih Pengirim Nota Dinas------")); ?>
+			<?php echo $form->error($NDPP,'dari'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'perihal'); ?>
+			<?php echo $form->textField($NDPP,'perihal',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->error($NDPP,'perihal'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'Target SPK/Kontrak'); ?>
+			<?php echo $form->textField($NDPP,'targetSPK_kontrak',array('size'=>60)); ?>
+			<?php echo $form->error($NDPP,'targetSPK_kontrak'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'sumber_dana'); ?>
+			<?php echo $form->textField($NDPP,'sumber_dana',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'sumber_dana'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($NDPP,'pagu_anggaran'); ?>
+			<?php echo $form->textField($NDPP,'pagu_anggaran',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($NDPP,'pagu_anggaran'); ?>
+		</div>
+		
+		</br>
+		</br>
+		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save'); ?>
+			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
+		</div>
+		
+		</br>
+		</br>
+		
+		<div class="row buttons">
+			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
+		</div>
+		
+		</br>
+		</br>
+
+		<div class="row buttons">
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
+	
+	
 <?php	}
 ?>

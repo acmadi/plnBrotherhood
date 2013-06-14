@@ -36,5 +36,5 @@
 
 
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/detilpengadaanhistory', 'id'=>$id), 'style'=>'background:url(css/bg.gif)')); ?>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/detilpengadaanhistory', 'id'=>$id), 'class'=>'sidafbutton')); ?>
     

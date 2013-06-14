@@ -50,9 +50,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'nomor',
 		'dari',
 		'kepada',
-		'perilhal',
+		'perihal',
 		/*
 		'RAB',
+		'TOR_RKS',
 		'targetSPK_kontrak',
 		'sumber_dana',
 		'pagu_anggaran',

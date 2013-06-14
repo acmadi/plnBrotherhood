@@ -16,7 +16,6 @@
  * @property string $metode_pengadaan
  * @property string $metode_penawaran
  * @property string $jenis_kualifikasi
- * @property string $perihal_pengadaan
  *
  * The followings are the available model relations:
  * @property BeritaAcaraEvaluasiPenawaran[] $beritaAcaraEvaluasiPenawarans
@@ -69,15 +68,15 @@ class Pengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('divisi_peminta, nama_pengadaan, tanggal_masuk, status, id_panitia, metode_pengadaan, perihal_pengadaan', 'required'),
+			array('divisi_peminta, nama_pengadaan, tanggal_masuk, status, id_panitia, metode_pengadaan', 'required'),
 			array('divisi_peminta, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>32),
-			array('nama_pengadaan, perihal_pengadaan', 'length', 'max'=>100),
+			array('nama_pengadaan', 'length', 'max'=>100),
 			array('biaya', 'length', 'max'=>20),
 			array('id_panitia', 'length', 'max'=>11),
 			array('tanggal_selesai', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_pengadaan, divisi_peminta, nama_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi, perihal_pengadaan', 'safe', 'on'=>'search'),
+			array('id_pengadaan, divisi_peminta, nama_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,6 +94,7 @@ class Pengadaan extends CActiveRecord
 			'beritaAcaraPembukaanPenawarans' => array(self::HAS_MANY, 'BeritaAcaraPembukaanPenawaran', 'id_panitia'),
 			'beritaAcaraPenjelasans' => array(self::HAS_MANY, 'BeritaAcaraPenjelasan', 'id_panitia'),
 			'dokumens' => array(self::HAS_MANY, 'Dokumen', 'id_pengadaan'),
+			'notaDinasPerintahPengadaan' => array(self::HAS_ONE, 'NotaDinasPerintahPengadaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
 			'notaDinasPemberitahuanPemenangs' => array(self::HAS_MANY, 'NotaDinasPemberitahuanPemenang', 'nama_penyedia'),
 			'notaDinasPenetapanPemenangs' => array(self::HAS_MANY, 'NotaDinasPenetapanPemenang', 'nama_penyedia'),
 			'notaDinasPenetapanPemenangs1' => array(self::HAS_MANY, 'NotaDinasPenetapanPemenang', 'kepada'),
@@ -131,7 +131,6 @@ class Pengadaan extends CActiveRecord
 			'metode_pengadaan' => 'Metode Pengadaan',
 			'metode_penawaran' => 'Metode Penawaran',
 			'jenis_kualifikasi' => 'Jenis Kualifikasi',
-			'perihal_pengadaan' => 'Perihal Pengadaan',
 		);
 	}
 
@@ -152,13 +151,11 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
 		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
 		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
-		$criteria->compare('status',$this->status,true);
 		$criteria->compare('biaya',$this->biaya,true);
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->compare('perihal_pengadaan',$this->perihal_pengadaan,true);
 		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
@@ -179,13 +176,11 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
 		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
 		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
-		$criteria->compare('status',$this->status,true);
 		$criteria->compare('biaya',$this->biaya,true);
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->compare('perihal_pengadaan',$this->perihal_pengadaan,true);
 		$criteria->condition = "status='Selesai'";													
 
 		return new CActiveDataProvider($this, array(
@@ -193,5 +188,15 @@ class Pengadaan extends CActiveRecord
 		));
 	}
 	
-	public $maxId;
+	public function sisaHari(){								//jo----------------------------
+		$string = $this->tanggal_selesai;		
+		$jmlday = strtotime($string);
+		
+		$string2 = $this->tanggal_masuk;
+		$jmlday2 = strtotime($string2);
+		
+		return floor(($jmlday-$jmlday2)/3600/24);
+	}
+	
+	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }
