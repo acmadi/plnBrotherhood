@@ -26,7 +26,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			'notaDinasPerintahPengadaan.nota_dinas_permintaan',
 			
 			array(            // display using an expression
-				'name'=>'Panitia/Pejabat',
+				'name'=>'PIC',
 				'value'=>'$data->idPanitia->nama_panitia',
 				),
 				
@@ -66,7 +66,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				'notaDinasPerintahPengadaan.nota_dinas_permintaan',
 
 				array(            // display using an expression
-				'name'=>'Panitia/Pejabat',
+				'name'=>'PIC',
 				'value'=>'$data->idPanitia->nama_panitia',
 				),
 				

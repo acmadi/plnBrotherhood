@@ -11,6 +11,13 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 	'columns'=>array(
 		// 'id_pengadaan',
 		'nama_pengadaan',
+		'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+			
+		array(            // display using an expression
+			'name'=>"PIC",
+			'value'=>'$data->idPanitia->nama_panitia',
+			),
+					
 		// 'nama_penyedia',
 		// 'tanggal_masuk',
 		// 'tanggal_selesai',
