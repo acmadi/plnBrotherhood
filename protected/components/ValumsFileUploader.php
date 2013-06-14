@@ -13,12 +13,14 @@ class ValumsFileUploader {
     private $allowedExtensions = array();
     private $sizeLimit = 10485760;
     private $file;
+	private $namaDokumen;
 
-    function __construct(array $allowedExtensions = array(), $sizeLimit = 10485760){
+    function __construct(array $allowedExtensions = array(), $sizeLimit = 10485760, $namaDokumen){
         $allowedExtensions = array_map("strtolower", $allowedExtensions);
 
         $this->allowedExtensions = $allowedExtensions;
         $this->sizeLimit = $sizeLimit;
+		$this->namaDokumen=$namaDokumen;
 
         //$this->checkServerSettings();
 
@@ -77,7 +79,7 @@ class ValumsFileUploader {
         }
 
         $pathinfo = pathinfo($this->file->getName());
-        $filename = $pathinfo['filename'];
+        $filename = $this->namaDokumen;
         //$filename = md5(uniqid());
         $ext = $pathinfo['extension'];
 
@@ -86,12 +88,12 @@ class ValumsFileUploader {
             return array('error' => CocoWidget::t('File has an invalid extension, it should be one of '). $these . '.');
         }
 
-        if(!$replaceOldFile){
-            /// don't overwrite previous files that were uploaded
-            while (file_exists($uploadDirectory . $filename . '.' . $ext)) {
-                $filename .= rand(10, 99);
-            }
-        }
+        // if(!$replaceOldFile){
+            // don't overwrite previous files that were uploaded
+            // while (file_exists($uploadDirectory . $filename . '.' . $ext)) {
+                // $filename .= rand(10, 99);
+            // }
+        // }
 
         $fullpath = $uploadDirectory . $filename . '.' . $ext;
 

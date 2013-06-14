@@ -170,4 +170,27 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function inputDatabase($id,$idPengadaan, $user,$uploadDir)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addCondition("nama_dokumen=:nama_dokumen AND id_pengadaan=:id_pengadaan");
+		$newModel = $this->find('nama_dokumen=:nama_dokumen AND id_pengadaan=:id_pengadaan',
+		array(
+			':nama_dokumen'=>$id,
+			':id_pengadaan'=>$idPengadaan,
+			));
+		
+		$newModel->tanggal='1111-01-01';
+		$newModel->tempat='Jakarta';
+		$newModel->status_upload='Selesai';
+		$newModel->waktu_upload='23:23:23';
+		$newModel->pengunggah=$user;
+		$newModel->link_penyimpanan=$uploadDir;
+		$newModel->save();
+	}
+	public function fileReceptor($fullFileName,$userdata)
+	{
+
+	}
 }
