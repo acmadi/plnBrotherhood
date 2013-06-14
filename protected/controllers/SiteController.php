@@ -201,13 +201,12 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$Dokumen1->attributes=$_POST['Dokumen'];
-					$Dokumen2->attributes=$_POST['Dokumen'];
-					$Dokumen1->tanggal=$Dokumen0->id_pengadaan;
-					$Dokumen2->tanggal=$Dokumen0->id_pengadaan;
 					$Dokumen2->tanggal=$Dokumen1->tanggal;
 					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
 					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
 					$SUP->nama_pengadaan=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->nama_pengadaan;
+					$SUP->id_panitia=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->id_panitia;
+					$BAP->id_panitia=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->id_panitia;
 					$DH->jam=$SUP->waktu;
 					$DH->tempat_hadir=$SUP->tempat;
 					$DH->acara="Aanwijzing";
