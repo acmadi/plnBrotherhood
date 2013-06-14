@@ -2,12 +2,16 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Beranda';
+$id = Yii::app()->user->name;
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
 
 <?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){
 
+	
+	
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
@@ -17,12 +21,21 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			'nama_pengadaan',
 			// 'nama_penyedia',
 			// 'tanggal_masuk',
-			// 'tanggal_selesai',
+			// 'tanggal_selesai',			
+			// 'kode_panitia',
+			// 'notaDinasPermintaan.nomor',
+						
+			'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+			
+			array(            // display using an expression
+            'name'=>'Sisa Hari',
+            'value'=>'$data->sisaHari()',
+			),
+			
 			'status',
 			/*
 			'biaya',
-			'nama',
-			'kode_panitia',
+			'nama',			
 			'metode_pengadaan',
 			'metode_penawaran',
 			'deskripsi',
@@ -46,11 +59,16 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				// 'nama_penyedia',
 				// 'tanggal_masuk',
 				// 'tanggal_selesai',
+				// 'kode_panitia',
+				'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+				array(            // display using an expression
+				'name'=>'Sisa Hari',
+				'value'=>'$data->sisaHari()',
+				),
 				'status',
 				/*
 				'biaya',
-				'nama',
-				'kode_panitia',
+				'nama',				
 				'metode_pengadaan',
 				'metode_penawaran',
 				'deskripsi',
