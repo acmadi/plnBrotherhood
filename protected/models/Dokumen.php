@@ -167,4 +167,5 @@ class Dokumen extends CActiveRecord
 	}
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
+	public $tes;//tes doang
 }
