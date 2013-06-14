@@ -165,6 +165,50 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+<<<<<<< HEAD
+
+	public function searchListDokumen($pid)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id_dokumen',$this->id_dokumen,true);
+		$criteria->compare('nama_dokumen',$this->id_dokumen,true);
+		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
+		$criteria->condition = 'status_upload = "Selesai"';
+		$criteria->condition = 'id_pengadaan = "' . $pid . '"';
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+	
+	public function inputDatabase($id,$idPengadaan, $user,$uploadDir)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addCondition("nama_dokumen=:nama_dokumen AND id_pengadaan=:id_pengadaan");
+		$newModel = $this->find('nama_dokumen=:nama_dokumen AND id_pengadaan=:id_pengadaan',
+		array(
+			':nama_dokumen'=>$id,
+			':id_pengadaan'=>$idPengadaan,
+			));
+		
+		$newModel->tanggal='1111-01-01';
+		$newModel->tempat='Jakarta';
+		$newModel->status_upload='Selesai';
+		$newModel->waktu_upload='23:23:23';
+		$newModel->pengunggah=$user;
+		$newModel->link_penyimpanan=$uploadDir;
+		$newModel->save();
+	}
+	public function fileReceptor($fullFileName,$userdata)
+	{
+
+	}
+=======
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
+>>>>>>> bc489811b16568e9824d1adbde8e6f51bdf8d4ce
 }

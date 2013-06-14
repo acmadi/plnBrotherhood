@@ -18,7 +18,8 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 		<?php if($cpengadaan->status != 'Penunjukan Panitia') { ?>
 			Apabila anda ingin mengubah data-data sebelumnya, silahkan masuk ke menu di atasnya. </br>
 		<?php } ?> </br>
-		Untuk mengunggah dokumen, silahkan masuk ke menu Unggah Dokumen.
+		Untuk mengunggah dokumen, silahkan masuk ke menu Unggah Dokumen. </br>
+		Untuk melihat dokumen yang telah diunggah, silahkan masuk ke menu Lihat Dokumen.
 	</div>
 </div>
 

@@ -1,23 +1,24 @@
 <?php
     $this->pageTitle=Yii::app()->name . ' | Uploader';
 	$id = Yii::app()->getRequest()->getQuery('id');
+	$user=Yii::app()->user->name;
 	$objectpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id. '"');
 	$dirUpload = 'uploads/' . $objectpengadaan->nama_pengadaan . '/' ;
-	$uploader1 = 'Pakta Integritas I';
+	$uploader1 = 'Pakta Integritas Panitia 1';
 	$uploader2 = 'Dokumen Kualifikasi';
-	$uploader3 = 'Berita Acara Evaluasi Kualifikas';
-	$uploader4 = 'Berita Acara Aanwijzing';
-	$uploader5 = 'Berita Acara Pembukaan Dokumen Penawaran';
+	$uploader3 = 'Berita Acara Evaluasi Kualifikasi';
+	$uploader4 = 'Berita Acara Penjelasan';
+	$uploader5 = 'Berita Acara Pembukaan Penawaran';
 	$uploader52 = 'Berita Acara Pembukaan Dokumen Penawaran 2';
 	$uploader6 = 'Berita Acara Evaluasi Penawaran';
 	$uploader62 = 'Berita Acara Evaluasi Penawaran 2';
-	$uploader7 = 'Berita Acara Negosiasi dan Klarifikasi';
+	$uploader7 = 'Berita Acara Negosiasi Klarifikasi';
 	$uploader8 = 'Nota Dinas Usulan Pemenang';
 	$uploader9 = 'Nota Dinas Penetapan Pemenang';
 	$uploader10 = 'Nota Dinas Pemberitahuan Pemenang';
-	$uploader11 = 'Pakta Integritas II';
+	$uploader11 = 'Pakta Integritas Panitia 2';
 	$uploader12 = 'Kontrak';
-	$uploader13 = 'Absensi';
+	$uploader13 = 'Daftar Hadir';
 	
 	$kadivuploader1 = 'Nota Dinas Perintah Pengadaan';
 	
@@ -36,6 +37,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader1,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -44,8 +47,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader1 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -62,6 +65,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader2,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -70,8 +75,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader2 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -88,6 +93,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader3,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -96,8 +103,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader3 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -114,6 +121,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader4,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -122,8 +131,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader4 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -140,6 +149,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader5,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -148,8 +159,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader5 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -168,6 +179,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader52,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -176,8 +189,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader52 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -195,6 +208,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader6,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -203,8 +218,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader6 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -223,6 +238,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader62,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -231,8 +248,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader62 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -250,6 +267,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader7,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -258,8 +277,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader7 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -276,6 +295,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader8,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -284,8 +305,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader8 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -302,6 +323,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader9,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -310,8 +333,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader9 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -328,6 +351,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader10,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -336,8 +361,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader10 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -354,6 +379,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader11,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -362,8 +389,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader11 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -380,6 +407,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader12,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -388,8 +417,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader12 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)
@@ -406,6 +435,8 @@
     $this->widget('CocoWidget'
         ,array(
             'id'=>$uploader13,
+			'user'=>$user,
+			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
             'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
             'onMessage'=>'function(m){ alert(m); }',
@@ -414,8 +445,8 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $uploader13 . '/',
-			'receptorClassName'=>'application.models.User',
-			'methodName'=>'myFileReceptor',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
             'maxUploads'=>1, // defaults to -1 (unlimited)

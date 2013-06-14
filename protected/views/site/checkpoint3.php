@@ -2,6 +2,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
+$id = Yii::app()->getRequest()->getQuery('id');
 ?>
 
 <div id="pagecontent">
@@ -10,6 +11,10 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
+		<?php 
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		?>
+	
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -20,11 +25,25 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 			<?php echo $form->errorSummary($Rks); ?>
 			
+			<h4><b> Pengadaan </b></h4>
+			<div class="row">
+				<?php echo $form->labelEx($Dokumen0,'id_pengadaan'); ?>
+				<?php echo $form->dropDownList($Dokumen0,'id_pengadaan',CHtml::listData(Pengadaan::model()->findAllByPk($id), 'id_pengadaan', 'nama_pengadaan'));?>
+				<?php echo $form->error($Dokumen0,'id_pengadaan'); ?>
+			</div>
+			</br>
+			
 			<h4><b> RKS </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($Rks,'nomor'); ?>
-				<?php echo $form->textField($Rks,'nomor',array('size'=>20,'maxlength'=>20)); ?>
+				<?php echo $form->textField($Rks,'nomor',array('size'=>32,'maxlength'=>20)); ?>
 				<?php echo $form->error($Rks,'nomor'); ?>
+			</div>
+			
+			<div class="row">
+				<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
+				<?php echo $form->textField($Dokumen0,'tanggal',array('size'=>32)); ?>
+				<?php echo $form->error($Dokumen0,'tanggal'); ?>
 			</div>
 			</br>
 			
@@ -53,6 +72,8 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 			<?php $this->endWidget(); ?>
 
 		</div><!-- form -->
+		<?php }
+		?>
 	</div>
 </div>
 

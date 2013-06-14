@@ -16,12 +16,13 @@ class CocoWidget extends CWidget implements EYuiActionRunnable {
 	public $htmlOptions;
 	public $defaultControllerName='site';
 	public $defaultActionName='coco';
-
+	public $idPengadaan;
+	public $user;
 	public $buttonText='Find & Upload';
 	public $dropFilesText='Drop Files Here !';
 	public $allowedExtensions=array();
 	public $sizeLimit;
-	public $uploadDir = 'assets/';
+	public $uploadDir = 'uploads/';
 	public $onCompleted;
 	public $onCancelled;
 	public $onMessage;
@@ -89,13 +90,16 @@ class CocoWidget extends CWidget implements EYuiActionRunnable {
 			'receptorClassName'=>$this->receptorClassName,
 			'methodName'=>$this->methodName,
 			'userdata'=>$this->userdata,
+			'idPengadaan'=>$this->idPengadaan,
+			'user'=>$this->user,
+			'id'=>$this->id,
 		);
 
 		$action['data'] = serialize($vars);
 
 		$options = CJavaScript::encode(
 			array(
-				'id'=>$id,
+				'id'=>$id,				
 				'loggerid'=>$logid,
 				'action'=>CHtml::normalizeUrl($action),
 				'onCompleted'=>$this->onCompleted,
@@ -181,7 +185,10 @@ echo
 		$this->receptorClassName = $vars['receptorClassName'];
 		$this->methodName = $vars['methodName'];
 		$this->userdata = $vars['userdata'];
-
+		$this->idPengadaan = $vars['idPengadaan'];
+		$this->user = $vars['user'];
+		$this->id = $vars['id'];
+		
 		if(($this->allowedExtensions == null) || ($this->allowedExtensions==''))
 			$this->allowedExtensions = array();
 
@@ -189,8 +196,7 @@ echo
 
 
 		if($action == 'upload'){
-
-			$uploader = new ValumsFileUploader($this->allowedExtensions, $this->sizeLimit);
+			$uploader = new ValumsFileUploader($this->allowedExtensions, $this->sizeLimit, $this->id);
 			if($uploader->checkServerSettings() != null){
 				Yii::log("CocoWidget. Please increase post_max_size and upload_max_filesize to ".$this->sizeLimit,"error");
 				return;
@@ -206,6 +212,7 @@ echo
 					Yii::log('ACTION CALLED - RESULT=SUCCESS','info');
 					$fullpath = $result['fullpath'];
 					$this->onFileUploaded($fullpath,$this->userdata);
+					Dokumen::model()->inputDatabase($this->id,$this->idPengadaan,$this->user,$this->uploadDir);
 				}
 				else{
 					Yii::log('ACTION CALLED - RESULT=ERROR1','info');
