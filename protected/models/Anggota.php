@@ -62,6 +62,7 @@ class Anggota extends CActiveRecord
 		return array(
 			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
 			'username0' => array(self::BELONGS_TO, 'User', 'username'),
+			'pengadaan' => array(self::HAS_ONE, 'Pengadaan','id_panitia','through'=>'idPanitia'),
 		);
 	}
 

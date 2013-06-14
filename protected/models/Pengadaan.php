@@ -190,14 +190,15 @@ class Pengadaan extends CActiveRecord
 		));
 	}
 
-	public function searchBuatPanitia()															//jo
+	public function searchBuatPanitia()															//jo---msh ada bug: yg status selesai msh ditampilin
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
 		$usern = Yii::app()->user->name;
-		$modelUser = Anggota::model()->findAll('username="' . $usern . '"');
+		// $modelUser = Anggota::model()->with('pengadaan')->findAll('username="' . $usern . '"' );
+		$modelUser = Anggota::model()->findAll('username="' . $usern . '"' );
 		
 		for($i=0;$i<count($modelUser);$i++){
 			$idpan[$i] = $modelUser[$i]->id_panitia;
@@ -214,14 +215,14 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
+		// $criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
 		
 		$strDummy = "id_panitia=$idpan[0]";
 		for($j=1;$j<count($idpan);$j++){			
 			$strDummy = "id_panitia=$idpan[$j]" . "||" . $strDummy;			
 		};
 		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
-		$criteria->condition = $strDummy;
+		$criteria->condition = $strDummy ;											
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -239,6 +240,34 @@ class Pengadaan extends CActiveRecord
 		$jmlday2 = strtotime($string2);
 		
 		return floor(($jmlday-$jmlday2)/3600/24);
+	}
+
+	public function progressPengadaan(){					//jo---------------------------
+		
+		if($this->status == 'Penunjukan Panitia'){
+			return 100/7;
+		}
+		else if($this->status == 'Prakualifikasi'){
+			return 200/7;
+		}
+		else if($this->status == 'Pengambilan Dokumen Pengadaan'){
+			return 300/7;
+		}
+		else if($this->status == 'Aanwijzing'){
+			return 400/7;
+		}
+		else if($this->status == 'Penawaran dan Evaluasi'){
+			return 500/7;
+		}
+		else if($this->status == 'Negosiasi dan Klarifikasi' ){
+			return 600/7;
+		}
+		else if($this->status == 'Penentuan Pemenang'){
+			return 700/7;
+		}		
+		else{
+			return 0;
+		}
 	}
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum

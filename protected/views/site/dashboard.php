@@ -14,6 +14,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
 		// 'filter'=>$model,
+		"ajaxUpdate"=>"false",
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
@@ -38,6 +39,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			),
 			
 			'status',
+			
+			array (
+				  'name'=>'Progress',				  
+				  'value'=>'$this->grid->Controller->createWidget("zii.widgets.jui.CJuiProgressBar",array(					
+					"value"=>$data->progressPengadaan(),
+					"htmlOptions"=>array(
+					  "style"=>"width:100px; height:20px; float:left;margin-left:35px; background-color:#44F44F ;background:#EFFDFF",
+					  "color" => "red"
+					  // "options"=>array(
+					    // "change"=>new CJavaScriptExpression("function(event, ui)) {}
+					  // ),
+					),					
+
+				  ))->run()',
+				),
+				
 			/*
 			'biaya',
 			'nama',			
@@ -54,6 +71,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		),
 	)); 
 	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
+				
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',
 			'dataProvider'=>$model->searchBuatPanitia(),
@@ -61,6 +79,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 
+			"ajaxUpdate"=>"false",
+			
 			'columns'=>array(
 				// 'id_pengadaan',
 				'nama_pengadaan',
@@ -80,6 +100,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				'value'=>'$data->sisaHari()',
 				),
 				'status',
+				
+				array (
+				  'name'=>'Progress',				  
+				  'value'=>'$this->grid->Controller->createWidget("zii.widgets.jui.CJuiProgressBar",array(					
+					"value"=>$data->progressPengadaan(),
+					"htmlOptions"=>array(
+					  "style"=>"width:100px; height:20px; float:left;margin-left:35px; background-color:#44F44F ;background:#EFFDFF",
+					  "color" => "red"
+					  // "options"=>array(
+					    // "change"=>new CJavaScriptExpression("function(event, ui)) {}
+					  // ),
+					),					
+
+				  ))->run()',
+				),
+				
 				/*
 				'biaya',
 				'nama',				
