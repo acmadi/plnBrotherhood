@@ -73,7 +73,7 @@ class SiteController extends Controller
 			));
 		}
 	}
-        
+		
         public function actionDokumenhistory(){
 		
 			if (Yii::app()->user->isGuest) {
