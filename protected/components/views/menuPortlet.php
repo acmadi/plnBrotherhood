@@ -66,6 +66,7 @@
 		</br> </br>
 		
 		<li class='unggah'><?php echo CHtml::link('Unggah Dokumen',array("site/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li class='lihat'><?php echo CHtml::link('Lihat Dokumen',array("site/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		
 	<?php } else if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<li><?php echo CHtml::link('TOR dan RAB',array('site/tordanrab',"id"=>"$cpengadaan->id_pengadaan")); ?></li>   
