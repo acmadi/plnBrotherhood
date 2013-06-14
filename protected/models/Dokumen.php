@@ -165,7 +165,6 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-<<<<<<< HEAD
 
 	public function searchListDokumen($pid)
 	{
