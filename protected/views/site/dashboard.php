@@ -10,8 +10,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 <?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){
 
-	
-	
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
@@ -27,6 +25,11 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 						
 			'notaDinasPerintahPengadaan.nota_dinas_permintaan',
 			
+			array(            // display using an expression
+				'name'=>'Panitia/Pejabat',
+				'value'=>'$data->idPanitia->nama_panitia',
+				),
+				
 			array(            // display using an expression
             'name'=>'Sisa Hari',
             'value'=>'$data->sisaHari()',
@@ -51,7 +54,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',
-			'dataProvider'=>$model->search(),
+			'dataProvider'=>$model->searchBuatPanitia(),
 			// 'filter'=>$model,
 			'columns'=>array(
 				// 'id_pengadaan',
@@ -61,6 +64,12 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				// 'tanggal_selesai',
 				// 'kode_panitia',
 				'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+
+				array(            // display using an expression
+				'name'=>'Panitia/Pejabat',
+				'value'=>'$data->idPanitia->nama_panitia',
+				),
+				
 				array(            // display using an expression
 				'name'=>'Sisa Hari',
 				'value'=>'$data->sisaHari()',

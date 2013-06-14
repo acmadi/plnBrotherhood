@@ -110,6 +110,8 @@ class Pengadaan extends CActiveRecord
 			'suratUndanganPengambilanDokumenPengadaans' => array(self::HAS_MANY, 'SuratUndanganPengambilanDokumenPengadaan', 'nama_pengadaan'),
 			'suratUndanganPenjelasans' => array(self::HAS_MANY, 'SuratUndanganPenjelasan', 'id_panitia'),
 			'suratUndanganPenjelasans1' => array(self::HAS_MANY, 'SuratUndanganPenjelasan', 'nama_pengadaan'),
+			// 'anggota' => array(self::HAS_ONE, 'Anggota', 'id_panitia'),																//jo---------harusnya sih HAS_MANY
+			// 'user' => array(self::HAS_ONE, 'User', 'username', 'through'=>'anggota'),
 		);
 	}
 
@@ -156,14 +158,14 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
+		$criteria->condition = "status!='Selesai'";													//------jo-------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 	
-	public function searchBuatHistory()																//----------------------------------
+	public function searchBuatHistory()																//--jo--------------------------------
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -187,6 +189,35 @@ class Pengadaan extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function searchBuatPanitia()															//jo
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+		$usern = Yii::app()->user->name;
+		$modelUser = Anggota::model()->find('username="' . $usern . '"');
+		$idpan = $modelUser->id_panitia;
+
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
+		$criteria->condition = "id_panitia=$idpan";
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}	
 	
 	public function sisaHari(){								//jo----------------------------
 		$string = $this->tanggal_selesai;		
