@@ -15,7 +15,6 @@
  * @property string $nama_pengadaan
  *
  * The followings are the available model relations:
- * @property Pengadaan $namaPengadaan
  * @property Dokumen $idDokumen
  * @property Pengadaan $idPanitia
  */
@@ -66,7 +65,6 @@ class SuratUndanganPenjelasan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'namaPengadaan' => array(self::BELONGS_TO, 'Pengadaan', 'nama_pengadaan'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
