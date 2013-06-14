@@ -212,8 +212,53 @@ class SiteController extends Controller
 	
 	public function actionCheckpoint3()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint3');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan= new Pengadaan;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_pengadaan) AS maxId';
+				$row = $Pengadaan->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Pengadaan->id_pengadaan=$somevariable;
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='RKS';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				
+				$RKS= new Rks;
+				$RKS->id_dokumen=$Dokumen0->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Rks']))
+				{
+					$RKS->attributes=$_POST['Rks'];
+					$Pengadaan->attributes=$_POST['Pengadaan'];
+							
+					if($RKS->save(false))
+					{	
+						$Dokumen0->save(false);
+						$Pengadaan->save(false);
+						$this->redirect(array('dashboard'));
+					}
+				}
+
+				$this->render('checkpoint3',array(
+					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,
+				));
+			}
 		}
 	}
 	
@@ -407,6 +452,12 @@ class SiteController extends Controller
 				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
 				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
 				$NDPP->nota_dinas_permintaan=$NDP->nomor;
+				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+				if($Panitia->jenis_panitia=='Pejabat'){
+					$NDPP->kepada='Sdr '.$Panitia->nama_panitia;
+				} else {
+					$NDPP->kepada='Sdr '.(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama).' Ketua '.($Panitia->nama_panitia).' Pengadaan Barang / Jasa';
+				}
 				// $TOR->attributes=$_POST['Tor'];
 				// $RAB->attributes=$_POST['Rab'];
 						

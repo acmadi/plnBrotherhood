@@ -77,12 +77,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'kepada'); ?>
-			<?php echo $form->dropDownList($NDPP,'kepada',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
-			<?php echo $form->error($NDPP,'kepada'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($NDPP,'perihal'); ?>
 			<?php echo $form->textField($NDPP,'perihal',array('size'=>60,'maxlength'=>50)); ?>
 			<?php echo $form->error($NDPP,'perihal'); ?>

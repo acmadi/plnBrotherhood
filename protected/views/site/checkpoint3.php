@@ -17,24 +17,37 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 			'enableAjaxValidation'=>false,
 		)); ?>
 
-			<p class="note">Keterangan : <span class="required">*</span> harus diisi.</p>
 
 			<?php echo $form->errorSummary($Rks); ?>
-
-			<div class="row">
-				<?php echo $form->labelEx($Rks,'id_dokumen'); ?>
-				<?php echo $form->textField($Rks,'id_dokumen',array('size'=>32,'maxlength'=>32)); ?>
-				<?php echo $form->error($Rks,'id_dokumen'); ?>
-			</div>
-	
+			
+			<h4><b> RKS </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($Rks,'nomor'); ?>
 				<?php echo $form->textField($Rks,'nomor',array('size'=>20,'maxlength'=>20)); ?>
 				<?php echo $form->error($Rks,'nomor'); ?>
 			</div>
+			</br>
+			
+			<h4><b> Metode Penawaran Pengadaan</b></h4>
+			<div class="row">
+				<?php echo $form->dropDownList($Pengadaan,'metode_penawaran',
+					array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
+					array('empty'=>"------Pilih Metode Penawaran------")); ?>
+				<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+			</div>
+			</br>
+			
+			<h4><b> Jenis Kualifikasi Pengadaan</b></h4>
+			<div class="row">
+				<?php echo $form->dropDownList($Pengadaan,'jenis_kualifikasi',
+					array('Pra Kualifikasi'=>'Pra Kualifikasi','Pasca Kualifikasi'=>'Pasca Kualifikasi'),
+					array('empty'=>"------Pilih Jenis Kualifikasi------")); ?>
+				<?php echo $form->error($Pengadaan,'jenis_kualifikasi'); ?>
+			</div>
+			</br>
 
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Rks->isNewRecord ? 'Simpan' : 'Save'); ?>
+				<?php echo CHtml::submitButton($Rks->isNewRecord ? 'Simpan' : 'Save', array('class'=>'sidafbutton')); ?>
 			</div>
 
 			<?php $this->endWidget(); ?>
@@ -44,4 +57,4 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 </div>
 
 <div>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?></div>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?></div>
