@@ -230,16 +230,19 @@ class Pengadaan extends CActiveRecord
 	}	
 	
 	public function sisaHari(){								//jo----------------------------
-		
-		date_default_timezone_set ('Asia/Jakarta');
-		
-		$string = $this->tanggal_selesai;		
-		$jmlday = strtotime($string);
-		
-		$string2 = date('Y-m-d H:i:s');
-		$jmlday2 = strtotime($string2);
-		
-		return floor(($jmlday-$jmlday2)/3600/24);
+		if($this->status == 'Selesai'){
+			return "-";
+		}else{
+			date_default_timezone_set ('Asia/Jakarta');
+			
+			$string = $this->tanggal_selesai;		
+			$jmlday = strtotime($string);
+			
+			$string2 = date('Y-m-d H:i:s');
+			$jmlday2 = strtotime($string2);
+			
+			return floor(($jmlday-$jmlday2)/3600/24);
+		}
 	}
 
 	public function progressPengadaan(){					//jo---------------------------
