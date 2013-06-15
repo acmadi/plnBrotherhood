@@ -219,9 +219,10 @@ class Pengadaan extends CActiveRecord
 		
 		$strDummy = "id_panitia=$idpan[0]";
 		for($j=1;$j<count($idpan);$j++){			
-			$strDummy = "id_panitia=$idpan[$j]" . "||" . $strDummy;			
+			$strDummy = "status!='Selesai' &&" . "id_panitia=$idpan[$j]" . "||" . $strDummy;			
 		};
 		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
+		$strDummy = $strDummy . "&& status!='Selesai'";
 		$criteria->condition = $strDummy ;											
 		
 		return new CActiveDataProvider($this, array(
