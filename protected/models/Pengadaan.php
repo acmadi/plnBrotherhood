@@ -245,26 +245,29 @@ class Pengadaan extends CActiveRecord
 	public function progressPengadaan(){					//jo---------------------------
 		
 		if($this->status == 'Penunjukan Panitia'){
-			return 100/7;
+			return 100/8;
 		}
 		else if($this->status == 'Prakualifikasi'){
-			return 200/7;
+			return 200/8;
 		}
 		else if($this->status == 'Pengambilan Dokumen Pengadaan'){
-			return 300/7;
+			return 300/8;
 		}
 		else if($this->status == 'Aanwijzing'){
-			return 400/7;
+			return 400/8;
 		}
 		else if($this->status == 'Penawaran dan Evaluasi'){
-			return 500/7;
+			return 500/8;
 		}
 		else if($this->status == 'Negosiasi dan Klarifikasi' ){
-			return 600/7;
+			return 600/8;
 		}
 		else if($this->status == 'Penentuan Pemenang'){
-			return 700/7;
-		}		
+			return 700/8;
+		}
+		else if($this->status == 'Selesai'){
+			return 800/8;
+		}
 		else{
 			return 0;
 		}
