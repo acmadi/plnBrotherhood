@@ -16,6 +16,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
+			array(
+				'name'=>'No',
+				'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+			),
 			// 'id_pengadaan',
 			'nama_pengadaan',
 			// 'nama_penyedia',
@@ -80,6 +84,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			"ajaxUpdate"=>"false",
 			
 			'columns'=>array(
+				array(
+					'name'=>'No',
+					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+				),
 				// 'id_pengadaan',
 				'nama_pengadaan',
 				// 'nama_penyedia',
