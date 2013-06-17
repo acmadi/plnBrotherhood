@@ -23,14 +23,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<?php echo $form->errorSummary($SUP); ?>
 		
-		<?php $Dokumen0->id_pengadaan=$id;?>
-		
-		<div class="row" style = "display:none">
-		<?php echo $form->labelEx($Dokumen0,'nama pengadaan'); ?>
-		<?php echo $form->textField($Dokumen0,'id_pengadaan'); ?>
-		<?php echo $form->error($Dokumen0,'id_pengadaan'); ?>
-		</div>
-		
 		<h4><b> Surat Undangan Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUP,'nomor'); ?>

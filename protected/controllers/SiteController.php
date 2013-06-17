@@ -253,7 +253,7 @@ class SiteController extends Controller
 					$SUPDP->nomor=$SUPDPx->nomor;
 					$SUPDP->sifat=$SUPDPx->sifat;
 					$SUPDP->perihal=$SUPDPx->perihal;
-					$SUPDP->tanggal_pengambilan=$SUPDPx->tanggal_undangan;
+					$SUPDP->tanggal_pengambilan=$SUPDPx->tanggal_pengambilan;
 					$SUPDP->waktu_pengambilan=$SUPDPx->waktu_pengambilan;
 					$SUPDP->tempat_pengambilan=$SUPDPx->tempat_pengambilan;
 					if($Pengadaan->save(false))
@@ -275,11 +275,15 @@ class SiteController extends Controller
 	
 	public function actionAanwijzing()
 	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='Penawaran dan Evaluasi';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -290,24 +294,29 @@ class SiteController extends Controller
 				$Dokumen0->nama_dokumen='Surat Undangan Anwijzing';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
 				
 				$Dokumen1=new Dokumen;
 				$Dokumen1->id_dokumen=$somevariable+2;
 				$Dokumen1->nama_dokumen='Berita Acara Anwijzing';
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+3;
 				$Dokumen2->nama_dokumen='Daftar Hadir Anwijzing';
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
 				
 				$SUP= new SuratUndanganPenjelasan;
 				$SUP->id_dokumen=$Dokumen0->id_dokumen;
+				$SUP->id_panitia=$Pengadaan->id_panitia;
 				
 				$BAP= new BeritaAcaraPenjelasan;
 				$BAP->id_dokumen=$Dokumen0->id_dokumen;
+				$BAP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen0->id_dokumen;
@@ -320,13 +329,6 @@ class SiteController extends Controller
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
 					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
-					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
-					$Pengadaan->status ='Penawaran dan Evaluasi';
-					$Dokumen1->id_pengadaan=$Dokumen0->id_pengadaan;
-					$Dokumen2->id_pengadaan=$Dokumen0->id_pengadaan;
-					$SUP->nama_pengadaan=$Pengadaan->nama_pengadaan;
-					$SUP->id_panitia=$Pengadaan->id_panitia;
-					$BAP->id_panitia=$Pengadaan->id_panitia;
 					$valid=$SUP->validate();
 					if($valid){
 						$Dokumen2->tanggal=$SUP->tanggal_undangan;						
@@ -356,19 +358,29 @@ class SiteController extends Controller
 	
 	public function actionEditAanwijzing()
 	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan = Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
+				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Aanwijzing"');
+				$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Aanwijzing"');
+				
+				$SUP=SuratUndanganPenjelasan::model()->findByPk($Dokumen0->id_dokumen);
+				$BAP=BeritaAcaraPenjelasan::model()->findByPk($Dokumen1->id_dokumen);
+				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
 				
 				$Dokumenx= new Dokumen;
 				
 				$SUPx= new SuratUndanganPenjelasan;
 				
 				$BAPx= new BeritaAcaraPenjelasan;
-				
-				$DH= new DaftarHadir;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -378,23 +390,18 @@ class SiteController extends Controller
 					$Dokumenx->attributes=$_POST['Dokumen'];
 					$SUPx->attributes=$_POST['SuratUndanganPenjelasan'];
 					$BAPx->attributes=$_POST['BeritaAcaraPenjelasan'];
-					$Pengadaan = Pengadaan::model()->findByPk($Dokumenx->id_pengadaan);
-					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
+								
 					$Dokumen0->tanggal=$Dokumenx->tanggal;	
-					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Aanwijzing"');
 					$Dokumen1->tanggal=$SUPx->tanggal_undangan;	
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Aanwijzing"');
 					$Dokumen2->tanggal=$SUPx->tanggal_undangan;	
-					$SUP=SuratUndanganPenjelasan::model()->findByPk($Dokumen0->id_dokumen);
+					
 					$SUP->nomor=$SUPx->nomor;
 					$SUP->sifat=$SUPx->sifat;
 					$SUP->perihal=$SUPx->perihal;
 					$SUP->tanggal_undangan=$SUPx->tanggal_undangan;
 					$SUP->waktu=$SUPx->waktu;
 					$SUP->tempat=$SUPx->tempat;
-					$BAP=BeritaAcaraPenjelasan::model()->findByPk($Dokumen1->id_dokumen);
 					$BAP->nomor=$BAPx->nomor;
-					$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
 					$DH->jam=$SUPx->waktu;
 					$DH->tempat_hadir=$SUPx->tempat;
 					if($Pengadaan->save(false))
