@@ -191,7 +191,7 @@
 				$this->rrmdir($this->tmpDir);
 			}
 			
-			mkdir($this->tmpDir);
+			mkdir($this->tmpDir,0777,true);
 			
 			$archive = new PclZip($this->template);
 			$archive->extract(PCLZIP_OPT_PATH, $this->tmpDir);
