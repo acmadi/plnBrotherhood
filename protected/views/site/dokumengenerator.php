@@ -18,6 +18,7 @@
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'list-dokumen-grid',
 		'dataProvider'=>$dataProvider,
+		"ajaxUpdate"=>"false",
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
