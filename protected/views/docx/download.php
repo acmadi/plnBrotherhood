@@ -1,3 +1,3 @@
 <?php
-	echo '<script>window.close()</script>';
+	$this->controller()->redirect(array('site/dashboard'));
 ?>
