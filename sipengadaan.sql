@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 14, 2013 at 04:30 AM
+-- Generation Time: Jun 17, 2013 at 04:24 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -74,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 --
 
 INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panitia`, `nama_pengadaan`, `nomor`, `hari_tanggal`) VALUES
-(987654342, '42/A/31/2013', 4, 'Pengadaan komputer', '43/A/31/2013', 'Senin/10 Juni 2013'),
 (987654362, '42/A/32/2013', 1, 'Pengadaan alat tulis', '43/A/32/2013', 'Kamis/27 Juni 2013'),
 (987654382, '42/A/33/2013', 2, 'Pengadaan alat komunikasi', '43/A/33/2013', 'Kamis/06 Juni 2013');
 
@@ -103,7 +102,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
 --
 
 INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `id_panitia`, `surat_keputusan`) VALUES
-(987654343, '43/A/31/2013', 'administrasi', 'teknis', 10000000000, 10000000000, 4, ''),
 (987654363, '43/A/32/2013', 'administrasi', 'teknis', 450000000, 450000000, 1, ''),
 (987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, 2, '');
 
@@ -132,7 +130,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
 --
 
 INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `id_panitia`, `surat_keputusan`) VALUES
-(987654344, '44/A/31/2013', 4, 3, 1, 'apa ini', 4, ''),
 (987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', 1, ''),
 (987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', 2, '');
 
@@ -172,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 --
 
 INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`) VALUES
-(987654345, '45/A/31/2013', 4),
 (987654365, '45/A/32/2013', 1),
 (987654385, '45/A/33/2013', 2);
 
@@ -533,8 +529,7 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 
 INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
 (987654373, 1),
-(987654393, 2),
-(987654353, 4);
+(987654393, 2);
 
 -- --------------------------------------------------------
 
@@ -623,8 +618,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
 (987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Negosiasi dan Klarifikasi', 10000000000, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi'),
 (987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 1, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi'),
-(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 2, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
-(987654326, 'Divisi C', 'Pengadaan Alat Musik', NULL, '2013-02-04', NULL, 'Penunjukan Panitia', NULL, 4, 'Pemilihan Langsung', NULL, NULL);
+(987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 2, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi');
 
 -- --------------------------------------------------------
 
@@ -691,7 +685,6 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 --
 
 INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
-(987654355, '55/A/31/2013', 4, 'Pemberitahuan pengadaan komputer', 'Pengadaan komputer', '17'),
 (987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
 (987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
 
@@ -783,7 +776,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 --
 
 INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
-(987654358, 4, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer', ''),
 (987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
 (987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', 'Kamis/06 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
 
@@ -839,7 +831,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
 --
 
 INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `sifat`, `perihal`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
-(987654360, '60/A/31/2013', 4, 'Biasa', 'Penjelsana pekerjaan pengadaan komputer', 'Rabu/10 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5', 'Pengadaan komputer'),
 (987654380, '60/A/32/2013', 1, 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
 (987654400, '60/A/33/2013', 2, 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', 'Jumat/07 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
 
