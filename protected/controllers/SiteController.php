@@ -261,11 +261,11 @@ class SiteController extends Controller
 					$SUPx->attributes=$_POST['SuratUndanganPenjelasan'];
 					$BAPx->attributes=$_POST['BeritaAcaraPenjelasan'];
 					$Pengadaan = Pengadaan::model()->findByPk($Dokumenx->id_pengadaan);
-					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Penjelasan"');
+					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
 					$Dokumen0->tanggal=$Dokumenx->tanggal;	
-					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Penjelasan"');
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Aanwijzing"');
 					$Dokumen1->tanggal=$SUPx->tanggal_undangan;	
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Penjelasan"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Aanwijzing"');
 					$Dokumen2->tanggal=$SUPx->tanggal_undangan;	
 					$SUP=SuratUndanganPenjelasan::model()->findByPk($Dokumen0->id_dokumen);
 					$SUP->nomor=$SUPx->nomor;
