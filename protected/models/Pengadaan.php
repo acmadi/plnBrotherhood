@@ -110,6 +110,8 @@ class Pengadaan extends CActiveRecord
 			'suratUndanganPengambilanDokumenPengadaans' => array(self::HAS_MANY, 'SuratUndanganPengambilanDokumenPengadaan', 'nama_pengadaan'),
 			'suratUndanganPenjelasans' => array(self::HAS_MANY, 'SuratUndanganPenjelasan', 'id_panitia'),
 			'suratUndanganPenjelasans1' => array(self::HAS_MANY, 'SuratUndanganPenjelasan', 'nama_pengadaan'),
+			// 'anggota' => array(self::HAS_ONE, 'Anggota', 'id_panitia'),																//jo---------harusnya sih HAS_MANY
+			// 'user' => array(self::HAS_ONE, 'User', 'username', 'through'=>'anggota'),
 		);
 	}
 
@@ -156,14 +158,14 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
+		$criteria->condition = "status!='Selesai'";													//------jo-------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 	
-	public function searchBuatHistory()																//----------------------------------
+	public function searchBuatHistory()																//--jo--------------------------------
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -187,15 +189,92 @@ class Pengadaan extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function searchBuatPanitia()															//jo---msh ada bug: yg status selesai msh ditampilin
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+		$usern = Yii::app()->user->name;
+		// $modelUser = Anggota::model()->with('pengadaan')->findAll('username="' . $usern . '"' );
+		$modelUser = Anggota::model()->findAll('username="' . $usern . '"' );
+		
+		for($i=0;$i<count($modelUser);$i++){
+			$idpan[$i] = $modelUser[$i]->id_panitia;
+		};
+
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+		// $criteria->condition = "status!='Selesai'";													//-------------------search yg ngga selesai doang----------------------		
+		
+		$strDummy = "id_panitia=$idpan[0]";
+		for($j=1;$j<count($idpan);$j++){			
+			$strDummy = "status!='Selesai' &&" . "id_panitia=$idpan[$j]" . "||" . $strDummy;			
+		};
+		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
+		$strDummy = $strDummy . "&& status!='Selesai'";
+		$criteria->condition = $strDummy ;											
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}	
 	
-	public function sisaHari(){								//jo----------------------------
-		$string = $this->tanggal_selesai;		
-		$jmlday = strtotime($string);
+	public function sisaHari($id){								//jo----------------------------
+		if($this->status == 'Selesai'){
+			return "-";
+		}else{
+			date_default_timezone_set ('Asia/Jakarta');
+			
+			$string1 = date('Y-m-d H:i:s');
+			$jmlday1 = strtotime($string1);
+			
+			$string2 = $this->tanggal_masuk;		
+			$jmlday2 = strtotime($string2);
+			
+			return floor($this->findByPk($id)->notaDinasPerintahPengadaan->targetSPK_kontrak-(($jmlday1-$jmlday2)/3600/24));
+		}
+	}
+
+	public function progressPengadaan(){					//jo---------------------------
 		
-		$string2 = $this->tanggal_masuk;
-		$jmlday2 = strtotime($string2);
-		
-		return floor(($jmlday-$jmlday2)/3600/24);
+		if($this->status == 'Penunjukan Panitia'){
+			return 100/8;
+		}
+		else if($this->status == 'Prakualifikasi'){
+			return 200/8;
+		}
+		else if($this->status == 'Pengambilan Dokumen Pengadaan'){
+			return 300/8;
+		}
+		else if($this->status == 'Aanwijzing'){
+			return 400/8;
+		}
+		else if($this->status == 'Penawaran dan Evaluasi'){
+			return 500/8;
+		}
+		else if($this->status == 'Negosiasi dan Klarifikasi' ){
+			return 600/8;
+		}
+		else if($this->status == 'Penentuan Pemenang'){
+			return 700/8;
+		}
+		else if($this->status == 'Selesai'){
+			return 800/8;
+		}
+		else{
+			return 0;
+		}
 	}
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
