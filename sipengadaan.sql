@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2013 at 03:56 PM
+-- Generation Time: Jun 17, 2013 at 04:12 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -811,6 +811,9 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
   `nomor` varchar(20) NOT NULL,
   `sifat` varchar(32) NOT NULL,
   `perihal` varchar(100) NOT NULL,
+  `tanggal_pengambilan` date NOT NULL,
+  `waktu_pengambilan` varchar(12) NOT NULL,
+  `tempat_pengambilan` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -819,10 +822,10 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
 -- Dumping data for table `surat_undangan_pengambilan_dokumen_pengadaan`
 --
 
-INSERT INTO `surat_undangan_pengambilan_dokumen_pengadaan` (`id_dokumen`, `nomor`, `sifat`, `perihal`) VALUES
-(987654359, '59/A/31/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang '),
-(987654379, '59/A/32/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang '),
-(987654399, '59/A/33/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ');
+INSERT INTO `surat_undangan_pengambilan_dokumen_pengadaan` (`id_dokumen`, `nomor`, `sifat`, `perihal`, `tanggal_pengambilan`, `waktu_pengambilan`, `tempat_pengambilan`) VALUES
+(987654359, '59/A/31/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', '2013-06-11', '14.00', 'PLN'),
+(987654379, '59/A/32/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', '2013-06-13', '14.00', 'PLN'),
+(987654399, '59/A/33/2013', 'Biasa', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', '2013-06-25', '14.00', 'PLN');
 
 -- --------------------------------------------------------
 
