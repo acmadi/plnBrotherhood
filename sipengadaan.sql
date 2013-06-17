@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2013 at 04:24 AM
+-- Generation Time: Jun 17, 2013 at 05:13 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   `id_panitia` bigint(11) NOT NULL,
   `nama_pengadaan` varchar(50) NOT NULL,
   `nomor` varchar(20) NOT NULL,
-  `hari_tanggal` varchar(32) NOT NULL,
+  `tanggal_berita_acara` date NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
   KEY `no_RKS` (`no_RKS`),
@@ -73,9 +73,9 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 -- Dumping data for table `berita_acara_evaluasi_penawaran`
 --
 
-INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panitia`, `nama_pengadaan`, `nomor`, `hari_tanggal`) VALUES
-(987654362, '42/A/32/2013', 1, 'Pengadaan alat tulis', '43/A/32/2013', 'Kamis/27 Juni 2013'),
-(987654382, '42/A/33/2013', 2, 'Pengadaan alat komunikasi', '43/A/33/2013', 'Kamis/06 Juni 2013');
+INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panitia`, `nama_pengadaan`, `nomor`, `tanggal_berita_acara`) VALUES
+(987654362, '42/A/32/2013', 1, 'Pengadaan alat tulis', '43/A/32/2013', '2013-06-27'),
+(987654382, '42/A/33/2013', 2, 'Pengadaan alat komunikasi', '43/A/33/2013', '2013-06-06');
 
 -- --------------------------------------------------------
 
@@ -730,7 +730,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
   `perihal` varchar(100) NOT NULL,
   `kepada` varchar(30) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
-  `hari_tanggal` varchar(30) NOT NULL,
+  `tanggal_undangan` date NOT NULL,
   `waktu` varchar(14) NOT NULL,
   `tempat` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
@@ -741,10 +741,10 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
 -- Dumping data for table `surat_undangan_negosiasi_klarifikasi`
 --
 
-INSERT INTO `surat_undangan_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `sifat`, `perihal`, `kepada`, `nama_pengadaan`, `hari_tanggal`, `waktu`, `tempat`) VALUES
-(987654357, '57/A/31/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Apple', 'Pengadaan komputer', 'Rabu/12 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 5'),
-(987654377, '57/A/32/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Pilot', 'Pengadaan alat tulis', 'Kamis/27 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 7'),
-(987654397, '57/A/33/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Samsung', 'Pengadaan alat komunikasi', 'Sabtu/08 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50');
+INSERT INTO `surat_undangan_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `sifat`, `perihal`, `kepada`, `nama_pengadaan`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
+(987654357, '57/A/31/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Apple', 'Pengadaan komputer', '2013-06-12', '14.00', 'Ruang rapat Gedung I lantai 5'),
+(987654377, '57/A/32/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Pilot', 'Pengadaan alat tulis', '2013-06-27', '14.00', 'Ruang rapat Gedung I lantai 7'),
+(987654397, '57/A/33/2013', 'Biasa', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Samsung', 'Pengadaan alat komunikasi', '2013-06-08', '14.00', 'Ruang rapat Gedung I lantai 50');
 
 -- --------------------------------------------------------
 
@@ -759,7 +759,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
   `no_RKS` varchar(20) NOT NULL,
-  `hari_tanggal` varchar(20) NOT NULL,
+  `tanggal_undangan` date NOT NULL,
   `waktu` varchar(20) NOT NULL,
   `tempat` varchar(100) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
@@ -775,9 +775,9 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 -- Dumping data for table `surat_undangan_pembukaan_penawaran`
 --
 
-INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
-(987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
-(987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', 'Kamis/06 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
+INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `tanggal_undangan`, `waktu`, `tempat`, `nama_pengadaan`, `surat_keputusan`) VALUES
+(987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis', ''),
+(987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', '2013-06-06', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi', '');
 
 -- --------------------------------------------------------
 
@@ -817,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   `id_panitia` bigint(11) NOT NULL,
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
-  `hari_tanggal` varchar(20) NOT NULL,
+  `tanggal_undangan` date NOT NULL,
   `waktu` varchar(20) NOT NULL,
   `tempat` varchar(100) NOT NULL,
   `nama_pengadaan` varchar(100) NOT NULL,
@@ -830,9 +830,9 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
 -- Dumping data for table `surat_undangan_penjelasan`
 --
 
-INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `sifat`, `perihal`, `hari_tanggal`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
-(987654380, '60/A/32/2013', 1, 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', 'Rabu/26 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
-(987654400, '60/A/33/2013', 2, 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', 'Jumat/07 Juni 2013', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
+INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `sifat`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`, `nama_pengadaan`) VALUES
+(987654380, '60/A/32/2013', 1, 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50', 'Pengadaan alat tulis'),
+(987654400, '60/A/33/2013', 2, 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', '2013-06-07', '14.00', 'Ruang rapat Gedung I lantai 500', 'Pengadaan alat komunikasi');
 
 -- --------------------------------------------------------
 
