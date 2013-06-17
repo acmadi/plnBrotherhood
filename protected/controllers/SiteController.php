@@ -236,6 +236,67 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionEditAanwijzing()
+	{	
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Dokumenx= new Dokumen;
+				
+				$SUPx= new SuratUndanganPenjelasan;
+				
+				$BAPx= new BeritaAcaraPenjelasan;
+				
+				$DH= new DaftarHadir;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPenjelasan']))
+				{
+					$Dokumenx->attributes=$_POST['Dokumen'];
+					$SUPx->attributes=$_POST['SuratUndanganPenjelasan'];
+					$BAPx->attributes=$_POST['BeritaAcaraPenjelasan'];
+					$Pengadaan = Pengadaan::model()->findByPk($Dokumenx->id_pengadaan);
+					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
+					$Dokumen0->tanggal=$Dokumenx->tanggal;	
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Aanwijzing"');
+					$Dokumen1->tanggal=$SUPx->tanggal_undangan;	
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Aanwijzing"');
+					$Dokumen2->tanggal=$SUPx->tanggal_undangan;	
+					$SUP=SuratUndanganPenjelasan::model()->findByPk($Dokumen0->id_dokumen);
+					$SUP->nomor=$SUPx->nomor;
+					$SUP->sifat=$SUPx->sifat;
+					$SUP->perihal=$SUPx->perihal;
+					$SUP->tanggal_undangan=$SUPx->tanggal_undangan;
+					$SUP->waktu=$SUPx->waktu;
+					$SUP->tempat=$SUPx->tempat;
+					$BAP=BeritaAcaraPenjelasan::model()->findByPk($Dokumen1->id_dokumen);
+					$BAP->nomor=$BAPx->nomor;
+					$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+					$DH->jam=$SUPx->waktu;
+					$DH->tempat_hadir=$SUPx->tempat;
+					if($Pengadaan->save(false))
+					{	
+						if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+							if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
+								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+							}
+						}
+					}
+				}
+
+				$this->render('editaanwijzing',array(
+					'SUPx'=>$SUPx,'Dokumenx'=>$Dokumenx,'BAPx'=>$BAPx,
+				));
+
+			}
+		}
+	}
+	
 	public function actionCheckpoint3()
 	{	
 		if (Yii::app()->user->isGuest) {
