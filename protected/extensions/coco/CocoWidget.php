@@ -18,7 +18,7 @@ class CocoWidget extends CWidget implements EYuiActionRunnable {
 	public $defaultActionName='coco';
 	public $idPengadaan;
 	public $user;
-	public $buttonText='Find & Upload';
+	public $buttonText='Unggah Dokumen';
 	public $dropFilesText='Drop Files Here !';
 	public $allowedExtensions=array();
 	public $sizeLimit;
@@ -204,7 +204,7 @@ echo
 
 			// ensure directory
 			$this->uploadDir = rtrim($this->uploadDir,'/').'/';
-			@mkdir($this->uploadDir);
+			@mkdir($this->uploadDir,0700,true);
 
 			$result = $uploader->handleUpload($this->uploadDir);
 			if(isset($result['success'])){

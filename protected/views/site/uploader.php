@@ -1,9 +1,10 @@
 <?php
+	$model=Dokumen::model();
     $this->pageTitle=Yii::app()->name . ' | Uploader';
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
 	$objectpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id. '"');
-	$dirUpload = 'uploads/' . $objectpengadaan->nama_pengadaan . '/' ;
+	$dirUpload =  $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $objectpengadaan->id_pengadaan . '/' ;
 	$uploader1 = 'Pakta Integritas Panitia 1';
 	$uploader2 = 'Dokumen Kualifikasi';
 	$uploader3 = 'Berita Acara Evaluasi Kualifikasi';
