@@ -115,7 +115,7 @@
 		</div>
 		
 		<div>
-		<?php echo CHtml::button('Generate Doc', array('submit'=>array('docx/download'), 'class'=>'sidafbutton')); ?>
+		<?php echo CHtml::button('Unduh Dokumen', array('submit'=>array('docx/download'), 'class'=>'sidafbutton')); ?>
 		</div>
 		
 		</br>

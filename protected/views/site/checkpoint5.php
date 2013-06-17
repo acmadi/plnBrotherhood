@@ -10,11 +10,8 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
-	<?php 
-		if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-			echo CHtml::button('Generate Doc', array('submit'=>array('docx/download'), 'class'=>'sidafbutton')); 
-		}
-	?>
+	
+	Checkpoint 5.
 
 	</div>
 </div>
