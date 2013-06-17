@@ -106,26 +106,26 @@
 		</div>
 		
 		</br>
-		</br>
 		
 		<div class="row buttons">
 			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
 		</div>
 		
-		</br>
-		</br>
-		
 		<div class="row buttons">
 			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
 		</div>
 		
-		</br>
+		<div>
+		<?php echo CHtml::button('Generate Doc', array('submit'=>array('docx/download'), 'class'=>'sidafbutton')); ?>
+		</div>
+		
 		</br>
 
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 
+		
 		<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
