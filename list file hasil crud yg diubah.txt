@@ -1,6 +1,8 @@
 jo
 Pengadaan.php : function search()
 Pengadaan.php : function sisaHari()
+Pengadaan.php : function searchBuatPanitia()
+Pengadaan.php : function searchBuatHistory()
 
 aidil
 pengadaan.php : rules
