@@ -9,7 +9,7 @@
  * @property string $id_panitia
  * @property string $sifat
  * @property string $perihal
- * @property string $hari_tanggal
+ * @property string $tanggal_undangan
  * @property string $waktu
  * @property string $tempat
  * @property string $nama_pengadaan
@@ -46,14 +46,14 @@ class SuratUndanganPenjelasan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, id_panitia, sifat, perihal, hari_tanggal, waktu, tempat, nama_pengadaan', 'required'),
+			array('id_dokumen, nomor, id_panitia, sifat, perihal, tanggal_undangan, waktu, tempat, nama_pengadaan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, sifat, hari_tanggal, waktu', 'length', 'max'=>20),
+			array('nomor, sifat, waktu', 'length', 'max'=>20),
 			array('id_panitia', 'length', 'max'=>11),
 			array('perihal, tempat, nama_pengadaan', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, id_panitia, sifat, perihal, hari_tanggal, waktu, tempat, nama_pengadaan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, id_panitia, sifat, perihal, tanggal_undangan, waktu, tempat, nama_pengadaan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,7 +81,7 @@ class SuratUndanganPenjelasan extends CActiveRecord
 			'id_panitia' => 'Id Panitia',
 			'sifat' => 'Sifat',
 			'perihal' => 'Perihal',
-			'hari_tanggal' => 'Hari Tanggal',
+			'tanggal_undangan' => 'Tanggal Undangan',
 			'waktu' => 'Waktu',
 			'tempat' => 'Tempat',
 			'nama_pengadaan' => 'Nama Pengadaan',
@@ -104,7 +104,7 @@ class SuratUndanganPenjelasan extends CActiveRecord
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('sifat',$this->sifat,true);
 		$criteria->compare('perihal',$this->perihal,true);
-		$criteria->compare('hari_tanggal',$this->hari_tanggal,true);
+		$criteria->compare('tanggal_undangan',$this->tanggal_undangan,true);
 		$criteria->compare('waktu',$this->waktu,true);
 		$criteria->compare('tempat',$this->tempat,true);
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
