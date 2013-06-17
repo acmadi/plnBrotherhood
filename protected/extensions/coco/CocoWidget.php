@@ -193,10 +193,20 @@ echo
 			$this->allowedExtensions = array();
 
 		Yii::log('ACTION CALLED - data is: '.CJSON::encode($vars),'info');
-
-
+		
+		//Nama dokumen dengan format :
+		//[singkatan]_[pengunggah]_[tanggal-YYMMDD]_[time-HH:MM::SS].ext
+		date_default_timezone_set("Asia/Jakarta");
+		$date = date_create();
+		$sec = time() + (7*3600);
+		$hours = ($sec / 3600) % 24;
+		$minutes = ($sec / 60) % 60;
+		$seconds = $sec % 60;
+		$waktuUpload = $hours . $minutes . $seconds;
+		$namadokumen = $this->singkatNamaDokumen($this->id) . '_' . $this->user  . '_' . date("ymd") . '_' . $waktuUpload;
+		
 		if($action == 'upload'){
-			$uploader = new ValumsFileUploader($this->allowedExtensions, $this->sizeLimit, $this->id);
+			$uploader = new ValumsFileUploader($this->allowedExtensions, $this->sizeLimit, $namadokumen);
 			if($uploader->checkServerSettings() != null){
 				Yii::log("CocoWidget. Please increase post_max_size and upload_max_filesize to ".$this->sizeLimit,"error");
 				return;
@@ -205,7 +215,7 @@ echo
 			// ensure directory
 			$this->uploadDir = rtrim($this->uploadDir,'/').'/';
 			@mkdir($this->uploadDir,0700,true);
-
+						
 			$result = $uploader->handleUpload($this->uploadDir);
 			if(isset($result['success'])){
 				if($result['success']==true){
@@ -274,6 +284,54 @@ echo
 			}
 		}catch(Exception $e){
 			Yii::log(__CLASS__.' an error occurs.','error');
+		}
+	}
+	
+	public function singkatNamaDokumen($nama){
+		if($nama=='Pakta Integritas Panitia 1'){
+			return 'PIP1';
+		}
+		else if($nama=='Dokumen Kualifikasi'){
+			return 'DK';
+		}
+		else if($nama=='Berita Acara Evaluasi Kualifikasi'){
+			return 'BAEK';
+		}
+		else if($nama=='Berita Acara Penjelasan'){
+			return 'BAP';
+		}
+		else if($nama=='Berita Acara Pembukaan Dokumen Penawaran'){
+			return 'BAPDP';
+		}
+		else if($nama=='Berita Acara Pembukaan Dokumen Penawaran 2'){
+			return 'BAPDP2';
+		}
+		else if($nama=='Berita Acara Evaluasi Penawaran'){
+			return 'BAEP';
+		}
+		else if($nama=='Berita Acara Evaluasi Penawaran 2'){
+			return 'BAEP2';
+		}
+		else if($nama=='Berita Acara Negosiasi Klarifikasi'){
+			return 'BANK';
+		}
+		else if($nama=='Nota Dinas Usulan Pemenang'){
+			return 'NDUP';
+		}
+		else if($nama=='Nota Dinas Penetapan Pemenang'){
+			return 'NDPP';
+		}
+		else if($nama=='Nota Dinas Pemberitahuan Pemenang'){
+			return 'NDPP2';
+		}
+		else if($nama=='Pakta Integritas Panitia 2'){
+			return 'PIP2';
+		}
+		else if($nama=='Kontrak'){
+			return 'K';
+		}
+		else if($nama=='Daftar Hadir'){
+			return 'DH';
 		}
 	}
 
