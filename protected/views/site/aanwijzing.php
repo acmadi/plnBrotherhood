@@ -23,12 +23,13 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<?php echo $form->errorSummary($SUP); ?>
 		
-		<h4><b> Pengadaan </b></h4>
+		<!----
 		<div class="row">
-		<?php echo $form->labelEx($Dokumen0,'id_pengadaan'); ?>
+		<?php /* echo $form->labelEx($Dokumen0,'Nama Pengadaan'); ?>
 		<?php echo $form->dropDownList($Dokumen0,'id_pengadaan',CHtml::listData(Pengadaan::model()->findAllByPk($id), 'id_pengadaan', 'nama_pengadaan'));?>
-		<?php echo $form->error($Dokumen0,'id_pengadaan'); ?>
+		<?php echo $form->error($Dokumen0,'id_pengadaan');*/ ?>
 		</div>
+		--->
 		
 		<h4><b> Surat Undangan Aanwijzing </b></h4>
 		<div class="row">
