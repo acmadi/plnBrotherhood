@@ -162,6 +162,7 @@ class SiteController extends Controller
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -201,31 +202,26 @@ class SiteController extends Controller
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
 					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
-					$valid=$Dokumen0->validate();
-					if($valid) {
-						$SUP->nama_pengadaan=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->nama_pengadaan;
-						$SUP->id_panitia=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->id_panitia;
-						$BAP->id_panitia=Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->id_panitia;
-						$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
-						$Pengadaan->status ='Penawaran dan Evaluasi';						
-						$valid=$SUP->validate();
-						
-						if($valid) {				
-							$Dokumen1->tanggal=$SUP->tanggal_undangan;
-							$Dokumen2->tanggal=$SUP->tanggal_undangan;					
-							$DH->jam=$SUP->waktu;
-							$DH->tempat_hadir=$SUP->tempat;
-							$DH->acara="Aanwijzing";
-							
-							$valid=$Dokumen1->validate()&&$Dokumen1->validate()&&$BAP->validate()&&$DH->validate();								
-							
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
-									if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false))
-									{
-										$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
-									}
+					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
+					$Pengadaan->status ='Penawaran dan Evaluasi';
+					$Dokumen1->id_pengadaan=$Dokumen0->id_pengadaan;
+					$Dokumen2->id_pengadaan=$Dokumen0->id_pengadaan;
+					$SUP->nama_pengadaan=$Pengadaan->nama_pengadaan;
+					$SUP->id_panitia=$Pengadaan->id_panitia;
+					$BAP->id_panitia=$Pengadaan->id_panitia;
+					$valid=$SUP->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUP->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUP->tanggal_undangan;
+						$DH->jam=$SUP->waktu;
+						$DH->tempat_hadir=$SUP->tempat;
+						$DH->acara="Aanwijzing";
+						$valid=$BAP->validate()&&$DH->validate();
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -235,6 +231,7 @@ class SiteController extends Controller
 				$this->render('aanwijzing',array(
 					'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'BAP'=>$BAP,
 				));
+
 			}
 		}
 	}
