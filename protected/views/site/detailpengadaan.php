@@ -10,7 +10,7 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 
 <div id="detailpengadaan">
 	<h1><?php echo $cpengadaan->nama_pengadaan; ?></h1>	
-	<div style="width:50%;">
+	<div style="width:50%; margin-left:30px;">
 		<?php
 			$this->widget('zii.widgets.CDetailView', array(
 				'id'=>'viewdetail',

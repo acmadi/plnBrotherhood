@@ -23,13 +23,11 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<?php echo $form->errorSummary($SUP); ?>
 		
-		<!----
-		<div class="row">
-		<?php /* echo $form->labelEx($Dokumen0,'Nama Pengadaan'); ?>
-		<?php echo $form->dropDownList($Dokumen0,'id_pengadaan',CHtml::listData(Pengadaan::model()->findAllByPk($id), 'id_pengadaan', 'nama_pengadaan'));?>
-		<?php echo $form->error($Dokumen0,'id_pengadaan');*/ ?>
+		<?php $Dokumen0->id_pengadaan=$id;?>
+		
+		<div class="row" style = "display:none">
+		<?php echo $form->textField($Dokumen0,'id_pengadaan');?>
 		</div>
-		--->
 		
 		<h4><b> Surat Undangan Aanwijzing </b></h4>
 		<div class="row">
@@ -40,7 +38,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
 		<div class="row">
 			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
-			<?php echo $form->textField($Dokumen0,'tanggal',array('size'=>60)); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen0,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen0->tanggal,
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 
@@ -57,9 +62,16 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'hari / tanggal Aanwijzing'); ?>
-			<?php echo $form->textField($SUP,'hari_tanggal',array('size'=>60,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUP,'hari_tanggal'); ?>
+			<?php echo $form->labelEx($SUP,'tanggal Aanwijzing'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$SUP,
+					'attribute'=>'tanggal_undangan',
+					'value'=>$SUP->tanggal_undangan,
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
+			<?php echo $form->error($SUP,'tanggal_undangan'); ?>
 		</div>
 
 		<div class="row">
@@ -79,12 +91,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->labelEx($BAP,'nomor'); ?>
 			<?php echo $form->textField($BAP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
 			<?php echo $form->error($BAP,'nomor'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($Dokumen1,'tanggal berita acara'); ?>
-			<?php echo $form->textField($Dokumen1,'tanggal',array('size'=>60)); ?>
-			<?php echo $form->error($Dokumen1,'tanggal'); ?>
 		</div>
 
 		<div class="row buttons">
