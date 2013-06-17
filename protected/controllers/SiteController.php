@@ -131,6 +131,22 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
+	public function actionDetaildokumen()
+	{
+		// renders the view file 'protected/views/site/history.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			$this->render('detaildokumen');
+		}
+	}
+
+	/**
+	 * This is the default 'index' action that is invoked
+	 * when an action is not explicitly requested by users.
+	 */
 	public function actionGenerator()
 	{	
 		if (Yii::app()->user->isGuest) {
