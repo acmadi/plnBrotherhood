@@ -21,8 +21,6 @@
 	$uploader12 = 'Kontrak';
 	$uploader13 = 'Daftar Hadir';
 	
-	$kadivuploader1 = 'Nota Dinas Perintah Pengadaan';
-	
 ?>
 
 <div id="pagecontent">
