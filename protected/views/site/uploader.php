@@ -1,4 +1,5 @@
 <?php
+	$model=Dokumen::model();
     $this->pageTitle=Yii::app()->name . ' | Uploader';
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
