@@ -17,7 +17,8 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 		Untuk melanjutkan proses pengadaan, silahkan masuk ke menu <b><?php echo $cpengadaan->status; ?></b> di sebelah kiri. </br>
 		<?php if($cpengadaan->status != 'Penunjukan Panitia') { ?>
 			Apabila anda ingin mengubah data-data sebelumnya, silahkan masuk ke menu di atasnya. </br>
-		<?php } ?> </br>
+		<?php } ?> 
+		Apabila pengadaan gagal, silahkan masuk ke menu Pengadaan gagal </br> </br>
 		Untuk mengunggah dokumen, silahkan masuk ke menu Unggah Dokumen. </br>
 		Untuk melihat dokumen yang telah diunggah, silahkan masuk ke menu Lihat Dokumen.
 	</div>
