@@ -176,16 +176,16 @@ class Dokumen extends CActiveRecord
 			':id_pengadaan'=>$idPengadaan,
 			));
 			
-		// $dateTimeZone = date_create("");
-		$indonesiazone = timezone_open("Asia/Jakarta");
+		date_default_timezone_set("Asia/Jakarta");
+		$date = date_create();
 		$sec = time() + (7*3600);
 		$hours = ($sec / 3600) % 24;
 		$minutes = ($sec / 60) % 60;
 		$seconds = $sec % 60;
 		$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
 		
-		$newModel->tanggal='1111-01-01';
-		$newModel->tempat='Jakarta';
+		$newModel->tanggal=date("Y-m-d");
+		$newModel->tempat=	'Jakarta';
 		$newModel->status_upload='Selesai';
 		$newModel->waktu_upload=$waktu_upload;
 		$newModel->pengunggah=$user;
