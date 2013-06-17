@@ -61,7 +61,7 @@
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::button('Unggah Nota Dinas Perintah Pengadaan', array('class'=>'sidafbutton'));?>
+			<?php echo CHtml::button('Unggah Nota Dinas Permintaan', array('class'=>'sidafbutton'));?>
 		</div>
 		
 		</br>
