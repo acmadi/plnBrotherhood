@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2013 at 04:12 PM
+-- Generation Time: Jun 17, 2013 at 04:55 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 
 INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panitia`, `nomor`, `tanggal_berita_acara`) VALUES
 (987654342, '42/A/31/2013', 4, '43/A/31/2013', '2013-06-11'),
-(987654362, '42/A/32/2013', 1, '43/A/32/2013', '2013-06-27'),
 (987654382, '42/A/33/2013', 2, '43/A/33/2013', '2013-06-06');
 
 -- --------------------------------------------------------
@@ -102,7 +101,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
 
 INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `id_panitia`, `surat_keputusan`) VALUES
 (987654343, '44/A/31/2013', 'Administrasi', 'Klarifikasi', 1000000000, 1000000000, 4, NULL),
-(987654363, '43/A/32/2013', 'administrasi', 'teknis', 450000000, 450000000, 1, ''),
 (987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, 2, '');
 
 -- --------------------------------------------------------
@@ -131,7 +129,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
 
 INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `id_panitia`, `surat_keputusan`) VALUES
 (987654344, '45/A/31/2013', 5, 3, 2, 'apa ini', 4, NULL),
-(987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', 1, ''),
 (987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', 2, '');
 
 -- --------------------------------------------------------
@@ -171,7 +168,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 
 INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`) VALUES
 (987654345, '46/A/31/2013', 4),
-(987654365, '45/A/32/2013', 1),
 (987654385, '45/A/33/2013', 2);
 
 -- --------------------------------------------------------
@@ -272,7 +268,7 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (987654356, 'Surat Pernyataan Minat', '2013-06-20', 'Jakarta', 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
 (987654357, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-21', 'Jakarta', 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
 (987654358, 'Surat Undangan Pembukaan Penawaran', '2013-06-22', 'Jakarta', 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
-(987654359, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-23', 'Jakarta', 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
+(987654359, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-23', 'Jakarta', 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
 (987654360, 'Surat Undangan Aanwijzing', '2013-06-24', 'Jakarta', 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
 (987654361, 'RKS', '2013-06-26', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
 (987654362, 'Berita Acara Evaluasi Penawaran', '2013-06-26', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
@@ -292,7 +288,7 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (987654376, 'Surat Pernyataan Minat', '2013-06-29', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
 (987654377, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-30', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
 (987654378, 'Surat Undangan Pembukaan Penawaran', '2013-06-30', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
-(987654379, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-30', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
+(987654379, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-30', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
 (987654380, 'Surat Undangan Aanwijzing', '2013-06-30', 'Jakarta', 987654323, 'Selesai', '08:00:00', 'haniferidaputra', 'www.sipengadaan.pln.co.id'),
 (987654381, 'RKS', '2013-06-04', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654382, 'Berita Acara Evaluasi Penawaran', '2013-06-04', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
@@ -312,7 +308,7 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (987654396, 'Surat Pernyataan Minat', '2013-06-09', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654397, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-09', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654398, 'Surat Undangan Pembukaan Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
-(987654399, 'Surat Undangan Pengambilan Dokumen Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
+(987654399, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654400, 'Surat Undangan Aanwijzing', '2013-06-10', 'Jakarta', 987654324, 'Selesai', '08:00:00', 'johannesridho', 'www.sipengadaan.pln.co.id'),
 (987654401, 'TOR', NULL, NULL, 987654322, 'Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
 (987654402, 'RAB', NULL, NULL, 987654322, 'Belum Selesai', '08:00:00', 'irvanaditya', 'www.sipengadaan.pln.co.id'),
@@ -554,7 +550,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 --
 
 INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
-(987654373, 1),
 (987654393, 2),
 (987654353, 4);
 
@@ -711,7 +706,6 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 
 INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
 (987654355, '56/A/31/2013', 4, 'Pemberitahuan Pengadaan Komputer', 'Pengadaan Komputer', '14'),
-(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
 (987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
 
 -- --------------------------------------------------------
@@ -797,7 +791,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 
 INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `tanggal_undangan`, `waktu`, `tempat`, `surat_keputusan`) VALUES
 (987654358, 4, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', '2013-06-15', '14.00', 'Ruang rapat Gedung I lantai 5', ''),
-(987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50', ''),
 (987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', '2013-06-06', '14.00', 'Ruang rapat Gedung I lantai 500', '');
 
 -- --------------------------------------------------------
@@ -852,7 +845,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
 
 INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `sifat`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
 (987654360, '60/A/31/2013', 4, 'Biasa', 'Penjelsan pekerjaan pengadaan komputer', '2013-06-12', '14.00', 'Ruang rapat Gedung I lantai 50'),
-(987654380, '60/A/32/2013', 1, 'Biasa', 'Penjelsan pekerjaan pengadaan alat tulis', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50'),
 (987654400, '60/A/33/2013', 2, 'Biasa', 'Penjelsan pekerjaan pengadaan alat komunikasi', '2013-06-07', '14.00', 'Ruang rapat Gedung I lantai 500');
 
 -- --------------------------------------------------------
