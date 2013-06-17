@@ -104,8 +104,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	</div><!-- form -->
 	
 	
-<?php	}
-?>
+<?php	} ?>
 	</div>
 </div>
 
