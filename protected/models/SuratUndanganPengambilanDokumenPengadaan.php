@@ -8,10 +8,11 @@
  * @property string $nomor
  * @property string $sifat
  * @property string $perihal
- * @property string $nama_pengadaan
+ * @property string $tanggal_pengambilan
+ * @property string $waktu_pengambilan
+ * @property string $tempat_pengambilan
  *
  * The followings are the available model relations:
- * @property Pengadaan $namaPengadaan
  * @property Dokumen $idDokumen
  */
 class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
@@ -42,13 +43,15 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, sifat, perihal, nama_pengadaan', 'required'),
+			array('id_dokumen, nomor, sifat, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required'),
 			array('id_dokumen, sifat', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>20),
-			array('perihal, nama_pengadaan', 'length', 'max'=>100),
+			array('perihal', 'length', 'max'=>100),
+			array('waktu_pengambilan', 'length', 'max'=>12),
+			array('tempat_pengambilan', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, sifat, perihal, nama_pengadaan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, sifat, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,7 +63,6 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'namaPengadaan' => array(self::BELONGS_TO, 'Pengadaan', 'nama_pengadaan'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
@@ -75,7 +77,9 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 			'nomor' => 'Nomor',
 			'sifat' => 'Sifat',
 			'perihal' => 'Perihal',
-			'nama_pengadaan' => 'Nama Pengadaan',
+			'tanggal_pengambilan' => 'Tanggal Pengambilan',
+			'waktu_pengambilan' => 'Waktu Pengambilan',
+			'tempat_pengambilan' => 'Tempat Pengambilan',
 		);
 	}
 
@@ -94,7 +98,9 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('sifat',$this->sifat,true);
 		$criteria->compare('perihal',$this->perihal,true);
-		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('tanggal_pengambilan',$this->tanggal_pengambilan,true);
+		$criteria->compare('waktu_pengambilan',$this->waktu_pengambilan,true);
+		$criteria->compare('tempat_pengambilan',$this->tempat_pengambilan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

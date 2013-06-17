@@ -49,41 +49,34 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'perihal'); ?>
-			<?php echo $form->textField($SUP,'perihal',array('size'=>60,'maxlength'=>100)); ?>
-			<?php echo $form->error($SUP,'perihal'); ?>
+			<?php echo $form->labelEx($SUPDP,'perihal'); ?>
+			<?php echo $form->textField($SUPDP,'perihal',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->error($SUPDP,'perihal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'tanggal Aanwijzing'); ?>
+			<?php echo $form->labelEx($SUPDP,'tanggal pengambilan'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SUP,
-					'attribute'=>'tanggal_undangan',
-					'value'=>$SUP->tanggal_undangan,
+					'model'=>$SUPDP,
+					'attribute'=>'tanggal_pengambilan',
+					'value'=>$SUPDP->tanggal_pengambilan,
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($SUP,'tanggal_undangan'); ?>
+			<?php echo $form->error($SUPDP,'tanggal_pengambilan'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'waktu Aanwijzing'); ?>
-			<?php echo $form->textField($SUP,'waktu',array('size'=>60,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUP,'waktu'); ?>
+			<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
+			<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'tempat Aanwijzing'); ?>
-			<?php echo $form->textField($SUP,'tempat',array('size'=>60,'maxlength'=>100)); ?>
-			<?php echo $form->error($SUP,'tempat'); ?>
-		</div>
-		
-		<h4><b> Berita Acara Aanwijzing </b></h4>
-		<div class="row">
-			<?php echo $form->labelEx($BAP,'nomor'); ?>
-			<?php echo $form->textField($BAP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAP,'nomor'); ?>
+			<?php echo $form->labelEx($SUPDP,'tempat_pengambilan'); ?>
+			<?php echo $form->textField($SUPDP,'tempat_pengambilan',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->error($SUPDP,'tempat_pengambilan'); ?>
 		</div>
 
 		<div class="row buttons">

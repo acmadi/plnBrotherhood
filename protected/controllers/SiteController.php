@@ -189,7 +189,7 @@ class SiteController extends Controller
 				$row = $Dokumen0->model()->find($criteria);
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
-				$Dokumen0->nama_dokumen='Undangan Pengambilan Dokumen Pengadaan';
+				$Dokumen0->nama_dokumen='Surat Undangan Pengambilan Dokumen Pengadaan';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
@@ -200,18 +200,13 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				if(isset($_POST['SuratUndanganPenjelasan']))
+				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SUP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
-					$valid=$SUP->validate();
+					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$valid=$Dokumen0->validate();
+					$valid=$SUPDP->validate();
 					if($valid){
-						$Dokumen2->tanggal=$SUP->tanggal_undangan;						
-						$Dokumen1->tanggal=$SUP->tanggal_undangan;
-						$DH->jam=$SUP->waktu;
-						$DH->tempat_hadir=$SUP->tempat;
-						$DH->acara="Aanwijzing";
-						$valid=$BAP->validate()&&$DH->validate();
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
@@ -226,7 +221,54 @@ class SiteController extends Controller
 				$this->render('pengambilandokumenpengadaan',array(
 					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
 				));
+			}
+		}
+	}
+	
+	public function actionEditPengambilandokumenpengadaan()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pengambilan Dokumen Pengadaan"');
+				
+				$SUPDP= SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($Dokumen0->id_dokumen);
+				
+				$Dokumenx= new Dokumen;
+				$SUPDPx= new SuratUndanganPengambilanDokumenPengadaan;
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
 
+				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
+				{
+					$Dokumenx->attributes=$_POST['Dokumen'];
+					$SUPDPx->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$Dokumen0->tanggal=$Dokumenx->tanggal;
+					$SUPDP->nomor=$SUPDPx->nomor;
+					$SUPDP->sifat=$SUPDPx->sifat;
+					$SUPDP->perihal=$SUPDPx->perihal;
+					$SUPDP->tanggal_pengambilan=$SUPDPx->tanggal_undangan;
+					$SUPDP->waktu_pengambilan=$SUPDPx->waktu_pengambilan;
+					$SUPDP->tempat_pengambilan=$SUPDPx->tempat_pengambilan;
+					if($Pengadaan->save(false))
+					{	
+						if($Dokumen0->save(false)){
+							if($SUPDP->save(false)){
+								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+							}
+						}
+					}
+				}
+
+				$this->render('editpengambilandokumenpengadaan',array(
+					'SUPDPx'=>$SUPDPx,'Dokumenx'=>$Dokumenx,
+				));
 			}
 		}
 	}
@@ -245,7 +287,7 @@ class SiteController extends Controller
 				$row = $Dokumen0->model()->find($criteria);
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
-				$Dokumen0->nama_dokumen='Undangan Anwijzing';
+				$Dokumen0->nama_dokumen='Surat Undangan Anwijzing';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				
