@@ -34,7 +34,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader1 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader1,
 			'user'=>$user,
@@ -62,7 +62,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader2 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader2,
 			'user'=>$user,
@@ -90,7 +90,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader3 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader3,
 			'user'=>$user,
@@ -118,7 +118,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader4 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader4,
 			'user'=>$user,
@@ -146,7 +146,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader5 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader5,
 			'user'=>$user,
@@ -176,7 +176,7 @@
 	if($objectpengadaan->metode_penawaran=="Dua Sampul" || $objectpengadaan->metode_penawaran=="Dua Tahap" )
 	{
 	echo '<h5>' . $uploader52 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader52,
 			'user'=>$user,
@@ -205,7 +205,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader6 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader6,
 			'user'=>$user,
@@ -235,7 +235,7 @@
 	if($objectpengadaan->metode_penawaran=="Dua Sampul" || $objectpengadaan->metode_penawaran=="Dua Tahap" )
 	{
 	echo '<h5>' . $uploader62 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader62,
 			'user'=>$user,
@@ -264,7 +264,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader7 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader7,
 			'user'=>$user,
@@ -292,7 +292,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader8 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader8,
 			'user'=>$user,
@@ -320,7 +320,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader9 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader9,
 			'user'=>$user,
@@ -348,7 +348,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader10 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader10,
 			'user'=>$user,
@@ -376,7 +376,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader11 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader11,
 			'user'=>$user,
@@ -404,7 +404,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader12 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader12,
 			'user'=>$user,
@@ -432,7 +432,7 @@
 	<div class="uploaderblock">
 	<?php
 	echo '<h5>' . $uploader13 . '<h5>' ;
-    $this->widget('CocoWidget'
+    $this->widget('ext.coco.CocoWidget'
         ,array(
             'id'=>$uploader13,
 			'user'=>$user,
