@@ -21,7 +21,22 @@ class DocxController extends Controller
 				
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);
+		$Dok=Dokumen::model()->findByPk($NDPP->id_dokumen);
+		$Peng=Pengadaan::model()->findByPk($Dok->id_pengadaan);
 		$nomor = $NDPP->nomor;
+		$dari = $NDPP->dari;
+		$kepada = $NDPP->kepada;
+		$perihal = $NDPP->perihal;
+		$anggaran = $NDPP->pagu_anggaran;
+		$sumber = $NDPP->sumber_dana;
+		$tanggal = $Dok->tanggal;
+		$torrks = $NDPP->TOR_RKS;
+		$rab = $NDPP->RAB;
+		$target = $NDPP->targetSPK_kontrak;
+		$nonota = $NDPP->nota_dinas_permintaan;
+		$metode = $Peng->metode_pengadaan;
+		$user = $Peng->divisi_peminta;
+		$nama = $Peng->nama_pengadaan;
 		
 		$this->doccy->newFile('notadinas.docx'); // template.docx must be located in protected/views/report/template.docx where "report" is the name of the controller from which is renderDocx called (alternatively you must configure option "templatePath")
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#","Test1"); // basic field mapping to header
@@ -33,21 +48,19 @@ class DocxController extends Controller
 		// $this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Ball"),array("#TOYNAME#"=>"Frisbee"),array("#TOYNAME#"=>"Box")),array("members"=>1,"pets"=>1)); // would create a block toy for rex
 		// $this->doccy->phpdocx->assignNestedBlock("toys",array(array("#TOYNAME#"=>"Frisbee")),array("members"=>2,"pets"=>1)); // would create a block toy for rox
 		$this->doccy->phpdocx->assign('#nosurat#', $nomor);
-		$this->doccy->phpdocx->assign('#tahunsurat#', '12');
-		$this->doccy->phpdocx->assign('#kepada#', 'Aidil');
-		$this->doccy->phpdocx->assign('#dari#', 'Johan');
-		$this->doccy->phpdocx->assign('#lampiran#', 'e');
-		$this->doccy->phpdocx->assign('#tanggal#', 'f');
-		$this->doccy->phpdocx->assign('#perihal#', 'g');
-		$this->doccy->phpdocx->assign('#anggaran#', 'h');
-		$this->doccy->phpdocx->assign('#sumber#', 'i');
-		$this->doccy->phpdocx->assign('#torrks#', 'j');
-		$this->doccy->phpdocx->assign('#rab#', 'k');
-		$this->doccy->phpdocx->assign('#metode#', 'l');
-		$this->doccy->phpdocx->assign('#targetspk#', 'm');
-		$this->doccy->phpdocx->assign('#user#', 'n');
-		$this->doccy->phpdocx->assign('#nonotadinas#', 'o');
-		$this->doccy->phpdocx->assign('#namapengadaan#', 'p');
+		$this->doccy->phpdocx->assign('#kepada#', $kepada);
+		$this->doccy->phpdocx->assign('#dari#', $dari);
+		$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+		$this->doccy->phpdocx->assign('#perihal#', $perihal);
+		$this->doccy->phpdocx->assign('#anggaran#', $anggaran);
+		$this->doccy->phpdocx->assign('#sumber#', $sumber);
+		$this->doccy->phpdocx->assign('#torrks#', $torrks);
+		$this->doccy->phpdocx->assign('#rab#', $rab);
+		$this->doccy->phpdocx->assign('#metode#', $metode);
+		$this->doccy->phpdocx->assign('#targetspk#', $target);
+		$this->doccy->phpdocx->assign('#user#', $user);
+		$this->doccy->phpdocx->assign('#nonotadinas#', $nonota);
+		$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 		$this->renderDocx("Nota Dinas Perintah Pengadaan.docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
 		$this->render('download');
 
