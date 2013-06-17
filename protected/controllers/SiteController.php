@@ -171,6 +171,69 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionPengambilandokumenpengadaan()
+	{	
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Undangan Pengambilan Dokumen Pengadaan';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				
+				$SUPDP= new SuratUndanganPenjelasan;
+				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPenjelasan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
+					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
+					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
+					$Pengadaan->status ='Penawaran dan Evaluasi';
+					$Dokumen1->id_pengadaan=$Dokumen0->id_pengadaan;
+					$Dokumen2->id_pengadaan=$Dokumen0->id_pengadaan;
+					$SUP->nama_pengadaan=$Pengadaan->nama_pengadaan;
+					$SUP->id_panitia=$Pengadaan->id_panitia;
+					$BAP->id_panitia=$Pengadaan->id_panitia;
+					$valid=$SUP->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUP->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUP->tanggal_undangan;
+						$DH->jam=$SUP->waktu;
+						$DH->tempat_hadir=$SUP->tempat;
+						$DH->acara="Aanwijzing";
+						$valid=$BAP->validate()&&$DH->validate();
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('pengambilandokumenpengadaan',array(
+					'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'BAP'=>$BAP,
+				));
+
+			}
+		}
+	}
+	
 	public function actionAanwijzing()
 	{	
 		if (Yii::app()->user->isGuest) {
@@ -406,13 +469,6 @@ class SiteController extends Controller
 	{	
 		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
 			$this->render('checkpoint7');
-		}
-	}
-	
-	public function actionCheckpoint8()
-	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint8');
 		}
 	}
 	
