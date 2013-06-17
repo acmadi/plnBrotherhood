@@ -230,19 +230,19 @@ class Pengadaan extends CActiveRecord
 		));
 	}	
 	
-	public function sisaHari(){								//jo----------------------------
+	public function sisaHari($id){								//jo----------------------------
 		if($this->status == 'Selesai'){
 			return "-";
 		}else{
 			date_default_timezone_set ('Asia/Jakarta');
 			
-			$string = $this->tanggal_selesai;		
-			$jmlday = strtotime($string);
+			$string1 = date('Y-m-d H:i:s');
+			$jmlday1 = strtotime($string1);
 			
-			$string2 = date('Y-m-d H:i:s');
+			$string2 = $this->tanggal_masuk;		
 			$jmlday2 = strtotime($string2);
 			
-			return floor(($jmlday-$jmlday2)/3600/24);
+			return floor($this->findByPk($id)->notaDinasPerintahPengadaan->targetSPK_kontrak-(($jmlday1-$jmlday2)/3600/24));
 		}
 	}
 

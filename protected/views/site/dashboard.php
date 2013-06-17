@@ -2,8 +2,6 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Beranda';
-$id = Yii::app()->user->name;
-$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
@@ -35,7 +33,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				
 			array(            // display using an expression
             'name'=>'Sisa Hari',
-            'value'=>'$data->sisaHari()',
+            'value'=>'$data->sisaHari($data->id_pengadaan)',
 			),
 			
 			'status',
@@ -97,7 +95,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				
 				array(            // display using an expression
 				'name'=>'Sisa Hari',
-				'value'=>'$data->sisaHari()',
+				'value'=>'$data->sisaHari($data->id_pengadaan)',
 				),
 				'status',
 				
