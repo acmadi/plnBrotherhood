@@ -26,7 +26,6 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'tanggal_masuk'); ?>
-			 <?php /*echo $form->textField($Pengadaan,'tanggal_masuk',array('size'=>60)); */?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$Pengadaan,
 					'attribute'=>'tanggal_masuk',
