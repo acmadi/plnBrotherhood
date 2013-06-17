@@ -242,7 +242,7 @@ class Pengadaan extends CActiveRecord
 			$string2 = $this->tanggal_masuk;		
 			$jmlday2 = strtotime($string2);
 			
-			return floor($this->findByPk($id)->notaDinasPerintahPengadaan->targetSPK_kontrak-(($jmlday1-$jmlday2)/3600/24));
+			return($this->findByPk($id)->notaDinasPerintahPengadaan->targetSPK_kontrak-floor(($jmlday1-$jmlday2)/3600/24));
 		}
 	}
 
