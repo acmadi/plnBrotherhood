@@ -19,8 +19,7 @@
 	$uploader10 = 'Nota Dinas Pemberitahuan Pemenang';
 	$uploader11 = 'Pakta Integritas Panitia 2';
 	$uploader12 = 'Kontrak';
-	$uploader13 = 'Daftar Hadir';
-	
+	$uploader13 = 'Daftar Hadir';	
 ?>
 
 <div id="pagecontent">
