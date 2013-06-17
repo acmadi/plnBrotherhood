@@ -9,7 +9,7 @@
 	$uploader2 = 'Dokumen Kualifikasi';
 	$uploader3 = 'Berita Acara Evaluasi Kualifikasi';
 	$uploader4 = 'Berita Acara Penjelasan';
-	$uploader5 = 'Berita Acara Pembukaan Penawaran';
+	$uploader5 = 'Berita Acara Pembukaan Dokumen Penawaran';
 	$uploader52 = 'Berita Acara Pembukaan Dokumen Penawaran 2';
 	$uploader6 = 'Berita Acara Evaluasi Penawaran';
 	$uploader62 = 'Berita Acara Evaluasi Penawaran 2';
@@ -50,7 +50,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -78,7 +78,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -106,7 +106,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -134,7 +134,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -162,7 +162,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -192,7 +192,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -221,7 +221,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -251,7 +251,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -280,7 +280,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -308,7 +308,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -336,7 +336,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -364,7 +364,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -392,7 +392,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -420,7 +420,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
@@ -448,7 +448,7 @@
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
             // controls how many files must be uploaded
-            'maxUploads'=>1, // defaults to -1 (unlimited)
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
             'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
             // controls how many files the can select (not upload, for uploads see also: maxUploads)
             'multipleFileSelection'=>true, // true or false, defaults: true
