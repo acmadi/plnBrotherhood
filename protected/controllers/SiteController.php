@@ -479,28 +479,35 @@ class SiteController extends Controller
 				$Pengadaan->attributes=$_POST['Pengadaan'];
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
 				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
-				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
-				$NDPP->nota_dinas_permintaan=$NDP->nomor;
-				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-				if($Panitia->jenis_panitia=='Pejabat'){
-					$NDPP->kepada='Sdr '.$Panitia->nama_panitia;
-				} else {
-					$NDPP->kepada='Sdr '.(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama).' Ketua '.($Panitia->nama_panitia).' Pengadaan Barang / Jasa';
-				}
+				$valid=$Pengadaan->validate();
+				
 				// $TOR->attributes=$_POST['Tor'];
 				// $RAB->attributes=$_POST['Rab'];
-						
-				if($Pengadaan->save(false))
-				{	
-					$Dokumen0->save(false);
-					$Dokumen1->save(false);
-					$Dokumen2->save(false);
-					$Dokumen3->save(false);
-					$NDP->save(false);
-					$NDPP->save(false);
-					// $TOR->save(false);
-					// $RAB->save(false);
-					$this->redirect(array('dashboard'));
+				
+				if($valid){
+					$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
+					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+					if($Panitia->jenis_panitia=='Pejabat'){
+						$NDPP->kepada='Sdr '.$Panitia->nama_panitia;
+					} else {
+						$NDPP->kepada='Sdr '.(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama).' Ketua '.($Panitia->nama_panitia).' Pengadaan Barang / Jasa';
+					}
+					$valid=$valid&&$NDP->validate();
+					if($valid){
+						$NDPP->nota_dinas_permintaan=$NDP->nomor;
+						$valid=$valid&&$NDPP->validate();
+						if($valid){
+							if($Pengadaan->save(false)) {
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+									$NDP->save(false);
+									$NDPP->save(false);
+									// $TOR->save(false);
+									// $RAB->save(false);
+									$this->redirect(array('dashboard'));
+								}
+							}
+						}
+					}
 				}
 			}
 
