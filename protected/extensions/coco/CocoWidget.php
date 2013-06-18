@@ -214,6 +214,7 @@ echo
 					$fullpath = $result['fullpath'];
 					$this->onFileUploaded($fullpath,$this->userdata);
 					Dokumen::model()->changeStatus($this->id);
+					LinkDokumen::model()->inputData($this->id, $this->user);
 				}
 				else{
 					Yii::log('ACTION CALLED - RESULT=ERROR1','info');
