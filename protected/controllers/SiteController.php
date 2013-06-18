@@ -173,7 +173,13 @@ class SiteController extends Controller
 					$this->redirect(array('site/aanwijzing','id'=>$id));
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi"){
-					$this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="Negosiasi dan Klarifikasi"){
+					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="Penentuan Pemenang"){
+					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
 				}
 			}
 		}
