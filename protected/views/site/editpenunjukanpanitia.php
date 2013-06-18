@@ -27,7 +27,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<h4><b> RKS </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($Rksx,'nomor'); ?>
-				<?php echo $form->textField($Rksx,'nomor',array('size'=>32,'maxlength'=>20)); ?>
+				<?php echo $form->textField($Rksx,'nomor',array('size'=>45,'maxlength'=>20)); ?>
 				<?php echo $form->error($Rksx,'nomor'); ?>
 			</div>
 			
@@ -37,7 +37,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumenx,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumenx->tanggal,
-					'htmlOptions'=>array('size'=>32),
+					'htmlOptions'=>array('size'=>45),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
