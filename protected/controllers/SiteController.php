@@ -139,14 +139,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			$model=new LinkDokumen('search');
-			$model->unsetAttributes();  // clear any default values
-			if(isset($_GET['LinkDokumen'])){
-				$model->attributes=$_GET['LinkDokumen'];
-			}
-			$this->render('detaildokumen', array(
-				'model'=>$model,
-			));
+			$this->render('detaildokumen');
 		}
 	}
 
@@ -755,14 +748,7 @@ class SiteController extends Controller
 							if($Pengadaan->save(false)) {
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
-										if(isset($_POST['simpan']))
-										{
-											$this->redirect(array('dashboard'));
-										}
-										if(isset($_POST['simpanbuat']))
-										{
-											$this->redirect(array('detaildokumen', 'id'=>$NDPP->id_dokumen));
-										}
+										$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));
 									}
 								}
 							}
