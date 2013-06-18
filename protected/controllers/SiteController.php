@@ -362,17 +362,18 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
+				if(isset($_POST['SuratPemberitahuanPengadaan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$X2->attributes=$_POST['SuratPemberitahuanPengadaan'];
+					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPDP->validate();
+					$valid=$valid&&$X2->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
-								if($SUPDP->save(false)){
+								if($X2->save(false)){
 									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
