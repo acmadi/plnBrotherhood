@@ -27,7 +27,7 @@
 		'dataProvider'=>$dataProvider,
 		"ajaxUpdate"=>"false",
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-		'selectionChanged'=>"function(id){window.location='" . $_SERVER["DOCUMENT_ROOT"] . Yii::app()->baseUrl . '/uploads/' . $cdokumen->id_pengadaan . '/' . "'+ $.fn.yiiGridView.getSelection(id) + '.docx';}",
+		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("download/download"/*, array("id"=>LinkDokumen::model()->find('id_dokumen = ' . $id)->nomor_link)*/) . "'+ '&id=' + $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			array(
 				'name'=>'Tanggal unggah',
