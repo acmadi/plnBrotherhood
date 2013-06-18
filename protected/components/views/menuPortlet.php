@@ -37,12 +37,32 @@
 				<li class='sudah'><?php echo CHtml::link('Aanwijzing',array("site/editaanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-				<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
-			<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php if($cpengadaan->metode_penawaran=='Satu Sampul') { ?>
+			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Aanwijzing')) { ?>
+					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
+				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
+					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<?php } else { ?>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>	
+		<?php } else if($cpengadaan->metode_penawaran=='Dua Sampul') { ?>
+			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Aanwijzing')) { ?>
+					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
+				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
+					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<?php } else { ?>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>
+		<?php } else if($cpengadaan->metode_penawaran=='Dua Tahap') { ?>
+			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Aanwijzing')) { ?>
+					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
+				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
+					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<?php } else { ?>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>
+		<?php } else {?>
+			<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
 		<?php } ?>
 		
 		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Aanwijzing') || ($cpengadaan->status == 'Penawaran dan Evaluasi')) { ?>
