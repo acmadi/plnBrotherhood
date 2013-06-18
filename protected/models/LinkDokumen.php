@@ -1,22 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "pakta_integritas_panitia_1".
+ * This is the model class for table "link_dokumen".
  *
- * The followings are the available columns in table 'pakta_integritas_panitia_1':
+ * The followings are the available columns in table 'link_dokumen':
  * @property string $id_dokumen
- * @property string $id_panitia
+ * @property string $waktu_upload
+ * @property string $tanggal_upload
+ * @property string $pengunggah
+ * @property integer $nomor_link
  *
  * The followings are the available model relations:
+ * @property User $pengunggah0
  * @property Dokumen $idDokumen
- * @property Pengadaan $idPanitia
  */
-class PaktaIntegritasPanitia1 extends CActiveRecord
+class LinkDokumen extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return PaktaIntegritasPanitia1 the static model class
+	 * @return LinkDokumen the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -28,7 +31,7 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'pakta_integritas_panitia_1';
+		return 'link_dokumen';
 	}
 
 	/**
@@ -39,12 +42,13 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, id_panitia', 'required'),
-			array('id_dokumen', 'length', 'max'=>32),
-			array('id_panitia', 'length', 'max'=>11),
+			array('id_dokumen', 'required'),
+			array('nomor_link', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, pengunggah', 'length', 'max'=>32),
+			array('waktu_upload, tanggal_upload', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, id_panitia', 'safe', 'on'=>'search'),
+			array('id_dokumen, waktu_upload, tanggal_upload, pengunggah, nomor_link', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,8 +60,8 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'pengunggah0' => array(self::BELONGS_TO, 'User', 'pengunggah'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -68,7 +72,10 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 	{
 		return array(
 			'id_dokumen' => 'Id Dokumen',
-			'id_panitia' => 'Id Panitia',
+			'waktu_upload' => 'Waktu Upload',
+			'tanggal_upload' => 'Tanggal Upload',
+			'pengunggah' => 'Pengunggah',
+			'nomor_link' => 'Nomor Link',
 		);
 	}
 
@@ -84,7 +91,10 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('waktu_upload',$this->waktu_upload,true);
+		$criteria->compare('tanggal_upload',$this->tanggal_upload,true);
+		$criteria->compare('pengunggah',$this->pengunggah,true);
+		$criteria->compare('nomor_link',$this->nomor_link);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

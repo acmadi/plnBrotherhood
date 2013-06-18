@@ -10,9 +10,6 @@
  * @property string $tempat
  * @property string $id_pengadaan
  * @property string $status_upload
- * @property string $waktu_upload
- * @property string $pengunggah
- * @property string $link_penyimpanan
  *
  * The followings are the available model relations:
  * @property BeritaAcaraEvaluasiPenawaran $beritaAcaraEvaluasiPenawaran
@@ -22,9 +19,9 @@
  * @property BeritaAcaraPenjelasan $beritaAcaraPenjelasan
  * @property DaftarHadir $daftarHadir
  * @property Pengadaan $idPengadaan
- * @property User $pengunggah0
  * @property DokumenPenawaran $dokumenPenawaran
  * @property FormIsianKualifikasi $formIsianKualifikasi
+ * @property LinkDokumen[] $linkDokumens
  * @property NotaDinasPemberitahuanPemenang $notaDinasPemberitahuanPemenang
  * @property NotaDinasPenetapanPemenang $notaDinasPenetapanPemenang
  * @property NotaDinasPerintahPengadaan $notaDinasPerintahPengadaan
@@ -71,16 +68,14 @@ class Dokumen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama_dokumen, id_pengadaan', 'required'),
+			array('id_dokumen, nama_dokumen, id_pengadaan', 'required'),
+			array('id_dokumen, id_pengadaan', 'length', 'max'=>32),
 			array('nama_dokumen', 'length', 'max'=>50),
-			array('tempat', 'length', 'max'=>20),
-			array('id_pengadaan, pengunggah', 'length', 'max'=>32),
-			array('status_upload', 'length', 'max'=>10),
-			array('link_penyimpanan', 'length', 'max'=>100),
-			array('tanggal, waktu_upload', 'safe'),
+			array('tempat, status_upload', 'length', 'max'=>20),
+			array('tanggal', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload, waktu_upload, pengunggah, link_penyimpanan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -99,9 +94,9 @@ class Dokumen extends CActiveRecord
 			'beritaAcaraPenjelasan' => array(self::HAS_ONE, 'BeritaAcaraPenjelasan', 'id_dokumen'),
 			'daftarHadir' => array(self::HAS_ONE, 'DaftarHadir', 'id_dokumen'),
 			'idPengadaan' => array(self::BELONGS_TO, 'Pengadaan', 'id_pengadaan'),
-			'pengunggah0' => array(self::BELONGS_TO, 'User', 'pengunggah'),
 			'dokumenPenawaran' => array(self::HAS_ONE, 'DokumenPenawaran', 'id_dokumen'),
 			'formIsianKualifikasi' => array(self::HAS_ONE, 'FormIsianKualifikasi', 'id_dokumen'),
+			'linkDokumens' => array(self::HAS_MANY, 'LinkDokumen', 'id_dokumen'),
 			'notaDinasPemberitahuanPemenang' => array(self::HAS_ONE, 'NotaDinasPemberitahuanPemenang', 'id_dokumen'),
 			'notaDinasPenetapanPemenang' => array(self::HAS_ONE, 'NotaDinasPenetapanPemenang', 'id_dokumen'),
 			'notaDinasPerintahPengadaan' => array(self::HAS_ONE, 'NotaDinasPerintahPengadaan', 'id_dokumen'),
@@ -134,9 +129,6 @@ class Dokumen extends CActiveRecord
 			'tempat' => 'Tempat',
 			'id_pengadaan' => 'Id Pengadaan',
 			'status_upload' => 'Status Upload',
-			'waktu_upload' => 'Waktu Upload',
-			'pengunggah' => 'Pengunggah',
-			'link_penyimpanan' => 'Link Penyimpanan',
 		);
 	}
 
@@ -157,9 +149,6 @@ class Dokumen extends CActiveRecord
 		$criteria->compare('tempat',$this->tempat,true);
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('status_upload',$this->status_upload,true);
-		$criteria->compare('waktu_upload',$this->waktu_upload,true);
-		$criteria->compare('pengunggah',$this->pengunggah,true);
-		$criteria->compare('link_penyimpanan',$this->link_penyimpanan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -192,9 +181,11 @@ class Dokumen extends CActiveRecord
 		$newModel->link_penyimpanan=$uploadDir;
 		$newModel->save();
 	}
+	
 	public function fileReceptor($fullFileName,$userdata)
 	{
 
 	}	
+	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }
