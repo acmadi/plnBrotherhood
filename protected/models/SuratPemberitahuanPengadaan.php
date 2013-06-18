@@ -46,9 +46,9 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'required'),
 			array('id_dokumen, lingkup_kerja', 'length', 'max'=>32),
-			array('nomor, waktu_kerja', 'length', 'max'=>20),
+			array('nomor, perihal', 'length', 'max'=>50),
 			array('id_panitia', 'length', 'max'=>11),
-			array('perihal', 'length', 'max'=>50),
+			array('waktu_kerja', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'safe', 'on'=>'search'),

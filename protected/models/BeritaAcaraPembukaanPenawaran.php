@@ -11,7 +11,6 @@
  * @property integer $jumlah_penyedia_dokumen_tidak_sah
  * @property string $status_metode
  * @property string $id_panitia
- * @property string $surat_keputusan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -48,12 +47,12 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia', 'required'),
 			array('jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, surat_keputusan', 'length', 'max'=>20),
+			array('nomor', 'length', 'max'=>50),
 			array('status_metode', 'length', 'max'=>10),
 			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia, surat_keputusan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,7 +82,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 			'jumlah_penyedia_dokumen_tidak_sah' => 'Jumlah Penyedia Dokumen Tidak Sah',
 			'status_metode' => 'Status Metode',
 			'id_panitia' => 'Id Panitia',
-			'surat_keputusan' => 'Surat Keputusan',
 		);
 	}
 
@@ -105,7 +103,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		$criteria->compare('jumlah_penyedia_dokumen_tidak_sah',$this->jumlah_penyedia_dokumen_tidak_sah);
 		$criteria->compare('status_metode',$this->status_metode,true);
 		$criteria->compare('id_panitia',$this->id_panitia,true);
-		$criteria->compare('surat_keputusan',$this->surat_keputusan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

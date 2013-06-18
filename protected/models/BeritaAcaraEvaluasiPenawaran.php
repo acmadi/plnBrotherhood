@@ -45,7 +45,7 @@ class BeritaAcaraEvaluasiPenawaran extends CActiveRecord
 		return array(
 			array('id_dokumen, no_RKS, id_panitia, nomor, tanggal_berita_acara', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('no_RKS, nomor', 'length', 'max'=>20),
+			array('no_RKS, nomor', 'length', 'max'=>50),
 			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

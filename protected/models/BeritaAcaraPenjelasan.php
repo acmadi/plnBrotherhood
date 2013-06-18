@@ -42,7 +42,7 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, id_panitia', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>20),
+			array('nomor', 'length', 'max'=>50),
 			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

@@ -216,7 +216,7 @@ class SiteController extends Controller
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
 				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-				$Dokumen0->nama_dokumen='Pakta Integritas Panitia 1';
+				$Dokumen0->nama_dokumen='Pakta Integritas Awal Panitia';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				

@@ -9,10 +9,11 @@
  * @property string $NIP
  * @property string $email
  * @property string $id_panitia
+ * @property string $jabatan
  *
  * The followings are the available model relations:
- * @property Panitia $idPanitia
  * @property User $username0
+ * @property Panitia $idPanitia
  */
 class Anggota extends CActiveRecord
 {
@@ -42,13 +43,13 @@ class Anggota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, NIP, email, id_panitia', 'required'),
+			array('username, NIP, email, id_panitia, jabatan', 'required'),
 			array('username', 'length', 'max'=>20),
-			array('NIP, email', 'length', 'max'=>32),
+			array('NIP, email, jabatan', 'length', 'max'=>32),
 			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, NIP, email, id_panitia', 'safe', 'on'=>'search'),
+			array('id, username, NIP, email, id_panitia, jabatan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,9 +61,8 @@ class Anggota extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
 			'username0' => array(self::BELONGS_TO, 'User', 'username'),
-			'pengadaan' => array(self::HAS_ONE, 'Pengadaan','id_panitia','through'=>'idPanitia'),
+			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
 		);
 	}
 
@@ -77,6 +77,7 @@ class Anggota extends CActiveRecord
 			'NIP' => 'Nip',
 			'email' => 'Email',
 			'id_panitia' => 'Id Panitia',
+			'jabatan' => 'Jabatan',
 		);
 	}
 
@@ -96,6 +97,7 @@ class Anggota extends CActiveRecord
 		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('jabatan',$this->jabatan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'surat_undangan_pengambilan_dokumen_pengadaan':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $sifat
  * @property string $perihal
  * @property string $tanggal_pengambilan
  * @property string $waktu_pengambilan
@@ -43,15 +42,14 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, sifat, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required'),
-			array('id_dokumen, sifat', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>20),
-			array('perihal', 'length', 'max'=>100),
+			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required'),
+			array('id_dokumen', 'length', 'max'=>32),
+			array('nomor', 'length', 'max'=>50),
+			array('perihal, tempat_pengambilan', 'length', 'max'=>100),
 			array('waktu_pengambilan', 'length', 'max'=>12),
-			array('tempat_pengambilan', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, sifat, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +73,6 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'sifat' => 'Sifat',
 			'perihal' => 'Perihal',
 			'tanggal_pengambilan' => 'Tanggal Pengambilan',
 			'waktu_pengambilan' => 'Waktu Pengambilan',
@@ -96,7 +93,6 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('sifat',$this->sifat,true);
 		$criteria->compare('perihal',$this->perihal,true);
 		$criteria->compare('tanggal_pengambilan',$this->tanggal_pengambilan,true);
 		$criteria->compare('waktu_pengambilan',$this->waktu_pengambilan,true);
