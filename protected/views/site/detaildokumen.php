@@ -1,9 +1,15 @@
 <?php
 /* @var $this SiteController */
 
-$id = Yii::app()->getRequest()->getQuery('id');
-$cdokumen = Dokumen::model()->find('id_dokumen = "' . $id . '"');
-$this->pageTitle=Yii::app()->name . ' | ' . Pengadaan::model()->findByPk($cdokumen->id_pengadaan)->nama_pengadaan . ' : ' . $cdokumen->nama_dokumen;
+	$id = Yii::app()->getRequest()->getQuery('id');
+	$cdokumen = Dokumen::model()->find('id_dokumen = "' . $id . '"');
+	$this->pageTitle=Yii::app()->name . ' | ' . Pengadaan::model()->findByPk($cdokumen->id_pengadaan)->nama_pengadaan . ' : ' . $cdokumen->nama_dokumen;
+	$dataProvider = new CActiveDataProvider(LinkDokumen::model(), array(
+		'criteria'=>array(
+			'condition'=>'id_dokumen = ' . $id,
+			'order'=>'nomor_link DESC',
+		),
+	));
 ?>
 
 <br />
@@ -15,7 +21,10 @@ $this->pageTitle=Yii::app()->name . ' | ' . Pengadaan::model()->findByPk($cdokum
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'dokumengrid',
-		'dataProvider'=>$model->search(),
+		'dataProvider'=>$dataProvider,
+		'columns'=>array(
+			'pengunggah',
+		),
 	));
 ?>
 
