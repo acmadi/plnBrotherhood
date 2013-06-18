@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2013 at 05:58 AM
+-- Generation Time: Jun 18, 2013 at 06:22 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -119,7 +119,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   `jumlah_penyedia_dokumen_tidak_sah` int(10) NOT NULL,
   `status_metode` varchar(10) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
-  `surat_keputusan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
   KEY `id_panitia` (`id_panitia`)
@@ -129,10 +128,10 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
 -- Dumping data for table `berita_acara_pembukaan_penawaran`
 --
 
-INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `id_panitia`, `surat_keputusan`) VALUES
-(987654344, '45/A/31/2013', 5, 3, 2, 'apa ini', 4, NULL),
-(987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', 1, ''),
-(987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', 2, '');
+INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `id_panitia`) VALUES
+(987654344, '45/A/31/2013', 5, 3, 2, 'apa ini', 4),
+(987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', 1),
+(987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', 2);
 
 -- --------------------------------------------------------
 
@@ -401,6 +400,7 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   `tanggal_upload` date DEFAULT NULL,
   `pengunggah` varchar(32) DEFAULT NULL,
   `nomor_link` int(11) DEFAULT NULL,
+  `format_dokumen` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id_link`),
   KEY `id_dokumen` (`id_dokumen`),
   KEY `pengunggah` (`pengunggah`)
@@ -410,85 +410,85 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 -- Dumping data for table `link_dokumen`
 --
 
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`) VALUES
-(1, 987654341, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(2, 987654342, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(3, 987654343, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(4, 987654344, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(5, 987654345, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(6, 987654346, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(7, 987654347, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(8, 987654348, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(9, 987654349, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(10, 987654350, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(11, 987654351, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(12, 987654352, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(13, 987654353, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(14, 987654354, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(15, 987654355, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(16, 987654356, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(17, 987654357, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(18, 987654358, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(19, 987654359, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(20, 987654360, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(21, 987654361, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(22, 987654362, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(23, 987654363, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(24, 987654364, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(25, 987654365, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(26, 987654366, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(27, 987654367, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(28, 987654368, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(29, 987654369, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(30, 987654370, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(31, 987654371, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(32, 987654372, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(33, 987654373, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(34, 987654374, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(35, 987654375, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(36, 987654376, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(37, 987654377, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(38, 987654378, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(39, 987654379, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(40, 987654380, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(41, 987654381, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(42, 987654382, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(43, 987654383, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(44, 987654384, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(45, 987654385, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(46, 987654386, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(47, 987654387, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(48, 987654388, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(49, 987654389, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(50, 987654390, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(51, 987654391, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(52, 987654392, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(53, 987654393, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(54, 987654394, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(55, 987654395, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(56, 987654396, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(57, 987654397, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(58, 987654398, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(59, 987654399, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(60, 987654400, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(61, 987654401, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(62, 987654402, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(63, 987654403, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(64, 987654404, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(65, 987654405, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(66, 987654406, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(67, 987654407, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(68, 987654408, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(69, 987654409, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(70, 987654410, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(71, 987654411, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(72, 987654412, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(73, 987654413, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(74, 987654414, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(75, 987654415, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(76, 987654416, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(77, 987654417, '08:00:00', '2013-06-19', 'haniferidaputra', 1),
-(78, 987654418, '08:00:00', '2013-06-19', 'haniferidaputra', 1);
+INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`) VALUES
+(1, 987654341, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(2, 987654342, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(3, 987654343, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(4, 987654344, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(5, 987654345, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(6, 987654346, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(7, 987654347, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(8, 987654348, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(9, 987654349, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(10, 987654350, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(11, 987654351, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(12, 987654352, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(13, 987654353, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(14, 987654354, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(15, 987654355, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(16, 987654356, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(17, 987654357, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(18, 987654358, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(19, 987654359, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(20, 987654360, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(21, 987654361, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(22, 987654362, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(23, 987654363, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(24, 987654364, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(25, 987654365, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(26, 987654366, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(27, 987654367, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(28, 987654368, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(29, 987654369, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(30, 987654370, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(31, 987654371, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(32, 987654372, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(33, 987654373, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(34, 987654374, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(35, 987654375, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(36, 987654376, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(37, 987654377, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(38, 987654378, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(39, 987654379, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(40, 987654380, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(41, 987654381, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(42, 987654382, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(43, 987654383, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(44, 987654384, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(45, 987654385, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(46, 987654386, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(47, 987654387, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(48, 987654388, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(49, 987654389, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(50, 987654390, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(51, 987654391, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(52, 987654392, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(53, 987654393, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(54, 987654394, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(55, 987654395, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(56, 987654396, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(57, 987654397, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(58, 987654398, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(59, 987654399, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(60, 987654400, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(61, 987654401, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(62, 987654402, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(63, 987654403, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(64, 987654404, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(65, 987654405, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(66, 987654406, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(67, 987654407, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(68, 987654408, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(69, 987654409, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(70, 987654410, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(71, 987654411, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(72, 987654412, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(73, 987654413, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(74, 987654414, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(75, 987654415, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(76, 987654416, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(77, 987654417, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
+(78, 987654418, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf');
 
 -- --------------------------------------------------------
 
@@ -800,6 +800,7 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
   `id_panitia` bigint(11) NOT NULL,
   `perihal` varchar(50) NOT NULL,
   `lingkup_kerja` varchar(32) NOT NULL,
+  `tanggal_penawaran` date NOT NULL,
   `waktu_kerja` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
@@ -810,10 +811,10 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 -- Dumping data for table `surat_pemberitahuan_pengadaan`
 --
 
-INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
-(987654355, '56/A/31/2013', 4, 'Pemberitahuan Pengadaan Komputer', 'Pengadaan Komputer', '14'),
-(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
-(987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
+INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `tanggal_penawaran`, `waktu_kerja`) VALUES
+(987654355, '56/A/31/2013', 4, 'Pemberitahuan Pengadaan Komputer', 'Pengadaan Komputer', '2013-06-11', '14'),
+(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '2013-06-13', '5'),
+(987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '2013-06-19', '7');
 
 -- --------------------------------------------------------
 
@@ -874,14 +875,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   `nomor` varchar(20) NOT NULL,
   `sifat` varchar(20) NOT NULL,
   `perihal` varchar(100) NOT NULL,
-  `no_RKS` varchar(20) NOT NULL,
   `tanggal_undangan` date NOT NULL,
   `waktu` varchar(20) NOT NULL,
   `tempat` varchar(100) NOT NULL,
-  `surat_keputusan` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
-  KEY `no_RKS` (`no_RKS`),
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -889,10 +887,10 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 -- Dumping data for table `surat_undangan_pembukaan_penawaran`
 --
 
-INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `no_RKS`, `tanggal_undangan`, `waktu`, `tempat`, `surat_keputusan`) VALUES
-(987654358, 4, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '42/A/31/2013', '2013-06-15', '14.00', 'Ruang rapat Gedung I lantai 5', ''),
-(987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '42/A/32/2013', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50', ''),
-(987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '42/A/33/2013', '2013-06-06', '14.00', 'Ruang rapat Gedung I lantai 500', '');
+INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `sifat`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
+(987654358, 4, '58/A/31/2013', 'Biasa', 'Pembukaan penawaran komputer', '2013-06-15', '14.00', 'Ruang rapat Gedung I lantai 5'),
+(987654378, 1, '58/A/32/2013', 'Biasa', 'Pembukaan penawaran alat tulis', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50'),
+(987654398, 2, '58/A/33/2013', 'Biasa', 'Pembukaan penawaran alat komunikasi', '2013-06-06', '14.00', 'Ruang rapat Gedung I lantai 500');
 
 -- --------------------------------------------------------
 
@@ -1195,7 +1193,6 @@ ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
 -- Constraints for table `surat_undangan_pembukaan_penawaran`
 --
 ALTER TABLE `surat_undangan_pembukaan_penawaran`
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_3` FOREIGN KEY (`no_RKS`) REFERENCES `rks` (`nomor`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_6` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
