@@ -10,11 +10,11 @@
 	$modelDok2 = Dokumen::model()->find('nama_dokumen="Dokumen Kualifikasi"');
 	$modelDok3 = Dokumen::model()->find('nama_dokumen="Berita Acara Evaluasi Kualifikasi"');
 	$modelDok4 = Dokumen::model()->find('nama_dokumen="Berita Acara Aanwijzing"');
-	$modelDok5 = Dokumen::model()->find('nama_dokumen="Berita Acara Pembukaan Dokumen Penawaran"');
+	$modelDok5 = Dokumen::model()->find('nama_dokumen="Berita Acara Pembukaan Penawaran"');
 	$modelDok52 = Dokumen::model()->find('nama_dokumen="Berita Acara Pembukaan Dokumen Penawaran 2"');
 	$modelDok6 = Dokumen::model()->find('nama_dokumen="Berita Acara Evaluasi Penawaran"');
 	$modelDok62 = Dokumen::model()->find('nama_dokumen="Berita Acara Evaluasi Penawaran 2"');
-	$modelDok7 = Dokumen::model()->find('nama_dokumen="Berita Acara Negosiasi Klarifikasi"');
+	$modelDok7 = Dokumen::model()->find('nama_dokumen="Berita Acara Negosiasi dan Klarifikasi"');
 	$modelDok8 = Dokumen::model()->find('nama_dokumen="Nota Dinas Usulan Pemenang"');
 	$modelDok9 = Dokumen::model()->find('nama_dokumen="Nota Dinas Penetapan Pemenang "');
 	$modelDok10 = Dokumen::model()->find('nama_dokumen="Nota Dinas Pemberitahuan Pemenang"');
@@ -63,7 +63,7 @@
 	echo '<h5>' . $modelDok2->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
-            'id'=>$modelDok2,
+            'id'=>$modelDok2->id_dokumen,
 			'user'=>$user,
 			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
@@ -91,7 +91,7 @@
 	echo '<h5>' . $modelDok3->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
-            'id'=>$modelDok3,
+            'id'=>$modelDok3->id_dokumen,
 			'user'=>$user,
 			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
@@ -147,7 +147,7 @@
 	echo '<h5>' . $modelDok5->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
-            'id'=>$modelDok5,
+            'id'=>$modelDok5->id_dokumen,
 			'user'=>$user,
 			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
@@ -236,7 +236,7 @@
 	echo '<h5>' . $modelDok62->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
-            'id'=>$modelDok62,
+            'id'=>$modelDok62->id_dokumen,
 			'user'=>$user,
 			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
@@ -265,7 +265,7 @@
 	echo '<h5>' . $modelDok7->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
-            'id'=>$modelDok7,
+            'id'=>$modelDok7->id_dokumen,
 			'user'=>$user,
 			'idPengadaan'=>$id,
             'onCompleted'=>'function(id,filename,jsoninfo){  }',
