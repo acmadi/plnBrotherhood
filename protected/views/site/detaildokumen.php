@@ -16,13 +16,29 @@
 
 <h2><?php echo Pengadaan::model()->findByPk($cdokumen->id_pengadaan)->nama_pengadaan; ?> : <?php echo $cdokumen->nama_dokumen?></h2>
 <?php echo CHtml::button('Buat Dokumen', array('class'=>'sidafbutton'));  ?>
-<?php echo CHtml::button('Unggah', array('class'=>'sidafbutton'));  ?>
+<?php echo CHtml::button('Unggah Dokumen', array('class'=>'sidafbutton'));  ?>
 
+<br />
+<br />
+<br />
+
+<p style="margin-left:1px; margin-bottom:-30px;">Unduh dokumen</p>
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'dokumengrid',
 		'dataProvider'=>$dataProvider,
+		"ajaxUpdate"=>"false",
+		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
+		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$id")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
+			array(
+				'name'=>'Tanggal unggah',
+				'value'=>'$data->tanggal_upload',
+			),
+			array(
+				'name'=>'Waktu unggah',
+				'value'=>'$data->waktu_upload',
+			),
 			'pengunggah',
 		),
 	));
