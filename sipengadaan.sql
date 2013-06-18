@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2013 at 03:09 AM
+-- Generation Time: Jun 18, 2013 at 05:58 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -142,7 +142,10 @@ INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_p
 
 CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   `id_dokumen` bigint(32) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
+  `nomor` varchar(20) NOT NULL,
+  `id_panitia` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`),
+  KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -820,13 +823,6 @@ INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`
 
 CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
   `id_dokumen` bigint(32) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `jabatan` varchar(30) NOT NULL,
-  `bertindak` varchar(30) NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `telepon_fax` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
-  `kantor_pusat_unit` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -834,10 +830,10 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
 -- Dumping data for table `surat_pernyataan_minat`
 --
 
-INSERT INTO `surat_pernyataan_minat` (`id_dokumen`, `nama`, `jabatan`, `bertindak`, `alamat`, `telepon_fax`, `email`, `kantor_pusat_unit`) VALUES
-(987654356, 'Bawang Merah', 'Direktur bagian pemasaran', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '5432123', 'apple@gmail.com', 'PLN'),
-(987654376, 'Bawang Putih', 'Direktur bagian pemasaran', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '5432123', 'pilot@gmail.com', 'PLN'),
-(987654396, 'Bawang Bombay', 'Direktur bagian pemasaran', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '5432123', 'samsung@gmail.com', 'PLN');
+INSERT INTO `surat_pernyataan_minat` (`id_dokumen`) VALUES
+(987654356),
+(987654376),
+(987654396);
 
 -- --------------------------------------------------------
 
@@ -1057,7 +1053,8 @@ ALTER TABLE `berita_acara_pembukaan_penawaran`
 -- Constraints for table `berita_acara_pengadaan_gagal`
 --
 ALTER TABLE `berita_acara_pengadaan_gagal`
-  ADD CONSTRAINT `berita_acara_pengadaan_gagal_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `berita_acara_pengadaan_gagal_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `berita_acara_pengadaan_gagal_ibfk_2` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `berita_acara_penjelasan`

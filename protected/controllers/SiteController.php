@@ -346,12 +346,20 @@ class SiteController extends Controller
 				$Dokumen4->id_pengadaan=$id;
 				
 				$X0= new SuratUndanganPrakualifikasi;
-				$X1= new PaktaIntegritasPanitia;
-				$X2= new SuratPemberitahuanPengadaan;
-				$X3= new SuratPernyataanMinat;
-				$X4= new FormIsianKualifikasi;
+				$X0->id_dokumen=$Dokumen0->id_dokumen;
 				
-				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
+				$X1= new PaktaIntegritasPanitia;
+				$X1->id_dokumen=$Dokumen1->id_dokumen;
+				
+				$X2= new SuratPemberitahuanPengadaan;
+				$X2->id_dokumen=$Dokumen2->id_dokumen;
+				
+				$X3= new SuratPernyataanMinat;
+				$X3->id_dokumen=$Dokumen3->id_dokumen;
+				
+				$X4= new FormIsianKualifikasi;
+				$X4->id_dokumen=$Dokumen4->id_dokumen;
+				
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
