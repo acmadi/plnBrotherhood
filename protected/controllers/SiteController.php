@@ -739,11 +739,7 @@ class SiteController extends Controller
 				if($valid){
 					$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-					if($Panitia->jenis_panitia=='Pejabat'){
-						$NDPP->kepada='Sdr '.$Panitia->nama_panitia;
-					} else {
-						$NDPP->kepada='Sdr '.(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama).' Ketua '.($Panitia->nama_panitia).' Pengadaan Barang / Jasa';
-					}
+					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama);
 					$valid=$valid&&$NDP->validate();
 					if($valid){
 						$NDPP->nota_dinas_permintaan=$NDP->nomor;
