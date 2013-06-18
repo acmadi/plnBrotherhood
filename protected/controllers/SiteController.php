@@ -573,25 +573,41 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionCheckpoint6()
+	public function actionPenawaranevaluasisatusampul()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint6');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('penawaranevaluasisatusampul');
+			}
 		}
 	}
 	
-	public function actionCheckpoint7()
+	public function actionPenawaranevaluasiduasampul()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint7');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('penawaranevaluasiduasampul');
+			}
 		}
 	}
 	
-	public function actionDetilpengadaanhistory()
-	{
-		$this->render('detilpengadaanhistory');
+	public function actionPenawaranevaluasiduatahap()
+	{	
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('penawaranevaluasiduatahap');
+			}
+		}
 	}
-	
 
 	/**
 	 * This is the action to handle external exceptions.
@@ -748,7 +764,12 @@ class SiteController extends Controller
 							if($Pengadaan->save(false)) {
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
-										$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));
+										if(isset($_POST['simpan'])){
+											$this->redirect(array('dashboard'));
+										}
+										if(isset($_POST['simpanbuat'])){
+											$this->redirect(array('detaildokumen', 'id'=>$NDPP->id_dokumen));
+										}
 									}
 								}
 							}

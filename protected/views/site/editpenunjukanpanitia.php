@@ -37,6 +37,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumenx,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumenx->tanggal,
+					'htmlOptions'=>array('size'=>32),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),

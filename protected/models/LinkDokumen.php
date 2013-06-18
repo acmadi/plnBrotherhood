@@ -103,4 +103,24 @@ class LinkDokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function inputData($id, $user)
+	{
+		date_default_timezone_set("Asia/Jakarta");
+		$date = date_create();
+		$sec = time() + (7*3600);
+		$hours = ($sec / 3600) % 24;
+		$minutes = ($sec / 60) % 60;
+		$seconds = $sec % 60;
+		$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
+		
+		$updatedModel = new LinkDokumen;
+		$updatedModel->id_link=$this->count()+1;
+		$updatedModel->id_dokumen=$id;
+		$updatedModel->waktu_upload=$waktu_upload;
+		$updatedModel->tanggal_upload=date("Y-m-d");
+		$updatedModel->pengunggah=$user;
+		$updatedModel->nomor_link=$this->count('id_dokumen ="' . $id . '"')+1;
+		$updatedModel->save();
+	}
 }

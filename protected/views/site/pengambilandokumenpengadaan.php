@@ -35,6 +35,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 					'model'=>$Dokumen0,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumen0->tanggal,
+					'htmlOptions'=>array('size'=>60),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -60,6 +61,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 					'model'=>$SUPDP,
 					'attribute'=>'tanggal_pengambilan',
 					'value'=>$SUPDP->tanggal_pengambilan,
+					'htmlOptions'=>array('size'=>60),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),

@@ -157,7 +157,8 @@ class Dokumen extends CActiveRecord
 	public function changeStatus($id)
 	{
 		$updatedModel = $this->find('id_dokumen ="' . $id . '"');
-		$updatedModel->status_upload='Selesai';		
+		$updatedModel->status_upload='Selesai';
+		$updatedModel->save();
 	}
 	
 	public function fileReceptor($fullFileName,$userdata)
