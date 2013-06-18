@@ -148,13 +148,33 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionGenerator()
-	{	
+	{
+		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('generator');
+				if(Pengadaan::model()->findByPk($id)->status=="Penunjukan Panitia"){
+					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="Kualifikasi"){
+					if(Pengadaan::model()->findByPk($id)->jenis_kualifikasi=="Pra Kualifikasi"){
+						$this->redirect(array('site/prakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->jenis_kualifikasi=="Pasca Kualifikasi"){
+						$this->redirect(array('site/pascakualifikasi','id'=>$id));
+					}
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="Pengambilan Dokumen Pengadaan"){
+					$this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="Aanwijzing"){
+					$this->redirect(array('site/aanwijzing','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi"){
+					$this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+				}
 			}
 		}
 	}
@@ -294,6 +314,7 @@ class SiteController extends Controller
 		}
 	}
 	
+	
 	public function actionPrakualifikasi()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
@@ -388,6 +409,196 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionEditPrakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
+		
+				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen1->id_dokumen);				
+				
+				
+				$Dokumenx= new Dokumen;
+				$X= new SuratPemberitahuanPengadaan;	
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratPemberitahuanPengadaan']))
+				{
+					$Dokumenx->attributes=$_POST['Dokumen'];
+					$X->attributes=$_POST['SuratPemberitahuanPengadaan'];
+					$Dokumen0->tanggal=$Dokumenx->tanggal;
+					$Dokumen1->tanggal=$Dokumenx->tanggal;
+					$X2->nomor=$X->nomor;
+					$X2->perihal=$X->perihal;
+					$X2->lingkup_kerja=$X->lingkup_kerja;
+					$X2->tanggal_penawaran=$X->tanggal_penawaran;
+					$X2->waktu_kerja=$X->waktu_kerja;
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$X2->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($X2->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('editprakualifikasi',array(
+					'Dokumenx'=>$Dokumenx,'X'=>$X,
+				));
+			}
+		}
+	}
+	
+	public function actionPascakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status= "Pengambilan Dokumen Pengadaan";
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Pakta Integritas Penyedia';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$Dokumen1= new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Surat Pemberitahuan Pengadaan';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
+				
+				$Dokumen2= new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Surat Pernyataan Minat';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$Dokumen3= new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+4;
+				$Dokumen3->nama_dokumen='Form Isian Kualifikasi';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
+				$X0= new PaktaIntegritasPenyedia;
+				$X0->id_dokumen=$Dokumen0->id_dokumen;
+				
+				$X1= new SuratPemberitahuanPengadaan;
+				$X1->id_dokumen=$Dokumen1->id_dokumen;
+				$X1->id_panitia=$Pengadaan->id_panitia;
+				
+				$X2= new SuratPernyataanMinat;
+				$X2->id_dokumen=$Dokumen2->id_dokumen;
+				
+				$X3= new FormIsianKualifikasi;
+				$X3->id_dokumen=$Dokumen3->id_dokumen;
+				
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratPemberitahuanPengadaan']))
+				{
+					$Dokumen1->attributes=$_POST['Dokumen'];
+					$X1->attributes=$_POST['SuratPemberitahuanPengadaan'];
+					$valid=$Dokumen1->validate();
+					$valid=$valid&&$X1->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('pascakualifikasi',array(
+					'Dokumen1'=>$Dokumen1,'X1'=>$X1,
+				));
+			}
+		}
+	}
+	
+	public function actionEditPascakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
+				$X0= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen0->id_dokumen);	
+				
+				$Dokumenx= new Dokumen;
+				$X= new SuratPemberitahuanPengadaan;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratPemberitahuanPengadaan']))
+				{
+					$Dokumenx->attributes=$_POST['Dokumen'];
+					$X->attributes=$_POST['SuratPemberitahuanPengadaan'];
+					$Dokumen0->tanggal=$Dokumenx->tanggal;
+					$X0->nomor=$X->nomor;
+					$X0->perihal=$X->perihal;
+					$X0->lingkup_kerja=$X->lingkup_kerja;
+					$X0->tanggal_penawaran=$X->tanggal_penawaran;
+					$X0->waktu_kerja=$X->waktu_kerja;
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$X0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($X0->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('editpascakualifikasi',array(
+					'Dokumenx'=>$Dokumenx,'X'=>$X,
+				));
+			}
+		}
+	}
+	
 	public function actionPengambilandokumenpengadaan()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
@@ -398,7 +609,6 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="Aanwijzing";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
