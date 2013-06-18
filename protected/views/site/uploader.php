@@ -13,6 +13,7 @@
 	$modelDok4 = Dokumen::model()->find('nama_dokumen="Surat Pemberitahuan Pengadaan"');
 	$modelDok5 = Dokumen::model()->find('nama_dokumen="Surat Pernyataan Minat"');
 	$modelDok6 = Dokumen::model()->find('nama_dokumen="Form Isian Kualifikasi"');
+	$modelDok21=Dokumen::model()->find('nama_dokumen="Surat Undangan Pengambilan Dokumen Pengadaan"');
 	$modelDok7 = Dokumen::model()->find('nama_dokumen="Surat Undangan Aanwijzing"');
 	$modelDok8 = Dokumen::model()->find('nama_dokumen="Berita Acara Aanwijzing"');
 	$modelDok9 = Dokumen::model()->find('nama_dokumen="Daftar Hadir Aanwijzing"');
@@ -110,7 +111,7 @@
 	
 	<div class="modelDokblock">
 	<?php
-	if($modelDok2 !=null){
+	if(($modelDok2 !=null) && ($object_pengadaan->jenis_kualifikasi=='Pra Kualifikasi')){
 	echo '<h5>' . $modelDok2->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
@@ -245,6 +246,36 @@
             // this arguments are used to send a notification
             // on a specific class when a new file is uploaded,
 			'uploadDir'=>$dirUpload . $modelDok6->id_dokumen . '/',
+			'receptorClassName'=>'application.models.Dokumen',
+			'methodName'=>'fileReceptor',
+			'userdata'=>$model->primaryKey,
+            // controls how many files must be uploaded
+            'maxUploads'=>-1, // defaults to -1 (unlimited)
+            'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
+            // controls how many files the can select (not upload, for uploads see also: maxUploads)
+            'multipleFileSelection'=>true, // true or false, defaults: true
+        ));
+		}
+    ?>
+	</div>
+	
+		<div class="uploaderblock">
+	<?php
+	if($modelDok21 !=null){
+	echo '<h5>' . $modelDok21->nama_dokumen . '<h5>' ;
+    $this->widget('ext.coco.CocoWidget'
+        ,array(
+            'id'=>$modelDok21->id_dokumen,
+			'user'=>$user,
+			'idPengadaan'=>$id,
+            'onCompleted'=>'function(id,filename,jsoninfo){  }',
+            'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
+            'onMessage'=>'function(m){ alert(m); }',
+            //'allowedExtensions'=>array('jpeg','jpg','gif','png'), // server-side mime-type validated
+            'sizeLimit'=>2000000, // limit in server-side and in client-side
+            // this arguments are used to send a notification
+            // on a specific class when a new file is uploaded,
+			'uploadDir'=>$dirUpload . $modelDok21->id_dokumen . '/',
 			'receptorClassName'=>'application.models.Dokumen',
 			'methodName'=>'fileReceptor',
 			'userdata'=>$model->primaryKey,
