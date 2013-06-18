@@ -29,19 +29,5 @@
 	<?php echo CHtml::encode($data->status_upload); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('waktu_upload')); ?>:</b>
-	<?php echo CHtml::encode($data->waktu_upload); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('pengunggah')); ?>:</b>
-	<?php echo CHtml::encode($data->pengunggah); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('link_penyimpanan')); ?>:</b>
-	<?php echo CHtml::encode($data->link_penyimpanan); ?>
-	<br />
-
-	*/ ?>
 
 </div>

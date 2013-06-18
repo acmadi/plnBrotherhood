@@ -154,7 +154,6 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
 	public function inputDatabase($id,$idPengadaan, $user,$uploadDir)
 	{
 		$criteria = new CDbCriteria();
