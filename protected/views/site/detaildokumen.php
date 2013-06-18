@@ -10,6 +10,7 @@
 			'order'=>'nomor_link DESC',
 		),
 	));
+	$clink = LinkDokumen::model()->findAll('id_dokumen = ' . $id);
 ?>
 
 <br />
@@ -19,17 +20,14 @@
 <?php echo CHtml::button('Unggah Dokumen', array('class'=>'sidafbutton'));  ?>
 
 <br />
-<br />
-<br />
 
-<p style="margin-left:1px; margin-bottom:-30px;">Unduh dokumen</p>
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'dokumengrid',
 		'dataProvider'=>$dataProvider,
 		"ajaxUpdate"=>"false",
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$id")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+		'selectionChanged'=>"function(id){window.location='" . $_SERVER["DOCUMENT_ROOT"] . Yii::app()->baseUrl . '/uploads/' . $cdokumen->id_pengadaan . '/' . "'+ $.fn.yiiGridView.getSelection(id) + '.docx';}",
 		'columns'=>array(
 			array(
 				'name'=>'Tanggal unggah',
