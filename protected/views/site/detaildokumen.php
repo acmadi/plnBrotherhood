@@ -15,7 +15,7 @@ $this->pageTitle=Yii::app()->name . ' | ' . Pengadaan::model()->findByPk($cdokum
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'dokumengrid',
-		'dataProvider'=>
+		'dataProvider'=>$model->search(),
 	));
 ?>
 
