@@ -13,9 +13,10 @@ $this->pageTitle=Yii::app()->name . ' | ' . Pengadaan::model()->findByPk($cdokum
 <?php echo CHtml::button('Unggah', array('class'=>'sidafbutton'));  ?>
 
 <?php
-	// $this->widget('zii.widgets.grid.CGridView', array(
-	// 	'id'=>'dokumengrid',
-	// ));
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'dokumengrid',
+		'dataProvider'=>$model->search(),
+	));
 ?>
 
 <?php echo CHtml::button('Kembali', array('submit'=>array('site/dokumengenerator', 'id'=>$cdokumen->id_pengadaan), 'class'=>'sidafbutton'));  ?>

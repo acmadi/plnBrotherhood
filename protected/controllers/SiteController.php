@@ -139,7 +139,14 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			$this->render('detaildokumen');
+			$model=new LinkDokumen('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['LinkDokumen'])){
+				$model->attributes=$_GET['LinkDokumen'];
+			}
+			$this->render('detaildokumen', array(
+				'model'=>$model,
+			));
 		}
 	}
 
