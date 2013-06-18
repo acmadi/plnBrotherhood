@@ -9,14 +9,11 @@
  * @property string $nomor
  * @property string $sifat
  * @property string $perihal
- * @property string $no_RKS
  * @property string $tanggal_undangan
  * @property string $waktu
  * @property string $tempat
- * @property string $surat_keputusan
  *
  * The followings are the available model relations:
- * @property Rks $noRKS
  * @property Dokumen $idDokumen
  * @property Pengadaan $idPanitia
  */
@@ -48,14 +45,14 @@ class SuratUndanganPembukaanPenawaran extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, id_panitia, nomor, sifat, perihal, no_RKS, tanggal_undangan, waktu, tempat, surat_keputusan', 'required'),
+			array('id_dokumen, id_panitia, nomor, sifat, perihal, tanggal_undangan, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('id_panitia', 'length', 'max'=>11),
-			array('nomor, sifat, no_RKS, waktu, surat_keputusan', 'length', 'max'=>20),
+			array('nomor, sifat, waktu', 'length', 'max'=>20),
 			array('perihal, tempat', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, id_panitia, nomor, sifat, perihal, no_RKS, tanggal_undangan, waktu, tempat, surat_keputusan', 'safe', 'on'=>'search'),
+			array('id_dokumen, id_panitia, nomor, sifat, perihal, tanggal_undangan, waktu, tempat', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +64,6 @@ class SuratUndanganPembukaanPenawaran extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'noRKS' => array(self::BELONGS_TO, 'Rks', 'no_RKS'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
@@ -84,11 +80,9 @@ class SuratUndanganPembukaanPenawaran extends CActiveRecord
 			'nomor' => 'Nomor',
 			'sifat' => 'Sifat',
 			'perihal' => 'Perihal',
-			'no_RKS' => 'No Rks',
 			'tanggal_undangan' => 'Tanggal Undangan',
 			'waktu' => 'Waktu',
 			'tempat' => 'Tempat',
-			'surat_keputusan' => 'Surat Keputusan',
 		);
 	}
 
@@ -108,11 +102,9 @@ class SuratUndanganPembukaanPenawaran extends CActiveRecord
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('sifat',$this->sifat,true);
 		$criteria->compare('perihal',$this->perihal,true);
-		$criteria->compare('no_RKS',$this->no_RKS,true);
 		$criteria->compare('tanggal_undangan',$this->tanggal_undangan,true);
 		$criteria->compare('waktu',$this->waktu,true);
 		$criteria->compare('tempat',$this->tempat,true);
-		$criteria->compare('surat_keputusan',$this->surat_keputusan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

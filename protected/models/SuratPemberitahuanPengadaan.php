@@ -9,6 +9,7 @@
  * @property string $id_panitia
  * @property string $perihal
  * @property string $lingkup_kerja
+ * @property string $tanggal_penawaran
  * @property string $waktu_kerja
  *
  * The followings are the available model relations:
@@ -43,14 +44,14 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, waktu_kerja', 'required'),
+			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'required'),
 			array('id_dokumen, lingkup_kerja', 'length', 'max'=>32),
 			array('nomor, waktu_kerja', 'length', 'max'=>20),
 			array('id_panitia', 'length', 'max'=>11),
 			array('perihal', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, waktu_kerja', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +79,7 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 			'id_panitia' => 'Id Panitia',
 			'perihal' => 'Perihal',
 			'lingkup_kerja' => 'Lingkup Kerja',
+			'tanggal_penawaran' => 'Tanggal Penawaran',
 			'waktu_kerja' => 'Waktu Kerja',
 		);
 	}
@@ -98,6 +100,7 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('perihal',$this->perihal,true);
 		$criteria->compare('lingkup_kerja',$this->lingkup_kerja,true);
+		$criteria->compare('tanggal_penawaran',$this->tanggal_penawaran,true);
 		$criteria->compare('waktu_kerja',$this->waktu_kerja,true);
 
 		return new CActiveDataProvider($this, array(

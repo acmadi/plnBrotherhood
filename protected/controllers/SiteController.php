@@ -304,7 +304,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="Pengambilan Dokumen Pengadaan";
+				$Pengadaan->status= "Pengambilan Dokumen Pengadaan";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -320,7 +320,6 @@ class SiteController extends Controller
 				$Dokumen1= new Dokumen;
 				$Dokumen1->id_dokumen=$somevariable+2;
 				$Dokumen1->nama_dokumen='Pakta Integritas Penyedia';
-				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
 				
@@ -334,25 +333,24 @@ class SiteController extends Controller
 				$Dokumen3= new Dokumen;
 				$Dokumen3->id_dokumen=$somevariable+4;
 				$Dokumen3->nama_dokumen='Surat Pernyataan Minat';
-				$Dokumen3->tempat='Jakarta';
 				$Dokumen3->status_upload='Belum Selesai';
 				$Dokumen3->id_pengadaan=$id;
 				
 				$Dokumen4= new Dokumen;
 				$Dokumen4->id_dokumen=$somevariable+4;
 				$Dokumen4->nama_dokumen='Form Isian Kualifikasi';
-				$Dokumen4->tempat='Jakarta';
 				$Dokumen4->status_upload='Belum Selesai';
 				$Dokumen4->id_pengadaan=$id;
 				
 				$X0= new SuratUndanganPrakualifikasi;
 				$X0->id_dokumen=$Dokumen0->id_dokumen;
 				
-				$X1= new PaktaIntegritasPanitia;
+				$X1= new PaktaIntegritasPenyedia;
 				$X1->id_dokumen=$Dokumen1->id_dokumen;
 				
 				$X2= new SuratPemberitahuanPengadaan;
 				$X2->id_dokumen=$Dokumen2->id_dokumen;
+				$X2->id_panitia=$Pengadaan->id_panitia;
 				
 				$X3= new SuratPernyataanMinat;
 				$X3->id_dokumen=$Dokumen3->id_dokumen;
@@ -364,17 +362,18 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
+				if(isset($_POST['SuratPemberitahuanPengadaan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$X2->attributes=$_POST['SuratPemberitahuanPengadaan'];
+					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPDP->validate();
+					$valid=$valid&&$X2->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
-								if($SUPDP->save(false)){
+								if($X2->save(false)){
 									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -383,7 +382,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('prakualifikasi',array(
-					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
+					'Dokumen0'=>$Dokumen0,'X2'=>$X2,
 				));
 			}
 		}
