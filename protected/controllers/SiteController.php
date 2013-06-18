@@ -573,25 +573,41 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionCheckpoint6()
+	public function actionPenawaranevaluasisatusampul()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint6');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('penawaranevaluasisatusampul');
+			}
 		}
 	}
 	
-	public function actionCheckpoint7()
+	public function actionPenawaranevaluasiduasampul()
 	{	
-		if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint7');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('penawaranevaluasiduasampul');
+			}
 		}
 	}
 	
-	public function actionDetilpengadaanhistory()
-	{
-		$this->render('detilpengadaanhistory');
+	public function actionPenawaranevaluasiduatahap()
+	{	
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('penawaranevaluasiduatahap');
+			}
+		}
 	}
-	
 
 	/**
 	 * This is the action to handle external exceptions.
