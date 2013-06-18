@@ -114,7 +114,8 @@
 		</br>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton','name'=>'simpan')); ?>
+			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan dan Buat Nota Dinas Perintah Pengadaan' : 'Save',array('class'=>'sidafbutton','name'=>'simpanbuat')); ?>
 		</div>
 
 		

@@ -10,7 +10,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	</div>
 
 	<div id="maincontent">
-		Checkpoint 7
+		Penawaran dan evaluasi dua tahap
 	</div>
 </div>
 

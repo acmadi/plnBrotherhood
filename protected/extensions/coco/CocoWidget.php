@@ -194,16 +194,7 @@ echo
 
 		Yii::log('ACTION CALLED - data is: '.CJSON::encode($vars),'info');
 		
-		//Nama dokumen dengan format :
-		//[singkatan]_[pengunggah]_[tanggal-YYMMDD]_[time-HH:MM::SS].ext
-		date_default_timezone_set("Asia/Jakarta");
-		$date = date_create();
-		$sec = time() + (7*3600);
-		$hours = ($sec / 3600) % 24;
-		$minutes = ($sec / 60) % 60;
-		$seconds = $sec % 60;
-		$waktuUpload = $hours . $minutes . $seconds;
-		$namadokumen = $this->singkatNamaDokumen($this->id) . '_' . $this->user  . '_' . date("ymd") . '_' . $waktuUpload;
+		$namadokumen=LinkDokumen::model()->count('id_dokumen="' . $this->id .'"') + 1;
 		
 		if($action == 'upload'){
 			$uploader = new ValumsFileUploader($this->allowedExtensions, $this->sizeLimit, $namadokumen);
@@ -222,7 +213,8 @@ echo
 					Yii::log('ACTION CALLED - RESULT=SUCCESS','info');
 					$fullpath = $result['fullpath'];
 					$this->onFileUploaded($fullpath,$this->userdata);
-					Dokumen::model()->inputDatabase($this->id,$this->idPengadaan,$this->user,$this->uploadDir);
+					Dokumen::model()->changeStatus($this->id);
+					LinkDokumen::model()->inputData($this->id, $this->user);
 				}
 				else{
 					Yii::log('ACTION CALLED - RESULT=ERROR1','info');

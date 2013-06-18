@@ -37,6 +37,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumenx,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumenx->tanggal,
+					'htmlOptions'=>array('size'=>32),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -47,9 +48,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			
 			<h4><b> Metode Penawaran Pengadaan</b></h4>
 			<div class="row">
-				<?php echo $form->dropDownList($Pengadaanx,'metode_penawaran',
+				<?php echo $form->radioButtonList($Pengadaanx,'metode_penawaran',
 					array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
-					array('empty'=>"------Pilih Metode Penawaran------")); ?>
+					array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 				<?php echo $form->error($Pengadaanx,'metode_penawaran'); ?>
 			</div>
 			</br>
