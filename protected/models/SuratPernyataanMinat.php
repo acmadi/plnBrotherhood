@@ -5,13 +5,6 @@
  *
  * The followings are the available columns in table 'surat_pernyataan_minat':
  * @property string $id_dokumen
- * @property string $nama
- * @property string $jabatan
- * @property string $bertindak
- * @property string $alamat
- * @property string $telepon_fax
- * @property string $email
- * @property string $kantor_pusat_unit
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -44,15 +37,11 @@ class SuratPernyataanMinat extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nama, jabatan, bertindak, alamat, telepon_fax, email, kantor_pusat_unit', 'required'),
+			array('id_dokumen', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nama', 'length', 'max'=>50),
-			array('jabatan, bertindak', 'length', 'max'=>30),
-			array('alamat', 'length', 'max'=>100),
-			array('telepon_fax, email, kantor_pusat_unit', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nama, jabatan, bertindak, alamat, telepon_fax, email, kantor_pusat_unit', 'safe', 'on'=>'search'),
+			array('id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,13 +64,6 @@ class SuratPernyataanMinat extends CActiveRecord
 	{
 		return array(
 			'id_dokumen' => 'Id Dokumen',
-			'nama' => 'Nama',
-			'jabatan' => 'Jabatan',
-			'bertindak' => 'Bertindak',
-			'alamat' => 'Alamat',
-			'telepon_fax' => 'Telepon Fax',
-			'email' => 'Email',
-			'kantor_pusat_unit' => 'Kantor Pusat Unit',
 		);
 	}
 
@@ -97,13 +79,6 @@ class SuratPernyataanMinat extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('jabatan',$this->jabatan,true);
-		$criteria->compare('bertindak',$this->bertindak,true);
-		$criteria->compare('alamat',$this->alamat,true);
-		$criteria->compare('telepon_fax',$this->telepon_fax,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('kantor_pusat_unit',$this->kantor_pusat_unit,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
