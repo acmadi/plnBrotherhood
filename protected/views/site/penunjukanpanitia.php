@@ -47,9 +47,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			
 			<h4><b> Metode Penawaran Pengadaan</b></h4>
 			<div class="row">
-				<?php echo $form->dropDownList($Pengadaan,'metode_penawaran',
+				<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
 					array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
-					array('empty'=>"------Pilih Metode Penawaran------")); ?>
+					array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 				<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
 			</div>
 			</br>
