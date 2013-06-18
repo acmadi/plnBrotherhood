@@ -240,6 +240,60 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionEditPenunjukanpanitia()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Panitia 1"');
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				
+				$RKS= Rks::model()->findByPk($Dokumen1->id_dokumen);
+				
+				$Pengadaanx= new Pengadaan;
+				$Dokumenx= new Dokumen;		
+				$RKSx= new Rks;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Rks']))
+				{
+					$Pengadaanx->attributes=$_POST['Pengadaan'];
+					$Dokumenx->attributes=$_POST['Dokumen'];
+					$RKSx->attributes=$_POST['Rks'];
+					
+					$Pengadaan->metode_penawaran=$Pengadaanx->metode_penawaran;
+					$Pengadaan->jenis_kualifikasi=$Pengadaanx->jenis_kualifikasi;
+					
+					$Dokumen0->tanggal=$Dokumenx->tanggal;
+					$Dokumen1->tanggal=$Dokumenx->tanggal;
+					
+					$RKS->nomor=$RKSx->nomor;
+							
+					if($Pengadaan->save(false))
+					{	
+						if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+							if($RKS->save(false)){
+								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+							}
+						}
+					}
+				}
+
+				$this->render('editpenunjukanpanitia',array(
+					'Rksx'=>$RKSx,'Pengadaanx'=>$Pengadaanx,'Dokumenx'=>$Dokumenx,
+				));
+			}
+		}
+	}
+	
 	public function actionPengambilandokumenpengadaan()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
