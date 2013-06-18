@@ -77,7 +77,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'tempat_pengambilan'); ?>
-			<?php echo $form->textField($SUPDPx,'tempat_pengambilan',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPDPx,'tempat_pengambilan',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPDPx,'tempat_pengambilan'); ?>
 		</div>
 
