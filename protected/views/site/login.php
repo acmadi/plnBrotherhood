@@ -24,14 +24,14 @@ $this->pageTitle=Yii::app()->name . ' | Masuk';
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nama pengguna'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>50)); ?>
-		<?php echo $form->error($model,'username'); ?>
+		<?php echo $form->textField($model,'nama_pengguna',array('size'=>50)); ?>
+		<?php echo $form->error($model,'nama_pengguna'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'kata sandi'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>50)); ?>
-		<?php echo $form->error($model,'password'); ?>
+		<?php echo $form->passwordField($model,'kata_sandi',array('size'=>50)); ?>
+		<?php echo $form->error($model,'kata_sandi'); ?>
 		<!-- <p class="hint">
 			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
 		</p> -->

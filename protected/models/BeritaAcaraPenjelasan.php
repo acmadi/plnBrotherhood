@@ -40,7 +40,7 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, id_panitia', 'required'),
+			array('id_dokumen, nomor, id_panitia', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
 			array('id_panitia', 'length', 'max'=>11),

@@ -43,7 +43,7 @@ class LinkDokumen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_link, id_dokumen', 'required'),
+			array('id_link, id_dokumen', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('nomor_link', 'numerical', 'integerOnly'=>true),
 			array('id_link, id_dokumen, pengunggah', 'length', 'max'=>32),
 			array('waktu_upload, tanggal_upload', 'safe'),

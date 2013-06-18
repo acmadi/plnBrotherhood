@@ -40,7 +40,7 @@ class DaftarHadir extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, jam, tempat_hadir, acara', 'required'),
+			array('id_dokumen, jam, tempat_hadir, acara', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('jam', 'length', 'max'=>10),
 			array('tempat_hadir', 'length', 'max'=>50),

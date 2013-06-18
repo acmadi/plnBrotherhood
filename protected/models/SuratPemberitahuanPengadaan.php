@@ -44,7 +44,7 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'required'),
+			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen, lingkup_kerja', 'length', 'max'=>32),
 			array('nomor, perihal', 'length', 'max'=>50),
 			array('id_panitia', 'length', 'max'=>11),

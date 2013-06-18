@@ -43,7 +43,7 @@ class Panitia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia, jenis_panitia', 'required'),
+			array('id_panitia, nama_panitia, tahun, jumlah_panitia, status_panitia, jenis_panitia', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('tahun', 'numerical', 'integerOnly'=>true),
 			array('id_panitia', 'length', 'max'=>11),
 			array('nama_panitia', 'length', 'max'=>50),

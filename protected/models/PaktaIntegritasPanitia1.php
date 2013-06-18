@@ -39,7 +39,7 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, id_panitia', 'required'),
+			array('id_dokumen, id_panitia', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().

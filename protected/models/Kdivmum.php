@@ -39,7 +39,7 @@ class Kdivmum extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, NIP, email', 'required'),
+			array('username, NIP, email', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('username', 'length', 'max'=>20),
 			array('NIP, email', 'length', 'max'=>32),
 			// The following rule is used by search().

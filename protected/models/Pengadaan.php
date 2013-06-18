@@ -68,7 +68,7 @@ class Pengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('divisi_peminta, nama_pengadaan, tanggal_masuk, status, id_panitia, metode_pengadaan', 'required'),
+			array('divisi_peminta, nama_pengadaan, tanggal_masuk, status, id_panitia, metode_pengadaan', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('divisi_peminta, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>32),
 			array('nama_pengadaan', 'length', 'max'=>100),
 			array('biaya', 'length', 'max'=>20),

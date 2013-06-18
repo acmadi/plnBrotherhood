@@ -43,7 +43,7 @@ class Anggota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, NIP, email, id_panitia, jabatan', 'required'),
+			array('username, NIP, email, id_panitia, jabatan', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('username', 'length', 'max'=>20),
 			array('NIP, email, jabatan', 'length', 'max'=>32),
 			array('id_panitia', 'length', 'max'=>11),

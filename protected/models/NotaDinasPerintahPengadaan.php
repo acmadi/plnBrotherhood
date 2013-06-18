@@ -48,7 +48,7 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required'),
+			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('targetSPK_kontrak', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen, TOR_RKS', 'length', 'max'=>32),
 			array('nota_dinas_permintaan, nomor', 'length', 'max'=>50),
