@@ -20,9 +20,10 @@ class DocxController extends Controller
 	{
 				
 		$id = Yii::app()->getRequest()->getQuery('id');
-		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);
-		$Dok=Dokumen::model()->findByPk($NDPP->id_dokumen);
+		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);		
+		$Dok=Dokumen::model()->findByPk($id);
 		$Peng=Pengadaan::model()->findByPk($Dok->id_pengadaan);
+		
 		$nomor = $NDPP->nomor;
 		$dari = $NDPP->dari;
 		$kepada = $NDPP->kepada;

@@ -15,10 +15,9 @@
 <br />
 
 <h2><?php echo Pengadaan::model()->findByPk($cdokumen->id_pengadaan)->nama_pengadaan; ?> : <?php echo $cdokumen->nama_dokumen?></h2>
-<?php echo CHtml::button('Buat Dokumen', array('class'=>'sidafbutton'));  ?>
+<?php echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton'));  ?>
 <?php echo CHtml::button('Unggah Dokumen', array('class'=>'sidafbutton'));  ?>
 
-=======
 <br />
 <br />
 <br />
