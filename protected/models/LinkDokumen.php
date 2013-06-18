@@ -113,7 +113,7 @@ class LinkDokumen extends CActiveRecord
 		$minutes = ($sec / 60) % 60;
 		$seconds = $sec % 60;
 		$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
-		
+
 		$updatedModel = new LinkDokumen;
 		$updatedModel->id_link=$this->count()+1;
 		$updatedModel->id_dokumen=$id;

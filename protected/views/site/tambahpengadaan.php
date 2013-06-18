@@ -14,7 +14,7 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'nama_pengadaan'); ?>
-			<?php echo $form->textField($Pengadaan,'nama_pengadaan',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($Pengadaan,'nama_pengadaan',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
 			<?php echo $form->error($Pengadaan,'nama_pengadaan'); ?>
 		</div>
 	
@@ -30,6 +30,7 @@
 					'model'=>$Pengadaan,
 					'attribute'=>'tanggal_masuk',
 					'value'=>$Pengadaan->tanggal_masuk,
+					'htmlOptions'=>array('size'=>60),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -82,7 +83,7 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'perihal'); ?>
-			<?php echo $form->textField($NDPP,'perihal',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->textArea($NDPP,'perihal',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
 			<?php echo $form->error($NDPP,'perihal'); ?>
 		</div>
 		
