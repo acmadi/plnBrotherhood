@@ -378,6 +378,7 @@ class SiteController extends Controller
 				$X2= new SuratPemberitahuanPengadaan;
 				$X2->id_dokumen=$Dokumen2->id_dokumen;
 				$X2->id_panitia=$Pengadaan->id_panitia;
+				$X2->perihal= 'Pemberitahuan '.$Pengadaan->nama_pengadaan;
 				
 				$X3= new SuratPernyataanMinat;
 				$X3->id_dokumen=$Dokumen3->id_dokumen;
@@ -429,11 +430,12 @@ class SiteController extends Controller
 				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
 				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
 		
-				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen1->id_dokumen);				
-				
+				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen1->id_dokumen);			
 				
 				$Dokumenx= new Dokumen;
-				$X= new SuratPemberitahuanPengadaan;	
+				$Dokumenx->id_pengadaan=$id;
+				$X= new SuratPemberitahuanPengadaan;
+				$X->perihal= 'Pemberitahuan '.$Pengadaan->nama_pengadaan;			
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -517,6 +519,7 @@ class SiteController extends Controller
 				$X1= new SuratPemberitahuanPengadaan;
 				$X1->id_dokumen=$Dokumen1->id_dokumen;
 				$X1->id_panitia=$Pengadaan->id_panitia;
+				$X1->perihal= 'Pemberitahuan '.$Pengadaan->nama_pengadaan;
 				
 				$X2= new SuratPernyataanMinat;
 				$X2->id_dokumen=$Dokumen2->id_dokumen;
@@ -570,6 +573,7 @@ class SiteController extends Controller
 				
 				$Dokumenx= new Dokumen;
 				$X= new SuratPemberitahuanPengadaan;
+				$X->perihal= 'Pemberitahuan '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -629,6 +633,7 @@ class SiteController extends Controller
 				
 				$SUPDP= new SuratUndanganPengambilanDokumenPengadaan;
 				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -675,6 +680,7 @@ class SiteController extends Controller
 				
 				$Dokumenx= new Dokumen;
 				$SUPDPx= new SuratUndanganPengambilanDokumenPengadaan;
+				$SUPDPx->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
@@ -746,6 +752,7 @@ class SiteController extends Controller
 				$SUP= new SuratUndanganPenjelasan;
 				$SUP->id_dokumen=$Dokumen0->id_dokumen;
 				$SUP->id_panitia=$Pengadaan->id_panitia;
+				$SUP->perihal= 'Undangan Aanwijzing '.$Pengadaan->nama_pengadaan;
 				
 				$BAP= new BeritaAcaraPenjelasan;
 				$BAP->id_dokumen=$Dokumen0->id_dokumen;
@@ -812,6 +819,7 @@ class SiteController extends Controller
 				$Dokumenx= new Dokumen;
 				
 				$SUPx= new SuratUndanganPenjelasan;
+				$SUPx->perihal= 'Undangan Aanwijzing '.$Pengadaan->nama_pengadaan;
 				
 				$BAPx= new BeritaAcaraPenjelasan;
 				
