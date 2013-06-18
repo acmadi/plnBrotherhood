@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2013 at 02:59 AM
+-- Generation Time: Jun 18, 2013 at 03:09 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -398,6 +398,7 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   `tanggal_upload` date DEFAULT NULL,
   `pengunggah` varchar(32) DEFAULT NULL,
   `nomor_link` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_link`),
   KEY `id_dokumen` (`id_dokumen`),
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
