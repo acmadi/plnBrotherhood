@@ -36,6 +36,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumenx,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumenx->tanggal,
+					'htmlOptions'=>array('size'=>60),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -61,6 +62,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$SUPx,
 					'attribute'=>'tanggal_undangan',
 					'value'=>$SUPx->tanggal_undangan,
+					'htmlOptions'=>array('size'=>60),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
