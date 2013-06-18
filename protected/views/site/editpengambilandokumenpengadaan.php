@@ -25,7 +25,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		<h4><b> Surat Undangan Pengambilan Dokumen Pengadaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'nomor'); ?>
-			<?php echo $form->textField($SUPDPx,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPDPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPDPx,'nomor'); ?>
 		</div>
 		
@@ -35,7 +35,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 					'model'=>$Dokumenx,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumenx->tanggal,
-					'htmlOptions'=>array('size'=>60),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -45,13 +45,13 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'sifat'); ?>
-			<?php echo $form->textField($SUPDPx,'sifat',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPDPx,'sifat',array('size'=>56)); ?>
 			<?php echo $form->error($SUPDPx,'sifat'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'perihal'); ?>
-			<?php echo $form->textField($SUPDPx,'perihal',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPDPx,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPDPx,'perihal'); ?>
 		</div>
 
@@ -61,7 +61,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 					'model'=>$SUPDPx,
 					'attribute'=>'tanggal_pengambilan',
 					'value'=>$SUPDPx->tanggal_pengambilan,
-					'htmlOptions'=>array('size'=>60),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -71,13 +71,13 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'waktu pengambilan'); ?>
-			<?php echo $form->textField($SUPDPx,'waktu_pengambilan',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPDPx,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPDPx,'waktu_pengambilan'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'tempat_pengambilan'); ?>
-			<?php echo $form->textField($SUPDPx,'tempat_pengambilan',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->textField($SUPDPx,'tempat_pengambilan',array('size'=>56,'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPDPx,'tempat_pengambilan'); ?>
 		</div>
 

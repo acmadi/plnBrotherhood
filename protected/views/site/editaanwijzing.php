@@ -26,7 +26,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Undangan Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPx,'nomor'); ?>
-			<?php echo $form->textField($SUPx,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPx,'nomor'); ?>
 		</div>
 		
@@ -36,7 +36,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumenx,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumenx->tanggal,
-					'htmlOptions'=>array('size'=>60),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -46,13 +46,13 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPx,'sifat'); ?>
-			<?php echo $form->textField($SUPx,'sifat',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPx,'sifat',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPx,'sifat'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPx,'perihal'); ?>
-			<?php echo $form->textField($SUPx,'perihal',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPx,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPx,'perihal'); ?>
 		</div>
 
@@ -62,7 +62,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$SUPx,
 					'attribute'=>'tanggal_undangan',
 					'value'=>$SUPx->tanggal_undangan,
-					'htmlOptions'=>array('size'=>60),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -72,20 +72,20 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPx,'waktu Aanwijzing'); ?>
-			<?php echo $form->textField($SUPx,'waktu',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPx,'waktu',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPx,'waktu'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPx,'tempat Aanwijzing'); ?>
-			<?php echo $form->textField($SUPx,'tempat',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPx,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPx,'tempat'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAPx,'nomor'); ?>
-			<?php echo $form->textField($BAPx,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($BAPx,'nomor'); ?>
 		</div>
 
