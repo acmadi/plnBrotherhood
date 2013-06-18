@@ -16,9 +16,21 @@
 		<?php if($cpengadaan->status == 'Penunjukan Panitia') { ?>
 				<li class='belum'><?php echo 'Kualifikasi' ?></li>
 			<?php } else if($cpengadaan->status == 'Kualifikasi') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Kualifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php 
+					if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi'){
+						echo CHtml::link('Kualifikasi',array("site/prakualifikasi","id"=>"$cpengadaan->id_pengadaan")); 
+					} else {
+						echo CHtml::link('Kualifikasi',array("site/pascakualifikasi","id"=>"$cpengadaan->id_pengadaan"));
+					}
+				?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Kualifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php
+					if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi'){
+						echo CHtml::link('Kualifikasi',array("site/editprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); 
+					} else {
+						echo CHtml::link('Kualifikasi',array("site/editpascakualifikasi","id"=>"$cpengadaan->id_pengadaan"));
+					} 
+				?></li>
 		<?php } ?>
 		
 		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')) { ?>
@@ -87,13 +99,6 @@
 		
 		<li class='unggah'><?php echo CHtml::link('Unggah Dokumen',array("site/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<li class='lihat'><?php echo CHtml::link('Lihat Dokumen',array("site/dokumengenerator","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-		
-	<?php } else if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
-		<li><?php echo CHtml::link('TOR dan RAB',array('site/tordanrab',"id"=>"$cpengadaan->id_pengadaan")); ?></li>   
-		<li><?php echo CHtml::link('Nota Dinas Perintah Pengadaan',array('site/notadinasperintahpengadaan',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
-		<li><?php echo CHtml::link('Pakta Integritas Panitia',array('site/paktaintegritaspanitia',"id"=>"$cpengadaan->id_pengadaan")); ?></li>
-	
-	<?php } else{?>
 	
 	<?php } ?>
 	

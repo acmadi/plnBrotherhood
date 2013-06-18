@@ -294,6 +294,93 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionPrakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="Pengambilan Dokumen Pengadaan";
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Undangan Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$Dokumen1= new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Pakta Integritas Penyedia';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
+				
+				$Dokumen2= new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Surat Pemberitahuan Pengadaan';
+				$Dokumen2->tempat='Jakarta';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$Dokumen3= new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+4;
+				$Dokumen3->nama_dokumen='Surat Pernyataan Minat';
+				$Dokumen3->tempat='Jakarta';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
+				$Dokumen4= new Dokumen;
+				$Dokumen4->id_dokumen=$somevariable+4;
+				$Dokumen4->nama_dokumen='Form Isian Kualifikasi';
+				$Dokumen4->tempat='Jakarta';
+				$Dokumen4->status_upload='Belum Selesai';
+				$Dokumen4->id_pengadaan=$id;
+				
+				$X0= new SuratUndanganPrakualifikasi;
+				$X1= new PaktaIntegritasPanitia;
+				$X2= new SuratPemberitahuanPengadaan;
+				$X3= new SuratPernyataanMinat;
+				$X4= new FormIsianKualifikasi;
+				
+				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPDP->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPDP->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('prakualifikasi',array(
+					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
+				));
+			}
+		}
+	}
+	
 	public function actionPengambilandokumenpengadaan()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
@@ -543,22 +630,6 @@ class SiteController extends Controller
 
 			}
 		}
-	}
-	
-	public function actionCheckpoint4()
-	{	
-		if (Yii::app()->user->isGuest) {
-			$this->redirect(array('site/login'));
-		}
-		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('checkpoint4');
-			}
-		}
-		
-		/*if (Yii::app()->user->name == 'panitia'|| Yii::app()->user->name == 'jo') {
-			$this->render('checkpoint4');
-		}*/
 	}
 	
 	public function actionCheckpoint5()
