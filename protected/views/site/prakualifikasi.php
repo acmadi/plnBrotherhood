@@ -59,7 +59,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
 		<div class="row">
 			<?php echo $form->labelEx($X2,'tanggal penawaran'); ?>
-			<?php echo $form->textField($X2,'tanggal_penawaran',array('size'=>60,'maxlength'=>100)); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$X2,
+					'attribute'=>'tanggal_penawaran',
+					'value'=>$X2->tanggal_penawaran,
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
 			<?php echo $form->error($X2,'tanggal_penawaran'); ?>
 		</div>
 

@@ -337,7 +337,7 @@ class SiteController extends Controller
 				$Dokumen3->id_pengadaan=$id;
 				
 				$Dokumen4= new Dokumen;
-				$Dokumen4->id_dokumen=$somevariable+4;
+				$Dokumen4->id_dokumen=$somevariable+5;
 				$Dokumen4->nama_dokumen='Form Isian Kualifikasi';
 				$Dokumen4->status_upload='Belum Selesai';
 				$Dokumen4->id_pengadaan=$id;
@@ -366,14 +366,14 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$X2->attributes=$_POST['SuratPemberitahuanPengadaan'];
-					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$X2->validate();
 					if($valid){
+						$Dokumen2->tanggal=$Dokumen0->tanggal;
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)){
-								if($X2->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
+								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
 									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
