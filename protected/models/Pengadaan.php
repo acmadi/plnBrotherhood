@@ -251,7 +251,7 @@ class Pengadaan extends CActiveRecord
 		if($this->status == 'Penunjukan Panitia'){
 			return 100/8;
 		}
-		else if($this->status == 'Prakualifikasi'){
+		else if($this->status == 'Kualifikasi'){
 			return 200/8;
 		}
 		else if($this->status == 'Pengambilan Dokumen Pengadaan'){
