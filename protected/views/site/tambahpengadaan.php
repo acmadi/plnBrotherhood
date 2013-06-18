@@ -108,14 +108,7 @@
 		
 		<div class="row buttons">
 			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
-		</div>
-		
-		<div class="row buttons">
 			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
-		</div>
-		
-		<div>
-		<?php echo CHtml::button('Unduh Dokumen', array('submit'=>array('docx/download'), 'class'=>'sidafbutton')); ?>
 		</div>
 		
 		</br>

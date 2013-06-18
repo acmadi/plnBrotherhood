@@ -154,4 +154,37 @@ class Dokumen extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	public function inputDatabase($id,$idPengadaan, $user,$uploadDir)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addCondition("nama_dokumen=:nama_dokumen AND id_pengadaan=:id_pengadaan");
+		$newModel = $this->find('nama_dokumen=:nama_dokumen AND id_pengadaan=:id_pengadaan',
+		array(
+			':nama_dokumen'=>$id,
+			':id_pengadaan'=>$idPengadaan,
+			));
+			
+		date_default_timezone_set("Asia/Jakarta");
+		$date = date_create();
+		$sec = time() + (7*3600);
+		$hours = ($sec / 3600) % 24;
+		$minutes = ($sec / 60) % 60;
+		$seconds = $sec % 60;
+		$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
+		
+		$newModel->tanggal=date("Y-m-d");
+		$newModel->tempat=	'Jakarta';
+		$newModel->status_upload='Selesai';
+		$newModel->waktu_upload=$waktu_upload;
+		$newModel->pengunggah=$user;
+		$newModel->link_penyimpanan=$uploadDir;
+		$newModel->save();
+	}
+	
+	public function fileReceptor($fullFileName,$userdata)
+	{
+
+	}	
+	
+	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }

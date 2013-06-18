@@ -171,6 +171,129 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionPenunjukanpanitia()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='Kualifikasi';
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='Pakta Integritas Panitia 1';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				
+				$Dokumen1= new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen1->nama_dokumen='RKS';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				
+				$PAP1= new PaktaIntegritasPanitia1;
+				$PAP1->id_dokumen=$Dokumen0->id_dokumen;
+				$PAP1->id_panitia=$Pengadaan->id_panitia;
+				
+				$RKS= new Rks;
+				$RKS->id_dokumen=$Dokumen1->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Rks']))
+				{
+					$Pengadaan->attributes=$_POST['Pengadaan'];
+					$Dokumen1->attributes=$_POST['Dokumen'];
+					$RKS->attributes=$_POST['Rks'];
+					
+					$Dokumen0->tanggal=$Dokumen1->tanggal;
+	
+					$valid=$Pengadaan->validate();
+					$valid=$valid&&$Dokumen0->validate()&&$Dokumen1->validate();
+					$valid=$valid&&$PAP1->validate()&&$RKS->validate();
+							
+					if($Pengadaan->save(false))
+					{	
+						if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+							if($PAP1->save(false)&&$RKS->save(false)){
+								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+							}
+						}
+					}
+				}
+
+				$this->render('penunjukanpanitia',array(
+					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen1'=>$Dokumen1,
+				));
+			}
+		}
+	}
+	
+	public function actionEditPenunjukanpanitia()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Panitia 1"');
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				
+				$RKS= Rks::model()->findByPk($Dokumen1->id_dokumen);
+				
+				$Pengadaanx= new Pengadaan;
+				$Dokumenx= new Dokumen;		
+				$RKSx= new Rks;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Rks']))
+				{
+					$Pengadaanx->attributes=$_POST['Pengadaan'];
+					$Dokumenx->attributes=$_POST['Dokumen'];
+					$RKSx->attributes=$_POST['Rks'];
+					
+					$Pengadaan->metode_penawaran=$Pengadaanx->metode_penawaran;
+					$Pengadaan->jenis_kualifikasi=$Pengadaanx->jenis_kualifikasi;
+					
+					$Dokumen0->tanggal=$Dokumenx->tanggal;
+					$Dokumen1->tanggal=$Dokumenx->tanggal;
+					
+					$RKS->nomor=$RKSx->nomor;
+							
+					if($Pengadaan->save(false))
+					{	
+						if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+							if($RKS->save(false)){
+								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+							}
+						}
+					}
+				}
+
+				$this->render('editpenunjukanpanitia',array(
+					'Rksx'=>$RKSx,'Pengadaanx'=>$Pengadaanx,'Dokumenx'=>$Dokumenx,
+				));
+			}
+		}
+	}
+	
 	public function actionPengambilandokumenpengadaan()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
@@ -205,7 +328,7 @@ class SiteController extends Controller
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
 					$valid=$Dokumen0->validate();
-					$valid=$SUPDP->validate();
+					$valid=$valid&&$SUPDP->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
@@ -418,60 +541,6 @@ class SiteController extends Controller
 					'SUPx'=>$SUPx,'Dokumenx'=>$Dokumenx,'BAPx'=>$BAPx,
 				));
 
-			}
-		}
-	}
-	
-	public function actionCheckpoint3()
-	{	
-		if (Yii::app()->user->isGuest) {
-			$this->redirect(array('site/login'));
-		}
-		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				
-				$Pengadaan= new Pengadaan;
-				$criteria=new CDbcriteria;
-				$criteria->select='max(id_pengadaan) AS maxId';
-				$row = $Pengadaan->model()->find($criteria);
-				$somevariable = $row['maxId'];
-				$Pengadaan->id_pengadaan=$somevariable;
-				
-				$Dokumen0= new Dokumen;
-				$criteria=new CDbcriteria;
-				$criteria->select='max(id_dokumen) AS maxId';
-				$row = $Dokumen0->model()->find($criteria);
-				$somevariable = $row['maxId'];
-				$Dokumen0->id_dokumen=$somevariable+1;
-				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-				$Dokumen0->nama_dokumen='RKS';
-				$Dokumen0->tempat='Jakarta';
-				$Dokumen0->status_upload='Belum Selesai';
-				
-				$RKS= new Rks;
-				$RKS->id_dokumen=$Dokumen0->id_dokumen;
-				
-				//Uncomment the following line if AJAX validation is needed
-				//$this->performAjaxValidation($model);
-
-				if(isset($_POST['Rks']))
-				{
-					$RKS->attributes=$_POST['Rks'];
-					$Pengadaan->attributes=$_POST['Pengadaan'];
-					$Pengadaan = Pengadaan::model()->findByPk($Dokumen0->id_pengadaan);
-					$Pengadaan->status ='Pengambilan Dokumen Pengadaan';
-							
-					if($RKS->save(false))
-					{	
-						$Dokumen0->save(false);
-						$Pengadaan->save(false);
-						$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
-					}
-				}
-
-				$this->render('checkpoint3',array(
-					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,
-				));
 			}
 		}
 	}
