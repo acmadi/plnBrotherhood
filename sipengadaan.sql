@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 18, 2013 at 06:17 AM
+-- Generation Time: Jun 18, 2013 at 06:22 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -800,6 +800,7 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
   `id_panitia` bigint(11) NOT NULL,
   `perihal` varchar(50) NOT NULL,
   `lingkup_kerja` varchar(32) NOT NULL,
+  `tanggal_penawaran` date NOT NULL,
   `waktu_kerja` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
@@ -810,10 +811,10 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 -- Dumping data for table `surat_pemberitahuan_pengadaan`
 --
 
-INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `waktu_kerja`) VALUES
-(987654355, '56/A/31/2013', 4, 'Pemberitahuan Pengadaan Komputer', 'Pengadaan Komputer', '14'),
-(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '5'),
-(987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '7');
+INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `tanggal_penawaran`, `waktu_kerja`) VALUES
+(987654355, '56/A/31/2013', 4, 'Pemberitahuan Pengadaan Komputer', 'Pengadaan Komputer', '2013-06-11', '14'),
+(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '2013-06-13', '5'),
+(987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '2013-06-19', '7');
 
 -- --------------------------------------------------------
 
