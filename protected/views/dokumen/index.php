@@ -2,9 +2,9 @@
 /* @var $this DokumenController */
 /* @var $dataProvider CActiveDataProvider */
 
-// $this->breadcrumbs=array(
-	// 'Dokumens',
-// );
+$this->breadcrumbs=array(
+	'Dokumens',
+);
 
 $this->menu=array(
 	array('label'=>'Create Dokumen', 'url'=>array('create')),

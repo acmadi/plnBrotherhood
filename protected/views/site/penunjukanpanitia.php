@@ -32,8 +32,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 			
 			<div class="row">
-				<?php echo $form->labelEx($Dokumen1,'tanggal surat'); ?>
-				<?php echo $form->textField($Dokumen1,'tanggal',array('size'=>32)); ?>
+				<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
+				<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen1,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen1->tanggal,
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+				));?>
 				<?php echo $form->error($Dokumen1,'tanggal'); ?>
 			</div>
 			</br>
