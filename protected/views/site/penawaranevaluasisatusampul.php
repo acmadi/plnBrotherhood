@@ -2,6 +2,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
+$id = Yii::app()->getRequest()->getQuery('id');
 ?>
 
 <div id="pagecontent">
@@ -104,6 +105,27 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 			<?php echo $form->labelEx($BAPP,'status metode'); ?>
 			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($BAPP,'status_metode'); ?>
+		</div>
+		
+		<h4><b> Berita Acara Evaluasi Penawaran Sampul Satu</b></h4>
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'nomor'); ?>
+			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($BAEP,'nomor'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'tanggal Evaluasi Penawaran'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$BAEP,
+					'attribute'=>'tanggal_berita_acara',
+					'value'=>$BAEP->tanggal_berita_acara,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
+			<?php echo $form->error($BAEP,'tanggal_berita_acara'); ?>
 		</div>
 
 		<div class="row buttons">
