@@ -1,7 +1,8 @@
 <?php
 /* @var $this SiteController */
-
+	
 	$id = Yii::app()->getRequest()->getQuery('id');
+	$model=Dokumen::model()->findByPk($id);
 	$user = Yii::app()->user->name;
 	$dirUpload = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . Dokumen::model()->find('id_dokumen="' . $id . '"')->id_pengadaan . '/' . $id . '/' ;
 	$cdokumen = Dokumen::model()->find('id_dokumen = "' . $id . '"');

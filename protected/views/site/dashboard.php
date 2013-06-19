@@ -79,7 +79,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			'dataProvider'=>$model->searchBuatPanitia(),
 			// 'filter'=>$model,
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
 
 			"ajaxUpdate"=>"false",
 			
@@ -121,20 +121,6 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 				  ))->run()',
 				),
-				
-				/*
-				'biaya',
-				'nama',				
-				'metode_pengadaan',
-				'metode_penawaran',
-				'deskripsi',
-				*/
-				// array(
-					// 'class'=>'CButtonColumn',
-					// 'template'=>'{view}',			
-					// 'viewButtonLabel'=>'Lihat',
-					// 'viewButtonUrl'=>'Yii::app()->createUrl("site/generator", array("id"=>"$data->id_pengadaan"))',			
-				// ),
 			),
 		)); 
 	}

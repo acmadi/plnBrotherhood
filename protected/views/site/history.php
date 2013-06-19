@@ -9,7 +9,7 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 	'dataProvider'=>$model->searchBuatHistory(),
 	// 'filter'=>$model,
 	'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-	'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detilpengadaanhistory", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+	'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
 		array(
 			'name'=>'No',
@@ -23,24 +23,5 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 			'name'=>"PIC",
 			'value'=>'$data->idPanitia->nama_panitia',
 			),
-					
-		// 'nama_penyedia',
-		// 'tanggal_masuk',
-		// 'tanggal_selesai',
-		// 'status',
-		/*
-		'biaya',
-		'nama',
-		'kode_panitia',
-		'metode_pengadaan',
-		'metode_penawaran',
-		'deskripsi',
-		*/
-		// array(
-			// 'class'=>'CButtonColumn',
-			// 'template'=>'{view}',
-			// 'viewButtonLabel'=>'Lihat',
-			// 'viewButtonUrl'=>'Yii::app()->createUrl("site/detilpengadaanhistory", array("id"=>"$data->id_pengadaan"))',
-		// ),
 	),
 )); ?>

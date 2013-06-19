@@ -121,9 +121,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('detailpengadaan');
-			}
+			$this->render('detailpengadaan');
 		}
 	}
 
