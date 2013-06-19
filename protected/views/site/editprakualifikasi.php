@@ -20,66 +20,64 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'id'=>'surat-undangan-prakualifikasi-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($X); ?>
 		
 		<h4><b> Surat Undangan Prakualifikasi</b></h4>		
 		<div class="row">
-			<?php echo $form->labelEx($Dokumenx,'tanggal surat'); ?>
+			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$Dokumenx,
+					'model'=>$Dokumen0,
 					'attribute'=>'tanggal',
-					'value'=>$Dokumenx->tanggal,
+					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($Dokumenx,'tanggal'); ?>
+			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 		
 		</br>		
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($X,'nomor'); ?>
-			<?php echo $form->textField($X,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($X,'nomor'); ?>
+			<?php echo $form->labelEx($X2,'nomor'); ?>
+			<?php echo $form->textField($X2,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($X2,'nomor'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($X,'perihal'); ?>
-			<?php echo $form->textArea($X,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($X,'perihal'); ?>
+			<?php echo $form->labelEx($X2,'perihal'); ?>
+			<?php echo $form->textArea($X2,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($X2,'perihal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($X,'lingkup kerja'); ?>
-			<?php echo $form->textField($X,'lingkup_kerja',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($X,'lingkup_kerja'); ?>
+			<?php echo $form->labelEx($X2,'lingkup kerja'); ?>
+			<?php echo $form->textField($X2,'lingkup_kerja',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($X2,'lingkup_kerja'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($X,'tanggal penawaran'); ?>
+			<?php echo $form->labelEx($X2,'tanggal penawaran'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$X,
+					'model'=>$X2,
 					'attribute'=>'tanggal_penawaran',
-					'value'=>$X->tanggal_penawaran,
+					'value'=>$X2->tanggal_penawaran,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($X,'tanggal_penawaran'); ?>
+			<?php echo $form->error($X2,'tanggal_penawaran'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($X,'waktu kerja (dalam satuan hari kerja)'); ?>
-			<?php echo $form->textField($X,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($X,'waktu_kerja'); ?>
+			<?php echo $form->labelEx($X2,'waktu kerja (dalam satuan hari kerja)'); ?>
+			<?php echo $form->textField($X2,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($X2,'waktu_kerja'); ?>
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumenx->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>

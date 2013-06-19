@@ -49,6 +49,7 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 			array('nomor, perihal', 'length', 'max'=>50),
 			array('id_panitia', 'length', 'max'=>11),
 			array('waktu_kerja', 'length', 'max'=>20),
+			array('nomor','Check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'safe', 'on'=>'search'),
@@ -106,5 +107,11 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function Check($attribute,$params){
+		if(strpos($this->attributes['nomor'], 'Nomor') !== false) {
+			$this->addError($attribute, 'Periksa kembali nomor surat');
+		}
 	}
 }

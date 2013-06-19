@@ -22,12 +22,10 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			'enableAjaxValidation'=>false,
 		)); ?>
 
-
-			<?php echo $form->errorSummary($Rks); ?>
 			<h4><b> RKS </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($Rks,'nomor'); ?>
-				<?php echo $form->textField($Rks,'nomor',array('size'=>40,'maxlength'=>20)); ?>
+				<?php echo $form->textField($Rks,'nomor',array('size'=>50,'maxlength'=>50)); ?>
 				<?php echo $form->error($Rks,'nomor'); ?>
 			</div>
 			
@@ -37,7 +35,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumen1,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumen1->tanggal,
-					'htmlOptions'=>array('size'=>40),
+					'htmlOptions'=>array('size'=>50),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -65,7 +63,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</br>
 
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Rks->isNewRecord ? 'Simpan' : 'Save', array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton('Simpan', array('class'=>'sidafbutton')); ?>
 			</div>
 
 			<?php $this->endWidget(); ?>

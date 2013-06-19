@@ -10,7 +10,6 @@
  * The followings are the available model relations:
  * @property BeritaAcaraEvaluasiPenawaran[] $beritaAcaraEvaluasiPenawarans
  * @property Dokumen $idDokumen
- * @property SuratUndanganPembukaanPenawaran[] $suratUndanganPembukaanPenawarans
  */
 class Rks extends CActiveRecord
 {
@@ -42,7 +41,7 @@ class Rks extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>20),
+			array('nomor', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
@@ -59,7 +58,6 @@ class Rks extends CActiveRecord
 		return array(
 			'beritaAcaraEvaluasiPenawarans' => array(self::HAS_MANY, 'BeritaAcaraEvaluasiPenawaran', 'no_RKS'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'suratUndanganPembukaanPenawarans' => array(self::HAS_MANY, 'SuratUndanganPembukaanPenawaran', 'no_RKS'),
 		);
 	}
 

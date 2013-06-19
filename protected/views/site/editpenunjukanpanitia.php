@@ -22,50 +22,48 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			'enableAjaxValidation'=>false,
 		)); ?>
 
-
-			<?php echo $form->errorSummary($Rksx); ?>
 			<h4><b> RKS </b></h4>
 			<div class="row">
-				<?php echo $form->labelEx($Rksx,'nomor'); ?>
-				<?php echo $form->textField($Rksx,'nomor',array('size'=>45,'maxlength'=>20)); ?>
-				<?php echo $form->error($Rksx,'nomor'); ?>
+				<?php echo $form->labelEx($Rks,'nomor'); ?>
+				<?php echo $form->textField($Rks,'nomor',array('size'=>50,'maxlength'=>50)); ?>
+				<?php echo $form->error($Rks,'nomor'); ?>
 			</div>
 			
 			<div class="row">
-				<?php echo $form->labelEx($Dokumenx,'tanggal'); ?>
+				<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
 				<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$Dokumenx,
+					'model'=>$Dokumen1,
 					'attribute'=>'tanggal',
-					'value'=>$Dokumenx->tanggal,
-					'htmlOptions'=>array('size'=>45),
+					'value'=>$Dokumen1->tanggal,
+					'htmlOptions'=>array('size'=>50),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 				));?>
-				<?php echo $form->error($Dokumenx,'tanggal'); ?>
+				<?php echo $form->error($Dokumen1,'tanggal'); ?>
 			</div>
 			</br>
 			
 			<h4><b> Metode Penawaran Pengadaan</b></h4>
 			<div class="row">
-				<?php echo $form->radioButtonList($Pengadaanx,'metode_penawaran',
+				<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
 					array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
 					array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-				<?php echo $form->error($Pengadaanx,'metode_penawaran'); ?>
+				<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
 			</div>
 			</br>
 			
 			<h4><b> Jenis Kualifikasi Pengadaan</b></h4>
 			<div class="row">
-				<?php echo $form->dropDownList($Pengadaanx,'jenis_kualifikasi',
+				<?php echo $form->dropDownList($Pengadaan,'jenis_kualifikasi',
 					array('Pra Kualifikasi'=>'Pra Kualifikasi','Pasca Kualifikasi'=>'Pasca Kualifikasi'),
 					array('empty'=>"------Pilih Jenis Kualifikasi------")); ?>
-				<?php echo $form->error($Pengadaanx,'jenis_kualifikasi'); ?>
+				<?php echo $form->error($Pengadaan,'jenis_kualifikasi'); ?>
 			</div>
 			</br>
 
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Rksx->isNewRecord ? 'Simpan' : 'Save', array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton('Perbarui', array('class'=>'sidafbutton')); ?>
 			</div>
 
 			<?php $this->endWidget(); ?>

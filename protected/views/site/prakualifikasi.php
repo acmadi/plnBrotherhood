@@ -3,6 +3,7 @@
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$A=Dokumen::model()->find(('id_pengadaan='.$id).' and nama_dokumen= "RKS"'); 
 ?>
 
 <div id="pagecontent">
@@ -20,8 +21,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'id'=>'surat-undangan-prakualifikasi-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($X2); ?>
 		
 		<h4><b> Surat Undangan Prakualifikasi</b></h4>		
 		<div class="row">
@@ -42,7 +41,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($X2,'nomor'); ?>
-			<?php echo $form->textField($X2,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($X2,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($X2,'nomor'); ?>
 		</div>
 		
@@ -73,13 +72,13 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($X2,'waktu kerja'); ?>
+			<?php echo $form->labelEx($X2,'waktu kerja (Ket : dalam satuan hari)'); ?>
 			<?php echo $form->textField($X2,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($X2,'waktu_kerja'); ?>
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>

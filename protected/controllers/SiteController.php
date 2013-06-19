@@ -241,17 +241,18 @@ class SiteController extends Controller
 					$Dokumen1->attributes=$_POST['Dokumen'];
 					$RKS->attributes=$_POST['Rks'];
 					
+					$valid=$PAP1->validate()&&$RKS->validate();
+					$valid=$valid&&$Dokumen1->validate();
 					$Dokumen0->tanggal=$Dokumen1->tanggal;
-	
-					$valid=$Pengadaan->validate();
-					$valid=$valid&&$Dokumen0->validate()&&$Dokumen1->validate();
-					$valid=$valid&&$PAP1->validate()&&$RKS->validate();
-							
-					if($Pengadaan->save(false))
-					{	
-						if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-							if($PAP1->save(false)&&$RKS->save(false)){
-								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+					$valid=$valid&&$Dokumen0->validate();
+					$valid=$valid&&$Pengadaan->validate();
+					if($valid){		
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($PAP1->save(false)&&$RKS->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
 							}
 						}
 					}
@@ -275,44 +276,40 @@ class SiteController extends Controller
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
-				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Panitia 1"');
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Awal Panitia"');
 				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				
 				$RKS= Rks::model()->findByPk($Dokumen1->id_dokumen);
 				
-				$Pengadaanx= new Pengadaan;
-				$Dokumenx= new Dokumen;		
-				$RKSx= new Rks;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
 				if(isset($_POST['Rks']))
 				{
-					$Pengadaanx->attributes=$_POST['Pengadaan'];
-					$Dokumenx->attributes=$_POST['Dokumen'];
-					$RKSx->attributes=$_POST['Rks'];
+					$Pengadaan->attributes=$_POST['Pengadaan'];
+					$Dokumen1->attributes=$_POST['Dokumen'];
+					$RKS->attributes=$_POST['Rks'];
 					
-					$Pengadaan->metode_penawaran=$Pengadaanx->metode_penawaran;
-					$Pengadaan->jenis_kualifikasi=$Pengadaanx->jenis_kualifikasi;
-					
-					$Dokumen0->tanggal=$Dokumenx->tanggal;
-					$Dokumen1->tanggal=$Dokumenx->tanggal;
-					
-					$RKS->nomor=$RKSx->nomor;
-							
-					if($Pengadaan->save(false))
-					{	
-						if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-							if($RKS->save(false)){
-								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+					$valid=$RKS->validate();
+					$valid=$valid&&$Dokumen1->validate();
+					$Dokumen0->tanggal=$Dokumen1->tanggal;
+					$valid=$valid&&$Dokumen0->validate();
+					$valid=$valid&&$Pengadaan->validate();
+					if($valid){		
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($RKS->save(false)){
+									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+								}
 							}
 						}
 					}
 				}
 
 				$this->render('editpenunjukanpanitia',array(
-					'Rksx'=>$RKSx,'Pengadaanx'=>$Pengadaanx,'Dokumenx'=>$Dokumenx,
+					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen1'=>$Dokumen1,
 				));
 			}
 		}
@@ -346,6 +343,7 @@ class SiteController extends Controller
 				$Dokumen1->id_dokumen=$somevariable+2;
 				$Dokumen1->nama_dokumen='Pakta Integritas Penyedia';
 				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->tempat='-';
 				$Dokumen1->id_pengadaan=$id;
 				
 				$Dokumen2= new Dokumen;
@@ -358,15 +356,19 @@ class SiteController extends Controller
 				$Dokumen3= new Dokumen;
 				$Dokumen3->id_dokumen=$somevariable+4;
 				$Dokumen3->nama_dokumen='Surat Pernyataan Minat';
+				$Dokumen1->tempat='-';
 				$Dokumen3->status_upload='Belum Selesai';
 				$Dokumen3->id_pengadaan=$id;
 				
 				$Dokumen4= new Dokumen;
 				$Dokumen4->id_dokumen=$somevariable+5;
 				$Dokumen4->nama_dokumen='Form Isian Kualifikasi';
+				$Dokumen1->tempat='-';
 				$Dokumen4->status_upload='Belum Selesai';
 				$Dokumen4->id_pengadaan=$id;
 				
+				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
+				$A1=Rks::model()->findByPk($A->id_dokumen);
 				$X0= new SuratUndanganPrakualifikasi;
 				$X0->id_dokumen=$Dokumen0->id_dokumen;
 				
@@ -377,6 +379,7 @@ class SiteController extends Controller
 				$X2->id_dokumen=$Dokumen2->id_dokumen;
 				$X2->id_panitia=$Pengadaan->id_panitia;
 				$X2->perihal= 'Pemberitahuan '.$Pengadaan->nama_pengadaan;
+				$X2->nomor='Nomor RKS : '.$A1->nomor;
 				
 				$X3= new SuratPernyataanMinat;
 				$X3->id_dokumen=$Dokumen3->id_dokumen;
@@ -395,7 +398,10 @@ class SiteController extends Controller
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$X2->validate();
 					if($valid){
+						$Dokumen1->tanggal=$Dokumen0->tanggal;
 						$Dokumen2->tanggal=$Dokumen0->tanggal;
+						$Dokumen3->tanggal=$Dokumen0->tanggal;
+						$Dokumen4->tanggal=$Dokumen0->tanggal;
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
@@ -428,34 +434,23 @@ class SiteController extends Controller
 				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
 				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
 		
-				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen1->id_dokumen);			
-				
-				$Dokumenx= new Dokumen;
-				$Dokumenx->id_pengadaan=$id;
-				$X= new SuratPemberitahuanPengadaan;
-				$X->perihal= 'Pemberitahuan '.$Pengadaan->nama_pengadaan;			
+				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen1->id_dokumen);					
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
 				if(isset($_POST['SuratPemberitahuanPengadaan']))
 				{
-					$Dokumenx->attributes=$_POST['Dokumen'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
 					$X->attributes=$_POST['SuratPemberitahuanPengadaan'];
-					$Dokumen0->tanggal=$Dokumenx->tanggal;
-					$Dokumen1->tanggal=$Dokumenx->tanggal;
-					$X2->nomor=$X->nomor;
-					$X2->perihal=$X->perihal;
-					$X2->lingkup_kerja=$X->lingkup_kerja;
-					$X2->tanggal_penawaran=$X->tanggal_penawaran;
-					$X2->waktu_kerja=$X->waktu_kerja;
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$X2->validate();
 					if($valid){
+						$Dokumen1->tanggal=$Dokumen0->tanggal;
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-								if($X2->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
+								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
 									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -464,7 +459,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('editprakualifikasi',array(
-					'Dokumenx'=>$Dokumenx,'X'=>$X,
+					'Dokumen0'=>$Dokumen0,'X2'=>$X2,
 				));
 			}
 		}
@@ -1129,6 +1124,11 @@ class SiteController extends Controller
 			$row = $Pengadaan->model()->find($criteria);
 			$somevariable = $row['maxId'];
 			$Pengadaan->id_pengadaan=$somevariable+1;
+			$Pengadaan->nama_penyedia='-';
+			$Pengadaan->tanggal_selesai='-';
+			$Pengadaan->biaya='-';
+			$Pengadaan->metode_penawaran='-';
+			$Pengadaan->jenis_kualifikasi='-';
 			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
@@ -1138,6 +1138,7 @@ class SiteController extends Controller
 			$Dokumen0->id_dokumen=$somevariable+1;
 			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
+			$Dokumen0->tempat='Jakarta';
 			$Dokumen0->status_upload='Belum Selesai';
 			
 			$Dokumen1= new Dokumen;
@@ -1151,12 +1152,14 @@ class SiteController extends Controller
 			$Dokumen2->id_dokumen=$somevariable+3;
 			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen2->nama_dokumen='TOR';
+			$Dokumen2->tempat='Jakarta';
 			$Dokumen2->status_upload='Belum Selesai';
 			
 			$Dokumen3= new Dokumen;
 			$Dokumen3->id_dokumen=$somevariable+4;
 			$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen3->nama_dokumen='RAB';
+			$Dokumen3->tempat='Jakarta';
 			$Dokumen3->status_upload='Belum Selesai';
 			
 			$NDP= new NotaDinasPermintaan;
@@ -1181,13 +1184,16 @@ class SiteController extends Controller
 				$Pengadaan->attributes=$_POST['Pengadaan'];
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
 				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
-				$valid=$Pengadaan->validate();
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				
 				// $TOR->attributes=$_POST['Tor'];
 				// $RAB->attributes=$_POST['Rab'];
 				
 				if($valid){
 					$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
+					$Dokumen2->tanggal=$Dokumen0->tanggal;
+					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama);
 					$valid=$valid&&$NDP->validate();
@@ -1213,7 +1219,7 @@ class SiteController extends Controller
 			}
 
 			$this->render('tambahpengadaan',array(
-				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,
+				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0
 			));
 		}
 	}

@@ -10,8 +10,6 @@
 		'enableAjaxValidation'=>false,
 		)); ?>
 
-		<?php echo $form->errorSummary($Pengadaan); ?>
-
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'nama_pengadaan'); ?>
 			<?php echo $form->textArea($Pengadaan,'nama_pengadaan',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
@@ -60,6 +58,20 @@
 			<?php echo $form->error($NDP,'nomor'); ?>
 		</div>
 		
+		<div class="row">
+			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen0,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen0->tanggal,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
+			<?php echo $form->error($Dokumen0,'tanggal'); ?>
+		</div>
+		
 		<div class="row buttons">
 			<?php echo CHtml::button('Unggah Nota Dinas Permintaan', array('class'=>'sidafbutton'));?>
 		</div>
@@ -88,7 +100,7 @@
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'Target SPK/Kontrak'); ?>
+			<?php echo $form->labelEx($NDPP,'Target SPK/Kontrak (Ket: Dalam Satuan Hari)'); ?>
 			<?php echo $form->textField($NDPP,'targetSPK_kontrak',array('size'=>60)); ?>
 			<?php echo $form->error($NDPP,'targetSPK_kontrak'); ?>
 		</div>
