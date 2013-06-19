@@ -105,6 +105,13 @@ class ValumsFileUploader {
         }
 
     }
+	
+	public function getExtDocument()
+	{
+	    $pathinfo = pathinfo($this->file->getName());
+        $ext = $pathinfo['extension'];
+		return $ext;
+	}
 }
 
 /*
