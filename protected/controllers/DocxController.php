@@ -51,11 +51,9 @@ class DocxController extends Controller
 				$sekretaris = "- Sekretaris Panitia";
 			}
 			
-			$this->doccy->newFile('notadinas.docx');
-			if ($dari == "KDIVMUM"){$tembusan = "MS-DAF";}
+			$this->doccy->newFile('nd-perintahpengadaan.docx');
+			if ($dari == "KDIVMUM"){$tembusan = "MSDAF";}
 			else {$tembusan = "KDIVMUM";}
-			
-			
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -82,7 +80,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Penetapan Pemenang"){
 			
-			$this->doccy->newFile('ndpenetapanpemenang.docx');
+			$this->doccy->newFile('nd-penetapanpemenang.docx');
 			
 			$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
@@ -115,8 +113,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Usulan Pemenang"){
 			
-			
-			$this->doccy->newFile('ndusulanpemenang.docx');
+			$this->doccy->newFile('nd-usulanpemenang.docx');
 			
 			$NDUP=NotaDinasUsulanPemenang::model()->findByPk($id);	
 			$nomor = $NDUP->nomor;
@@ -186,7 +183,7 @@ class DocxController extends Controller
 			$tempatambil = $SUPDP->tempat_pengambilan;
 			$nama = $Peng->nama_pengadaan;
 			
-			$this->doccy->newFile('UPDP.docx');
+			$this->doccy->newFile('s-updp.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -265,7 +262,7 @@ class DocxController extends Controller
 			$nama = $Peng->nama_pengadaan;
 			$perihal = $SUP->perihal;
 					
-			$this->doccy->newFile('SUP.docx');
+			$this->doccy->newFile('s-up.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
@@ -289,7 +286,7 @@ class DocxController extends Controller
 			$tanggal = $Dok->tanggal;
 			$tempat = $Dok->tempat;
 			
-			$this->doccy->newFile('SPM.docx');
+			$this->doccy->newFile('s-pm.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -309,7 +306,7 @@ class DocxController extends Controller
 			$perihal = $SPP->perihal;
 			$nama = $Peng->nama_pengadaan;
 				
-			$this->doccy->newFile('spp.docx');
+			$this->doccy->newFile('s-pp.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -325,7 +322,7 @@ class DocxController extends Controller
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Panitia 1"){
 			
-			$this->doccy->newFile('PIPanitia.docx');
+			$this->doccy->newFile('pi-panitia.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -351,7 +348,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Penyedia"){
 			
-			$this->doccy->newFile('PIPeserta.docx');
+			$this->doccy->newFile('pi-peserta.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -413,7 +410,7 @@ class DocxController extends Controller
 			$kepada = $Peng->nama_penyedia;
 			$nama = $Peng->nama_pengadaan;
 			
-			$this->doccy->newFile('bapenjelasan.docx');
+			$this->doccy->newFile('ba-penjelasan.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -432,7 +429,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){
 			
-			$this->doccy->newFile('baevaluasi1.docx');
+			$this->doccy->newFile('ba-evaluasi1.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -458,7 +455,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Negosiasi Klarifikasi"){
 			
-			$this->doccy->newFile('bakn.docx');
+			$this->doccy->newFile('ba-kn.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -484,7 +481,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
 			
-			$this->doccy->newFile('bapembukaan1.docx');
+			$this->doccy->newFile('ba-pembukaan1.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
