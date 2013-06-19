@@ -189,7 +189,7 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
 			
 			
-			$this->doccy->newFile('notadinas.docx');
+			$this->doccy->newFile('--.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","Test1"); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","Test2"); // basic field mapping to footer
 			
@@ -504,7 +504,7 @@ class DocxController extends Controller
 //	=====================================Dokumen=====================================
 		else if ($Dok->nama_dokumen == "Dokumen Penawaran"){
 			
-			$this->doccy->newFile('notadinas.docx');
+			$this->doccy->newFile('--.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","Test1"); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","Test2"); // basic field mapping to footer
 			
