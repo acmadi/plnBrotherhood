@@ -4,6 +4,12 @@
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
+$dataProvider = new CActiveDataProvider(Dokumen::model(), array(
+	'criteria'=>array(
+		'condition'=>'id_pengadaan = "' . $id . '"',
+		'order'=>'id_dokumen ASC',
+	),
+));
 ?>
 
 <br />
@@ -65,11 +71,38 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 		?>
 	</div>
 
-	<br />
+	<br /><br /><br />
 	
 </div>
 
-<?php echo CHtml::button('Lihat dokumen', array('submit'=>array('site/dokumengenerator', 'id'=>$id), 'class'=>'sidafbutton'));  ?>
+<div>
+<h4> 
+	List Dokumen
+</h4>
+<?php
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'list-dokumen-grid',
+		'dataProvider'=>$dataProvider,
+		"ajaxUpdate"=>"false",
+		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
+		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+		'columns'=>array(
+			array(
+				'name'=>'No',
+				'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+			),
+			'nama_dokumen',
+			array(
+				'class'=>'CDataColumn',
+				'header'=>'Status Unggah',
+				'value'=>'$data->status_upload',
+			),
+		),
+	));
+?>
+
+</div>
+
 <?php 
 	if($cpengadaan->status=="Selesai"){
 		echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'class'=>'sidafbutton')); 
