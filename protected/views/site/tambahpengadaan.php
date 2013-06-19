@@ -45,7 +45,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'metode_pengadaan'); ?>
 			<?php echo $form->dropDownList($Pengadaan,'metode_pengadaan',
-			  array('Penunjukan Langsung'=>'Penunjukan Lansung','Pemilihan Langsung'=>'Pemilihan Lansung','Pelelangan'=>'Pelelangan'),
+			  array('Penunjukan Langsung'=>'Penunjukan Langsung','Pemilihan Langsung'=>'Pemilihan Langsung','Pelelangan'=>'Pelelangan'),
 					array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
@@ -88,7 +88,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'dari'); ?>
 			<?php echo $form->dropDownList($NDPP,'dari',
-			  array('KDIVMUM'=>'KDIVMUM','MS-DAF'=>'MS-DAF'),
+			  array('KDIVMUM'=>'KDIVMUM','MSDAF'=>'MSDAF'),
 					array('empty'=>"-----Pilih Pengirim Nota Dinas------")); ?>
 			<?php echo $form->error($NDPP,'dari'); ?>
 		</div>

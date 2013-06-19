@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2013 at 01:53 PM
+-- Generation Time: Jun 19, 2013 at 10:22 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -74,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 --
 
 INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panitia`, `nomor`, `tanggal_berita_acara`) VALUES
-(987654362, '42/A/32/2013', 1, '43/A/32/2013', '2013-06-27'),
 (987654382, '42/A/33/2013', 2, '43/A/33/2013', '2013-06-06');
 
 -- --------------------------------------------------------
@@ -102,7 +101,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
 --
 
 INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `id_panitia`, `surat_keputusan`) VALUES
-(987654363, '43/A/32/2013', 'administrasi', 'teknis', 450000000, 450000000, 1, ''),
 (987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, 2, '');
 
 -- --------------------------------------------------------
@@ -129,7 +127,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
 --
 
 INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`, `status_metode`, `id_panitia`) VALUES
-(987654364, '44/A/32/2013', 2, 2, 0, 'apa ini', 1),
 (987654384, '44/A/33/2013', 1, 1, 0, 'apa ini', 2);
 
 -- --------------------------------------------------------
@@ -166,9 +163,7 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 --
 
 INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`) VALUES
-(987654365, '45/A/32/2013', 1),
-(987654385, '45/A/33/2013', 2),
-(987654446, '024/HEP/DIVMUM/2013', 1);
+(987654385, '45/A/33/2013', 2);
 
 -- --------------------------------------------------------
 
@@ -189,22 +184,11 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 --
 
 INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
-(987654346, '14.00', 'Ruang rapat gedung I lantai 5', 'Aanwijzing'),
-(987654366, '14.00', 'Ruang rapat divisi umum', 'Aanwijzing'),
 (987654386, '14.00', 'Ruang rapat besar', 'Aanwijzing'),
-(987654407, '14.00', 'Ruang rapat gedung I lantai 5', 'Pembukaan Penawaran'),
-(987654408, '14.00', 'Ruang rapat gedung I lantai 50', 'Negoisasi dan Klarifikasi'),
-(987654409, '14.00', 'Ruang rapat gedung I lantai 500', 'Evaluasi Penawaran'),
-(987654410, '14.00', 'Ruang rapat gedung I lantai 5000', 'Prakualifikasi'),
-(987654411, '14.00', 'Ruang rapat gedung I lantai 5', 'Pembukaan Penawaran'),
-(987654412, '14.00', 'Ruang rapat gedung I lantai 50', 'Negoisasi dan Klarifikasi'),
-(987654413, '14.00', 'Ruang rapat gedung I lantai 500', 'Evaluasi Penawaran'),
-(987654414, '14.00', 'Ruang rapat gedung I lantai 5000', 'Prakualifikasi'),
 (987654415, '14.00', 'Ruang rapat gedung I lantai 5', 'Pembukaan Penawaran'),
 (987654416, '14.00', 'Ruang rapat gedung I lantai 50', 'Negoisasi dan Klarifikasi'),
 (987654417, '14.00', 'Ruang rapat gedung I lantai 500', 'Evaluasi Penawaran'),
-(987654418, '14.00', 'Ruang rapat gedung I lantai 5000', 'Prakualifikasi'),
-(987654447, '10:00', 'Kantor Pusat PLN', 'Aanwijzing');
+(987654418, '14.00', 'Ruang rapat gedung I lantai 5000', 'Prakualifikasi');
 
 -- --------------------------------------------------------
 
@@ -242,46 +226,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
 --
 
 INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(987654341, 'RKS', '2013-06-05', 'Jakarta', 987654322, 'Selesai'),
-(987654342, 'Berita Acara Evaluasi Penawaran', '2013-06-06', 'Jakarta', 987654322, 'Selesai'),
-(987654343, 'Berita Acara Negoisasi Klarifikasi', '2013-06-07', 'Jakarta', 987654322, 'Selesai'),
-(987654344, 'Berita Acara Pembukaan Penawaran', '2013-06-08', 'Jakarta', 987654322, 'Selesai'),
-(987654345, 'Berita Acara Aanwijzing', '2013-06-09', 'Jakarta', 987654322, 'Selesai'),
-(987654346, 'Daftar Hadir Aanwijzing', '2013-06-10', 'Jakarta', 987654322, 'Selesai'),
-(987654347, 'Dokumen Penawaran', '2013-06-11', 'Jakarta', 987654322, 'Selesai'),
-(987654348, 'Nota Dinas Pemberitahuan Pemenang', '2013-06-12', 'Jakarta', 987654322, 'Selesai'),
-(987654349, 'Nota Dinas Penetapan Pemenang', '2013-06-13', 'Jakarta', 987654322, 'Selesai'),
-(987654350, 'Nota Dinas Perintah Pengadaan', '2013-06-14', 'Jakarta', 987654322, 'Selesai'),
-(987654351, 'Nota Dinas Permintaan', '2013-06-15', 'Jakarta', 987654322, 'Selesai'),
-(987654352, 'Nota Dinas Usulan Pemenang', '2013-06-16', 'Jakarta', 987654322, 'Selesai'),
-(987654353, 'Pakta Integritas Panitia 1', '2013-06-17', 'Jakarta', 987654322, 'Selesai'),
-(987654354, 'Pakta Integritas Penyedia', '2013-06-18', 'Jakarta', 987654322, 'Selesai'),
-(987654355, 'Surat Pemberitahuan Pengadaan', '2013-06-19', 'Jakarta', 987654322, 'Selesai'),
-(987654356, 'Surat Pernyataan Minat', '2013-06-20', 'Jakarta', 987654322, 'Selesai'),
-(987654357, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-21', 'Jakarta', 987654322, 'Selesai'),
-(987654358, 'Surat Undangan Pembukaan Penawaran', '2013-06-22', 'Jakarta', 987654322, 'Selesai'),
-(987654359, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-23', 'Jakarta', 987654322, 'Selesai'),
-(987654360, 'Surat Undangan Aanwijzing', '2013-06-24', 'Jakarta', 987654322, 'Selesai'),
-(987654361, 'RKS', '2013-06-26', 'Jakarta', 987654323, 'Selesai'),
-(987654362, 'Berita Acara Evaluasi Penawaran', '2013-06-26', 'Jakarta', 987654323, 'Selesai'),
-(987654363, 'Berita Acara Negoisasi Klarifikasi', '2013-06-26', 'Jakarta', 987654323, 'Selesai'),
-(987654364, 'Berita Acara Pembukaan Penawaran', '2013-06-26', 'Jakarta', 987654323, 'Selesai'),
-(987654365, 'Berita Acara Aanwijzing', '2013-06-27', 'Jakarta', 987654323, 'Selesai'),
-(987654366, 'Daftar Hadir Aanwijzing', '2013-06-27', 'Jakarta', 987654323, 'Selesai'),
-(987654367, 'Dokumen Penawaran', '2013-06-27', 'Jakarta', 987654323, 'Selesai'),
-(987654368, 'Nota Dinas Pemberitahuan Pemenang', '2013-06-27', 'Jakarta', 987654323, 'Selesai'),
-(987654369, 'Nota Dinas Penetapan Pemenang', '2013-06-28', 'Jakarta', 987654323, 'Selesai'),
-(987654370, 'Nota Dinas Perintah Pengadaan', '2013-06-28', 'Jakarta', 987654323, 'Selesai'),
-(987654371, 'Nota Dinas Permintaan', '2013-06-28', 'Jakarta', 987654323, 'Selesai'),
-(987654372, 'Nota Dinas Usulan Pemenang', '2013-06-28', 'Jakarta', 987654323, 'Selesai'),
-(987654373, 'Pakta Integritas Panitia 1', '2013-06-29', 'Jakarta', 987654323, 'Selesai'),
-(987654374, 'Pakta Integritas Penyedia', '2013-06-29', 'Jakarta', 987654323, 'Selesai'),
-(987654375, 'Surat Pemberitahuan Pengadaan', '2013-06-29', 'Jakarta', 987654323, 'Selesai'),
-(987654376, 'Surat Pernyataan Minat', '2013-06-29', 'Jakarta', 987654323, 'Selesai'),
-(987654377, 'Surat Undangan Negosiasi dan Klarifikasi', '2013-06-30', 'Jakarta', 987654323, 'Selesai'),
-(987654378, 'Surat Undangan Pembukaan Penawaran', '2013-06-30', 'Jakarta', 987654323, 'Selesai'),
-(987654379, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-30', 'Jakarta', 987654323, 'Selesai'),
-(987654380, 'Surat Undangan Aanwijzing', '2013-06-30', 'Jakarta', 987654323, 'Selesai'),
 (987654381, 'RKS', '2013-06-04', 'Jakarta', 987654324, 'Selesai'),
 (987654382, 'Berita Acara Evaluasi Penawaran', '2013-06-04', 'Jakarta', 987654324, 'Selesai'),
 (987654383, 'Berita Acara Negoisasi Klarifikasi', '2013-06-04', 'Jakarta', 987654324, 'Selesai'),
@@ -302,53 +246,41 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (987654398, 'Surat Undangan Pembukaan Penawaran', '2013-06-10', 'Jakarta', 987654324, 'Selesai'),
 (987654399, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-10', 'Jakarta', 987654324, 'Selesai'),
 (987654400, 'Surat Undangan Aanwijzing', '2013-06-10', 'Jakarta', 987654324, 'Selesai'),
-(987654401, 'TOR', '0000-00-00', '', 987654322, 'Selesai'),
-(987654402, 'RAB', '0000-00-00', '', 987654322, 'Belum Selesai'),
-(987654403, 'TOR', '0000-00-00', '', 987654323, 'Belum Selesai'),
-(987654404, 'RAB', '0000-00-00', '', 987654323, 'Selesai'),
 (987654405, 'TOR', '0000-00-00', '', 987654324, 'Belum Selesai'),
 (987654406, 'RAB', '0000-00-00', '', 987654324, 'Selesai'),
-(987654407, 'Daftar Hadir Pembukaan Penawaran', '2013-06-05', 'Jakarta', 987654322, 'Selesai'),
-(987654408, 'Daftar Hadir Negoisasi Klarifikasi', '2013-06-06', 'Jakarta', 987654322, 'Selesai'),
-(987654409, 'Daftar Hadir Evaluasi Penawaran', '2013-06-07', 'Jakarta', 987654322, 'Selesai'),
-(987654410, 'Daftar Hadir Prakualifikasi', '2013-06-08', 'Jakarta', 987654322, 'Selesai'),
-(987654411, 'Daftar Hadir Pembukaan Penawaran', '2013-06-27', 'Jakarta', 987654323, 'Selesai'),
-(987654412, 'Daftar Hadir Negoisasi Klarifikasi', '2013-06-27', 'Jakarta', 987654323, 'Selesai'),
-(987654413, 'Daftar Hadir Evaluasi Penawaran', '2013-06-28', 'Jakarta', 987654323, 'Selesai'),
-(987654414, 'Daftar Hadir Prakualifikasi', '2013-06-29', 'Jakarta', 987654323, 'Selesai'),
 (987654415, 'Daftar Hadir Pembukaan Penawaran', '2013-06-12', 'Jakarta', 987654324, 'Selesai'),
 (987654416, 'Daftar Hadir Negoisasi Klarifikasi', '2013-06-13', 'Jakarta', 987654324, 'Selesai'),
 (987654417, 'Daftar Hadir Evaluasi Penawaran', '2013-06-14', 'Jakarta', 987654324, 'Selesai'),
 (987654418, 'Daftar Hadir Prakualifikasi', '2013-06-15', 'Jakarta', 987654324, 'Selesai'),
-(987654419, 'Pakta Integritas Awal Panitia', '0000-00-00', 'Jakarta', 987654322, 'Belum Selesai'),
-(987654420, 'RKS', '0000-00-00', 'Jakarta', 987654322, 'Belum Selesai'),
-(987654421, 'Pakta Integritas Awal Panitia', '0000-00-00', 'Jakarta', 987654322, 'Belum Selesai'),
-(987654422, 'RKS', '0000-00-00', 'Jakarta', 987654322, 'Belum Selesai'),
-(987654423, 'Nota Dinas Permintaan', '2013-06-11', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654424, 'Nota Dinas Perintah Pengadaan', '2013-06-19', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654425, 'TOR', '2013-06-11', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654426, 'RAB', '0000-00-00', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654427, 'Pakta Integritas Awal Panitia', '2013-06-21', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654428, 'RKS', '2013-06-21', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654429, 'Surat Undangan Prakualifikasi', '2013-06-27', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654430, 'Pakta Integritas Penyedia', '2013-06-27', '-', 987654325, 'Belum Selesai'),
-(987654431, 'Surat Pemberitahuan Pengadaan', '2013-06-27', 'Jakarta', 987654325, 'Belum Selesai'),
-(987654432, 'Surat Pernyataan Minat', '2013-06-27', '-', 987654325, 'Belum Selesai'),
-(987654433, 'Form Isian Kualifikasi', '2013-06-27', '-', 987654325, 'Belum Selesai'),
-(987654434, 'Nota Dinas Permintaan', '2013-06-20', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654435, 'Nota Dinas Perintah Pengadaan', '2013-06-20', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654436, 'TOR', '2013-06-20', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654437, 'RAB', '0000-00-00', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654438, 'Pakta Integritas Awal Panitia', '2013-06-05', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654439, 'RKS', '2013-06-05', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654440, 'Pakta Integritas Penyedia', '0000-00-00', '-', 987654326, 'Belum Selesai'),
-(987654441, 'Surat Pemberitahuan Pengadaan', '2013-06-20', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654442, 'Surat Pernyataan Minat', '0000-00-00', '-', 987654326, 'Belum Selesai'),
-(987654443, 'Form Isian Kualifikasi', '0000-00-00', '-', 987654326, 'Belum Selesai'),
-(987654444, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-24', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654445, 'Surat Undangan Aanwijzing', '2013-07-10', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654446, 'Berita Acara Aanwijzing', '2013-07-17', 'Jakarta', 987654326, 'Belum Selesai'),
-(987654447, 'Daftar Hadir Aanwijzing', '2013-07-17', 'Jakarta', 987654326, 'Belum Selesai');
+(987654419, 'Nota Dinas Permintaan', '2013-06-24', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654420, 'TOR', '2013-06-24', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654421, 'RAB', '2013-06-24', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654422, 'Nota Dinas Perintah Pengadaan', '2013-06-19', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654423, 'Nota Dinas Permintaan', '2013-06-06', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654424, 'TOR', '2013-06-06', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654425, 'RAB', '2013-06-06', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654426, 'Nota Dinas Perintah Pengadaan', '2013-06-10', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654427, 'Nota Dinas Permintaan', '2013-06-06', 'Jakarta', 987654327, 'Belum Selesai'),
+(987654428, 'TOR', '2013-06-06', 'Jakarta', 987654327, 'Belum Selesai'),
+(987654429, 'RAB', '2013-06-06', 'Jakarta', 987654327, 'Belum Selesai'),
+(987654430, 'Nota Dinas Perintah Pengadaan', '2013-06-11', 'Jakarta', 987654327, 'Belum Selesai'),
+(987654431, 'Pakta Integritas Awal Panitia', '2013-06-17', 'Jakarta', 987654327, 'Belum Selesai'),
+(987654432, 'RKS', '2013-06-17', 'Jakarta', 987654327, 'Belum Selesai'),
+(987654433, 'Pakta Integritas Awal Panitia', '2013-06-17', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654434, 'RKS', '2013-06-17', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654435, 'Surat Undangan Prakualifikasi', '2013-06-20', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654436, 'Pakta Integritas Penyedia', '2013-06-20', '-', 987654326, 'Belum Selesai'),
+(987654437, 'Surat Pemberitahuan Pengadaan', '2013-06-20', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654438, 'Surat Pernyataan Minat', '2013-06-20', '-', 987654326, 'Belum Selesai'),
+(987654439, 'Form Isian Kualifikasi', '2013-06-20', '-', 987654326, 'Belum Selesai'),
+(987654440, 'Surat Undangan Pengambilan Dokumen Pengadaan', '2013-06-28', 'Jakarta', 987654326, 'Belum Selesai'),
+(987654441, 'Pakta Integritas Awal Panitia', '2013-06-17', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654442, 'RKS', '2013-06-17', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654443, 'Surat Undangan Prakualifikasi', '2013-06-19', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654444, 'Pakta Integritas Penyedia', '2013-06-19', '-', 987654325, 'Belum Selesai'),
+(987654445, 'Surat Pemberitahuan Pengadaan', '2013-06-19', 'Jakarta', 987654325, 'Belum Selesai'),
+(987654446, 'Surat Pernyataan Minat', '2013-06-19', '-', 987654325, 'Belum Selesai'),
+(987654447, 'Form Isian Kualifikasi', '2013-06-19', '-', 987654325, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -377,8 +309,8 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
 --
 
 INSERT INTO `form_isian_kualifikasi` (`id_dokumen`) VALUES
-(987654433),
-(987654443);
+(987654439),
+(987654447);
 
 -- --------------------------------------------------------
 
@@ -428,46 +360,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 --
 
 INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`) VALUES
-(1, 987654341, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(2, 987654342, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(3, 987654343, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(4, 987654344, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(5, 987654345, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(6, 987654346, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(7, 987654347, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(8, 987654348, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(9, 987654349, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(10, 987654350, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(11, 987654351, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(12, 987654352, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(13, 987654353, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(14, 987654354, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(15, 987654355, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(16, 987654356, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(17, 987654357, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(18, 987654358, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(19, 987654359, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(20, 987654360, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(21, 987654361, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(22, 987654362, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(23, 987654363, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(24, 987654364, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(25, 987654365, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(26, 987654366, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(27, 987654367, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(28, 987654368, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(29, 987654369, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(30, 987654370, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(31, 987654371, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(32, 987654372, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(33, 987654373, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(34, 987654374, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(35, 987654375, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(36, 987654376, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(37, 987654377, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(38, 987654378, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(39, 987654379, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(40, 987654380, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (41, 987654381, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (42, 987654382, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (43, 987654383, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
@@ -488,20 +380,8 @@ INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_up
 (58, 987654398, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (59, 987654399, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (60, 987654400, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(61, 987654401, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(62, 987654402, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(63, 987654403, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(64, 987654404, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (65, 987654405, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (66, 987654406, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(67, 987654407, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(68, 987654408, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(69, 987654409, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(70, 987654410, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(71, 987654411, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(72, 987654412, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(73, 987654413, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
-(74, 987654414, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (75, 987654415, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (76, 987654416, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
 (77, 987654417, '08:00:00', '2013-06-19', 'haniferidaputra', 1, 'pdf'),
@@ -532,8 +412,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
 --
 
 INSERT INTO `nota_dinas_pemberitahuan_pemenang` (`id_dokumen`, `nomor`, `dari`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
-(987654348, '48/A/31/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-13', 'Jakarta'),
-(987654368, '48/A/32/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '1234567', 450000000, '2013-06-27', 'Jakarta'),
 (987654388, '48/A/33/2013', 'Ketua panitia Pengadaan barang dan jasa', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-07', 'Jakarta');
 
 -- --------------------------------------------------------
@@ -565,8 +443,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
 --
 
 INSERT INTO `nota_dinas_penetapan_pemenang` (`id_dokumen`, `nomor`, `kepada`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`, `sumber_dana`, `jangka_waktu_berlaku`, `jangka_waktu_deadline`) VALUES
-(987654349, '49/A/31/2013', 'Apple', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-24', 'Jakarta', 'Uang Kas PLN', '7', '14'),
-(987654369, '49/A/32/2013', 'Pilot', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '1234567', 450000000, '2013-06-29', 'Jakarta', 'Uang Kas PLN', '7', '14'),
 (987654389, '49/A/33/2013', 'Samsung', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-09', 'Jakarta', 'Uang Kas PLN', '7', '14');
 
 -- --------------------------------------------------------
@@ -596,11 +472,10 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 --
 
 INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perihal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(987654350, '51/A/31/2013', '50/A/31/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan komputer PLN', 'Terlampir', 'Terlampir', 70, 'Kas PLN', 'xxx'),
-(987654370, '51/A/32/2013', '50/A/32/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat tulis PLN', 'Terlampir', 'Terlampir', 50, 'Kas PLN', 'xxx'),
 (987654390, '51/A/33/2013', '50/A/33/2013', 'Kdivmum', 'Ketua panitia Pengadaan barang dan jasa', 'Perintah pengadaan alat komunikasi PLN', 'Terlampir', 'Terlampir', 48, 'Kas PLN', 'xxx'),
-(987654424, '045/DVMAM/2013', '056/DIVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan Panitia', 'Terlampir', 'Terlampir', 90, 'Kas PLN', '10.000.000'),
-(987654435, '073/DIVTRANS/2013', '039/DVMUM/2013', 'MS-DAF', 'Hanif Eridaputra', 'Penunjukan Pejabat Pengadaan', 'Terlampir', 'Terlampir', 87, 'Kas PLN', '7.000.000');
+(987654422, '045/DVMAM/2013', '035/DVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan Panitia Pengadaan Baju Dinas', 'Terlampir', 'Terlampir', 78, 'Kas PLN', '100.000.000'),
+(987654426, '045/DVIN/2013', '095/DVMUM/2013', 'MSDAF', 'Hanif Eridaputra', 'Penunjukan Pejabat Pengadaan Internet', 'Terlampir', 'Terlampir', 56, 'Kas PLN', '10.000.000'),
+(987654430, '073/DIVTRANS/2013', '029/DMUM/2013', 'KDIVMUM', 'Kevin Indra', 'Penunjukan Panitia Pengadaan Sewa Mobil', 'Terlampir', 'Terlampir', 90, 'Kas PLN', '100.000.000');
 
 -- --------------------------------------------------------
 
@@ -620,10 +495,9 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 --
 
 INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`) VALUES
-(987654423, '045/DVMAM/2013'),
-(987654434, '073/DIVTRANS/2013'),
-(987654351, '51/A/31/2013'),
-(987654371, '51/A/32/2013'),
+(987654423, '045/DVIN/2013'),
+(987654419, '045/DVMAM/2013'),
+(987654427, '073/DIVTRANS/2013'),
 (987654391, '51/A/33/2013');
 
 -- --------------------------------------------------------
@@ -651,8 +525,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
 --
 
 INSERT INTO `nota_dinas_usulan_pemenang` (`id_dokumen`, `nomor`, `dari`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
-(987654352, '52/A/31/2013', 'ketua panitia Pengadaan barang dan jasa', 'Apple', 'Jl.apelmanis No 57 Jakarta Pusat', '1234567', 10000000000, '2013-06-23', 'Jakarta'),
-(987654372, '52/A/32/2013', 'ketua panitia Pengadaan barang dan jasa', 'Pilot', 'Jl.pilotpramugari No 57 Jakarta Pusat', '1234567', 450000000, '2013-06-28', 'Jakarta'),
 (987654392, '52/A/33/2013', 'ketua panitia Pengadaan barang dan jasa', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-08', 'Jakarta');
 
 -- --------------------------------------------------------
@@ -673,10 +545,10 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 --
 
 INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
-(987654373, 1),
-(987654438, 1),
+(987654433, 1),
 (987654393, 2),
-(987654427, 4);
+(987654431, 3),
+(987654441, 4);
 
 -- --------------------------------------------------------
 
@@ -694,11 +566,9 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
 --
 
 INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`) VALUES
-(987654354),
-(987654374),
 (987654394),
-(987654430),
-(987654440);
+(987654436),
+(987654444);
 
 -- --------------------------------------------------------
 
@@ -763,11 +633,10 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `divisi_peminta`, `nama_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(987654322, 'Divisi Khusus', 'Pengadaan komputer', 'Apple', '2013-06-05', '2013-06-25', 'Kualifikasi', 10000000000, 4, 'Pemilihan Langsung', 'Dua Sampul', ''),
-(987654323, 'Divisi Management', 'Pengadaan alat tulis', 'Pilot', '2013-06-26', '2013-06-30', 'Aanwijzing', 450000000, 1, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi'),
 (987654324, 'Divisi Sistem Informasi', 'Pengadaan alat komunikasi', 'Samsung', '2013-06-04', '2013-06-10', 'Selesai', 499000000, 2, 'Penunjukan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
-(987654325, 'Divisi Manajemen', 'Pengadaan Baju Dinas', '-', '2013-06-19', '0000-00-00', 'Pengambilan Dokumen Pengadaan', 0, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi'),
-(987654326, 'Divisi Transportasi', 'Pengadaan Sewa Mobil', '-', '2013-06-20', '0000-00-00', 'Penawaran dan Evaluasi', 0, 1, 'Penunjukan Langsung', 'Satu Sampul', 'Pasca Kualifikasi');
+(987654325, 'Divisi Manajemen', 'Pengadaan Baju Dinas', '-', '2013-06-19', '0000-00-00', 'Pengambilan Dokumen Pengadaan', 0, 4, 'Pelelangan', 'Dua Tahap', 'Pra Kualifikasi'),
+(987654326, 'Divisi Internet', 'Pengadaan Internet', '-', '2013-06-10', '0000-00-00', 'Aanwijzing', 0, 1, 'Penunjukan Langsung', 'Satu Sampul', 'Pra Kualifikasi'),
+(987654327, 'Divisi Transportasi', 'Pengadaan Sewa Mobil', '-', '2013-06-11', '0000-00-00', 'Kualifikasi', 0, 3, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi');
 
 -- --------------------------------------------------------
 
@@ -785,8 +654,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
 --
 
 INSERT INTO `rab` (`id_dokumen`) VALUES
-(987654402),
-(987654404),
 (987654406);
 
 -- --------------------------------------------------------
@@ -807,12 +674,9 @@ CREATE TABLE IF NOT EXISTS `rks` (
 --
 
 INSERT INTO `rks` (`id_dokumen`, `nomor`) VALUES
-(987654420, ''),
-(987654422, ''),
-(987654439, '021/HEP/DIVMUM/2013'),
-(987654428, '021/PPJB-B/DIVMUM/2013'),
-(987654341, '42/A/31/2013'),
-(987654361, '42/A/32/2013'),
+(987654434, '011/PPJB-A/DIVMUM/2013'),
+(987654432, '021/PPJB-A/DIVMUM/2013'),
+(987654442, '031/PPJB-B/DIVMUM/2013'),
 (987654381, '42/A/33/2013');
 
 -- --------------------------------------------------------
@@ -839,10 +703,9 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 --
 
 INSERT INTO `surat_pemberitahuan_pengadaan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `lingkup_kerja`, `tanggal_penawaran`, `waktu_kerja`) VALUES
-(987654375, '55/A/32/2013', 1, 'Pemberitahuan pengadaan alat tulis', 'Pengadaan alat tulis', '2013-06-13', '5'),
 (987654395, '55/A/33/2013', 2, 'Pemberitahuan pengadaan alat komunikasi', 'Pengadaan alat komun', '2013-06-19', '7'),
-(987654431, '022/PPJB-B/DIVMUM/2013', 4, 'Pemberitahuan Pengadaan Baju Dinas', 'Pembelian Baju', '2013-06-21', '78'),
-(987654441, '022/HEP/DIVMUM/2013', 1, 'Pemberitahuan Pengadaan Sewa Mobil', 'Penyewaan Mobil', '2013-06-29', '13');
+(987654437, '012/PPJB-A/DIVMUM/2013', 1, 'Pemberitahuan Pengadaan Internet', 'Penyediaan Fasilitas', '2013-06-24', '78'),
+(987654445, '032/PPJB-B/DIVMUM/2013', 4, 'Pemberitahuan Pengadaan Baju Dinas', 'Pembelian Baju', '2013-06-21', '89');
 
 -- --------------------------------------------------------
 
@@ -860,11 +723,9 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
 --
 
 INSERT INTO `surat_pernyataan_minat` (`id_dokumen`) VALUES
-(987654356),
-(987654376),
 (987654396),
-(987654432),
-(987654442);
+(987654438),
+(987654446);
 
 -- --------------------------------------------------------
 
@@ -888,8 +749,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
 --
 
 INSERT INTO `surat_undangan_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `perihal`, `kepada`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
-(987654357, '57/A/31/2013', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Apple', '2013-06-12', '14.00', 'Ruang rapat Gedung I lantai 5'),
-(987654377, '57/A/32/2013', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Pilot', '2013-06-27', '14.00', 'Ruang rapat Gedung I lantai 7'),
 (987654397, '57/A/33/2013', 'Pemberitahuan Hasil Evaluasi Penilaian dan Undangan Rapat Klarifikasi & Negosiasi', 'Direktur Samsung', '2013-06-08', '14.00', 'Ruang rapat Gedung I lantai 50');
 
 -- --------------------------------------------------------
@@ -916,7 +775,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 --
 
 INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `id_panitia`, `nomor`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
-(987654378, 1, '58/A/32/2013', 'Pembukaan penawaran alat tulis', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50'),
 (987654398, 2, '58/A/33/2013', 'Pembukaan penawaran alat komunikasi', '2013-06-06', '14.00', 'Ruang rapat Gedung I lantai 500');
 
 -- --------------------------------------------------------
@@ -941,10 +799,8 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
 --
 
 INSERT INTO `surat_undangan_pengambilan_dokumen_pengadaan` (`id_dokumen`, `nomor`, `perihal`, `tanggal_pengambilan`, `waktu_pengambilan`, `tempat_pengambilan`) VALUES
-(987654359, '59/A/31/2013', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', '2013-06-11', '14.00', 'PLN'),
-(987654379, '59/A/32/2013', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', '2013-06-13', '14.00', 'PLN'),
 (987654399, '59/A/33/2013', 'Undangan Pengambilan Dokumen Pengadaan Barang/Jasa danJadwal Pelaksanaan Lelang ', '2013-06-25', '14.00', 'PLN'),
-(987654444, '023/HEP/DIVMUM/2013', 'Undangan Pengambilan Dokumen RKS dari Pengadaan Sewa Mobil', '2013-06-28', '10:00', 'Kantor PLN Pusat');
+(987654440, '013/PPJB-A/DIVMUM/2013', 'Undangan Pengambilan Dokumen RKS dari Pengadaan Internet', '2013-07-01', '10:00', 'Gedung Utama Lt.2\r\nKantor Pusat PLN');
 
 -- --------------------------------------------------------
 
@@ -969,9 +825,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
 --
 
 INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
-(987654380, '60/A/32/2013', 1, 'Penjelsan pekerjaan pengadaan alat tulis', '2013-06-26', '14.00', 'Ruang rapat Gedung I lantai 50'),
-(987654400, '60/A/33/2013', 2, 'Penjelsan pekerjaan pengadaan alat komunikasi', '2013-06-07', '14.00', 'Ruang rapat Gedung I lantai 500'),
-(987654445, '023/HEP/DIVMUM/2013', 1, 'Undangan Aanwijzing Pengadaan Sewa Mobil', '2013-07-17', '10:00', 'Kantor Pusat PLN');
+(987654400, '60/A/33/2013', 2, 'Penjelsan pekerjaan pengadaan alat komunikasi', '2013-06-07', '14.00', 'Ruang rapat Gedung I lantai 500');
 
 -- --------------------------------------------------------
 
@@ -989,7 +843,8 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_prakualifikasi` (
 --
 
 INSERT INTO `surat_undangan_prakualifikasi` (`id_dokumen`) VALUES
-(987654429);
+(987654435),
+(987654443);
 
 -- --------------------------------------------------------
 
@@ -1007,8 +862,6 @@ CREATE TABLE IF NOT EXISTS `tor` (
 --
 
 INSERT INTO `tor` (`id_dokumen`) VALUES
-(987654401),
-(987654403),
 (987654405);
 
 -- --------------------------------------------------------
