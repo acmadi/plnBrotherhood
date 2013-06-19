@@ -13,7 +13,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		<?php 
 		if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-		<div class="form">
+		<div class="form" >
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
@@ -80,7 +80,10 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
+	</br></br>
 	
+	<h4><b> Buat Dokumen </b></h4>
+	<?php echo CHtml::button('Surat Undangan Pengambilan Dokumen Pengadaan', array('submit'=>array('docx/download','id'=>$SUPDP->id_dokumen), 'class'=>'sidafbutton'));?>
 	
 <?php	} ?>
 	</div>

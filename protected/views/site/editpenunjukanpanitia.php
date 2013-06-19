@@ -69,8 +69,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php $this->endWidget(); ?>
 
 		</div><!-- form -->
-		<?php }
-		?>
+		
+		</br></br>
+		<h4><b> Buat Dokumen </b></h4>
+		<?php echo CHtml::button('Pakta Integritas Awal Panitia', array('submit'=>array('docx/download','id'=>$PAP1->id_dokumen), 'class'=>'sidafbutton'));?>
+		<?php echo CHtml::button('RKS', array('submit'=>array('docx/download','id'=>$Rks->id_dokumen), 'class'=>'sidafbutton'));?>
+		<?php /*echo CHtml::button('HPS', array('submit'=>array('docx/download','id'=>$DH->id_dokumen), 'class'=>'sidafbutton'));*/?>
+		
+		<?php } ?>
 	</div>
 </div>
 

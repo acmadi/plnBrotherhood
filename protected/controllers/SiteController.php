@@ -258,7 +258,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($PAP1->save(false)&&$RKS->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -286,8 +286,8 @@ class SiteController extends Controller
 				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Awal Panitia"');
 				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				
+				$PAP1= PaktaIntegritasPanitia1::model()->findByPk($Dokumen0->id_dokumen);
 				$RKS= Rks::model()->findByPk($Dokumen1->id_dokumen);
-				
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -308,7 +308,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($RKS->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -316,7 +316,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('editpenunjukanpanitia',array(
-					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen1'=>$Dokumen1,
+					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,
 				));
 			}
 		}
@@ -413,7 +413,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
 								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -439,9 +439,16 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
-				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
+				$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
+				$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
+				$Dokumen4= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
 		
-				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen1->id_dokumen);					
+				$X0= SuratUndanganPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+				$X1= PaktaIntegritasPenyedia::model()->findByPk($Dokumen1->id_dokumen);
+				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen2->id_dokumen);
+				$X3= SuratPernyataanMinat::model()->findByPk($Dokumen3->id_dokumen);
+				$X4= FormIsianKualifikasi::model()->findByPk($Dokumen4->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -458,7 +465,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
 								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -466,7 +473,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('editprakualifikasi',array(
-					'Dokumen0'=>$Dokumen0,'X2'=>$X2,
+					'Dokumen0'=>$Dokumen0,'X0'=>$X0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
 				));
 			}
 		}
@@ -549,7 +556,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpascakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -574,6 +581,16 @@ class SiteController extends Controller
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
+				$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
+				$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
+				$Dokumen4= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
+		
+				$X1= PaktaIntegritasPenyedia::model()->findByPk($Dokumen1->id_dokumen);
+				$X2= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen2->id_dokumen);
+				$X3= SuratPernyataanMinat::model()->findByPk($Dokumen3->id_dokumen);
+				$X4= FormIsianKualifikasi::model()->findByPk($Dokumen4->id_dokumen);
+				
 				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"');
 				$X0= SuratPemberitahuanPengadaan::model()->findByPk($Dokumen0->id_dokumen);	
 				
@@ -582,16 +599,16 @@ class SiteController extends Controller
 
 				if(isset($_POST['SuratPemberitahuanPengadaan']))
 				{
-					$Dokumen0->attributes=$_POST['Dokumen'];
-					$X0->attributes=$_POST['SuratPemberitahuanPengadaan'];
-					$valid=$Dokumen0->validate();
-					$valid=$valid&&$X0->validate();
+					$Dokumen2->attributes=$_POST['Dokumen'];
+					$X2->attributes=$_POST['SuratPemberitahuanPengadaan'];
+					$valid=$Dokumen2->validate();
+					$valid=$valid&&$X2->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)){
-								if($X0->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+							if($Dokumen2->save(false)){
+								if($X2->save(false)){
+									$this->redirect(array('editpascakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -599,7 +616,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('editpascakualifikasi',array(
-					'Dokumen0'=>$Dokumen0,'X0'=>$X0,
+					'Dokumen2'=>$Dokumen2,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
 				));
 			}
 		}
@@ -650,7 +667,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPDP->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpengambilandokumenpengadaan','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -693,7 +710,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPDP->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpengambilandokumenpengadaan','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -783,7 +800,7 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
-										$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+										$this->redirect(array('editaanwijzing','id'=>$Dokumen0->id_pengadaan));
 									}
 								}
 							}
@@ -839,7 +856,7 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
-										$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+										$this->redirect(array('editaanwijzing','id'=>$Dokumen0->id_pengadaan));
 									}
 								}
 							}
@@ -848,7 +865,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('editaanwijzing',array(
-					'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'BAP'=>$BAP,
+					'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'BAP'=>$BAP,'DH'=>$DH
 				));
 
 			}
