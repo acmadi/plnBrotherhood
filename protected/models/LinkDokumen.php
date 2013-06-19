@@ -10,6 +10,7 @@
  * @property string $tanggal_upload
  * @property string $pengunggah
  * @property integer $nomor_link
+ * @property string $format_dokumen
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -43,13 +44,14 @@ class LinkDokumen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_link, id_dokumen', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('id_link, id_dokumen', 'required'),
 			array('nomor_link', 'numerical', 'integerOnly'=>true),
 			array('id_link, id_dokumen, pengunggah', 'length', 'max'=>32),
+			array('format_dokumen', 'length', 'max'=>12),
 			array('waktu_upload, tanggal_upload', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_link, id_dokumen, waktu_upload, tanggal_upload, pengunggah, nomor_link', 'safe', 'on'=>'search'),
+			array('id_link, id_dokumen, waktu_upload, tanggal_upload, pengunggah, nomor_link, format_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +80,7 @@ class LinkDokumen extends CActiveRecord
 			'tanggal_upload' => 'Tanggal Upload',
 			'pengunggah' => 'Pengunggah',
 			'nomor_link' => 'Nomor Link',
+			'format_dokumen' => 'Format Dokumen',
 		);
 	}
 
@@ -98,29 +101,30 @@ class LinkDokumen extends CActiveRecord
 		$criteria->compare('tanggal_upload',$this->tanggal_upload,true);
 		$criteria->compare('pengunggah',$this->pengunggah,true);
 		$criteria->compare('nomor_link',$this->nomor_link);
+		$criteria->compare('format_dokumen',$this->format_dokumen,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 	
-	public function inputData($id, $user)
+	public function inputData($iddokumen, $user, $ext)
 	{
 		date_default_timezone_set("Asia/Jakarta");
-		$date = date_create();
-		$sec = time() + (7*3600);
-		$hours = ($sec / 3600) % 24;
-		$minutes = ($sec / 60) % 60;
-		$seconds = $sec % 60;
+		$secs = time() + (7*3600);
+		$hours = $secs / 3600 % 24;
+		$minutes = $secs / 60 % 60;
+		$seconds = $secs % 60;
 		$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
-
-		$updatedModel = new LinkDokumen;
+		
+		$updatedModel=new LinkDokumen;
 		$updatedModel->id_link=$this->count()+1;
-		$updatedModel->id_dokumen=$id;
+		$updatedModel->id_dokumen=$iddokumen;
 		$updatedModel->waktu_upload=$waktu_upload;
-		$updatedModel->tanggal_upload=date("Y-m-d");
+		$updatedModel->tanggal_upload=date('Y-m-d');
 		$updatedModel->pengunggah=$user;
-		$updatedModel->nomor_link=$this->count('id_dokumen ="' . $id . '"')+1;
+		$updatedModel->nomor_link=$this->count('id_dokumen="' . $iddokumen . '"')+1;
+		$updatedModel->format_dokumen=$ext;
 		$updatedModel->save();
 	}
 }
