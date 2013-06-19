@@ -44,7 +44,7 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia', 'required',,'message'=>'{attribute} tidak boleh kosong'),
+			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia', 'required'),
 			array('jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),

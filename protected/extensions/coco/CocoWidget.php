@@ -33,7 +33,7 @@ class CocoWidget extends CWidget implements EYuiActionRunnable {
 	public $maxConnections=3; // max simultaneus connections (client-side)
 	public $maxUploads=-1; // -1=unlimited. number of uploads allowed (client-side)
 	public $maxUploadsReachMessage = ''; // a message when maxUploads is reach.
-
+	public $file;
 	private $_baseUrl;
 
 	public static function t($text){
@@ -191,7 +191,7 @@ echo
 
 		if(($this->allowedExtensions == null) || ($this->allowedExtensions==''))
 			$this->allowedExtensions = array();
-
+			
 		Yii::log('ACTION CALLED - data is: '.CJSON::encode($vars),'info');
 		
 		$namadokumen=LinkDokumen::model()->count('id_dokumen="' . $this->id .'"') + 1;
@@ -214,7 +214,7 @@ echo
 					$fullpath = $result['fullpath'];
 					$this->onFileUploaded($fullpath,$this->userdata);
 					Dokumen::model()->changeStatus($this->id);
-					LinkDokumen::model()->inputData($this->id, $this->user);
+					LinkDokumen::model()->inputData($this->id, $this->user,$uploader->getExtDocument());
 				}
 				else{
 					Yii::log('ACTION CALLED - RESULT=ERROR1','info');
