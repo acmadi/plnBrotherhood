@@ -36,4 +36,10 @@
 	));
 ?>
 
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'class'=>'sidafbutton'));  ?>
+<?php 
+	if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		echo CHtml::button('Kembali', array('submit'=>array('site/generator', 'id'=>$id), 'class'=>'sidafbutton'));
+	} else if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'class'=>'sidafbutton'));
+	}
+?>

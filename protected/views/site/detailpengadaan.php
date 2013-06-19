@@ -70,4 +70,10 @@ $this->pageTitle=Yii::app()->name . ' | ' . $cpengadaan->nama_pengadaan;
 </div>
 
 <?php echo CHtml::button('Lihat dokumen', array('submit'=>array('site/dokumengenerator', 'id'=>$id), 'class'=>'sidafbutton'));  ?>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?>
+<?php 
+	if($cpengadaan->status=="Selesai"){
+		echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'class'=>'sidafbutton')); 
+	} else {
+		echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton')); 
+	}
+?>
