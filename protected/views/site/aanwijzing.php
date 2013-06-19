@@ -45,12 +45,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'sifat'); ?>
-			<?php echo $form->textField($SUP,'sifat',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUP,'sifat'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($SUP,'perihal'); ?>
 			<?php echo $form->textArea($SUP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUP,'perihal'); ?>

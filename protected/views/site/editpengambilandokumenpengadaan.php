@@ -44,12 +44,6 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPDPx,'sifat'); ?>
-			<?php echo $form->textField($SUPDPx,'sifat',array('size'=>56)); ?>
-			<?php echo $form->error($SUPDPx,'sifat'); ?>
-		</div>
-
-		<div class="row">
 			<?php echo $form->labelEx($SUPDPx,'perihal'); ?>
 			<?php echo $form->textArea($SUPDPx,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPDPx,'perihal'); ?>

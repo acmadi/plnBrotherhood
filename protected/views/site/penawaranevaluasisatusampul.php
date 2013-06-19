@@ -42,13 +42,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUPP,'sifat'); ?>
-			<?php echo $form->textField($SUPP,'sifat',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUPP,'sifat'); ?>
-		</div>
-
+		
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'perihal'); ?>
 			<?php echo $form->textArea($SUPP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
