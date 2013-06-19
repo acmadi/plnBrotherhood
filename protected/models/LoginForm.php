@@ -50,7 +50,7 @@ class LoginForm extends CFormModel
 		{
 			$this->_identity=new UserIdentity($this->nama_pengguna,$this->kata_sandi);
 			if(!$this->_identity->authenticate())
-				$this->addError('password','Nama pengguna atau kata sandi salah.');
+				$this->addError('kata_sandi','Nama pengguna atau kata sandi salah.');
 		}
 	}
 
