@@ -51,7 +51,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'tanggal Aanwijzing'); ?>
+			<?php echo $form->labelEx($SUPPx,'tanggal Pembukaan Penawaran'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$SUPPx,
 					'attribute'=>'tanggal_undangan',
@@ -65,13 +65,13 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'waktu Aanwijzing'); ?>
+			<?php echo $form->labelEx($SUPPx,'waktu Pembukaan Penawaran'); ?>
 			<?php echo $form->textField($SUPPx,'waktu',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPPx,'waktu'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'tempat Aanwijzing'); ?>
+			<?php echo $form->labelEx($SUPPx,'tempat Pembukaan Penawaran'); ?>
 			<?php echo $form->textArea($SUPPx,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPPx,'tempat'); ?>
 		</div>
@@ -111,13 +111,12 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo CHtml::submitButton($Dokumenx->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 		
-	<?php $this->endWidget(); ?>
+		<?php $this->endWidget(); ?>
 
-	</div><!-- form -->
+		</div><!-- form -->
 	
 	
-<?php	}
-?>
+	<?php	} ?>
 	</div>
 </div>
 
