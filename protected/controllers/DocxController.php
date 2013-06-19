@@ -93,18 +93,50 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#norks#', '');
-			$this->doccy->phpdocx->assign('#targetspk#', '');
+			$this->doccy->phpdocx->assign('#acara#', '');
+			$this->doccy->phpdocx->assign('#pekerjaan#', '');
 			$this->doccy->phpdocx->assign('#perihal#', $perihal);
 			$this->doccy->phpdocx->assign('#hari#', '');
-			$this->doccy->phpdocx->assign('#targetspk#', '');
 			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#waktu#', $waktu);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
 			$this->renderDocx("Surat Undangan Penjelasan.docx", true);
 
 		}
-		else if ($Dok->nama_dokumen == "Nota Dinas Permintaan"){
-			$NDP = NotaDinasPermintaan::model()->findByPk($id);
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
+			
+		}
+		else if ($Dok->nama_dokumen == ""){
 			
 		}
 		
