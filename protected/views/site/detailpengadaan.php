@@ -12,11 +12,9 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 ));
 ?>
 
-<br />
-
 <div id="detailpengadaan">
-	<h1><?php echo $cpengadaan->nama_pengadaan; ?></h1>	
-	<div style="width:50%; margin-left:30px;">
+	<h1 style="text-align:center;"><?php echo $cpengadaan->nama_pengadaan; ?></h1><br />	
+	<div style="width:60%; margin:auto;">
 		<?php
 			$this->widget('zii.widgets.CDetailView', array(
 				'id'=>'viewdetail',
@@ -71,35 +69,34 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 		?>
 	</div>
 
-	<br /><br /><br />
+	<br /><br /><br /><br />
 	
 </div>
 
 <div>
-<h4> 
-	List Dokumen
-</h4>
-<?php
-	$this->widget('zii.widgets.grid.CGridView', array(
-		'id'=>'list-dokumen-grid',
-		'dataProvider'=>$dataProvider,
-		"ajaxUpdate"=>"false",
-		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
-		'columns'=>array(
-			array(
-				'name'=>'No',
-				'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+<div style="width:75%; margin:auto;">
+	<?php
+		$this->widget('zii.widgets.grid.CGridView', array(
+			'id'=>'list-dokumen-grid',
+			'dataProvider'=>$dataProvider,
+			"ajaxUpdate"=>"false",
+			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+			'columns'=>array(
+				array(
+					'name'=>'No',
+					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+				),
+				'nama_dokumen',
+				array(
+					'class'=>'CDataColumn',
+					'header'=>'Status Unggah',
+					'value'=>'$data->status_upload',
+				),
 			),
-			'nama_dokumen',
-			array(
-				'class'=>'CDataColumn',
-				'header'=>'Status Unggah',
-				'value'=>'$data->status_upload',
-			),
-		),
-	));
-?>
+		));
+	?>
+</div>
 
 </div>
 
