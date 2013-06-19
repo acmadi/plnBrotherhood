@@ -23,6 +23,8 @@ class DocxController extends Controller
 		$Dok=Dokumen::model()->findByPk($id);
 		$Peng=Pengadaan::model()->findByPk($Dok->id_pengadaan);
 		
+		
+//	=====================================Nota Dinas=====================================
 		if ($Dok->nama_dokumen == "Nota Dinas Perintah Pengadaan"){
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
@@ -77,6 +79,25 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Nota Dinas Perintah Pengadaan.docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
 		}
+		else if ($Dok->nama_dokumen == "Nota Dinas Usulan Pemenang"){
+			
+		}
+		else if ($Dok->nama_dokumen == "Nota Dinas Penetapan Pemenang"){
+			
+		}
+		else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
+			
+		}
+//	=====================================Surat-Surat=====================================
+		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
+			
+		}
+		else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
+			
+		}
+		else if ($Dok->nama_dokumen == "Surat Undangan Negsiasi dan Klarifikasi"){
+			
+		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Aanwijzing") {
 			$SUP=SuratUndanganPenjelasan::model()->findByPk($id);
 			$nomor = $SUP->nomor;
@@ -103,43 +124,56 @@ class DocxController extends Controller
 			$this->renderDocx("Surat Undangan Penjelasan.docx", true);
 
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Surat Pernyataan Minat"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Surat Pemberitahuan Pengadaan"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+//	=====================================Pakta Integritas=====================================
+		else if ($Dok->nama_dokumen == "Pakta Integritas Panitia 1"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Pakta Integritas Penyedia"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+//	=====================================RKS=====================================
+		else if ($Dok->nama_dokumen == "RKS"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+//	=====================================Berita Acara=====================================
+		else if ($Dok->nama_dokumen == "Berita Acara Aanwijzing"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Berita Acara Negosiasi Klarifikasi"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+//	=====================================Dokumen=====================================
+		else if ($Dok->nama_dokumen == "Dokumen Penawaran"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+//	=====================================Daftar Hadir=====================================
+		else if ($Dok->nama_dokumen == "Daftar Hadir Aanwijzing"){
 			
 		}
-		else if ($Dok->nama_dokumen == ""){
+		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran"){
 			
 		}
-		
+		else if ($Dok->nama_dokumen == "Daftar Hadir Negosiasi Klarifikasi"){
+			
+		}
+		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran"){
+			
+		}
+		else if ($Dok->nama_dokumen == "Daftar Hadir Prakualifikasi"){
+			
+		}
 		
 		
 		
