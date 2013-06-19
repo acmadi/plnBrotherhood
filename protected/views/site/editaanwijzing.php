@@ -20,71 +20,69 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'id'=>'surat-undangan-penjelasan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($SUPx); ?>
 		
 		<h4><b> Surat Undangan Aanwijzing </b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($SUPx,'nomor'); ?>
-			<?php echo $form->textField($SUPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUPx,'nomor'); ?>
+			<?php echo $form->labelEx($SUP,'nomor'); ?>
+			<?php echo $form->textField($SUP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($SUP,'nomor'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($Dokumenx,'tanggal surat'); ?>
+			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$Dokumenx,
+					'model'=>$Dokumen0,
 					'attribute'=>'tanggal',
-					'value'=>$Dokumenx->tanggal,
+					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($Dokumenx,'tanggal'); ?>
+			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPx,'perihal'); ?>
-			<?php echo $form->textArea($SUPx,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPx,'perihal'); ?>
+			<?php echo $form->labelEx($SUP,'perihal'); ?>
+			<?php echo $form->textArea($SUP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUP,'perihal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPx,'tanggal Aanwijzing'); ?>
+			<?php echo $form->labelEx($SUP,'tanggal Aanwijzing'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SUPx,
+					'model'=>$SUP,
 					'attribute'=>'tanggal_undangan',
-					'value'=>$SUPx->tanggal_undangan,
+					'value'=>$SUP->tanggal_undangan,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($SUPx,'tanggal_undangan'); ?>
+			<?php echo $form->error($SUP,'tanggal_undangan'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPx,'waktu Aanwijzing'); ?>
-			<?php echo $form->textField($SUPx,'waktu',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUPx,'waktu'); ?>
+			<?php echo $form->labelEx($SUP,'waktu Aanwijzing (Format HH:MM)'); ?>
+			<?php echo $form->textField($SUP,'waktu',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($SUP,'waktu'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPx,'tempat Aanwijzing'); ?>
-			<?php echo $form->textArea($SUPx,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPx,'tempat'); ?>
+			<?php echo $form->labelEx($SUP,'tempat Aanwijzing'); ?>
+			<?php echo $form->textArea($SUP,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUP,'tempat'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Aanwijzing </b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($BAPx,'nomor'); ?>
-			<?php echo $form->textField($BAPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAPx,'nomor'); ?>
+			<?php echo $form->labelEx($BAP,'nomor'); ?>
+			<?php echo $form->textField($BAP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->error($BAP,'nomor'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumenx->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
@@ -92,8 +90,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	</div><!-- form -->
 	
 	
-<?php	}
-?>
+<?php	} ?>
 	</div>
 </div>
 

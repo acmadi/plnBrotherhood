@@ -42,8 +42,9 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, id_panitia', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
+			array('nomor', 'length', 'max'=>100),
 			array('id_panitia', 'length', 'max'=>11),
+			array('nomor','Check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, id_panitia', 'safe', 'on'=>'search'),
@@ -93,5 +94,11 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function Check($attribute,$params){
+		if((strpos($this->attributes['nomor'], 'Nomor') !== false)){
+			$this->addError($attribute, 'Periksa kembali nomor surat');
+		}
 	}
 }

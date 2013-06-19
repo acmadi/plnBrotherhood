@@ -44,9 +44,10 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
+			array('nomor', 'length', 'max'=>100),
 			array('perihal, tempat_pengambilan', 'length', 'max'=>100),
 			array('waktu_pengambilan', 'length', 'max'=>12),
+			array('nomor','Check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),
@@ -101,5 +102,11 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function Check($attribute,$params){
+		if(strpos($this->attributes['nomor'], 'Nomor') !== false) {
+			$this->addError($attribute, 'Periksa kembali nomor surat');
+		}
 	}
 }

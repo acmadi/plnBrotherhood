@@ -19,13 +19,11 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($SUPDP); ?>
 		
 		<h4><b> Surat Undangan Pengambilan Dokumen Pengadaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPDP,'nomor'); ?>
-			<?php echo $form->textField($SUPDP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPDP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUPDP,'nomor'); ?>
 		</div>
 		
@@ -64,7 +62,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
+			<?php echo $form->labelEx($SUPDP,'waktu pengambilan (Format HH:MM)'); ?>
 			<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
 		</div>
@@ -76,7 +74,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>

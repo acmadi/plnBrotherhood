@@ -20,13 +20,11 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'id'=>'surat-undangan-penjelasan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($SUP); ?>
 		
 		<h4><b> Surat Undangan Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUP,'nomor'); ?>
-			<?php echo $form->textField($SUP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUP,'nomor'); ?>
 		</div>
 		
@@ -65,7 +63,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'waktu Aanwijzing'); ?>
+			<?php echo $form->labelEx($SUP,'waktu Aanwijzing (Format HH:MM)'); ?>
 			<?php echo $form->textField($SUP,'waktu',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($SUP,'waktu'); ?>
 		</div>
@@ -84,7 +82,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>

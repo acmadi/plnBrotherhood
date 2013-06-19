@@ -20,8 +20,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'id'=>'surat-undangan-prakualifikasi-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($X1); ?>
 		
 		</br>		
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
@@ -78,7 +76,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumen1->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
