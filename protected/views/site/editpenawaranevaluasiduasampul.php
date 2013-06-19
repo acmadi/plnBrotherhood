@@ -23,7 +23,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<?php echo $form->errorSummary($SUPPx); ?>
 		
-		<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
+		<h4><b> Surat Undangan Pembukaan Penawaran Sampul Satu</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPPx,'nomor'); ?>
 			<?php echo $form->textField($SUPPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
@@ -76,7 +76,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->error($SUPPx,'tempat'); ?>
 		</div>
 		
-		<h4><b> Berita Acara Pembukaan Penawaran </b></h4>
+		<h4><b> Berita Acara Pembukaan Penawaran Sampul Satu</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAPPx,'nomor'); ?>
 			<?php echo $form->textField($BAPPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
@@ -127,19 +127,19 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			));?>
 			<?php echo $form->error($BAEPx,'tanggal_berita_acara'); ?>
 		</div>
-
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($Dokumenx->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 		
-		<?php $this->endWidget(); ?>
+	<?php $this->endWidget(); ?>
 
-		</div><!-- form -->
+	</div><!-- form -->
 	
 	
-	<?php	} ?>
+<?php	} ?>
 	</div>
 </div>
 
 <div>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?></div>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?></div>
