@@ -111,7 +111,7 @@
 	
 	<div class="uploaderblock">
 	<?php
-	if(($modelDok2 !=null) && ($object_pengadaan->jenis_kualifikasi=='Pra Kualifikasi')){
+	if(($modelDok2 !=null) && ($objectpengadaan->jenis_kualifikasi=='Pra Kualifikasi')){
 	echo '<h5>' . $modelDok2->nama_dokumen . '<h5>' ;
     $this->widget('ext.coco.CocoWidget'
         ,array(
