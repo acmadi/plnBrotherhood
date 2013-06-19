@@ -109,7 +109,7 @@
     ?>
 	</div>
 	
-	<div class="modelDokblock">
+	<div class="uploaderblock">
 	<?php
 	if(($modelDok2 !=null) && ($object_pengadaan->jenis_kualifikasi=='Pra Kualifikasi')){
 	echo '<h5>' . $modelDok2->nama_dokumen . '<h5>' ;

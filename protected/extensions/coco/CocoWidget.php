@@ -181,14 +181,14 @@ echo
 
 		$this->allowedExtensions = $vars['allowedExtensions'];
 		$this->sizeLimit = (integer)$vars['sizeLimit'];
-		$this->uploadDir = $vars['uploadDir'];
 		$this->receptorClassName = $vars['receptorClassName'];
 		$this->methodName = $vars['methodName'];
 		$this->userdata = $vars['userdata'];
 		$this->idPengadaan = $vars['idPengadaan'];
 		$this->user = $vars['user'];
 		$this->id = $vars['id'];
-		
+		$this->uploadDir = $vars['uploadDir'];
+
 		if(($this->allowedExtensions == null) || ($this->allowedExtensions==''))
 			$this->allowedExtensions = array();
 
