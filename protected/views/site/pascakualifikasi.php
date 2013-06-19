@@ -27,7 +27,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($X1,'nomor'); ?>
-			<?php echo $form->textField($X1,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($X1,'nomor',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($X1,'nomor'); ?>
 		</div>
 		
@@ -37,6 +37,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$Dokumen1,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumen1->tanggal,
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -46,13 +47,13 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
 		<div class="row">
 			<?php echo $form->labelEx($X1,'perihal'); ?>
-			<?php echo $form->textField($X1,'perihal',array('size'=>60,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($X1,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($X1,'perihal'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($X1,'lingkup kerja'); ?>
-			<?php echo $form->textField($X1,'lingkup_kerja',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($X1,'lingkup_kerja',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($X1,'lingkup_kerja'); ?>
 		</div>
 		
@@ -62,6 +63,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'model'=>$X1,
 					'attribute'=>'tanggal_penawaran',
 					'value'=>$X1->tanggal_penawaran,
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
@@ -71,7 +73,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($X1,'waktu kerja'); ?>
-			<?php echo $form->textField($X1,'waktu_kerja',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($X1,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
 			<?php echo $form->error($X1,'waktu_kerja'); ?>
 		</div>
 		
