@@ -71,7 +71,7 @@
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } else {?>
 			<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>

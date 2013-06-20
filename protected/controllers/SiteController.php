@@ -178,7 +178,15 @@ class SiteController extends Controller
 					$this->redirect(array('site/aanwijzing','id'=>$id));
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi"){
-					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
+					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
+						$this->redirect(array('site/penawaranevaluasisatusampul','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
+						$this->redirect(array('site/penawaranevaluasiduasampul','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
+						$this->redirect(array('site/penawaranevaluasiduatahap','id'=>$id));
+					}
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="Negosiasi dan Klarifikasi"){
 					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
@@ -886,6 +894,7 @@ class SiteController extends Controller
 	
 	public function actionPenawaranevaluasisatusampul()
 	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
@@ -926,6 +935,9 @@ class SiteController extends Controller
 				$Dokumen3->status_upload='Belum Selesai';
 				$Dokumen3->id_pengadaan=$id;
 				
+				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
+				$A1=RKS::model()->findByPk($A->id_dokumen);
+				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
 				$SUPP->id_panitia=$Pengadaan->id_panitia;
@@ -937,10 +949,12 @@ class SiteController extends Controller
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				$DH->acara="Pembukaan Penawaran";
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen3->id_dokumen;
 				$BAEP->id_panitia=$Pengadaan->id_panitia;
+				$BAEP->no_RKS=$A1->nomor;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -952,18 +966,18 @@ class SiteController extends Controller
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
 					$valid=$SUPP->validate();
+					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
 						$Dokumen2->tanggal=$SUPP->tanggal_undangan;						
 						$Dokumen1->tanggal=$SUPP->tanggal_undangan;
 						$DH->jam=$SUPP->waktu;
 						$DH->tempat_hadir=$SUPP->tempat;
-						$DH->acara="Pembukaan Penawaran";
 						$valid=$BAPP->validate()&&$DH->validate();
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpenawaranevaluasisatusampul','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -987,7 +1001,6 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan = Pengadaan::model()->findByPk($id);
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
 				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
@@ -999,55 +1012,35 @@ class SiteController extends Controller
 				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
 				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($Dokumen3->id_dokumen);
 				
-				$Dokumenx= new Dokumen;
-				
-				$SUPPx= new SuratUndanganPembukaanPenawaran;
-				$SUPPx->perihal= 'Undangan Pembukaan Penawaran '.$Pengadaan->nama_pengadaan;
-				
-				$BAPPx= new BeritaAcaraPembukaanPenawaran;
-				
-				$BAEPx= new BeritaAcaraEvaluasiPenawaran;
-				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
 				if(isset($_POST['SuratUndanganPembukaanPenawaran']))
 				{
-					$Dokumenx->attributes=$_POST['Dokumen'];
-					$SUPPx->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
-					$BAPPx->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
-					$BAEPx->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
-								
-					$Dokumen0->tanggal=$Dokumenx->tanggal;	
-					$Dokumen1->tanggal=$SUPPx->tanggal_undangan;	
-					$Dokumen2->tanggal=$SUPPx->tanggal_undangan;	
-					$Dokumen3->tanggal=$Dokumenx->tanggal;
-					
-					$SUPP->nomor=$SUPPx->nomor;
-					$SUPP->perihal=$SUPPx->perihal;
-					$SUPP->tanggal_undangan=$SUPPx->tanggal_undangan;
-					$SUPP->waktu=$SUPPx->waktu;
-					$SUPP->tempat=$SUPPx->tempat;
-					$BAPP->nomor=$BAPPx->nomor;
-					$BAPP->jumlah_penyedia_diundang=$BAPPx->jumlah_penyedia_diundang;
-					$BAPP->jumlah_penyedia_dokumen_sah=$BAPPx->jumlah_penyedia_dokumen_sah;
-					$BAPP->jumlah_penyedia_dokumen_tidak_sah=$BAPPx->jumlah_penyedia_dokumen_tidak_sah;
-					$DH->jam=$SUPPx->waktu;
-					$DH->tempat_hadir=$SUPPx->tempat;
-					$BAEP->nomor=$BAEPx->nomor;
-					$BAEP->tanggal_berita_acara=$BAEPx->tanggal_berita_acara;
-					if($Pengadaan->save(false))
-					{	
-						if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-							if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPP->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
+					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$SUPP->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUPP->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUPP->tanggal_undangan;
+						$DH->jam=$SUPP->waktu;
+						$DH->tempat_hadir=$SUPP->tempat;
+						$valid=$BAPP->validate()&&$DH->validate();
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
+									$this->redirect(array('editpenawaranevaluasisatusampul','id'=>$Dokumen0->id_pengadaan));
+								}
 							}
 						}
 					}
 				}
 
 				$this->render('editpenawaranevaluasisatusampul',array(
-					'SUPPx'=>$SUPPx,'Dokumenx'=>$Dokumenx,'BAPPx'=>$BAPPx,'BAEPx'=>$BAEPx,
+					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAPP'=>$BAPP,'DH'=>$DH,'BAEP'=>$BAEP,
 				));
 
 			}
@@ -1056,6 +1049,7 @@ class SiteController extends Controller
 	
 	public function actionPenawaranevaluasiduasampul()
 	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
@@ -1085,7 +1079,7 @@ class SiteController extends Controller
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+3;
-				$Dokumen2->nama_dokumen='Daftar Hadir Pembukaan Penawaran';
+				$Dokumen2->nama_dokumen='Daftar Hadir Pembukaan Penawaran Sampul Satu';
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
@@ -1096,6 +1090,9 @@ class SiteController extends Controller
 				$Dokumen3->tempat='Jakarta';
 				$Dokumen3->status_upload='Belum Selesai';
 				$Dokumen3->id_pengadaan=$id;
+				
+				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
+				$A1=RKS::model()->findByPk($A->id_dokumen);
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
@@ -1108,10 +1105,12 @@ class SiteController extends Controller
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				$DH->acara="Pembukaan Penawaran";
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen3->id_dokumen;
 				$BAEP->id_panitia=$Pengadaan->id_panitia;
+				$BAEP->no_RKS=$A1->nomor;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1123,18 +1122,18 @@ class SiteController extends Controller
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
 					$valid=$SUPP->validate();
+					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
 						$Dokumen2->tanggal=$SUPP->tanggal_undangan;						
 						$Dokumen1->tanggal=$SUPP->tanggal_undangan;
 						$DH->jam=$SUPP->waktu;
 						$DH->tempat_hadir=$SUPP->tempat;
-						$DH->acara="Pembukaan Penawaran";
 						$valid=$BAPP->validate()&&$DH->validate();
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpenawaranevaluasiduasampul','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -1162,7 +1161,7 @@ class SiteController extends Controller
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
 				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
-				$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran"');
+				$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran Sampul Satu"');
 				$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Satu"');
 				
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dokumen0->id_dokumen);
@@ -1170,53 +1169,36 @@ class SiteController extends Controller
 				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
 				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($Dokumen3->id_dokumen);
 				
-				$Dokumenx= new Dokumen;
-				
-				$SUPPx= new SuratUndanganPembukaanPenawaran;
-				$SUPPx->perihal= 'Undangan Pembukaan Penawaran Sampul Satu '.$Pengadaan->nama_pengadaan;
-				
-				$BAPPx= new BeritaAcaraPembukaanPenawaran;
-				
-				$BAEPx= new BeritaAcaraEvaluasiPenawaran;
-				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				if(isset($_POST['SuratUndanganPenjelasan']))
+				if(isset($_POST['SuratUndanganPembukaanPenawaran']))
 				{
-					$Dokumenx->attributes=$_POST['Dokumen'];
-					$SUPPx->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
-					$BAPPx->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
-					$BAEPx->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
-								
-					$Dokumen0->tanggal=$Dokumenx->tanggal;	
-					$Dokumen1->tanggal=$SUPPx->tanggal_undangan;	
-					$Dokumen2->tanggal=$SUPPx->tanggal_undangan;
-					$Dokumen3->tanggal=$Dokumenx->tanggal;
-					
-					$SUPP->nomor=$SUPPx->nomor;
-					$SUPP->sifat=$SUPPx->sifat;
-					$SUPP->perihal=$SUPPx->perihal;
-					$SUPP->tanggal_undangan=$SUPPx->tanggal_undangan;
-					$SUPP->waktu=$SUPPx->waktu;
-					$SUPP->tempat=$SUPPx->tempat;
-					$BAPP->nomor=$BAPPx->nomor;
-					$DH->jam=$SUPx->waktu;
-					$DH->tempat_hadir=$SUPPx->tempat;
-					$BAEP->nomor=$BAEPx->nomor;
-					$BAEP->tanggal_berita_acara=$BAEPx->tanggal_berita_acara;
-					if($Pengadaan->save(false))
-					{	
-						if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-							if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-								$this->redirect(array('generator','id'=>$Dokumen0->id_pengadaan));
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPP->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
+					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$SUPP->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUPP->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUPP->tanggal_undangan;
+						$DH->jam=$SUPP->waktu;
+						$DH->tempat_hadir=$SUPP->tempat;
+						$valid=$BAPP->validate()&&$DH->validate();
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
+									$this->redirect(array('editpenawaranevaluasiduasampul','id'=>$Dokumen0->id_pengadaan));
+								}
 							}
 						}
 					}
 				}
 
 				$this->render('editpenawaranevaluasiduasampul',array(
-					'SUPPx'=>$SUPx,'Dokumenx'=>$Dokumenx,'BAPPx'=>$BAPPx,'BAEPx'=>$BAEPx,
+					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAPP'=>$BAPP,'BAEP'=>$BAEP,
 				));
 
 			}
@@ -1225,12 +1207,158 @@ class SiteController extends Controller
 	
 	public function actionPenawaranevaluasiduatahap()
 	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('penawaranevaluasiduatahap');
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='Negosiasi dan Klarifikasi';
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Undangan Pembukaan Penawaran Tahap Satu';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$Dokumen1=new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Berita Acara Pembukaan Penawaran Tahap Satu';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
+				
+				$Dokumen2=new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Daftar Hadir Pembukaan Penawaran Tahap Satu';
+				$Dokumen2->tempat='Jakarta';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$Dokumen3=new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+4;
+				$Dokumen3->nama_dokumen='Berita Acara Evaluasi Penawaran Tahap Satu';
+				$Dokumen3->tempat='Jakarta';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
+				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
+				$A1=RKS::model()->findByPk($A->id_dokumen);
+				
+				$SUPP= new SuratUndanganPembukaanPenawaran;
+				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPP->id_panitia=$Pengadaan->id_panitia;
+				$SUPP->perihal= 'Undangan Pembukaan Penawaran Tahap Satu '.$Pengadaan->nama_pengadaan;
+				
+				$BAPP= new BeritaAcaraPembukaanPenawaran;
+				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
+				$BAPP->id_panitia=$Pengadaan->id_panitia;
+				
+				$DH= new DaftarHadir;
+				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				$DH->acara="Pembukaan Penawaran Tahap Satu";
+				
+				$BAEP= new BeritaAcaraEvaluasiPenawaran;
+				$BAEP->id_dokumen=$Dokumen3->id_dokumen;
+				$BAEP->id_panitia=$Pengadaan->id_panitia;
+				$BAEP->no_RKS=$A1->nomor;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPembukaanPenawaran']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPP->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
+					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$SUPP->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUPP->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUPP->tanggal_undangan;
+						$DH->jam=$SUPP->waktu;
+						$DH->tempat_hadir=$SUPP->tempat;
+						$valid=$BAPP->validate()&&$DH->validate();
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
+									$this->redirect(array('editpenawaranevaluasiduatahap','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('penawaranevaluasiduatahap',array(
+					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAPP'=>$BAPP,'BAEP'=>$BAEP,
+				));
+			}
+		}
+	}
+	
+	public function actionEditPenawaranevaluasiduatahap()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan = Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
+				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
+				$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran Tahap Satu"');
+				$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Satu"');
+				
+				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dokumen0->id_dokumen);
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($Dokumen1->id_dokumen);
+				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($Dokumen3->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPembukaanPenawaran']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPP->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
+					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$SUPP->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUPP->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUPP->tanggal_undangan;
+						$DH->jam=$SUPP->waktu;
+						$DH->tempat_hadir=$SUPP->tempat;
+						$valid=$BAPP->validate()&&$DH->validate();
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
+									$this->redirect(array('editpenawaranevaluasiduatahap','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('editpenawaranevaluasiduatahap',array(
+					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAPP'=>$BAPP,'BAEP'=>$BAEP,
+				));
+
 			}
 		}
 	}
