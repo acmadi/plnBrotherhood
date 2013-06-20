@@ -18,7 +18,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		'columns'=>array(
 			array(
 				'name'=>'No',
-				'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+				'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',		
 			),
 			// 'id_pengadaan',
 			'nama_pengadaan',

@@ -128,6 +128,26 @@ class Pengadaan extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'status'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),
+			'PIC'=>array(
+			  'asc'=>'idPanitia.nama_panitia',
+			  'desc'=>'idPanitia.nama_panitia desc',
+			),
+			'Sisa Hari'=>array(
+			  'asc'=>'sisaHari(id_pengadaan)',
+			  'desc'=>'sisaHari(id_pengadaan) desc',
+			),
+		);
+		
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
@@ -146,6 +166,7 @@ class Pengadaan extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>$sort,
 		));
 	}
 	
