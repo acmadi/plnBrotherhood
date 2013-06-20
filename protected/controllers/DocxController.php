@@ -145,7 +145,18 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
 			
-			$this->doccy->newFile('temp.docx');
+			$this->doccy->newFile('nd-pemberitahuanpemenang.docx');
+			
+			$NDPP=NotaDinasPemberitahuanPemenang::model()->findByPk($id);	
+			$nomor = $NDPP->nomor;
+			$dari = $NDPP->dari;
+			$pemenang = $NDPP->nama_penyedia;
+			$alamat = $NDPP->alamat;
+			$NPWP = $NDPP->NPWP;
+			$biaya = $NDPP->biaya;
+			$tanggal = $Dok->tanggal;
+			$waktu = $NDPP->waktu_pelaksanaan;
+			$tempat = $NDPP->tempat_penyerahan;
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -322,7 +333,7 @@ class DocxController extends Controller
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Panitia 1"){
 			
-			$this->doccy->newFile('pi-panitia.docx');
+			$this->doccy->newFile('pi-panitia1.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
