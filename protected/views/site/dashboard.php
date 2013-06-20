@@ -12,7 +12,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
 		// 'filter'=>$model,
-		"ajaxUpdate"=>"false",
+		"ajaxUpdate"=>false,
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
@@ -81,7 +81,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
 
-			"ajaxUpdate"=>"false",
+			"ajaxUpdate"=>false,
 			
 			'columns'=>array(
 				array(
