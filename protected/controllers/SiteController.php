@@ -311,7 +311,7 @@ class SiteController extends Controller
 					$Dokumen0->tanggal=$Dokumen1->tanggal;
 					$valid=$valid&&$Dokumen0->validate();
 					$valid=$valid&&$Pengadaan->validate();
-					if($valid){		
+					if($valid){						
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
