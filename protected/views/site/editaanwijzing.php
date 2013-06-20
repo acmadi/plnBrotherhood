@@ -89,14 +89,18 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 	</div><!-- form -->
 	
-	</br></br>
-	<h4><b> Buat Dokumen </b></h4>
-	<?php echo CHtml::button('Surat Undangan Aanwijzing', array('submit'=>array('docx/download','id'=>$SUP->id_dokumen), 'class'=>'sidafbutton'));?>
-	<?php echo CHtml::button('Berita Acara Aanwijzing', array('submit'=>array('docx/download','id'=>$BAP->id_dokumen), 'class'=>'sidafbutton'));?>
-	<?php echo CHtml::button('Daftar Hadir Aanwijzing', array('submit'=>array('docx/download','id'=>$DH->id_dokumen), 'class'=>'sidafbutton'));?>
+	</br>
+	<div style="border-top:1px solid lightblue">
+	</br>
+		<h4><b> Buat Dokumen </b></h4>
+		<ul class="generatedoc">
+			<li><?php echo CHtml::link('Surat Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>
+			<li><?php echo CHtml::link('Berita Acara Aanwijzing', array('docx/download','id'=>$BAP->id_dokumen)); ?></li>
+			<li><?php echo CHtml::link('Daftar Hadir Aanwijzing', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+		</ul>
+	</div>
 	
-	
-<?php	} ?>
+	<?php	} ?>
 	</div>
 </div>
 

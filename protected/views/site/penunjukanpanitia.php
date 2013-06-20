@@ -45,13 +45,31 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</br>
 			
 			<h4><b> Metode Penawaran Pengadaan</b></h4>
-			<div class="row">
-				<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
-					array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
-					array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-				<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
-			</div>
-			</br>
+			<?php if($Pengadaan->metode_pengadaan=='Penunjukan Langsung'){ ?>
+				<div class="row">
+					<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+						array('Satu Sampul'=>'Satu Sampul'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+				</div>
+				</br>
+			<?php } else if($Pengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
+				<div class="row">
+					<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+						array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+				</div>
+				</br>
+			<?php } else { ?>
+				<div class="row">
+					<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+						array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+				</div>
+				</br>
+			<?php } ?>
 			
 			<h4><b> Jenis Kualifikasi Pengadaan</b></h4>
 			<div class="row">

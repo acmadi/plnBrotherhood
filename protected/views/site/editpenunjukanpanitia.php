@@ -45,13 +45,31 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</br>
 			
 			<h4><b> Metode Penawaran Pengadaan</b></h4>
-			<div class="row">
-				<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
-					array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
-					array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-				<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
-			</div>
-			</br>
+			<?php if($Pengadaan->metode_pengadaan=='Penunjukan Langsung'){ ?>
+				<div class="row">
+					<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+						array('Satu Sampul'=>'Satu Sampul'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+				</div>
+				</br>
+			<?php } else if($Pengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
+				<div class="row">
+					<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+						array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+				</div>
+				</br>
+			<?php } else { ?>
+				<div class="row">
+					<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+						array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
+				</div>
+				</br>
+			<?php } ?>
 			
 			<h4><b> Jenis Kualifikasi Pengadaan</b></h4>
 			<div class="row">
@@ -69,13 +87,16 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php $this->endWidget(); ?>
 
 		</div><!-- form -->
-		
-		</br></br>
-		<h4><b> Buat Dokumen </b></h4>
-		<?php echo CHtml::button('Pakta Integritas Awal Panitia', array('submit'=>array('docx/download','id'=>$PAP1->id_dokumen), 'class'=>'sidafbutton'));?>
-		<?php echo CHtml::button('RKS', array('submit'=>array('docx/download','id'=>$Rks->id_dokumen), 'class'=>'sidafbutton'));?>
-		<?php /*echo CHtml::button('HPS', array('submit'=>array('docx/download','id'=>$DH->id_dokumen), 'class'=>'sidafbutton'));*/?>
-		
+		</br>
+		<div style="border-top:1px solid lightblue">
+		</br>
+			<h4><b> Buat Dokumen </b></h4>
+			<ul class="generatedoc">
+				<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('RKS', array('docx/download','id'=>$Rks->id_dokumen)); ?></li>
+				<li><?php /*echo CHtml::link('HPS', array('docx/download','id'=>$HPS->id_dokumen));*/ ?></li>
+			</ul>
+		</div>
 		<?php } ?>
 	</div>
 </div>
