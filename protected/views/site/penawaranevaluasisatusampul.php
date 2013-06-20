@@ -26,7 +26,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'nomor'); ?>
-			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUPP,'nomor'); ?>
 		</div>
 		
@@ -65,8 +65,8 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPP,'waktu Pembukaan Penawaran'); ?>
-			<?php echo $form->textField($SUPP,'waktu',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->labelEx($SUPP,'waktu Pembukaan Penawaran (Format HH:MM)'); ?>
+			<?php echo $form->textField($SUPP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($SUPP,'waktu'); ?>
 		</div>
 
@@ -79,38 +79,38 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Berita Acara Pembukaan Penawaran </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
-			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAPP,'nomor'); ?>
 		</div>
 		
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
 		</div>
 		
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen yang sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_sah'); ?>
 		</div>
 		
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen tidak sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
 		</div>
 		
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'status metode'); ?>
-			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'status_metode'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Evaluasi Penawaran Sampul Satu</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAEP,'nomor'); ?>
-			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAEP,'nomor'); ?>
 		</div>
 		

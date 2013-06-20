@@ -189,7 +189,7 @@ class SiteController extends Controller
 					}
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="Negosiasi dan Klarifikasi"){
-					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
+					$this->redirect(array('site/negosiasidanklarifikasi','id'=>$id));
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="Penentuan Pemenang"){
 					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
@@ -1357,6 +1357,148 @@ class SiteController extends Controller
 
 				$this->render('editpenawaranevaluasiduatahap',array(
 					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAPP'=>$BAPP,'BAEP'=>$BAEP,
+				));
+
+			}
+		}
+	}
+	
+	public function actionNegosiasidanklarifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='Penentuan Pemenang';
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Undangan Negosiasi dan Klarifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$Dokumen1=new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Berita Acara Negosiasi dan Klarifikasi';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
+				
+				$Dokumen2=new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Daftar Hadir Negosiasi dan Klarifikasi';
+				$Dokumen2->tempat='Jakarta';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$SUNK= new SuratUndanganNegosiasiKlarifikasi;
+				$SUNK->id_dokumen=$Dokumen0->id_dokumen;
+				$SUNK->perihal= 'Undangan Negosiasi dan Klarifikasi '.$Pengadaan->nama_pengadaan;
+				
+				$BANK= new BeritaAcaraNegosiasiKlarifikasi;
+				$BANK->id_dokumen=$Dokumen1->id_dokumen;
+				$BANK->id_panitia=$Pengadaan->id_panitia;
+				
+				$DH= new DaftarHadir;
+				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				$DH->acara="Negosiasi dan Klarifikasi";
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganNegosiasiKlarifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUNK->attributes=$_POST['SuratUndanganNegosiasiKlarifikasi'];
+					$BANK->attributes=$_POST['BeritaAcaraNegosiasiKlarifikasi'];
+					$valid=$SUNK->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUNK->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUNK->tanggal_undangan;
+						$DH->jam=$SUNK->waktu;
+						$DH->tempat_hadir=$SUNK->tempat;
+						$valid=$BANK->validate()&&$DH->validate();
+						if($valid){
+						if($Pengadaan->save(false))
+							{	
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+									if($SUNK->save(false)&&$BANK->save(false)&&$DH->save(false)){
+										$this->redirect(array('editnegosiasidanklarifikasi','id'=>$Dokumen0->id_pengadaan));
+									}
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('negosiasidanklarifikasi',array(
+					'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'BANK'=>$BANK,
+				));
+
+			}
+		}
+	}
+	
+	public function actionEditNegosiasidanklarifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Negosiasi dan Klarifikasi"');
+				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Negosiasi dan Klarifikasi"');
+				$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Negosiasi dan Klarifikasi"');
+				
+				$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($Dokumen0->id_dokumen);
+				$BANK=BeritaAcaraNegosiasiKlarifikasi::model()->findByPk($Dokumen1->id_dokumen);
+				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganNegosiasiKlarifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUNK->attributes=$_POST['SuratUndanganNegosiasiKlarifikasi'];
+					$BANK->attributes=$_POST['BeritaAcaraNegosiasiKlarifikasi'];
+					$valid=$SUNK->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						$Dokumen2->tanggal=$SUNK->tanggal_undangan;						
+						$Dokumen1->tanggal=$SUNK->tanggal_undangan;
+						$DH->jam=$SUNK->waktu;
+						$DH->tempat_hadir=$SUNK->tempat;
+						$valid=$BANK->validate()&&$DH->validate();
+						if($valid){
+						if($Pengadaan->save(false))
+							{	
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+									if($SUNK->save(false)&&$BANK->save(false)&&$DH->save(false)){
+										$this->redirect(array('editnegosiasidanklarifikasi','id'=>$Dokumen0->id_pengadaan));
+									}
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('editnegosiasidanklarifikasi',array(
+					'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'BANK'=>$BANK,
 				));
 
 			}
