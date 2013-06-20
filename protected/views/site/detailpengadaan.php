@@ -30,7 +30,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 					),
 					array(
 						'label'=>'Pagu anggaran',
-						'value'=>$cpengadaan->notaDinasPerintahPengadaan->pagu_anggaran,
+						'value'=>'Rp. ' . $cpengadaan->notaDinasPerintahPengadaan->pagu_anggaran . ',00',
 					),
 					array(
 						'label'=>'Sumber dana',
@@ -81,7 +81,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 			'dataProvider'=>$dataProvider,
 			"ajaxUpdate"=>"false",
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl(($cpengadaan->status == 'Selesai' ? "download/download" : "site/detaildokumen"), array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 			'columns'=>array(
 				array(
 					'name'=>'No',
