@@ -45,7 +45,7 @@
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
 						array('label'=>'Beranda', 'url'=>array('/site/dashboard')),
-						array('label'=>'Pengadaan Lampau', 'url'=>array('/site/history')),
+						array('label'=>'Arsip Pengadaan', 'url'=>array('/site/history')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),

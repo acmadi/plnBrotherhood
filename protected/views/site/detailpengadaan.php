@@ -13,7 +13,11 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 ?>
 
 <div id="detailpengadaan">
-	<h1 style="text-align:center;"><?php echo $cpengadaan->nama_pengadaan; ?></h1><br />	
+	<h1 style="text-align:center;"><?php echo $cpengadaan->nama_pengadaan; ?></h1>
+	<div style="width:136px; margin:auto;">
+		<?php if ($cpengadaan->status == 'Menunggu Pengarsipan') echo CHtml::button('Arsipkan Pengadaan', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'class'=>'sidafbutton')); ?>
+	</div>
+	<br />
 	<div style="width:60%; margin:auto;">
 		<?php
 			$this->widget('zii.widgets.CDetailView', array(
@@ -43,6 +47,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 					array(
 						'label'=>'Status pengadaan',
 						'value'=>$cpengadaan->status,
+						'visible'=>$cpengadaan->status != 'Selesai',
 					),
 					array(
 						'label'=>'Nomor kontrak',
