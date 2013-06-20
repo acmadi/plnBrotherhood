@@ -85,7 +85,9 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 	<div style="border-top:1px solid lightblue">
 		</br>
 		<h4><b> Buat Dokumen </b></h4>
-		<?php echo CHtml::button('Surat Undangan Pengambilan Dokumen Pengadaan', array('submit'=>array('docx/download','id'=>$SUPDP->id_dokumen), 'class'=>'sidafbutton'));?>
+		<ul class="generatedoc">
+			<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
+		</ul>
 	</div>
 	<?php	} ?>
 	</div>
