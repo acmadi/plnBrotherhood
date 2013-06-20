@@ -82,12 +82,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
-	</br></br>
-	<h4><b> Buat Dokumen </b></h4>
-	<?php echo CHtml::button('Pakta Integritas Penyedia', array('submit'=>array('docx/download','id'=>$X1->id_dokumen), 'class'=>'sidafbutton'));?>
-	<?php echo CHtml::button('Surat Pemberitahuan Pengadaan', array('submit'=>array('docx/download','id'=>$X2->id_dokumen), 'class'=>'sidafbutton'));?>
-	<?php echo CHtml::button('Surat Pernyataan Minat', array('submit'=>array('docx/download','id'=>$X3->id_dokumen), 'class'=>'sidafbutton'));?>
-	<?php echo CHtml::button('Form Isian Kualifikasi', array('submit'=>array('docx/download','id'=>$X4->id_dokumen), 'class'=>'sidafbutton'));?>
+	</br>
+	<div style="border-top:1px solid lightblue">
+	</br>
+		<h4><b> Buat Dokumen </b></h4>
+		<?php echo CHtml::button('Pakta Integritas Penyedia', array('submit'=>array('docx/download','id'=>$X1->id_dokumen), 'class'=>'sidafbutton'));?>
+		<?php echo CHtml::button('Surat Pemberitahuan Pengadaan', array('submit'=>array('docx/download','id'=>$X2->id_dokumen), 'class'=>'sidafbutton'));?>
+		<?php echo CHtml::button('Surat Pernyataan Minat', array('submit'=>array('docx/download','id'=>$X3->id_dokumen), 'class'=>'sidafbutton'));?>
+		<?php echo CHtml::button('Form Isian Kualifikasi', array('submit'=>array('docx/download','id'=>$X4->id_dokumen), 'class'=>'sidafbutton'));?>
+	</div>
 <?php	} ?>
 	</div>
 </div>
