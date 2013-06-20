@@ -3,6 +3,7 @@
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$edit= Yii::app()->getRequest()->getQuery('state');
 ?>
 
 <div id="pagecontent">
@@ -14,7 +15,24 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-	
+		
+		<?php if($edit != null && $edit=="edited") {?>
+			<div id="popup" style="width:96%; background-color:lightgreen; border:3px solid green; padding:10px;">
+				<span style="margin-left:20px;"><b>Data Berhasil Disimpan</b></span>
+				<script>
+					setTimeout(function() {
+						$('#popup').animate({
+							height:'0px',
+							opacity:'0.0'
+						}, 1000, function() {
+							$('#popup').hide();
+						});
+					}, 2000);
+				</script>
+			</div>
+			<br />
+		<?php } ?>
+		
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -81,7 +99,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</br>
 
 			<div class="row buttons">
-				<?php echo CHtml::submitButton('Perbarui', array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton('Perbarui', array('submit'=>array('site/editpenunjukanpanitia', 'id'=>$id), 'class'=>'sidafbutton')); ?>
 			</div>
 
 			<?php $this->endWidget(); ?>
@@ -94,7 +112,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('RKS', array('docx/download','id'=>$Rks->id_dokumen)); ?></li>
-				<li><?php /*echo CHtml::link('HPS', array('docx/download','id'=>$HPS->id_dokumen));*/ ?></li>
 			</ul>
 		</div>
 		<?php } ?>

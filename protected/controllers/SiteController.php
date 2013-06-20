@@ -311,12 +311,12 @@ class SiteController extends Controller
 					$Dokumen0->tanggal=$Dokumen1->tanggal;
 					$valid=$valid&&$Dokumen0->validate();
 					$valid=$valid&&$Pengadaan->validate();
-					if($valid){		
+					if($valid){						
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($RKS->save(false)){
-									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan,'state'=>'edited'));
 								}
 							}
 						}
