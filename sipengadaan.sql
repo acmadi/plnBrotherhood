@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2013 at 06:54 AM
+-- Generation Time: Jun 20, 2013 at 08:04 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -84,10 +84,8 @@ INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panit
 CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `klarifikasi_administrasi` varchar(100) NOT NULL,
-  `klarifikasi_teknis` varchar(100) NOT NULL,
-  `harga_awal` bigint(20) NOT NULL,
-  `harga_akhir` bigint(20) NOT NULL,
+  `surat_penawaran_harga` varchar(50) NOT NULL,
+  `hak_kewajiban_penyedia` varchar(50) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
@@ -98,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
 -- Dumping data for table `berita_acara_negosiasi_klarifikasi`
 --
 
-INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `id_panitia`) VALUES
-(987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, 2);
+INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `surat_penawaran_harga`, `hak_kewajiban_penyedia`, `id_panitia`) VALUES
+(987654383, '43/A/33/2013', 'siapa aja bole', 'Menyediakan', 2);
 
 -- --------------------------------------------------------
 
