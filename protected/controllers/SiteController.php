@@ -316,7 +316,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($RKS->save(false)){
-									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan,'state'=>'edited'));
 								}
 							}
 						}
