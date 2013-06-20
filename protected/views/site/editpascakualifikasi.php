@@ -25,7 +25,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($X2,'nomor'); ?>
-			<?php echo $form->textField($X2,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($X2,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($X2,'nomor'); ?>
 		</div>
 		
@@ -45,7 +45,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
 		<div class="row">
 			<?php echo $form->labelEx($X2,'perihal'); ?>
-			<?php echo $form->textArea($X2,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($X2,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($X2,'perihal'); ?>
 		</div>
 

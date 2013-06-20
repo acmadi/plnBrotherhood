@@ -43,7 +43,7 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 			<h4><b> RKS </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($Rks,'nomor'); ?>
-				<?php echo $form->textField($Rks,'nomor',array('size'=>50,'maxlength'=>50)); ?>
+				<?php echo $form->textField($Rks,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 				<?php echo $form->error($Rks,'nomor'); ?>
 			</div>
 			
@@ -53,7 +53,7 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 					'model'=>$Dokumen1,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumen1->tanggal,
-					'htmlOptions'=>array('size'=>50),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),

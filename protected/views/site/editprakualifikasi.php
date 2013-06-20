@@ -46,7 +46,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
 		<div class="row">
 			<?php echo $form->labelEx($X2,'perihal'); ?>
-			<?php echo $form->textArea($X2,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($X2,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($X2,'perihal'); ?>
 		</div>
 

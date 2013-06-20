@@ -26,7 +26,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'nomor'); ?>
-			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUPP,'nomor'); ?>
 		</div>
 		
@@ -46,7 +46,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'perihal'); ?>
-			<?php echo $form->textArea($SUPP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPP,'perihal'); ?>
 		</div>
 
@@ -72,14 +72,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'tempat Pembukaan Penawaran'); ?>
-			<?php echo $form->textArea($SUPP,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPP,'tempat'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Pembukaan Penawaran </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
-			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAPP,'nomor'); ?>
 		</div>
 		
@@ -107,10 +107,10 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->error($BAPP,'status_metode'); ?>
 		</div>
 		
-		<h4><b> Berita Acara Evaluasi Penawaran Sampul Satu</b></h4>
+		<h4><b> Berita Acara Evaluasi Penawaran</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAEP,'nomor'); ?>
-			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAEP,'nomor'); ?>
 		</div>
 		
