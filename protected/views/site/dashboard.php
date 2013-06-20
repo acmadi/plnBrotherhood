@@ -12,12 +12,13 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
 		// 'filter'=>$model,
-		"ajaxUpdate"=>false,
+		"ajaxUpdate"=>false,					
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			array(
 				'name'=>'No',
+				// 'filter'=>CHtml::listData(Pengadaan::model()->nama_pengadaan, 'id', 'name'),
 				'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',		
 			),
 			// 'id_pengadaan',
@@ -36,8 +37,13 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				),
 				
 			array(            // display using an expression
-            'name'=>'Sisa Hari',
+            'name'=>'Sisa Hari',			
             'value'=>'$data->sisaHari($data->id_pengadaan)',
+			// "htmlOptions"=>array(
+				// "style"=>'Pengadaan::model()->sisaHari(Pengadaan::model()->id_pengadaan)'==0 ? 'color:red' : "color:green",
+			// ),		
+			// 'cssClassExpression' => '$data->sisaHari($data->id_pengadaan) == "46" ? "background-color:#FFC4D3;" : "font:bold 100px"',			
+
 			),
 			
 			'status',
@@ -47,7 +53,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				  'value'=>'$this->grid->Controller->createWidget("zii.widgets.jui.CJuiProgressBar",array(					
 					"value"=>$data->progressPengadaan(),
 					"htmlOptions"=>array(
-					  "style"=>"width:100px; height:20px; float:left;margin-left:35px; background-color:#44F44F ;background:#EFFDFF",
+					  "style"=>"width:100px; height:20px; float:left;margin-left:30px; background-color:#44F44F ;background:#EFFDFF",
 					  "color" => "red"
 					  // "options"=>array(
 					    // "change"=>new CJavaScriptExpression("function(event, ui)) {}
@@ -55,21 +61,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 					),					
 
 				  ))->run()',
-				),
-				
-			/*
-			'biaya',
-			'nama',			
-			'metode_pengadaan',
-			'metode_penawaran',
-			'deskripsi',
-			*/
-			// array(
-				// 'class'=>'CButtonColumn',
-				// 'template'=>'{view}',			
-				// 'viewButtonLabel'=>'Lihat',
-				// 'viewButtonUrl'=>'Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$data->id_pengadaan"))',			
-			// ),
+			),							
 		),
 	)); 
 	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
@@ -112,7 +104,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				  'value'=>'$this->grid->Controller->createWidget("zii.widgets.jui.CJuiProgressBar",array(					
 					"value"=>$data->progressPengadaan(),
 					"htmlOptions"=>array(
-					  "style"=>"width:100px; height:20px; float:left;margin-left:35px; background-color:#44F44F ;background:#EFFDFF",
+					  "style"=>"width:100px; height:20px; float:left;margin-left:30px; background-color:#44F44F ;background:#EFFDFF",
 					  "color" => "red"
 					  // "options"=>array(
 					    // "change"=>new CJavaScriptExpression("function(event, ui)) {}

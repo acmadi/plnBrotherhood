@@ -143,7 +143,7 @@ class Pengadaan extends CActiveRecord
 			  'desc'=>'idPanitia.nama_panitia desc',
 			),
 			'Sisa Hari'=>array(
-			  'asc'=>'Sisa Hari',
+			  'asc'=>'nama_pengadaan',
 			  'desc'=>'sisaHari(id_pengadaan) desc',
 			),
 		);
