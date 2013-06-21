@@ -12,7 +12,7 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
+		<?php echo $form->labelEx($model,'nama pengguna'); ?>
 		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'status_user'); ?>
+		<?php echo $form->labelEx($model,'status_pengguna'); ?>
 		<?php echo $form->textField($model,'status_user',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'status_user'); ?>
 	</div>

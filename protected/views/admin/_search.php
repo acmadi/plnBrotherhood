@@ -1,6 +1,6 @@
 <?php
-/* @var $this KdivmumController */
-/* @var $model Kdivmum */
+/* @var $this AdminController */
+/* @var $model Admin */
 /* @var $form CActiveForm */
 ?>
 
@@ -14,16 +14,6 @@
 	<div class="row">
 		<?php echo $form->label($model,'username'); ?>
 		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'NIP'); ?>
-		<?php echo $form->textField($model,'NIP',array('size'=>32,'maxlength'=>32)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>32,'maxlength'=>32)); ?>
 	</div>
 
 	<div class="row buttons">

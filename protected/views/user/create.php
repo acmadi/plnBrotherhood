@@ -8,8 +8,8 @@
 // );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'Daftar Pengguna', 'url'=>array('index')),
+	array('label'=>'Kelola Pengguna', 'url'=>array('admin')),
 );
 ?>
 

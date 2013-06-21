@@ -37,7 +37,7 @@ class Admin extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('username', 'required'),
 			array('username', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

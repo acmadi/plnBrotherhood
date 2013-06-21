@@ -1,15 +1,15 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/* @var $this AdminController */
+/* @var $model Admin */
 
 // $this->breadcrumbs=array(
-	// 'Users'=>array('index'),
+	// 'Admins'=>array('index'),
 	// 'Manage',
 // );
 
 $this->menu=array(
-	array('label'=>'Daftar Pengguna', 'url'=>array('index')),
-	array('label'=>'Tambah Pengguna', 'url'=>array('create')),
+	array('label'=>'Daftar Admin', 'url'=>array('index')),
+	array('label'=>'Tambah Admin', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#user-grid').yiiGridView('update', {
+	$('#admin-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Kelola Pengguna</h1>
+<h1>Kelola Admin</h1>
 
 <?php echo CHtml::link('Pencarian Lanjut','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -36,15 +36,11 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'user-grid',
+	'id'=>'admin-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'username',
-		'nama',
-		'password',
-		'divisi',
-		'status_user',
 		array(
 			'class'=>'CButtonColumn',
 		),

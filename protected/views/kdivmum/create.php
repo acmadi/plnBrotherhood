@@ -8,11 +8,11 @@
 //);
 
 $this->menu=array(
-	array('label'=>'List Kdivmum', 'url'=>array('index')),
-	array('label'=>'Manage Kdivmum', 'url'=>array('admin')),
+	array('label'=>'Daftar KDIVMUM / MSDAF ', 'url'=>array('index')),
+	array('label'=>'Kelola KDIVMUM / MSDAF', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Kdivmum</h1>
+<h1>Tambah KDIVMUM / MSDAF</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

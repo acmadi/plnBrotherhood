@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Daftar Panitia', 'url'=>array('index')),
 	array('label'=>'Tambah Panitia', 'url'=>array('create')),
 	array('label'=>'Perbarui Panitia', 'url'=>array('update', 'id'=>$model->id_panitia)),
-	array('label'=>'Hapus Panitia', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_panitia),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Hapus Panitia', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_panitia),'confirm'=>'Apakah anda yakin menghapus pengguna ini?')),
 	array('label'=>'Kelola Panitia', 'url'=>array('admin')),
 );
 ?>

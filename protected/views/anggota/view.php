@@ -8,15 +8,15 @@
 // );
 
 $this->menu=array(
-	array('label'=>'List Anggota', 'url'=>array('index')),
-	array('label'=>'Create Anggota', 'url'=>array('create')),
-	array('label'=>'Update Anggota', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Anggota', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Anggota', 'url'=>array('admin')),
+	array('label'=>'Daftar Anggota', 'url'=>array('index')),
+	array('label'=>'Tambah Anggota', 'url'=>array('create')),
+	array('label'=>'Perbarui Anggota', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Hapus Anggota', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Apakah anda yakin menghapus pengguna ini?')),
+	array('label'=>'Kelola Anggota', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Anggota #<?php echo $model->id; ?></h1>
+<h1>Lihat Anggota #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -26,5 +26,6 @@ $this->menu=array(
 		'NIP',
 		'email',
 		'id_panitia',
+		'jabatan',
 	),
 )); ?>

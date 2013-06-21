@@ -8,15 +8,15 @@
 // );
 
 $this->menu=array(
-	array('label'=>'List Kdivmum', 'url'=>array('index')),
-	array('label'=>'Create Kdivmum', 'url'=>array('create')),
-	array('label'=>'Update Kdivmum', 'url'=>array('update', 'id'=>$model->username)),
-	array('label'=>'Delete Kdivmum', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->username),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Kdivmum', 'url'=>array('admin')),
+	array('label'=>'Daftar KDIVMUM / MSDAF', 'url'=>array('index')),
+	array('label'=>'Tambah KDIVMUM / MSDAF', 'url'=>array('create')),
+	array('label'=>'Perbarui KDIVMUM / MSDAF', 'url'=>array('update', 'id'=>$model->username)),
+	array('label'=>'Hapus KDIVMUM / MSDAF', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->username),'Apakah anda yakin menghapus pengguna ini?')),
+	array('label'=>'Kelola KDIVMUM / MSDAF', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Kdivmum #<?php echo $model->username; ?></h1>
+<h1>Lihat KDIVMUM / MSDAF #<?php echo $model->username; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

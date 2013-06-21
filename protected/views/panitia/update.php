@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Perbarui Panitia <?php echo $model->id_panitia; ?></h1>
+<h1>Perbarui Panitia : <?php echo $model->id_panitia; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

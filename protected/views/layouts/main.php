@@ -45,6 +45,9 @@
 					'items'=>array(
 						array('label'=>'Pengguna', 'url'=>array('/user/index')),
 						array('label'=>'Panitia', 'url'=>array('/panitia/index')),
+						array('label'=>'Anggota', 'url'=>array('/anggota/index')),
+						array('label'=>'KDIVMUM / MSDAF', 'url'=>array('/kdivmum/index')),
+						array('label'=>'Admin', 'url'=>array('/admin/index')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),

@@ -25,5 +25,9 @@
 	<?php echo CHtml::encode($data->id_panitia); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('jabatan')); ?>:</b>
+	<?php echo CHtml::encode($data->jabatan); ?>
+	<br />
+
 
 </div>
