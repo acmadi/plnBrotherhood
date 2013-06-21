@@ -40,8 +40,16 @@
 						array('label'=>'Masuk', 'url'=>array('/site/login')),
 					),
 				));
-			}
-			else {
+			} else if (Admin::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->widget('zii.widgets.CMenu', array(
+					'items'=>array(
+						array('label'=>'Pengguna', 'url'=>array('/site/ubahpengguna')),
+						array('label'=>'Panitia', 'url'=>array('/site/ubahpantia')),
+						array('label'=>'Keluar', 'url'=>array('/site/logout')),
+						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
+					),
+				));			
+			} else {
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
 						array('label'=>'Beranda', 'url'=>array('/site/dashboard')),
