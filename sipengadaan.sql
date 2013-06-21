@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.4
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 21, 2013 at 03:12 AM
--- Server version: 5.1.44
--- PHP Version: 5.3.1
+-- Generation Time: Jun 21, 2013 at 08:13 AM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -139,11 +140,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `berita_acara_pengadaan_gagal`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -201,11 +197,6 @@ CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `divisi`
---
-
 
 -- --------------------------------------------------------
 
@@ -298,11 +289,6 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dokumen_penawaran`
---
-
 
 -- --------------------------------------------------------
 
@@ -589,25 +575,26 @@ INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `panitia` (
-  `id_panitia` bigint(11) NOT NULL,
+  `id_panitia` bigint(11) NOT NULL AUTO_INCREMENT,
   `nama_panitia` varchar(50) NOT NULL,
+  `SK_panitia` varchar(50) NOT NULL,
   `tahun` int(11) NOT NULL,
   `jumlah_panitia` bigint(20) NOT NULL,
   `status_panitia` varchar(32) NOT NULL,
   `jenis_panitia` varchar(20) NOT NULL,
   PRIMARY KEY (`id_panitia`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `panitia`
 --
 
-INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`, `jenis_panitia`) VALUES
-(1, 'Hanif Eridaputra', 2013, 1, 'Aktif', 'Pejabat'),
-(2, 'Johannes Ridho', 2013, 1, 'Aktif', 'Pejabat'),
-(3, 'Panitia-A', 2013, 3, 'Aktif', 'Panitia'),
-(4, 'Panitia-B', 2013, 2, 'Aktif', 'Panitia'),
-(5, 'Panitia-C', 2012, 0, 'Tidak Aktif', 'Panitia');
+INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`, `jenis_panitia`) VALUES
+(1, 'Hanif Eridaputra', '-', 2013, 1, 'Aktif', 'Pejabat'),
+(2, 'Johannes Ridho', '-', 2013, 1, 'Aktif', 'Pejabat'),
+(3, 'Panitia-A', '024/SK/PLN', 2013, 3, 'Aktif', 'Panitia'),
+(4, 'Panitia-B', '025/SK/PLN', 2013, 2, 'Aktif', 'Panitia'),
+(5, 'Panitia-C', '026/SK/PLN', 2012, 0, 'Tidak Aktif', 'Panitia');
 
 -- --------------------------------------------------------
 
@@ -1113,3 +1100,7 @@ ALTER TABLE `surat_undangan_prakualifikasi`
 --
 ALTER TABLE `tor`
   ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
