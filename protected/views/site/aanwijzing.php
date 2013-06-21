@@ -44,7 +44,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($SUP,'perihal'); ?>
-			<?php echo $form->textArea($SUP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUP,'perihal'); ?>
 		</div>
 
@@ -70,14 +70,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<div class="row">
 			<?php echo $form->labelEx($SUP,'tempat Aanwijzing'); ?>
-			<?php echo $form->textArea($SUP,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUP,'tempat'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAP,'nomor'); ?>
-			<?php echo $form->textField($BAP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($BAP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAP,'nomor'); ?>
 		</div>
 

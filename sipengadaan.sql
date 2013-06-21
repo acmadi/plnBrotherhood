@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 19, 2013 at 10:22 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jun 20, 2013 at 08:04 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -85,12 +84,9 @@ INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `no_RKS`, `id_panit
 CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `klarifikasi_administrasi` varchar(100) NOT NULL,
-  `klarifikasi_teknis` varchar(100) NOT NULL,
-  `harga_awal` bigint(20) NOT NULL,
-  `harga_akhir` bigint(20) NOT NULL,
+  `surat_penawaran_harga` varchar(50) NOT NULL,
+  `hak_kewajiban_penyedia` varchar(50) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
-  `surat_keputusan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`),
   KEY `id_panitia` (`id_panitia`)
@@ -100,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
 -- Dumping data for table `berita_acara_negosiasi_klarifikasi`
 --
 
-INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `klarifikasi_administrasi`, `klarifikasi_teknis`, `harga_awal`, `harga_akhir`, `id_panitia`, `surat_keputusan`) VALUES
-(987654383, '43/A/33/2013', 'administrasi', 'teknis', 499000000, 499000000, 2, '');
+INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `surat_penawaran_harga`, `hak_kewajiban_penyedia`, `id_panitia`) VALUES
+(987654383, '43/A/33/2013', 'siapa aja bole', 'Menyediakan', 2);
 
 -- --------------------------------------------------------
 
@@ -142,6 +138,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   PRIMARY KEY (`id_dokumen`),
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_pengadaan_gagal`
+--
+
 
 -- --------------------------------------------------------
 
@@ -200,6 +201,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `divisi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -292,6 +298,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokumen_penawaran`
+--
+
 
 -- --------------------------------------------------------
 
@@ -740,7 +751,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
   `kepada` varchar(30) NOT NULL,
   `tanggal_undangan` date NOT NULL,
   `waktu` varchar(14) NOT NULL,
-  `tempat` varchar(50) NOT NULL,
+  `tempat` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1101,7 +1112,3 @@ ALTER TABLE `surat_undangan_prakualifikasi`
 --
 ALTER TABLE `tor`
   ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

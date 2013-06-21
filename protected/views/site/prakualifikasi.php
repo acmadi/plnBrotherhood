@@ -47,7 +47,7 @@ $A=Dokumen::model()->find(('id_pengadaan='.$id).' and nama_dokumen= "RKS"');
 		
 		<div class="row">
 			<?php echo $form->labelEx($X2,'perihal'); ?>
-			<?php echo $form->textArea($X2,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($X2,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($X2,'perihal'); ?>
 		</div>
 

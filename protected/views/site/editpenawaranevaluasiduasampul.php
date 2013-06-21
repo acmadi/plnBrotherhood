@@ -21,120 +21,132 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'enableAjaxValidation'=>false,
 		)); ?>
 
-		<?php echo $form->errorSummary($SUPPx); ?>
+		<?php echo $form->errorSummary($SUPP); ?>
 		
 		<h4><b> Surat Undangan Pembukaan Penawaran Sampul Satu</b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'nomor'); ?>
-			<?php echo $form->textField($SUPPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUPPx,'nomor'); ?>
+			<?php echo $form->labelEx($SUPP,'nomor'); ?>
+			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($SUPP,'nomor'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($Dokumenx,'tanggal surat'); ?>
+			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$Dokumenx,
+					'model'=>$Dokumen0,
 					'attribute'=>'tanggal',
-					'value'=>$Dokumenx->tanggal,
+					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($Dokumenx,'tanggal'); ?>
+			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'perihal'); ?>
-			<?php echo $form->textArea($SUPPx,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPPx,'perihal'); ?>
+			<?php echo $form->labelEx($SUPP,'perihal'); ?>
+			<?php echo $form->textArea($SUPP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUPP,'perihal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'tanggal Pembukaan Penawaran'); ?>
+			<?php echo $form->labelEx($SUPP,'tanggal Pembukaan Penawaran'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SUPPx,
+					'model'=>$SUPP,
 					'attribute'=>'tanggal_undangan',
-					'value'=>$SUPPx->tanggal_undangan,
+					'value'=>$SUPP->tanggal_undangan,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($SUPPx,'tanggal_undangan'); ?>
+			<?php echo $form->error($SUPP,'tanggal_undangan'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'waktu Pembukaan Penawaran'); ?>
-			<?php echo $form->textField($SUPPx,'waktu',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($SUPPx,'waktu'); ?>
+			<?php echo $form->labelEx($SUPP,'waktu Pembukaan Penawaran (Format HH:MM)'); ?>
+			<?php echo $form->textField($SUPP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($SUPP,'waktu'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUPPx,'tempat Pembukaan Penawaran'); ?>
-			<?php echo $form->textArea($SUPPx,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPPx,'tempat'); ?>
+			<?php echo $form->labelEx($SUPP,'tempat Pembukaan Penawaran'); ?>
+			<?php echo $form->textArea($SUPP,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUPP,'tempat'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Pembukaan Penawaran Sampul Satu</b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($BAPPx,'nomor'); ?>
-			<?php echo $form->textField($BAPPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAPPx,'nomor'); ?>
+			<?php echo $form->labelEx($BAPP,'nomor'); ?>
+			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($BAPP,'nomor'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAPPx,'jumlah penyedia diundang'); ?>
-			<?php echo $form->textField($BAPPx,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAPPx,'jumlah_penyedia_diundang'); ?>
+			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
+			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAPPx,'jumlah penyedia dengan dokumen yang sah'); ?>
-			<?php echo $form->textField($BAPPx,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAPPx,'jumlah_penyedia_dokumen_sah'); ?>
+			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen yang sah'); ?>
+			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_sah'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAPPx,'jumlah penyedia dengan dokumen tidak sah'); ?>
-			<?php echo $form->textField($BAPPx,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAPPx,'jumlah_penyedia_dokumen_tidak_sah'); ?>
+			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen tidak sah'); ?>
+			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAPPx,'status metode'); ?>
-			<?php echo $form->textField($BAPPx,'status_metode',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAPPx,'status_metode'); ?>
+			<?php echo $form->labelEx($BAPP,'status metode'); ?>
+			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAPP,'status_metode'); ?>
 		</div>
 		
 		<h4><b> Berita Acara Evaluasi Penawaran Sampul Satu</b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($BAEPx,'nomor'); ?>
-			<?php echo $form->textField($BAEPx,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($BAEPx,'nomor'); ?>
+			<?php echo $form->labelEx($BAEP,'nomor'); ?>
+			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($BAEP,'nomor'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAEPx,'tanggal Evaluasi Penawaran'); ?>
+			<?php echo $form->labelEx($BAEP,'tanggal Evaluasi Penawaran'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$BAEPx,
+					'model'=>$BAEP,
 					'attribute'=>'tanggal_berita_acara',
-					'value'=>$BAEPx->tanggal_berita_acara,
+					'value'=>$BAEP->tanggal_berita_acara,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($BAEPx,'tanggal_berita_acara'); ?>
+			<?php echo $form->error($BAEP,'tanggal_berita_acara'); ?>
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Dokumenx->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
+	
+	</br>
+	<div style="border-top:1px solid lightblue">
+	</br>
+		<h4><b> Buat Dokumen </b></h4>
+		<ul class="generatedoc">
+			<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>
+			<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$BAPP>id_dokumen)); ?></li>
+			<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+			<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu', array('docx/download','id'=>$BAEP>id_dokumen)); ?></li>
+		</ul>
+	</div>
 	
 	
 <?php	} ?>

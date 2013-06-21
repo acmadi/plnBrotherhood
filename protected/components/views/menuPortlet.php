@@ -71,7 +71,7 @@
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } else {?>
 			<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
@@ -80,9 +80,9 @@
 		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing') || ($cpengadaan->status == 'Penawaran dan Evaluasi')) { ?>
 				<li class='belum'><?php echo 'Negosiasi dan Klarifikasi' ?></li>
 			<?php } else if($cpengadaan->status == 'Negosiasi dan Klarifikasi') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/negosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/editnegosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing') || ($cpengadaan->status == 'Penawaran dan Evaluasi') || ($cpengadaan->status == 'Negosiasi dan Klarifikasi')) { ?>

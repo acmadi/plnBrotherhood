@@ -43,7 +43,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDP,'perihal'); ?>
-			<?php echo $form->textArea($SUPDP,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPDP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPDP,'perihal'); ?>
 		</div>
 
@@ -69,7 +69,7 @@ $this->pageTitle=Yii::app()->name . ' | Generator';
 
 		<div class="row">
 			<?php echo $form->labelEx($SUPDP,'tempat_pengambilan'); ?>
-			<?php echo $form->textArea($SUPDP,'tempat_pengambilan',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->textArea($SUPDP,'tempat_pengambilan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPDP,'tempat_pengambilan'); ?>
 		</div>
 

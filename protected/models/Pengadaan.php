@@ -123,13 +123,35 @@ class Pengadaan extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search()													//search buat kadiv
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'status'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),
+			'PIC'=>array(
+			  'asc'=>'idPanitia.nama_panitia',
+			  'desc'=>'idPanitia.nama_panitia desc',
+			),
+			'Sisa Hari'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'sisaHari(id_pengadaan) desc',
+			),
+		);
+		
 		$criteria=new CDbCriteria;
 
+		$criteria->with = "idPanitia";
+		
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
@@ -141,11 +163,12 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
-		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);				
 		$criteria->condition = "status!='Selesai'";													//------jo-------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>$sort,
 		));
 	}
 	
@@ -154,7 +177,21 @@ class Pengadaan extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'PIC'=>array(
+			  'asc'=>'idPanitia.nama_panitia',
+			  'desc'=>'idPanitia.nama_panitia desc',
+			),
+		);
+		
 		$criteria=new CDbCriteria;
+
+		$criteria->with = "idPanitia";
 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -171,6 +208,7 @@ class Pengadaan extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>$sort,
 		));
 	}
 
@@ -179,7 +217,24 @@ class Pengadaan extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'status'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),
+			'Sisa Hari'=>array(
+			  'asc'=>'$this->sisaHari($this->id_pengadaan)',
+			  'desc'=>'sisaHari(id_pengadaan) desc',
+			),
+		);
+		
+		$criteria=new CDbCriteria;		
+		
 		$usern = Yii::app()->user->name;
 		// $modelUser = Anggota::model()->with('pengadaan')->findAll('username="' . $usern . '"' );
 		$modelUser = Anggota::model()->findAll('username="' . $usern . '"' );
@@ -211,6 +266,7 @@ class Pengadaan extends CActiveRecord
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>$sort,
 		));
 	}	
 	
