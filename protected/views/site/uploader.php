@@ -49,6 +49,25 @@
 	</div>
 	
 	<div id="maincontent">
+	<?php
+		//uploader biasa
+		$form = $this->beginWidget('CActiveForm', array(
+			'id'=>'upload-form',
+			'enableAjaxValidation'=>'false',
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'),	
+		)
+		);
+		
+		echo $form->labelEx($modelDok1,'coks');
+		echo '<br>';
+		echo $form->fileField($modelDok1,'id_dokumen');
+		echo $form->error($modelDok1,'id_dokumen');
+		
+		echo CHtml::submitButton('Simpan', array('submit'=>array('uploader/save'),'class'=>'sidafbutton'));
+		
+		$this->endWidget();
+	?>
+	
 	<div class="uploaderblock">
 	<?php
 	if($modelDok0 !=null){
