@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2013 at 08:04 AM
+-- Generation Time: Jun 21, 2013 at 03:12 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -521,7 +521,8 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
   `dari` varchar(50) NOT NULL,
-  `nama_penyedia` varchar(20) NOT NULL,
+  `nama_penyedia` varchar(50) NOT NULL,
+  `nama_penyedia_2` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `NPWP` varchar(20) NOT NULL,
   `biaya` bigint(20) NOT NULL,
@@ -535,8 +536,8 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
 -- Dumping data for table `nota_dinas_usulan_pemenang`
 --
 
-INSERT INTO `nota_dinas_usulan_pemenang` (`id_dokumen`, `nomor`, `dari`, `nama_penyedia`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
-(987654392, '52/A/33/2013', 'ketua panitia Pengadaan barang dan jasa', 'Samsung', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-08', 'Jakarta');
+INSERT INTO `nota_dinas_usulan_pemenang` (`id_dokumen`, `nomor`, `dari`, `nama_penyedia`, `nama_penyedia_2`, `alamat`, `NPWP`, `biaya`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
+(987654392, '52/A/33/2013', 'ketua panitia Pengadaan barang dan jasa', 'Samsung', '0', 'Jl.samsungjamil No 57 Jakarta Pusat', '1234567', 499000000, '2013-06-08', 'Jakarta');
 
 -- --------------------------------------------------------
 
