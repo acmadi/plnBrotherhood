@@ -18,4 +18,4 @@
 	---->	
 </div>
 
-<?php /*$this->redirect(array('site/generator', 'id'=>$id));*/ ?>
+<?php $this->redirect(array('site/generator', 'id'=>$id)); ?>

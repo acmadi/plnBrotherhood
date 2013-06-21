@@ -25,7 +25,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($X1,'nomor'); ?>
-			<?php echo $form->textField($X1,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+			<?php echo $form->textField($X1,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($X1,'nomor'); ?>
 		</div>
 		
