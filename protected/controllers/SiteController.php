@@ -266,7 +266,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($PAP1->save(false)&&$RKS->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -423,7 +422,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
 								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -476,7 +474,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
 								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -568,7 +565,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpascakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -621,7 +617,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen2->save(false)){
 								if($X2->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpascakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -681,7 +676,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPDP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpengambilandokumenpengadaan','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -725,7 +719,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPDP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpengambilandokumenpengadaan','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -816,7 +809,6 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
-										Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 										$this->redirect(array('editaanwijzing','id'=>$Dokumen0->id_pengadaan));
 									}
 								}
@@ -873,7 +865,6 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($SUP->save(false)&&$BAP->save(false)&&$DH->save(false)){
-										Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 										$this->redirect(array('editaanwijzing','id'=>$Dokumen0->id_pengadaan));
 									}
 								}
@@ -987,7 +978,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenawaranevaluasisatusampul','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1043,7 +1033,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenawaranevaluasisatusampul','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1145,7 +1134,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenawaranevaluasiduasampul','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1203,7 +1191,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenawaranevaluasiduasampul','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1305,7 +1292,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenawaranevaluasiduatahap','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1363,7 +1349,6 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($SUPP->save(false)&&$BAPP->save(false)&&$DH->save(false)&&$BAEP->save(false)){
-									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 									$this->redirect(array('editpenawaranevaluasiduatahap','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1449,7 +1434,6 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($SUNK->save(false)&&$BANK->save(false)&&$DH->save(false)){
-										Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 										$this->redirect(array('editnegosiasidanklarifikasi','id'=>$Dokumen0->id_pengadaan));
 									}
 								}
@@ -1506,7 +1490,6 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($SUNK->save(false)&&$BANK->save(false)&&$DH->save(false)){
-										Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 										$this->redirect(array('editnegosiasidanklarifikasi','id'=>$Dokumen0->id_pengadaan));
 									}
 								}
@@ -1690,7 +1673,7 @@ class SiteController extends Controller
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
 										if(isset($_POST['simpan'])){
-											$this->redirect(array('detailpengadaan','id'=>$Pengadaan->id_pengadaan));
+											$this->redirect(array('dashboard'));
 										}
 										if(isset($_POST['simpanbuat'])){
 											$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));
