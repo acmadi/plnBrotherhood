@@ -43,8 +43,8 @@
 			} else if (Admin::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
-						array('label'=>'Pengguna', 'url'=>array('/site/ubahpengguna')),
-						array('label'=>'Panitia', 'url'=>array('/site/ubahpantia')),
+						array('label'=>'Pengguna', 'url'=>array('/user/index')),
+						array('label'=>'Panitia', 'url'=>array('/panitia/index')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),

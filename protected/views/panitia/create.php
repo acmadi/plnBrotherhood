@@ -8,11 +8,11 @@
 // );
 
 $this->menu=array(
-	array('label'=>'List Panitia', 'url'=>array('index')),
-	array('label'=>'Manage Panitia', 'url'=>array('admin')),
+	array('label'=>'Daftar Panitia', 'url'=>array('index')),
+	array('label'=>'Kelola Panitia', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Panitia</h1>
+<h1>Tambah Panitia</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

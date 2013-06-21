@@ -11,20 +11,16 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'id_panitia'); ?>
-		<?php echo $form->textField($model,'id_panitia',array('size'=>11,'maxlength'=>11)); ?>
-		<?php echo $form->error($model,'id_panitia'); ?>
-	</div>
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'nama_panitia'); ?>
 		<?php echo $form->textField($model,'nama_panitia',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'nama_panitia'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'SK_panitia'); ?>
+		<?php echo $form->textField($model,'SK_panitia',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'SK_panitia'); ?>
 	</div>
 
 	<div class="row">
@@ -45,8 +41,14 @@
 		<?php echo $form->error($model,'status_panitia'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'jenis_panitia'); ?>
+		<?php echo $form->textField($model,'jenis_panitia',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'jenis_panitia'); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
