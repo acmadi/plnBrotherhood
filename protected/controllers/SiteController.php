@@ -198,6 +198,18 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionSukses()
+	{
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$this->render('sukses');
+			}
+		}
+	}
+	
 	public function actionCheckpoint2()
 	{	
 		if (Yii::app()->user->isGuest) {
@@ -316,7 +328,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($RKS->save(false)){
-									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan,'state'=>'edited'));
+									$this->redirect(array('sukses','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
@@ -1675,7 +1687,7 @@ class SiteController extends Controller
 											$this->redirect(array('dashboard'));
 										}
 										if(isset($_POST['simpanbuat'])){
-											$this->redirect(array('detaildokumen', 'id'=>$NDPP->id_dokumen));
+											$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));
 										}
 									}
 								}
