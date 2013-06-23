@@ -32,8 +32,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'jumlah_panitia'); ?>
-		<?php echo $form->textField($model,'jumlah_panitia',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->label($model,'jumlah_anggota'); ?>
+		<?php echo $form->textField($model,'jumlah_anggota',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
 	<div class="row">

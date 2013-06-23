@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.4
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 21, 2013 at 04:34 PM
--- Server version: 5.1.41
--- PHP Version: 5.3.1
+-- Generation Time: Jun 23, 2013 at 10:44 AM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,7 +28,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(20) NOT NULL,
-  KEY `username` (`username`)
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -157,11 +158,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `berita_acara_pengadaan_gagal`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -219,11 +215,6 @@ CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `divisi`
---
-
 
 -- --------------------------------------------------------
 
@@ -321,11 +312,6 @@ CREATE TABLE IF NOT EXISTS `dokumen_kontrak` (
   KEY `id_dokumen_2` (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `dokumen_kontrak`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -336,11 +322,6 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dokumen_penawaran`
---
-
 
 -- --------------------------------------------------------
 
@@ -371,11 +352,7 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
   `username` varchar(20) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `NIP` (`NIP`),
-  UNIQUE KEY `NIP_2` (`NIP`),
-  KEY `username` (`username`,`NIP`),
-  KEY `username_2` (`username`,`NIP`)
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -631,7 +608,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
   `nama_panitia` varchar(50) NOT NULL,
   `SK_panitia` varchar(50) NOT NULL,
   `tahun` int(11) NOT NULL,
-  `jumlah_panitia` bigint(20) NOT NULL,
+  `jumlah_anggota` bigint(20) NOT NULL,
   `status_panitia` varchar(32) NOT NULL,
   `jenis_panitia` varchar(20) NOT NULL,
   PRIMARY KEY (`id_panitia`)
@@ -641,7 +618,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 -- Dumping data for table `panitia`
 --
 
-INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tahun`, `jumlah_panitia`, `status_panitia`, `jenis_panitia`) VALUES
+INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tahun`, `jumlah_anggota`, `status_panitia`, `jenis_panitia`) VALUES
 (1, 'Hanif Eridaputra', '-', 2013, 1, 'Aktif', 'Pejabat'),
 (2, 'Johannes Ridho', '-', 2013, 1, 'Aktif', 'Pejabat'),
 (3, 'Panitia-A', '024/SK/PLN', 2013, 3, 'Aktif', 'Panitia'),
@@ -917,11 +894,6 @@ CREATE TABLE IF NOT EXISTS `termin` (
   KEY `id_dokumen` (`id_dokumen`,`nomor_termin`,`tipe`,`user`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `termin`
---
-
 
 -- --------------------------------------------------------
 

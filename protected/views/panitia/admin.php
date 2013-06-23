@@ -45,7 +45,7 @@ $('.search-form form').submit(function(){
 		'nama_panitia',
 		'SK_panitia',
 		'tahun',
-		'jumlah_panitia',
+		'jumlah_anggota',
 		'status_panitia',
 		/*
 		'jenis_panitia',

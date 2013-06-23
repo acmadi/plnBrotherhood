@@ -21,8 +21,8 @@
 	<?php echo CHtml::encode($data->tahun); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah_panitia')); ?>:</b>
-	<?php echo CHtml::encode($data->jumlah_panitia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah_anggota')); ?>:</b>
+	<?php echo CHtml::encode($data->jumlah_anggota); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status_panitia')); ?>:</b>

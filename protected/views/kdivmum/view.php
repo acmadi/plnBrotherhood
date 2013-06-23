@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Daftar KDIVMUM / MSDAF', 'url'=>array('index')),
 	array('label'=>'Tambah KDIVMUM / MSDAF', 'url'=>array('create')),
 	array('label'=>'Perbarui KDIVMUM / MSDAF', 'url'=>array('update', 'id'=>$model->username)),
-	array('label'=>'Hapus KDIVMUM / MSDAF', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->username),'Apakah anda yakin menghapus pengguna ini?')),
+	array('label'=>'Hapus KDIVMUM / MSDAF', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->username),'confirm'=>'Apakah anda yakin menghapus pengguna ini?')),
 	array('label'=>'Kelola KDIVMUM / MSDAF', 'url'=>array('admin')),
 );
 ?>

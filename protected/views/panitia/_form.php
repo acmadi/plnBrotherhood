@@ -30,20 +30,24 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'jumlah_panitia'); ?>
-		<?php echo $form->textField($model,'jumlah_panitia',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'jumlah_panitia'); ?>
+		<?php echo $form->labelEx($model,'jumlah_anggota'); ?>
+		<?php echo $form->textField($model,'jumlah_anggota',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'jumlah_anggota'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status_panitia'); ?>
-		<?php echo $form->textField($model,'status_panitia',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->radioButtonList($model,'status_panitia',
+				array('Aktif'=>'Aktif','Tidak Aktif'=>'Tidak Aktif'),
+				array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 		<?php echo $form->error($model,'status_panitia'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'jenis_panitia'); ?>
-		<?php echo $form->textField($model,'jenis_panitia',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->radioButtonList($model,'jenis_panitia',
+				array('Pejabat'=>'Pejabat','Panitia'=>'Panitia'),
+				array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 		<?php echo $form->error($model,'jenis_panitia'); ?>
 	</div>
 
