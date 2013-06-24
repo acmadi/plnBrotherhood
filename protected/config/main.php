@@ -16,7 +16,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.extensions.coco.*',
-		'application.extensions.jqBarGraph.*',
+		'application.extensions.amcharts.*',
 	),
 
 	'modules'=>array(

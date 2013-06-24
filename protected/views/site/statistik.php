@@ -3,3 +3,8 @@
 
 $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 ?>
+
+<?php $this->widget('EAmChartWidget', array(
+		
+	));
+?>
