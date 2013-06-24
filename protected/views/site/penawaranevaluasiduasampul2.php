@@ -24,7 +24,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 		<?php echo $form->errorSummary($SUPP); ?>
 		
-		<h4><b> Surat Undangan Pembukaan Penawaran Tahap Satu</b></h4>
+		<h4><b> Surat Undangan Pembukaan Penawaran Sampul Dua</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'nomor'); ?>
 			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -77,7 +77,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->error($SUPP,'tempat'); ?>
 		</div>
 		
-		<h4><b> Berita Acara Pembukaan Penawaran Tahap Satu</b></h4>
+		<h4><b> Berita Acara Pembukaan Penawaran Sampul Dua</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
 			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -108,7 +108,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->error($BAPP,'status_metode'); ?>
 		</div>
 		
-		<h4><b> Berita Acara Evaluasi Penawaran Tahap Satu</b></h4>
+		<h4><b> Berita Acara Evaluasi Penawaran Sampul Dua</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAEP,'nomor'); ?>
 			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -130,32 +130,17 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
-	
 	</br>
-	<div style="border-top:1px solid lightblue">
-	</br>
-		<h4><b> Buat Dokumen </b></h4>
-		<ul class="generatedoc">
-			<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>
-			<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$BAPP>id_dokumen)); ?></li>
-			<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
-			<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Tahap Satu', array('docx/download','id'=>$BAEP>id_dokumen)); ?></li>
-		</ul>
-	</div>
 	
 	<div style="border-top:1px solid lightblue">
 	</br>
-		<?php if($cpengadaan->status == 'Penawaran dan Evaluasi Tahap-2') { ?>
-				<?php echo CHtml::button('Tahap Dua', array('submit'=>array('site/penawaranevaluasiduatahap2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } else { ?>
-				<?php echo CHtml::button('Tahap Dua', array('submit'=>array('site/editpenawaranevaluasiduatahap2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-		<?php } ?>
+		<?php echo CHtml::button('Sampul Satu', array('submit'=>array('site/editpenawaranevaluasiduasampul',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
 	</div>
 	
 	

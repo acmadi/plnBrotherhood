@@ -62,16 +62,20 @@
 					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduasampul","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi Sampul-2') { ?>
+					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduasampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduasampul","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduasampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Tahap') { ?>
 			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')|| ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing')) { ?>
 					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi Tahap-2') { ?>
+					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
-					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduatahap2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } else {?>
 			<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
