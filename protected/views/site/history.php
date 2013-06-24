@@ -23,5 +23,10 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
 			'name'=>"PIC",
 			'value'=>'$data->idPanitia->nama_panitia',
 			),
+			
+		array(            // display using an expression
+				'name'=>'User',
+				'value'=>'$data->divisi_peminta',
+				),			
 	),
 )); ?>
