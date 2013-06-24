@@ -7,12 +7,12 @@
 // );
 
 $this->menu=array(
-	array('label'=>'Create Anggota', 'url'=>array('create')),
-	array('label'=>'Manage Anggota', 'url'=>array('admin')),
+	array('label'=>'Tambah Anggota', 'url'=>array('create')),
+	array('label'=>'Kelola Anggota', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Anggotas</h1>
+<h1>Daftar Anggota</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

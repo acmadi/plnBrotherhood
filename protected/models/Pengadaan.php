@@ -134,6 +134,10 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'nama_pengadaan',
 			  'desc'=>'nama_pengadaan desc',
 			),
+			'User'=>array(
+			  'asc'=>'divisi_peminta',
+			  'desc'=>'divisi_peminta desc',
+			),
 			'status'=>array(
 			  'asc'=>'status',
 			  'desc'=>'status desc',
@@ -146,11 +150,13 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'nama_pengadaan',
 			  'desc'=>'sisaHari(id_pengadaan) desc',
 			),
+			'*',
 		);
 		
 		$criteria=new CDbCriteria;
 
-		$criteria->with = "idPanitia";
+		$criteria->with = array("idPanitia");
+		// $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");
 		
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -163,7 +169,10 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
-		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);				
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);			
+		
+		// $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->notaDinasPerintahPengadaan->nota_dinas_permintaan,true);			
+				
 		$criteria->condition = "status!='Selesai'";													//------jo-------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
@@ -182,6 +191,10 @@ class Pengadaan extends CActiveRecord
 			'nama_pengadaan'=>array(
 			  'asc'=>'nama_pengadaan',
 			  'desc'=>'nama_pengadaan desc',
+			),
+			'User'=>array(
+			  'asc'=>'divisi_peminta',
+			  'desc'=>'divisi_peminta desc',
 			),
 			'PIC'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
@@ -226,6 +239,10 @@ class Pengadaan extends CActiveRecord
 			'status'=>array(
 			  'asc'=>'status',
 			  'desc'=>'status desc',
+			),
+			'User'=>array(
+			  'asc'=>'divisi_peminta',
+			  'desc'=>'divisi_peminta desc',
 			),
 			'Sisa Hari'=>array(
 			  'asc'=>'$this->sisaHari($this->id_pengadaan)',
@@ -289,28 +306,28 @@ class Pengadaan extends CActiveRecord
 	public function progressPengadaan(){					//jo---------------------------
 		
 		if($this->status == 'Penunjukan Panitia'){
-			return 100/8;
+			return 0;
 		}
 		else if($this->status == 'Kualifikasi'){
-			return 200/8;
+			return 100/7;
 		}
 		else if($this->status == 'Pengambilan Dokumen Pengadaan'){
-			return 300/8;
+			return 200/7;
 		}
 		else if($this->status == 'Aanwijzing'){
-			return 400/8;
+			return 300/7;
 		}
 		else if($this->status == 'Penawaran dan Evaluasi'){
-			return 500/8;
+			return 400/7;
 		}
 		else if($this->status == 'Negosiasi dan Klarifikasi' ){
-			return 600/8;
+			return 500/7;
 		}
 		else if($this->status == 'Penentuan Pemenang'){
-			return 700/8;
+			return 600/7;
 		}
 		else if($this->status == 'Selesai'){
-			return 800/8;
+			return 700/7;
 		}
 		else{
 			return 0;

@@ -7,12 +7,12 @@
 // );
 
 $this->menu=array(
-	array('label'=>'Create Panitia', 'url'=>array('create')),
-	array('label'=>'Manage Panitia', 'url'=>array('admin')),
+	array('label'=>'Tambah Panitia', 'url'=>array('create')),
+	array('label'=>'Kelola Panitia', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Panitias</h1>
+<h1>Daftar Panitia</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

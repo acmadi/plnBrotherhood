@@ -11,13 +11,9 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->dropDownList($model,'username',CHtml::listData(User::model()->findAll(), 'username', 'nama'),array('empty'=>'-----Pilih Nama-----'));?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
@@ -35,12 +31,18 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_panitia'); ?>
-		<?php echo $form->textField($model,'id_panitia',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->dropDownList($model,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
 		<?php echo $form->error($model,'id_panitia'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'jabatan'); ?>
+		<?php echo $form->textField($model,'jabatan',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'jabatan'); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

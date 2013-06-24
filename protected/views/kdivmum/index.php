@@ -7,12 +7,12 @@
 // );
 
 $this->menu=array(
-	array('label'=>'Create Kdivmum', 'url'=>array('create')),
-	array('label'=>'Manage Kdivmum', 'url'=>array('admin')),
+	array('label'=>'Tambah KDIVMUM / MSDAF', 'url'=>array('create')),
+	array('label'=>'Kelola KDIVMUM / MSDAF', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Kdivmums</h1>
+<h1>Daftar KDIVMUM / MSDAF</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

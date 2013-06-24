@@ -9,13 +9,13 @@
 // );
 
 $this->menu=array(
-	array('label'=>'List Kdivmum', 'url'=>array('index')),
-	array('label'=>'Create Kdivmum', 'url'=>array('create')),
-	array('label'=>'View Kdivmum', 'url'=>array('view', 'id'=>$model->username)),
-	array('label'=>'Manage Kdivmum', 'url'=>array('admin')),
+	array('label'=>'Daftar KDIVMUM / MSDAF', 'url'=>array('index')),
+	array('label'=>'Tambah KDIVMUM / MSDAF', 'url'=>array('create')),
+	array('label'=>'Lihat KDIVMUM / MSDAF', 'url'=>array('view', 'id'=>$model->username)),
+	array('label'=>'Kelola KDIVMUM / MSDAF', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Kdivmum <?php echo $model->username; ?></h1>
+<h1>Perbarui KDIVMUM / MSDAF : <?php echo $model->username; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

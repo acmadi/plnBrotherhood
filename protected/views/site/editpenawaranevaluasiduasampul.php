@@ -3,6 +3,7 @@
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <div id="pagecontent">
@@ -148,10 +149,19 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</ul>
 	</div>
 	
+	<div style="border-top:1px solid lightblue">
+	</br>
+		<?php if($cpengadaan->status == 'Penawaran dan Evaluasi Sampul-2') { ?>
+				<?php echo CHtml::button('Sampul Dua', array('submit'=>array('site/penawaranevaluasiduasampul2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
+			<?php } else { ?>
+				<?php echo CHtml::button('Sampul Dua', array('submit'=>array('site/editpenawaranevaluasiduasampul2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
+		<?php } ?>
+	</div>
+	
 	
 <?php	} ?>
 	</div>
 </div>
 
 <div>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?></div>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)'));  ?></div>

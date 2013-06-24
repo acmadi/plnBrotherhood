@@ -8,11 +8,11 @@
 // );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'Daftar Pengguna', 'url'=>array('index')),
+	array('label'=>'Kelola Pengguna', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create User</h1>
+<h1>Tambah Pengguna</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -36,8 +36,13 @@
 		<?php echo $form->textField($model,'id_panitia',array('size'=>11,'maxlength'=>11)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'jabatan'); ?>
+		<?php echo $form->textField($model,'jabatan',array('size'=>32,'maxlength'=>32)); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Cari',array('class'=>'sidafbutton')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

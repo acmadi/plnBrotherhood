@@ -13,16 +13,24 @@
 	<?php echo CHtml::encode($data->nama_panitia); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('SK_panitia')); ?>:</b>
+	<?php echo CHtml::encode($data->SK_panitia); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('tahun')); ?>:</b>
 	<?php echo CHtml::encode($data->tahun); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah_panitia')); ?>:</b>
-	<?php echo CHtml::encode($data->jumlah_panitia); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah_anggota')); ?>:</b>
+	<?php echo CHtml::encode($data->jumlah_anggota); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status_panitia')); ?>:</b>
 	<?php echo CHtml::encode($data->status_panitia); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('jenis_panitia')); ?>:</b>
+	<?php echo CHtml::encode($data->jenis_panitia); ?>
 	<br />
 
 

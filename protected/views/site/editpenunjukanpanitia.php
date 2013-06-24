@@ -16,22 +16,23 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
 		
-		<?php if($edit != null && $edit=="edited") {?>
-			<div id="popup" style="width:96%; background-color:lightgreen; border:3px solid green; padding:10px;">
-				<span style="margin-left:20px;"><b>Data Berhasil Disimpan</b></span>
-				<script>
+		<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+ 			<div class="flash-success">
+				<?php echo Yii::app()->user->getFlash('sukses'); ?>
+				<script type="text/javascript">
 					setTimeout(function() {
-						$('#popup').animate({
-							height:'0px',
-							opacity:'0.0'
+						$('.flash-success').animate({
+							height: '0px',
+							marginBottom: '0em',
+							padding: '0em',
+							opacity: '0.0'
 						}, 1000, function() {
-							$('#popup').hide();
+							$('.flash-success').hide();
 						});
 					}, 2000);
 				</script>
 			</div>
-			<br />
-		<?php } ?>
+		<?php endif; ?>
 		
 		<div class="form">
 

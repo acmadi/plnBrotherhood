@@ -3,6 +3,7 @@
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <div id="pagecontent">
@@ -146,6 +147,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Tahap Satu', array('docx/download','id'=>$BAEP>id_dokumen)); ?></li>
 		</ul>
+	</div>
+	
+	<div style="border-top:1px solid lightblue">
+	</br>
+		<?php if($cpengadaan->status == 'Penawaran dan Evaluasi Tahap-2') { ?>
+				<?php echo CHtml::button('Tahap Dua', array('submit'=>array('site/penawaranevaluasiduatahap2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
+			<?php } else { ?>
+				<?php echo CHtml::button('Tahap Dua', array('submit'=>array('site/editpenawaranevaluasiduatahap2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
+		<?php } ?>
 	</div>
 	
 	

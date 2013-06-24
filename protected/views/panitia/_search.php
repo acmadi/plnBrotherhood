@@ -22,13 +22,18 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'SK_panitia'); ?>
+		<?php echo $form->textField($model,'SK_panitia',array('size'=>50,'maxlength'=>50)); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'tahun'); ?>
 		<?php echo $form->textField($model,'tahun'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'jumlah_panitia'); ?>
-		<?php echo $form->textField($model,'jumlah_panitia',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->label($model,'jumlah_anggota'); ?>
+		<?php echo $form->textField($model,'jumlah_anggota',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
 	<div class="row">
@@ -36,8 +41,13 @@
 		<?php echo $form->textField($model,'status_panitia',array('size'=>32,'maxlength'=>32)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'jenis_panitia'); ?>
+		<?php echo $form->textField($model,'jenis_panitia',array('size'=>20,'maxlength'=>20)); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Cari',array('class'=>'sidafbutton')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
