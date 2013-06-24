@@ -57,6 +57,7 @@
 					'items'=>array(
 						array('label'=>'Beranda', 'url'=>array('/site/dashboard')),
 						array('label'=>'Arsip Pengadaan', 'url'=>array('/site/history')),
+						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),
