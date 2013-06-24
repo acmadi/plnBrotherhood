@@ -40,24 +40,17 @@
 						array('label'=>'Masuk', 'url'=>array('/site/login')),
 					),
 				));
-			} else if (Admin::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->widget('zii.widgets.CMenu', array(
-					'items'=>array(
-						array('label'=>'Pengguna', 'url'=>array('/user/index')),
-						array('label'=>'Panitia', 'url'=>array('/panitia/index')),
-						array('label'=>'Anggota', 'url'=>array('/anggota/index')),
-						array('label'=>'KDIVMUM / MSDAF', 'url'=>array('/kdivmum/index')),
-						// array('label'=>'Admin', 'url'=>array('/admin/index')),
-						array('label'=>'Keluar', 'url'=>array('/site/logout')),
-						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
-					),
-				));			
 			} else {
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
-						array('label'=>'Beranda', 'url'=>array('/site/dashboard')),
-						array('label'=>'Arsip Pengadaan', 'url'=>array('/site/history')),
+						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>!Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'Arsip Pengadaan', 'url'=>array('/site/history'), 'visible'=>!Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'Pengguna', 'url'=>array('/user/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'Panitia', 'url'=>array('/panitia/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'Anggota', 'url'=>array('/anggota/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'KDIVMUM / MSDAF', 'url'=>array('/kdivmum/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						// array('label'=>'Admin', 'url'=>array('/admin/index')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),
