@@ -37,6 +37,11 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				),
 				
 			array(            // display using an expression
+				'name'=>'User',
+				'value'=>'$data->divisi_peminta',
+				),			
+				
+			array(            // display using an expression
             'name'=>'Sisa Hari',			
             'value'=>'$data->sisaHari($data->id_pengadaan)',
 			// "htmlOptions"=>array(
@@ -92,6 +97,11 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				'name'=>'PIC',
 				'value'=>'$data->idPanitia->nama_panitia',
 				),
+				
+				array(            // display using an expression
+				'name'=>'User',
+				'value'=>'$data->divisi_peminta',
+				),			
 				
 				array(            // display using an expression
 				'name'=>'Sisa Hari',
