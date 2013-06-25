@@ -7,15 +7,17 @@
 <ul>
 		
 	<?php if(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
-		<?php if($cpengadaan->status == 'Penunjukan Panitia') { ?>
-				<li class='onprogress' ><?php echo CHtml::link('Penunjukan Panitia',array("site/penunjukanpanitia","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else { ?>
-				<li class='sudah' > <?php echo CHtml::link('Penunjukan Panitia',array("site/editpenunjukanpanitia","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php if($cpengadaan->status == '1') { ?>
+				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/rks","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '2') { ?>
+				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/hps","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
+		<?php } else { ?>
+			<li class='sudah' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/edithps","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == 'Penunjukan Panitia') { ?>
+		<?php if($cpengadaan->status == '1'||$cpengadaan->status == '2') { ?>
 				<li class='belum'><?php echo 'Kualifikasi' ?></li>
-			<?php } else if($cpengadaan->status == 'Kualifikasi') { ?>
+			<?php } else if($cpengadaan->status == '3') { ?>
 				<li class='onprogress'><?php 
 					if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi'){
 						echo CHtml::link('Kualifikasi',array("site/prakualifikasi","id"=>"$cpengadaan->id_pengadaan")); 
@@ -33,33 +35,37 @@
 				?></li>
 		<?php } ?>
 		
-		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')) { ?>
+		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
 				<li class='belum'><?php echo 'Pengambilan Dokumen Pengadaan' ?></li>
-			<?php } else if($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') { ?>
+			<?php } else if($cpengadaan->status == '4') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/pengambilandokumenpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '5') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/pengambilandokumenpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li class='sudah'><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/editpengambilandokumenpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')|| ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan')) { ?>
-				<li class='belum'><?php echo 'Annwijzing' ?></li>
-			<?php } else if($cpengadaan->status == 'Aanwijzing') { ?>
+		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5') { ?>
+				<li class='belum'><?php echo 'Aanwijzing' ?></li>
+			<?php } else if($cpengadaan->status == '6') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Aanwijzing',array("site/aanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '7') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Aanwijzing',array("site/beritaacaraaanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li class='sudah'><?php echo CHtml::link('Aanwijzing',array("site/editaanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<?php if($cpengadaan->metode_penawaran=='Satu Sampul') { ?>
-			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')|| ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
+			<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8') { ?>
+					<li class='belum'><?php echo 'Penawaran' ?></li>
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasisatusampul","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasisatusampul","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>	
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Sampul') { ?>
-			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')|| ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing')) { ?>
-					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
+			<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8') { ?>
+					<li class='belum'><?php echo 'Penawaran' ?></li>
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduasampul","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi Sampul-2') { ?>
@@ -68,7 +74,7 @@
 					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editpenawaranevaluasiduasampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Tahap') { ?>
-			<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi')|| ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing')) { ?>
+			<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8') { ?>
 					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
 				<?php } else if($cpengadaan->status == 'Penawaran dan Evaluasi') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/penawaranevaluasiduatahap","id"=>"$cpengadaan->id_pengadaan")); ?></li>
@@ -81,23 +87,34 @@
 			<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
 		<?php } ?>
 		
-		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing') || ($cpengadaan->status == 'Penawaran dan Evaluasi')) { ?>
+		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13') { ?>
 				<li class='belum'><?php echo 'Negosiasi dan Klarifikasi' ?></li>
-			<?php } else if($cpengadaan->status == 'Negosiasi dan Klarifikasi') { ?>
+			<?php } else if($cpengadaan->status == '14') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/negosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '15') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/negosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+
 			<?php } else { ?>
 				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/editnegosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing') || ($cpengadaan->status == 'Penawaran dan Evaluasi') || ($cpengadaan->status == 'Negosiasi dan Klarifikasi')) { ?>
+		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13' || $cpengadaan->status == '14'||$cpengadaan->status == '15') { ?>
 				<li class='belum'><?php echo 'Penentuan Pemenang' ?></li>
-			<?php } else if($cpengadaan->status == 'Penentuan Pemenang') { ?>
+			<?php } else if($cpengadaan->status == '16') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '17') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '18') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '19') { ?>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '20') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if(($cpengadaan->status == 'Penunjukan Panitia') || ($cpengadaan->status == 'Kualifikasi') || ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Pengambilan Dokumen Pengadaan') || ($cpengadaan->status == 'Aanwijzing') || ($cpengadaan->status == 'Penawaran dan Evaluasi') || ($cpengadaan->status == 'Negosiasi dan Klarifikasi') || ($cpengadaan->status == 'Penawaran dan Evaluasi') || ($cpengadaan->status == 'Penentuan Pemenang')){ ?>
+		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13' || $cpengadaan->status == '14'||$cpengadaan->status == '15' || $cpengadaan->status == '16'|| $cpengadaan->status == '17' || $cpengadaan->status == '18'||$cpengadaan->status == '19' || $cpengadaan->status == '20') { ?>
 				<li class='belum'><?php echo 'Selesai' ?></li>
 			<?php } else if($cpengadaan->status == 'Pengajuan Selesai') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Selesai',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>

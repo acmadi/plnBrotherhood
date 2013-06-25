@@ -197,10 +197,13 @@ class SiteController extends Controller
 		}
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				if(Pengadaan::model()->findByPk($id)->status=="Penunjukan Panitia"){
-					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
+				if(Pengadaan::model()->findByPk($id)->status=="1"){
+					$this->redirect(array('site/rks','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="Kualifikasi"){
+				if(Pengadaan::model()->findByPk($id)->status=="2"){
+					$this->redirect(array('site/hps','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="3"){
 					if(Pengadaan::model()->findByPk($id)->jenis_kualifikasi=="Pra Kualifikasi"){
 						$this->redirect(array('site/prakualifikasi','id'=>$id));
 					}
@@ -208,35 +211,35 @@ class SiteController extends Controller
 						$this->redirect(array('site/pascakualifikasi','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="Pengambilan Dokumen Pengadaan"){
-					$this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="Aanwijzing"){
-					$this->redirect(array('site/aanwijzing','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi"){
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
-						$this->redirect(array('site/penawaranevaluasisatusampul','id'=>$id));
-					}
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
-						$this->redirect(array('site/penawaranevaluasiduasampul','id'=>$id));
-					}
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
-						$this->redirect(array('site/penawaranevaluasiduatahap','id'=>$id));
-					}
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi Sampul-2"){
-					$this->redirect(array('site/penawaranevaluasiduasampul2','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi Tahap-2"){
-					$this->redirect(array('site/penawaranevaluasiduatahap2','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="Negosiasi dan Klarifikasi"){
-					$this->redirect(array('site/negosiasidanklarifikasi','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="Penentuan Pemenang"){
-					$this->redirect(array('site/penunjukanpanitia','id'=>$id));
-				}
+				// if(Pengadaan::model()->findByPk($id)->status=="Pengambilan Dokumen Pengadaan"){
+					// $this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="Aanwijzing"){
+					// $this->redirect(array('site/aanwijzing','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi"){
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
+						// $this->redirect(array('site/penawaranevaluasisatusampul','id'=>$id));
+					// }
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
+						// $this->redirect(array('site/penawaranevaluasiduasampul','id'=>$id));
+					// }
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
+						// $this->redirect(array('site/penawaranevaluasiduatahap','id'=>$id));
+					// }
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi Sampul-2"){
+					// $this->redirect(array('site/penawaranevaluasiduasampul2','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi Tahap-2"){
+					// $this->redirect(array('site/penawaranevaluasiduatahap2','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="Negosiasi dan Klarifikasi"){
+					// $this->redirect(array('site/negosiasidanklarifikasi','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="Penentuan Pemenang"){
+					// $this->redirect(array('site/penunjukanpanitia','id'=>$id));
+				// }
 			}
 		}
 	}
@@ -253,7 +256,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionPenunjukanpanitia()
+	public function actionRks()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -263,7 +266,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Kualifikasi';
+				$Pengadaan->status ='2';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -309,21 +312,21 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($PAP1->save(false)&&$RKS->save(false)){
-									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editrks','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('penunjukanpanitia',array(
+				$this->render('rks',array(
 					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen1'=>$Dokumen1,
 				));
 			}
 		}
 	}
 	
-	public function actionEditPenunjukanpanitia()
+	public function actionEditRks()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -360,20 +363,124 @@ class SiteController extends Controller
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($RKS->save(false)){
 									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-									$this->redirect(array('editpenunjukanpanitia','id'=>$Dokumen0->id_pengadaan,));
+									$this->redirect(array('editrks','id'=>$Dokumen0->id_pengadaan,));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('editpenunjukanpanitia',array(
+				$this->render('rks',array(
 					'Rks'=>$RKS,'Pengadaan'=>$Pengadaan,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,
 				));
 			}
 		}
 	}
 	
+	public function actionHps()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='3';
+				
+				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS= Rks::model()->findByPk($Dok->id_dokumen);
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='HPS';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				
+				$HPS= new Hps;
+				$HPS->id_dokumen=$Dokumen0->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Hps']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$HPS->attributes=$_POST['Hps'];
+					$valid=$HPS->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($HPS->save(false)){
+									$this->redirect(array('edithps','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+						
+					}
+				}
+
+				$this->render('hps',array(
+					'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS,
+				));
+			}
+		}
+	}
+	
+	public function actionEditHps()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS= Rks::model()->findByPk($Dok->id_dokumen);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "HPS"');
+				
+				$HPS= Hps::model()->findByPk($Dokumen0->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['Hps']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$HPS->attributes=$_POST['Hps'];
+					
+					$valid=$HPS->validate();;
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){						
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($HPS->save(false)){
+									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+									$this->redirect(array('edithps','id'=>$Dokumen0->id_pengadaan,));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('hps',array(
+					'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS
+				));
+			}
+		}
+	}
 	
 	public function actionPrakualifikasi()
 	{	
@@ -2042,7 +2149,7 @@ class SiteController extends Controller
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$Pengadaan=new Pengadaan;
-			$Pengadaan->status="Penunjukan Panitia";
+			$Pengadaan->status="1";
 			$criteria=new CDbcriteria;
 			$criteria->select='max(id_pengadaan) AS maxId';
 			$row = $Pengadaan->model()->find($criteria);

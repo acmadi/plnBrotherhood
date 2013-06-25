@@ -85,3 +85,36 @@ li
 {
 	margin-left: 5px;
 }
+
+#menuform
+{
+	background:white url(bg.gif) repeat-x left top;
+}
+
+#menuform ul
+{
+	padding:6px 20px 5px 20px;
+	margin:0px;
+}
+
+#menuform ul li
+{
+	display: inline;
+}
+
+#menuform ul li a
+{
+	color:#ffffff;
+	background-color:transparent;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	padding:5px 8px;
+}
+
+#menuform ul li a:hover, #menuform ul li.active a
+{
+	color: #6399cd;
+	background-color:#EFF4FA;
+	text-decoration:none;
+}
