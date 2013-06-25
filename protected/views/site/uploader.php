@@ -40,7 +40,8 @@
 	$modelDok17 = Dokumen::model()->find('nama_dokumen="Nota Dinas Usulan Pemenang"');
 	$modelDok18 = Dokumen::model()->find('nama_dokumen="Nota Dinas Penetapan Pemenang"');
 	$modelDok19 = Dokumen::model()->find('nama_dokumen="Nota Dinas Pemberitahuan Pemenang"');
-	$modelDok20 = Dokumen::model()->find('nama_dokumen="Pakta Integritas Akhir Panitia"');
+	$modelDok20 = Dokumen::model()->find('nama_dokumen="Pakta Integritas Akhir Panitia" AND id_pengadaan="' . $id . '"');
+	
 ?>
 
 <div id="pagecontent">
@@ -58,10 +59,12 @@
 		)
 		);
 		
-		echo $form->labelEx($modelDok1,'coks');
+		echo $form->labelEx($modelDokKadiv1,'TOR');
 		echo '<br>';
-		echo $form->fileField($modelDok1,'id_dokumen');
-		echo $form->error($modelDok1,'id_dokumen');
+		echo $form->fileField($modelDokKadiv1,'uploadedFile');
+		echo $form->error($modelDokKadiv1,'uploadedFile');
+		
+		echo $modelDokKadiv1->id_dokumen;
 		
 		echo CHtml::submitButton('Simpan', array('submit'=>array('uploader/save'),'class'=>'sidafbutton'));
 		
