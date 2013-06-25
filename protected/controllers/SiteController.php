@@ -210,6 +210,18 @@ class SiteController extends Controller
 						$this->redirect(array('site/pascakualifikasi','id'=>$id));
 					}
 				}
+				if(Pengadaan::model()->findByPk($id)->status=="4"){
+					$this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+				}
+				// if(Pengadaan::model()->findByPk($id)->status=="5"){
+					// $this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+				// }
+				if(Pengadaan::model()->findByPk($id)->status=="6"){
+					$this->redirect(array('site/aanwijzing','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="7"){
+					$this->redirect(array('site/beritaacaraaanwijzing','id'=>$id));
+				}
 				if(Pengadaan::model()->findByPk($id)->status=="8"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
 						$this->redirect(array('site/suratundanganpembukaanpenawaran','id'=>$id));
@@ -245,36 +257,7 @@ class SiteController extends Controller
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="14"){
 					$this->redirect(array('site/suratundangannegosiasiklarifikasi','id'=>$id));
-				}
-				// if(Pengadaan::model()->findByPk($id)->status=="Pengambilan Dokumen Pengadaan"){
-					// $this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="Aanwijzing"){
-					// $this->redirect(array('site/aanwijzing','id'=>$id));
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi"){
-					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
-						// $this->redirect(array('site/penawaranevaluasisatusampul','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
-						// $this->redirect(array('site/penawaranevaluasiduasampul','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
-						// $this->redirect(array('site/penawaranevaluasiduatahap','id'=>$id));
-					// }
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi Sampul-2"){
-					// $this->redirect(array('site/penawaranevaluasiduasampul2','id'=>$id));
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="Penawaran dan Evaluasi Tahap-2"){
-					// $this->redirect(array('site/penawaranevaluasiduatahap2','id'=>$id));
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="Negosiasi dan Klarifikasi"){
-					// $this->redirect(array('site/negosiasidanklarifikasi','id'=>$id));
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="Penentuan Pemenang"){
-					// $this->redirect(array('site/penunjukanpanitia','id'=>$id));
-				// }
+				}				
 			}
 		}
 	}
@@ -527,7 +510,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "Pengambilan Dokumen Pengadaan";
+				$Pengadaan->status= "4";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -683,7 +666,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "Pengambilan Dokumen Pengadaan";
+				$Pengadaan->status= "4";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -826,7 +809,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="Aanwijzing";
+				$Pengadaan->status="6";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -928,7 +911,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Penawaran dan Evaluasi';
+				$Pengadaan->status ='7';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
