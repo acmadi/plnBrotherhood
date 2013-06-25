@@ -656,7 +656,11 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "4";
+				if($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "4";
+				} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+					$Pengadaan->status= "5";
+				}
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -721,7 +725,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionPengambilandokumenpengadaan()
+	public function actionPengumumanpengadaan()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -744,13 +748,10 @@ class SiteController extends Controller
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
 				
-				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pemberitahuan Pengadaan"'); 
-				$A1=SuratPemberitahuanPengadaan::model()->findByPk($A->id_dokumen);
 				
 				$SUPDP= new SuratUndanganPengambilanDokumenPengadaan;
 				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
 				$SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
-				$SUPDP->nomor="Nomor Surat Pemberitahuan Pengadaan : ".$A1->nomor;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -766,14 +767,57 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPDP->save(false)){
-									$this->redirect(array('editpengambilandokumenpengadaan','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpengumumanpengadaan','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('pengambilandokumenpengadaan',array(
+				$this->render('pengumumanpengadaan',array(
+					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
+				));
+			}
+		}
+	}
+	
+	public function actionEditPengumumanpengadaan()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pengambilan Dokumen Pengadaan"');
+				
+				$SUPDP= SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($Dokumen0->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPDP->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPDP->save(false)){
+									$this->redirect(array('editpengumumanpengadaan','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('pengumumanpengadaan',array(
 					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
 				));
 			}
@@ -816,7 +860,7 @@ class SiteController extends Controller
 					}
 				}
 
-				$this->render('editpengambilandokumenpengadaan',array(
+				$this->render('pengambilandokumenpengadaan',array(
 					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
 				));
 			}
