@@ -146,6 +146,10 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'status',
 			  'desc'=>'status desc',
 			),
+                        'Progress'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),       
 			'PIC'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
 			  'desc'=>'idPanitia.nama_panitia desc',
@@ -244,6 +248,10 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'status',
 			  'desc'=>'status desc',
 			),
+                        'Progress'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),                        
 			'User'=>array(
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
