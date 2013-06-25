@@ -30,7 +30,7 @@
 					if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi'){
 						echo CHtml::link('Kualifikasi',array("site/editprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); 
 					} else {
-						echo CHtml::link('Kualifikasi',array("site/editpascakualifikasi","id"=>"$cpengadaan->id_pengadaan"));
+						echo CHtml::link('Kualifikasi',array("site/pascakualifikasi","id"=>"$cpengadaan->id_pengadaan"));
 					} 
 				?></li>
 		<?php } ?>
