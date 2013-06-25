@@ -173,7 +173,7 @@ class Pengadaan extends CActiveRecord
 		
 		// $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->notaDinasPerintahPengadaan->nota_dinas_permintaan,true);			
 				
-		$criteria->condition = "status!='Selesai'";													//------jo-------------search yg ngga selesai doang----------------------		
+		$criteria->condition = "status!='100'";													//------jo-------------search yg ngga selesai doang----------------------		
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -217,7 +217,7 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->condition = "status='Selesai'";													
+		$criteria->condition = "status='100'";	
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -275,10 +275,10 @@ class Pengadaan extends CActiveRecord
 		
 		$strDummy = "id_panitia=$idpan[0]";
 		for($j=1;$j<count($idpan);$j++){			
-			$strDummy = "status!='Selesai' &&" . "id_panitia=$idpan[$j]" . "||" . $strDummy;			
+			$strDummy = "status!='100' &&" . "id_panitia=$idpan[$j]" . "||" . $strDummy;			
 		};
 		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
-		$strDummy = $strDummy . "&& status!='Selesai'";
+		$strDummy = $strDummy . "&& status!='100'";
 		$criteria->condition = $strDummy ;											
 		
 		return new CActiveDataProvider($this, array(
@@ -288,7 +288,7 @@ class Pengadaan extends CActiveRecord
 	}	
 	
 	public function sisaHari($id){								//jo----------------------------
-		if($this->status == 'Selesai'){
+		if($this->status == '100'){
 			return "-";
 		}else{
 			date_default_timezone_set ('Asia/Jakarta');
@@ -305,33 +305,126 @@ class Pengadaan extends CActiveRecord
 
 	public function progressPengadaan(){					//jo---------------------------
 		
-		if($this->status == 'Penunjukan Panitia'){
-			return 0;
+		if($this->status == '1'){
+			return 0/24;
 		}
-		else if($this->status == 'Kualifikasi'){
-			return 100/7;
+		else if($this->status == '2'){
+			return 100/24;
 		}
-		else if($this->status == 'Pengambilan Dokumen Pengadaan'){
-			return 200/7;
+		else if($this->status == '3'){
+			return 200/24;
 		}
-		else if($this->status == 'Aanwijzing'){
-			return 300/7;
+		else if($this->status == '4'){
+			return 300/24;
 		}
-		else if($this->status == 'Penawaran dan Evaluasi'){
-			return 400/7;
+		else if($this->status == '5'){
+			return 400/24;
 		}
-		else if($this->status == 'Negosiasi dan Klarifikasi' ){
-			return 500/7;
+		else if($this->status == '6' ){
+			return 500/24;
 		}
-		else if($this->status == 'Penentuan Pemenang'){
-			return 600/7;
+		else if($this->status == '7'){
+			return 600/24;
 		}
-		else if($this->status == 'Selesai'){
-			return 700/7;
+		else if($this->status == '8'){
+			return 700/24;
+		}
+		else if($this->status == '9'){
+			return 800/24;
+		}
+		else if($this->status == '10'){
+			return 900/24;
+		}
+		else if($this->status == '11'){
+			return 1000/24;
+		}
+		else if($this->status == '12'){
+			return 1100/24;
+		}
+		else if($this->status == '13' ){
+			return 1200/24;
+		}
+		else if($this->status == '14'){
+			return 1300/24;
+		}
+		else if($this->status == '15'){
+			return 1400/24;
+		}
+		else if($this->status == '16'){
+			return 1500/24;
+		}
+		else if($this->status == '17'){
+			return 1600/24;
+		}
+		else if($this->status == '18'){
+			return 1700/24;
+		}
+		else if($this->status == '19'){
+			return 1800/24;
+		}
+		else if($this->status == '20' ){
+			return 1900/24;
+		}
+		else if($this->status == '21'){
+			return 2000/24;
+		}
+		else if($this->status == '22'){
+			return 2100/24;
+		}
+		else if($this->status == '23'){
+			return 2200/24;
+		}
+		else if($this->status == '24'){
+			return 2300/24;
+		}		
+		else if($this->status == '100'){
+			return 2400/24;
 		}
 		else{
 			return 0;
 		}
+	}
+	
+	public function dapatkanStatus(){
+		if($this->status == '1'){
+			return 'Penunjukan Panitia';
+		}
+		else if($this->status == '2' || $this->status == '3'){
+			return 'Pembuatan Dokumen Pengadaan';
+		}
+		else if($this->status == '4'){
+			return 'Kualifikasi';
+		}		
+		else if($this->status == '5' || $this->status == '6'){
+			return 'Pengambilan Dokumen Pengadaan';
+		}
+		else if($this->status == '8' || $this->status == '7'){
+			return 'Aanwijzing';
+		}
+		else if($this->status == '10' || $this->status == '9' || $this->status == '11'){
+			return 'Penawaran';
+		}
+		else if($this->status == '12'){
+			return 'Evaluasi';
+		}
+		else if($this->status == '13' || $this->status == '14' || $this->status == '15'){
+			return 'Penawaran 2';
+		}
+		else if($this->status == '16'){
+			return 'Evaluasi 2';
+		}
+		else if($this->status == '17' || $this->status == '18'){
+			return 'Klarifikasi dan Negosiasi';
+		}
+		else if($this->status == '19' || $this->status == '20' || $this->status == '21' || $this->status == '22' || $this->status == '23'){
+			return 'Penentuan Pemenang';
+		}
+		else if($this->status == '24'){
+			return 'Kontrak';
+		}
+		else if($this->status == '100'){
+			return 'Selesai';
+		}				
 	}
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum

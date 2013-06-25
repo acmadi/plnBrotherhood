@@ -58,7 +58,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 						'value'=>$cpengadaan->notaDinasPerintahPengadaan->targetSPK_kontrak . ' hari',
 					),
 					array(
-						'label'=>'Pelaksana',
+						'label'=>'Penyedia',
 						'value'=>$cpengadaan->nama_penyedia,
 					),
 					array(
