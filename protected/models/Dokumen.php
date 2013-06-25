@@ -47,6 +47,9 @@ class Dokumen extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Dokumen the static model class
 	 */
+	 
+	public $uploadedFile;
+	 
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
