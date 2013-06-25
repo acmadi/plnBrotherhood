@@ -1076,11 +1076,13 @@ class SiteController extends Controller
 					$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
 					$valid=$BAP->validate();
 					if($valid){
+                                            if($Pengadaan->save(false)){
 						if($Dokumen1->save(false)&&$Dokumen2->save(false)){
 							if($BAP->save(false)&&$DH->save(false)){
 								$this->redirect(array('editberitaacaraaanwijzing','id'=>$Dokumen1->id_pengadaan));
 							}
 						}
+                                            }
 					}
 				}
 
