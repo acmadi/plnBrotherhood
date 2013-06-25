@@ -627,10 +627,10 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
+			$this->doccy->phpdocx->assign('#1#', $nomor);
+			$this->doccy->phpdocx->assign('#2#', $nama);
 			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
+			$this->doccy->phpdocx->assign('#4#', $tanggal);
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->doccy->phpdocx->assign('#6#', '.............................................');
 			$this->doccy->phpdocx->assign('#7#', '.............................................');
