@@ -151,10 +151,8 @@ class SiteController extends Controller
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
-<<<<<<< HEAD
-	*/
-=======
 	 */
+	
 	public function actionKontrak()
 	{
 		// renders the view file 'protected/views/site/history.php'
@@ -191,7 +189,6 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
->>>>>>> 16008202509df5237e00601f6a0987b76f92dcd3
 	public function actionGenerator()
 	{
 		$id = Yii::app()->getRequest()->getQuery('id');

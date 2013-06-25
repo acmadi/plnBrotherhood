@@ -146,10 +146,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#12#', $tempat);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
-			
+		/*else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
 			$this->doccy->newFile('nd-pemberitahuanpemenang.docx');
-			
 			$NDPP=NotaDinasPemberitahuanPemenang::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
 			$dari = $NDPP->dari;
@@ -182,7 +180,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#16#', '.............................................');
 			$this->doccy->phpdocx->assign('#17#', '.............................................');
 			$this->renderDocx("Nota Dinas Pemberitahuan Pemenang.docx", true);
-		}
+		}*/
 //	=====================================Surat-Surat=====================================
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			
@@ -214,7 +212,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#10#', $nomor);
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
-/*Belum ada template*/		else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
+/*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
 			
 			$this->doccy->newFile('temp.docx');
 			
@@ -239,8 +237,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#16#', '.............................................');
 			$this->doccy->phpdocx->assign('#17#', '.............................................');
 			$this->renderDocx("Surat Undangan Pembukaan Penawaran.docx", true);
-		}
-/*Belum ada template*/		else if ($Dok->nama_dokumen == "Surat Undangan Negosiasi dan Klarifikasi"){
+		}*/
+/*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Negosiasi dan Klarifikasi"){
 			
 			$this->doccy->newFile('temp.docx');
 			
@@ -265,7 +263,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#16#', '.............................................');
 			$this->doccy->phpdocx->assign('#17#', '.............................................');
 			$this->renderDocx("Surat Undangan Negosiasi.docx", true);
-		}
+		}*/
 		else if ($Dok->nama_dokumen == "Surat Undangan Aanwijzing") {
 			
 			$SUP=SuratUndanganPenjelasan::model()->findByPk($id);
@@ -333,7 +331,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}
-/*Perbaiki*/		else if ($Dok->nama_dokumen == "Surat Penawaran Harga"){
+/*Perbaiki*/		/*else if ($Dok->nama_dokumen == "Surat Penawaran Harga"){
 			
 			$SPP=SuratPemberitahuanPengadaan::model()->findByPk($id);	
 			$nomor = $SPP->nomor;
@@ -355,8 +353,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', $nama);
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
-		}
-/*Perbaiki*/		else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
+		}*/
+/*Perbaiki*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
 			$SPP=SuratPemberitahuanPengadaan::model()->findByPk($id);	
 			$nomor = $SPP->nomor;
@@ -378,9 +376,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', $nama);
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
-		}
+		}*/
 //	=====================================Pakta Integritas=====================================
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Pakta Integritas Panitia 1"){
+		else if ($Dok->nama_dokumen == "Pakta Integritas Panitia 1"){
 			
 			$this->doccy->newFile('pi-panitia1.docx');
 			
@@ -432,7 +430,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#17#', '.............................................');
 			$this->renderDocx("Pakta Integritas Panitia.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Pakta Integritas Penyedia"){
+		else if ($Dok->nama_dokumen == "Pakta Integritas Penyedia"){
 			
 			$this->doccy->newFile('pi-peserta.docx');
 			
@@ -460,7 +458,6 @@ class DocxController extends Controller
 		}
 //	=====================================RKS=====================================
 		else if ($Dok->nama_dokumen == "RKS"){
-			
 			
 			$this->doccy->newFile('temp.docx');
 			
@@ -701,6 +698,24 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#4#', '.............................................');
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->renderDocx("Daftar Hadir Prakualifikasi.docx", true);
+		}
+		else {
+			$this->doccy->newFile('temp.docx');
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assign('#1#', '');
+			$this->doccy->phpdocx->assign('#2#', '');
+			$this->doccy->phpdocx->assign('#3#', '');
+			$this->doccy->phpdocx->assign('#4#', '');
+			$this->doccy->phpdocx->assign('#5#', '');
+			$this->doccy->phpdocx->assign('#6#', '');
+			$this->doccy->phpdocx->assign('#7#', '');
+			$this->doccy->phpdocx->assign('#8#', '');
+			$this->doccy->phpdocx->assign('#9#', '');
+			$this->doccy->phpdocx->assign('#10#', '');
+			$this->doccy->phpdocx->assign('#11#', '');
+			$this->doccy->phpdocx->assign('#12#', '');
+			$this->renderDocx("Temp.docx", true);
 		}
 	}
 }
