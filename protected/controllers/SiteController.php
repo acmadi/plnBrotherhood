@@ -211,7 +211,7 @@ class SiteController extends Controller
 						$this->redirect(array('site/pascakualifikasi','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="Surat Undangan Pembukaan Penawaran"){
+				if(Pengadaan::model()->findByPk($id)->status=="8"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
 						$this->redirect(array('site/suratundanganpembukaanpenawaran','id'=>$id));
 					}
@@ -222,7 +222,7 @@ class SiteController extends Controller
 						$this->redirect(array('site/suratundanganpembukaanpenawarantahap1','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="Berita Acara Pembukaan Penawaran"){
+				if(Pengadaan::model()->findByPk($id)->status=="9"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
 						$this->redirect(array('site/beritaacarapembukaanpenawaran','id'=>$id));
 					}
@@ -233,7 +233,7 @@ class SiteController extends Controller
 						$this->redirect(array('site/beritaacarapembukaanpenawarantahap1','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="Berita Acara Evaluasi Penawaran"){
+				if(Pengadaan::model()->findByPk($id)->status=="10"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
 						$this->redirect(array('site/beritaacaraevaluasipenawaran','id'=>$id));
 					}
@@ -244,7 +244,7 @@ class SiteController extends Controller
 						$this->redirect(array('site/beritaacaraevaluasipenawarantahap1','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="Surat Undangan Negosiasi dan Klarifikasi"){
+				if(Pengadaan::model()->findByPk($id)->status=="14"){
 					$this->redirect(array('site/suratundangannegosiasiklarifikasi','id'=>$id));
 				}
 				// if(Pengadaan::model()->findByPk($id)->status=="Pengambilan Dokumen Pengadaan"){
@@ -1045,7 +1045,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Surat Undangan Pembukaan Penawaran';
+				$Pengadaan->status ='8';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
 				$SUP=SuratUndanganPenjelasan::model()->findByPk($Dok0->id_dokumen);
@@ -1175,7 +1175,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Pembukaan Penawaran';
+				$Pengadaan->status ='9';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1274,7 +1274,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Evaluasi Penawaran';
+				$Pengadaan->status ='10';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -1387,7 +1387,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Surat Undangan Negosiasi dan Klarifikasi';
+				$Pengadaan->status ='14';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -1506,7 +1506,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Pembukaan Penawaran';
+				$Pengadaan->status ='9';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1605,7 +1605,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Evaluasi Penawaran';
+				$Pengadaan->status ='10';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -1718,7 +1718,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Surat Undangan Pembukaan Penawaran 2';
+				$Pengadaan->status ='11';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -1837,7 +1837,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Pembukaan Penawaran 2';
+				$Pengadaan->status ='12';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1936,7 +1936,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Evaluasi Penawaran 2';
+				$Pengadaan->status ='13';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2049,7 +2049,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Surat Undangan Negosiasi dan Klarifikasi';
+				$Pengadaan->status ='14';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2168,7 +2168,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Pembukaan Penawaran';
+				$Pengadaan->status ='9';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2267,7 +2267,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Evaluasi Penawaran';
+				$Pengadaan->status ='10';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2380,7 +2380,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Surat Undangan Pembukaan Penawaran 2';
+				$Pengadaan->status ='11';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2499,7 +2499,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Pembukaan Penawaran 2';
+				$Pengadaan->status ='12';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2598,7 +2598,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Evaluasi Penawaran 2';
+				$Pengadaan->status ='13';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2711,7 +2711,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Surat Undangan Negosiasi dan Klarifikasi';
+				$Pengadaan->status ='14';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2831,7 +2831,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Berita Acara Negosiasi dan Klarifikasi';
+				$Pengadaan->status ='15';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;

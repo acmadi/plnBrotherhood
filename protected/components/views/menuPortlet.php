@@ -58,11 +58,11 @@
 		<?php if($cpengadaan->metode_penawaran=='Satu Sampul') { ?>
 			<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8') { ?>
 					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
-				<?php } else if($cpengadaan->status == 'Surat Undangan Pembukaan Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '8') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/suratundanganpembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '9') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Evaluasi Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '10') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
@@ -70,17 +70,17 @@
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Sampul') { ?>
 			<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8') { ?>
 					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
-				<?php } else if($cpengadaan->status == 'Surat Undangan Pembukaan Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '8') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/suratundanganpembukaanpenawaransampul1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '9') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacarapembukaanpenawaransampul1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Evaluasi Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '10') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacaraevaluasipenawaransampul1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Surat Undangan Pembukaan Penawaran 2') { ?>
+				<?php } else if($cpengadaan->status == '11') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/suratundanganpembukaanpenawaransampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran 2') { ?>
+				<?php } else if($cpengadaan->status == '12') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacarapembukaanpenawaransampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Evaluasi Penawaran 2') { ?>
+				<?php } else if($cpengadaan->status == '13') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacaraevaluasipenawaransampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editberitaacaraevaluasipenawaransampul2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
@@ -88,17 +88,17 @@
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Tahap') { ?>
 			<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8') { ?>
 					<li class='belum'><?php echo 'Penawaran dan Evaluasi' ?></li>
-				<?php } else if($cpengadaan->status == 'Surat Undangan Pembukaan Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '8') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/suratundanganpembukaanpenawarantahap1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '9') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacarapembukaanpenawarantahap1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Evaluasi Penawaran') { ?>
+				<?php } else if($cpengadaan->status == '10') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacaraevaluasipenawarantahap1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Surat Undangan Pembukaan Penawaran 2') { ?>
+				<?php } else if($cpengadaan->status == '11') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/suratundanganpembukaanpenawarantahap2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran 2') { ?>
+				<?php } else if($cpengadaan->status == '12') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacarapembukaanpenawarantahap2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == 'Berita Acara Evaluasi Penawaran 2') { ?>
+				<?php } else if($cpengadaan->status == '13') { ?>
 					<li class='onprogress'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/beritaacaraevaluasipenawarantahap2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li class='sudah'><?php echo CHtml::link('Penawaran dan Evaluasi',array("site/editberitaacaraevaluasipenawarantahap2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
@@ -110,12 +110,11 @@
 		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13') { ?>
 				<li class='belum'><?php echo 'Negosiasi dan Klarifikasi' ?></li>
 			<?php } else if($cpengadaan->status == '14') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/negosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/suratundangannegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '15') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/negosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-
+				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/beritaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/editnegosiasidanklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/editberitaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13' || $cpengadaan->status == '14'||$cpengadaan->status == '15') { ?>
