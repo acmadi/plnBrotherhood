@@ -142,10 +142,14 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
 			),
-			'status'=>array(
+			'Status'=>array(
 			  'asc'=>'status',
 			  'desc'=>'status desc',
 			),
+                        'Progress'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),       
 			'PIC'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
 			  'desc'=>'idPanitia.nama_panitia desc',
@@ -159,6 +163,8 @@ class Pengadaan extends CActiveRecord
 		
 		$criteria=new CDbCriteria;
 
+                $criteria->with = array("idPanitia");
+                
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -238,10 +244,14 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'nama_pengadaan',
 			  'desc'=>'nama_pengadaan desc',
 			),
-			'status'=>array(
+			'Status'=>array(
 			  'asc'=>'status',
 			  'desc'=>'status desc',
 			),
+                        'Progress'=>array(
+			  'asc'=>'status',
+			  'desc'=>'status desc',
+			),                        
 			'User'=>array(
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
@@ -252,8 +262,8 @@ class Pengadaan extends CActiveRecord
 			),
 		);
 		
-		$criteria=new CDbCriteria;		
-		
+		$criteria=new CDbCriteria;				
+                
 		$usern = Yii::app()->user->name;
 		// $modelUser = Anggota::model()->with('pengadaan')->findAll('username="' . $usern . '"' );
 		$modelUser = Anggota::model()->findAll('username="' . $usern . '"' );

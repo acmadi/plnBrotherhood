@@ -19,7 +19,8 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'RKS', 'url'=>array($Rks->isNewRecord?('/site/rks'):('/site/editrks'),'id'=>$id)),
-							array('label'=>'HPS', 'url'=>array((!$Rks->isNewRecord)&&(Pengadaan::model()->findByPk($id)->status=='2')?'/site/hps')),
+							array('label'=>'HPS', 'visible'=>$Rks->isNewRecord),
+							array('label'=>'HPS', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/hps':'/site/edithps','id'=>$id), 'visible'=>!$Rks->isNewRecord),
 						),
 					));
 				?>
