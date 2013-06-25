@@ -3,6 +3,7 @@
 
 $this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 ?>
 
 <div id="pagecontent">
@@ -11,6 +12,20 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	</div>
 
 	<div id="maincontent">
+	
+	<?php if($SUPP->isNewRecord) { ?>
+		
+	<?php } else { ?>
+		<div>
+			<?php if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran') { ?>
+				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Sampul Satu', array('submit'=>array('site/beritaacarapembukaanpenawaransampul1',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
+			<?php } else { ?>
+				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Sampul Satu', array('submit'=>array('site/editberitaacarapembukaanpenawaransampul1',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
+			<?php } ?>
+		</div>
+		</br>
+	<?php } ?>
+	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
@@ -23,7 +38,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 		<?php echo $form->errorSummary($SUPP); ?>
 		
-		<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
+		<h4><b> Surat Undangan Pembukaan Penawaran Sampul Satu </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'nomor'); ?>
 			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -75,67 +90,27 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->textArea($SUPP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUPP,'tempat'); ?>
 		</div>
-		
-		<h4><b> Berita Acara Pembukaan Penawaran </b></h4>
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'nomor'); ?>
-			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($BAPP,'nomor'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen yang sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_sah'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen tidak sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'status metode'); ?>
-			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'status_metode'); ?>
-		</div>
-		
-		<h4><b> Berita Acara Evaluasi Penawaran</b></h4>
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'nomor'); ?>
-			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($BAEP,'nomor'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'tanggal Evaluasi Penawaran'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$BAEP,
-					'attribute'=>'tanggal_berita_acara',
-					'value'=>$BAEP->tanggal_berita_acara,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
-					),
-			));?>
-			<?php echo $form->error($BAEP,'tanggal_berita_acara'); ?>
-		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($SUPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
 	
+	<?php if($SUPP->isNewRecord) { ?>
+		
+	<?php } else { ?>
+		</br>
+		<div style="border-top:1px solid lightblue">
+		</br>
+			<h4><b> Buat Dokumen </b></h4>
+			<ul class="generatedoc">
+				<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>
+			</ul>
+		</div>
+	<?php } ?>
 	
 <?php	} ?>
 	</div>
