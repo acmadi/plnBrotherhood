@@ -42,9 +42,9 @@
 		<?php } else if($cpengadaan->status == '5') { ?>
 			<li class='onprogress' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/permintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } else { ?>
-			<?php if($cpengadaan->metode_pengadaan='Pelelangan'){ ?>
+			<?php if($cpengadaan->metode_pengadaan=='Pelelangan'){ ?>
 				<li class='sudah' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/editpengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if ($cpengadaan->metode_pengadaan='Penunjukan Langsung'||$cpengadaan->metode_pengadaan='Pemilihan Langsung'){ ?>
+			<?php } else if ($cpengadaan->metode_pengadaan=='Penunjukan Langsung'||$cpengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
 				<li class='sudah' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/editpermintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } ?>

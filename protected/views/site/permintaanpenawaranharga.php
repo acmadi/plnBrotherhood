@@ -19,7 +19,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pengadaan', 'url'=>array($Dokumen0->isNewRecord?('/site/pengumumanpengadaan'):('/site/editpengumumanpengadaan'),'id'=>$id)),
+							array('label'=>'Surat Permintaan Penawaran Harga', 'url'=>array($Dokumen0->isNewRecord?('/site/permintaanpenawaranharga'):('/site/editpermintaanpenawaranharga'),'id'=>$id)),
 						),
 					));
 				?>

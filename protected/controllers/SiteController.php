@@ -211,11 +211,11 @@ class SiteController extends Controller
 					}
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="4"){
-					$this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
+					$this->redirect(array('site/pengumumanpengadaan','id'=>$id));
 				}
-				// if(Pengadaan::model()->findByPk($id)->status=="5"){
-					// $this->redirect(array('site/pengambilandokumenpengadaan','id'=>$id));
-				// }
+				if(Pengadaan::model()->findByPk($id)->status=="5"){
+					$this->redirect(array('site/permintaanpenawaranharga','id'=>$id));
+				}
 				if(Pengadaan::model()->findByPk($id)->status=="6"){
 					$this->redirect(array('site/aanwijzing','id'=>$id));
 				}
@@ -824,7 +824,63 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionEditPengambilandokumenpengadaan()
+	public function actionPermintaanpenawaranharga()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="6";
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Undangan Pengambilan Dokumen Pengadaan';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				
+				$SUPDP= new SuratUndanganPengambilanDokumenPengadaan;
+				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPDP->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPDP->save(false)){
+									$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('permintaanpenawaranharga',array(
+					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
+				));
+			}
+		}
+	}
+	
+	public function actionEditpermintaanpenawaranharga()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -853,14 +909,14 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPDP->save(false)){
-									$this->redirect(array('editpengambilandokumenpengadaan','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('pengambilandokumenpengadaan',array(
+				$this->render('permintaanpenawaranharga',array(
 					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,
 				));
 			}

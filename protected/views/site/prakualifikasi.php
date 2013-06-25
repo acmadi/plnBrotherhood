@@ -67,8 +67,8 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				</div>
 				
 				<div class="row buttons">
-						<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-					</div>
+					<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				</div>
 				
 				<?php $this->endWidget(); ?>
 
