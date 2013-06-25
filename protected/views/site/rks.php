@@ -78,7 +78,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'model'=>$Rks,
 						'attribute'=>'tanggal_permintaan_penawaran',
 						'value'=>$Rks->tanggal_permintaan_penawaran,
-						'htmlOptions'=>array('size'=>56),
+						'htmlOptions'=>array('sigze'=>56),
 						'options'=>array(
 						'dateFormat'=>'yy-mm-dd',
 						),
@@ -113,7 +113,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'tanggal_pemasukan_penawaran'); ?>
+					<?php echo $form->labelEx($Rks,'tanggal_awal_pemasukan_penawaran'); ?>
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 						'model'=>$Rks,
 						'attribute'=>'tanggal_pemasukan_penawaran',
@@ -124,6 +124,20 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_pemasukan_penawaran'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'tanggal_akhir_pemasukan_penawaran'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_akhir_pemasukan_penawaran',
+						'value'=>$Rks->tanggal_akhir_pemasukan_penawaran,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'yy-mm-dd',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_akhir_pemasukan_penawaran'); ?>
 				</div>
 				
 				<div class="row">
