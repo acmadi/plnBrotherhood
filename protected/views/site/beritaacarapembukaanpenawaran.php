@@ -13,25 +13,27 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	<div id="maincontent">
 
-        <?php echo CHtml::button('Surat Undangan Pembukaan Penawaran', array('submit'=>array('site/editsuratundanganpembukaanpenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-            
-	<?php if($BAPP->isNewRecord) { ?>
-
-	<?php } else { ?>
-		<div>
-	
-			<?php if($cpengadaan->status == '10') { ?>
-				<?php echo CHtml::button('Berita Acara Evaluasi Penawaran', array('submit'=>array('site/beritaacaraevaluasipenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } else { ?>
-				<?php echo CHtml::button('Berita Acara Evaluasi Penawaran', array('submit'=>array('site/editberitaacaraevaluasipenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+//                                    array('label'=>'SU Pembukaan Penawaran', 'url'=>array($BAPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
+                                    array('label'=>'SU Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='8'?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawaran'),'id'=>$id)),
+//                                    array('label'=>'BA Pembukaan Penawaran', 'visible'=>$BAPP->isNewRecord),
+//                                    array('label'=>'BA Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id), 'visible'=>!$BAPP->isNewRecord),
+//                                    array('label'=>'Berita Acara Evaluasi Penawaran', 'visible'=>$SUPP->isNewRecord),
+//                                    array('label'=>'Berita Acara Evaluasi Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='10'?'/site/beritaacaraevaluasipenawaran':(Pengadaan::model()->findByPk($id)->status=='9'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(

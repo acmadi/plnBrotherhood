@@ -13,19 +13,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	<div id="maincontent">
 	
-	<?php if($SUPP->isNewRecord) { ?>
-		
-	<?php } else { ?>
-		<div>
-			<?php if($cpengadaan->status == '9') { ?>
-				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran', array('submit'=>array('site/beritaacarapembukaanpenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
-			<?php } else { ?>
-				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran', array('submit'=>array('site/editberitaacarapembukaanpenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
-			<?php } ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
@@ -34,9 +21,12 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'Surat Undangan Pembukaan Penawaran', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
-//                                    array('label'=>'Berita Acara Pembukaan Penawaran', 'visible'=>$SUPP->isNewRecord),
-                                    array('label'=>'Berita Acara Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id), 'visible'=>!$SUPP->isNewRecord),
+                                    array('label'=>'SU Pembukaan Penawaran', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawaran'),'id'=>$id)),
+//                                    array('label'=>'BA Pembukaan Penawaran', 'visible'=>$SUPP->isNewRecord),
+//                                    array('label'=>'BA Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id), 'visible'=>!$SUPP->isNewRecord),
+//                                    array('label'=>'Berita Acara Evaluasi Penawaran', 'visible'=>$SUPP->isNewRecord),
+//                                    array('label'=>'Berita Acara Evaluasi Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='10'?'/site/beritaacaraevaluasipenawaran':(Pengadaan::model()->findByPk($id)->status=='9'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),                                
                             ),
                         ));
                     ?>
