@@ -18,13 +18,13 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<?php } else { ?>
 		<div>
 		<?php echo CHtml::button('Surat Undangan Pembukaan Penawaran', array('submit'=>array('site/editsuratundanganpembukaanpenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php if($cpengadaan->status == 'Berita Acara Evaluasi Penawaran') { ?>
+			<?php if($cpengadaan->status == '10') { ?>
 				<?php echo CHtml::button('Berita Acara Evaluasi Penawaran', array('submit'=>array('site/beritaacaraevaluasipenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
 			<?php } else { ?>
 				<?php echo CHtml::button('Berita Acara Evaluasi Penawaran', array('submit'=>array('site/editberitaacaraevaluasipenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
 			<?php } ?>
 		</div>
-		</br>
+		<br/>
 	<?php } ?>
 	
 		<?php 
@@ -81,9 +81,9 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<?php if($BAPP->isNewRecord) { ?>
 		
 	<?php } else { ?>
-		</br>
+		<br/>
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran', array('docx/download','id'=>$BAPP>id_dokumen)); ?></li>
