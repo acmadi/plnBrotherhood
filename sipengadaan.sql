@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2013 at 05:14 AM
+-- Generation Time: Jun 25, 2013 at 04:20 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -594,6 +594,17 @@ CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `surat_pengantar_penawaran_harga`
+--
+
+CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
+  `id_dokumen` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `surat_pernyataan_minat`
 --
 
@@ -952,6 +963,12 @@ ALTER TABLE `rks`
 ALTER TABLE `surat_pemberitahuan_pengadaan`
   ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_pengantar_penawaran_harga`
+--
+ALTER TABLE `surat_pengantar_penawaran_harga`
+  ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_pernyataan_minat`

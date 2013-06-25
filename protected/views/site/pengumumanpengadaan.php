@@ -19,7 +19,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pengadaan', 'url'=>array($Dokumen0->isNewRecord?('/site/prakualifikasi'):('/site/editprakualifikasi'),'id'=>$id)),
+							array('label'=>'Pengumuman Pengadaan', 'url'=>array($Dokumen0->isNewRecord?('/site/pengumumanpengadaan'):('/site/editpengumumanpengadaan'),'id'=>$id)),
 						),
 					));
 				?>
@@ -112,14 +112,16 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
 		</br>
 		</div><!-- form -->
-		</br>
-		<div style="border-top:1px solid lightblue">
-			</br>
-			<h4><b> Buat Dokumen </b></h4>
-			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
-			</ul>
-		</div>
+		<?php if (!$Dokumen0->isNewRecord){ ?>
+				</br>
+				<div style="border-top:1px solid lightblue">
+				</br>
+					<h4><b> Buat Dokumen </b></h4>
+					<ul class="generatedoc">
+						<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
+					</ul>
+				</div>
+		<?php } ?>
 	<?php	} ?>
 	</div>
 </div>
