@@ -142,7 +142,7 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
 			),
-			'status'=>array(
+			'Status'=>array(
 			  'asc'=>'status',
 			  'desc'=>'status desc',
 			),
@@ -159,6 +159,8 @@ class Pengadaan extends CActiveRecord
 		
 		$criteria=new CDbCriteria;
 
+                $criteria->with = array("idPanitia");
+                
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -238,7 +240,7 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'nama_pengadaan',
 			  'desc'=>'nama_pengadaan desc',
 			),
-			'status'=>array(
+			'Status'=>array(
 			  'asc'=>'status',
 			  'desc'=>'status desc',
 			),
@@ -254,6 +256,8 @@ class Pengadaan extends CActiveRecord
 		
 		$criteria=new CDbCriteria;		
 		
+                $criteria->with = array("idPanitia");
+                
 		$usern = Yii::app()->user->name;
 		// $modelUser = Anggota::model()->with('pengadaan')->findAll('username="' . $usern . '"' );
 		$modelUser = Anggota::model()->findAll('username="' . $usern . '"' );
