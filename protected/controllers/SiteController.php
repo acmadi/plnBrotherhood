@@ -1376,7 +1376,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawaran',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'DH'=>$DH,
 				));
 
 			}

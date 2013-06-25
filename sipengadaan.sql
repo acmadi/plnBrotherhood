@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2013 at 04:20 PM
+-- Generation Time: Jun 25, 2013 at 04:45 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `id_panitia` (`id_panitia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `anggota`
@@ -67,7 +67,8 @@ INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `id_panitia`, `jabatan`
 (4, 'johannesridho', '123456787', 'johan@gmail.com', 4, 'Sekretaris'),
 (5, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 3, 'Anggota'),
 (6, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 1, 'Ketua'),
-(7, 'johannesridho', '123456787', 'johan@gmail.com', 2, 'Ketua');
+(7, 'johannesridho', '123456787', 'johan@gmail.com', 2, 'Ketua'),
+(8, 'b', '123123', 'bb@bb.bb', 3, 'asda');
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,19 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (10, 'RAB', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
 (11, 'Nota Dinas Perintah Pengadaan', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
 (12, 'Pakta Integritas Awal Panitia', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(13, 'RKS', '2013-06-19', 'Jakarta', 2, 'Belum Selesai');
+(13, 'RKS', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
+(14, 'Nota Dinas Permintaan', '2013-06-20', 'Jakarta', 3, 'Belum Selesai'),
+(15, 'TOR', '2013-06-20', 'Jakarta', 3, 'Belum Selesai'),
+(16, 'RAB', '2013-06-20', 'Jakarta', 3, 'Belum Selesai'),
+(17, 'Nota Dinas Perintah Pengadaan', '2013-06-12', 'Jakarta', 3, 'Belum Selesai'),
+(18, 'Nota Dinas Permintaan', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
+(19, 'TOR', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
+(20, 'RAB', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
+(21, 'Nota Dinas Perintah Pengadaan', '2013-06-28', 'Jakarta', 4, 'Belum Selesai'),
+(22, 'Nota Dinas Permintaan', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
+(23, 'TOR', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
+(24, 'RAB', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
+(25, 'Nota Dinas Perintah Pengadaan', '2013-06-14', 'Jakarta', 5, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -302,6 +315,7 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
 --
 
 INSERT INTO `kdivmum` (`username`, `NIP`, `email`) VALUES
+('a', '111111', 'a@aa.aa'),
 ('aidilsyaputra', '123456789', 'aidil@gmail.com');
 
 -- --------------------------------------------------------
@@ -395,7 +409,10 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 
 INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perihal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
 (4, '045/DVMAM/2013', '035/DVMUM/2013', 'KDIVMUM', 'Kevin Indra', 'Penunjunak petugas pengadaan', 'Terlampir', 'Terlampir', 98, 'Kas PLN', '10.000.000'),
-(11, '045/DVIN/2013', '056/DIVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan panitia pengadaan', 'Terlampir', 'Terlampir', 90, 'Kas PLN', '10.000.000');
+(11, '045/DVIN/2013', '056/DIVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan panitia pengadaan', 'Terlampir', 'Terlampir', 90, 'Kas PLN', '10.000.000'),
+(17, '23423', '23432', 'MSDAF', 'Kevin Indra', 'sdfsd', 'Terlampir', 'Terlampir', 23324, 'dsfsd', 'sdfsd'),
+(21, 'w4r34r34', '344353453', 'MSDAF', 'Kevin Indra', 'sdfsdf', 'Terlampir', 'Terlampir', 344353, 'sdfsd', 'sdfsd'),
+(25, '34534', '43t453452', 'KDIVMUM', 'Kevin Indra', 'sdgfds', 'Terlampir', 'Terlampir', 234353, 'dfgdf', 'dfgdf');
 
 -- --------------------------------------------------------
 
@@ -416,7 +433,10 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 
 INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`) VALUES
 (8, '045/DVIN/2013'),
-(1, '045/DVMAM/2013');
+(1, '045/DVMAM/2013'),
+(14, '23423'),
+(22, '34534'),
+(18, 'w4r34r34');
 
 -- --------------------------------------------------------
 
@@ -538,7 +558,10 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
 (1, 'Pengadaan Baju Dinas', 'divin', 'Barang dan Jasa', '-', '2013-06-05', '0000-00-00', '3', 0, 3, 'Penunjukan Langsung', 'Satu Sampul', 'Pra Kualifikasi'),
-(2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-06-19', '0000-00-00', '2', 0, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi');
+(2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-06-19', '0000-00-00', '2', 0, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi'),
+(3, 'asdasd', 'divman', 'Barang dan Jasa', '-', '2013-06-12', '0000-00-00', '1', 0, 3, 'Pemilihan Langsung', '-', '-'),
+(4, 'dvfdgd', 'divtrans', 'Barang dan Jasa', '-', '2013-06-28', '0000-00-00', '1', 0, 3, 'Pemilihan Langsung', '-', '-'),
+(5, 'fghfghf', 'divtrans', 'Barang dan Jasa', '-', '2013-06-14', '0000-00-00', '1', 0, 3, 'Pelelangan', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -748,7 +771,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `nama`, `password`, `divisi`, `status_user`) VALUES
+('a', 'a', 'a', 'divisi umum', 'Aktif'),
 ('aidilsyaputra', 'Aidil Syaputra', 'aidil', 'Divisi Umum', 'Aktif'),
+('b', 'b', 'b', 'panitia', 'Aktif'),
 ('divin', 'Divisi Internet', 'divin', 'Divisi Internet', 'Aktif'),
 ('divman', 'Divisi Manajemen', 'divman', 'Divisi Manajemen', 'Aktif'),
 ('divsi', 'Divisi Sistem Informasi', 'divsi', 'Divisi Sistem Informasi', 'Aktif'),

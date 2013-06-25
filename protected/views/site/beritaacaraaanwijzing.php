@@ -72,7 +72,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	
 		</br>
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				

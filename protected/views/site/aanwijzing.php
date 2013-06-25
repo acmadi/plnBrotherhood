@@ -121,7 +121,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	<?php if (!$SUP->isNewRecord){ ?>
 			
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>			

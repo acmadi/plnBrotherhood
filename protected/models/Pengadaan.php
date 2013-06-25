@@ -143,12 +143,12 @@ class Pengadaan extends CActiveRecord
 			  'desc'=>'divisi_peminta desc',
 			),
 			'Status'=>array(
-			  'asc'=>'status',
-			  'desc'=>'status desc',
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',
 			),
                         'Progress'=>array(
-			  'asc'=>'status',
-			  'desc'=>'status desc',
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',
 			),       
 			'PIC'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
@@ -156,7 +156,7 @@ class Pengadaan extends CActiveRecord
 			),
 			'Sisa Hari'=>array(
 			  'asc'=>'nama_pengadaan',
-			  'desc'=>'sisaHari(id_pengadaan) desc',
+			  'desc'=>'$this->sisaHari($this->id_pengadaan) desc',
 			),
 			'*',
 		);
@@ -245,13 +245,13 @@ class Pengadaan extends CActiveRecord
 			  'desc'=>'nama_pengadaan desc',
 			),
 			'Status'=>array(
-			  'asc'=>'status',
-			  'desc'=>'status desc',
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',
 			),
                         'Progress'=>array(
-			  'asc'=>'status',
-			  'desc'=>'status desc',
-			),                        
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',
+			),                       
 			'User'=>array(
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
