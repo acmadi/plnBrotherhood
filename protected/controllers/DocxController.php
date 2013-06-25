@@ -331,7 +331,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}*/
-/*Perbaiki*/		/*else if ($Dok->nama_dokumen == "Surat Penawaran Harga"){
+/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penawaran Harga"){
 			
 			$SPP=SuratPemberitahuanPengadaan::model()->findByPk($id);	
 			$nomor = $SPP->nomor;
@@ -354,7 +354,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}*/
-/*Perbaiki*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
+/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
 			$SPP=SuratPemberitahuanPengadaan::model()->findByPk($id);	
 			$nomor = $SPP->nomor;
@@ -558,7 +558,7 @@ class DocxController extends Controller
 			}
 			$this->renderDocx("Berita Acara Evaluasi Penawaran.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Berita Acara Negosiasi Klarifikasi"){
+		else if ($Dok->nama_dokumen == "Berita Acara Negosiasi Klarifikasi"){
 			
 			$bakn=BeritaAcaraNegosiasiKlarifikasi::model()->findByPk($id);	
 			$nomor = $bakn->nomor;
@@ -586,7 +586,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#10#', '.............................................');
 			$this->renderDocx("Berita Acara Negosiasi Klarifikasi.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
+		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
 			
 			$BAPP=BeritAcaraPembukaanPenawaran::model()->findByPk($id);	
 			$nomor = $BAPP->nomor;
@@ -640,7 +640,7 @@ class DocxController extends Controller
 			$this->renderDocx("Berita Acara Pembukaan Penawaran.docx", true);}
 		}
 //	=====================================Daftar Hadir=====================================
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Daftar Hadir Aanwijzing"){
+		else if ($Dok->nama_dokumen == "Daftar Hadir Aanwijzing"){
 						
 			$this->doccy->newFile('daftarhadir.docx');
 			
@@ -654,7 +654,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->renderDocx("Daftar Hadir Aanwijzing.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran"){
+		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran"){
 						
 			$this->doccy->newFile('daftarhadir.docx');
 			
@@ -668,7 +668,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->renderDocx("Daftar Hadir Evaluasi Penawaran.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Daftar Hadir Negosiasi Klarifikasi"){
+		else if ($Dok->nama_dokumen == "Daftar Hadir Negosiasi Klarifikasi"){
 						
 			$this->doccy->newFile('daftarhadir.docx');
 			
@@ -682,7 +682,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->renderDocx("Daftar Hadir Negosiasi dan Klarifikasi.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran"){
+		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran"){
 						
 			$this->doccy->newFile('daftarhadir.docx');
 			
@@ -696,7 +696,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->renderDocx("Daftar Hadir Pembukaan Penawaran.docx", true);
 		}
-/*Masih kosong*/		else if ($Dok->nama_dokumen == "Daftar Hadir Prakualifikasi"){
+		else if ($Dok->nama_dokumen == "Daftar Hadir Prakualifikasi"){
 						
 			$this->doccy->newFile('daftarhadir.docx');
 			
