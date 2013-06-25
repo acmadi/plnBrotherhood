@@ -58,7 +58,7 @@
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
 		
-		</br>
+		<br/>
 		<h4><b> Nota Dinas Permintaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDP,'nomor'); ?>
@@ -84,8 +84,8 @@
 			<?php echo CHtml::button('Unggah Nota Dinas Permintaan', array('class'=>'sidafbutton'));?>
 		</div>
 		
-		</br>
-		</br>
+		<br/>
+		<br/>
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'nomor'); ?>
@@ -125,14 +125,14 @@
 			<?php echo $form->error($NDPP,'pagu_anggaran'); ?>
 		</div>
 		
-		</br>
+		<br/>
 		
 		<div class="row buttons">
 			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
 			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
 		</div>
 		
-		</br>
+		<br/>
 
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton','name'=>'simpan')); ?>

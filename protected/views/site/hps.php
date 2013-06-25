@@ -26,7 +26,7 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 					));
 				?>
 			</div>
-			</br>
+			<br/>
 			
 			<?php if(Yii::app()->user->hasFlash('sukses')): ?>
 				<div class="flash-success">

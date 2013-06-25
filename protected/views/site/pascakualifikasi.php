@@ -21,7 +21,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		</br>		
+		<br/>		
 		<h4><b> Surat Pemberitahuan Pengadaan</b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($X1,'nomor'); ?>

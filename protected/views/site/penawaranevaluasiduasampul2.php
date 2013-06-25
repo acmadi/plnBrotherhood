@@ -136,10 +136,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
-	</br>
+	<br/>
 	
 	<div style="border-top:1px solid lightblue">
-	</br>
+	<br/>
 		<?php echo CHtml::button('Sampul Satu', array('submit'=>array('site/editpenawaranevaluasiduasampul',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
 	</div>
 	

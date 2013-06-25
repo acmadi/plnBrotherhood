@@ -152,7 +152,6 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	
 	public function actionKontrak()
 	{
 		// renders the view file 'protected/views/site/history.php'
@@ -580,7 +579,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('prakualifikasi',array(
-					'Dokumen0'=>$Dokumen0,'X2'=>$X2,
+					'Dokumen0'=>$Dokumen0,'X0'=>$X0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
 				));
 			}
 		}
