@@ -17,13 +17,13 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 	<?php } else { ?>
 		<div>
-			<?php if($cpengadaan->status == 'Berita Acara Pembukaan Penawaran') { ?>
+			<?php if($cpengadaan->status == '9') { ?>
 				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran', array('submit'=>array('site/beritaacarapembukaanpenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
 			<?php } else { ?>
 				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran', array('submit'=>array('site/editberitaacarapembukaanpenawaran',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
 			<?php } ?>
 		</div>
-		</br>
+		<br/>
 	<?php } ?>
 	
 		<?php 
@@ -102,9 +102,9 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<?php if($SUPP->isNewRecord) { ?>
 		
 	<?php } else { ?>
-		</br>
+		<br/>
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>

@@ -17,13 +17,13 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 	<?php } else { ?>
 		<div>
-			<?php if($cpengadaan->status == 'Berita Acara Negosiasi dan Klarifikasi') { ?>
+			<?php if($cpengadaan->status == '15') { ?>
 				<?php echo CHtml::button('Berita Acara Negosiasi dan Klarifikasi', array('submit'=>array('site/beritaacaranegosiasiklarifikasi',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
 			<?php } else { ?>
 				<?php echo CHtml::button('Berita Acara Negosiasi dan Klarifikasi', array('submit'=>array('site/editberitaacaranegosiasiklarifikasi',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
 			<?php } ?>
 		</div>
-		</br>
+		<br/>
 	<?php } ?>
 	
 		<?php 
@@ -108,9 +108,9 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<?php if($SUNK->isNewRecord) { ?>
 		
 	<?php } else { ?>
-		</br>
+		<br/>
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Undangan Negosiasi dan Klarifikasi', array('docx/download','id'=>$SUNK->id_dokumen)); ?></li>

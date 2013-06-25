@@ -19,7 +19,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<div>
 		<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Tahap Dua', array('submit'=>array('site/editberitaacarapembukaanpenawarantahap2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
 		</div>
-		</br>
+		<br/>
 	<?php } ?>
 	
 		<?php 
@@ -80,9 +80,9 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<?php if($BAEP->isNewRecord) { ?>
 		
 	<?php } else { ?>
-		</br>
+		<br/>
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Tahap Dua', array('docx/download','id'=>$BAEP>id_dokumen)); ?></li>
