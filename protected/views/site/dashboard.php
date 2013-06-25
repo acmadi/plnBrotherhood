@@ -37,6 +37,11 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				),
 				
 			array(            // display using an expression
+				'name'=>'User',
+				'value'=>'$data->divisi_peminta',
+				),			
+				
+			array(            // display using an expression
             'name'=>'Sisa Hari',			
             'value'=>'$data->sisaHari($data->id_pengadaan)',
 			// "htmlOptions"=>array(
@@ -46,7 +51,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 			),
 			
-			'status',
+			array(            // display using an expression
+					'name'=>'Status',
+					'value'=>'$data->dapatkanStatus()',
+				),			
 			
 			array (
 				  'name'=>'Progress',				  
@@ -94,10 +102,20 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				),
 				
 				array(            // display using an expression
+				'name'=>'User',
+				'value'=>'$data->divisi_peminta',
+				),			
+				
+				array(            // display using an expression
 				'name'=>'Sisa Hari',
 				'value'=>'$data->sisaHari($data->id_pengadaan)',
 				),
-				'status',
+				
+				array(            // display using an expression
+					'name'=>'Status',
+					'value'=>'$data->dapatkanStatus()',
+				),			
+				// 'status',
 				
 				array (
 				  'name'=>'Progress',				  

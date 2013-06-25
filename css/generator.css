@@ -85,3 +85,41 @@ li
 {
 	margin-left: 5px;
 }
+
+#menuform
+{
+	background:lightgrey;
+}
+
+#menuform ul
+{
+	padding:6px 20px 5px 20px;
+	margin:0px;
+}
+
+#menuform ul li
+{
+	display: inline;
+}
+
+#menuform ul li a
+{
+	color:#000000;
+	background-color:transparent;
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	padding:5px 8px;
+}
+
+#menuform ul li a:hover, #menuform ul li.active a
+{
+	color: #000000;
+	background-color:#EFF4FA;
+	text-decoration:none;
+}
+
+#menuform ul li span
+{
+	color:#000000;
+}

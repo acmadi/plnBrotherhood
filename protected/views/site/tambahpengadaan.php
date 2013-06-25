@@ -18,8 +18,16 @@
 	
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'divisi_peminta'); ?>
-			<?php echo $form->textField($Pengadaan,'divisi_peminta',array('size'=>60,'maxlength'=>32)); ?>
+			<?php echo $form->dropDownList($Pengadaan,'divisi_peminta',CHtml::listData(Divisi::model()->findAll(), 'username', 'username'),array('empty'=>'-----Pilih Divisi-----'));?>
 			<?php echo $form->error($Pengadaan,'divisi_peminta'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($Pengadaan,'jenis_pengadaan'); ?>
+			<?php echo $form->radioButtonList($Pengadaan,'jenis_pengadaan',
+						array('Barang dan Jasa'=>'Barang dan Jasa','Jasa Konsultasi'=>'Jasa Konsultasi'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+			<?php echo $form->error($Pengadaan,'jenis_pengadaan'); ?>
 		</div>
 
 		<div class="row">
@@ -50,7 +58,7 @@
 			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
 		</div>
 		
-		</br>
+		<br/>
 		<h4><b> Nota Dinas Permintaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDP,'nomor'); ?>
@@ -76,8 +84,8 @@
 			<?php echo CHtml::button('Unggah Nota Dinas Permintaan', array('class'=>'sidafbutton'));?>
 		</div>
 		
-		</br>
-		</br>
+		<br/>
+		<br/>
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'nomor'); ?>
@@ -117,14 +125,14 @@
 			<?php echo $form->error($NDPP,'pagu_anggaran'); ?>
 		</div>
 		
-		</br>
+		<br/>
 		
 		<div class="row buttons">
 			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
 			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
 		</div>
 		
-		</br>
+		<br/>
 
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton','name'=>'simpan')); ?>
