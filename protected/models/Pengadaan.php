@@ -262,9 +262,7 @@ class Pengadaan extends CActiveRecord
 			),
 		);
 		
-		$criteria=new CDbCriteria;		
-		
-                $criteria->with = array("idPanitia");
+		$criteria=new CDbCriteria;				
                 
 		$usern = Yii::app()->user->name;
 		// $modelUser = Anggota::model()->with('pengadaan')->findAll('username="' . $usern . '"' );
