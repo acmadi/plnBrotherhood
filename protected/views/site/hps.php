@@ -16,9 +16,17 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
 		
-			<?php echo CHtml::submitButton('Ubah RKS',array('submit'=>array('site/editrks','id'=>$id),'class'=>'sidafbutton')); ?>
-			
-			</br/></br>
+			<div id="menuform">
+				<?php
+				$this->widget('zii.widgets.CMenu', array(
+						'items'=>array(
+							array('label'=>'RKS', 'url'=>array('/site/editrks','id'=>$id)),
+							array('label'=>'HPS', 'url'=>array(($Hps->isNewRecord)?('/site/hps'):('/site/edithps'),'id'=>$id)),
+						),
+					));
+				?>
+			</div>
+			</br>
 			
 			<?php if(Yii::app()->user->hasFlash('sukses')): ?>
 				<div class="flash-success">

@@ -18,13 +18,13 @@
 	
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'divisi_peminta'); ?>
-			<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Divisi::model()->findAll(), 'username', 'username'),array('empty'=>'-----Pilih Divisi-----'));?>
+			<?php echo $form->dropDownList($Pengadaan,'divisi_peminta',CHtml::listData(Divisi::model()->findAll(), 'username', 'username'),array('empty'=>'-----Pilih Divisi-----'));?>
 			<?php echo $form->error($Pengadaan,'divisi_peminta'); ?>
 		</div>
 		
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'jenis_pengadaan'); ?>
-			<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
+			<?php echo $form->radioButtonList($Pengadaan,'jenis_pengadaan',
 						array('Barang dan Jasa'=>'Barang dan Jasa','Jasa Konsultasi'=>'Jasa Konsultasi'),
 						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 			<?php echo $form->error($Pengadaan,'jenis_pengadaan'); ?>
