@@ -51,7 +51,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 			),
 			
-			'status',
+			array(            // display using an expression
+					'name'=>'Status',
+					'value'=>'$data->dapatkanStatus()',
+				),			
 			
 			array (
 				  'name'=>'Progress',				  
@@ -107,7 +110,12 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				'name'=>'Sisa Hari',
 				'value'=>'$data->sisaHari($data->id_pengadaan)',
 				),
-				'status',
+				
+				array(            // display using an expression
+					'name'=>'Status',
+					'value'=>'$data->dapatkanStatus()',
+				),			
+				// 'status',
 				
 				array (
 				  'name'=>'Progress',				  
