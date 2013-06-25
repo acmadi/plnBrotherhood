@@ -75,9 +75,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div><!-- form -->
 		
 		<?php if (!$Dokumen0->isNewRecord){ ?>
-				</br>
+				<br/>
 				<div style="border-top:1px solid lightblue">
-				</br>
+				<br/>
 					<h4><b> Buat Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Surat Undangan Prakualifikasi', array('docx/download','id'=>$X0->id_dokumen)); ?></li>

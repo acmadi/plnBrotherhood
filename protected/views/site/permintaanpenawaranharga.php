@@ -110,12 +110,12 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			
 		<?php $this->endWidget(); ?>
 		
-		</br>
+		<br/>
 		</div><!-- form -->
 		<?php if (!$Dokumen0->isNewRecord){ ?>
-				</br>
+				<br/>
 				<div style="border-top:1px solid lightblue">
-				</br>
+				<br/>
 					<h4><b> Buat Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
