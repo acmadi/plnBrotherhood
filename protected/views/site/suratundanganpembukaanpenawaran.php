@@ -29,6 +29,21 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'Surat Undangan Pembukaan Penawaran', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
+//                                    array('label'=>'Berita Acara Pembukaan Penawaran', 'visible'=>$SUPP->isNewRecord),
+                                    array('label'=>'Berita Acara Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id), 'visible'=>!$SUPP->isNewRecord),
+                            ),
+                        ));
+                    ?>
+                </div>
+                
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
