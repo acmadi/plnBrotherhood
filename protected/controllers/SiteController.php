@@ -3227,8 +3227,90 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionUploader()
-	{
-		$this->render('uploader');
+public function actionUploader(){
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$user = Yii::app()->user->name;
+			$objectpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id. '"');
+
+			$metode_penawaran1='';
+			$metode_penawaran2='';
+			if($objectpengadaan->metode_penawaran=='Dua Tahap'){
+				$metode_penawaran1='Tahap 1';
+				$metode_penawaran2='Tahap 2';
+			} else if ($objectpengadaan->metode_penawaran=='Dua Sampul'){
+				$metode_penawaran1='Sampul 1';
+				$metode_penawaran2='Sampul 2';
+			}	
+			
+			$modelDok = array(Dokumen::model()->find('nama_dokumen="Pakta Integritas Awal Panitia" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="RKS" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Undangan Prakualifikasi" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Pakta Integritas Penyedia" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Pemberitahuan Pengadaan" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Pernyataan Minat" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Form Isian Kualifikasi" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Undangan Pengambilan Dokumen Pengadaan" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Undangan Aanwijzing" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Berita Acara Aanwijzing" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Daftar Hadir Aanwijzing" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Dokumen Penawaran" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Undangan Pembukaan Penawaran ' . $metode_penawaran1 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Undangan Pembukaan Penawaran ' . $metode_penawaran2 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Berita Acara Pembukaan Penawaran ' . $metode_penawaran1 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Berita Acara Pembukaan Penawaran ' . $metode_penawaran2 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Daftar Hadir Pembukaan Penawaran ' . $metode_penawaran1 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Daftar Hadir Pembukaan Penawaran ' . $metode_penawaran2 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Berita Acara Evaluasi Penawaran ' . $metode_penawaran1 . '" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Berita Acara Evaluasi Penawaran ' . $metode_penawaran2 . ' " AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Surat Undangan Negosiasi dan Klarifikasi" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Berita Acara Negosiasi dan Klarifikasi" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Nota Dinas Usulan Pemenang" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Nota Dinas Penetapan Pemenang" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Nota Dinas Pemberitahuan Pemenang" AND id_pengadaan="' . $id . '"'),
+										 Dokumen::model()->find('nama_dokumen="Pakta Integritas Akhir Panitia" AND id_pengadaan="' . $id . '"')
+										);
+
+			$modelDokKadiv = array(Dokumen::model()->find('nama_dokumen="Nota Dinas Permintaan" AND id_pengadaan="' . $id . '"'),
+												Dokumen::model()->find('nama_dokumen="TOR" AND id_pengadaan="' . $id . '"'),
+												Dokumen::model()->find('nama_dokumen="RAB" AND id_pengadaan="' . $id . '"'),
+												Dokumen::model()->find('nama_dokumen="Nota Dinas Perintah Pengadaan" AND id_pengadaan="' . $id . '"')
+										);
+			
+			$newDokumen = new Dokumen;
+			$newLinkDokumen = new LinkDokumen;
+				
+			if(isset($_POST['Dokumen'])){
+				$newDokumen->attributes=$_POST['Dokumen'];
+				$fileDokumen = CUploadedFile::getInstance($newDokumen,'uploadedFile');				
+				$newDokumen = Dokumen::model()->findByPk($newDokumen->id_dokumen);
+				$newDokumen->uploadedFile=$fileDokumen;
+				
+				$newDokumen->status_upload='Selesai';
+				
+				date_default_timezone_set("Asia/Jakarta");
+				$secs = time() + (7*3600);
+				$hours = $secs / 3600 % 24;
+				$minutes = $secs / 60 % 60;
+				$seconds = $secs % 60;
+				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
+		
+				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
+				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
+				$newLinkDokumen->waktu_upload=$waktu_upload;
+				$newLinkDokumen->tanggal_upload=date('Y-m-d');
+				$newLinkDokumen->pengunggah=$user;
+				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->format_dokumen='pdf';
+				$newLinkDokumen->save();
+								
+				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
+				@mkdir($path,0700,true);
+				$namaFile = $newLinkDokumen->nomor_link;
+				
+				if($newDokumen->save(false)){
+					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.jpg');
+					} 
+	}
+				$this->render('uploader',array('modelDok'=>$modelDok));
 	}
 }
