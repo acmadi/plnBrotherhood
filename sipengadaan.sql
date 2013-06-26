@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 02:24 AM
+-- Generation Time: Jun 26, 2013 at 05:10 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -153,6 +153,13 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_penjelasan`
+--
+
+INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`) VALUES
+(147, 'assasda', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -166,6 +173,13 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
   `acara` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `daftar_hadir`
+--
+
+INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
+(148, 'a', 'ASA', 'Aanwijzing');
 
 -- --------------------------------------------------------
 
@@ -345,7 +359,11 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (141, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
 (142, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
 (143, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(144, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai');
+(144, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
+(145, 'Surat Undangan Permintaan Penawaran Harga', '2013-06-11', 'Jakarta', 3, 'Belum Selesai'),
+(146, 'Surat Undangan Aanwijzing', '2013-06-14', 'Jakarta', 3, 'Belum Selesai'),
+(147, 'Berita Acara Aanwijzing', '2013-06-25', 'Jakarta', 3, 'Belum Selesai'),
+(148, 'Daftar Hadir Aanwijzing', '2013-06-25', 'Jakarta', 3, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -735,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(3, 'asdasd', 'divman', 'Barang dan Jasa', '-', '2013-06-12', '0000-00-00', '5', 0, 3, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
+(3, 'asdasd', 'divman', 'Barang dan Jasa', '-', '2013-06-12', '0000-00-00', '8', 0, 3, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
 (4, 'dvfdgd', 'divtrans', 'Barang dan Jasa', '-', '2013-06-28', '0000-00-00', '1', 0, 3, 'Pemilihan Langsung', '-', '-'),
 (5, 'fghfghf', 'divtrans', 'Barang dan Jasa', '-', '2013-06-14', '0000-00-00', '1', 0, 3, 'Pelelangan', '-', '-');
 
@@ -947,6 +965,13 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_penjelasan`
+--
+
+INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
+(146, 'xx', 3, 'Undangan Aanwijzing asdasd', '2013-06-25', 'a', 'ASA');
+
 -- --------------------------------------------------------
 
 --
@@ -963,6 +988,13 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
   PRIMARY KEY (`id_dokumen`),
   UNIQUE KEY `nomor` (`nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_permintaan_penawaran_harga`
+--
+
+INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, `lingkup_kerja`, `waktu_kerja`, `masa_berlaku_penawaran`, `tempat_penyerahan`) VALUES
+(145, 'cx', 'xcaa', '33232', 34, '4322sda');
 
 -- --------------------------------------------------------
 
