@@ -36,6 +36,8 @@ class DocxController extends Controller
 			$anggaran = $NDPP->pagu_anggaran;
 			$sumber = $NDPP->sumber_dana;
 			$tanggal = $Dok->tanggal;
+			$DokNotaDinas= Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$tanggal2 = $DokNotaDinas->tanggal;
 			$torrks = $NDPP->TOR_RKS;
 			$rab = $NDPP->RAB;
 			$target = $NDPP->targetSPK_kontrak;
