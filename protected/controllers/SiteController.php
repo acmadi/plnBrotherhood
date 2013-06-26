@@ -164,7 +164,12 @@ class SiteController extends Controller
 				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
 				$pathinfo = pathinfo($tempDokumen->uploadedFile->getName());
 				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_link) AS maxId';
+				$row = $LinkDokumen->model()->find($criteria);
+				$id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=$id_link;
 				$newLinkDokumen->id_dokumen=$tempDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
@@ -1583,7 +1588,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
@@ -3205,6 +3210,7 @@ class SiteController extends Controller
 	
 	public function actionTambahpengadaan()
 	{	
+		$user = Yii::app()->user->name;
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$Pengadaan=new Pengadaan;
@@ -3266,9 +3272,8 @@ class SiteController extends Controller
 			$RAB= new Rab;
 			$RAB->id_dokumen=$Dokumen2->id_dokumen;
 
-			//Uncomment the following line if AJAX validation is needed
-			//$this->performAjaxValidation($model);
-
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
@@ -3277,10 +3282,9 @@ class SiteController extends Controller
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				
-				// $TOR->attributes=$_POST['Tor'];
-				// $RAB->attributes=$_POST['Rab'];
-				
 				if($valid){
+					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
+					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
 					$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$Dokumen3->tanggal=$Dokumen0->tanggal;
@@ -3291,14 +3295,14 @@ class SiteController extends Controller
 						$NDPP->nota_dinas_permintaan=$NDP->nomor;
 						$valid=$valid&&$NDPP->validate();
 						if($valid){
-							if($Pengadaan->save(false)) {
+							if($Pengadaan->save(false)&&$Divisi->save(false)) {
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
+									if($NDP->save(false)&&$NDPP->save(false)&&$TOR->save(false)&&$RAB->save(false)){										
 										if(isset($_POST['simpan'])){
 											$this->redirect(array('dashboard'));
 										}
 										if(isset($_POST['simpanbuat'])){
-											$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));
+											$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));											
 										}
 									}
 								}
@@ -3309,7 +3313,7 @@ class SiteController extends Controller
 			}
 
 			$this->render('tambahpengadaan',array(
-				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0
+				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
 			));
 		}
 	}
@@ -3382,7 +3386,12 @@ public function actionUploader(){
 				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
 				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
 				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_link) AS maxId';
+				$row = $LinkDokumen->model()->find($criteria);
+				$id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=$id_link;
 				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');

@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'nota_dinas_penetapan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $kepada
  * @property string $nama_penyedia
  * @property string $alamat
  * @property string $NPWP
@@ -19,7 +18,6 @@
  *
  * The followings are the available model relations:
  * @property Pengadaan $namaPenyedia
- * @property Pengadaan $kepada0
  * @property Dokumen $idDokumen
  */
 class NotaDinasPenetapanPemenang extends CActiveRecord
@@ -50,14 +48,14 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, kepada, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'required'),
+			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('kepada, nama_penyedia, NPWP, biaya, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'length', 'max'=>20),
+			array('nama_penyedia, NPWP, biaya, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'length', 'max'=>20),
 			array('alamat', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, kepada, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +68,6 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'namaPenyedia' => array(self::BELONGS_TO, 'Pengadaan', 'nama_penyedia'),
-			'kepada0' => array(self::BELONGS_TO, 'Pengadaan', 'kepada'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
@@ -83,7 +80,6 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'kepada' => 'Kepada',
 			'nama_penyedia' => 'Nama Penyedia',
 			'alamat' => 'Alamat',
 			'NPWP' => 'Npwp',
@@ -109,7 +105,6 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('kepada',$this->kepada,true);
 		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
 		$criteria->compare('alamat',$this->alamat,true);
 		$criteria->compare('NPWP',$this->NPWP,true);
