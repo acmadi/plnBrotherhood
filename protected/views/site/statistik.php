@@ -4,30 +4,35 @@
 $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 ?>
 
-<?php
-	$test = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
-	$dataProvider = array();
-	while(list($k1, $v1)=each($test)) {
-		$x = array();
-		array_push($x, $v1['username']);
-		array_push($x, (int)$v1['jumlah_berlangsung']);
-		array_push($dataProvider, $x);
-	}
-?>
-
 <div id="sidebar">
-	<?php
-		$this->widget('zii.widgets.CPortlet', array());
-	?>
+	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
+	<ul>
+		<li><?php echo CHtml::link('Pengadaan per divisi', array('site/statistik', 'chart'=>'1')) ?></li>
+	</ul>
+	<?php $this->endWidget(); ?>
 </div>
 
-<div id="perdiv">
+<div id="maincontent">
+	<div id="menuform">
+		<?php
+		    $this->widget('zii.widgets.CMenu', array(
+		        'items'=>array(
+		                array('label'=>'Total', 'url'=>array('site/statistik', 'chart'=>'1')),
+		                array('label'=>'Berlangsung', 'url'=>array('site/statistik', 'chart'=>'2')),
+		                array('label'=>'Selesai', 'url'=>array('site/statistik', 'chart'=>'3')),
+		                array('label'=>'Gagal', 'url'=>array('site/statistik', 'chart'=>'4')),
+		        ),
+		    ));
+		?>
+	</div>
+	<br />
 	<?php $this->widget('HighchartsWidget', array(
 			'options'=>array(
 				'tooltip'=>array(
 					'formatter'=>'js:function() {return "<b>"+ this.point.name +"</b>: "+ this.percentage +" %";}',
 				),
-				'title'=>array('text'=>'Pengadaan per divisi'),
+				'title'=>array('text'=>$title),
+				'subtitle'=>array('text'=>$subtitle),
 				'series'=>array(
 					array(
 						'type'=>'pie',
