@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 02:50 AM
+-- Generation Time: Jun 26, 2013 at 03:05 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -206,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
   `jumlah_berlangsung` bigint(32) NOT NULL,
   `jumlah_selesai` bigint(32) NOT NULL,
+  `jumlah_gagal` bigint(32) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -213,11 +214,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 -- Dumping data for table `divisi`
 --
 
-INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`) VALUES
-('divin', 1, 0),
-('divman', 1, 0),
-('divsi', 0, 1),
-('divtrans', 1, 0);
+INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`, `jumlah_gagal`) VALUES
+('divin', 1, 0, 0),
+('divman', 1, 0, 0),
+('divsi', 0, 1, 0),
+('divtrans', 1, 0, 0);
 
 -- --------------------------------------------------------
 
