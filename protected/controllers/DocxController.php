@@ -67,7 +67,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#kepada2#', $kepada2);
 			$this->doccy->phpdocx->assign('#dari#', $dari);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#tanggal2#', $tanggal2);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal2);
 			$this->doccy->phpdocx->assign('#perihal#', $perihal);
 			$this->doccy->phpdocx->assign('#anggaran#', $anggaran);
 			$this->doccy->phpdocx->assign('#sumber#', $sumber);
