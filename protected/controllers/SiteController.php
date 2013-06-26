@@ -3045,7 +3045,7 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
-				$Dokumen1->tanggal=$SUPP->tanggal_undangan;
+				$Dokumen1->tanggal=$SUNK->tanggal_undangan;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
@@ -3053,7 +3053,7 @@ class SiteController extends Controller
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
-				$Dokumen2->tanggal=$SUPP->tanggal_undangan;
+				$Dokumen2->tanggal=$SUNK->tanggal_undangan;
 				
 				$BANK= new BeritaAcaraNegosiasiKlarifikasi;
 				$BANK->id_dokumen=$Dokumen1->id_dokumen;
