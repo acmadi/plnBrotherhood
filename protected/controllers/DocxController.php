@@ -280,11 +280,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#norks#', '');
-			$this->doccy->phpdocx->assign('#acara#', '');
-			$this->doccy->phpdocx->assign('#pekerjaan#', '');
+			$this->doccy->phpdocx->assign('#norks#', '		');
+			$this->doccy->phpdocx->assign('#acara#', '		');
+			$this->doccy->phpdocx->assign('#pekerjaan#', '			');
 			$this->doccy->phpdocx->assign('#perihal#', $perihal);
-			$this->doccy->phpdocx->assign('#hari#', '');
+			$this->doccy->phpdocx->assign('#hari#', '		');
 			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#waktu#', $waktu);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
@@ -380,7 +380,7 @@ class DocxController extends Controller
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-		$this->renderDocx("Form Isian Kualifikasi", true);
+		$this->renderDocx("Form Isian Kualifikasi.docx", true);
 		}
 /*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
