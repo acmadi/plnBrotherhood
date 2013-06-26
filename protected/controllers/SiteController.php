@@ -839,6 +839,15 @@ class SiteController extends Controller
 					}				
 					$this->render('pascakualifikasi',array('X0'=>$X0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3));
 				} else {
+					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
+					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengantar Penawaran Harga"');
+					$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
+					$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
+			
+					$X0= PaktaIntegritasPenyedia::model()->findByPk($Dokumen0->id_dokumen);
+					$X1= SuratPengantarPenawaranHarga::model()->findByPk($Dokumen1->id_dokumen);
+					$X2= SuratPernyataanMinat::model()->findByPk($Dokumen2->id_dokumen);
+					$X3= FormIsianKualifikasi::model()->findByPk($Dokumen3->id_dokumen);
 					$this->render('pascakualifikasi',array('X0'=>$X0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3));
 				}
 			}
