@@ -399,7 +399,7 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '24'){
 			return 2300/24;
 		}		
-		else if($this->status == '100'){
+		else if($this->status == '100' || $this->status == '99'){
 			return 2400/24;
 		}
 		else{
@@ -408,41 +408,41 @@ class Pengadaan extends CActiveRecord
 	}
 	
 	public function dapatkanStatus(){
-		if($this->status == '1'){
-			return 'Penunjukan Panitia';
-		}
-		else if($this->status == '2' || $this->status == '3'){
+		if($this->status == '2' || $this->status == '1'){
 			return 'Pembuatan Dokumen Pengadaan';
 		}
-		else if($this->status == '4'){
+		else if($this->status == '3'){
 			return 'Kualifikasi';
 		}		
-		else if($this->status == '5' || $this->status == '6'){
+		else if($this->status == '5' || $this->status == '4'){
 			return 'Pengambilan Dokumen Pengadaan';
 		}
-		else if($this->status == '8' || $this->status == '7'){
+		else if($this->status == '6' || $this->status == '7'){
 			return 'Aanwijzing';
 		}
-		else if($this->status == '10' || $this->status == '9' || $this->status == '11'){
+		else if($this->status == '8' || $this->status == '9'){
 			return 'Penawaran';
 		}
-		else if($this->status == '12'){
+		else if($this->status == '10'){
 			return 'Evaluasi';
 		}
-		else if($this->status == '13' || $this->status == '14' || $this->status == '15'){
+		else if($this->status == '11' || $this->status == '12'){
 			return 'Penawaran 2';
 		}
-		else if($this->status == '16'){
+		else if($this->status == '13'){
 			return 'Evaluasi 2';
 		}
-		else if($this->status == '17' || $this->status == '18'){
+		else if($this->status == '14' || $this->status == '15'){
 			return 'Klarifikasi dan Negosiasi';
 		}
-		else if($this->status == '19' || $this->status == '20' || $this->status == '21' || $this->status == '22' || $this->status == '23'){
+		else if($this->status == '19' || $this->status == '20' || $this->status == '16' || $this->status == '17' || $this->status == '18'){
 			return 'Penentuan Pemenang';
 		}
-		else if($this->status == '24'){
+		else if($this->status == '21'){
 			return 'Kontrak';
+		}
+                else if($this->status == '99'){
+			return 'Gagal';
 		}
 		else if($this->status == '100'){
 			return 'Selesai';
