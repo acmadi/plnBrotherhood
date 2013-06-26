@@ -29,10 +29,17 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 	<?php $this->widget('HighchartsWidget', array(
 			'options'=>array(
 				'tooltip'=>array(
-					'formatter'=>'js:function() {return "<b>"+ this.point.name +"</b>: "+ this.percentage +" %";}',
+					'formatter'=>'js:function() {return this.percentage +" %";}',
 				),
 				'title'=>array('text'=>$title),
 				'subtitle'=>array('text'=>$subtitle),
+				'plotOptions'=>array(
+					'pie'=>array(
+						'dataLabels'=>array(
+							'formatter'=>'js:function() {return "<b>" + this.point.name + "</b><br />  " + this.y;}',
+						),
+					),
+				),
 				'series'=>array(
 					array(
 						'type'=>'pie',
