@@ -80,10 +80,6 @@
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 		
-		<div class="row buttons">
-			<?php echo CHtml::button('Unggah Nota Dinas Permintaan', array('class'=>'sidafbutton'));?>
-		</div>
-		
 		<br/>
 		<br/>
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
@@ -126,11 +122,6 @@
 		</div>
 		
 		<br/>
-		
-		<div class="row buttons">
-			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
-			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
-		</div>
 		
 		<br/>
 
