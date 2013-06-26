@@ -164,12 +164,12 @@ class SiteController extends Controller
 				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
 				$pathinfo = pathinfo($tempDokumen->uploadedFile->getName());
 				
-				$criteria=new CDbcriteria;
-				$criteria->select='max(id_link) AS maxId';
-				$row = $LinkDokumen->model()->find($criteria);
-				$id_link = $row['maxId'] + 1;
+				// $criteria=new CDbcriteria;
+				// $criteria->select='max(id_link) AS maxId';
+				// $row = $newLinkDokumen->model()->find($criteria);
+				// $id_link = $row['maxId'] + 1;
 				
-				$newLinkDokumen->id_link=$id_link;
+				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
 				$newLinkDokumen->id_dokumen=$tempDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
@@ -2454,20 +2454,21 @@ class SiteController extends Controller
 
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
-					// $Dokumen0->attributes=$_POST['Dokumen'];
-					
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
-					$valid=$BAPP->validate();					
-					if($valid){						
-						if($BAPP->save(false)&&$DH->save(false)){
-							$this->redirect(array('editberitaacarapembukaanpenawarantahap1','id'=>$Dokumen1->id_pengadaan));
+					$valid=$BAPP->validate();
+					if($valid){
+						if($Pengadaan->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($BAPP->save(false)&&$DH->save(false)){
+									$this->redirect(array('editberitaacarapembukaanpenawarantahap1','id'=>$Dokumen1->id_pengadaan));
+								}
+							}
 						}
-						
 					}
 				}
 
 				$this->render('beritaacarapembukaanpenawarantahap1',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'DH'=>$DH,
 				));
 
 			}
@@ -2587,7 +2588,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawarantahap1',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
@@ -2798,7 +2799,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawarantahap2',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'DH'=>$DH,
 				));
 
 			}
@@ -2918,7 +2919,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawarantahap2',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
@@ -3035,7 +3036,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Penentuan Pemenang';
+				$Pengadaan->status ='16';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Negosiasi dan Klarifikasi"');
 				$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($Dok0->id_dokumen);
@@ -3392,12 +3393,12 @@ public function actionUploader(){
 				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
 				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
 				
-				$criteria=new CDbcriteria;
-				$criteria->select='max(id_link) AS maxId';
-				$row = $LinkDokumen->model()->find($criteria);
-				$id_link = $row['maxId'] + 1;
+				// $criteria=new CDbcriteria;
+				// $criteria->select='max(id_link) AS maxId';
+				// $row = $newLinkDokumen->model()->find($criteria);
+				// $id_link = $row['maxId'] + 1;
 				
-				$newLinkDokumen->id_link=$id_link;
+				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
 				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
