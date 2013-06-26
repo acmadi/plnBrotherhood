@@ -215,12 +215,75 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$chart = Yii::app()->getRequest()->getQuery('chart');
+		$dataProvider;
+		$title;
+		$subtitle;
+		switch ($chart) {
+			case '1' : {
+				$query = Yii::app()->db->createCommand('select * from divisi')->queryAll();
+				$dataProvider = array();
+				while(list($k1, $v1)=each($query)) {
+					$x = array();
+					array_push($x, $v1['username']);
+					array_push($x, (int)$v1['jumlah_berlangsung'] + (int)$v1['jumlah_selesai'] + (int)$v1['jumlah_gagal']);
+					array_push($dataProvider, $x);
+				}
+				$title = 'Pengadaan total';
+				$subtitle = 'per divisi';
+				break;
+			}
+			case '2' : {
+				$query = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
+				$dataProvider = array();
+				while(list($k1, $v1)=each($query)) {
+					$x = array();
+					array_push($x, $v1['username']);
+					array_push($x, (int)$v1['jumlah_berlangsung']);
+					array_push($dataProvider, $x);
+				}
+				$title = 'Pengadaan yang sedang berlangsung';
+				$subtitle = 'per divisi';
+				break;
+			}
+			case '3' : {
+				$query = Yii::app()->db->createCommand('select username, jumlah_selesai from divisi')->queryAll();
+				$dataProvider = array();
+				while(list($k1, $v1)=each($query)) {
+					$x = array();
+					array_push($x, $v1['username']);
+					array_push($x, (int)$v1['jumlah_selesai']);
+					array_push($dataProvider, $x);
+				}
+				$title = 'Pengadaan yang telah selesai';
+				$subtitle = 'per divisi';
+				break;
+			}
+			case '4' : {
+				$query = Yii::app()->db->createCommand('select username, jumlah_gagal from divisi')->queryAll();
+				$dataProvider = array();
+				while(list($k1, $v1)=each($query)) {
+					$x = array();
+					array_push($x, $v1['username']);
+					array_push($x, (int)$v1['jumlah_gagal']);
+					array_push($dataProvider, $x);
+				}
+				$title = 'Pengadaan yang gagal';
+				$subtitle = 'per divisi';
+				break;
+			}
+		}
+
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
 		else {
 			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('statistik');
+				$this->render('statistik', array(
+					'dataProvider'=>$dataProvider,
+					'title'=>$title,
+					'subtitle'=>$subtitle,
+				));
 			}
 		}
 	}
@@ -1525,7 +1588,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
