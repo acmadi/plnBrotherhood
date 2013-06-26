@@ -3395,7 +3395,7 @@ public function actionUploader(){
 				
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_link) AS maxId';
-				$row = $LinkDokumen->model()->find($criteria);
+				$row = $newLinkDokumen->model()->find($criteria);
 				$id_link = $row['maxId'] + 1;
 				
 				$newLinkDokumen->id_link=$id_link;
