@@ -38,14 +38,14 @@
 		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
 				<li class='belum' ><?php echo 'Pengambilan Dokumen Pengadaan'?></li>
 		<?php } else if($cpengadaan->status == '4') { ?>
-				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/pengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
+				<li class='onprogress' ><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/pengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
 		<?php } else if($cpengadaan->status == '5') { ?>
-			<li class='onprogress' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/permintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<li class='onprogress' > <?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/permintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } else { ?>
 			<?php if($cpengadaan->metode_pengadaan=='Pelelangan'){ ?>
-				<li class='sudah' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/editpengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' ><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/editpengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if ($cpengadaan->metode_pengadaan=='Penunjukan Langsung'||$cpengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
-				<li class='sudah' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/editpermintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' > <?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/editpermintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } ?>
 		
