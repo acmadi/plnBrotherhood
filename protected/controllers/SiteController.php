@@ -361,7 +361,16 @@ class SiteController extends Controller
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="14"){
 					$this->redirect(array('site/suratundangannegosiasiklarifikasi','id'=>$id));
-				}				
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="15"){
+					$this->redirect(array('site/beritaacaranegosiasiklarifikasi','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="16"){
+					$this->redirect(array('site/editrks','id'=>$id));
+				}
+				// if(Pengadaan::model()->findByPk($id)->status=="16"){
+					// $this->redirect(array('site/notadinasusulanpemenang','id'=>$id));
+				// }
 			}
 		}
 	}
