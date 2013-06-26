@@ -3126,7 +3126,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaranegosiasiklarifikasi',array(
-					'BANK'=>$BANK,
+					'BANK'=>$BANK,'DH'=>$DH,
 				));
 
 			}
