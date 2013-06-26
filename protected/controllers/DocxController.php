@@ -350,7 +350,7 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
 			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);
-			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_pengadaan = ""RKS');
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$nomor = $SUPH->nomor;
 			$tanggal = $Dok->tanggal;
