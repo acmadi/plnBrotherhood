@@ -51,11 +51,11 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			'enableAjaxValidation'=>false,
 			)); ?>
 			
-			<h4><b> Surat Undangan Pengambilan Dokumen Pengadaan </b></h4>
+			<h4><b> Surat Undangan Permintaan Penawaran Harga </b></h4>
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'nomor'); ?>
-				<?php echo $form->textField($SUPDP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($SUPDP,'nomor'); ?>
+				<?php echo $form->labelEx($SUPPP,'nomor'); ?>
+				<?php echo $form->textField($SUPPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->error($SUPPP,'nomor'); ?>
 			</div>
 			
 			<div class="row">
@@ -73,35 +73,27 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'perihal'); ?>
-				<?php echo $form->textArea($SUPDP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($SUPDP,'perihal'); ?>
+				<?php echo $form->labelEx($SUPPP,'lingkup_kerja'); ?>
+				<?php echo $form->textArea($SUPPP,'lingkup_kerja',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+				<?php echo $form->error($SUPPP,'lingkup_kerja'); ?>
+			</div>
+			
+			<div class="row">
+				<?php echo $form->labelEx($SUPPP,'lama berlaku penawaran harga  (dalam satuan bulan)'); ?>
+				<?php echo $form->textField($SUPPP,'masa_berlaku_penawaran',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->error($SUPPP,'masa_berlaku_penawaran'); ?>
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'tanggal pengambilan'); ?>
-				<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-						'model'=>$SUPDP,
-						'attribute'=>'tanggal_pengambilan',
-						'value'=>$SUPDP->tanggal_pengambilan,
-						'htmlOptions'=>array('size'=>56),
-						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
-						),
-				));?>
-				<?php echo $form->error($SUPDP,'tanggal_pengambilan'); ?>
+				<?php echo $form->labelEx($SUPPP,'waktu peneyelesaian pekerjaan'); ?>
+				<?php echo $form->textField($SUPPP,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->error($SUPPP,'waktu_kerja'); ?>
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
-				<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'tempat_pengambilan'); ?>
-				<?php echo $form->textArea($SUPDP,'tempat_pengambilan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($SUPDP,'tempat_pengambilan'); ?>
+				<?php echo $form->labelEx($SUPPP,'tempat_penyerahan_pekerjaan'); ?>
+				<?php echo $form->textArea($SUPPP,'tempat_penyerahan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+				<?php echo $form->error($SUPPP,'tempat_penyerahan'); ?>
 			</div>
 
 			<div class="row buttons">
@@ -110,15 +102,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			
 		<?php $this->endWidget(); ?>
 		
-		</br>
+		<br/>
 		</div><!-- form -->
 		<?php if (!$Dokumen0->isNewRecord){ ?>
-				</br>
+				<br/>
 				<div style="border-top:1px solid lightblue">
-				</br>
+				<br/>
 					<h4><b> Buat Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Surat Undangan Permintaan Penawaran Harga', array('docx/download', 'id'=>$SUPPP->id_dokumen)); ?></li>
 					</ul>
 				</div>
 		<?php } ?>

@@ -27,7 +27,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<br/>
 			
 			<div style="border-top:1px solid lightblue">
-			</br>
+			<br/>
 				<h4><b> Buat Dokumen </b></h4>
 				<ul class="generatedoc">
 					<li><?php echo CHtml::link('Pakta Integritas Penyedia', array('docx/download','id'=>$X0->id_dokumen)); ?></li>

@@ -70,7 +70,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	
 	<?php if (!$BAP->isNewRecord){ ?>
 	
-		</br>
+		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>

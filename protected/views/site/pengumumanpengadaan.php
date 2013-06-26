@@ -14,7 +14,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<?php 
 		if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-		
+			
 			<div id="menuform">
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
@@ -25,7 +25,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				?>
 			</div>
 			<br/>
-		
+			
 			<?php if(Yii::app()->user->hasFlash('sukses')): ?>
 				<div class="flash-success">
 					<?php echo Yii::app()->user->getFlash('sukses'); ?>
@@ -93,7 +93,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
+				<?php echo $form->labelEx($SUPDP,'waktu pengambilan (dalam satuan hari)'); ?>
 				<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
 			</div>
@@ -110,12 +110,12 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			
 		<?php $this->endWidget(); ?>
 		
-		</br>
+		<br/>
 		</div><!-- form -->
 		<?php if (!$Dokumen0->isNewRecord){ ?>
-				</br>
+				<br/>
 				<div style="border-top:1px solid lightblue">
-				</br>
+				<br/>
 					<h4><b> Buat Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
