@@ -13,23 +13,21 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	<div id="maincontent">
 	
-	<?php if($BAEP->isNewRecord) { ?>
-		
-	<?php } else { ?>
-		<div>
-		<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Sampul Satu', array('submit'=>array('site/editberitaacarapembukaanpenawaransampul1',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php if($cpengadaan->status == '11') { ?>
-				<?php echo CHtml::button('Surat Undangan Pembukaan Penawaran Sampul Dua', array('submit'=>array('site/suratundanganpembukaanpenawaransampul2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } else { ?>
-				<?php echo CHtml::button('Surat Undangan Pembukaan Penawaran Sampul Dua', array('submit'=>array('site/editsuratundanganpembukaanpenawaransampul2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'BA Evaluasi Penawaran Sampul 1', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='10'?'/site/beritaacaraevaluasipenawaransampul1':'/site/editberitaacaraevaluasipenawaransampul1','id'=>$id)),                                    
+                            ),
+                        ));
+                    ?>
+                </div>
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -90,7 +88,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu', array('docx/download','id'=>$BAEP>id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Daftar Hadir Evaluasi Penawaran Sampul Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>

@@ -1805,7 +1805,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawaransampul1',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'DH'=>$DH,
 				));
 
 			}
@@ -1925,7 +1925,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawaransampul1',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
