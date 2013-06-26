@@ -3036,7 +3036,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='Penentuan Pemenang';
+				$Pengadaan->status ='16';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Negosiasi dan Klarifikasi"');
 				$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($Dok0->id_dokumen);
