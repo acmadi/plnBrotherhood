@@ -25,7 +25,6 @@ class DocxController extends Controller
 		$Dok=Dokumen::model()->findByPk($id);
 		$Peng=Pengadaan::model()->findByPk($Dok->id_pengadaan);
 		
-		
 //	=====================================Nota Dinas=====================================
 		if ($Dok->nama_dokumen == "Nota Dinas Perintah Pengadaan"){
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);	
@@ -274,20 +273,27 @@ class DocxController extends Controller
 			$waktu = $SUP->waktu;
 			$nama = $Peng->nama_pengadaan;
 			$perihal = $SUP->perihal;
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
 					
 			$this->doccy->newFile('8 Surat Undangan Aanwijzing.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#norks#', '');
-			$this->doccy->phpdocx->assign('#acara#', '');
-			$this->doccy->phpdocx->assign('#pekerjaan#', '');
+			$this->doccy->phpdocx->assign('#norks#', '		');
+			$this->doccy->phpdocx->assign('#acara#', '		');
+			$this->doccy->phpdocx->assign('#pekerjaan#', '			');
 			$this->doccy->phpdocx->assign('#perihal#', $perihal);
-			$this->doccy->phpdocx->assign('#hari#', '');
+			$this->doccy->phpdocx->assign('#hari#', '		');
 			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#waktu#', $waktu);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
+			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			
 			$this->renderDocx("Surat Undangan Penjelasan.docx", true);
 
 		}
@@ -332,32 +338,20 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}*/
-/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Pengantar Penawaran Harga"){
-			
-			$SPPH=SuratPengantarPenawaranHarga::model()->findByPk($id);	
-			$nomor = $SPPH->nomor;
-			$tanggal = $Dok->tanggal;
-			$tempat = $Dok->tempat;
-			$kepada = $Peng->nama_penyedia;
-			$perihal = $SPPHS->perihal;
-			$nama = $Peng->nama_pengadaan;
-				
-			$this->doccy->newFile('s-pengantarpenawaranharga2.docx');
+		else if ($Dok->nama_dokumen == "Surat Pengantar Penawaran Harga"){
+		
+		$this->doccy->newFile('5c Surat Pengantar Penawaran Harga.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-			$this->doccy->phpdocx->assign('#1#', $nomor);
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', $tanggal);
-			$this->doccy->phpdocx->assign('#4#', $kepada);
-			$this->doccy->phpdocx->assign('#5#', $nama);
-			$this->doccy->phpdocx->assign('#6#', $perihal);
-			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
-		}*/
+		$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
+		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
-			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);	
+			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$nomor = $SUPH->nomor;
 			$tanggal = $Dok->tanggal;
 			$lingkup = $SUPH->lingkup_kerja;
@@ -366,22 +360,36 @@ class DocxController extends Controller
 			$lingkup = $SUPH->lingkup_kerja;
 			$tempat = $SUPH->tempat_penyerahan;
 			$nama = $Peng->nama_pengadaan;
-				
+			$tanggalpenawaran = $rks->tanggal_pemasukan_penawaran;
+			$waktupenawaran = $rks->waktu_pemasukan_penawaran;
 			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#bulan#', '.....');
+			$this->doccy->phpdocx->assign('#bulan#', $masa);
 			$this->doccy->phpdocx->assign('#terbilangbulan#', '................................');
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#lingkupkerja#', $lingkup);
 			$this->doccy->phpdocx->assign('#tanggalpenawaran#', $tanggalpenawaran);
+			$this->doccy->phpdocx->assign('#waktupenawaranpenawaran#', $waktupenawaran);
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', 'PaKadiv');
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
+		}
+		else if ($Dok->nama_dokumen == "Form Isian Kualifikasi"){
+		
+		$nama = $Peng->nama_pengadaan;
+			
+		$this->doccy->newFile('5d Form Isian Kualifikasi.docx');
+			
+		$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+		
+		$this->renderDocx("Form Isian Kualifikasi.docx", true);
 		}
 /*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
@@ -535,9 +543,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota#', $anggota1);
-			$this->doccy->phpdocx->assign('#wakturapat#', '....... : .......');
-			$this->doccy->phpdocx->assign('#norks#', '.............................................');
-			$this->doccy->phpdocx->assign('#tanggalrks#', '.............................................');
+			$DokRKS=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+			$this->doccy->phpdocx->assign('#wakturapat#', $RKS->waktu_penjelasan);
+			$this->doccy->phpdocx->assign('#norks#', $RKS->nomor);
+			$this->doccy->phpdocx->assign('#tanggal_rks#', $DokRKS->tanggal);
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){

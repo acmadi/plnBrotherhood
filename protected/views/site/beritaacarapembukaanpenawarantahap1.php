@@ -13,23 +13,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	<div id="maincontent">
 	
-	<?php if($BAPP->isNewRecord) { ?>
-		
-	<?php } else { ?>
-		<div>
-		<?php echo CHtml::button('Surat Undangan Pembukaan Penawaran Tahap Satu', array('submit'=>array('site/editsuratundanganpembukaanpenawarantahap1',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php if($cpengadaan->status == '10') { ?>
-				<?php echo CHtml::button('Berita Acara Evaluasi Penawaran Tahap Satu', array('submit'=>array('site/beritaacaraevaluasipenawarantahap1',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } else { ?>
-				<?php echo CHtml::button('Berita Acara Evaluasi Penawaran Tahap Satu', array('submit'=>array('site/editberitaacaraevaluasipenawarantahap1',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php } ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'SU Pembukaan Penawaran Tahap Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='8'?'/site/suratundanganpembukaanpenawarantahap1':'/site/editsuratundanganpembukaanpenawarantahap1','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawarantahap1':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawarantahap1'),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -86,7 +85,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$BAPP>id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>

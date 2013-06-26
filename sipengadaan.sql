@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 06:19 AM
+-- Generation Time: Jun 26, 2013 at 09:21 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`, `jumlah_gagal`) VALUES
 ('divin', 1, 0, 0),
 ('divman', 1, 0, 0),
-('divsi', 0, 0, 0),
+('divsi', 1, 0, 0),
 ('divtrans', 2, 0, 0);
 
 -- --------------------------------------------------------
@@ -216,10 +216,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
 --
 
 INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Nota Dinas Permintaan', '2013-06-18', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'TOR', '2013-06-18', 'Jakarta', 1, 'Belum Selesai'),
-(3, 'RAB', '2013-06-18', 'Jakarta', 1, 'Belum Selesai'),
-(4, 'Nota Dinas Perintah Pengadaan', '2013-06-13', 'Jakarta', 1, 'Belum Selesai'),
 (5, 'Nota Dinas Permintaan', '2013-06-20', 'Jakarta', 2, 'Belum Selesai'),
 (6, 'TOR', '2013-06-20', 'Jakarta', 2, 'Belum Selesai'),
 (7, 'RAB', '2013-06-20', 'Jakarta', 2, 'Belum Selesai'),
@@ -231,7 +227,13 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (13, 'Nota Dinas Permintaan', '2013-06-12', 'Jakarta', 4, 'Belum Selesai'),
 (14, 'TOR', '2013-06-12', 'Jakarta', 4, 'Belum Selesai'),
 (15, 'RAB', '2013-06-12', 'Jakarta', 4, 'Belum Selesai'),
-(16, 'Nota Dinas Perintah Pengadaan', '2013-06-13', 'Jakarta', 4, 'Belum Selesai');
+(16, 'Nota Dinas Perintah Pengadaan', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
+(17, 'Nota Dinas Permintaan', '2013-06-18', 'Jakarta', 5, 'Belum Selesai'),
+(18, 'TOR', '2013-06-18', 'Jakarta', 5, 'Belum Selesai'),
+(19, 'RAB', '2013-06-18', 'Jakarta', 5, 'Belum Selesai'),
+(20, 'Nota Dinas Perintah Pengadaan', '2013-06-12', 'Jakarta', 5, 'Belum Selesai'),
+(113, 'Pakta Integritas Awal Panitia', '2013-06-20', 'Jakarta', 4, 'Belum Selesai'),
+(114, 'RKS', '2013-06-20', 'Jakarta', 4, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -394,10 +396,10 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 --
 
 INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perihal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(4, '045/DVMAM/2013', '056/DIVMUM/2013', 'MSDAF', 'Kevin Indra', 'Penunjukan Panitia Pengadaan Baju Dinas', 'Terlampir', 'Terlampir', 78, 'Kas PLN', '100.000.000'),
 (8, '073/DIVTRANS/2013', '029/DMUM/2013', 'MSDAF', 'Irvan Aditya', 'Penunjukan Panitia Pengadaan Sewa Mobil', 'Terlampir', 'Terlampir', 98, 'Kas PLN', '100.000.000'),
 (12, '075/DIVTRANS/2013', '049/DMUM/2013', 'MSDAF', 'Johannes Ridho', 'Penunjukan Pejabat Pengadaan Sewa Motor', 'Terlampir', 'Terlampir', 67, 'Kas PLN', '100.000.000'),
-(16, '045/DVIN/2013', '027/DMUM/2013', 'KDIVMUM', 'Hanif Eridaputra', 'Penunjukan Pejabat Pengadaan Internet', 'Terlampir', 'Terlampir', 89, 'Kas PLN', '100.000.000');
+(16, '045/DVIN/2013', '027/DMUM/2013', 'KDIVMUM', 'Hanif Eridaputra', 'Penunjukan Pejabat Pengadaan Internet', 'Terlampir', 'Terlampir', 89, 'Kas PLN', '100.000.000'),
+(20, '045/DIVSI/2013', '058/DIVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan Panitia Pengadaan Sepatu Futsal', 'Terlampir', 'Terlampir', 67, 'Kas PLN', '400.000.000');
 
 -- --------------------------------------------------------
 
@@ -417,8 +419,8 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 --
 
 INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`) VALUES
+(17, '045/DIVSI/2013'),
 (13, '045/DVIN/2013'),
-(1, '045/DVMAM/2013'),
 (5, '073/DIVTRANS/2013'),
 (9, '075/DIVTRANS/2013');
 
@@ -457,6 +459,13 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   PRIMARY KEY (`id_dokumen`),
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pakta_integritas_panitia_1`
+--
+
+INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
+(113, 1);
 
 -- --------------------------------------------------------
 
@@ -535,10 +544,10 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-06-13', '0000-00-00', '1', 0, 3, 'Pemilihan Langsung', '-', '-'),
 (2, 'Pengadaan Sewa Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-06-06', '0000-00-00', '1', 0, 4, 'Pelelangan', '-', '-'),
 (3, 'Pengadaan Sewa Motor', 'divtrans', 'Barang dan Jasa', '-', '2013-06-19', '0000-00-00', '1', 0, 2, 'Penunjukan Langsung', '-', '-'),
-(4, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-06-13', '0000-00-00', '1', 0, 1, 'Pemilihan Langsung', '-', '-');
+(4, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-06-13', '0000-00-00', '2', 0, 1, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
+(5, 'Pengadaan Sepatu Futsal', 'divsi', 'Barang dan Jasa', '-', '2013-06-12', '0000-00-00', '1', 0, 4, 'Pelelangan', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -556,10 +565,10 @@ CREATE TABLE IF NOT EXISTS `rab` (
 --
 
 INSERT INTO `rab` (`id_dokumen`) VALUES
-(2),
 (6),
 (10),
-(14);
+(14),
+(18);
 
 -- --------------------------------------------------------
 
@@ -587,6 +596,13 @@ CREATE TABLE IF NOT EXISTS `rks` (
   PRIMARY KEY (`id_dokumen`),
   KEY `nomor` (`nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rks`
+--
+
+INSERT INTO `rks` (`id_dokumen`, `nomor`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_pemasukan_penawaran`, `tanggal_akhir_pemasukan_penawaran`, `waktu_pemasukan_penawaran`, `tempat_pemasukan_penawaran`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tempat_penetapan_pemenang`) VALUES
+(114, '011/PPJB-A/DIVMUM/2013', '2013-06-20', '2013-06-21', '08:00', 'PLN', '2013-06-21', '2013-06-20', '08:00', 'PLN', '2013-06-28', '08:00', 'PLN', '2013-06-29', '08:00', 'PLN');
 
 -- --------------------------------------------------------
 
@@ -746,10 +762,10 @@ CREATE TABLE IF NOT EXISTS `tor` (
 --
 
 INSERT INTO `tor` (`id_dokumen`) VALUES
-(2),
 (6),
 (10),
-(14);
+(14),
+(18);
 
 -- --------------------------------------------------------
 

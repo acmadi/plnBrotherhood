@@ -46,8 +46,8 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 					),
 					array(
 						'label'=>'Status pengadaan',
-						'value'=>$cpengadaan->status,
-						'visible'=>$cpengadaan->status != 'Selesai',
+						'value'=>$cpengadaan->dapatkanStatus(),
+						'visible'=>$cpengadaan->status != '100',
 					),
 					array(
 						'label'=>'Nomor kontrak',

@@ -11,6 +11,7 @@
  * @property string $waktu_penjelasan
  * @property string $tempat_penjelasan
  * @property string $tanggal_pemasukan_penawaran
+ * @property string $tanggal_akhir_pemasukan_penawaran
  * @property string $waktu_pemasukan_penawaran
  * @property string $tempat_pemasukan_penawaran
  * @property string $tanggal_negosiasi
@@ -52,14 +53,14 @@ class Rks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_pemasukan_penawaran, waktu_pemasukan_penawaran, tempat_pemasukan_penawaran, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tempat_penetapan_pemenang', 'required'),
+			array('id_dokumen, nomor, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_pemasukan_penawaran, tanggal_akhir_pemasukan_penawaran, waktu_pemasukan_penawaran, tempat_pemasukan_penawaran, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tempat_penetapan_pemenang', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
 			array('waktu_penjelasan, waktu_pemasukan_penawaran, waktu_negosiasi, waktu_penetapan_pemenang', 'length', 'max'=>20),
 			array('tempat_penjelasan, tempat_pemasukan_penawaran, tempat_negosiasi, tempat_penetapan_pemenang', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_pemasukan_penawaran, waktu_pemasukan_penawaran, tempat_pemasukan_penawaran, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tempat_penetapan_pemenang', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_pemasukan_penawaran, tanggal_akhir_pemasukan_penawaran, waktu_pemasukan_penawaran, tempat_pemasukan_penawaran, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tempat_penetapan_pemenang', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -89,6 +90,7 @@ class Rks extends CActiveRecord
 			'waktu_penjelasan' => 'Waktu Penjelasan',
 			'tempat_penjelasan' => 'Tempat Penjelasan',
 			'tanggal_pemasukan_penawaran' => 'Tanggal Pemasukan Penawaran',
+			'tanggal_akhir_pemasukan_penawaran' => 'Tanggal Akhir Pemasukan Penawaran',
 			'waktu_pemasukan_penawaran' => 'Waktu Pemasukan Penawaran',
 			'tempat_pemasukan_penawaran' => 'Tempat Pemasukan Penawaran',
 			'tanggal_negosiasi' => 'Tanggal Negosiasi',
@@ -118,6 +120,7 @@ class Rks extends CActiveRecord
 		$criteria->compare('waktu_penjelasan',$this->waktu_penjelasan,true);
 		$criteria->compare('tempat_penjelasan',$this->tempat_penjelasan,true);
 		$criteria->compare('tanggal_pemasukan_penawaran',$this->tanggal_pemasukan_penawaran,true);
+		$criteria->compare('tanggal_akhir_pemasukan_penawaran',$this->tanggal_akhir_pemasukan_penawaran,true);
 		$criteria->compare('waktu_pemasukan_penawaran',$this->waktu_pemasukan_penawaran,true);
 		$criteria->compare('tempat_pemasukan_penawaran',$this->tempat_pemasukan_penawaran,true);
 		$criteria->compare('tanggal_negosiasi',$this->tanggal_negosiasi,true);
