@@ -4,7 +4,6 @@
 	//id pengadaan
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
-	if(Yii::app()->user-.isGuest)
 ?>
 
 <div id="pagecontent">
@@ -26,7 +25,7 @@
 				echo '<br>';
 				echo $form->fileField($modelDok[$i],'uploadedFile');
 				echo $form->hiddenField($modelDok[$i],'id_dokumen');
-				echo $form->error($modelDok[$i]	,'uploadedFile');		
+				echo $form->error($modelDok[$i]	,'uploadedFile');	
 				echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
 				$this->endWidget();
 				echo '<br/>';

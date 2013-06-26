@@ -545,8 +545,7 @@ class SiteController extends Controller
 									$this->redirect(array('edithps','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
-						}
-						
+						}						
 					}
 				}
 
