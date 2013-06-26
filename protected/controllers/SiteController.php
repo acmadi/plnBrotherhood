@@ -614,7 +614,11 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "4";
+				if($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "4";
+				} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+					$Pengadaan->status= "5";
+				}
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -760,10 +764,13 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				if($Pengadaan->metode_pengadaan=='Pelelangan'){
-					$Pengadaan->status= "4";
-				} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
-					$Pengadaan->status= "5";
+				
+				if($Pengadaan->status=='3'){
+					if($Pengadaan->metode_pengadaan=='Pelelangan'){
+						$Pengadaan->status= "4";
+					} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+						$Pengadaan->status= "5";
+					}
 				}
 				
 				$Dokumen0= new Dokumen;

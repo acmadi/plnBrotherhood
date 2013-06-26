@@ -85,7 +85,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPPP,'waktu peneyelesaian pekerjaan'); ?>
+				<?php echo $form->labelEx($SUPPP,'waktu penyelesaian pekerjaan (dalam satuan hari)'); ?>
 				<?php echo $form->textField($SUPPP,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($SUPPP,'waktu_kerja'); ?>
 			</div>
