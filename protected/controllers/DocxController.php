@@ -37,6 +37,8 @@ class DocxController extends Controller
 			$tanggal = $Dok->tanggal;
 			$DokNotaDinas= Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan. ' and nama_dokumen = "Nota Dinas Permintaan"');
 			$tanggalpermintaan = $DokNotaDinas->tanggal;
+			$tanggalpermintaan2 = Tanggal::getTanggalSlash($tanggalpermintaan);
+			$tanggal2 = Tanggal::getTanggalSlash($tanggal);
 			$torrks = $NDPP->TOR_RKS;
 			$rab = $NDPP->RAB;
 			$target = $NDPP->targetSPK_kontrak;
@@ -65,8 +67,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#kepada1#', $kepada);
 			$this->doccy->phpdocx->assign('#kepada2#', $kepada2);
 			$this->doccy->phpdocx->assign('#dari#', $dari);
-			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#tanggalpermintaan#', $tanggalpermintaan);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal2);
+			$this->doccy->phpdocx->assign('#tanggalpermintaan#', $tanggalpermintaan2);
 			$this->doccy->phpdocx->assign('#perihal#', $perihal);
 			$this->doccy->phpdocx->assign('#anggaran#', $anggaran);
 			$this->doccy->phpdocx->assign('#sumber#', $sumber);
