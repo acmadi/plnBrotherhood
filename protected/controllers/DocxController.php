@@ -330,17 +330,43 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}*/
-/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penawaran Harga"){
+/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Pengantar Penawaran Harga"){
 			
-			$SPP=SuratPemberitahuanPengadaan::model()->findByPk($id);	
-			$nomor = $SPP->nomor;
+			$SPPH=SuratPengantarPenawaranHarga::model()->findByPk($id);	
+			$nomor = $SPPH->nomor;
 			$tanggal = $Dok->tanggal;
 			$tempat = $Dok->tempat;
 			$kepada = $Peng->nama_penyedia;
-			$perihal = $SPP->perihal;
+			$perihal = $SPPHS->perihal;
 			$nama = $Peng->nama_pengadaan;
 				
 			$this->doccy->newFile('s-pengantarpenawaranharga2.docx');
+			
+		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+		
+			$this->doccy->phpdocx->assign('#1#', $nomor);
+			$this->doccy->phpdocx->assign('#2#', '.............................................');
+			$this->doccy->phpdocx->assign('#3#', $tanggal);
+			$this->doccy->phpdocx->assign('#4#', $kepada);
+			$this->doccy->phpdocx->assign('#5#', $nama);
+			$this->doccy->phpdocx->assign('#6#', $perihal);
+			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
+		}*/
+/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
+			
+			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);	
+			$nomor = $SUPH->nomor;
+			$tanggal = $Dok->tanggal;
+			$lingkup = $SUPH->lingkup_kerja;
+			$waktukerja = $SUPH->waktu_kerja;
+			$masa = $SUPH->masa_berlaku_penawaran;
+			$lingkup = $SUPH->lingkup_kerja;
+			
+			
+			$nama = $Peng->nama_pengadaan;
+				
+			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
