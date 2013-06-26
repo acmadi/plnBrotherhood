@@ -15,6 +15,20 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
 		
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'Surat Undangan Aanwijzing', 'url'=>array($SUP->isNewRecord?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
+                                    array('label'=>'Berita Acara Aanwijzing', 'visible'=>$SUP->isNewRecord),
+                                    array('label'=>'Berita Acara Aanwijzing', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='7'?'/site/beritaacaraaanwijzing':'/site/editberitaacaraaanwijzing','id'=>$id), 'visible'=>!$SUP->isNewRecord),
+                            ),
+                        ));
+                    ?>
+                </div>
+            
+                <br/>
+                
 		<?php if(Yii::app()->user->hasFlash('sukses')): ?>
  			<div class="flash-success">
 				<?php echo Yii::app()->user->getFlash('sukses'); ?>
@@ -105,11 +119,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	</div><!-- form -->
 	
 	<?php if (!$SUP->isNewRecord){ ?>
-	
-		<?php echo CHtml::submitButton('Buat Berita Acara Aanwijzing',array('submit'=>array('site/beritaacaraaanwijzing','id'=>$id),'class'=>'sidafbutton')); ?>
-		</br>
+			
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>			

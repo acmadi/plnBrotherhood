@@ -195,7 +195,6 @@ echo
 		Yii::log('ACTION CALLED - data is: '.CJSON::encode($vars),'info');
 		
 		$namadokumen=LinkDokumen::model()->count('id_dokumen="' . $this->id .'"') + 1;
-		
 		if($action == 'upload'){
 			$uploader = new ValumsFileUploader($this->allowedExtensions, $this->sizeLimit, $namadokumen);
 			if($uploader->checkServerSettings() != null){

@@ -26,7 +26,7 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 					));
 				?>
 			</div>
-			</br>
+			<br/>
 			
 			<?php if(Yii::app()->user->hasFlash('sukses')): ?>
 				<div class="flash-success">
@@ -56,7 +56,7 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 				<h4><b> HPS </b></h4>
 				<div class="row">
 					<?php echo $form->labelEx($Hps,'nomor'); ?>
-					Nomor Rks : <?php echo $Rks->nomor ?> </br>  
+					Nomor Rks : <?php echo $Rks->nomor ?> <br/>  
 					<?php echo $form->textField($Hps,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 					<?php echo $form->error($Hps,'nomor'); ?>
 				</div>
@@ -74,7 +74,7 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 					));?>
 					<?php echo $form->error($Dokumen0,'tanggal'); ?>
 				</div>
-				</br>
+				<br/>
 				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($Hps->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
@@ -85,9 +85,9 @@ $edit= Yii::app()->getRequest()->getQuery('state');
 			</div><!-- form -->
 			
 			<?php if (!$Hps->isNewRecord){ ?>
-				</br>
+				<br/>
 				<div style="border-top:1px solid lightblue">
-				</br>
+				<br/>
 					<h4><b> Buat Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Hps', array('docx/download','id'=>$Hps->id_dokumen)); ?></li>

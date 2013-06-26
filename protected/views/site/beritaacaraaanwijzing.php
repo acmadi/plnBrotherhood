@@ -15,6 +15,18 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
 		
+                <div id="menuform">
+                    <?php
+                    $this->widget('zii.widgets.CMenu', array(
+                                    'items'=>array(
+                                            array('label'=>'Surat Undangan Aanwijzing', 'url'=>array('/site/editaanwijzing','id'=>$id)),
+                                            array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
+                                    ),
+                            ));
+                    ?>
+                </div>
+                <br/>
+            
 		<?php if(Yii::app()->user->hasFlash('sukses')): ?>
  			<div class="flash-success">
 				<?php echo Yii::app()->user->getFlash('sukses'); ?>
@@ -49,9 +61,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($BAP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-			</br>
-			<?php echo CHtml::submitButton('Kembali ke Surat Undangan Aanwijzing',array('submit'=>array('site/editaanwijzing','id'=>$id),'class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($BAP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>			
 		</div>
 		
 	<?php $this->endWidget(); ?>
@@ -60,9 +70,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 	
 	<?php if (!$BAP->isNewRecord){ ?>
 	
-		</br>
+		<br/>
 		<div style="border-top:1px solid lightblue">
-		</br>
+		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				
