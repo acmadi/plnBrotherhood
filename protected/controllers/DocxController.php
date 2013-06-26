@@ -534,9 +534,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota#', $anggota1);
-			$this->doccy->phpdocx->assign('#wakturapat#', '....... : .......');
-			$this->doccy->phpdocx->assign('#norks#', '.............................................');
-			$this->doccy->phpdocx->assign('#tanggalrks#', '.............................................');
+			$this->doccy->phpdocx->assign('#wakturapat#', RKS::model()->findByPk($Dok->id_dokumen)->waktu_penjelasan);
+			$this->doccy->phpdocx->assign('#norks#', RKS::model()->findByPk($Dok->id_dokumen)->nomor);
+			$this->doccy->phpdocx->assign('#tanggalrks#', $Dok->tanggal);
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){
