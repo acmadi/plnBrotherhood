@@ -28,19 +28,19 @@
     	}
 
         public static function getTanggal($date) {
-        	return Yii::app()->dateFormatter->format('dd', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
-        }
-
-        public static function getTanggal0($date) {
         	return Yii::app()->dateFormatter->format('d', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
         }
 
+        public static function getTanggal0($date) {
+        	return Yii::app()->dateFormatter->format('dd', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
+        }
+
         public static function getBulan($date) {
-        	return Yii::app()->dateFormatter->format('MM', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
+        	return Yii::app()->dateFormatter->format('M', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
         }
 
         public static function getBulan0($date) {
-        	return Yii::app()->dateFormatter->format('M', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
+        	return Yii::app()->dateFormatter->format('MM', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
         }
 
         public static function getBulanA($date) {
@@ -51,12 +51,20 @@
         	return Yii::app()->dateFormatter->format('yyyy', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
         }
 
+        public static function getTahun0($date) {
+            return Yii::app()->dateFormatter->format('yy', CDateTimeParser::parse($date, 'yyyy-MM-dd'));
+        }
+
         public static function getHari($date) {
         	return Tanggal::ubahBahasa(Yii::app()->dateFormatter->formatDayInWeek('EEEE', CDateTimeParser::parse($date, 'yyyy-MM-dd')));
         }
 
+        public static function getTanggalSlash($date) {
+            return Tanggal::getTanggal0($date) . '/' . Tanggal::getBulan0($date) . '/' . Tanggal::getTahun0($date);
+        }
+
         public static function getTanggalLengkap($date) {
-            return Tanggal::getTanggal0($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
+            return Tanggal::getTanggal($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
         }
 
         public static function getHariTanggalLengkap($date) {
