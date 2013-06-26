@@ -379,7 +379,12 @@ class DocxController extends Controller
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Awal Panitia"){
 			
+			$PI=PaktaIntegritasPanitia1::model()->findByPk($id);
 			$tanggal = $Dok->tanggal;
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			
 			
 			$this->doccy->newFile('2 Pakta Integritas Awal Panitia.docx');
 			
@@ -388,6 +393,9 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#kota#', 'Jakarta');
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
+			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->renderDocx("Pakta Integritas Awal Panitia.docx", true);
 			
 		}
@@ -430,28 +438,46 @@ class DocxController extends Controller
 //	=====================================RKS=====================================
 		else if ($Dok->nama_dokumen == "RKS"){
 			
+			$rks=Rks::model()->findByPk($id);
+			
+			$norks = $rks->nomor;
+			$tglrks = $Dok->tanggal;
+			$nama = $Peng->nama_pengadaan;
+			$tanggalpermintaan = $rks->tanggal_permintaan_penawaran;
+			$tanggalpenunjukan = $rks->tanggal_penjelasan;
+			$waktupenunjukan = $rks->waktu_penjelasan;
+			$tempatpenunjukan = $rks->tempat_penjelasan;
+			$tanggalawalpemasukan = $rks->tanggal_pemasukan_penawaran;
+			$tanggalakhirpemasukan = $rks->tanggal_akhir_pemasukan_penawaran;
+			$waktupemasukanpenawaran = $rks->waktu_pemasukan_penawaran;
+			$tempatpemasukan = $rks->tempat_pemasukan_penawaran;
+			$tanggalnegosiasi = $rks->tanggal_negosiasi;
+			$waktunegosiasi = $rks->waktu_negosiasi;
+			$tanggalpenunjukanpemenang = $rks->tanggal_penetapan_pemenang;
+			$waktupenunjukanpemenang = $rks->waktu_penetapan_pemenang;
+			$tempatpenunjukanpemenang = $rks->tempat_penetapan_pemenang;
+			
 			$this->doccy->newFile('3a rks-tunjuklangsungjasa.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->doccy->phpdocx->assign('#6#', '.............................................');
-			$this->doccy->phpdocx->assign('#7#', '.............................................');
-			$this->doccy->phpdocx->assign('#8#', '.............................................');
-			$this->doccy->phpdocx->assign('#9#', '.............................................');
-			$this->doccy->phpdocx->assign('#10#', '.............................................');
-			$this->doccy->phpdocx->assign('#11#', '.............................................');
-			$this->doccy->phpdocx->assign('#12#', '.............................................');
-			$this->doccy->phpdocx->assign('#13#', '.............................................');
-			$this->doccy->phpdocx->assign('#14#', '.............................................');
-			$this->doccy->phpdocx->assign('#15#', '.............................................');
-			$this->doccy->phpdocx->assign('#16#', '.............................................');
-			$this->doccy->phpdocx->assign('#17#', '.............................................');
+			$this->doccy->phpdocx->assign('#norks#', $norks);
+			$this->doccy->phpdocx->assign('#tglrks#', $tglrks);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#tanggalpermintaanpenawaran#', $tanggalpermintaan);
+			$this->doccy->phpdocx->assign('#tanggalpenunjukanlangsung#', $tanggalpenunjukan);
+			$this->doccy->phpdocx->assign('#waktupenunjukanlangsung#', $waktupenunjukan);
+			$this->doccy->phpdocx->assign('#tempatpenunjukanlangsung#', $tempatpenunjukan);
+			$this->doccy->phpdocx->assign('#tanggalawalpemasukansuratpenawaran#', $tanggalawalpemasukan);
+			$this->doccy->phpdocx->assign('#tanggalakhirpemasukansuratpenawaran#', $tanggalakhirpemasukan);
+			$this->doccy->phpdocx->assign('#waktupemasukansuratpenawaran#', $waktupemasukanpenawaran);
+			$this->doccy->phpdocx->assign('#tempatpemasukansuratpenawaran#', $tempatpemasukan);
+			$this->doccy->phpdocx->assign('#tanggalnegosiasidanklarifikasi#', $tanggalnegosiasi);
+			$this->doccy->phpdocx->assign('#waktunegosiasidanklarifikasi#', $waktunegosiasi);
+			$this->doccy->phpdocx->assign('#tanggalpenunjukanpemenang#', $tanggalpenunjukanpemenang);
+			$this->doccy->phpdocx->assign('#waktupenunjukanpemenang#', $waktupenunjukanpemenang);
+			$this->doccy->phpdocx->assign('#tempatpenunjukanpemenang#', $tempatpenunjukanpemenang);
 			$this->renderDocx("RKS.docx", true);
 		}
 //	=====================================Berita Acara=====================================
