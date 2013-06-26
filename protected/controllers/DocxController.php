@@ -25,7 +25,6 @@ class DocxController extends Controller
 		$Dok=Dokumen::model()->findByPk($id);
 		$Peng=Pengadaan::model()->findByPk($Dok->id_pengadaan);
 		
-		
 //	=====================================Nota Dinas=====================================
 		if ($Dok->nama_dokumen == "Nota Dinas Perintah Pengadaan"){
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);	
@@ -350,7 +349,9 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
-			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);	
+			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_pengadaan = ""RKS');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$nomor = $SUPH->nomor;
 			$tanggal = $Dok->tanggal;
 			$lingkup = $SUPH->lingkup_kerja;
@@ -359,19 +360,20 @@ class DocxController extends Controller
 			$lingkup = $SUPH->lingkup_kerja;
 			$tempat = $SUPH->tempat_penyerahan;
 			$nama = $Peng->nama_pengadaan;
-			$tanggalpenawaran = $SUPH->tempat_penyerahan;
-				
+			$tanggalpenawaran = $rks->tanggal_pemasukan_penawaran;
+			$waktupenawaran = $rks->waktu_pemasukan_penawaran;
 			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#bulan#', '.....');
+			$this->doccy->phpdocx->assign('#bulan#', $masa);
 			$this->doccy->phpdocx->assign('#terbilangbulan#', '................................');
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#lingkupkerja#', $lingkup);
 			$this->doccy->phpdocx->assign('#tanggalpenawaran#', $tanggalpenawaran);
+			$this->doccy->phpdocx->assign('#waktupenawaranpenawaran#', $waktupenawaran);
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', 'PaKadiv');
