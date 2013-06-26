@@ -13,18 +13,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	<div id="maincontent">
 	
-	<?php if($BANK->isNewRecord) { ?>
-		
-	<?php } else { ?>
-		<div>
-		<?php echo CHtml::button('Surat Undangan Negosiasi dan Klarifikasi', array('submit'=>array('site/editsuratundangannegosiasiklarifikasi',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='14'?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/beritaacaranegosiasiklarifikasi':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editberitaacaranegosiasiklarifikasi'),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -63,7 +67,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK>id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
