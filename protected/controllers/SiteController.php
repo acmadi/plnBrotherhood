@@ -1520,7 +1520,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}

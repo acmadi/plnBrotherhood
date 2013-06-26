@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'nota_dinas_pemberitahuan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $dari
  * @property string $nama_penyedia
  * @property string $alamat
  * @property string $NPWP
@@ -50,14 +49,14 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, dari, nama_penyedia, alamat, NPWP, biaya, nama_penyedia_2, alamat_2, NPWP_2, biaya_2, waktu_pelaksanaan, tempat_penyerahan', 'required'),
+			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, nama_penyedia_2, alamat_2, NPWP_2, biaya_2, waktu_pelaksanaan, tempat_penyerahan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, dari, nama_penyedia, nama_penyedia_2', 'length', 'max'=>50),
+			array('nomor, nama_penyedia_2', 'length', 'max'=>50),
+			array('nama_penyedia, NPWP, biaya, NPWP_2, biaya_2, tempat_penyerahan', 'length', 'max'=>20),
 			array('alamat, alamat_2', 'length', 'max'=>100),
-			array('NPWP, biaya, NPWP_2, biaya_2, tempat_penyerahan', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, dari, nama_penyedia, alamat, NPWP, biaya, nama_penyedia_2, alamat_2, NPWP_2, biaya_2, waktu_pelaksanaan, tempat_penyerahan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, nama_penyedia_2, alamat_2, NPWP_2, biaya_2, waktu_pelaksanaan, tempat_penyerahan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,7 +81,6 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'dari' => 'Dari',
 			'nama_penyedia' => 'Nama Penyedia',
 			'alamat' => 'Alamat',
 			'NPWP' => 'Npwp',
@@ -109,7 +107,6 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('dari',$this->dari,true);
 		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
 		$criteria->compare('alamat',$this->alamat,true);
 		$criteria->compare('NPWP',$this->NPWP,true);
