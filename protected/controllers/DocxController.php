@@ -332,29 +332,15 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}*/
-/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Pengantar Penawaran Harga"){
-			
-			$SPPH=SuratPengantarPenawaranHarga::model()->findByPk($id);	
-			$nomor = $SPPH->nomor;
-			$tanggal = $Dok->tanggal;
-			$tempat = $Dok->tempat;
-			$kepada = $Peng->nama_penyedia;
-			$perihal = $SPPHS->perihal;
-			$nama = $Peng->nama_pengadaan;
-				
-			$this->doccy->newFile('s-pengantarpenawaranharga2.docx');
+		else if ($Dok->nama_dokumen == "Surat Pengantar Penawaran Harga"){
+		
+		$this->doccy->newFile('5c Surat Pengantar Penawaran Harga.docx');
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-			$this->doccy->phpdocx->assign('#1#', $nomor);
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', $tanggal);
-			$this->doccy->phpdocx->assign('#4#', $kepada);
-			$this->doccy->phpdocx->assign('#5#', $nama);
-			$this->doccy->phpdocx->assign('#6#', $perihal);
-			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
-		}*/
+		$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
+		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
 			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);	
@@ -366,6 +352,7 @@ class DocxController extends Controller
 			$lingkup = $SUPH->lingkup_kerja;
 			$tempat = $SUPH->tempat_penyerahan;
 			$nama = $Peng->nama_pengadaan;
+			$tanggalpenawaran = $SUPH->tempat_penyerahan;
 				
 			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
@@ -382,6 +369,18 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', 'PaKadiv');
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
+		}
+		else if ($Dok->nama_dokumen == "Form Isian Kualifikasi"){
+		
+		$nama = $Peng->nama_pengadaan;
+			
+		$this->doccy->newFile('5d Form Isian Kualifikasi.docx');
+			
+		$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+		
+		$this->renderDocx("Form Isian Kualifikasi", true);
 		}
 /*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
