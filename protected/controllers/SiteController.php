@@ -3167,7 +3167,7 @@ class SiteController extends Controller
 			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
 			$Dokumen0->tempat='Jakarta';
-			$Dokumen0->status_upload='Selesai';
+			$Dokumen0->status_upload='Belum Selesai';
 			
 			$Dokumen1= new Dokumen;
 			$Dokumen1->id_dokumen=$somevariable+4;
@@ -3181,14 +3181,14 @@ class SiteController extends Controller
 			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen2->nama_dokumen='TOR';
 			$Dokumen2->tempat='Jakarta';
-			$Dokumen2->status_upload='Selesai';
+			$Dokumen2->status_upload='Belum Selesai';
 			
 			$Dokumen3= new Dokumen;
 			$Dokumen3->id_dokumen=$somevariable+3;
 			$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen3->nama_dokumen='RAB';
 			$Dokumen3->tempat='Jakarta';
-			$Dokumen3->status_upload='Selesai';
+			$Dokumen3->status_upload='Belum Selesai';
 			
 			$NDP= new NotaDinasPermintaan;
 			$NDP->id_dokumen=$Dokumen0->id_dokumen;
@@ -3203,24 +3203,9 @@ class SiteController extends Controller
 			
 			$RAB= new Rab;
 			$RAB->id_dokumen=$Dokumen2->id_dokumen;
-			
-			$LinkDokumenTOR = new LinkDokumen;
-			$LinkDokumenRAB = new LinkDokumen;
-			$LinkDokumenPermintaan = new LinkDokumen;
 
-			//Uncomment the following line if AJAX validation is needed
-			//$this->performAjaxValidation($model);
-			if(isset($_POST['Dokumen'])){
-				$tempDokumen = new Dokumen;
-				$tempDokumen->attributes = $_POST['Dokumen'];
-				if ($tempDokumen->id_dokumen == $Dokumen0->id_dokumen){
-					$Dokumen0->uploadedFile = CUploadedFile::getInstance($tempDokumen,'uploadedFile');
-				}else if ($tempDokumen->id_dokumen == $Dokumen2->id_dokumen){					
-					$Dokumen2->uploadedFile = CUploadedFile::getInstance($tempDokumen,'uploadedFile');
-				}else if ($tempDokumen->id_dokumen == $Dokumen3->id_dokumen){					
-					$Dokumen3->uploadedFile = CUploadedFile::getInstance($tempDokumen,'uploadedFile');
-				}
-			}
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
@@ -3245,66 +3230,11 @@ class SiteController extends Controller
 						if($valid){
 							if($Pengadaan->save(false)) {
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
-										
-										//===========Masukin ke Link Dokumen
-										date_default_timezone_set("Asia/Jakarta");
-										$secs = time() + (7*3600);
-										$hours = $secs / 3600 % 24;
-										$minutes = $secs / 60 % 60;
-										$seconds = $secs % 60;
-										$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
-										// $pathinfoPermintaan = pathinfo($Dokumen1->uploadedFile->getName());				
-										// $pathinfoTOR = pathinfo($Dokumen2->uploadedFile->getName());				
-										// $pathinfoRAB = pathinfo($Dokumen3->uploadedFile->getName());
-										
-										$LinkDokumenPermintaan->id_link=LinkDokumen::model()->count()+1;
-										$LinkDokumenPermintaan->id_dokumen=$Dokumen0->id_dokumen;
-										$LinkDokumenPermintaan->waktu_upload=$waktu_upload;
-										$LinkDokumenPermintaan->tanggal_upload=date('Y-m-d');
-										$LinkDokumenPermintaan->pengunggah=$user;
-										$LinkDokumenPermintaan->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $Dokumen0->id_dokumen . '"') + 1;
-										$LinkDokumenPermintaan->format_dokumen='pdf';
-										// $newLinkDokumen->save();				
-										
-										$LinkDokumenTOR->id_link=LinkDokumen::model()->count()+1;
-										$LinkDokumenTOR->id_dokumen=$Dokumen2->id_dokumen;
-										$LinkDokumenTOR->waktu_upload=$waktu_upload;
-										$LinkDokumenTOR->tanggal_upload=date('Y-m-d');
-										$LinkDokumenTOR->pengunggah=$user;
-										$LinkDokumenTOR->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $Dokumen2->id_dokumen . '"') + 1;
-										$LinkDokumenTOR->format_dokumen='pdf';
-										
-										// $newLinkDokumen->save();										
-										$LinkDokumenRAB->id_link=LinkDokumen::model()->count()+1;
-										$LinkDokumenRAB->id_dokumen=$Dokumen3->id_dokumen;
-										$LinkDokumenRAB->waktu_upload=$waktu_upload;
-										$LinkDokumenRAB->tanggal_upload=date('Y-m-d');
-										$LinkDokumenRAB->pengunggah=$user;
-										$LinkDokumenRAB->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $Dokumen3->id_dokumen . '"') + 1;
-										$LinkDokumenRAB->format_dokumen='pdf';
-										// $newLinkDokumen->save();
-										
-										$pathPermintaan = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $Dokumen0->id_pengadaan . '/' . $Dokumen0->id_dokumen . '/';
-										$pathTOR = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $Dokumen2->id_pengadaan . '/' . $Dokumen2->id_dokumen . '/';
-										$pathRAB = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $Dokumen3->id_pengadaan . '/' . $Dokumen3->id_dokumen . '/';
-										@mkdir($pathPermintaan,0700,true);
-										@mkdir($pathTOR,0700,true);
-										@mkdir($pathRAB,0700,true);
-										$namaFilePermintaan = $LinkDokumenPermintaan->nomor_link;
-										$namaFileTOR = $LinkDokumenTOR->nomor_link;
-										$namaFileRAB = $LinkDokumenRAB->nomor_link;
-					
+									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){										
 										if(isset($_POST['simpan'])){
-											$Dokumen0->uploadedFile->saveAs($pathPermintaan . $namaFilePermintaan . '.' . 'pdf');
-											$Dokumen2->uploadedFile->saveAs($pathTOR . $namaFileTOR . '.' . 'pdf');
-											$Dokumen3->uploadedFile->saveAs($pathRAB . $namaFileRAB . '.' . 'pdf');
 											$this->redirect(array('dashboard'));
 										}
 										if(isset($_POST['simpanbuat'])){
-											$Dokumen0->uploadedFile->saveAs($pathPermintaan . $namaFilePermintaan . '.' . 'pdf');
-											$Dokumen2->uploadedFile->saveAs($pathTOR . $namaFileTOR . '.' . 'pdf');
-											$Dokumen3->uploadedFile->saveAs($pathRAB . $namaFileRAB . '.' . 'pdf');
 											$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));											
 										}
 									}
@@ -3316,7 +3246,7 @@ class SiteController extends Controller
 			}
 
 			$this->render('tambahpengadaan',array(
-				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'Dokumen2'=>$Dokumen2,'Dokumen3'=>$Dokumen3,
+				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
 			));
 		}
 	}
