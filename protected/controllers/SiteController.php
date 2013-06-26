@@ -164,7 +164,12 @@ class SiteController extends Controller
 				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
 				$pathinfo = pathinfo($tempDokumen->uploadedFile->getName());
 				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_link) AS maxId';
+				$row = $LinkDokumen->model()->find($criteria);
+				$id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=$id_link;
 				$newLinkDokumen->id_dokumen=$tempDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
@@ -3319,7 +3324,12 @@ public function actionUploader(){
 				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
 				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
 				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_link) AS maxId';
+				$row = $LinkDokumen->model()->find($criteria);
+				$id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=$id_link;
 				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
