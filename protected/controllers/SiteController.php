@@ -2454,20 +2454,21 @@ class SiteController extends Controller
 
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
-					// $Dokumen0->attributes=$_POST['Dokumen'];
-					
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
-					$valid=$BAPP->validate();					
-					if($valid){						
-						if($BAPP->save(false)&&$DH->save(false)){
-							$this->redirect(array('editberitaacarapembukaanpenawarantahap1','id'=>$Dokumen1->id_pengadaan));
+					$valid=$BAPP->validate();
+					if($valid){
+						if($Pengadaan->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($BAPP->save(false)&&$DH->save(false)){
+									$this->redirect(array('editberitaacarapembukaanpenawarantahap1','id'=>$Dokumen1->id_pengadaan));
+								}
+							}
 						}
-						
 					}
 				}
 
 				$this->render('beritaacarapembukaanpenawarantahap1',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'DH'=>$DH,
 				));
 
 			}
@@ -2587,7 +2588,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawarantahap1',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
@@ -2798,7 +2799,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawarantahap2',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'DH'=>$DH,
 				));
 
 			}
@@ -2918,7 +2919,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawarantahap2',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
 				));
 
 			}
