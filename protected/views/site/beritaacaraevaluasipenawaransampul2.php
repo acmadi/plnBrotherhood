@@ -12,19 +12,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	</div>
 
 	<div id="maincontent">
-	
-	<?php if($BAEP->isNewRecord) { ?>
 		
-	<?php } else { ?>
-		<div>
-		<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Sampul Dua', array('submit'=>array('site/editberitaacarapembukaanpenawaransampul2',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'BA Evaluasi Penawaran Sampul 2', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='13'?'/site/beritaacaraevaluasipenawaransampul2':'/site/editberitaacaraevaluasipenawaransampul2','id'=>$id)),                                    
+                            ),
+                        ));
+                    ?>
+                </div>
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -85,7 +88,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Dua', array('docx/download','id'=>$BAEP>id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Dua', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Daftar Hadir Evaluasi Penawaran Sampul Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
