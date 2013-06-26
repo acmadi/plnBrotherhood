@@ -15,37 +15,19 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 	}
 ?>
 
+<div id="sidebar">
+	<?php
+		$this->widget('zii.widgets.CPortlet', array());
+	?>
+</div>
+
 <div id="perdiv">
 	<?php $this->widget('HighchartsWidget', array(
-			// 'dataProvider'=>Divisi::model()->search(),
-			// 'template'=>'{items}',
 			'options'=>array(
-				// 'chart'=>array(
-				// 	'renderTo'=>'perdiv',
-				// 	'plotBackgroundColor'=>null,
-				// 	'plotBorderWidth'=>null,
-				// 	'plotShadow'=>false,
-				// ),
 				'tooltip'=>array(
 					'formatter'=>'js:function() {return "<b>"+ this.point.name +"</b>: "+ this.percentage +" %";}',
 				),
 				'title'=>array('text'=>'Pengadaan per divisi'),
-				'plotOptions'=>array(
-					'pie'=>array(
-						'dataLabels'=>array(
-							'enabled'=>true,
-							// 'color'=>'black',
-							// 'connectorColor'=>'black',
-							'formatter'=>'js:function() {return "<b>"+ this.point.name +"</b>: "+ this.percentage +" %";}',
-						),
-					),
-				),
-				// 'xAxis'=>array(
-				// 	'categories'=>'username',
-				// ),
-				// 'yAxis'=>array(
-				// 	'categories'=>'jumlah_berlangsung',
-				// ),
 				'series'=>array(
 					array(
 						'type'=>'pie',

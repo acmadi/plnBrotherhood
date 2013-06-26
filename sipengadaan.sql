@@ -3,10 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 05:10 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
-
+-- Generation Time: Jun 26, 2013 at 03:27 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -177,11 +176,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 -- Dumping data for table `berita_acara_penjelasan`
 --
 
-<<<<<<< HEAD
-INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`) VALUES
-(147, 'assasda', 3);
-=======
->>>>>>> 732d98f5059b71a42c508ebb542e6f8f735344ce
 
 -- --------------------------------------------------------
 
@@ -201,11 +195,6 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 -- Dumping data for table `daftar_hadir`
 --
 
-<<<<<<< HEAD
-INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
-(148, 'a', 'ASA', 'Aanwijzing');
-=======
->>>>>>> 732d98f5059b71a42c508ebb542e6f8f735344ce
 
 -- --------------------------------------------------------
 
@@ -255,159 +244,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
 -- Dumping data for table `dokumen`
 --
 
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Nota Dinas Permintaan', '2013-06-20', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'TOR', '2013-06-20', 'Jakarta', 1, 'Belum Selesai'),
-(3, 'RAB', '2013-06-20', 'Jakarta', 1, 'Belum Selesai'),
-(4, 'Nota Dinas Perintah Pengadaan', '2013-06-05', 'Jakarta', 1, 'Belum Selesai'),
-(5, 'Pakta Integritas Awal Panitia', '2013-06-12', 'Jakarta', 1, 'Belum Selesai'),
-(6, 'RKS', '2013-06-12', 'Jakarta', 1, 'Belum Selesai'),
-(7, 'HPS', '2013-06-19', 'Jakarta', 1, 'Belum Selesai'),
-(8, 'Nota Dinas Permintaan', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(9, 'TOR', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(10, 'RAB', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(11, 'Nota Dinas Perintah Pengadaan', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(12, 'Pakta Integritas Awal Panitia', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(13, 'RKS', '2013-06-19', 'Jakarta', 2, 'Belum Selesai'),
-(14, 'Nota Dinas Permintaan', '2013-06-20', 'Jakarta', 3, 'Belum Selesai'),
-(15, 'TOR', '2013-06-20', 'Jakarta', 3, 'Belum Selesai'),
-(16, 'RAB', '2013-06-20', 'Jakarta', 3, 'Belum Selesai'),
-(17, 'Nota Dinas Perintah Pengadaan', '2013-06-12', 'Jakarta', 3, 'Belum Selesai'),
-(18, 'Nota Dinas Permintaan', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
-(19, 'TOR', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
-(20, 'RAB', '2013-06-13', 'Jakarta', 4, 'Belum Selesai'),
-(21, 'Nota Dinas Perintah Pengadaan', '2013-06-28', 'Jakarta', 4, 'Belum Selesai'),
-(22, 'Nota Dinas Permintaan', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
-(23, 'TOR', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
-(24, 'RAB', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
-<<<<<<< HEAD
-(25, 'Nota Dinas Perintah Pengadaan', '2013-06-14', 'Jakarta', 5, 'Belum Selesai'),
-(26, 'Pakta Integritas Awal Panitia', '2013-06-04', 'Jakarta', 3, 'Selesai'),
-(27, 'RKS', '2013-06-04', 'Jakarta', 3, 'Belum Selesai'),
-(28, 'HPS', '2013-06-14', 'Jakarta', 3, 'Belum Selesai'),
-(29, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(30, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(31, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(32, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(33, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(34, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(35, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(36, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(37, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(38, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(39, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(40, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(41, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(42, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(43, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(44, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(45, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(46, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(47, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(48, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(49, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(50, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(51, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(52, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(53, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(54, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(55, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(56, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(57, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(58, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(59, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(60, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(61, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(62, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(63, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(64, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(65, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(66, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(67, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(68, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(69, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(70, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(71, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(72, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(73, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(74, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(75, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(76, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(77, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(78, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(79, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(80, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(81, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(82, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(83, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(84, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(85, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(86, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(87, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(88, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(89, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(90, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(91, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(92, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(93, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(94, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(95, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(96, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(97, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(98, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(99, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(100, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(101, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(102, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(103, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(104, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(105, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(106, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(107, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(108, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(109, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(110, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(111, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(112, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(113, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(114, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(115, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(116, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(117, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(118, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(119, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(120, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(121, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(122, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(123, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(124, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(125, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(126, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(127, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(128, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(129, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(130, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(131, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(132, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(133, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(134, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(135, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(136, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(137, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(138, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(139, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(140, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(141, 'Pakta Integritas Penyedia', '0000-00-00', '-', 3, 'Belum Selesai'),
-(142, 'Surat Pengantar Penawaran Harga', '0000-00-00', 'Jakarta', 3, 'Belum Selesai'),
-(143, 'Surat Pernyataan Minat', '0000-00-00', '-', 3, 'Belum Selesai'),
-(144, 'Form Isian Kualifikasi', '0000-00-00', '-', 3, 'Belum Selesai'),
-(145, 'Surat Undangan Permintaan Penawaran Harga', '2013-06-11', 'Jakarta', 3, 'Belum Selesai'),
-(146, 'Surat Undangan Aanwijzing', '2013-06-14', 'Jakarta', 3, 'Belum Selesai'),
-(147, 'Berita Acara Aanwijzing', '2013-06-25', 'Jakarta', 3, 'Belum Selesai'),
-(148, 'Daftar Hadir Aanwijzing', '2013-06-25', 'Jakarta', 3, 'Belum Selesai');
-=======
-(25, 'Nota Dinas Perintah Pengadaan', '2013-06-14', 'Jakarta', 5, 'Belum Selesai');
->>>>>>> 732d98f5059b71a42c508ebb542e6f8f735344ce
 
 -- --------------------------------------------------------
 
@@ -477,8 +313,6 @@ CREATE TABLE IF NOT EXISTS `hps` (
 -- Dumping data for table `hps`
 --
 
-INSERT INTO `hps` (`id_dokumen`, `nomor`) VALUES
-(7, '012/PPJB-A/DIVMUM/2013 ');
 
 -- --------------------------------------------------------
 
@@ -535,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
   `dari` varchar(50) NOT NULL,
-  `nama_penyedia` varchar(50) NOT NULL,
+  `nama_penyedia` varchar(20) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `NPWP` varchar(20) NOT NULL,
   `biaya` bigint(20) NOT NULL,
@@ -609,12 +443,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 -- Dumping data for table `nota_dinas_perintah_pengadaan`
 --
 
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nota_dinas_permintaan`, `nomor`, `dari`, `kepada`, `perihal`, `RAB`, `TOR_RKS`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(4, '045/DVMAM/2013', '035/DVMUM/2013', 'KDIVMUM', 'Kevin Indra', 'Penunjunak petugas pengadaan', 'Terlampir', 'Terlampir', 98, 'Kas PLN', '10.000.000'),
-(11, '045/DVIN/2013', '056/DIVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan panitia pengadaan', 'Terlampir', 'Terlampir', 90, 'Kas PLN', '10.000.000'),
-(17, '23423', '23432', 'MSDAF', 'Kevin Indra', 'sdfsd', 'Terlampir', 'Terlampir', 23324, 'dsfsd', 'sdfsd'),
-(21, 'w4r34r34', '344353453', 'MSDAF', 'Kevin Indra', 'sdfsdf', 'Terlampir', 'Terlampir', 344353, 'sdfsd', 'sdfsd'),
-(25, '34534', '43t453452', 'KDIVMUM', 'Kevin Indra', 'sdgfds', 'Terlampir', 'Terlampir', 234353, 'dfgdf', 'dfgdf');
 
 -- --------------------------------------------------------
 
@@ -633,12 +461,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 -- Dumping data for table `nota_dinas_permintaan`
 --
 
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`) VALUES
-(8, '045/DVIN/2013'),
-(1, '045/DVMAM/2013'),
-(14, '23423'),
-(22, '34534'),
-(18, 'w4r34r34');
 
 -- --------------------------------------------------------
 
@@ -686,9 +508,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 -- Dumping data for table `pakta_integritas_panitia_1`
 --
 
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
-(5, 3),
-(12, 4);
 
 -- --------------------------------------------------------
 
@@ -771,16 +590,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 -- Dumping data for table `pengadaan`
 --
 
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-<<<<<<< HEAD
-(3, 'asdasd', 'divman', 'Barang dan Jasa', '-', '2013-06-12', '0000-00-00', '8', 0, 3, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
-=======
-(1, 'Pengadaan Baju Dinas', 'divin', 'Barang dan Jasa', '-', '2013-06-05', '0000-00-00', '3', 0, 3, 'Penunjukan Langsung', 'Satu Sampul', 'Pra Kualifikasi'),
-(2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-06-19', '0000-00-00', '2', 0, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pra Kualifikasi'),
-(3, 'asdasd', 'divman', 'Barang dan Jasa', '-', '2013-06-12', '0000-00-00', '1', 0, 3, 'Pemilihan Langsung', '-', '-'),
->>>>>>> 732d98f5059b71a42c508ebb542e6f8f735344ce
-(4, 'dvfdgd', 'divtrans', 'Barang dan Jasa', '-', '2013-06-28', '0000-00-00', '1', 0, 3, 'Pemilihan Langsung', '-', '-'),
-(5, 'fghfghf', 'divtrans', 'Barang dan Jasa', '-', '2013-06-14', '0000-00-00', '1', 0, 3, 'Pelelangan', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -807,39 +616,26 @@ CREATE TABLE IF NOT EXISTS `rab` (
 CREATE TABLE IF NOT EXISTS `rks` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
+  `tanggal_permintaan_penawaran` date NOT NULL,
+  `tanggal_penjelasan` date NOT NULL,
+  `waktu_penjelasan` varchar(20) NOT NULL,
+  `tempat_penjelasan` varchar(256) NOT NULL,
+  `tanggal_pemasukan_penawaran` date NOT NULL,
+  `tanggal_akhir_pemasukan_penawaran` date NOT NULL,
+  `waktu_pemasukan_penawaran` varchar(20) NOT NULL,
+  `tempat_pemasukan_penawaran` varchar(256) NOT NULL,
+  `tanggal_negosiasi` date NOT NULL,
+  `waktu_negosiasi` varchar(20) NOT NULL,
+  `tempat_negosiasi` varchar(256) NOT NULL,
+  `tanggal_penetapan_pemenang` date NOT NULL,
+  `waktu_penetapan_pemenang` varchar(20) NOT NULL,
+  `tempat_penetapan_pemenang` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
   KEY `nomor` (`nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rks`
---
-
-INSERT INTO `rks` (`id_dokumen`, `nomor`) VALUES
-(6, '011/PPJB-A/DIVMUM/2013'),
-(13, '021/PPJB-B/DIVMUM/2013');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `surat_pemberitahuan_pengadaan`
---
-
-CREATE TABLE IF NOT EXISTS `surat_pemberitahuan_pengadaan` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `id_panitia` bigint(11) NOT NULL,
-  `perihal` varchar(50) NOT NULL,
-  `lingkup_kerja` varchar(32) NOT NULL,
-  `tanggal_penawaran` date NOT NULL,
-  `waktu_kerja` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_dokumen`),
-  UNIQUE KEY `nomor` (`nomor`),
-  KEY `id_panitia` (`id_panitia`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `surat_pemberitahuan_pengadaan`
 --
 
 
@@ -961,29 +757,32 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-<<<<<<< HEAD
 --
 -- Dumping data for table `surat_undangan_penjelasan`
 --
 
-INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `id_panitia`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
-(146, 'xx', 3, 'Undangan Aanwijzing asdasd', '2013-06-25', 'a', 'ASA');
 
 -- --------------------------------------------------------
 
-=======
->>>>>>> 732d98f5059b71a42c508ebb542e6f8f735344ce
 --
--- Dumping data for table `surat_undangan_penjelasan`
+-- Table structure for table `surat_undangan_permintaan_penawaran_harga`
 --
 
+CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(50) NOT NULL,
+  `lingkup_kerja` varchar(32) NOT NULL,
+  `waktu_kerja` varchar(20) NOT NULL,
+  `masa_berlaku_penawaran` int(20) NOT NULL,
+  `tempat_penyerahan` varchar(256) NOT NULL,
+  PRIMARY KEY (`id_dokumen`),
+  UNIQUE KEY `nomor` (`nomor`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `surat_undangan_permintaan_penawaran_harga`
 --
 
-INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, `lingkup_kerja`, `waktu_kerja`, `masa_berlaku_penawaran`, `tempat_penyerahan`) VALUES
-(145, 'cx', 'xcaa', '33232', 34, '4322sda');
 
 -- --------------------------------------------------------
 
@@ -1276,13 +1075,6 @@ ALTER TABLE `rks`
   ADD CONSTRAINT `rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `surat_pemberitahuan_pengadaan`
---
-ALTER TABLE `surat_pemberitahuan_pengadaan`
-  ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `surat_pemberitahuan_pengadaan_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `surat_pengantar_penawaran_harga`
 --
 ALTER TABLE `surat_pengantar_penawaran_harga`
@@ -1319,6 +1111,12 @@ ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
 ALTER TABLE `surat_undangan_penjelasan`
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_5` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_undangan_permintaan_penawaran_harga`
+--
+ALTER TABLE `surat_undangan_permintaan_penawaran_harga`
+  ADD CONSTRAINT `surat_undangan_permintaan_penawaran_harga_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_prakualifikasi`
