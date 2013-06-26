@@ -4,30 +4,23 @@
 $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 ?>
 
-<?php
-	$test = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
-	$dataProvider = array();
-	while(list($k1, $v1)=each($test)) {
-		$x = array();
-		array_push($x, $v1['username']);
-		array_push($x, (int)$v1['jumlah_berlangsung']);
-		array_push($dataProvider, $x);
-	}
-?>
-
 <div id="sidebar">
-	<?php
-		$this->widget('zii.widgets.CPortlet', array());
-	?>
+	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
+	<ul>
+		<li><?php echo CHtml::link('Pengadaan per divisi', array('site/statistik')) ?></li>
+		<li><?php echo CHtml::link('Status pengadaan', array('site/statistik')) ?></li>
+	</ul>
+	<?php $this->endWidget(); ?>
 </div>
 
-<div id="perdiv">
+<div id="maincontent">
 	<?php $this->widget('HighchartsWidget', array(
 			'options'=>array(
 				'tooltip'=>array(
 					'formatter'=>'js:function() {return "<b>"+ this.point.name +"</b>: "+ this.percentage +" %";}',
 				),
-				'title'=>array('text'=>'Pengadaan per divisi'),
+				'title'=>array('text'=>$title),
+				'subtitle'=>array('text'=>$subtitle),
 				'series'=>array(
 					array(
 						'type'=>'pie',
