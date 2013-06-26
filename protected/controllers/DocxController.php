@@ -274,6 +274,9 @@ class DocxController extends Controller
 			$waktu = $SUP->waktu;
 			$nama = $Peng->nama_pengadaan;
 			$perihal = $SUP->perihal;
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
 					
 			$this->doccy->newFile('8 Surat Undangan Aanwijzing.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
@@ -288,6 +291,10 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#waktu#', $waktu);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
+			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			
 			$this->renderDocx("Surat Undangan Penjelasan.docx", true);
 
 		}
