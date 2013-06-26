@@ -13,23 +13,22 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	<div id="maincontent">
 	
-	<?php if($SUPP->isNewRecord) { ?>
-		
-	<?php } else { ?>
-		<div>
-		<?php echo CHtml::button('Berita Acara Evaluasi Penawaran Sampul Satu', array('submit'=>array('site/editberitaacaraevaluasipenawaransampul1',"id"=>"$cpengadaan->id_pengadaan"), 'style'=>'background:url(css/bg.gif)')); ?>
-			<?php if($cpengadaan->status == '12') { ?>
-				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Sampul Dua', array('submit'=>array('site/beritaacarapembukaanpenawaransampul2',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
-			<?php } else { ?>
-				<?php echo CHtml::button('Berita Acara Pembukaan Penawaran Sampul Dua', array('submit'=>array('site/editberitaacarapembukaanpenawaransampul2',"id"=>"$cpengadaan->id_pengadaan"), 'class'=>'sidafbutton')); ?>
-			<?php } ?>
-		</div>
-		<br/>
-	<?php } ?>
-	
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
+                
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'SU Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaransampul2':'/site/editsuratundanganpembukaanpenawaransampul2','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaransampul2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaransampul2'),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+                <br/>
+                
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
