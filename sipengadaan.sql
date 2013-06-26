@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 03:27 AM
+-- Generation Time: Jun 26, 2013 at 03:37 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -368,7 +368,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `dari` varchar(50) NOT NULL,
   `nama_penyedia` varchar(20) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `NPWP` varchar(20) NOT NULL,
@@ -397,7 +396,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `kepada` varchar(20) NOT NULL,
   `nama_penyedia` varchar(20) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `NPWP` varchar(20) NOT NULL,
@@ -408,8 +406,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   `jangka_waktu_berlaku` varchar(20) NOT NULL,
   `jangka_waktu_deadline` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
-  KEY `nama_penyedia` (`nama_penyedia`),
-  KEY `kepada` (`kepada`)
+  KEY `nama_penyedia` (`nama_penyedia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -471,7 +468,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `dari` varchar(50) NOT NULL,
   `nama_penyedia` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `NPWP` varchar(20) NOT NULL,
@@ -1019,7 +1015,6 @@ ALTER TABLE `nota_dinas_pemberitahuan_pemenang`
 --
 ALTER TABLE `nota_dinas_penetapan_pemenang`
   ADD CONSTRAINT `nota_dinas_penetapan_pemenang_ibfk_2` FOREIGN KEY (`nama_penyedia`) REFERENCES `pengadaan` (`nama_penyedia`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `nota_dinas_penetapan_pemenang_ibfk_3` FOREIGN KEY (`kepada`) REFERENCES `pengadaan` (`nama_penyedia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `nota_dinas_penetapan_pemenang_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
