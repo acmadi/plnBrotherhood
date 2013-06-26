@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 03:37 AM
+-- Generation Time: Jun 26, 2013 at 03:43 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -368,7 +368,7 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `nama_penyedia` varchar(20) NOT NULL,
+  `nama_penyedia` varchar(50) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `NPWP` varchar(20) NOT NULL,
   `biaya` bigint(20) NOT NULL,
