@@ -80,10 +80,6 @@
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 		
-		<div class="row buttons">
-			<?php echo CHtml::button('Unggah Nota Dinas Permintaan', array('class'=>'sidafbutton'));?>
-		</div>
-		
 		<br/>
 		<br/>
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
@@ -127,9 +123,56 @@
 		
 		<br/>
 		
-		<div class="row buttons">
-			<?php echo CHtml::button('Unggah TOR',array('class'=>'sidafbutton'));?>
-			<?php echo CHtml::button('Unggah RAB', array('class'=>'sidafbutton'));?>
+		<div class="row buttons" style=background-color:green;>
+		<?php
+		$form = $this->beginWidget('CActiveForm',array(
+			'id'=>'upload-form',
+			'enableAjaxValidation'=>'false',
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'),
+		));		
+		echo $form->labelEx($Dokumen0,$Dokumen0->nama_dokumen);
+		echo '<br>';
+		echo $form->fileField($Dokumen0,'uploadedFile');
+		echo $form->hiddenField($Dokumen0,'id_dokumen');
+		echo $form->error($Dokumen0,'uploadedFile');		
+		echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
+		$this->endWidget();
+		?>
+		</div>
+		
+		<div class="row buttons" style=background-color:green;>
+		<?php
+		$form = $this->beginWidget('CActiveForm',array(
+			'id'=>'upload-form',
+			'enableAjaxValidation'=>'false',
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'),
+		));		
+		echo $form->labelEx($Dokumen2,$Dokumen2->nama_dokumen);
+		echo '<br>';
+		echo $form->fileField($Dokumen2,'uploadedFile');
+		echo $form->hiddenField($Dokumen2,'id_dokumen');
+		echo $form->error($Dokumen2,'uploadedFile');		
+		echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
+		$this->endWidget();		
+		?>
+		</div>
+		
+		<div class="row buttons" style=background-color:red;>
+		<?php
+		$form = $this->beginWidget('CActiveForm',array(
+			'id'=>'upload-form',
+			'enableAjaxValidation'=>'false',
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'),
+		));		
+		echo $form->labelEx($Dokumen3,$Dokumen3->nama_dokumen);
+		echo '<br>';
+		echo $form->fileField($Dokumen3,'uploadedFile');
+		echo $form->hiddenField($Dokumen3,'id_dokumen');
+		echo $form->error($Dokumen3,'uploadedFile');
+		echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
+		$this->endWidget();
+		
+		?>
 		</div>
 		
 		<br/>
