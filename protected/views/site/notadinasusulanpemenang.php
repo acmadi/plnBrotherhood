@@ -23,7 +23,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                             'items'=>array(
                                     array('label'=>'ND Usulan Pemenang', 'url'=>array($NDUP->isNewRecord?('/site/notadinasusulanpemenang'):('/site/editnotadinasusulanpemenang'),'id'=>$id)),
                                     array('label'=>'ND Penetapan Pemenang', 'visible'=>$NDUP->isNewRecord),
-                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='7'?'/site/notadinaspenetapanpemenang':'/site/editnotadinaspenetapanpemenang','id'=>$id), 'visible'=>!$NDUP->isNewRecord),
+                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':'/site/editnotadinaspenetapanpemenang','id'=>$id), 'visible'=>!$NDUP->isNewRecord),
                             ),
                         ));
                     ?>
