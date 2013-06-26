@@ -3233,6 +3233,8 @@ class SiteController extends Controller
 				// $RAB->attributes=$_POST['Rab'];
 				
 				if($valid){
+					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
+					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
 					$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$Dokumen3->tanggal=$Dokumen0->tanggal;
@@ -3243,7 +3245,7 @@ class SiteController extends Controller
 						$NDPP->nota_dinas_permintaan=$NDP->nomor;
 						$valid=$valid&&$NDPP->validate();
 						if($valid){
-							if($Pengadaan->save(false)) {
+							if($Pengadaan->save(false)&&$Divisi->save(false)) {
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 									if($NDP->save(false)&&$NDPP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
 										
