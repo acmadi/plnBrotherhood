@@ -4,7 +4,6 @@
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$model=Dokumen::model()->findByPk($id);
 	$user = Yii::app()->user->name;
-	$dirUpload = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . Dokumen::model()->find('id_dokumen="' . $id . '"')->id_pengadaan . '/' . $id . '/' ;
 	$cdokumen = Dokumen::model()->find('id_dokumen = "' . $id . '"');	
 	$pengadaan=Pengadaan::model()->findByPk($cdokumen->id_pengadaan);
 	$this->pageTitle=Yii::app()->name . ' | ' . $pengadaan->nama_pengadaan . ' : ' . $cdokumen->nama_dokumen;
@@ -24,8 +23,10 @@
 	if($pengadaan->status!='Selesai'){
 		if((Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"'))&&(($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
 			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton')); 
+			echo '<br/>';
 		} else if ((Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
-			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton')); 
+			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton'));
+			echo '<br/>';
 		}
 	}
 ?>
@@ -33,49 +34,42 @@
 <?php
 	if($pengadaan->status!='Selesai'){
 		if((Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"'))&&(($cdokumen->nama_dokumen=='Nota Dinas Permintaan')||($cdokumen->nama_dokumen=='TOR')||($cdokumen->nama_dokumen=='RAB')||($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
-			$this->widget('ext.coco.CocoWidget'
-				,array(
-					'id'=>$id,
-					'user'=>$user,
-					'onCompleted'=>'function(id,filename,jsoninfo){  }',
-					'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
-					'onMessage'=>'function(m){ alert(m); }',
-					//'allowedExtensions'=>array('jpeg','jpg','gif','png'), // server-side mime-type validated
-					'sizeLimit'=>2000000, // limit in server-side and in client-side
-					// this arguments are used to send a notification
-					// on a specific class when a new file is uploaded,
-					'uploadDir'=>$dirUpload,
-					'receptorClassName'=>'application.models.Dokumen',
-					'methodName'=>'fileReceptor',
-					'userdata'=>$model->primaryKey,
-					// controls how many files must be uploaded
-					'maxUploads'=>-1, // defaults to -1 (unlimited)
-					'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
-					// controls how many files the can select (not upload, for uploads see also: maxUploads)
-					'multipleFileSelection'=>true, // true or false, defaults: true
-				));
+		
+		//insert uploader here
+		$chosenDokumen = Dokumen::model()->findByPk($id);
+		echo '<br/>';
+		$form = $this->beginWidget('CActiveForm', array(
+			'id'=>'upload-form',
+			'enableAjaxValidation'=>'false',
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'),
+		));
+		
+		echo $form->labelEx($chosenDokumen, 'Unggah berkas');
+		echo $form->fileField($chosenDokumen, 'uploadedFile');
+		echo $form->hiddenField($chosenDokumen, 'id_dokumen');
+		echo $form->error($chosenDokumen, 'uploadedFile');
+		echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
+		
+		$this->endWidget();
+		
 		} else if ((Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
-			$this->widget('ext.coco.CocoWidget'
-				,array(
-					'id'=>$id,
-					'user'=>$user,
-					'onCompleted'=>'function(id,filename,jsoninfo){  }',
-					'onCancelled'=>'function(id,filename){ alert("cancelled"); }',
-					'onMessage'=>'function(m){ alert(m); }',
-					//'allowedExtensions'=>array('jpeg','jpg','gif','png'), // server-side mime-type validated
-					'sizeLimit'=>2000000, // limit in server-side and in client-side
-					// this arguments are used to send a notification
-					// on a specific class when a new file is uploaded,
-					'uploadDir'=>$dirUpload,
-					'receptorClassName'=>'application.models.Dokumen',
-					'methodName'=>'fileReceptor',
-					'userdata'=>$model->primaryKey,
-					// controls how many files must be uploaded
-					'maxUploads'=>-1, // defaults to -1 (unlimited)
-					'maxUploadsReachMessage'=>'No more files allowed', // if empty, no message is shown
-					// controls how many files the can select (not upload, for uploads see also: maxUploads)
-					'multipleFileSelection'=>true, // true or false, defaults: true
-				));			
+	
+		//insert uploader
+		$chosenDokumen = Dokumen::model()->findByPk($id);
+		echo '<br/>';
+		$form = $this->beginWidget('CActiveForm', array(
+			'id'=>'upload-form',
+			'enableAjaxValidation'=>'false',
+			'htmlOptions'=>array('enctype'=>'multipart/form-data'),
+		));
+		
+		echo $form->labelEx($chosenDokumen, $chosenDokumen->nama_dokumen);
+		echo $form->fileField($chosenDokumen, 'uploadedFile');
+		echo $form->hiddenField($chosenDokumen, 'id_dokumen');
+		echo $form->error($chosenDokumen, 'uploadedFile');
+		echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
+		
+		$this->endWidget();
 		}
 	}
     ?>

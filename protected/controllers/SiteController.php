@@ -138,16 +138,52 @@ class SiteController extends Controller
 	 */
 	public function actionDetaildokumen()
 	{
+		$user = Yii::app()->user->name;
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
 		else {
+			if(isset($_POST['Dokumen'])){
+				$newLinkDokumen = new LinkDokumen;
+				$tempDokumen = new Dokumen;
+				
+				$tempDokumen->attributes = $_POST['Dokumen'];
+				$fileDokumen = CUploadedFile::getInstance($tempDokumen,'uploadedFile');
+				$tempDokumen = Dokumen::model()->findByPk($tempDokumen->id_dokumen);
+				$tempDokumen->uploadedFile = $fileDokumen;
+				
+				$tempDokumen->status_upload='Selesai';
+				
+				date_default_timezone_set("Asia/Jakarta");
+				$secs = time() + (7*3600);
+				$hours = $secs / 3600 % 24;
+				$minutes = $secs / 60 % 60;
+				$seconds = $secs % 60;
+				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
+				$pathinfo = pathinfo($tempDokumen->uploadedFile->getName());
+				
+				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
+				$newLinkDokumen->id_dokumen=$tempDokumen->id_dokumen;
+				$newLinkDokumen->waktu_upload=$waktu_upload;
+				$newLinkDokumen->tanggal_upload=date('Y-m-d');
+				$newLinkDokumen->pengunggah=$user;
+				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $tempDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
+				$newLinkDokumen->save();
+								
+				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $tempDokumen->id_pengadaan . '/' . $tempDokumen->id_dokumen . '/';
+				@mkdir($path,0700,true);
+				$namaFile = $newLinkDokumen->nomor_link;
+				
+				if($tempDokumen->save(false)){
+					$tempDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
+					}
+			}
 			$this->render('detaildokumen');
 		}
 	}
-
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -3280,15 +3316,16 @@ public function actionUploader(){
 				$hours = $secs / 3600 % 24;
 				$minutes = $secs / 60 % 60;
 				$seconds = $secs % 60;
-				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;
-		
+				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
+				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
+				
 				$newLinkDokumen->id_link=LinkDokumen::model()->count()+1;
 				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
 				$newLinkDokumen->waktu_upload=$waktu_upload;
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
 				$newLinkDokumen->pengunggah=$user;
 				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
-				$newLinkDokumen->format_dokumen='pdf';
+				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
 				$newLinkDokumen->save();
 								
 				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
@@ -3296,8 +3333,8 @@ public function actionUploader(){
 				$namaFile = $newLinkDokumen->nomor_link;
 				
 				if($newDokumen->save(false)){
-					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.jpg');
-					} 
+					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
+					}
 	}
 				$this->render('uploader',array('modelDok'=>$modelDok));
 	}
