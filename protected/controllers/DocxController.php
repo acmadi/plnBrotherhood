@@ -195,6 +195,7 @@ class DocxController extends Controller
 			$tempatambil = $SUPDP->tempat_pengambilan;
 			$nama = $Peng->nama_pengadaan;
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$tanggalrks=$dokrks->tanggal;
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
 			
@@ -211,7 +212,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalambil#', $tanggalambil);
 			$this->doccy->phpdocx->assign('#waktuambil#', $waktuambil);
 			$this->doccy->phpdocx->assign('#tempatambil#', $tempatambil);
-			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
 /*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
