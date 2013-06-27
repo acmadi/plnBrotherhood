@@ -66,7 +66,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Dokumen1->tanggal,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Dokumen1,'tanggal'); ?>
@@ -80,7 +80,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Rks->tanggal_permintaan_penawaran,
 						'htmlOptions'=>array('sigze'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_permintaan_penawaran'); ?>
@@ -94,7 +94,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Rks->tanggal_penjelasan,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_penjelasan'); ?>
@@ -120,7 +120,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Rks->tanggal_pemasukan_penawaran,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_pemasukan_penawaran'); ?>
@@ -134,7 +134,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Rks->tanggal_akhir_pemasukan_penawaran,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_akhir_pemasukan_penawaran'); ?>
@@ -160,7 +160,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Rks->tanggal_negosiasi,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_negosiasi'); ?>
@@ -186,7 +186,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'value'=>$Rks->tanggal_penetapan_pemenang,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_penetapan_pemenang'); ?>

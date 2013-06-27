@@ -63,7 +63,15 @@
         public static function getTanggalSlash($date) {
             return Tanggal::getTanggal0($date) . '/' . Tanggal::getBulan0($date) . '/' . Tanggal::getTahun0($date);
         }
-
+		
+		public static function getTanggalSlashLain($date) {
+            return Tanggal::getTanggal0($date) . '/' . Tanggal::getBulan0($date) . '/' . Tanggal::getTahun($date);
+        }
+		
+		public static function getTanggalStrip($date) {
+            return Tanggal::getTanggal0($date) . '-' . Tanggal::getBulan0($date) . '-' . Tanggal::getTahun($date);
+        }
+		
         public static function getTanggalLengkap($date) {
             return Tanggal::getTanggal($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
         }

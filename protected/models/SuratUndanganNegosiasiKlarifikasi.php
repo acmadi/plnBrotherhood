@@ -46,9 +46,7 @@ class SuratUndanganNegosiasiKlarifikasi extends CActiveRecord
 			array('id_dokumen, nomor, perihal, kepada, tanggal_undangan, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('perihal, tempat', 'length', 'max'=>100),
-			array('kepada', 'length', 'max'=>30),
-			array('waktu', 'length', 'max'=>14),
+			array('perihal, kepada, tempat', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, perihal, kepada, tanggal_undangan, waktu, tempat', 'safe', 'on'=>'search'),

@@ -8,7 +8,6 @@
  * @property string $nomor
  *
  * The followings are the available model relations:
- * @property NotaDinasPerintahPengadaan[] $notaDinasPerintahPengadaans
  * @property Dokumen $idDokumen
  */
 class NotaDinasPermintaan extends CActiveRecord
@@ -39,7 +38,7 @@ class NotaDinasPermintaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('id_dokumen, nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
 			// The following rule is used by search().
@@ -56,7 +55,6 @@ class NotaDinasPermintaan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'notaDinasPerintahPengadaans' => array(self::HAS_MANY, 'NotaDinasPerintahPengadaan', 'nota_dinas_permintaan'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}

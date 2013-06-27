@@ -167,7 +167,13 @@ class Dokumen extends CActiveRecord
 	public function fileReceptor($fullFileName,$userdata)
 	{
 
-	}	
+	}
+
+	protected function beforeSave()
+	{ 
+		$this->tanggal=date('Y-m-d', strtotime($this->tanggal));
+		return TRUE;
+	}
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum
 }

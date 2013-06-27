@@ -6,11 +6,9 @@
  * The followings are the available columns in table 'berita_acara_penjelasan':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $id_panitia
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
- * @property Pengadaan $idPanitia
  */
 class BeritaAcaraPenjelasan extends CActiveRecord
 {
@@ -40,14 +38,12 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, id_panitia', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('id_dokumen, nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
-			array('id_panitia', 'length', 'max'=>11),
-			array('nomor','Check'),
+			array('nomor', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, id_panitia', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,7 +56,6 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -72,7 +67,6 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'id_panitia' => 'Id Panitia',
 		);
 	}
 
@@ -89,16 +83,9 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('id_panitia',$this->id_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	public function Check($attribute,$params){
-		if((strpos($this->attributes['nomor'], 'Nomor') !== false)){
-			$this->addError($attribute, 'Periksa kembali nomor surat');
-		}
 	}
 }
