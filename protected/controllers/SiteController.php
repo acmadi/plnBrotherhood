@@ -3215,7 +3215,7 @@ class SiteController extends Controller
 					$NDUP->nama_penyedia_2='-';
 					$NDUP->alamat_2='-';
 					$NDUP->NPWP_2='-';
-					$NDUP->biaya_2='-';
+					$NDUP->biaya_2='0';
 				}
 				
 				//Uncomment the following line if AJAX validation is needed
