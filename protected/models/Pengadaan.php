@@ -43,7 +43,11 @@ class Pengadaan extends CActiveRecord
 	 * @return Pengadaan the static model class
 	 */
     
-        public $SisaHari;
+        public $sisahari;
+        public $pic;
+        public $ndpermintaan;
+        public $statusgan;
+        public $progressgan;
     
 	public static function model($className=__CLASS__)
 	{
@@ -73,7 +77,7 @@ class Pengadaan extends CActiveRecord
 			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'safe', 'on'=>'search'),
+			array('progressgan,sisahari,statusgan,ndpermintaan,pic,id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -112,7 +116,7 @@ class Pengadaan extends CActiveRecord
 		return array(
 			'id_pengadaan' => 'Id Pengadaan',
 			'nama_pengadaan' => 'Nama Pengadaan',
-			'divisi_peminta' => 'Divisi Peminta',
+			'divisi_peminta' => 'User',
 			'jenis_pengadaan' => 'Jenis Pengadaan',
 			'nama_penyedia' => 'Nama Penyedia',
 			'tanggal_masuk' => 'Tanggal Masuk',
@@ -123,6 +127,12 @@ class Pengadaan extends CActiveRecord
 			'metode_pengadaan' => 'Metode Pengadaan',
 			'metode_penawaran' => 'Metode Penawaran',
 			'jenis_kualifikasi' => 'Jenis Kualifikasi',
+                        'pic'=>'PIC',
+                        'ndpermintaan'=>'No ND Permintaan',
+                        'sisahari'=>'Sisa Hari',
+                        'statusgan'=>'Status',
+                        'progressgan'=>'Progres',
+//                        'dapatkanStatus()'=>'Status',
 		);
 	}
 
@@ -145,33 +155,35 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
 			),
-			'Status'=>array(
+			'statusgan'=>array(
 			  'asc'=>'ABS(status)',
-			  'desc'=>'ABS(status) desc',
+			  'desc'=>'ABS(status) desc',                            
 			),
-                        'Progress'=>array(
+                        'progressgan'=>array(
 			  'asc'=>'ABS(status)',
 			  'desc'=>'ABS(status) desc',
 			),       
-			'PIC'=>array(
+			'pic'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
 			  'desc'=>'idPanitia.nama_panitia desc',
 			),
-			'Sisa Hari'=>array(
-			  'asc'=>'SisaHari',
-			  'desc'=>'$this->sisaHari($this->id_pengadaan) desc',
+//                        'ndpermintaan'=>array(
+//			  'asc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+//			  'desc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan desc',
+//			),
+                                       
+			'sisahari'=>array(
+			  'asc'=>'Pengadaan.sisaHari()',
+			  'desc'=>'sisahari desc',
 			),
 			'*',
 		);
 		
 		$criteria=new CDbCriteria;
 
-//                $criteria->select = array(
-//                    "*",
-//                    "IF(notaDinasPerintahPengadaan.targetSPK_kontrak) AS SisaHari"
-//                );
-                
-                $criteria->with = array("idPanitia");
+                $criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+                $criteria->with = array("idPanitia");    
                 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
@@ -187,11 +199,11 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
                 
-//                $criteria->compare('SisaHari',$this->sisaHari($this->id_pengadaan),true);
-		
-		// $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->notaDinasPerintahPengadaan->nota_dinas_permintaan,true);			
+                $criteria->compare('idPanitia.nama_panitia',$this->pic,true);
+//                $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->ndpermintaan,true);                           //withnya blm ditambah
+//                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
-		$criteria->condition = "status!='100'";													//------jo-------------search yg ngga selesai doang----------------------		
+		$criteria->addcondition("status!='100'");													//------jo-------------search yg ngga selesai doang----------------------		
  
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -235,7 +247,7 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
-		$criteria->condition = "status='100'";	
+		$criteria->addcondition("status='100'");	
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -301,7 +313,7 @@ class Pengadaan extends CActiveRecord
 		};
 		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
 		$strDummy = $strDummy . "&& status!='100'";
-		$criteria->condition = $strDummy ;											
+		$criteria->addcondition($strDummy);
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -309,7 +321,7 @@ class Pengadaan extends CActiveRecord
 		));
 	}	
 	
-	public function sisaHari($id){								//jo----------------------------
+	public function sisaHari(){								//jo----------------------------
 		if($this->status == '100'){
 			return "-";
 		}else{
@@ -320,8 +332,10 @@ class Pengadaan extends CActiveRecord
 			
 			$string2 = $this->tanggal_masuk;		
 			$jmlday2 = strtotime($string2);
-			
-			return($this->findByPk($id)->notaDinasPerintahPengadaan->targetSPK_kontrak-floor(($jmlday1-$jmlday2)/3600/24));
+
+//                        return $this->id_pengadaan;
+			return($this->findByPk($this->id_pengadaan)->notaDinasPerintahPengadaan->targetSPK_kontrak-floor(($jmlday1-$jmlday2)/3600/24));
+//                        return 0;
 		}
 	}
 
