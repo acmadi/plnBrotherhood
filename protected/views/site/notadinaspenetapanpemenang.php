@@ -16,30 +16,54 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-                
-                <div id="menuform">
+          	<?php if($cpengadaan->metode_pengadaan == 'Penunjukan Langsung') { ?>
+        		<div id="menuform">
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'ND Usulan Pemenang', 'url'=>array('/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(($NDPP->isNewRecord)?('/site/notadinaspenetapanpemenang'):('/site/editnotadinaspenetapanpemenang'),'id'=>$id)),                                
+                                    array('label'=>'ND Usulan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
                             ),
                         ));
                     ?>
                 </div>
+        	<?php } else if($cpengadaan->metode_pengadaan == 'Pemilihan Langsung') { ?>
+                <div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'ND Usulan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
+                                    array('label'=>'ND Pemberitahuan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/notadinaspemberitahuanpemenang':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspemberitahuanpemenang')),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+			<?php } else if($cpengadaan->metode_pengadaan == 'Pelelangan') { ?>
+				<div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'ND Usulan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+			<?php } ?>
                 
                 <br/>
                 
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'nota-dinas-usulan-pemenang-form',
+		'id'=>'nota-dinas-penetapan-pemenang-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
 
 		<?php echo $form->errorSummary($NDPP); ?>
 		
-		<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
+		<h4><b> Nota Dinas Penetapan Pemenang </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'nomor'); ?>
 			<?php echo $form->textField($NDPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -68,7 +92,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'alamat Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'alamat',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->textArea($NDPP,'alamat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($NDPP,'alamat'); ?>
 		</div>
 		

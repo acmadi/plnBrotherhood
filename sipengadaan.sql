@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2013 at 11:02 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Jun 27, 2013 at 11:14 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -83,6 +82,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_evaluasi_penawaran`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -96,6 +100,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   `hak_kewajiban_penyedia` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_negosiasi_klarifikasi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -113,6 +122,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_pembukaan_penawaran`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +138,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_pengadaan_gagal`
+--
+
 
 -- --------------------------------------------------------
 
@@ -138,6 +157,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
   UNIQUE KEY `nomor` (`nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_penjelasan`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +175,11 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
   `acara` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `daftar_hadir`
+--
+
 
 -- --------------------------------------------------------
 
@@ -240,6 +269,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_kontrak` (
   UNIQUE KEY `Nomor` (`Nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dokumen_kontrak`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -250,6 +284,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokumen_penawaran`
+--
+
 
 -- --------------------------------------------------------
 
@@ -329,6 +368,11 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `link_dokumen`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -351,6 +395,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_pemberitahuan_pemenang`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -371,6 +420,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   `jangka_waktu_deadline` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota_dinas_penetapan_pemenang`
+--
+
 
 -- --------------------------------------------------------
 
@@ -446,6 +500,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   `tempat_penyerahan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota_dinas_usulan_pemenang`
+--
+
 
 -- --------------------------------------------------------
 
@@ -633,6 +692,51 @@ INSERT INTO `surat_pengantar_penawaran_harga` (`id_dokumen`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `surat_pengumuman_pelelangan`
+--
+
+CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(32) NOT NULL,
+  `nama_penyedia` varchar(100) NOT NULL,
+  `harga_penawaran` int(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `batas_sanggahan` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_pengumuman_pelelangan`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `surat_penunjukan_pemenang`
+--
+
+CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(32) NOT NULL,
+  `nama_penyedia` varchar(100) NOT NULL,
+  `harga` int(255) NOT NULL,
+  `lama_penyerahan` bigint(32) NOT NULL,
+  `jaminan` int(255) NOT NULL,
+  `nomor_ski` varchar(32) NOT NULL,
+  `tanggal_ski` date NOT NULL,
+  `no_ski` varchar(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_penunjukan_pemenang`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `surat_pernyataan_minat`
 --
 
@@ -665,6 +769,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_negosiasi_klarifikasi`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -680,6 +789,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   `tempat` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_pembukaan_penawaran`
+--
+
 
 -- --------------------------------------------------------
 
@@ -697,6 +811,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_pengambilan_dokumen_pengadaan`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -712,6 +831,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   `tempat` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_penjelasan`
+--
+
 
 -- --------------------------------------------------------
 
@@ -729,6 +853,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_permintaan_penawaran_harga`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -739,6 +868,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_prakualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_prakualifikasi`
+--
+
 
 -- --------------------------------------------------------
 
@@ -760,6 +894,11 @@ CREATE TABLE IF NOT EXISTS `termin` (
   KEY `id_dokumen` (`id_dokumen`,`nomor_termin`,`tipe`,`user`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `termin`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1010,6 +1149,12 @@ ALTER TABLE `surat_pengantar_penawaran_harga`
   ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `surat_pengumuman_pelelangan`
+--
+ALTER TABLE `surat_pengumuman_pelelangan`
+  ADD CONSTRAINT `surat_pengumuman_pelelangan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `surat_pernyataan_minat`
 --
 ALTER TABLE `surat_pernyataan_minat`
@@ -1069,7 +1214,3 @@ ALTER TABLE `tor`
 --
 ALTER TABLE `user_kontrak`
   ADD CONSTRAINT `user_kontrak_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
