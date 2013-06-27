@@ -17,7 +17,6 @@
  * @property string $pagu_anggaran
  *
  * The followings are the available model relations:
- * @property NotaDinasPermintaan $notaDinasPermintaan
  * @property Dokumen $idDokumen
  */
 class NotaDinasPerintahPengadaan extends CActiveRecord
@@ -48,7 +47,7 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required'),
 			array('targetSPK_kontrak', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen, TOR_RKS', 'length', 'max'=>32),
 			array('nota_dinas_permintaan, nomor', 'length', 'max'=>50),
@@ -68,7 +67,6 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'notaDinasPermintaan' => array(self::BELONGS_TO, 'NotaDinasPermintaan', 'nota_dinas_permintaan'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
