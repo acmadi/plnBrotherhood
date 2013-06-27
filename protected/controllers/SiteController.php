@@ -1238,8 +1238,8 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='9';
 				
-				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
-				$SUP=SuratUndanganPenjelasan::model()->findByPk($Dok0->id_dokumen);
+				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1252,7 +1252,7 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
-				$Dokumen1->tanggal=$SUP->tanggal_undangan;
+				$Dokumen1->tanggal=$RKS->tanggal_penjelasan;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
@@ -1260,17 +1260,16 @@ class SiteController extends Controller
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
-				$Dokumen2->tanggal=$SUP->tanggal_undangan;
+				$Dokumen2->tanggal=$RKS->tanggal_penjelasan;
 				
 				$BAP= new BeritaAcaraPenjelasan;
 				$BAP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
 				$DH->acara="Aanwijzing";
-				$DH->jam=$SUP->waktu;
-				$DH->tempat_hadir=$SUP->tempat;
+				$DH->jam=$RKS->waktu_penjelasan;
+				$DH->tempat_hadir=$RKS->tempat_penjelasan;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);

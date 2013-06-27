@@ -19,7 +19,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
                     <?php
                     $this->widget('zii.widgets.CMenu', array(
                                     'items'=>array(
-                                            array('label'=>'Surat Undangan Aanwijzing', 'url'=>array('/site/editaanwijzing','id'=>$id)),
+                                            array('label'=>'Surat Undangan Aanwijzing', 'url'=>array('/site/aanwijzing','id'=>$id)),
                                             array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
                                     ),
                             ));
