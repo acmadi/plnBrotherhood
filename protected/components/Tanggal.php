@@ -70,6 +70,10 @@
         public static function getHariTanggalLengkap($date) {
         	return Tanggal::getHari($date) . ', ' . Tanggal::getTanggalLengkap($date);
         }
-
+		
+		public static function getJamMenit($time) {
+			return Yii::app()->dateFormatter->format('HH:mm', CDateTimeParser::parse($time, 'HH:mm:ss'));
+		}
+		
     }
 ?>

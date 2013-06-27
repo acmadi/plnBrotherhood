@@ -93,7 +93,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'waktu pengambilan (dalam satuan hari)'); ?>
+				<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
 				<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
 			</div>

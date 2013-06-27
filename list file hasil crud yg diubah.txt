@@ -8,6 +8,7 @@ aidil
 pengadaan.php : rules
 pengadaan.php : tambah variabel
 dokumen.php : tambah variabel
+rks : fungsi check tanggal
 
 irvan
 dokumen.php : searchlistdokumen
