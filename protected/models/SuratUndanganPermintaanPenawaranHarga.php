@@ -44,10 +44,10 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, lingkup_kerja, waktu_kerja, masa_berlaku_penawaran, tempat_penyerahan', 'required'),
 			array('masa_berlaku_penawaran', 'numerical', 'integerOnly'=>true),
-			array('id_dokumen, lingkup_kerja', 'length', 'max'=>32),
+			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('waktu_kerja', 'length', 'max'=>20),
-			array('tempat_penyerahan', 'length', 'max'=>256),
+			array('lingkup_kerja', 'length', 'max'=>100),
+			array('waktu_kerja, tempat_penyerahan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, lingkup_kerja, waktu_kerja, masa_berlaku_penawaran, tempat_penyerahan', 'safe', 'on'=>'search'),
