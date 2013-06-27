@@ -16,6 +16,7 @@
     			case 'July': return 'Juli';
     			case 'August': return 'Agustus';
     			case 'Oktober': return 'Oktober';
+    			case 'December': return 'Desember';
     			case 'Monday': return 'Senin';
     			case 'Tuesday': return 'Selasa';
     			case 'Wednesday': return 'Rabu';
@@ -62,14 +63,33 @@
         public static function getTanggalSlash($date) {
             return Tanggal::getTanggal0($date) . '/' . Tanggal::getBulan0($date) . '/' . Tanggal::getTahun0($date);
         }
-
+		
+		public static function getTanggalSlashLain($date) {
+            return Tanggal::getTanggal0($date) . '/' . Tanggal::getBulan0($date) . '/' . Tanggal::getTahun($date);
+        }
+		
+		public static function getTanggalStrip($date) {
+            return Tanggal::getTanggal0($date) . '-' . Tanggal::getBulan0($date) . '-' . Tanggal::getTahun($date);
+        }
+		
         public static function getTanggalLengkap($date) {
             return Tanggal::getTanggal($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
+        }
+
+        public static function getTanggalLengkap0($date) {
+            return Tanggal::getTanggal0($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
         }
 
         public static function getHariTanggalLengkap($date) {
         	return Tanggal::getHari($date) . ', ' . Tanggal::getTanggalLengkap($date);
         }
 
+        public static function getHariTanggalLengkap0($date) {
+        	return Tanggal::getHari($date) . ', ' . Tanggal::getTanggalLengkap0($date);
+        }
+		
+		public static function getJamMenit($time) {
+			return Yii::app()->dateFormatter->format('HH:mm', CDateTimeParser::parse($time, 'HH:mm:ss'));
+		}
     }
 ?>

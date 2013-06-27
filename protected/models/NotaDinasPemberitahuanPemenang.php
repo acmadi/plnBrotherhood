@@ -18,7 +18,6 @@
  * @property string $tempat_penyerahan
  *
  * The followings are the available model relations:
- * @property Pengadaan $namaPenyedia
  * @property Dokumen $idDokumen
  */
 class NotaDinasPemberitahuanPemenang extends CActiveRecord
@@ -51,9 +50,10 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, nama_penyedia_2, alamat_2, NPWP_2, biaya_2, waktu_pelaksanaan, tempat_penyerahan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, nama_penyedia_2', 'length', 'max'=>50),
-			array('nama_penyedia, NPWP, biaya, NPWP_2, biaya_2, tempat_penyerahan', 'length', 'max'=>20),
-			array('alamat, alamat_2', 'length', 'max'=>100),
+			array('nomor', 'length', 'max'=>50),
+			array('nama_penyedia, nama_penyedia_2', 'length', 'max'=>100),
+			array('alamat, alamat_2', 'length', 'max'=>256),
+			array('NPWP, biaya, NPWP_2, biaya_2, tempat_penyerahan', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, nama_penyedia_2, alamat_2, NPWP_2, biaya_2, waktu_pelaksanaan, tempat_penyerahan', 'safe', 'on'=>'search'),
@@ -68,7 +68,6 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'namaPenyedia' => array(self::BELONGS_TO, 'Pengadaan', 'nama_penyedia'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}

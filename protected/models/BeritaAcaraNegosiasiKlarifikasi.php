@@ -8,11 +8,9 @@
  * @property string $nomor
  * @property string $surat_penawaran_harga
  * @property string $hak_kewajiban_penyedia
- * @property string $id_panitia
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
- * @property Pengadaan $idPanitia
  */
 class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 {
@@ -42,13 +40,12 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, surat_penawaran_harga, hak_kewajiban_penyedia, id_panitia', 'required'),
+			array('id_dokumen, nomor, surat_penawaran_harga, hak_kewajiban_penyedia', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor, surat_penawaran_harga, hak_kewajiban_penyedia', 'length', 'max'=>50),
-			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, surat_penawaran_harga, hak_kewajiban_penyedia, id_panitia', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, surat_penawaran_harga, hak_kewajiban_penyedia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +58,6 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -75,7 +71,6 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 			'nomor' => 'Nomor',
 			'surat_penawaran_harga' => 'Surat Penawaran Harga',
 			'hak_kewajiban_penyedia' => 'Hak Kewajiban Penyedia',
-			'id_panitia' => 'Id Panitia',
 		);
 	}
 
@@ -94,7 +89,6 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('surat_penawaran_harga',$this->surat_penawaran_harga,true);
 		$criteria->compare('hak_kewajiban_penyedia',$this->hak_kewajiban_penyedia,true);
-		$criteria->compare('id_panitia',$this->id_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -1,8 +1,8 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -66,7 +66,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Dokumen1->tanggal,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Dokumen1,'tanggal'); ?>
@@ -80,7 +80,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Rks->tanggal_permintaan_penawaran,
 						'htmlOptions'=>array('sigze'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_permintaan_penawaran'); ?>
@@ -94,7 +94,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Rks->tanggal_penjelasan,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_penjelasan'); ?>
@@ -120,7 +120,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Rks->tanggal_pemasukan_penawaran,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_pemasukan_penawaran'); ?>
@@ -134,14 +134,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Rks->tanggal_akhir_pemasukan_penawaran,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_akhir_pemasukan_penawaran'); ?>
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'waktu_pemasukan_penawaran (Format HH:MM)'); ?>
+					<?php echo $form->labelEx($Rks,'waktu_paling_lambat_pemasukan_penawaran (Format HH:MM)'); ?>
 					<?php echo $form->textField($Rks,'waktu_pemasukan_penawaran',array('size'=>56,'maxlength'=>20)); ?>
 					<?php echo $form->error($Rks,'waktu_pemasukan_penawaran'); ?>
 				</div>
@@ -160,7 +160,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Rks->tanggal_negosiasi,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_negosiasi'); ?>
@@ -186,7 +186,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Rks->tanggal_penetapan_pemenang,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
 					<?php echo $form->error($Rks,'tanggal_penetapan_pemenang'); ?>

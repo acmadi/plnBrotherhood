@@ -17,7 +17,6 @@
  * @property string $jangka_waktu_deadline
  *
  * The followings are the available model relations:
- * @property Pengadaan $namaPenyedia
  * @property Dokumen $idDokumen
  */
 class NotaDinasPenetapanPemenang extends CActiveRecord
@@ -50,9 +49,10 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('nama_penyedia, NPWP, biaya, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'length', 'max'=>20),
-			array('alamat', 'length', 'max'=>100),
+			array('nomor, sumber_dana', 'length', 'max'=>50),
+			array('nama_penyedia', 'length', 'max'=>100),
+			array('alamat, tempat_penyerahan', 'length', 'max'=>256),
+			array('NPWP, biaya, jangka_waktu_berlaku, jangka_waktu_deadline', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'safe', 'on'=>'search'),
@@ -67,7 +67,6 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'namaPenyedia' => array(self::BELONGS_TO, 'Pengadaan', 'nama_penyedia'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}

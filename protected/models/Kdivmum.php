@@ -7,6 +7,7 @@
  * @property string $username
  * @property string $NIP
  * @property string $email
+ * @property string $jabatan
  *
  * The followings are the available model relations:
  * @property User $username0
@@ -39,12 +40,12 @@ class Kdivmum extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, NIP, email', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('username, NIP, email, jabatan', 'required'),
 			array('username', 'length', 'max'=>20),
-			array('NIP, email', 'length', 'max'=>32),
+			array('NIP, email, jabatan', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, NIP, email', 'safe', 'on'=>'search'),
+			array('username, NIP, email, jabatan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +70,7 @@ class Kdivmum extends CActiveRecord
 			'username' => 'Username',
 			'NIP' => 'Nip',
 			'email' => 'Email',
+			'jabatan' => 'Jabatan',
 		);
 	}
 
@@ -86,6 +88,7 @@ class Kdivmum extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
+		$criteria->compare('jabatan',$this->jabatan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

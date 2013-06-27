@@ -42,12 +42,12 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
-			array('perihal, tempat_pengambilan', 'length', 'max'=>100),
-			array('waktu_pengambilan', 'length', 'max'=>12),
-			array('nomor','Check'),
+			array('nomor', 'length', 'max'=>50),
+			array('perihal', 'length', 'max'=>100),
+			array('tempat_pengambilan', 'length', 'max'=>256),
+			array('waktu_pengambilan','check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, perihal, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),
@@ -104,9 +104,9 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		));
 	}
 	
-	public function Check($attribute,$params){
-		if(strpos($this->attributes['nomor'], 'Nomor') !== false) {
-			$this->addError($attribute, 'Periksa kembali nomor surat');
+	public function Check($attribute,$params){		
+		if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $this->attributes['waktu_pengambilan'])){
+			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
 		}
 	}
 }

@@ -54,7 +54,8 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<h4><b> Surat Undangan Pengambilan Dokumen Pengadaan </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($SUPDP,'nomor'); ?>
-				<?php echo $form->textField($SUPDP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+				Nomor HPS : <?php echo $HPS->nomor ?> <br/>
+				<?php echo $form->textField($SUPDP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 				<?php echo $form->error($SUPDP,'nomor'); ?>
 			</div>
 			
@@ -66,7 +67,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$Dokumen0->tanggal,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 				));?>
 				<?php echo $form->error($Dokumen0,'tanggal'); ?>
@@ -86,14 +87,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 						'value'=>$SUPDP->tanggal_pengambilan,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
-						'dateFormat'=>'yy-mm-dd',
+						'dateFormat'=>'dd-mm-yy',
 						),
 				));?>
 				<?php echo $form->error($SUPDP,'tanggal_pengambilan'); ?>
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'waktu pengambilan (dalam satuan hari)'); ?>
+				<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
 				<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
 			</div>
