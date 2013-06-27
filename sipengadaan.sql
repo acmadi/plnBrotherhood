@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2013 at 11:07 AM
+-- Generation Time: Jun 27, 2013 at 11:14 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -723,6 +723,9 @@ CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
   `harga` int(255) NOT NULL,
   `lama_penyerahan` bigint(32) NOT NULL,
   `jaminan` int(255) NOT NULL,
+  `nomor_ski` varchar(32) NOT NULL,
+  `tanggal_ski` date NOT NULL,
+  `no_ski` varchar(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
