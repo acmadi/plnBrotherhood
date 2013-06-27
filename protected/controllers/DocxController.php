@@ -477,20 +477,21 @@ class DocxController extends Controller
 			$rks=Rks::model()->findByPk($id);
 			
 			$norks = $rks->nomor;
-			$tglrks = $Dok->tanggal;
+			$tglrks = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$nama = $Peng->nama_pengadaan;
-			$tanggalpermintaan = $rks->tanggal_permintaan_penawaran;
-			$tanggalpenunjukan = $rks->tanggal_penjelasan;
-			$waktupenunjukan = $rks->waktu_penjelasan;
+			$namakapital = strtoupper($nama);
+			$tanggalpermintaan = Tanggal::getTanggalLengkap($rks->tanggal_permintaan_penawaran);
+			$tanggalpenunjukan = Tanggal::getTanggalLengkap($rks->tanggal_penjelasan);
+			$waktupenunjukan = Tanggal::getJamMenit($rks->waktu_penjelasan);
 			$tempatpenunjukan = $rks->tempat_penjelasan;
-			$tanggalawalpemasukan = $rks->tanggal_pemasukan_penawaran;
-			$tanggalakhirpemasukan = $rks->tanggal_akhir_pemasukan_penawaran;
-			$waktupemasukanpenawaran = $rks->waktu_pemasukan_penawaran;
+			$tanggalawalpemasukan = Tanggal::getTanggalLengkap($rks->tanggal_pemasukan_penawaran);
+			$tanggalakhirpemasukan = Tanggal::getTanggalLengkap($rks->tanggal_akhir_pemasukan_penawaran);
+			$waktupemasukanpenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran);
 			$tempatpemasukan = $rks->tempat_pemasukan_penawaran;
-			$tanggalnegosiasi = $rks->tanggal_negosiasi;
-			$waktunegosiasi = $rks->waktu_negosiasi;
-			$tanggalpenunjukanpemenang = $rks->tanggal_penetapan_pemenang;
-			$waktupenunjukanpemenang = $rks->waktu_penetapan_pemenang;
+			$tanggalnegosiasi = Tanggal::getTanggalLengkap($rks->tanggal_negosiasi);
+			$waktunegosiasi = Tanggal::getJamMenit($rks->waktu_negosiasi);
+			$tanggalpenunjukanpemenang = Tanggal::getTanggalLengkap($rks->tanggal_penetapan_pemenang);
+			$waktupenunjukanpemenang = Tanggal::getJamMenit($rks->waktu_penetapan_pemenang);
 			$tempatpenunjukanpemenang = $rks->tempat_penetapan_pemenang;
 			
 			$this->doccy->newFile('3a rks-tunjuklangsungjasa.docx');
@@ -500,6 +501,7 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tglrks#', $tglrks);
+			$this->doccy->phpdocx->assign('#pengadaan#', $namakapital);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#tanggalpermintaanpenawaran#', $tanggalpermintaan);
 			$this->doccy->phpdocx->assign('#tanggalpenunjukanlangsung#', $tanggalpenunjukan);
