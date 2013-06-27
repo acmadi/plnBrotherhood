@@ -16,6 +16,7 @@
     			case 'July': return 'Juli';
     			case 'August': return 'Agustus';
     			case 'Oktober': return 'Oktober';
+    			case 'December': return 'Desember';
     			case 'Monday': return 'Senin';
     			case 'Tuesday': return 'Selasa';
     			case 'Wednesday': return 'Rabu';
@@ -67,8 +68,16 @@
             return Tanggal::getTanggal($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
         }
 
+        public static function getTanggalLengkap0($date) {
+            return Tanggal::getTanggal0($date) . ' ' . Tanggal::getBulanA($date) . ' ' . Tanggal::getTahun($date);
+        }
+
         public static function getHariTanggalLengkap($date) {
         	return Tanggal::getHari($date) . ', ' . Tanggal::getTanggalLengkap($date);
+        }
+
+        public static function getHariTanggalLengkap0($date) {
+        	return Tanggal::getHari($date) . ', ' . Tanggal::getTanggalLengkap0($date);
         }
 
     }
