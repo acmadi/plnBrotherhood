@@ -167,21 +167,13 @@
 			<?php } else if($cpengadaan->status == '17') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspenetapanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '18') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '19') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '20') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspenetapanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-		<?php } ?>
-		
-		<?php if($cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13' || $cpengadaan->status == '14'||$cpengadaan->status == '15' || $cpengadaan->status == '16'|| $cpengadaan->status == '17' || $cpengadaan->status == '18'||$cpengadaan->status == '19' || $cpengadaan->status == '20') { ?>
-				<li class='belum'><?php echo 'Selesai' ?></li>
-			<?php } else if($cpengadaan->status == 'Pengajuan Selesai') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Selesai',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Selesai',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		</br> 

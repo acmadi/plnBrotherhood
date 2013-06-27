@@ -395,8 +395,11 @@ class SiteController extends Controller
 				if(Pengadaan::model()->findByPk($id)->status=="17"){
 					$this->redirect(array('site/notadinaspenetapanpemenang','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="100"){
-					$this->redirect(array('site/editnotadinaspenetapanpemenang','id'=>$id));
+				if(Pengadaan::model()->findByPk($id)->status=="18"){
+					$this->redirect(array('site/notadinaspemberitahuanpemenang','id'=>$id));
+				}
+				else{
+					$this->redirect(array('site/editnotadinaspemberitahuanpemenang','id'=>$id));
 				}
 			}
 		}
@@ -3296,11 +3299,11 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
-					$Pengadaan->status ='100';
+					$Pengadaan->status ='20';
 				} else if ($Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
-					$Pengadaan->status ='100';
+					$Pengadaan->status ='18';
 				} else if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
-					$Pengadaan->status ='100';
+					$Pengadaan->status ='19';
 				}
 				
 				$Dokumen0= new Dokumen;
@@ -3384,6 +3387,111 @@ class SiteController extends Controller
 
 				$this->render('notadinaspenetapanpemenang',array(
 					'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
+				));
+
+			}
+		}
+	}
+	
+	public function actionNotadinaspemberitahuanpemenang()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='20';
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Nota Dinas Pemberitahuan Pemenang';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$NDBP= new NotaDinasPemberitahuanPemenang;
+				$NDBP->id_dokumen=$Dokumen0->id_dokumen;
+				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
+					$NDBP->nama_penyedia_2='-';
+					$NDBP->alamat_2='-';
+					$NDBP->NPWP_2='-';
+					$NDBP->biaya_2='0';
+				}
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['NotaDinasPemberitahuanPemenang']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$NDBP->attributes=$_POST['NotaDinasPemberitahuanPemenang'];
+					$valid=$NDBP->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($NDBP->save(false)){
+									$this->redirect(array('editnotadinaspemberitahuanpemenang','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('notadinaspemberitahuanpemenang',array(
+					'NDBP'=>$NDBP,'Dokumen0'=>$Dokumen0,
+				));
+
+			}
+		}
+	}
+	
+	public function actionEditNotadinaspemberitahuanpemenang()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Pemberitahuan Pemenang"');
+				
+				$NDBP=NotaDinasPemberitahuanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['NotaDinasPemberitahuanPemenang']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$NDBP->attributes=$_POST['NotaDinasPemberitahuanPemenang'];
+					$valid=$NDBP->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($NDBP->save(false)){
+									$this->redirect(array('editnotadinaspemberitahuanpemenang','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('notadinaspemberitahuanpemenang',array(
+					'NDBP'=>$NDBP,'Dokumen0'=>$Dokumen0,
 				));
 
 			}
