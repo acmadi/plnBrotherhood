@@ -40,7 +40,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		'id'=>'pengadaan-grid',
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
-		"ajaxUpdate"=>false,					
+		"ajaxUpdate"=>false,	            
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
@@ -59,31 +59,37 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
                         array(            // display using an expression
 				'name'=>'ndpermintaan',				
-				'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan',      
+				'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan', 
+                                'filter'=>'',
                         ),			
 			
 			array(            // display using an expression
 				'name'=>'pic',				
-				'value'=>'$data->idPanitia->nama_panitia',      
+				'value'=>'$data->idPanitia->nama_panitia',   
+                                'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 				),
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
 				'value'=>'$data->divisi_peminta',
-				),			
+                                'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
+                            ),			
 				
 			array(            // display using an expression
                             'name'=>'sisahari',	
-                            'value'=>'$data->sisaHari()',			
+                            'value'=>'$data->sisaHari()',
+                            'filter'=>'',
+                            'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),
 			
 			array(            // display using an expression
-					'name'=>'statusgan',
-					'value'=>'$data->dapatkanStatus()',
-				),			
+                            'name'=>'statusgan',
+                            'value'=>'$data->dapatkanStatus()',
+                            'filter'=>'',
+                        ),			
 			
 			array (
-				  'name'=>'progressgan',				  
+				  'name'=>'progressgan',                                    
 				  'value'=>'$this->grid->Controller->createWidget(
                                       "zii.widgets.jui.CJuiProgressBar",array(
                                             "value"=>$data->progressPengadaan(),
@@ -96,6 +102,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                             ),					
                                       )
                                    )->run()',
+                            'filter'=>'',
 			),							
 		),
 	)); 
