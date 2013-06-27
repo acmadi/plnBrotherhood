@@ -31,7 +31,7 @@ class DocxController extends Controller
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
 			$dari = $NDPP->dari;
-			$kepada = $NDPP->kepada;
+			$kepada = $NDPP->kepada . '<w:br/>' . 'ssdafsa';
 			$perihal = $NDPP->perihal;
 			$anggaran = $NDPP->pagu_anggaran;
 			$sumber = $NDPP->sumber_dana;
@@ -48,10 +48,8 @@ class DocxController extends Controller
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
 			if($panitia->jenis_panitia=="Pejabat"){
-				$kepada2 = ""; 
 				$sekretaris = "";
 			} else {
-				$kepada2 = "Ketua ".$panitia->nama_panitia." Pengadaan Barang Jasa";
 				$sekretaris = "- Sekretaris Panitia";
 			}
 			
