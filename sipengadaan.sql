@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2013 at 10:23 AM
+-- Generation Time: Jun 27, 2013 at 11:07 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -707,6 +707,27 @@ CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
 
 --
 -- Dumping data for table `surat_pengumuman_pelelangan`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `surat_penunjukan_pemenang`
+--
+
+CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(32) NOT NULL,
+  `nama_penyedia` varchar(100) NOT NULL,
+  `harga` int(255) NOT NULL,
+  `lama_penyerahan` bigint(32) NOT NULL,
+  `jaminan` int(255) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_penunjukan_pemenang`
 --
 
 
