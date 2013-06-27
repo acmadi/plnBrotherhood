@@ -196,4 +196,16 @@ class Rks extends CActiveRecord
 			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
 		}
 	}
+	
+	protected function beforeSave()
+	{ 
+		$this->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($this->tanggal_permintaan_penawaran));
+		$this->tanggal_penjelasan=date('Y-m-d', strtotime($this->tanggal_penjelasan));
+		$this->tanggal_pemasukan_penawaran=date('Y-m-d', strtotime($this->tanggal_pemasukan_penawaran));
+		$this->tanggal_akhir_pemasukan_penawaran=date('Y-m-d', strtotime($this->tanggal_akhir_pemasukan_penawaran));
+		$this->tanggal_negosiasi=date('Y-m-d', strtotime($this->tanggal_negosiasi));
+		$this->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($this->tanggal_penetapan_pemenang));
+		return TRUE;
+	}
+
 }
