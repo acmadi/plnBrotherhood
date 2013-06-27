@@ -30,7 +30,7 @@ class DocxController extends Controller
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
 			$dari = $NDPP->dari;
-			$kepada = $NDPP->kepada;
+			$kepada = $NDPP->kepada . '<w:br/>' . 'ssdafsa';
 			$perihal = $NDPP->perihal;
 			$anggaran = $NDPP->pagu_anggaran;
 			$sumber = $NDPP->sumber_dana;
@@ -48,6 +48,11 @@ class DocxController extends Controller
 			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
+			if($panitia->jenis_panitia=="Pejabat"){
+				$sekretaris = "";
+			} else {
+				$sekretaris = "- Sekretaris Panitia";
+			}
 			
 			$this->doccy->newFile('1. nd-perintahpengadaan.docx');
 			if ($dari == "KDIVMUM"){$tembusan = "MSDAF";}
