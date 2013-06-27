@@ -48,13 +48,6 @@ class DocxController extends Controller
 			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
-			if($panitia->jenis_panitia=="Pejabat"){
-				$kepada2 = ""; 
-				$sekretaris = "";
-			} else {
-				$kepada2 = "Ketua ".$panitia->nama_panitia." Pengadaan Barang Jasa";
-				$sekretaris = "- Sekretaris Panitia";
-			}
 			
 			$this->doccy->newFile('1. nd-perintahpengadaan.docx');
 			if ($dari == "KDIVMUM"){$tembusan = "MSDAF";}
@@ -65,7 +58,6 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#nosurat#', $nomor);
 			$this->doccy->phpdocx->assign('#kepada1#', $kepada);
-			$this->doccy->phpdocx->assign('#kepada2#', $kepada2);
 			$this->doccy->phpdocx->assign('#dari#', $dari);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal2);
 			$this->doccy->phpdocx->assign('#tanggalpermintaan#', $tanggalpermintaan2);
@@ -197,6 +189,9 @@ class DocxController extends Controller
 			$waktuambil = $SUPDP->waktu_pengambilan;
 			$tempatambil = $SUPDP->tempat_pengambilan;
 			$nama = $Peng->nama_pengadaan;
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+			$norks = $rks->nomor;
 			
 			$this->doccy->newFile('7 Surat Pemberitahuan Pengadaan.docx');
 			
@@ -532,8 +527,10 @@ class DocxController extends Controller
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
 			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
-			//$norks = Rks::model()->find(Dokumen::model()->find('id_pengadaan='.$Peng->id_pengadaan)->id_dokumen)->nomor;
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$this->doccy->newFile('9a Berita Acara Aanwijzing.docx');
+			$norks = $rks->nomor;
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
