@@ -320,23 +320,23 @@ class SiteController extends Controller
 				if(Pengadaan::model()->findByPk($id)->status=="5"){
 					$this->redirect(array('site/permintaanpenawaranharga','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="6"){
-					$this->redirect(array('site/aanwijzing','id'=>$id));
-				}
+				// if(Pengadaan::model()->findByPk($id)->status=="6"){
+					// $this->redirect(array('site/aanwijzing','id'=>$id));
+				// }
 				if(Pengadaan::model()->findByPk($id)->status=="7"){
 					$this->redirect(array('site/beritaacaraaanwijzing','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="8"){
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
-						$this->redirect(array('site/suratundanganpembukaanpenawaran','id'=>$id));
-					}
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
-						$this->redirect(array('site/suratundanganpembukaanpenawaransampul1','id'=>$id));
-					}
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
-						$this->redirect(array('site/suratundanganpembukaanpenawarantahap1','id'=>$id));
-					}
-				}
+				// if(Pengadaan::model()->findByPk($id)->status=="8"){
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
+						// $this->redirect(array('site/suratundanganpembukaanpenawaran','id'=>$id));
+					// }
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
+						// $this->redirect(array('site/suratundanganpembukaanpenawaransampul1','id'=>$id));
+					// }
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
+						// $this->redirect(array('site/suratundanganpembukaanpenawarantahap1','id'=>$id));
+					// }
+				// }
 				if(Pengadaan::model()->findByPk($id)->status=="9"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
 						$this->redirect(array('site/beritaacarapembukaanpenawaran','id'=>$id));
@@ -359,14 +359,14 @@ class SiteController extends Controller
 						$this->redirect(array('site/beritaacaraevaluasipenawarantahap1','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="11"){
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
-						$this->redirect(array('site/suratundanganpembukaanpenawaransampul2','id'=>$id));
-					}
-					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
-						$this->redirect(array('site/suratundanganpembukaanpenawarantahap2','id'=>$id));
-					}
-				}
+				// if(Pengadaan::model()->findByPk($id)->status=="11"){
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
+						// $this->redirect(array('site/suratundanganpembukaanpenawaransampul2','id'=>$id));
+					// }
+					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
+						// $this->redirect(array('site/suratundanganpembukaanpenawarantahap2','id'=>$id));
+					// }
+				// }
 				if(Pengadaan::model()->findByPk($id)->status=="12"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
 						$this->redirect(array('site/beritaacarapembukaanpenawaransampul2','id'=>$id));
@@ -383,9 +383,9 @@ class SiteController extends Controller
 						$this->redirect(array('site/beritaacaraevaluasipenawarantahap2','id'=>$id));
 					}
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="14"){
-					$this->redirect(array('site/suratundangannegosiasiklarifikasi','id'=>$id));
-				}
+				// if(Pengadaan::model()->findByPk($id)->status=="14"){
+					// $this->redirect(array('site/suratundangannegosiasiklarifikasi','id'=>$id));
+				// }
 				if(Pengadaan::model()->findByPk($id)->status=="15"){
 					$this->redirect(array('site/beritaacaranegosiasiklarifikasi','id'=>$id));
 				}
@@ -500,6 +500,7 @@ class SiteController extends Controller
 				
 				$PAP1= PaktaIntegritasPanitia1::model()->findByPk($Dokumen0->id_dokumen);
 				$RKS= Rks::model()->findByPk($Dokumen1->id_dokumen);
+				$RKS->waktu_penjelasan=Tanggal::getJamMenit($RKS->waktu_penjelasan);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -891,7 +892,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="6";
+				$Pengadaan->status="7";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -990,7 +991,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="6";
+				$Pengadaan->status="7";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1088,7 +1089,6 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='7';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1198,7 +1198,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='8';
+				$Pengadaan->status ='9';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Aanwijzing"');
 				$SUP=SuratUndanganPenjelasan::model()->findByPk($Dok0->id_dokumen);
@@ -1325,7 +1325,6 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='9';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1537,7 +1536,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='14';
+				$Pengadaan->status ='15';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -1656,7 +1655,6 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='9';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1868,7 +1866,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='11';
+				$Pengadaan->status ='12';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -1987,7 +1985,6 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='12';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2199,7 +2196,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='14';
+				$Pengadaan->status ='15';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2318,7 +2315,6 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='9';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2531,7 +2527,6 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='11';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2862,7 +2857,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='14';
+				$Pengadaan->status ='15';
 				
 				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
@@ -2982,7 +2977,6 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='15';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -3215,7 +3209,7 @@ class SiteController extends Controller
 					$NDUP->nama_penyedia_2='-';
 					$NDUP->alamat_2='-';
 					$NDUP->NPWP_2='-';
-					$NDUP->biaya_2='-';
+					$NDUP->biaya_2='0';
 				}
 				
 				//Uncomment the following line if AJAX validation is needed
