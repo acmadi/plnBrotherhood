@@ -169,11 +169,11 @@
 			<?php } else if($cpengadaan->status == '18') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '19') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpengumumanpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '20') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editnotadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editsuratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		</br> 

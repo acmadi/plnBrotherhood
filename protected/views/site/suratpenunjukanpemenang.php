@@ -16,7 +16,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-          	<?php if($cpengadaan->metode_pengadaan == 'Penunjukan Langsung') { ?>
+            
+                <?php if($cpengadaan->metode_pengadaan == 'Penunjukan Langsung') { ?>
         		<div id="menuform">
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
@@ -61,17 +62,17 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'nota-dinas-penetapan-pemenang-form',
+		'id'=>'surat-penunjukan-pemenang-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
 
-		<?php echo $form->errorSummary($NDPP); ?>
+		<?php echo $form->errorSummary($SPPM); ?>
 		
-		<h4><b> Nota Dinas Penetapan Pemenang </b></h4>
+		<h4><b> Surat Penunjukan Pemenang </b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'nomor'); ?>
-			<?php echo $form->textField($NDPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($NDPP,'nomor'); ?>
+			<?php echo $form->labelEx($SPPM,'nomor'); ?>
+			<?php echo $form->textField($SPPM,'nomor',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($SPPM,'nomor'); ?>
 		</div>
 		
 		<div class="row">
@@ -89,76 +90,62 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'nama Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'nama_penyedia',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($NDPP,'nama_penyedia'); ?>
+			<?php echo $form->labelEx($SPPM,'nama Penyedia'); ?>
+			<?php echo $form->textField($SPPM,'nama_penyedia',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($SPPM,'nama_penyedia'); ?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'alamat Penyedia'); ?>
-			<?php echo $form->textArea($NDPP,'alamat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($NDPP,'alamat'); ?>
-		</div>
+		<?php if($cpengadaan->metode_pengadaan == 'Pelelangan') { ?>
 		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'NPWP Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'NPWP',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'NPWP'); ?>
-		</div>
+			<div class="row">
+				<?php echo $form->labelEx($SPPM,'nomor SKI'); ?>
+				<?php echo $form->textField($SPPM,'nomor_ski',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->error($SPPM,'nomor_ski'); ?>
+			</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'biaya Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'biaya',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($NDPP,'biaya'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'tanggal Pelaksanaan'); ?>
+			<div class="row">
+			<?php echo $form->labelEx($SPPM,'tanggal SKI'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$NDPP,
-					'attribute'=>'waktu_pelaksanaan',
-					'value'=>$NDPP->waktu_pelaksanaan,
+					'model'=>$SPPM,
+					'attribute'=>'tanggal_ski',
+					'value'=>$SPPM->tanggal_ski,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
-			<?php echo $form->error($NDPP,'tanggal_undangan'); ?>
+			<?php echo $form->error($SPPM,'tanggal'); ?>
 		</div>
-
+		
+			<div class="row">
+				<?php echo $form->labelEx($SPPM,'No.SKI'); ?>
+				<?php echo $form->textField($SPPM,'no_ski',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->error($SPPM,'no_ski'); ?>
+			</div>
+			
+		<?php } ?>
+		
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'tempat Penyerahan'); ?>
-			<?php echo $form->textArea($NDPP,'tempat_penyerahan',array('cols'=>43,'rows'=>3, 'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'tempat_penyerahan'); ?>
+			<?php echo $form->labelEx($SPPM,'jumlah harga keseluruhan'); ?>
+			<?php echo $form->textField($SPPM,'harga',array('size'=>56,'maxlength'=>255)); ?>
+			<?php echo $form->error($SPPM,'harga'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPP,'sumber dana'); ?>
-			<?php echo $form->textField($NDPP,'sumber_dana',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'sumber_dana'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'jangka waktu berlaku'); ?>
-			<?php echo $form->textField($NDPP,'jangka_waktu_berlaku',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'jangka_waktu_berlaku'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'jangka waktu deadline'); ?>
-			<?php echo $form->textField($NDPP,'jangka_waktu_deadline',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'jangka_waktu_deadline'); ?>
+			<?php echo $form->labelEx($SPPM,'batas waktu penyerahan (dalam satuan hari)'); ?>
+			<?php echo $form->textField($SPPM,'lama_penyerahan',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->error($SPPM,'lama_penyerahan'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($NDPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($SPPM->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
 	
-	<?php if($NDPP->isNewRecord) { ?>
+	<?php if($SPPM->isNewRecord) { ?>
 		
 	<?php } else { ?>
 		<br/>
@@ -166,7 +153,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Nota Dinas Penetapan Pemenang', array('docx/download','id'=>$NDPP->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Surat Pengumuman Pelelangan', array('docx/download','id'=>$SPPM->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>
