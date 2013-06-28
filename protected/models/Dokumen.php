@@ -175,5 +175,5 @@ class Dokumen extends CActiveRecord
 		return TRUE;
 	}
 	
-	public $maxId; //aidil---variabel untuk mencari nilai maksimum
+	public $maxId; //aidil---variabel untuk mencari nilai maksimum	
 }
