@@ -19,7 +19,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
                     <?php
                     $this->widget('zii.widgets.CMenu', array(
                                     'items'=>array(
-                                            array('label'=>'Surat Undangan Aanwijzing', 'url'=>array('/site/aanwijzing','id'=>$id)),
+                                            array('label'=>'Surat Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/aanwijzing':'/site/editaanwijzing','id'=>$id)),
                                             array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
                                     ),
                             ));
@@ -48,7 +48,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'surat-undangan-penjelasan-form',
+		'id'=>'berita-acara-penjelasan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
@@ -56,6 +56,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<h4><b> Berita Acara Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAP,'nomor'); ?>
+			<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null) {?>
+				<?php if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pelelangan"){ ?>
+				Nomor Surat Undangan Pengambilan Dokumen Pengadaan : <?php echo $SUPDP->nomor ?> <br/>
+				<?php } else if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Penunjukan Langsung"||Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->metode_pengadaan=="Pemilihan Langsung") { ?>
+				Nomor Surat Undangan Permintaan Penawaran Harga : <?php echo $SUPPPH->nomor ?> <br/>
+				<?php } ?>
+			<?php } else { ?>
+				Nomor Surat Undangan Aanwijzing : <?php echo $SUP->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($BAP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAP,'nomor'); ?>
 		</div>
