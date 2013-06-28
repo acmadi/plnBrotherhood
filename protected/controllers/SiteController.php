@@ -326,17 +326,17 @@ class SiteController extends Controller
 				if(Pengadaan::model()->findByPk($id)->status=="7"){
 					$this->redirect(array('site/beritaacaraaanwijzing','id'=>$id));
 				}
-				// if(Pengadaan::model()->findByPk($id)->status=="8"){
-					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
-						// $this->redirect(array('site/suratundanganpembukaanpenawaran','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
-						// $this->redirect(array('site/suratundanganpembukaanpenawaransampul1','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
-						// $this->redirect(array('site/suratundanganpembukaanpenawarantahap1','id'=>$id));
-					// }
-				// }
+				if(Pengadaan::model()->findByPk($id)->status=="8"){
+					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
+						$this->redirect(array('site/suratundanganpembukaanpenawaran','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){
+						$this->redirect(array('site/suratundanganpembukaanpenawaransampul1','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){
+						$this->redirect(array('site/suratundanganpembukaanpenawarantahap1','id'=>$id));
+					}
+				}
 				if(Pengadaan::model()->findByPk($id)->status=="9"){
 					if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){
 						$this->redirect(array('site/beritaacarapembukaanpenawaran','id'=>$id));
@@ -1266,7 +1266,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='9';
+				$Pengadaan->status ='8';
 				
 				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -1439,7 +1439,6 @@ class SiteController extends Controller
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPP->id_panitia=$Pengadaan->id_panitia;
 				$SUPP->perihal= 'Undangan Pembukaan Penawaran '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -1551,7 +1550,6 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAPP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -1665,7 +1663,6 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAEP->id_panitia=$Pengadaan->id_panitia;
 				$BAEP->no_RKS=$A1->nomor;
 				
 				$DH= new DaftarHadir;
@@ -1769,7 +1766,6 @@ class SiteController extends Controller
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPP->id_panitia=$Pengadaan->id_panitia;
 				$SUPP->perihal= 'Undangan Pembukaan Penawaran Sampul Satu '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -1881,7 +1877,6 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAPP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -1995,7 +1990,6 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAEP->id_panitia=$Pengadaan->id_panitia;
 				$BAEP->no_RKS=$A1->nomor;
 				
 				$DH= new DaftarHadir;
@@ -2099,7 +2093,6 @@ class SiteController extends Controller
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPP->id_panitia=$Pengadaan->id_panitia;
 				$SUPP->perihal= 'Undangan Pembukaan Penawaran Sampul Dua '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -2211,7 +2204,6 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAPP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -2325,7 +2317,6 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAEP->id_panitia=$Pengadaan->id_panitia;
 				$BAEP->no_RKS=$A1->nomor;
 				
 				$DH= new DaftarHadir;
@@ -2429,7 +2420,6 @@ class SiteController extends Controller
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPP->id_panitia=$Pengadaan->id_panitia;
 				$SUPP->perihal= 'Undangan Pembukaan Penawaran Tahap Satu '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -2541,7 +2531,6 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAPP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -2655,7 +2644,6 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAEP->id_panitia=$Pengadaan->id_panitia;
 				$BAEP->no_RKS=$A1->nomor;
 				
 				$DH= new DaftarHadir;
@@ -2760,7 +2748,6 @@ class SiteController extends Controller
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPP->id_panitia=$Pengadaan->id_panitia;
 				$SUPP->perihal= 'Undangan Pembukaan Penawaran Tahap Dua '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -2872,7 +2859,6 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAPP->id_panitia=$Pengadaan->id_panitia;
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -2986,7 +2972,6 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAEP->id_panitia=$Pengadaan->id_panitia;
 				$BAEP->no_RKS=$A1->nomor;
 				
 				$DH= new DaftarHadir;
@@ -3204,7 +3189,6 @@ class SiteController extends Controller
 				
 				$BANK= new BeritaAcaraNegosiasiKlarifikasi;
 				$BANK->id_dokumen=$Dokumen1->id_dokumen;
-				$BANK->id_panitia=$Pengadaan->id_panitia;
 				$BANK->surat_penawaran_harga='-';
 				
 				$DH= new DaftarHadir;
