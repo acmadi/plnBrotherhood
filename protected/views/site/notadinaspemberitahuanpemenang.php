@@ -16,41 +16,19 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-            <?php if($cpengadaan->metode_pengadaan == 'Penunjukan Langsung') { ?>
-        		<div id="menuform">
-                    <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Usulan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                            ),
-                        ));
-                    ?>
-                </div>
-        	<?php } else if($cpengadaan->metode_pengadaan == 'Pemilihan Langsung') { ?>
+            
                 <div id="menuform">
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'ND Usulan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                                    array('label'=>'ND Pemberitahuan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/notadinaspemberitahuanpemenang':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspemberitahuanpemenang')),'id'=>$id)),
+                                    array('label'=>'ND Usulan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
+                                    array('label'=>'ND Pemberitahuan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/notadinaspemberitahuanpemenang':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspemberitahuanpemenang')),'id'=>$id)),
+                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='20'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='18'?'':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editsuratpenunjukanpemenang'))),'id'=>$id)),
                             ),
                         ));
                     ?>
                 </div>
-			<?php } else if($cpengadaan->metode_pengadaan == 'Pelelangan') { ?>
-				<div id="menuform">
-                    <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Usulan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                            ),
-                        ));
-                    ?>
-                </div>
-			<?php } ?>
                 
                 <br/>
                 
@@ -88,7 +66,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 			<div class="row">
 				<?php echo $form->labelEx($NDBP,'nama Penyedia'); ?>
-				<?php echo $form->textField($NDBP,'nama_penyedia',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->textField($NDBP,'nama_penyedia',array('size'=>56,'maxlength'=>100)); ?>
 				<?php echo $form->error($NDBP,'nama_penyedia'); ?>
 			</div>
 		
@@ -114,7 +92,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 			<div class="row">
 				<?php echo $form->labelEx($NDBP,'nama Penyedia 1'); ?>
-				<?php echo $form->textField($NDBP,'nama_penyedia',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->textField($NDBP,'nama_penyedia',array('size'=>56,'maxlength'=>100)); ?>
 				<?php echo $form->error($NDBP,'nama_penyedia'); ?>
 			</div>
 		
@@ -138,7 +116,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			
 			<div class="row">
 				<?php echo $form->labelEx($NDBP,'nama Penyedia 2'); ?>
-				<?php echo $form->textField($NDBP,'nama_penyedia_2',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->textField($NDBP,'nama_penyedia_2',array('size'=>56,'maxlength'=>100)); ?>
 				<?php echo $form->error($NDBP,'nama_penyedia_2'); ?>
 			</div>
 		
