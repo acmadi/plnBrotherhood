@@ -159,7 +159,7 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'ABS(status)',
 			  'desc'=>'ABS(status) desc',                            
 			),
-                        'progressgan'=>array(
+			'progressgan'=>array(
 			  'asc'=>'ABS(status)',
 			  'desc'=>'ABS(status) desc',
 			),       
@@ -181,9 +181,9 @@ class Pengadaan extends CActiveRecord
 		
 		$criteria=new CDbCriteria;
 
-                $criteria->together=true;
+		$criteria->together=true;
 //                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
-                $criteria->with = array("idPanitia");    
+		$criteria->with = array("idPanitia");    
                 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
@@ -199,7 +199,7 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
                 
-                $criteria->compare('idPanitia.nama_panitia',$this->pic,true);
+		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
 //                $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->ndpermintaan,true);                           //withnya blm ditambah
 //                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
@@ -226,15 +226,17 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
 			),
-			'PIC'=>array(
+			'pic'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
 			  'desc'=>'idPanitia.nama_panitia desc',
 			),
+			'*',
 		);
 		
 		$criteria=new CDbCriteria;
 
-		$criteria->with = "idPanitia";
+		$criteria->together=true;
+		$criteria->with = array("idPanitia");    
 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -247,6 +249,9 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+		
+		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
+
 		$criteria->addcondition("status='100'");	
 
 		return new CActiveDataProvider($this, array(
@@ -266,22 +271,23 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'nama_pengadaan',
 			  'desc'=>'nama_pengadaan desc',
 			),
-			'Status'=>array(
+			'statusgan'=>array(
 			  'asc'=>'ABS(status)',
-			  'desc'=>'ABS(status) desc',
+			  'desc'=>'ABS(status) desc',                            
 			),
-                        'Progress'=>array(
+            'progressgan'=>array(
 			  'asc'=>'ABS(status)',
 			  'desc'=>'ABS(status) desc',
-			),                       
+			),                 
 			'User'=>array(
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
 			),
-			'Sisa Hari'=>array(
-			  'asc'=>'$this->sisaHari($this->id_pengadaan)',
-			  'desc'=>'sisaHari(id_pengadaan) desc',
+			'sisahari'=>array(
+			  'asc'=>'Pengadaan.sisaHari()',
+			  'desc'=>'sisahari desc',
 			),
+			'*',
 		);
 		
 		$criteria=new CDbCriteria;				

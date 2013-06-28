@@ -106,65 +106,97 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			),							
 		),
 	)); 
-	} else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
+	} 
+        else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
 				
+        ?>
+        
+            <div class="searchdiv">
+
+                <?php $form=$this->beginWidget('CActiveForm', array(
+                        'action'=>Yii::app()->createUrl($this->route),
+                        'method'=>'get',
+                )); ?>	
+                        <div class="row">
+                                <?php // echo $form->label($model,'nama_pengadaan'); ?>
+                                <?php echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); ?>
+                                <?php echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); ?>
+                        </div>
+
+                <?php $this->endWidget(); ?>
+
+            </div><!-- search-form -->
+            <br/>
+            <br/>
+            <br/>
+            
+            <?php
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',
 			'dataProvider'=>$model->searchBuatPanitia(),
-			// 'filter'=>$model,
+			 'filter'=>$model,
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
-
-			"ajaxUpdate"=>false,
-			
+			"ajaxUpdate"=>false,			
 			'columns'=>array(
-				array(
-					'name'=>'No',
-					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
-				),
+//				array(
+//					'name'=>'No',
+//					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+//				),
 				// 'id_pengadaan',
 				'nama_pengadaan',
 				// 'nama_penyedia',
 				// 'tanggal_masuk',
 				// 'tanggal_selesai',
 				// 'kode_panitia',
-				'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+				array(            // display using an expression
+                                    'name'=>'ndpermintaan',				
+                                    'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan', 
+                                    'filter'=>'',
+                                ),		
 
 				array(            // display using an expression
-				'name'=>'PIC',
-				'value'=>'$data->idPanitia->nama_panitia',
+                                    'name'=>'pic',				
+                                    'filter'=>'',
+                                    'value'=>'$data->idPanitia->nama_panitia',   
+                                    'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 				),
 				
 				array(            // display using an expression
-				'name'=>'User',
-				'value'=>'$data->divisi_peminta',
-				),			
+                                    'name'=>'divisi_peminta',
+                                    'value'=>'$data->divisi_peminta',
+                                    'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
+                                ),					
 				
 				array(            // display using an expression
-				'name'=>'Sisa Hari',
-				'value'=>'$data->sisaHari($data->id_pengadaan)',
-				),
+                                    'name'=>'sisahari',	
+                                    'value'=>'$data->sisaHari()',
+                                    'filter'=>'',
+                                    'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
+                                ),
 				
 				array(            // display using an expression
-					'name'=>'Status',
-					'value'=>'$data->dapatkanStatus()',
-				),			
-				// 'status',
+                                    'name'=>'statusgan',
+                                    'value'=>'$data->dapatkanStatus()',
+                                    'filter'=>'',
+                                ),			
 				
 				array (
-				  'name'=>'Progress',				  
-				  'value'=>'$this->grid->Controller->createWidget("zii.widgets.jui.CJuiProgressBar",array(					
-					"value"=>$data->progressPengadaan(),
-					"htmlOptions"=>array(
-					  "style"=>"width:100px; height:20px; float:left;margin-left:30px; background-color:#44F44F ;background:#EFFDFF",
-					  "color" => "red"
-					  // "options"=>array(
-					    // "change"=>new CJavaScriptExpression("function(event, ui)) {}
-					  // ),
-					),					
-
-				  ))->run()',
-				),
+				  'name'=>'progressgan',                                    
+				  'value'=>'$this->grid->Controller->createWidget(
+                                      "zii.widgets.jui.CJuiProgressBar",array(
+                                            "value"=>$data->progressPengadaan(),
+                                            "htmlOptions"=>array(
+                                                "style"=>"width:100px; height:20px; float:left;margin-left:30px; background-color:#44F44F ;background:#EFFDFF;",
+                                            "color" => "red",
+                                                // "options"=>array(
+                                                  // "change"=>new CJavaScriptExpression("function(event, ui)) {}
+                                                // ),
+                                            ),					
+                                      )
+                                   )->run()',
+                                  'filter'=>'',
+                                ),				
 			),
 		)); 
 	}
