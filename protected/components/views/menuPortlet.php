@@ -174,14 +174,68 @@
 				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editsuratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		</br> 
+		<br /> 
 		
 		<li class='unggah'><?php echo CHtml::link('Unggah Dokumen',array("site/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<li class='lihat'><?php echo CHtml::link('Lihat Dokumen',array("site/dokumengenerator","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		
-		</br></br>
+		<br />
+
+		<div style="background-color:lightblue; border:1px solid black; overflow:hidden;">
+
+			<h5 style="margin:5px;">Detil Pengadaan</h5>
+
+			<div style="margin-left:-3px;">
+				<?php $this->widget('zii.widgets.CDetailView', array(
+						'id'=>'viewdetail',
+						'data'=>$cpengadaan,
+						'attributes'=>array(
+							array(
+								'label'=>'Pemohon',
+								'value'=>$cpengadaan->divisi_peminta,
+							),
+							array(
+								'label'=>'Perihal',
+								'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
+							),
+							array(
+								'label'=>'Pagu anggaran',
+								'value'=>'Rp. ' . $cpengadaan->notaDinasPerintahPengadaan->pagu_anggaran . ',00',
+							),
+							array(
+								'label'=>'Sumber dana',
+								'value'=>$cpengadaan->notaDinasPerintahPengadaan->sumber_dana,
+							),
+							array(
+								'label'=>'Nomor nota dinas permintaan',
+								'value'=>$cpengadaan->notaDinasPerintahPengadaan->nota_dinas_permintaan,
+							),
+							array(
+								'label'=>'Nomor kontrak',
+								'value'=>'-',
+							),
+							array(
+								'label'=>'Target kontrak',
+								'value'=>$cpengadaan->notaDinasPerintahPengadaan->targetSPK_kontrak . ' hari',
+							),
+							array(
+								'label'=>'Penyedia',
+								'value'=>$cpengadaan->nama_penyedia,
+							),
+							array(
+								'label'=>'Nilai kontrak',
+								'value'=>$cpengadaan->biaya,
+							),
+						),
+					));
+				?>
+			</div>
+		</div>
+
+		<br />
+		<br />
 		
-		<li class='sudah'><?php echo CHtml::link('Pengadaan Gagal',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Pengadaan Gagal',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 	
 	<?php } ?>
 	
