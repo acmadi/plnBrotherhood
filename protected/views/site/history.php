@@ -36,4 +36,11 @@ $this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
           	'htmlOptions'=>array('style'=>'text-align:center;'),			
 		),			
 	),
+	'pager'=>array(
+				'class'=>'CLinkPager',
+				'header'=>'',
+				'nextPageLabel'=>"Selanjutnya",
+				'prevPageLabel'=>'Sebelumnya',
+			),
+	'summaryText' => '',
 )); ?>

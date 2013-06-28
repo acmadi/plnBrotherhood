@@ -105,6 +105,13 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                             'filter'=>'',
 			),							
 		),
+		'pager'=>array(
+				'class'=>'CLinkPager',
+				'header'=>'',
+				'nextPageLabel'=>"Selanjutnya",
+				'prevPageLabel'=>'Sebelumnya',
+			),
+		'summaryText' => '',
 	)); 
 	} 
         else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
@@ -196,8 +203,15 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                       )
                                    )->run()',
                                   'filter'=>'',
-                                ),				
+				),				
 			),
+			'pager'=>array(
+				'class'=>'CLinkPager',
+				'header'=>'',
+				'nextPageLabel'=>"Selanjutnya",
+				'prevPageLabel'=>'Sebelumnya',
+			),
+			'summaryText' => '',
 		)); 
 	}
 ?>
