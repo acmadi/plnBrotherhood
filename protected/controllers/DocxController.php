@@ -83,7 +83,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Penetapan Pemenang"){
 			
-			$this->doccy->newFile('nd-penetapanpemenang.docx');
+			$this->doccy->newFile('14 Nota Dinas Penetapan Pemenang.docx');
 			
 			$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
@@ -97,26 +97,27 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-			$this->doccy->phpdocx->assign('#1#', $nomor);
-			$this->doccy->phpdocx->assign('#2#', $tanggal);
-			$this->doccy->phpdocx->assign('#3#', 'Biasa');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->doccy->phpdocx->assign('#6#', $nama);
-			$this->doccy->phpdocx->assign('#7#', '.............................................');
-			$this->doccy->phpdocx->assign('#8#', '.............................................');
-			$this->doccy->phpdocx->assign('#9#', '.............................................');
-			$this->doccy->phpdocx->assign('#10#', '.............................................');
-			$this->doccy->phpdocx->assign('#11#', $pemenang);
-			$this->doccy->phpdocx->assign('#12#', $alamat);
-			$this->doccy->phpdocx->assign('#13#', $NPWP);
-			$this->doccy->phpdocx->assign('#14#', $biaya);
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#sifat#', 'Biasa');
+			$this->doccy->phpdocx->assign('#nondpp#', '.............................................');
+			$this->doccy->phpdocx->assign('#tanggalndpp#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#noBAEsampul1#', '.............................................');
+			$this->doccy->phpdocx->assign('#noBAEsampul2#', '.............................................');
+			$this->doccy->phpdocx->assign('#tanggalBAEsampul1#', '.............................................');
+			$this->doccy->phpdocx->assign('#tanggalBAEsampul2#', '.............................................');
+			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
+			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
+			$this->doccy->phpdocx->assign('#NPWP#', $NPWP);
+			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#terbilang#', $terbilang);
 			$this->renderDocx("Nota Dinas Penetapan Pemenang.docx", true);
 	
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Usulan Pemenang"){
 			
-			$this->doccy->newFile('nd-usulanpemenang.docx');
+			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang.docx');
 			
 			$NDUP=NotaDinasUsulanPemenang::model()->findByPk($id);	
 			$nomor = $NDUP->nomor;
@@ -132,18 +133,20 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-			$this->doccy->phpdocx->assign('#1#', $nomor);
-			$this->doccy->phpdocx->assign('#2#', $dari);
-			$this->doccy->phpdocx->assign('#3#', $tanggal);
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->doccy->phpdocx->assign('#6#', $nama);
-			$this->doccy->phpdocx->assign('#7#', $pemenang);
-			$this->doccy->phpdocx->assign('#8#', $alamat);
-			$this->doccy->phpdocx->assign('#9#', $NPWP);
-			$this->doccy->phpdocx->assign('#10#', $biaya);
-			$this->doccy->phpdocx->assign('#11#', $waktu);
-			$this->doccy->phpdocx->assign('#12#', $tempat);
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#dari#', $dari);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#lampiran#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
+			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
+			$this->doccy->phpdocx->assign('#NPWP#', $NPWP);
+			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#terbilang#', $tempat);
+			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
+			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
+			$this->doccy->phpdocx->assign('#zzz#', $tempat);
+			$this->doccy->phpdocx->assign('#metode#', $tempat);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
 		/*else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
