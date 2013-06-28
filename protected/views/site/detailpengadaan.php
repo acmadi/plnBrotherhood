@@ -99,6 +99,13 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 					'value'=>'$data->status_upload',
 				),
 			),
+			'pager'=>array(
+				'class'=>'CLinkPager',
+				'header'=>'',
+				'nextPageLabel'=>"Selanjutnya",
+				'prevPageLabel'=>'Sebelumnya',
+			),
+			'summaryText' => '',
 		));
 	?>
 </div>
