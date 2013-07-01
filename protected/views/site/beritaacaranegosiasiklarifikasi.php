@@ -21,7 +21,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='14'?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
                                     array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/beritaacaranegosiasiklarifikasi':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editberitaacaranegosiasiklarifikasi'),'id'=>$id)),
                             ),
                         ));
@@ -41,6 +41,17 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<h4><b> Berita Acara Negosiasi dan Klarifikasi </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BANK,'nomor'); ?>
+			<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null) {?>
+				<?php if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){ ?>
+				Nomor Berita Acara Evaluasi Penawaran : <?php echo $Eval->nomor ?> <br/>
+				<?php } else if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){ ?>
+				Nomor Berita Acara Evaluasi Penawaran Sampul Dua : <?php echo $Eval->nomor ?> <br/>
+				<?php } else if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){ ?>
+				Nomor Berita Acara Evaluasi Penawaran Tahap Dua : <?php echo $Eval->nomor ?> <br/>
+				<?php } ?>
+			<?php } else { ?>
+				Nomor Surat Undangan Negosiasi dan Klarifikasi : <?php echo $SUNK->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($BANK,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BANK,'nomor'); ?>
 		</div>

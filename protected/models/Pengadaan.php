@@ -95,6 +95,7 @@ class Pengadaan extends CActiveRecord
 			'beritaAcaraPenjelasans' => array(self::HAS_MANY, 'BeritaAcaraPenjelasan', 'id_panitia'),
 			'dokumens' => array(self::HAS_MANY, 'Dokumen', 'id_pengadaan'),
 			'notaDinasPerintahPengadaan' => array(self::HAS_ONE, 'NotaDinasPerintahPengadaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
+			'notaDinasPermintaan' => array(self::HAS_ONE, 'NotaDinasPermintaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
 			'notaDinasPemberitahuanPemenangs' => array(self::HAS_MANY, 'NotaDinasPemberitahuanPemenang', 'nama_penyedia'),
 			'notaDinasPenetapanPemenangs' => array(self::HAS_MANY, 'NotaDinasPenetapanPemenang', 'nama_penyedia'),
 			'notaDinasPenetapanPemenangs1' => array(self::HAS_MANY, 'NotaDinasPenetapanPemenang', 'kepada'),
@@ -475,6 +476,12 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '100'){
 			return 'Selesai';
 		}				
+	}
+	
+	protected function beforeSave()
+	{ 
+		$this->tanggal_masuk=date('Y-m-d', strtotime($this->tanggal_masuk));
+		return TRUE;
 	}
 	
 	public $maxId; //aidil---variabel untuk mencari nilai maksimum

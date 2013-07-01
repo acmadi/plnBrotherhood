@@ -1365,18 +1365,6 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionCheckpoint5()
-	{	
-		if (Yii::app()->user->isGuest) {
-			$this->redirect(array('site/login'));
-		}
-		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('checkpoint5');
-			}
-		}
-	}
-	
 	public function actionSuratundanganpembukaanpenawaran()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
@@ -1386,7 +1374,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				
+				$Pengadaan->status='9';
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -2170,6 +2158,9 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
+				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -2180,10 +2171,15 @@ class SiteController extends Controller
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
 				
 				$SUNK= new SuratUndanganNegosiasiKlarifikasi;
 				$SUNK->id_dokumen=$Dokumen0->id_dokumen;
 				$SUNK->perihal= 'Undangan Negosiasi dan Klarifikasi '.$Pengadaan->nama_pengadaan;
+				$SUNK->tanggal_undangan=$RKS->tanggal_negosiasi;
+				$SUNK->waktu=$RKS->waktu_negosiasi;
+				$SUNK->tempat=$RKS->tempat_negosiasi;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2205,11 +2201,26 @@ class SiteController extends Controller
 						}
 					}
 				}
-
-				$this->render('suratundangannegosiasiklarifikasi',array(
-					'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,
-				));
-
+				
+				if($Pengadaan->metode_penawaran=="Satu Sampul") {
+					$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
+					$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+					$this->render('suratundangannegosiasiklarifikasi',array(
+						'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
+					));
+				} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Dua"');
+					$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+					$this->render('suratundangannegosiasiklarifikasi',array(
+						'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
+					));
+				} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
+					$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+					$this->render('suratundangannegosiasiklarifikasi',array(
+						'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
+					));
+				}
 			}
 		}
 	}
@@ -2250,10 +2261,25 @@ class SiteController extends Controller
 					}
 				}
 
-				$this->render('suratundangannegosiasiklarifikasi',array(
-					'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,
-				));
-
+				if($Pengadaan->metode_penawaran=="Satu Sampul") {
+					$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
+					$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+					$this->render('suratundangannegosiasiklarifikasi',array(
+						'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
+					));
+				} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Dua"');
+					$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+					$this->render('suratundangannegosiasiklarifikasi',array(
+						'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
+					));
+				} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
+					$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+					$this->render('suratundangannegosiasiklarifikasi',array(
+						'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
+					));
+				}
 			}
 		}
 	}
@@ -2270,8 +2296,8 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='16';
 				
-				$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Negosiasi dan Klarifikasi"');
-				$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($Dok0->id_dokumen);
+				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2284,7 +2310,7 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
-				$Dokumen1->tanggal=$SUNK->tanggal_undangan;
+				$Dokumen1->tanggal=$RKS->tanggal_negosiasi;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
@@ -2292,7 +2318,7 @@ class SiteController extends Controller
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
-				$Dokumen2->tanggal=$SUNK->tanggal_undangan;
+				$Dokumen2->tanggal=$RKS->tanggal_negosiasi;
 				
 				$BANK= new BeritaAcaraNegosiasiKlarifikasi;
 				$BANK->id_dokumen=$Dokumen1->id_dokumen;
@@ -2301,8 +2327,8 @@ class SiteController extends Controller
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
 				$DH->acara="Negosiasi dan Klarifikasi";
-				$DH->jam=$SUNK->waktu;
-				$DH->tempat_hadir=$SUNK->tempat;
+				$DH->jam=$RKS->waktu_negosiasi;
+				$DH->tempat_hadir=$RKS->tempat_negosiasi;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2321,10 +2347,33 @@ class SiteController extends Controller
 						}
 					}
 				}
-
-				$this->render('beritaacaranegosiasiklarifikasi',array(
-					'BANK'=>$BANK,
-				));
+				if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null) {
+					if($Pengadaan->metode_penawaran=="Satu Sampul") {
+						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
+						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+						$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK,'Eval'=>$Eval,
+						));
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Dua"');
+						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+						$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK,'Eval'=>$Eval,
+						));
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
+						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+						$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK,'Eval'=>$Eval,
+						));
+					}
+				} else {
+					$DokSUNK=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Negosiasi dan Klarifikasi"');
+					$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($DokSUNK->id_dokumen);
+					$this->render('beritaacaranegosiasiklarifikasi',array(
+						'BANK'=>$BANK,'SUNK'=>$SUNK,
+					));
+				}
 			}
 		}
 	}
@@ -2363,10 +2412,33 @@ class SiteController extends Controller
 					}
 				}
 
-				$this->render('beritaacaranegosiasiklarifikasi',array(
-					'BANK'=>$BANK,'DH'=>$DH,
-				));
-
+				if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null) {
+					if($Pengadaan->metode_penawaran=="Satu Sampul") {
+						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
+						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+						$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK, 'DH'=>$DH, 'Eval'=>$Eval,
+						));
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Dua"');
+						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+						$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK, 'DH'=>$DH, 'Eval'=>$Eval,
+						));
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
+						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
+						$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK, 'DH'=>$DH, 'Eval'=>$Eval,
+						));
+					}
+				} else {
+					$DokSUNK=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Negosiasi dan Klarifikasi"');
+					$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($DokSUNK->id_dokumen);
+					$this->render('beritaacaranegosiasiklarifikasi',array(
+							'BANK'=>$BANK, 'DH'=>$DH, 'SUNK'=>$SUNK,
+					));
+				}
 			}
 		}
 	}
@@ -3022,8 +3094,6 @@ class SiteController extends Controller
 			
 			$NDPP= new NotaDinasPerintahPengadaan;
 			$NDPP->id_dokumen=$Dokumen1->id_dokumen;
-			$NDPP->RAB='Terlampir';
-			$NDPP->TOR_RKS='Terlampir';
 			
 			$TOR= new Tor;
 			$TOR->id_dokumen=$Dokumen2->id_dokumen;
@@ -3051,7 +3121,6 @@ class SiteController extends Controller
 					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama);
 					$valid=$valid&&$NDP->validate();
 					if($valid){
-						$NDPP->nota_dinas_permintaan=$NDP->nomor;
 						$valid=$valid&&$NDPP->validate();
 						if($valid){
 							if($Pengadaan->save(false)&&$Divisi->save(false)) {
