@@ -73,9 +73,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPPP,'lingkup_kerja'); ?>
-				<?php echo $form->textArea($SUPPP,'lingkup_kerja',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($SUPPP,'lingkup_kerja'); ?>
+				<?php //echo $form->labelEx($SUPPP,'lingkup_kerja'); ?>
+				<?php //echo $form->textArea($SUPPP,'lingkup_kerja',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+				<?php //echo $form->error($SUPPP,'lingkup_kerja'); ?>
 			</div>
 			
 			<div class="row">
