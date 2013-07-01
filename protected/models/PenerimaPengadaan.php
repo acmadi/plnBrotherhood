@@ -1,24 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "surat_undangan_pengambilan_dokumen_pengadaan".
+ * This is the model class for table "penerima_pengadaan".
  *
- * The followings are the available columns in table 'surat_undangan_pengambilan_dokumen_pengadaan':
+ * The followings are the available columns in table 'penerima_pengadaan':
+ * @property string $perusahaan
  * @property string $id_dokumen
- * @property string $nomor
- * @property string $tanggal_pengambilan
- * @property string $waktu_pengambilan
- * @property string $tempat_pengambilan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
  */
-class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
+class PenerimaPengadaan extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return SuratUndanganPengambilanDokumenPengadaan the static model class
+	 * @return PenerimaPengadaan the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +27,7 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'surat_undangan_pengambilan_dokumen_pengadaan';
+		return 'penerima_pengadaan';
 	}
 
 	/**
@@ -41,13 +38,12 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required'),
+			array('perusahaan, id_dokumen', 'required'),
+			array('perusahaan', 'length', 'max'=>100),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('tempat_pengambilan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),
+			array('perusahaan, id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,11 +65,8 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'perusahaan' => 'Perusahaan',
 			'id_dokumen' => 'Id Dokumen',
-			'nomor' => 'Nomor',
-			'tanggal_pengambilan' => 'Tanggal Pengambilan',
-			'waktu_pengambilan' => 'Waktu Pengambilan',
-			'tempat_pengambilan' => 'Tempat Pengambilan',
 		);
 	}
 
@@ -88,11 +81,8 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('perusahaan',$this->perusahaan,true);
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('tanggal_pengambilan',$this->tanggal_pengambilan,true);
-		$criteria->compare('waktu_pengambilan',$this->waktu_pengambilan,true);
-		$criteria->compare('tempat_pengambilan',$this->tempat_pengambilan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

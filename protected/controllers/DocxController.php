@@ -192,16 +192,16 @@ class DocxController extends Controller
 			
 			$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($id);	
 			$nomor = $SUPDP->nomor;
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
 			$kepada = $Peng->nama_penyedia;
-			$perihal = $SUPDP->perihal;
-			$tanggalambil = $SUPDP->tanggal_pengambilan;
-			$waktuambil = $SUPDP->waktu_pengambilan;
+			// $perihal = $SUPDP->perihal;
+			$tanggalambil = Tanggal::getTanggalLengkap($SUPDP->tanggal_pengambilan);
+			$waktuambil = Tanggal::getJamMenit($SUPDP->waktu_pengambilan);
 			$tempatambil = $SUPDP->tempat_pengambilan;
 			$nama = $Peng->nama_pengadaan;
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
-			$tanggalrks=$dokrks->tanggal;
+			$tanggalrks=Tanggal::getTanggalLengkap($dokrks->tanggal);
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
 			
@@ -377,12 +377,12 @@ class DocxController extends Controller
 			$tempat = $SUPH->tempat_penyerahan;
 			$nama = $Peng->nama_pengadaan;
 			$tanggalpenawaran = Tanggal::getTanggalLengkap($rks->tanggal_pemasukan_penawaran);
-			$waktupenawaran = $rks->waktu_pemasukan_penawaran;
+			$waktupenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran);
 			$terbilang = Tanggal::getTanggalLengkap0($tanggal);
 			
 			$norks = $rks -> nomor;
 			$nohps = $hps -> nomor;
-			$tglrks = $dokrks -> tanggal;
+			$tglrks = Tanggal::getTanggalLengkap($dokrks -> tanggal);
 			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
 			$dari= $NDPP->dari;
@@ -560,7 +560,7 @@ class DocxController extends Controller
 			
 			$BA=BeritaAcaraPenjelasan::model()->findByPk($id);	
 			$nomor = $BA->nomor;
-			$tanggal = $Dok->tanggal;
+			// $tanggal = $Dok->tanggal;
 			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
@@ -575,17 +575,17 @@ class DocxController extends Controller
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#nomorba#', $nomor);
-			$this->doccy->phpdocx->assign('#hari#', '				');
-			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#haritanggal#', Tanggal::getHariTanggalLengkap($Dok->tanggal));
+			// $this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota#', $anggota1);
 			$DokRKS=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
-			$this->doccy->phpdocx->assign('#wakturapat#', $RKS->waktu_penjelasan);
+			$this->doccy->phpdocx->assign('#wakturapat#', Tanggal::getJamMenit($RKS->waktu_penjelasan));
 			$this->doccy->phpdocx->assign('#norks#', $RKS->nomor);
-			$this->doccy->phpdocx->assign('#tanggal_rks#', $DokRKS->tanggal);
+			$this->doccy->phpdocx->assign('#tanggal_rks#', Tanggal::getHariTanggalLengkap($DokRKS->tanggal));
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){
