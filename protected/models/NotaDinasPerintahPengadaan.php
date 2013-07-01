@@ -5,16 +5,13 @@
  *
  * The followings are the available columns in table 'nota_dinas_perintah_pengadaan':
  * @property string $id_dokumen
- * @property string $nota_dinas_permintaan
  * @property string $nomor
  * @property string $dari
  * @property string $kepada
  * @property string $perihal
- * @property string $RAB
- * @property string $TOR_RKS
  * @property integer $targetSPK_kontrak
  * @property string $sumber_dana
- * @property string $pagu_anggaran
+ * @property integer $pagu_anggaran
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -47,15 +44,15 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required'),
-			array('targetSPK_kontrak', 'numerical', 'integerOnly'=>true),
-			array('id_dokumen, TOR_RKS', 'length', 'max'=>32),
-			array('nota_dinas_permintaan, nomor', 'length', 'max'=>50),
-			array('dari, RAB, sumber_dana, pagu_anggaran', 'length', 'max'=>20),
+			array('id_dokumen, nomor, dari, kepada, perihal, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'required'),
+			array('targetSPK_kontrak, pagu_anggaran', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen', 'length', 'max'=>32),
+			array('nomor', 'length', 'max'=>50),
+			array('dari, sumber_dana', 'length', 'max'=>20),
 			array('kepada, perihal', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nota_dinas_permintaan, nomor, dari, kepada, perihal, RAB, TOR_RKS, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, dari, kepada, perihal, targetSPK_kontrak, sumber_dana, pagu_anggaran', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,13 +75,10 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 	{
 		return array(
 			'id_dokumen' => 'Id Dokumen',
-			'nota_dinas_permintaan' => 'Nota Dinas Permintaan',
 			'nomor' => 'Nomor',
 			'dari' => 'Dari',
 			'kepada' => 'Kepada',
 			'perihal' => 'Perihal',
-			'RAB' => 'Rab',
-			'TOR_RKS' => 'Tor Rks',
 			'targetSPK_kontrak' => 'Target Spk Kontrak',
 			'sumber_dana' => 'Sumber Dana',
 			'pagu_anggaran' => 'Pagu Anggaran',
@@ -103,16 +97,13 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('nota_dinas_permintaan',$this->nota_dinas_permintaan,true);
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('dari',$this->dari,true);
 		$criteria->compare('kepada',$this->kepada,true);
 		$criteria->compare('perihal',$this->perihal,true);
-		$criteria->compare('RAB',$this->RAB,true);
-		$criteria->compare('TOR_RKS',$this->TOR_RKS,true);
 		$criteria->compare('targetSPK_kontrak',$this->targetSPK_kontrak);
 		$criteria->compare('sumber_dana',$this->sumber_dana,true);
-		$criteria->compare('pagu_anggaran',$this->pagu_anggaran,true);
+		$criteria->compare('pagu_anggaran',$this->pagu_anggaran);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

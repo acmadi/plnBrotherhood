@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'nota_dinas_permintaan':
  * @property string $id_dokumen
  * @property string $nomor
+ * @property string $perihal
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -38,12 +39,13 @@ class NotaDinasPermintaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor', 'required'),
+			array('id_dokumen, nomor, perihal', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
+			array('perihal', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, perihal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,7 @@ class NotaDinasPermintaan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
+			'perihal' => 'Perihal',
 		);
 	}
 
@@ -83,6 +86,7 @@ class NotaDinasPermintaan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
+		$criteria->compare('perihal',$this->perihal,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

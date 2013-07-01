@@ -42,7 +42,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 					),
 					array(
 						'label'=>'Nomor nota dinas permintaan',
-						'value'=>$cpengadaan->notaDinasPerintahPengadaan->nota_dinas_permintaan,
+						'value'=>$cpengadaan->notaDinasPermintaan->nomor,
 					),
 					array(
 						'label'=>'Status pengadaan',

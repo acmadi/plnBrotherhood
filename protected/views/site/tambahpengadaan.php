@@ -38,7 +38,7 @@
 					'value'=>$Pengadaan->tanggal_masuk,
 					'htmlOptions'=>array('size'=>60),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Pengadaan,'tanggal_masuk'); ?>
@@ -74,10 +74,16 @@
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($NDP,'perihal'); ?>
+			<?php echo $form->textArea($NDP,'perihal',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
+			<?php echo $form->error($NDP,'perihal'); ?>
 		</div>
 		
 		<br/>

@@ -3094,8 +3094,6 @@ class SiteController extends Controller
 			
 			$NDPP= new NotaDinasPerintahPengadaan;
 			$NDPP->id_dokumen=$Dokumen1->id_dokumen;
-			$NDPP->RAB='Terlampir';
-			$NDPP->TOR_RKS='Terlampir';
 			
 			$TOR= new Tor;
 			$TOR->id_dokumen=$Dokumen2->id_dokumen;
@@ -3123,7 +3121,6 @@ class SiteController extends Controller
 					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama);
 					$valid=$valid&&$NDP->validate();
 					if($valid){
-						$NDPP->nota_dinas_permintaan=$NDP->nomor;
 						$valid=$valid&&$NDPP->validate();
 						if($valid){
 							if($Pengadaan->save(false)&&$Divisi->save(false)) {

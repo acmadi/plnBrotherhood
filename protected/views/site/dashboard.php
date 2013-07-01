@@ -59,7 +59,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
 			array(            // display using an expression
 				'name'=>'ndpermintaan',				
-				'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan', 
+				'value'=>'$data->notaDinasPermintaan->nomor', 
 				'filter'=>'',
 			),			
 			
@@ -159,7 +159,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				// 'kode_panitia',
 				array(            // display using an expression
                                     'name'=>'ndpermintaan',				
-                                    'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan', 
+                                    'value'=>'$data->notaDinasPermintaan->nomor',
                                     'filter'=>'',
                                 ),		
 
