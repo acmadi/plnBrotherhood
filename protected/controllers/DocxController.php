@@ -704,11 +704,10 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
 			
-			$BAPP=BeritAcaraPembukaanPenawaran::model()->findByPk($id);	
+			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
 			$nomor = $BAPP->nomor;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = $Dok->tanggal;
-			$norks = $BAPP->no_RKS;
 			$hari = Tanggal::getHari($tanggal);
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
@@ -719,14 +718,12 @@ class DocxController extends Controller
 			$metode = $Peng->metode_pengadaan;
 			$metode2 = $Peng->metode_penawaran;
 			$user = $Peng->divisi_peminta;
-			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
 			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
-						
-			if ($metode2 == "Satu Sampul"){
+			
 			$this->doccy->newFile('10a Berita Acara Pembukaan Penawaran.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -743,26 +740,98 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->renderDocx("Berita Acara Pembukaan Penawaran.docx", true);}
-		
-			else if ($metode2 == "Dua Sampul"){
-			$this->doccy->newFile('10b Berita Acara Pembukaan Penawaran.docx');
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $anggota1);
+			$this->doccy->phpdocx->assign('#listperusahaandanharga#', $anggota1);
+			$this->doccy->phpdocx->assign('#listperusahaanikut#', $anggota1);
+			$this->doccy->phpdocx->assign('#jumlahsah#', $anggota1);
+			$this->doccy->phpdocx->assign('#jumlahtidaksah#', $anggota1);
+			$this->renderDocx("Berita Acara Pembukaan Penawaran.docx", true);
+		}
+		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Sampul Satu" || $Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Tahap Satu"){
+			
+			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
+			$nomor = $BAPP->nomor;
+			$nama = $Peng->nama_pengadaan;
+			$tanggal = $Dok->tanggal;
+			$hari = Tanggal::getHari($tanggal);
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+			$norks = $rks->nomor;
+			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			
+			
+			$metode = $Peng->metode_pengadaan;
+			$metode2 = $Peng->metode_penawaran;
+			$user = $Peng->divisi_peminta;
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$namapanitia=$panitia->nama_panitia;
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
+			
+			$this->doccy->newFile('10b Berita Acara Pembukaan Penawaran Sampul 1.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#nomorba#', $nomor);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#hari#', '.....................');
+			$this->doccy->phpdocx->assign('#hari#', $hari);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#jam#', '..... : .....');
-			$this->doccy->phpdocx->assign('#norks#', '........................................');
-			$this->doccy->phpdocx->assign('#tanggalrks#', '..............................');
+			$this->doccy->phpdocx->assign('#norks#', $norks);
+			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->renderDocx("Berita Acara Pembukaan Penawaran.docx", true);}
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $anggota1);
+			$this->doccy->phpdocx->assign('#listperusahaandanharga#', $anggota1);
+			$this->doccy->phpdocx->assign('#listperusahaanikut#', $anggota1);
+			$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 1.docx", true);
+		}
+		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Sampul Dua" || $Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Tahap Dua"){
+			
+			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
+			$nomor = $BAPP->nomor;
+			$nama = $Peng->nama_pengadaan;
+			$tanggal = $Dok->tanggal;
+			$hari = Tanggal::getHari($tanggal);
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+			$norks = $rks->nomor;
+			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			
+			
+			$metode = $Peng->metode_pengadaan;
+			$metode2 = $Peng->metode_penawaran;
+			$user = $Peng->divisi_peminta;
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$namapanitia=$panitia->nama_panitia;
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
+			
+			$this->doccy->newFile('10b Berita Acara Pembukaan Penawaran Sampul 2.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomorba#', $nomor);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#hari#', $hari);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#jam#', '..... : .....');
+			$this->doccy->phpdocx->assign('#norks#', $norks);
+			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
+			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $anggota1);
+			$this->doccy->phpdocx->assign('#listperusahaandanharga#', $anggota1);
+			$this->doccy->phpdocx->assign('#listperusahaanikut#', $anggota1);
+			$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 2.docx", true);
 		}
 //	=====================================Daftar Hadir=====================================
 		else if ($Dok->nama_dokumen == "Daftar Hadir Aanwijzing"){

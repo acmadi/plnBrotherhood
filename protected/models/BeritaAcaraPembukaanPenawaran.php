@@ -44,12 +44,11 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia', 'required'),
+			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode', 'required'),
 			array('jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
 			array('status_metode', 'length', 'max'=>10),
-			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, status_metode, id_panitia', 'safe', 'on'=>'search'),
@@ -65,7 +64,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -81,7 +79,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 			'jumlah_penyedia_dokumen_sah' => 'Jumlah Penyedia Dokumen Sah',
 			'jumlah_penyedia_dokumen_tidak_sah' => 'Jumlah Penyedia Dokumen Tidak Sah',
 			'status_metode' => 'Status Metode',
-			'id_panitia' => 'Id Panitia',
 		);
 	}
 
@@ -102,7 +99,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		$criteria->compare('jumlah_penyedia_dokumen_sah',$this->jumlah_penyedia_dokumen_sah);
 		$criteria->compare('jumlah_penyedia_dokumen_tidak_sah',$this->jumlah_penyedia_dokumen_tidak_sah);
 		$criteria->compare('status_metode',$this->status_metode,true);
-		$criteria->compare('id_panitia',$this->id_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
