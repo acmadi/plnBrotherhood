@@ -127,12 +127,12 @@ class Pengadaan extends CActiveRecord
 			'metode_pengadaan' => 'Metode Pengadaan',
 			'metode_penawaran' => 'Metode Penawaran',
 			'jenis_kualifikasi' => 'Jenis Kualifikasi',
-                        'pic'=>'PIC',
-                        'ndpermintaan'=>'No ND Permintaan',
-                        'sisahari'=>'Sisa Hari',
-                        'statusgan'=>'Status',
-                        'progressgan'=>'Progres',
-//                        'dapatkanStatus()'=>'Status',
+			'pic'=>'PIC',
+			'ndpermintaan'=>'No ND Permintaan',
+			'sisahari'=>'Sisa Hari',
+			'statusgan'=>'Status',
+			'progressgan'=>'Progres',
+//              'dapatkanStatus()'=>'Status',
 		);
 	}
 
@@ -173,7 +173,7 @@ class Pengadaan extends CActiveRecord
 //			),
                                        
 			'sisahari'=>array(
-			  'asc'=>'Pengadaan.sisaHari()',
+			  'asc'=>'status+status',
 			  'desc'=>'sisahari desc',
 			),
 			'*',
@@ -203,8 +203,12 @@ class Pengadaan extends CActiveRecord
 //                $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->ndpermintaan,true);                           //withnya blm ditambah
 //                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
+		// $criteria->compare('sisahari',$this->sisaHari(),true);
+				
 		$criteria->addcondition("status!='100'");													//------jo-------------search yg ngga selesai doang----------------------		
  
+		// $criteria->order = 'ABS(status)';
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>$sort,
@@ -254,6 +258,8 @@ class Pengadaan extends CActiveRecord
 
 		$criteria->addcondition("status='100'");	
 
+		// $criteria->order = 'nama_pengadaan';
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>$sort,
@@ -320,6 +326,8 @@ class Pengadaan extends CActiveRecord
 		// $criteria->condition = "id_panitia=$idpan[0] || id_panitia=$idpan[1]";
 		$strDummy = $strDummy . "&& status!='100'";
 		$criteria->addcondition($strDummy);
+		
+		// $criteria->order = 'ABS(status)';
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
