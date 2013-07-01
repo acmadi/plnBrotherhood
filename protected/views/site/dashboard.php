@@ -2,12 +2,13 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name . ' | Beranda';
+		
 ?>
 
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
 
 <?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){		//kadiv
-		
+	
 ?>
     
     <!----------------------------------------->
@@ -116,7 +117,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 	)); 
 	} 
         else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
-				
+		
         ?>
         
             <div class="searchdiv">
