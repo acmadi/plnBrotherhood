@@ -21,8 +21,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='14'?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/beritaacaranegosiasiklarifikasi':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editberitaacaranegosiasiklarifikasi'),'id'=>$id)),
+                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
                             ),
                         ));
                     ?>
@@ -41,6 +41,13 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<h4><b> Surat Undangan Negosiasi dan Klarifikasi </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUNK,'nomor'); ?>
+			<?php if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){ ?>
+			Nomor Berita Acara Evaluasi Penawaran : <?php echo $Eval->nomor ?> <br/>
+			<?php } else if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){ ?>
+			Nomor Berita Acara Evaluasi Penawaran Sampul Dua : <?php echo $Eval->nomor ?> <br/>
+			<?php } else if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){ ?>
+			Nomor Berita Acara Evaluasi Penawaran Tahap Dua : <?php echo $Eval->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($SUNK,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUNK,'nomor'); ?>
 		</div>
@@ -53,7 +60,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
@@ -69,32 +76,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->labelEx($SUNK,'nama calon penyedia'); ?>
 			<?php echo $form->textField($SUNK,'kepada',array('size'=>56,'maxlength'=>30)); ?>
 			<?php echo $form->error($SUNK,'kepada'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUNK,'tanggal Negosiasi dan Klarifikasi'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SUNK,
-					'attribute'=>'tanggal_undangan',
-					'value'=>$SUNK->tanggal_undangan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
-					),
-			));?>
-			<?php echo $form->error($SUNK,'tanggal_undangan'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUNK,'waktu Negosiasi dan Klarifikasi (Format HH:MM)'); ?>
-			<?php echo $form->textField($SUNK,'waktu',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($SUNK,'waktu'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUNK,'tempat Negosiasi dan Klarifikasi'); ?>
-			<?php echo $form->textArea($SUNK,'tempat',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUNK,'tempat'); ?>
 		</div>
 
 		<div class="row buttons">

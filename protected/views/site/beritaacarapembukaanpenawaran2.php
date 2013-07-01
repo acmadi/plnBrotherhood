@@ -16,17 +16,31 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php 
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		?>
-                
+          	
+          	<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
                 <div id="menuform">
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Tahap Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='8'?'/site/suratundanganpembukaanpenawarantahap1':'/site/editsuratundanganpembukaanpenawarantahap1','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawarantahap1':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawarantahap1'),'id'=>$id)),
+                                    array('label'=>'SU Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaransampul2','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaran2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaransampul2'),'id'=>$id)),
                             ),
                         ));
                     ?>
                 </div>
+          	<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
+          		<div id="menuform">
+                    <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items'=>array(
+                                    array('label'=>'SU Pembukaan Penawaran Tahap Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaransampul2','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran Tahap Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaran2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaransampul2'),'id'=>$id)),
+                            ),
+                        ));
+                    ?>
+                </div>
+          	<?php } ?>
+                
                 <br/>
                 
 		<div class="form">
@@ -38,7 +52,11 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 		<?php echo $form->errorSummary($BAPP); ?>
 		
-		<h4><b> Berita Acara Pembukaan Penawaran Tahap Satu </b></h4>
+		<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
+			<h4><b> Berita Acara Pembukaan Penawaran Sampul Dua </b></h4>
+		<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
+			<h4><b> Berita Acara Pembukaan Penawaran Tahap Dua </b></h4>
+		<?php } ?>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
 			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -85,8 +103,13 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
-				<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+				<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
+					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+				<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
+					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+				<?php } ?>
 			</ul>
 		</div>
 	<?php } ?>

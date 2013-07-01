@@ -7,7 +7,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
 
 <?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){		//kadiv
-        
+		
 ?>
     
     <!----------------------------------------->
@@ -57,36 +57,37 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			// 'kode_panitia',
 			// 'notaDinasPermintaan.nomor',
 				
-                        array(            // display using an expression
+			array(            // display using an expression
 				'name'=>'ndpermintaan',				
-				'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan', 
-                                'filter'=>'',
-                        ),			
+				'value'=>'$data->notaDinasPermintaan->nomor', 
+				'filter'=>'',
+			),			
 			
 			array(            // display using an expression
 				'name'=>'pic',				
 				'value'=>'$data->idPanitia->nama_panitia',   
                                 'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
-				),
+			),
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
 				'value'=>'$data->divisi_peminta',
-                                'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
-                            ),			
+				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
+			),			
 				
 			array(            // display using an expression
-                            'name'=>'sisahari',	
-                            'value'=>'$data->sisaHari()',
-                            'filter'=>'',
-                            'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
+				'name'=>'sisahari',	
+				// 'type'=>'raw',
+				'value'=>'$data->sisaHari()',
+				// 'filter'=>'',
+				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),
 			
 			array(            // display using an expression
-                            'name'=>'statusgan',
-                            'value'=>'$data->dapatkanStatus()',
-                            'filter'=>'',
-                        ),			
+				'name'=>'statusgan',
+				'value'=>'$data->dapatkanStatus()',
+				'filter'=>'',
+			),			
 			
 			array (
 				  'name'=>'progressgan',                                    
@@ -158,7 +159,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				// 'kode_panitia',
 				array(            // display using an expression
                                     'name'=>'ndpermintaan',				
-                                    'value'=>'$data->notaDinasPerintahPengadaan->nota_dinas_permintaan', 
+                                    'value'=>'$data->notaDinasPermintaan->nomor',
                                     'filter'=>'',
                                 ),		
 
