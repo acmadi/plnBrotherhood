@@ -276,9 +276,9 @@ class DocxController extends Controller
 			
 			$SUP=SuratUndanganPenjelasan::model()->findByPk($id);
 			$nomor = $SUP->nomor;
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
-			$waktu = $SUP->waktu;
+			$waktu = Tanggal::getJamMenit($SUP->waktu);
 			$nama = $Peng->nama_pengadaan;
 			$perihal = $SUP->perihal;
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;

@@ -1153,7 +1153,7 @@ class SiteController extends Controller
 					$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 					$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
 					$this->render('aanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPH'=>$SUPPH,
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
 					));
 				}
 
@@ -1210,7 +1210,7 @@ class SiteController extends Controller
 					$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 					$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
 					$this->render('aanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPH'=>$SUPPH,
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
 					));
 				}
 			}
