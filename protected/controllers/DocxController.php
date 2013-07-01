@@ -706,6 +706,9 @@ class DocxController extends Controller
 			
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
 			$nomor = $BAPP->nomor;
+			$jumlah_penyedia_diundang = $BAPP->jumlah_penyedia_diundang;
+			$jumlah_penyedia_dokumen_sah = $BAPP->jumlah_penyedia_dokumen_sah;
+			$jumlah_penyedia_dokumen_tidak_sah = $BAPP->jumlah_penyedia_dokumen_tidak_sah;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = $Dok->tanggal;
 			$hari = Tanggal::getHari($tanggal);
@@ -740,17 +743,18 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $anggota1);
-			$this->doccy->phpdocx->assign('#listperusahaandanharga#', $anggota1);
-			$this->doccy->phpdocx->assign('#listperusahaanikut#', $anggota1);
-			$this->doccy->phpdocx->assign('#jumlahsah#', $anggota1);
-			$this->doccy->phpdocx->assign('#jumlahtidaksah#', $anggota1);
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlah_penyedia_diundang);
+			$this->doccy->phpdocx->assign('#listperusahaandanharga#', '.............................................');
+			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
+			$this->doccy->phpdocx->assign('#jumlahsah#', $jumlah_penyedia_dokumen_sah);
+			$this->doccy->phpdocx->assign('#jumlahtidaksah#', $jumlah_penyedia_dokumen_tidak_sah);
 			$this->renderDocx("Berita Acara Pembukaan Penawaran.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Sampul Satu" || $Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Tahap Satu"){
 			
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
 			$nomor = $BAPP->nomor;
+			$jumlah_penyedia_diundang = $BAPP->jumlah_penyedia_diundang;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = $Dok->tanggal;
 			$hari = Tanggal::getHari($tanggal);
@@ -785,15 +789,16 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $anggota1);
-			$this->doccy->phpdocx->assign('#listperusahaandanharga#', $anggota1);
-			$this->doccy->phpdocx->assign('#listperusahaanikut#', $anggota1);
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlah_penyedia_diundang);
+			$this->doccy->phpdocx->assign('#listperusahaandanharga#', '.............................................');
+			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
 			$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 1.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Sampul Dua" || $Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Tahap Dua"){
 			
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
 			$nomor = $BAPP->nomor;
+			$jumlah_penyedia_diundang = $BAPP->jumlah_penyedia_diundang;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = $Dok->tanggal;
 			$hari = Tanggal::getHari($tanggal);
@@ -828,9 +833,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $anggota1);
-			$this->doccy->phpdocx->assign('#listperusahaandanharga#', $anggota1);
-			$this->doccy->phpdocx->assign('#listperusahaanikut#', $anggota1);
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlah_penyedia_diundang);
+			$this->doccy->phpdocx->assign('#listperusahaandanharga#', '.............................................');
+			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
 			$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 2.docx", true);
 		}
 //	=====================================Daftar Hadir=====================================
