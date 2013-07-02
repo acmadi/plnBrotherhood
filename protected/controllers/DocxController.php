@@ -97,6 +97,7 @@ class DocxController extends Controller
 			$biaya = $NDPP->biaya;
 			$tanggal = $Dok->tanggal;
 			$nama = $Peng->nama_pengadaan;
+			$terbilang = RupiahMaker::terbilangMaker($biaya);
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
