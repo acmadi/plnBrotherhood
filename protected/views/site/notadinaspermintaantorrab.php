@@ -58,7 +58,21 @@
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'perihal_permintaan'); ?>
+			<?php echo $form->labelEx($NDPTR,'tanggal_nota_dinas_permintaan'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$NDPTR,
+					'attribute'=>'tanggal_nota_dinas_permintaan',
+					'value'=>$NDPTR->tanggal_nota_dinas_permintaan,
+					'htmlOptions'=>array('size'=>60),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($NDPTR,'tanggal_nota_dinas_permintaan'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($NDPTR,'perihal nota dinas permintaan'); ?>
 			<?php echo $form->textArea($NDPTR,'perihal_permintaan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
 			<?php echo $form->error($NDPTR,'perihal_permintaan'); ?>
 		</div>
