@@ -48,7 +48,7 @@ class NotaDinasPerintahPengadaan extends CActiveRecord
 			array('targetSPK_kontrak, pagu_anggaran', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('dari, sumber_dana', 'length', 'max'=>20),
+			array('dari, sumber_dana', 'length', 'max'=>256),
 			array('kepada, perihal', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

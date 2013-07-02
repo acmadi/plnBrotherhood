@@ -201,6 +201,7 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			
 			$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($id);	
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$nomor = $SUPDP->nomor;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
@@ -228,6 +229,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalambil#', $tanggalambil);
 			$this->doccy->phpdocx->assign('#waktuambil#', $waktuambil);
 			$this->doccy->phpdocx->assign('#tempatambil#', $tempatambil);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
 /*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
@@ -398,7 +400,7 @@ class DocxController extends Controller
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-		$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
+		$this->renderDocx("Surat Pengantar Penawaran Harga.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
