@@ -704,6 +704,7 @@ class DocxController extends Controller
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
 			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			$tglrks = Tanggal::getTanggalLengkap($tanggalrks);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			//$dokspph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 			//$spph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspph->id_dokumen);
@@ -718,7 +719,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#norks#', $norks);
-			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
+			$this->doccy->phpdocx->assign('#tanggalrks#', $tglrks);
 			$this->doccy->phpdocx->assign('#ha#', $hari);
 			$this->doccy->phpdocx->assign('#tgl#', $tanggal1);
 			$this->doccy->phpdocx->assign('#bulan#', $bulan);
