@@ -1638,7 +1638,11 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='15';
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Pengadaan->status ='15';
+				} else {
+					$Pengadaan->status ='11';
+				}
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
@@ -1784,6 +1788,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='12';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
