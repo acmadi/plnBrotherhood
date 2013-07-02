@@ -74,9 +74,9 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'perihal'); ?>
-				<?php echo $form->textArea($SUPDP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($SUPDP,'perihal'); ?>
+				<?php //echo $form->labelEx($SUPDP,'perihal'); ?>
+				<?php //echo $form->textArea($SUPDP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+				<?php //echo $form->error($SUPDP,'perihal'); ?>
 			</div>
 
 			<div class="row">

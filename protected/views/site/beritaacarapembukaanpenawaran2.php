@@ -70,18 +70,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen yang sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_sah'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen tidak sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
-		</div>
-		
-		<div class="row">
 			<?php echo $form->labelEx($BAPP,'status metode'); ?>
 			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'status_metode'); ?>

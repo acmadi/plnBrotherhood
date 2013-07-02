@@ -909,7 +909,7 @@ class SiteController extends Controller
 				
 				$SUPDP= new SuratUndanganPengambilanDokumenPengadaan;
 				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
+				// $SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1153,7 +1153,7 @@ class SiteController extends Controller
 					$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 					$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
 					$this->render('aanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPH'=>$SUPPH,
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
 					));
 				}
 
@@ -1210,7 +1210,7 @@ class SiteController extends Controller
 					$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 					$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
 					$this->render('aanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPH'=>$SUPPH,
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
 					));
 				}
 			}
@@ -1535,6 +1535,11 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$BAPP->jumlah_penyedia_dokumen_sah='0';
+					$BAPP->jumlah_penyedia_dokumen_tidak_sah='0';
+				}
+				
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -1928,6 +1933,8 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
+				$BAPP->jumlah_penyedia_dokumen_sah='0';
+				$BAPP->jumlah_penyedia_dokumen_tidak_sah='0';
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
