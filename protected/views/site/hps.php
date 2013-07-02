@@ -19,6 +19,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
+							array('label'=>'Penentuan Metode', 'url'=>array('/site/editpenentuanmetode','id'=>$id)),
 							array('label'=>'RKS', 'url'=>array('/site/editrks','id'=>$id)),
 							array('label'=>'HPS', 'url'=>array(($Hps->isNewRecord)?('/site/hps'):('/site/edithps'),'id'=>$id)),
 						),

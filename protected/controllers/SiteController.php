@@ -3493,7 +3493,7 @@ class SiteController extends Controller
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$Dokumen3->tanggal=$Dokumen0->tanggal;
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia)->username)->nama);
+					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
 					$valid=$valid&&$NDP->validate();
 					if($valid){
 						$valid=$valid&&$NDPP->validate();
