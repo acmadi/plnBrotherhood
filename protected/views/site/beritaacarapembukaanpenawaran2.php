@@ -22,8 +22,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaransampul2','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaran2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaransampul2'),'id'=>$id)),
+                                    array('label'=>'SU Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaran2','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaran2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
                             ),
                         ));
                     ?>
@@ -33,8 +33,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Tahap Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaransampul2','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Tahap Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaran2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaransampul2'),'id'=>$id)),
+                                    array('label'=>'SU Pembukaan Penawaran Tahap Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='11'?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaran2','id'=>$id)),
+                                    array('label'=>'BA Pembukaan Penawaran Tahap Dua', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='12'?'/site/beritaacarapembukaanpenawaran2':(Pengadaan::model()->findByPk($id)->status=='11'?'':'/site/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
                             ),
                         ));
                     ?>
@@ -67,18 +67,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
 			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen yang sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_sah'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen tidak sah'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
 		</div>
 		
 		<div class="row">

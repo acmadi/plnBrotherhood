@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'surat_undangan_permintaan_penawaran_harga':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $lingkup_kerja
  * @property string $waktu_kerja
  * @property integer $masa_berlaku_penawaran
  * @property string $tempat_penyerahan
@@ -42,15 +41,14 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, lingkup_kerja, waktu_kerja, masa_berlaku_penawaran, tempat_penyerahan', 'required'),
+			array('id_dokumen, nomor, waktu_kerja, masa_berlaku_penawaran, tempat_penyerahan', 'required'),
 			array('masa_berlaku_penawaran', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('lingkup_kerja', 'length', 'max'=>100),
 			array('waktu_kerja, tempat_penyerahan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, lingkup_kerja, waktu_kerja, masa_berlaku_penawaran, tempat_penyerahan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, waktu_kerja, masa_berlaku_penawaran, tempat_penyerahan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,7 +72,6 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'lingkup_kerja' => 'Lingkup Kerja',
 			'waktu_kerja' => 'Waktu Kerja',
 			'masa_berlaku_penawaran' => 'Masa Berlaku Penawaran',
 			'tempat_penyerahan' => 'Tempat Penyerahan',
@@ -94,7 +91,6 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('lingkup_kerja',$this->lingkup_kerja,true);
 		$criteria->compare('waktu_kerja',$this->waktu_kerja,true);
 		$criteria->compare('masa_berlaku_penawaran',$this->masa_berlaku_penawaran);
 		$criteria->compare('tempat_penyerahan',$this->tempat_penyerahan,true);

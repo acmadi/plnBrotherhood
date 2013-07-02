@@ -1,29 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "berita_acara_evaluasi_penawaran".
+ * This is the model class for table "penerima_pengadaan".
  *
- * The followings are the available columns in table 'berita_acara_evaluasi_penawaran':
+ * The followings are the available columns in table 'penerima_pengadaan':
+ * @property string $perusahaan
  * @property string $id_dokumen
- * @property string $nomor
- * @property string $pemenang
- * @property string $alamat
- * @property string $NPWP
- * @property integer $nilai
- * @property string $pemenang_2
- * @property string $alamat_2
- * @property string $NPWP_2
- * @property integer $nilai_2
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
  */
-class BeritaAcaraEvaluasiPenawaran extends CActiveRecord
+class PenerimaPengadaan extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return BeritaAcaraEvaluasiPenawaran the static model class
+	 * @return PenerimaPengadaan the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -35,7 +27,7 @@ class BeritaAcaraEvaluasiPenawaran extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'berita_acara_evaluasi_penawaran';
+		return 'penerima_pengadaan';
 	}
 
 	/**
@@ -46,15 +38,12 @@ class BeritaAcaraEvaluasiPenawaran extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, pemenang, alamat, NPWP, nilai, pemenang_2, alamat_2, NPWP_2, nilai_2', 'required'),
-			array('nilai, nilai_2', 'numerical', 'integerOnly'=>true),
+			array('perusahaan, id_dokumen', 'required'),
+			array('perusahaan', 'length', 'max'=>100),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('pemenang, NPWP, pemenang_2, NPWP_2', 'length', 'max'=>100),
-			array('alamat, alamat_2', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, pemenang, alamat, NPWP, nilai, pemenang_2, alamat_2, NPWP_2, nilai_2', 'safe', 'on'=>'search'),
+			array('perusahaan, id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,16 +65,8 @@ class BeritaAcaraEvaluasiPenawaran extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'perusahaan' => 'Perusahaan',
 			'id_dokumen' => 'Id Dokumen',
-			'nomor' => 'Nomor',
-			'pemenang' => 'Pemenang',
-			'alamat' => 'Alamat',
-			'NPWP' => 'Npwp',
-			'nilai' => 'Nilai',
-			'pemenang_2' => 'Pemenang 2',
-			'alamat_2' => 'Alamat 2',
-			'NPWP_2' => 'Npwp 2',
-			'nilai_2' => 'Nilai 2',
 		);
 	}
 
@@ -100,16 +81,8 @@ class BeritaAcaraEvaluasiPenawaran extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('perusahaan',$this->perusahaan,true);
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('pemenang',$this->pemenang,true);
-		$criteria->compare('alamat',$this->alamat,true);
-		$criteria->compare('NPWP',$this->NPWP,true);
-		$criteria->compare('nilai',$this->nilai);
-		$criteria->compare('pemenang_2',$this->pemenang_2,true);
-		$criteria->compare('alamat_2',$this->alamat_2,true);
-		$criteria->compare('NPWP_2',$this->NPWP_2,true);
-		$criteria->compare('nilai_2',$this->nilai_2);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

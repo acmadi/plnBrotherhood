@@ -1264,7 +1264,7 @@ class SiteController extends Controller
 				
 				$SUPDP= new SuratUndanganPengambilanDokumenPengadaan;
 				$SUPDP->id_dokumen=$Dokumen0->id_dokumen;
-				$SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
+				// $SUPDP->perihal= 'Undangan Pengambilan Dokumen RKS dari '.$Pengadaan->nama_pengadaan;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1508,7 +1508,7 @@ class SiteController extends Controller
 					$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 					$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
 					$this->render('aanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPH'=>$SUPPH,
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
 					));
 				}
 
@@ -1565,7 +1565,7 @@ class SiteController extends Controller
 					$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 					$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
 					$this->render('aanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPH'=>$SUPPH,
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
 					));
 				}
 			}
@@ -1890,6 +1890,11 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$BAPP->jumlah_penyedia_dokumen_sah='0';
+					$BAPP->jumlah_penyedia_dokumen_tidak_sah='0';
+				}
+				
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -1988,7 +1993,11 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='15';
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Pengadaan->status ='15';
+				} else {
+					$Pengadaan->status ='11';
+				}
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
@@ -2032,6 +2041,16 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$BAEP->pemenang='-';
+					$BAEP->alamat='-';
+					$BAEP->NPWP='-';
+					$BAEP->nilai='0';
+					$BAEP->pemenang_2='-';
+					$BAEP->alamat_2='-';
+					$BAEP->NPWP_2='-';
+					$BAEP->nilai_2='0';
+				}
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -2134,6 +2153,7 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='12';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2283,6 +2303,8 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
+				$BAPP->jumlah_penyedia_dokumen_sah='0';
+				$BAPP->jumlah_penyedia_dokumen_tidak_sah='0';
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -3181,11 +3203,9 @@ class SiteController extends Controller
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pelelangan"');
 				
-				$SPP=NotaDinasPenetapanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				$SPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
 				
-				//Uncomment the following line if AJAX validation is needed
-				//$this->performAjaxValidation($model);
-
+				
 				if(isset($_POST['SuratPengumumanPelelangan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
@@ -3230,7 +3250,7 @@ class SiteController extends Controller
 				$row = $Dokumen0->model()->find($criteria);
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
-				$Dokumen0->nama_dokumen='Surat Penunjukan Pemenangan';
+				$Dokumen0->nama_dokumen='Surat Penunjukan Pemenang';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
@@ -3238,10 +3258,10 @@ class SiteController extends Controller
 				$SPPM= new SuratPenunjukanPemenang;
 				$SPPM->id_dokumen=$Dokumen0->id_dokumen;
 				if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
-					$NDBP->jaminan='0';
-					$NDBP->nomor_ski='-';
-					$NDBP->tanggal_ski='-';
-					$NDBP->no_ski='-';
+					$SPPM->jaminan='0';
+					$SPPM->nomor_ski='-';
+					$SPPM->tanggal_ski='-';
+					$SPPM->no_ski='-';
 				}
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -3287,7 +3307,7 @@ class SiteController extends Controller
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Penunjukan Pemenang"');
 				
-				$SPPM=NotaDinasPemberitahuanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				$SPPM=SuratPenunjukanPemenang::model()->findByPk($Dokumen0->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
