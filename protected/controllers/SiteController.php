@@ -1686,6 +1686,16 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$BAEP->pemenang='-';
+					$BAEP->alamat='-';
+					$BAEP->NPWP='-';
+					$BAEP->nilai='0';
+					$BAEP->pemenang_2='-';
+					$BAEP->alamat_2='-';
+					$BAEP->NPWP_2='-';
+					$BAEP->nilai_2='0';
+				}
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
