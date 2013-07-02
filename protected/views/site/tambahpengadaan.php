@@ -62,7 +62,7 @@
 		<h4><b> Nota Dinas Permintaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDP,'nomor'); ?>
-			<?php echo $form->textField($NDP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($NDP,'nomor',array('size'=>60,'maxlength'=>50)); ?>
 			<?php echo $form->error($NDP,'nomor'); ?>
 		</div>
 		
@@ -91,7 +91,7 @@
 		<h4><b> Nota Dinas Perintah Pengadaan </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'nomor'); ?>
-			<?php echo $form->textField($NDPP,'nomor',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($NDPP,'nomor',array('size'=>60,'maxlength'=>50)); ?>
 			<?php echo $form->error($NDPP,'nomor'); ?>
 		</div>
 
@@ -117,13 +117,13 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'sumber_dana'); ?>
-			<?php echo $form->textField($NDPP,'sumber_dana',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($NDPP,'sumber_dana',array('size'=>60,'maxlength'=>256)); ?>
 			<?php echo $form->error($NDPP,'sumber_dana'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'pagu_anggaran'); ?>
-			<?php echo $form->textField($NDPP,'pagu_anggaran',array('size'=>60,'maxlength'=>20)); ?>
+			<?php echo $form->textField($NDPP,'pagu_anggaran',array('size'=>60,'maxlength'=>256)); ?>
 			<?php echo $form->error($NDPP,'pagu_anggaran'); ?>
 		</div>
 		

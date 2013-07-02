@@ -221,7 +221,8 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 <?php 
 	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-		echo CHtml::button('Tambah Pengadaan', array('submit'=>array('site/tambahpengadaan'), 'class'=>'sidafbutton')); 
+		echo CHtml::button('Tambah Pengadaan', array('submit'=>array('site/tambahpengadaan'), 'class'=>'sidafbutton'));
+		echo CHtml::button('Buat Nota Dinas Permintaan TOR/RAB', array('submit'=>array('site/notadinaspermintaantorrab'), 'class'=>'sidafbutton'));
 	}
 ?>
 

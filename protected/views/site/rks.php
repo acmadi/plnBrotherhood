@@ -119,7 +119,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 
 				<div class="row">
 					<?php echo $form->labelEx($Rks,'tempat_penjelasan'); ?>
-					<?php echo $form->textArea($Rks,'tempat_penjelasan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+					<?php echo $form->textArea($Rks,'tempat_penjelasan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
 					<?php echo $form->error($Rks,'tempat_penjelasan'); ?>
 				</div>
 				

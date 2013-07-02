@@ -323,7 +323,7 @@ class DocxController extends Controller
 	
 		$Dok=Dokumen::model()->findByPk($id);
 		$Peng=Pengadaan::model()->findByPk($Dok->id_pengadaan);
-		
+	
 //	=====================================Nota Dinas=====================================
 		if ($Dok->nama_dokumen == "Nota Dinas Perintah Pengadaan"){
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);
@@ -386,23 +386,38 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Penetapan Pemenang"){
 			
-			$this->doccy->newFile('14 Nota Dinas Penetapan Pemenang.docx');
-			
 			$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
 			$pemenang = $NDPP->nama_penyedia;
 			$alamat = $NDPP->alamat;
 			$NPWP = $NDPP->NPWP;
 			$biaya = $NDPP->biaya;
+			$metode = $Peng->metode_penawaran;
+			if ($metode == "Satu Sampul"){
+				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
+				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
+				$noBAE1 = $BAE1->nomor;
+				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
+				$noBAE2 = "-";
+				$tglBAE2 = "-";
+			}
+			else if ($metode == "Dua Sampul"){
+				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
+				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
+				$noBAE1 = $BAE1->nomor;
+				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
+				$DokBAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Dua"');
+				$BAE2 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE2->id_dokumen);
+				$noBAE2 = $BAE2->nomor;
+				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
+			}
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$BAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 1"');
-			$BAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 2"');
-			$ndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
-			$Dokndpp2=Dokumen::model()->findByPk($ndpp2->id_dokumen);
-			$DokBAE1=Dokumen::model()->findByPk($BAE1->id_dokumen);
-			$DokBAE2=Dokumen::model()->findByPk($BAE2->id_dokumen);
+			$dokndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$ndpp2 = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp2->id_dokumen);
 			$nondpp = $ndpp2->nomor;
-			$tanggalndpp = $Dokndpp2->tanggal;
+			$tanggalndpp = $dokndpp2->tanggal;
 			$nama = $Peng->nama_pengadaan;
 			$terbilang = RupiahMaker::terbilangMaker($biaya);
 			
@@ -415,10 +430,10 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nondpp#', $nondpp);
 			$this->doccy->phpdocx->assign('#tanggalndpp#', $tanggalndpp);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#noBAEsampul1#', '.............................................');
-			$this->doccy->phpdocx->assign('#noBAEsampul2#', '.............................................');
-			$this->doccy->phpdocx->assign('#tanggalBAEsampul1#', '.............................................');
-			$this->doccy->phpdocx->assign('#tanggalBAEsampul2#', '.............................................');
+			$this->doccy->phpdocx->assign('#noBAEsampul1#', $noBAE1);
+			$this->doccy->phpdocx->assign('#noBAEsampul2#', $noBAE2);
+			$this->doccy->phpdocx->assign('#tanggalBAEsampul1#', $tglBAE1);
+			$this->doccy->phpdocx->assign('#tanggalBAEsampul2#', $tglBAE2);
 			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
 			$this->doccy->phpdocx->assign('#NPWP#', $NPWP);
@@ -429,22 +444,38 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Usulan Pemenang"){
 			
-			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang.docx');
-			
 			$NDUP=NotaDinasUsulanPemenang::model()->findByPk($id);	
-			$nomor = $NDUP->nomor;
-			$dari = $NDUP->dari;
+			
+			if (($metode == "Pemilihan Langsung")||($metode == "Pelelangan")){
+			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(lelang-pilih).docx');
+			}
+			else{
+			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
+			}
+			
 			$pemenang = $NDUP->nama_penyedia;
 			$alamat = $NDUP->alamat;
 			$NPWP = $NDUP->NPWP;
 			$biaya = $NDUP->biaya;
+			$terbilang = RupiahMaker::terbilangMaker($biaya);
+				
+			$pemenang2 = $NDUP->nama_penyedia;
+			$alamat2 = $NDUP->alamat;
+			$NPWP2 = $NDUP->NPWP;
+			$biaya2 = $NDUP->biaya;
+			$terbilang2 = RupiahMaker::terbilangMaker($biaya2);
+			
+			$nomor = $NDUP->nomor;
+			$dari = $NDUP->dari;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$waktu = $NDUP->waktu_pelaksanaan;
 			$tempat = $NDUP->tempat_penyerahan;
 			$metode = $Peng->metode_pengadaan;
 			
+			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+		
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#dari#', $dari);
@@ -454,7 +485,12 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
 			$this->doccy->phpdocx->assign('#NPWP#', $NPWP);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
-			$this->doccy->phpdocx->assign('#terbilang#', $tempat);
+			$this->doccy->phpdocx->assign('#terbilang#', $terbilang);
+			$this->doccy->phpdocx->assign('#penyedia2#', $pemenang2);
+			$this->doccy->phpdocx->assign('#alamatpenyedia2#', $alamat2);
+			$this->doccy->phpdocx->assign('#NPWP2#', $NPWP2);
+			$this->doccy->phpdocx->assign('#biaya2#', $biaya2);
+			$this->doccy->phpdocx->assign('#terbilang2#', $terbilang2);
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
 			$this->doccy->phpdocx->assign('#zzz#', '..........');
@@ -500,6 +536,7 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			
 			$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($id);	
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$nomor = $SUPDP->nomor;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
@@ -527,6 +564,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalambil#', $tanggalambil);
 			$this->doccy->phpdocx->assign('#waktuambil#', $waktuambil);
 			$this->doccy->phpdocx->assign('#tempatambil#', $tempatambil);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
 /*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
@@ -697,7 +735,7 @@ class DocxController extends Controller
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-		$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
+		$this->renderDocx("Surat Pengantar Penawaran Harga.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
@@ -765,29 +803,61 @@ class DocxController extends Controller
 		
 		$this->renderDocx("Form Isian Kualifikasi.docx", true);
 		}
-/*Belum ada model*/		/*else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
+		else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
-			$SPP=SuratPemberitahuanPengadaan::model()->findByPk($id);	
+			$SPP=SuratPenunjukanPemenang::model()->findByPk($id);	
 			$nomor = $SPP->nomor;
-			$tanggal = $Dok->tanggal;
+			$penyedia = $SPP->nama_penyedia;
+			$biaya = $SPP->harga;
+			$biayaterbilang = RupiahMaker::TerbilangMaker($biaya);
+			$jaminan = $SPP->jaminan;
+			$jaminanterbilang = RupiahMaker::TerbilangMaker($jaminan);
+			$lama = $SPP->lama_penyerahan;
+			$lamaterbilang = RupiahMaker::TerbilangMaker($lama);
+			$noski = $SPP->no_ski;
+			$nomorski = $SPP->nomor_ski;
+			$tglski = $SPP->tanggal_ski;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
-			$kepada = $Peng->nama_penyedia;
 			$perihal = $SPP->perihal;
 			$nama = $Peng->nama_pengadaan;
-				
-			$this->doccy->newFile('s-pemberitahuanpengadaan.docx');
+			$metode = $Peng->metode_pengadaan;
+			
+			
+			if ($metode == "Penunjukan Langsung"){
+			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Tunjuk).docx');
+			}
+			else if($metode == "Pemilihan Langsung"){
+			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Pilih).docx');
+			}
+			else if($metode == "Pelelangan"){
+			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Lelang).docx');
+			}
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
-			$this->doccy->phpdocx->assign('#1#', $nomor);
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', $tanggal);
-			$this->doccy->phpdocx->assign('#4#', $kepada);
-			$this->doccy->phpdocx->assign('#5#', $nama);
-			$this->doccy->phpdocx->assign('#6#', $perihal);
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#kepada#', $penyedia);
+			$this->doccy->phpdocx->assign('#alamat#', '');
+			$this->doccy->phpdocx->assign('#nosupph#', '');
+			$this->doccy->phpdocx->assign('#tglsupph#', '');
+			$this->doccy->phpdocx->assign('#nospph#', '');
+			$this->doccy->phpdocx->assign('#tgglspph#', '');
+			$this->doccy->phpdocx->assign('#nospp#', '');
+			$this->doccy->phpdocx->assign('#tglspp#', '');
+			$this->doccy->phpdocx->assign('#noski#', $noski);
+			$this->doccy->phpdocx->assign('#tglski#', $tglski);
+			$this->doccy->phpdocx->assign('#nomorski#', $nomorski);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
+			$this->doccy->phpdocx->assign('#lama#', $lama);
+			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
+			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
+			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
-		}*/
+		}
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Awal Panitia"){
 			
@@ -1138,7 +1208,8 @@ class DocxController extends Controller
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
+			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			$tglrks = Tanggal::getTanggalLengkap($tanggalrks);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			//$dokspph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 			//$spph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspph->id_dokumen);
@@ -1153,7 +1224,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#norks#', $norks);
-			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
+			$this->doccy->phpdocx->assign('#tanggalrks#', $tglrks);
 			$this->doccy->phpdocx->assign('#ha#', $hari);
 			$this->doccy->phpdocx->assign('#tgl#', $tanggal1);
 			$this->doccy->phpdocx->assign('#bulan#', $bulan);
@@ -1538,7 +1609,7 @@ class DocxController extends Controller
 		}
 		return  $list;
 	}
-	
+
 	function getListPanitia($idPan){
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
 			$list = "";
@@ -1556,10 +1627,5 @@ class DocxController extends Controller
 		}
 		return  $list;
 	}
-	
-	
-	
-	
-	
 }
 ?>

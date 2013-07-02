@@ -3521,6 +3521,50 @@ class SiteController extends Controller
 		}
 	}
 	
+	public function actionNotadinaspermintaantorrab()
+	{	
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+			$Dokumen0= new Dokumen;
+			$criteria=new CDbcriteria;
+			$criteria->select='max(id_dokumen) AS maxId';
+			$row = $Dokumen0->model()->find($criteria);
+			$somevariable = $row['maxId'];
+			$Dokumen0->id_dokumen=$somevariable+1;
+			$Dokumen0->nama_dokumen='Nota Dinas Permintaan TOR/RAB';
+			$Dokumen0->tempat='Jakarta';
+			$Dokumen0->status_upload='Belum Selesai';
+			$Dokumen0->id_pengadaan='0';
+			
+			$NDPTR= new NotaDinasPermintaanTorRab;
+			$NDPTR->id_dokumen=$Dokumen0->id_dokumen;
+			
+			//Uncomment the following line if AJAX validation is needed
+			//$this->performAjaxValidation($model);
+
+			if(isset($_POST['NotaDinasPermintaanTorRab']))
+			{
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$NDPTR->attributes=$_POST['NotaDinasPermintaanTorRab'];
+				$valid=$NDPTR->validate();
+				$valid=$valid&&$Dokumen0->validate();
+				if($valid){
+					if($Dokumen0->save(false)){
+						if($NDPTR->save(false)){
+							$this->redirect(array('notadinaspermintaantorrab','id'=>$Dokumen0->id_pengadaan));
+						}
+					}
+				}
+			}
+
+			$this->render('notadinaspermintaantorrab',array(
+				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
+			));
+
+		}
+	}
+	
 public function actionUploader(){
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$user = Yii::app()->user->name;
