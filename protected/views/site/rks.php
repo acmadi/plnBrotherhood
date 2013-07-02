@@ -2,7 +2,8 @@
 /* @var $this SiteController */
 
 $id = Yii::app()->getRequest()->getQuery('id');
-$this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nama_pengadaan;
+$Pengadaan= Pengadaan::model()->findByPk($id);
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -18,9 +19,9 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'RKS', 'url'=>array($Rks->isNewRecord?('/site/rks'):('/site/editrks'),'id'=>$id)),
-							array('label'=>'HPS', 'visible'=>$Rks->isNewRecord),
-							array('label'=>'HPS', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/hps':'/site/edithps','id'=>$id), 'visible'=>!$Rks->isNewRecord),
+							array('label'=>'Penentuan Metode', 'url'=>array('/site/editpenentuanmetode','id'=>$id)),
+							array('label'=>'RKS', 'url'=>array(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"') == null?'/site/rks':'/site/editrks','id'=>$id)),
+							array('label'=>'HPS', 'url'=>array((Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"') == null?'':(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"') == null?'/site/hps':'/site/edithps')),'id'=>$id)),
 						),
 					));
 				?>
@@ -51,7 +52,17 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				'id'=>'rks-form',
 				'enableAjaxValidation'=>false,
 			)); ?>
+			
 				<h4><b> RKS </b></h4>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'jenis rks'); ?>
+					<?php echo $form->radioButtonList($Rks,'tipe_rks',
+						array(1=>'Barang',2=>'Barang dan Jasa',3=>'Jasa'),
+						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+					<?php echo $form->error($Rks,'tipe_rks'); ?>
+				</div>
+				
 				<div class="row">
 					<?php echo $form->labelEx($Rks,'nomor'); ?>
 					<?php echo $form->textField($Rks,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -78,7 +89,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 						'model'=>$Rks,
 						'attribute'=>'tanggal_permintaan_penawaran',
 						'value'=>$Rks->tanggal_permintaan_penawaran,
-						'htmlOptions'=>array('sigze'=>56),
+						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
 						'dateFormat'=>'dd-mm-yy',
 						),
@@ -113,44 +124,201 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'tanggal_awal_pemasukan_penawaran'); ?>
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul" || $Pengadaan->metode_penawaran=="Dua Sampul") { 
+						echo $form->labelEx($Rks,'tanggal_awal_pemasukan_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tanggal_awal_pemasukan_penawaran tahap 1'); 
+					} ?> 
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 						'model'=>$Rks,
-						'attribute'=>'tanggal_pemasukan_penawaran',
-						'value'=>$Rks->tanggal_pemasukan_penawaran,
+						'attribute'=>'tanggal_awal_pemasukan_penawaran1',
+						'value'=>$Rks->tanggal_akhir_pemasukan_penawaran1,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
 						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
-					<?php echo $form->error($Rks,'tanggal_pemasukan_penawaran'); ?>
+					<?php echo $form->error($Rks,'tanggal_awal_pemasukan_penawaran1'); ?>
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'tanggal_akhir_pemasukan_penawaran'); ?>
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul" || $Pengadaan->metode_penawaran=="Dua Sampul") { 
+						echo $form->labelEx($Rks,'tanggal_akhir_pemasukan_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tanggal_akhir_pemasukan_penawaran tahap 1'); 
+					} ?> 
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 						'model'=>$Rks,
-						'attribute'=>'tanggal_akhir_pemasukan_penawaran',
-						'value'=>$Rks->tanggal_akhir_pemasukan_penawaran,
+						'attribute'=>'tanggal_akhir_pemasukan_penawaran1',
+						'value'=>$Rks->tanggal_akhir_pemasukan_penawaran1,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
 						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
-					<?php echo $form->error($Rks,'tanggal_akhir_pemasukan_penawaran'); ?>
+					<?php echo $form->error($Rks,'tanggal_akhir_pemasukan_penawaran1'); ?>
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'waktu_paling_lambat_pemasukan_penawaran (Format HH:MM)'); ?>
-					<?php echo $form->textField($Rks,'waktu_pemasukan_penawaran',array('size'=>56,'maxlength'=>20)); ?>
-					<?php echo $form->error($Rks,'waktu_pemasukan_penawaran'); ?>
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul" || $Pengadaan->metode_penawaran=="Dua Sampul") { 
+						echo $form->labelEx($Rks,'waktu_paling_lambat_pemasukan_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'waktu_paling_lambat_pemasukan_penawaran tahap 1'); 
+					} ?> 
+					<?php echo $form->textField($Rks,'waktu_pemasukan_penawaran1',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'waktu_pemasukan_penawaran1'); ?>
 				</div>
 
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'tempat_pemasukan_penawaran'); ?>
-					<?php echo $form->textArea($Rks,'tempat_pemasukan_penawaran',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-					<?php echo $form->error($Rks,'tempat_pemasukan_penawaran'); ?>
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul" || $Pengadaan->metode_penawaran=="Dua Sampul") { 
+						echo $form->labelEx($Rks,'tempat_pemasukan_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tempat_pemasukan_penawaran tahap 1'); 
+					} ?> 
+					<?php echo $form->textArea($Rks,'tempat_pemasukan_penawaran1',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+					<?php echo $form->error($Rks,'tempat_pemasukan_penawaran1'); ?>
 				</div>
+				
+				<div class="row">
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
+						echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul") {
+						echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran sampul 1'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran tahap 1'); 
+					} ?> 
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_pembukaan_penawaran1',
+						'value'=>$Rks->tanggal_pembukaan_penawaran1,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'dd-mm-yy',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_pembukaan_penawaran1'); ?>
+				</div>
+				
+				<div class="row">
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
+						echo $form->labelEx($Rks,'waktu_pembukaan_penawaran (Format HH:MM)'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul") {
+						echo $form->labelEx($Rks,'waktu_pembukaan_penawaran sampul 1 (Format HH:MM)'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'waktu_pembukaan_penawaran tahap 1 (Format HH:MM)'); 
+					} ?> 
+					<?php echo $form->textField($Rks,'waktu_pembukaan_penawaran1',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'waktu_pembukaan_penawaran1'); ?>
+				</div>
+				
+				<div class="row">
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
+						echo $form->labelEx($Rks,'tempat_pembukaan_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul") {
+						echo $form->labelEx($Rks,'tempat_pembukaan_penawaran sampul 1'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tempat_pembukaan_penawaran tahap 1'); 
+					} ?> 
+					<?php echo $form->textArea($Rks,'tempat_pembukaan_penawaran1',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+					<?php echo $form->error($Rks,'tempat_pembukaan_penawaran1'); ?>
+				</div>
+				
+				<?php if ($Pengadaan->metode_penawaran=="Dua Sampul") { ?>
+								
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran sampul 2');?> 
+						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$Rks,
+							'attribute'=>'tanggal_pembukaan_penawaran2',
+							'value'=>$Rks->tanggal_pembukaan_penawaran2,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+						));?>
+						<?php echo $form->error($Rks,'tanggal_pembukaan_penawaran2'); ?>
+					</div>
+				
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'waktu_pembukaan_penawaran sampul 2 (Format HH:MM)'); ?> 
+						<?php echo $form->textField($Rks,'waktu_pembukaan_penawaran2',array('size'=>56,'maxlength'=>20)); ?>
+						<?php echo $form->error($Rks,'waktu_pembukaan_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tempat_pembukaan_penawaran sampul 2'); ?> 
+						<?php echo $form->textArea($Rks,'tempat_pembukaan_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+						<?php echo $form->error($Rks,'tempat_pembukaan_penawaran2'); ?>
+					</div>
+				<?php } ?>
+				
+				<?php if ($Pengadaan->metode_penawaran=="Dua Tahap") { ?>
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tanggal_awal_pemasukan_penawaran tahap 2'); ?> 
+						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$Rks,
+							'attribute'=>'tanggal_awal_pemasukan_penawaran2',
+							'value'=>$Rks->tanggal_awal_pemasukan_penawaran2,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+						));?>
+						<?php echo $form->error($Rks,'tanggal_awal_pemasukan_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tanggal_akhir_pemasukan_penawaran tahap 2'); ?> 
+						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$Rks,
+							'attribute'=>'tanggal_akhir_pemasukan_penawaran2',
+							'value'=>$Rks->tanggal_akhir_pemasukan_penawaran2,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+						));?>
+						<?php echo $form->error($Rks,'tanggal_akhir_pemasukan_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'waktu_paling_lambat_pemasukan_penawaran tahap 2 (Format HH:MM)'); ?>
+						<?php echo $form->textField($Rks,'waktu_pemasukan_penawaran2',array('size'=>56,'maxlength'=>20)); ?>
+						<?php echo $form->error($Rks,'waktu_pemasukan_penawaran2'); ?>
+					</div>
+
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tempat_pemasukan_penawaran tahap 2'); ?>
+						<?php echo $form->textArea($Rks,'tempat_pemasukan_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+						<?php echo $form->error($Rks,'tempat_pemasukan_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran tahap 2');?> 
+						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$Rks,
+							'attribute'=>'tanggal_pembukaan_penawaran2',
+							'value'=>$Rks->tanggal_pembukaan_penawaran2,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+						));?>
+						<?php echo $form->error($Rks,'tanggal_pembukaan_penawaran2'); ?>
+					</div>
+				
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'waktu_pembukaan_penawaran tahap 2 (Format HH:MM)'); ?> 
+						<?php echo $form->textField($Rks,'waktu_pembukaan_penawaran2',array('size'=>56,'maxlength'=>20)); ?>
+						<?php echo $form->error($Rks,'waktu_pembukaan_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tempat_pembukaan_penawaran tahap 2'); ?> 
+						<?php echo $form->textArea($Rks,'tempat_pembukaan_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+						<?php echo $form->error($Rks,'tempat_pembukaan_penawaran2'); ?>
+					</div>
+				<?php } ?>
 				
 				<div class="row">
 					<?php echo $form->labelEx($Rks,'tanggal_negosiasi'); ?>
@@ -179,6 +347,26 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				</div>
 				
 				<div class="row">
+					<?php echo $form->labelEx($Rks,'tanggal_usulan_pemenang'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_usulan_pemenang',
+						'value'=>$Rks->tanggal_usulan_pemenang,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'dd-mm-yy',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_usulan_pemenang'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'waktu_usulan_pemenang (Format HH:MM)'); ?>
+					<?php echo $form->textField($Rks,'waktu_usulan_pemenang',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'waktu_usulan_pemenang'); ?>
+				</div>
+				
+				<div class="row">
 					<?php echo $form->labelEx($Rks,'tanggal_penetapan_pemenang'); ?>
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 						'model'=>$Rks,
@@ -197,51 +385,59 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 					<?php echo $form->textField($Rks,'waktu_penetapan_pemenang',array('size'=>56,'maxlength'=>20)); ?>
 					<?php echo $form->error($Rks,'waktu_penetapan_pemenang'); ?>
 				</div>
-
+				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'tempat_penetapan_pemenang'); ?>
-					<?php echo $form->textArea($Rks,'tempat_penetapan_pemenang',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-					<?php echo $form->error($Rks,'tempat_penetapan_pemenang'); ?>
+					<?php echo $form->labelEx($Rks,'tanggal_pemberitahuan_pemenang'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_pemberitahuan_pemenang',
+						'value'=>$Rks->tanggal_pemberitahuan_pemenang,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'dd-mm-yy',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_pemberitahuan_pemenang'); ?>
 				</div>
 				
-				<br/>
-				
-				<h4><b> Metode Penawaran Pengadaan</b></h4>
-				<?php if($Pengadaan->metode_pengadaan=='Penunjukan Langsung'){ ?>
-					<div class="row">
-						<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
-							array('Satu Sampul'=>'Satu Sampul'),
-							array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-						<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
-					</div>
-					<br/>
-				<?php } else if($Pengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
-					<div class="row">
-						<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
-							array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul'),
-							array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-						<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
-					</div>
-					<br/>
-				<?php } else { ?>
-					<div class="row">
-						<?php echo $form->radioButtonList($Pengadaan,'metode_penawaran',
-							array('Satu Sampul'=>'Satu Sampul','Dua Sampul'=>'Dua Sampul','Dua Tahap'=>'Dua Tahap'),
-							array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-						<?php echo $form->error($Pengadaan,'metode_penawaran'); ?>
-					</div>
-					<br/>
-				<?php } ?>
-				
-				<h4><b> Jenis Kualifikasi Pengadaan</b></h4>
 				<div class="row">
-					<?php echo $form->dropDownList($Pengadaan,'jenis_kualifikasi',
-						array('Pra Kualifikasi'=>'Pra Kualifikasi','Pasca Kualifikasi'=>'Pasca Kualifikasi'),
-						array('empty'=>"------Pilih Jenis Kualifikasi------")); ?>
-					<?php echo $form->error($Pengadaan,'jenis_kualifikasi'); ?>
+					<?php echo $form->labelEx($Rks,'waktu_pemberitahuan_pemenang (Format HH:MM)'); ?>
+					<?php echo $form->textField($Rks,'waktu_pemberitahuan_pemenang',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'waktu_pemberitahuan_pemenang'); ?>
 				</div>
-				<br/>
-
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'tanggal_penunjukan_pemenang'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_penunjukan_pemenang',
+						'value'=>$Rks->tanggal_penunjukan_pemenang,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'dd-mm-yy',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_penunjukan_pemenang'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'waktu_penunjukan_pemenang (Format HH:MM)'); ?>
+					<?php echo $form->textField($Rks,'waktu_penunjukan_pemenang',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'waktu_penunjukan_pemenang'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'lama_berlaku_penawaran'); ?>
+					<?php echo $form->textField($Rks,'lama_berlaku_penawaran',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'lama_berlaku_penawaran'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'sistem_evaluasi_penawaran'); ?>
+					<?php echo $form->textField($Rks,'sistem_evaluasi_penawaran',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'sistem_evaluasi_penawaran'); ?>
+				</div>
+				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($Rks->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
@@ -257,7 +453,45 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 					<h4><b> Buat Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
-						<li><?php echo CHtml::link('RKS', array('docx/download','id'=>$Rks->id_dokumen)); ?></li>
+						<?php $Cover=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Cover"');?>
+						<li><?php echo CHtml::link('RKS - Cover', array('docx/downloadrks','id'=>$Cover->id_rincian)); ?></li>
+						<?php $DaftarIsi=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Daftar Isi"');?>
+						<li><?php echo CHtml::link('RKS - Daftar Isi', array('docx/downloadrks','id'=>$DaftarIsi->id_rincian)); ?></li>
+						<?php $Isi=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Isi"');?>
+						<li><?php echo CHtml::link('RKS - Isi', array('docx/downloadrks','id'=>$Isi->id_rincian)); ?></li>
+						<?php if ($Rks->tipe_rks==3) {
+							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
+							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
+							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
+							$Lamp4=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 4"');
+							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
+							?>
+							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 2', array('docx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 3', array('docx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
+						<?php } else {
+							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
+							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
+							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
+							$Lamp4=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 4"');
+							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
+							$Lamp6=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 6"');
+							$Lamp7=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 7"');
+							$Lamp8=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 8"');
+							$Lampba=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran ba"');
+						?>
+							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 2', array('docx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 3', array('docx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 6', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 7', array('docx/downloadrks','id'=>$Lamp7->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 8', array('docx/downloadrks','id'=>$Lamp8->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran ba', array('docx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
+						<? } ?>
 					</ul>
 				</div>
 			<?php } ?>
