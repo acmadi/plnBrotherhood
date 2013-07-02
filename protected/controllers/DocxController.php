@@ -415,6 +415,7 @@ class DocxController extends Controller
 			}
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 <<<<<<< HEAD
+<<<<<<< HEAD
 // <<<<<<< HEAD
 			// $BAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
 			// $BAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
@@ -426,6 +427,10 @@ class DocxController extends Controller
 			$dokndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp2 = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp2->id_dokumen);
 // >>>>>>> 8a1a4a8e18771049e77fedfb324295fdaa55054d
+=======
+			$dokndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$ndpp2 = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp2->id_dokumen);
+>>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 =======
 			$dokndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp2 = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp2->id_dokumen);
@@ -461,7 +466,10 @@ class DocxController extends Controller
 			
 			$NDUP=NotaDinasUsulanPemenang::model()->findByPk($id);	
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$metode = $Peng->metode_pengadaan;
+=======
+>>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 =======
 >>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 			
@@ -472,7 +480,10 @@ class DocxController extends Controller
 			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$nama = $Peng->nama_pengadaan;
+=======
+>>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 =======
 >>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 			
@@ -490,7 +501,11 @@ class DocxController extends Controller
 			
 			$nomor = $NDUP->nomor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// $dari = $NDUP->dari;
+=======
+			$dari = $NDUP->dari;
+>>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 =======
 			$dari = $NDUP->dari;
 >>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
@@ -499,12 +514,16 @@ class DocxController extends Controller
 			$tempat = $NDUP->tempat_penyerahan;
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if(($metode == "Pelelangan")||($metode == "Pemilihan Langsung")){
 				$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(lelang-pilih).docx');
 			}
 			else{
 				$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
 			}
+=======
+			
+>>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 =======
 			
 >>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
@@ -527,9 +546,12 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#biaya2#', $biaya2);
 			$this->doccy->phpdocx->assign('#terbilang2#', $terbilang2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyelesaian#', $tempat);
 =======
+=======
+>>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
 >>>>>>> c55f3fb592c578d01db2cd69ca5fcd249b0025c3
@@ -1671,6 +1693,5 @@ class DocxController extends Controller
 		}
 		return  $list;
 	}
-
 }
 ?>
