@@ -96,6 +96,14 @@ class DocxController extends Controller
 			$NPWP = $NDPP->NPWP;
 			$biaya = $NDPP->biaya;
 			$tanggal = $Dok->tanggal;
+			$BAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 1"');
+			$BAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 2"');
+			$ndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$Dokndpp2=Dokumen::model()->findByPk($ndpp2->id_dokumen);
+			$DokBAE1=Dokumen::model()->findByPk($BAE1->id_dokumen);
+			$DokBAE2=Dokumen::model()->findByPk($BAE2->id_dokumen);
+			$nondpp = $ndpp2->nomor;
+			$tanggalndpp = $Dokndpp2->tanggal;
 			$nama = $Peng->nama_pengadaan;
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -104,8 +112,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#sifat#', 'Biasa');
-			$this->doccy->phpdocx->assign('#nondpp#', '.............................................');
-			$this->doccy->phpdocx->assign('#tanggalndpp#', '.............................................');
+			$this->doccy->phpdocx->assign('#nondpp#', $nondpp);
+			$this->doccy->phpdocx->assign('#tanggalndpp#', $tanggalndpp);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#noBAEsampul1#', '.............................................');
 			$this->doccy->phpdocx->assign('#noBAEsampul2#', '.............................................');
@@ -133,6 +141,7 @@ class DocxController extends Controller
 			$tanggal = $Dok->tanggal;
 			$waktu = $NDUP->waktu_pelaksanaan;
 			$tempat = $NDUP->tempat_penyerahan;
+			$metode = $Peng->metode_pengadaan;
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -148,8 +157,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#terbilang#', $tempat);
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
-			$this->doccy->phpdocx->assign('#zzz#', $tempat);
-			$this->doccy->phpdocx->assign('#metode#', $tempat);
+			$this->doccy->phpdocx->assign('#zzz#', '..........');
+			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
 		/*else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
@@ -832,12 +841,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#4#', '');
 			$this->doccy->phpdocx->assign('#5#', '');
 			$this->doccy->phpdocx->assign('#6#', '');
-			$this->doccy->phpdocx->assign('#7#', '');
-			$this->doccy->phpdocx->assign('#8#', '');
-			$this->doccy->phpdocx->assign('#9#', '');
-			$this->doccy->phpdocx->assign('#10#', '');
-			$this->doccy->phpdocx->assign('#11#', '');
-			$this->doccy->phpdocx->assign('#12#', '');
 			$this->renderDocx("Temp.docx", true);
 		}
 	}
