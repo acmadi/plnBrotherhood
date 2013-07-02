@@ -2838,11 +2838,9 @@ class SiteController extends Controller
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pelelangan"');
 				
-				$SPP=NotaDinasPenetapanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				$SPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
 				
-				//Uncomment the following line if AJAX validation is needed
-				//$this->performAjaxValidation($model);
-
+				
 				if(isset($_POST['SuratPengumumanPelelangan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
@@ -2887,7 +2885,7 @@ class SiteController extends Controller
 				$row = $Dokumen0->model()->find($criteria);
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
-				$Dokumen0->nama_dokumen='Surat Penunjukan Pemenangan';
+				$Dokumen0->nama_dokumen='Surat Penunjukan Pemenang';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
@@ -2895,10 +2893,10 @@ class SiteController extends Controller
 				$SPPM= new SuratPenunjukanPemenang;
 				$SPPM->id_dokumen=$Dokumen0->id_dokumen;
 				if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
-					$NDBP->jaminan='0';
-					$NDBP->nomor_ski='-';
-					$NDBP->tanggal_ski='-';
-					$NDBP->no_ski='-';
+					$SPPM->jaminan='0';
+					$SPPM->nomor_ski='-';
+					$SPPM->tanggal_ski='-';
+					$SPPM->no_ski='-';
 				}
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -2944,7 +2942,7 @@ class SiteController extends Controller
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Penunjukan Pemenang"');
 				
-				$SPPM=NotaDinasPemberitahuanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				$SPPM=SuratPenunjukanPemenang::model()->findByPk($Dokumen0->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
