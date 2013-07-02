@@ -199,8 +199,20 @@
 								'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
 							),
 							array(
+								'label'=>'Metode pengadaan',
+								'value'=>$cpengadaan->metode_pengadaan,
+							),
+							array(
+								'label'=>'Metode penawaran',
+								'value'=>$cpengadaan->metode_penawaran,
+							),
+							array(
+								'label'=>'Jenis kualifikasi',
+								'value'=>$cpengadaan->jenis_kualifikasi,
+							),
+							array(
 								'label'=>'Pagu anggaran',
-								'value'=>'Rp. ' . $cpengadaan->notaDinasPerintahPengadaan->pagu_anggaran . ',00',
+								'value'=>RupiahMaker::convertInt($cpengadaan->notaDinasPerintahPengadaan->pagu_anggaran),
 							),
 							array(
 								'label'=>'Sumber dana',
@@ -208,7 +220,7 @@
 							),
 							array(
 								'label'=>'Nomor nota dinas permintaan',
-								'value'=>$cpengadaan->notaDinasPerintahPengadaan->nota_dinas_permintaan,
+								'value'=>$cpengadaan->notaDinasPermintaan->nomor,
 							),
 							array(
 								'label'=>'Nomor kontrak',
