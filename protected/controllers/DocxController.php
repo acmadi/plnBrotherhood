@@ -631,7 +631,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){
 			
-			$BAEP=BeritAcaraEvaluasiPenawaran::model()->findByPk($id);	
+			$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($id);	
 			$nomor = $BAEP->nomor;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
@@ -694,7 +694,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran Sampul Satu" || $Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran Tahap Satu"){
 			
-			$BAEP=BeritAcaraEvaluasiPenawaran::model()->findByPk($id);	
+			$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($id);	
 			$nomor = $BAEP->nomor;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
@@ -702,12 +702,12 @@ class DocxController extends Controller
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
 			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
 			$anggota2 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
-			$dokBAPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"');
+			$dokBAPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Sampul Satu"');
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($dokBAPP->id_dokumen);
 			$jumlahperusahaan = $BAPP->jumlah_penyedia_diundang;
 			
@@ -741,7 +741,7 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran Sampul Dua" || $Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran Tahap Dua"){
 			
-			$BAEP=BeritAcaraEvaluasiPenawaran::model()->findByPk($id);	
+			$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($id);	
 			$nomor = $BAEP->nomor;
 			$nama = $Peng->nama_pengadaan;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
@@ -749,11 +749,11 @@ class DocxController extends Controller
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
 			$anggota = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
-			$dokBAPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"');
+			$dokBAPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Sampul Satu"');
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($dokBAPP->id_dokumen);
 			$jumlahperusahaan = $BAPP->jumlah_penyedia_diundang;
 			
@@ -793,7 +793,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nilai1#', $nilai);
 			$this->doccy->phpdocx->assign('#nilai1terbilang#', $nilai1terbilang);
 			$this->doccy->phpdocx->assign('#pemenang2#', $pemenang2);
-			$this->doccy->phpdocx->assign('#alamat1#', $alamat2);
+			$this->doccy->phpdocx->assign('#alamat2#', $alamat2);
 			$this->doccy->phpdocx->assign('#npwp2#', $NPWP2);
 			$this->doccy->phpdocx->assign('#nilai2#', $nilai2);
 			$this->doccy->phpdocx->assign('#nilai2terbilang#', $nilai2terbilang);
@@ -819,7 +819,7 @@ class DocxController extends Controller
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			//$dokspph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 			//$spph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspph->id_dokumen);
