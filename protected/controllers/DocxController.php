@@ -692,17 +692,19 @@ class DocxController extends Controller
 			
 			$SPM=SuratPernyataanMinat::model()->findByPk($id);
 			$nama = $Peng->nama_pengadaan;
-			$tanggal = $Dok->tanggal;
+			$namakapital = strtoupper($nama);
+			$tahun = Tanggal::getTahun($Peng->tanggal_masuk);
 			$tempat = $Dok->tempat;
 			
 			$this->doccy->newFile('5b Surat Pernyataan Minat.docx');
 			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-		
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#namapengadaankapital#', $namakapital);
 			$this->doccy->phpdocx->assign('#kota#', $tempat);
-			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#tahun#', $tahun);
 			$this->renderDocx("Surat Pernyataan Minat.docx", true);
 		}
 		/*else if ($Dok->nama_dokumen == "Surat Pemberitahuan Pengadaan"){
@@ -793,11 +795,13 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Form Isian Kualifikasi"){
 		
-		$nama = $Peng->nama_pengadaan;
+		$nama = strtoupper($Peng->nama_pengadaan);
+		$tahun = Tanggal::getTahun($Peng->tanggal_masuk);
 			
 		$this->doccy->newFile('5d Form Isian Kualifikasi.docx');
 			
-		$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+		$this->doccy->phpdocx->assign('#nama pengadaan#', $nama);
+		$this->doccy->phpdocx->assign('#tahun#', $tahun);
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
