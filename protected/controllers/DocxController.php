@@ -995,6 +995,26 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#5#', '.............................................');
 			$this->renderDocx("Daftar Hadir Prakualifikasi.docx", true);
 		}
+		else if ($Dok->nama_dokumen == "Surat Pengumuman Pelelangan"){
+			
+			$spp = SuratPengumumanPelelangan::model()->findByPk($id);			
+			
+			$this->doccy->newFile('14a Pengumuman Pelelangan.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomor#', $spp->nomor);
+			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
+			$this->doccy->phpdocx->assign('#nosupph#', '.............................................');
+			$this->doccy->phpdocx->assign('#tglsupph#', '.............................................');
+			$this->doccy->phpdocx->assign('#penyedia#', $spp->nama_penyedia);
+			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($spp->harga_penawaran));
+			$this->doccy->phpdocx->assign('#keterangan#', $spp->keterangan);
+			$this->doccy->phpdocx->assign('#deadline#', $spp->batas_sanggahan);
+			$this->doccy->phpdocx->assign('#deadlineterbilang#', RupiahMaker::terbilangMaker($spp->batas_sanggahan));
+			$this->renderDocx("Surat Pengumuman Pelelangan", true);
+		}
 		else {
 			$this->doccy->newFile('temp.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
