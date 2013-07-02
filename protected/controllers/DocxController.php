@@ -996,7 +996,11 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Surat Pengumuman Pelelangan"){
 			
-			$spp = SuratPengumumanPelelangan::model()->findByPk($id);			
+			$spp = SuratPengumumanPelelangan::model()->findByPk($id);	
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+						
+			// $doksupph = Dokumen::model()->find('id_pengadaan = /"'. $Dok->id_pengadaan . '/" and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+			// $supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
 			
 			$this->doccy->newFile('14a Pengumuman Pelelangan.docx');
 			
@@ -1005,13 +1009,15 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#nomor#', $spp->nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
-			$this->doccy->phpdocx->assign('#nosupph#', '.............................................');
-			$this->doccy->phpdocx->assign('#tglsupph#', '.............................................');
+			// $this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
+			// $this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
 			$this->doccy->phpdocx->assign('#penyedia#', $spp->nama_penyedia);
 			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($spp->harga_penawaran));
 			$this->doccy->phpdocx->assign('#keterangan#', $spp->keterangan);
 			$this->doccy->phpdocx->assign('#deadline#', $spp->batas_sanggahan);
 			$this->doccy->phpdocx->assign('#deadlineterbilang#', RupiahMaker::terbilangMaker($spp->batas_sanggahan));
+			$this->doccy->phpdocx->assign('#namapeng#', $Peng->nama_pengadaan);
+			$this->doccy->phpdocx->assign('#namaketua#', $ketua);
 			$this->renderDocx("Surat Pengumuman Pelelangan", true);
 		}
 		else {
