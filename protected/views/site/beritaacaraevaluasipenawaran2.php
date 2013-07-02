@@ -76,17 +76,51 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAEP,'tanggal Evaluasi Penawaran'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$BAEP,
-					'attribute'=>'tanggal_berita_acara',
-					'value'=>$BAEP->tanggal_berita_acara,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
-					),
-			));?>
-			<?php echo $form->error($BAEP,'tanggal_berita_acara'); ?>
+			<?php echo $form->labelEx($BAEP,'pemenang 1'); ?>
+			<?php echo $form->textField($BAEP,'pemenang',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->error($BAEP,'pemenang'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'alamat 1'); ?>
+			<?php echo $form->textArea($BAEP,'alamat',array('cols'=>40,'rows'=>3, 'maxlength'=>255)); ?>
+			<?php echo $form->error($BAEP,'alamat'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'NPWP 1'); ?>
+			<?php echo $form->textField($BAEP,'NPWP',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->error($BAEP,'NPWP'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'nilai 1'); ?>
+			<?php echo $form->textField($BAEP,'nilai',array('size'=>56,'maxlength'=>255)); ?>
+			<?php echo $form->error($BAEP,'nilai'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'pemenang 2'); ?>
+			<?php echo $form->textField($BAEP,'pemenang_2',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->error($BAEP,'pemenang_2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'alamat 2'); ?>
+			<?php echo $form->textArea($BAEP,'alamat_2',array('cols'=>40,'rows'=>3, 'maxlength'=>255)); ?>
+			<?php echo $form->error($BAEP,'alamat_2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'NPWP 2'); ?>
+			<?php echo $form->textField($BAEP,'NPWP_2',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->error($BAEP,'NPWP_2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'nilai 2'); ?>
+			<?php echo $form->textField($BAEP,'nilai_2',array('size'=>56,'maxlength'=>255)); ?>
+			<?php echo $form->error($BAEP,'nilai_2'); ?>
 		</div>
 	
 		<div class="row buttons">
