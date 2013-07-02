@@ -717,7 +717,7 @@ class DocxController extends Controller
 			$jumlah_penyedia_dokumen_sah = $BAPP->jumlah_penyedia_dokumen_sah;
 			$jumlah_penyedia_dokumen_tidak_sah = $BAPP->jumlah_penyedia_dokumen_tidak_sah;
 			$nama = $Peng->nama_pengadaan;
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$hari = Tanggal::getHari($tanggal);
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
@@ -763,7 +763,7 @@ class DocxController extends Controller
 			$nomor = $BAPP->nomor;
 			$jumlah_penyedia_diundang = $BAPP->jumlah_penyedia_diundang;
 			$nama = $Peng->nama_pengadaan;
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$hari = Tanggal::getHari($tanggal);
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
@@ -796,8 +796,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlah_penyedia_diundang);
-			$this->doccy->phpdocx->assign('#listperusahaandanharga#', '.............................................');
+			$this->doccy->phpdocx->assign('#jumlahmasuk#', $jumlah_penyedia_diundang);
+			$this->doccy->phpdocx->assign('#listperusahaanmasuk#', '.............................................');
 			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
 			$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 1.docx", true);
 		}
@@ -807,7 +807,7 @@ class DocxController extends Controller
 			$nomor = $BAPP->nomor;
 			$jumlah_penyedia_diundang = $BAPP->jumlah_penyedia_diundang;
 			$nama = $Peng->nama_pengadaan;
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$hari = Tanggal::getHari($tanggal);
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
@@ -840,8 +840,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlah_penyedia_diundang);
-			$this->doccy->phpdocx->assign('#listperusahaandanharga#', '.............................................');
+			$this->doccy->phpdocx->assign('#listperusahaan#', '.............................................');
 			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
 			$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 2.docx", true);
 		}
