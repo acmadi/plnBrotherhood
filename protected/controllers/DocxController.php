@@ -96,8 +96,8 @@ class DocxController extends Controller
 			$NPWP = $NDPP->NPWP;
 			$biaya = $NDPP->biaya;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$BAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 1"');
-			$BAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 2"');
+			$BAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
+			$BAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
 			$ndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$Dokndpp2=Dokumen::model()->findByPk($ndpp2->id_dokumen);
 			$DokBAE1=Dokumen::model()->findByPk($BAE1->id_dokumen);
