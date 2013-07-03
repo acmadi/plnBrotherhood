@@ -3474,7 +3474,7 @@ class SiteController extends Controller
 			$TOR->id_dokumen=$Dokumen2->id_dokumen;
 			
 			$RAB= new Rab;
-			$RAB->id_dokumen=$Dokumen2->id_dokumen;
+			$RAB->id_dokumen=$Dokumen3->id_dokumen;
 
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
