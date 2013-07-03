@@ -1862,11 +1862,13 @@ class DocxController extends Controller
 			$list = "1. " . Panitia::model()-findByPk($idPan)->nama_panitia;
 		}else{
 			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "                                                       ...........................................";
-			$list .= '<w:br/>';			
+			$list .= '<w:br/>';		
+			$list .= '<w:br/>';					
 			$list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . "                  ...........................................";
 			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';				
+				$list .= '<w:br/>';		
 				if($i%2==0){
 					$list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . "                  ...........................................";
 				}else{
@@ -1883,10 +1885,12 @@ class DocxController extends Controller
 		}else{
 			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "/Ketua : ...........................................";
 			$list .= '<w:br/>';			
+			$list .= '<w:br/>';		
 			$list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . "/Sekretaris : ...........................................";
 			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';						
+				$list .= '<w:br/>';		
 				$list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . "/Anggota : ...........................................";						
 			}
 		}
