@@ -1071,8 +1071,12 @@ class DocxController extends Controller
 			$this->doccy->newFile('9a Berita Acara Aanwijzing.docx');
 			$norks = $rks->nomor;
 			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$namapic = $this->getListPanitiaAanwijzing($Peng->id_panitia);
+			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;						
+			$jenispic2 = Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia;
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#nomorba#', $nomor);
 			$this->doccy->phpdocx->assign('#haritanggal#', Tanggal::getHariTanggalLengkap($Dok->tanggal));
@@ -1086,6 +1090,16 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#wakturapat#', Tanggal::getJamMenit($RKS->waktu_penjelasan));
 			$this->doccy->phpdocx->assign('#norks#', $RKS->nomor);
 			$this->doccy->phpdocx->assign('#tanggal_rks#', Tanggal::getHariTanggalLengkap($DokRKS->tanggal));
+			
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic);				
+			}else{
+				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic2);				
+			}
+			
+			$this->doccy->phpdocx->assign('#listpic#',$namapic);
+			$this->doccy->phpdocx->assign('#tdtgnpanitia#',$this->getListPanitiaTTAanwijzing($Peng->id_panitia));
+			
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Penawaran"){
@@ -1697,5 +1711,46 @@ class DocxController extends Controller
 		}
 		return  $list;
 	}
+	
+	function getListPanitiaAanwijzing($idPan){
+		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
+			$list = "1. " . Panitia::model()-findByPk($idPan)->nama_panitia;
+		}else{
+			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . " : sebagai Ketua merangkap Anggota  " ;
+			$list .= '<w:br/>';
+			$list .= '<w:br/>';
+			$list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . " : sebagai Sekretaris merangkap Anggota";
+			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			for ( $i=1;$i<=$n;$i++){
+				$list .= '<w:br/>';
+				$list .= '<w:br/>';
+				$list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . " : sebagai Anggota";		
+			}
+		}
+		return  $list;
+	}
+	
+	function getListPanitiaTTAanwijzing($idPan){
+		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
+			$list = "1. " . Panitia::model()-findByPk($idPan)->nama_panitia;
+		}else{
+			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "                                                       ...........................................";
+			$list .= '<w:br/>';
+			$list .= '<w:br/>';
+			$list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . "                  ...........................................";
+			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			for ( $i=1;$i<=$n;$i++){
+				$list .= '<w:br/>';
+				$list .= '<w:br/>';
+				if($i%2==0){
+					$list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . "                  ...........................................";
+				}else{
+					$list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . "                                                       ...........................................";
+				}				
+			}
+		}
+		return  $list;
+	}
+	
 }
 ?>
