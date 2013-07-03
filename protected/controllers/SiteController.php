@@ -2846,6 +2846,12 @@ class SiteController extends Controller
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
 				
+				$Dokumen1->id_dokumen=$somevariable+1;
+				$Dokumen1->nama_dokumen='Pakta Integritas Akhir Panitia';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
+				
 				$NDUP= new NotaDinasUsulanPemenang;
 				$NDUP->id_dokumen=$Dokumen0->id_dokumen;
 				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
@@ -2854,6 +2860,9 @@ class SiteController extends Controller
 					$NDUP->NPWP_2='-';
 					$NDUP->biaya_2='0';
 				}
+				
+				$PIP2= new PaktaIntegritasPanitia2;
+				$PIP2->id_dokumen=$Dokumen1->id_dokumen;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2865,10 +2874,11 @@ class SiteController extends Controller
 					$valid=$NDUP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
+						$Dokumen1->tanggal=$Dokumen0->tanggal;
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)){
-								if($NDUP->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($NDUP->save(false)&&$PIP2->save(false)){
 									$this->redirect(array('editnotadinasusulanpemenang','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -2896,8 +2906,10 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Usulan Pemenang"');
+				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Akhir Panitia"');
 				
 				$NDUP=NotaDinasUsulanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				$PIP2=PaktaIntegritasPanitia2::model()->findByPk($Dokumen1->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2909,10 +2921,11 @@ class SiteController extends Controller
 					$valid=$NDUP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
+						$Dokumen1->tanggal=$Dokumen0->tanggal;
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)){
-								if($NDUP->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($NDUP->save(false)&&$PIP2->save(false)){
 									$this->redirect(array('editnotadinasusulanpemenang','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -2921,7 +2934,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('notadinasusulanpemenang',array(
-					'NDUP'=>$NDUP,'Dokumen0'=>$Dokumen0,
+					'NDUP'=>$NDUP,'Dokumen0'=>$Dokumen0,'PIP2'=>$PIP2,
 				));
 
 			}
