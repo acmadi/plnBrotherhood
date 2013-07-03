@@ -414,13 +414,16 @@ class DocxController extends Controller
 				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
 			}
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+			
 			$dokndpp2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp2 = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp2->id_dokumen);
+
 			$nondpp = $ndpp2->nomor;
 			$tanggalndpp = $dokndpp2->tanggal;
 			$nama = $Peng->nama_pengadaan;
 			$terbilang = RupiahMaker::terbilangMaker($biaya);
 			
+			$this->doccy->newFile('14 Nota Dinas Penetapan Pemenang.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
@@ -445,6 +448,8 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Nota Dinas Usulan Pemenang"){
 			
 			$NDUP=NotaDinasUsulanPemenang::model()->findByPk($id);	
+
+			$metode = $Peng->metode_pengadaan;
 			
 			if (($metode == "Pemilihan Langsung")||($metode == "Pelelangan")){
 			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(lelang-pilih).docx');
@@ -452,7 +457,8 @@ class DocxController extends Controller
 			else{
 			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
 			}
-			
+			$nama = $Peng->nama_pengadaan;
+
 			$pemenang = $NDUP->nama_penyedia;
 			$alamat = $NDUP->alamat;
 			$NPWP = $NDUP->NPWP;
@@ -466,19 +472,26 @@ class DocxController extends Controller
 			$terbilang2 = RupiahMaker::terbilangMaker($biaya2);
 			
 			$nomor = $NDUP->nomor;
+
 			$dari = $NDUP->dari;
+
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$waktu = $NDUP->waktu_pelaksanaan;
+			$waktu = Tanggal::getTanggalLengkap($NDUP->waktu_pelaksanaan);
 			$tempat = $NDUP->tempat_penyerahan;
-			$metode = $Peng->metode_pengadaan;
 			
-			
+			if(($metode == "Pelelangan")||($metode == "Pemilihan Langsung")){
+				$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(lelang-pilih).docx');
+			}
+			else{
+				$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
+			}
+
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#dari#', $dari);
+			// $this->doccy->phpdocx->assign('#dari#', $dari);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
@@ -491,8 +504,10 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#NPWP2#', $NPWP2);
 			$this->doccy->phpdocx->assign('#biaya2#', $biaya2);
 			$this->doccy->phpdocx->assign('#terbilang2#', $terbilang2);
+
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
+
 			$this->doccy->phpdocx->assign('#zzz#', '..........');
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
