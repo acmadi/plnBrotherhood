@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 02, 2013 at 02:48 PM
+-- Generation Time: Jul 03, 2013 at 08:03 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -125,7 +125,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   `jumlah_penyedia_diundang` int(10) NOT NULL,
   `jumlah_penyedia_dokumen_sah` int(10) NOT NULL,
   `jumlah_penyedia_dokumen_tidak_sah` int(10) NOT NULL,
-  `status_metode` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

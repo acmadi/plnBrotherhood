@@ -65,7 +65,7 @@
 					'value'=>$NDPTR->tanggal_nota_dinas_permintaan,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'dd-mm-yy',
+					'dateFormat'=>'yy-mm-dd',
 					),
 			));?>
 			<?php echo $form->error($NDPTR,'tanggal_nota_dinas_permintaan'); ?>
