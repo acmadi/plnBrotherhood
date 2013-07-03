@@ -473,7 +473,7 @@ class DocxController extends Controller
 			
 			$nomor = $NDUP->nomor;
 
-			$dari = $NDUP->dari;
+			//$dari = $NDUP->dari;
 
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$waktu = Tanggal::getTanggalLengkap($NDUP->waktu_pelaksanaan);
@@ -1064,8 +1064,8 @@ class DocxController extends Controller
 			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
-			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
-			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
+			// $sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			// $anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$this->doccy->newFile('9a Berita Acara Aanwijzing.docx');
@@ -1083,8 +1083,8 @@ class DocxController extends Controller
 			// $this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			$this->doccy->phpdocx->assign('#anggota#', $anggota1);
+			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			// $this->doccy->phpdocx->assign('#anggota#', $anggota1);
 			$DokRKS=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 			$this->doccy->phpdocx->assign('#wakturapat#', Tanggal::getJamMenit($RKS->waktu_penjelasan));
@@ -1280,7 +1280,7 @@ class DocxController extends Controller
 			$tanggal = $Dok->tanggal;
 			$hari = Tanggal::getHari($tanggal);
 			$tanggal1 = RupiahMaker::terbilangMaker(Tanggal::getTanggal($tanggal));
-			$bulan = RupiahMaker::terbilangMaker(Tanggal::getBulanA($tanggal));
+			$bulan = Tanggal::getBulanA($tanggal);
 			$tahun = RupiahMaker::terbilangMaker(Tanggal::getTahun($tanggal));
 			$tgll = Tanggal::getTanggalLengkap($tanggal);
 			$tempat = $Dok->tempat;
@@ -1316,7 +1316,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sk#', $nosk);
 			$this->doccy->phpdocx->assign('#tanggalsk#', $tgll);
 			$this->doccy->phpdocx->assign('#nospph#', '---');
-			$this->doccy->phpdocx->assign('#zzz#', $tgll);
+			$this->doccy->phpdocx->assign('#terbilang#', $tgll);
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			//$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			//$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
@@ -1460,184 +1460,134 @@ class DocxController extends Controller
 //	=====================================Daftar Hadir=====================================
 		else if ($Dok->nama_dokumen == "Daftar Hadir Aanwijzing"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Aanwijzing.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->renderDocx("Daftar Hadir Evaluasi Penawaran.docx", true);
-		}
-		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran Sampul Satu"){
-						
-			$this->doccy->newFile('daftarhadir.docx');
-			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Evaluasi Penawaran Sampul 1.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran Sampul Dua"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Evaluasi Penawaran Sampul 2.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran Tahap Satu"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Evaluasi Penawaran Tahap 1.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Evaluasi Penawaran Tahap Dua"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Evaluasi Penawaran Tahap 2.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Negosiasi Klarifikasi"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);;
 			$this->renderDocx("Daftar Hadir Negosiasi dan Klarifikasi.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Pembukaan Penawaran.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran Sampul Satu"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Pembukaan Penawaran Sampul Satu.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran Sampul Dua"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Pembukaan Penawaran Sampul Dua.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran Tahap Satu"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Pembukaan Penawaran Tahap Satu.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Pembukaan Penawaran Tahap Dua"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Pembukaan Penawaran Tahap Dua.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Daftar Hadir Prakualifikasi"){
 						
+			$nama = $Peng->nama_pengadaan;
 			$this->doccy->newFile('daftarhadir.docx');
 			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Prakualifikasi.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Surat Pengumuman Pelelangan"){
