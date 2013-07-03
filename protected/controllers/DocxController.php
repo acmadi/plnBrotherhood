@@ -557,6 +557,7 @@ class DocxController extends Controller
 			$notadinaspermintaan = $NDPTR->nota_dinas_permintaan;
 			$tanggalpermintaan = $NDPTR->tanggal_nota_dinas_permintaan;
 			$perihalpermintaan = $NDPTR->perihal_permintaan;
+			$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
 			
 			$this->doccy->newFile('0 Nota Dinas permintaan TOR RAB.docx');
 			
@@ -571,8 +572,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#notadinaspermintaan#', $notadinaspermintaan);
 			$this->doccy->phpdocx->assign('#tanggalpermintaan#', $tanggalpermintaan);
 			$this->doccy->phpdocx->assign('#perihalpermintaan#', $perihalpermintaan);
-			$this->doccy->phpdocx->assign('#nama#', 'KDIVMUM');
-			$this->renderDocx("Nota Dinas Permintaan TOR/RAB.docx", true);
+			$this->doccy->phpdocx->assign('#nama#', $namakadiv);
+			$this->renderDocx("Nota Dinas Permintaan TOR RAB.docx", true);
 		}
 //	=====================================Surat-Surat=====================================
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
