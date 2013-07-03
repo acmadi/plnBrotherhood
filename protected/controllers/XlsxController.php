@@ -7,15 +7,26 @@ class XlsxController extends Controller
 	{
 		$id= Yii::app()->getRequest()->getQuery('id');
 		$crincian = RincianRks::model()->findByPk($id);
+		$crks = Rks::model()->findByPk($crincian->id_dokumen);
+		$cdokumen = Dokumen::model()->findByPk($crincian->id_dokumen);
+		$cpengadaan = Pengadaan::model()->findByPk($cdokumen->id_pengadaan);
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
-		$objPHPExcel->setActiveSheetIndexByName('LAMP.BUKA.1SAMPUL (2)')->setCellValue('D35', 'hello world');
-		ob_end_clean();
-		ob_start();
+		if ($cpengadaan->metode_pengadaan == 'Penunjukan Langsung') {
+			if ($crks->tipe_rks == 1) {
+				if ($crincian->nama_rincian == 'Lampiran 2') {
+					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_2.xlsx');
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B6', 'NOMOR : ' . $crks->nomor);
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B7', 'TANGGAL : ' . strtoupper(Tanggal::getTanggalLengkap($cdokumen->tanggal)));
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B8', strtoupper($cpengadaan->nama_pengadaan));
+					ob_end_clean();
+					ob_start();
+					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_2.xlsx"');
+				}
+			}
+		}
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="test.xlsx"');
 		header('Cache-Control: max-age=0');
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		$objWriter->save('php://output');
