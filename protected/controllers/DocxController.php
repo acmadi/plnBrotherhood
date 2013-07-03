@@ -968,7 +968,7 @@ class DocxController extends Controller
 			$lamaterbilang = RupiahMaker::TerbilangMaker($lama);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
-			$perihal = $SPP->perihal;
+			//$perihal = $SPP->perihal;
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
 			
@@ -1009,18 +1009,19 @@ class DocxController extends Controller
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#kepada#', $penyedia);
-			$this->doccy->phpdocx->assign('#alamat#', '');
+			$this->doccy->phpdocx->assign('#penyedia#', $penyedia);
+			$this->doccy->phpdocx->assign('#perihal#', $nama);
+			$this->doccy->phpdocx->assign('#alamatpenyedia#', '');
 			$this->doccy->phpdocx->assign('#nosupph#', '');
 			$this->doccy->phpdocx->assign('#tglsupph#', '');
 			$this->doccy->phpdocx->assign('#nospph#', '');
-			$this->doccy->phpdocx->assign('#tgglspph#', '');
+			$this->doccy->phpdocx->assign('#tglspph#', '');
 			$this->doccy->phpdocx->assign('#nospp#', '');
 			$this->doccy->phpdocx->assign('#tglspp#', '');
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
-			$this->doccy->phpdocx->assign('#lama#', $lama);
+			$this->doccy->phpdocx->assign('#lamapengerjaan#', $lama);
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
 			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
 			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
