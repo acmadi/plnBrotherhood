@@ -56,14 +56,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php echo $form->errorSummary($Rks); ?>
 			
 				<h4><b> RKS </b></h4>
-				
-				<div class="row">
-					<?php echo $form->labelEx($Rks,'jenis rks'); ?>
-					<?php echo $form->radioButtonList($Rks,'tipe_rks',
-						array(1=>'Barang',2=>'Barang dan Jasa',3=>'Jasa'),
-						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-					<?php echo $form->error($Rks,'tipe_rks'); ?>
-				</div>
+				<?php if ($Rks->isNewRecord){ ?>
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'jenis rks'); ?>
+						<?php echo $form->radioButtonList($Rks,'tipe_rks',
+							array(1=>'Barang',2=>'Barang dan Jasa',3=>'Jasa'),
+							array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+						<?php echo $form->error($Rks,'tipe_rks'); ?>
+					</div>
+				<?php } ?>
 				
 				<div class="row">
 					<?php echo $form->labelEx($Rks,'nomor'); ?>
