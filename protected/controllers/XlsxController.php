@@ -3,13 +3,15 @@
 class XlsxController extends Controller
 {
 
-	public function actionDownload()
+	public function actionDownloadRks()
 	{
+		$id= Yii::app()->getRequest()->getQuery('id');
+		$crincian = RincianRks::model()->findByPk($id);
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
-		// $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', 'Hello')->setCellValue('A2', 'world');
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
-		$objPHPExcel = $objReader->load($templatePath . '16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx');
+		$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
+		$objPHPExcel->setActiveSheetIndexByName('LAMP.BUKA.1SAMPUL (2)')->setCellValue('D35', 'hello world');
 		ob_end_clean();
 		ob_start();
 		header('Content-Type: application/vnd.ms-excel');
