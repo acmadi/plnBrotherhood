@@ -497,8 +497,11 @@ class DocxController extends Controller
 				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
 				$noBAE1 = $BAE1->nomor;
 				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
-				$noBAE2 = "-";
-				$tglBAE2 = "-";
+				$noBAE2 = "";
+				$tglBAE2 = "";
+				$Kal1 = "";
+				$Kal2 = "";
+				$Kal3 = "";
 			}
 			else if ($metode == "Dua Sampul"){
 				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
@@ -510,6 +513,10 @@ class DocxController extends Controller
 				$BAE2 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE2->id_dokumen);
 				$noBAE2 = $BAE2->nomor;
 				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
+				$Kal1 = "dan Berita Acara Evaluasi Penawaran harga (sampul) II No. : ";
+				$Kal2 = "tanggal";
+				$Kal3 = "dengan ini ditetapkan Perusahaan tersebut dibawah ini sebagai pemenang untuk melaksanakan Pekerjaan";
+			
 			}
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			
@@ -538,6 +545,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
 			$this->doccy->phpdocx->assign('#NPWP#', $NPWP);
+				$this->doccy->phpdocx->assign('#Kal1#', $Kal1);
+				$this->doccy->phpdocx->assign('#Kal2#', $Kal2);
+				$this->doccy->phpdocx->assign('#Kal3#', $Kal3);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#terbilang#', $terbilang);
 			$this->renderDocx("Nota Dinas Penetapan Pemenang.docx", true);
@@ -961,6 +971,7 @@ class DocxController extends Controller
 			$nomor = $SPP->nomor;
 			$penyedia = $SPP->nama_penyedia;
 			$biaya = $SPP->harga;
+			$biayaa = RupiahMaker::convertInt($biaya);
 			$biayaterbilang = RupiahMaker::TerbilangMaker($biaya);
 			$jaminan = $SPP->jaminan;
 			$jaminanterbilang = RupiahMaker::TerbilangMaker($jaminan);
@@ -968,38 +979,46 @@ class DocxController extends Controller
 			$lamaterbilang = RupiahMaker::TerbilangMaker($lama);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
-			//$perihal = $SPP->perihal;
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
 			
-			// $doksupph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
-			// $supph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
-			// $nosupph = $supph->nomor;
-			// $tglsupph = $doksupph->tanggal;
+			$doksupph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+			$supph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
+			$nosupph = $supph->nomor;
+			$tglsupph = Tanggal::getTanggalLengkap($doksupph->tanggal);
 			
 			// $dokspph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengantar Penawaran Harga"');
 			// $spph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspph->id_dokumen);
 			// $nospph = $spph->nomor;
-			// $tglspph = $dokspph->tanggal;
+			// $tglspph = Tanggal::geetTanggalLengkap($dokspph->tanggal);
 			
-			// $dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
-			// $spp = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspp->id_dokumen);
-			// $nospp = $spp->nomor;
-			// $tglspp = $dokspp->tanggal;
 			
 			if ($metode == "Penunjukan Langsung"){
 				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Tunjuk).docx');
 			}
 			else if($metode == "Pemilihan Langsung"){
+				// $dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
+				// $spp = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspp->id_dokumen);
+				// $nospp = $spp->nomor;
+				// $tglspp = Tanggal::getTanggalLengkap($dokspp->tanggal);
 				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Pilih).docx');
+				$this->doccy->phpdocx->assign('#nospp#', '');
+				$this->doccy->phpdocx->assign('#tglspp#', '');
+
 			}
 			else if($metode == "Pelelangan"){
 				$noski = $SPP->no_ski;
 				$nomorski = $SPP->nomor_ski;
-				$tglski = $SPP->tanggal_ski;
+				$tglski = Tanggal::getTanggalLengkap($SPP->tanggal_ski);
 				
+				// $dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
+				// $spp = SuratPengumumanPelelangan::model()->findByPk($dokspp->id_dokumen);
+				// $nospp = $spp->nomor;
+				// $tglspp = Tanggal::getTanggalLengkap($dokspp->tanggal);
+			
 				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Lelang).docx');
-				
+				$this->doccy->phpdocx->assign('#nospp#', $nospp);
+				$this->doccy->phpdocx->assign('#tglspp#', $tglspp);
 				$this->doccy->phpdocx->assign('#noski#', $noski);
 				$this->doccy->phpdocx->assign('#tglski#', $tglski);
 				$this->doccy->phpdocx->assign('#nomorski#', $nomorski);
@@ -1012,14 +1031,12 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#penyedia#', $penyedia);
 			$this->doccy->phpdocx->assign('#perihal#', $nama);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', '');
-			$this->doccy->phpdocx->assign('#nosupph#', '');
-			$this->doccy->phpdocx->assign('#tglsupph#', '');
+			$this->doccy->phpdocx->assign('#nosupph#', $nosupph);
+			$this->doccy->phpdocx->assign('#tsupph#', $tglsupph);
 			$this->doccy->phpdocx->assign('#nospph#', '');
 			$this->doccy->phpdocx->assign('#tglspph#', '');
-			$this->doccy->phpdocx->assign('#nospp#', '');
-			$this->doccy->phpdocx->assign('#tglspp#', '');
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#biaya#', $biayaa);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
 			$this->doccy->phpdocx->assign('#lamapengerjaan#', $lama);
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
