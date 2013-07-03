@@ -535,7 +535,7 @@ class SiteController extends Controller
 						$Cover = new RincianRks;
 						$Cover->id_dokumen=$RKS->id_dokumen;
 						$Cover->nama_rincian="Cover";
-						if($Pengadaan->metode_pengadaan=="Penunjukan Langsung"){
+						// if($Pengadaan->metode_pengadaan=="Penunjukan Langsung"){
 							if($RKS->tipe_rks==1){
 								$PLBD= new RincianRks;
 								$PLBD->id_dokumen=$RKS->id_dokumen;
@@ -621,96 +621,96 @@ class SiteController extends Controller
 								$PLJL5->id_dokumen=$RKS->id_dokumen;
 								$PLJL5->nama_rincian="Lampiran 5";
 							}
-						} else if ($Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
-							if($RKS->tipe_rks==1){
-								$PMBD= new RincianRks;
-								$PMBD->id_dokumen=$RKS->id_dokumen;
-								$PMBD->nama_rincian="Daftar Isi";
-								$PMBI= new RincianRks;
-								$PMBI->id_dokumen=$RKS->id_dokumen;
-								$PMBI->nama_rincian="Isi";
-								$PMBL1= new RincianRks;
-								$PMBL1->id_dokumen=$RKS->id_dokumen;
-								$PMBL1->nama_rincian="Lampiran 1";
-								$PMBL2= new RincianRks;
-								$PMBL2->id_dokumen=$RKS->id_dokumen;
-								$PMBL2->nama_rincian="Lampiran 2";
-								$PMBL3= new RincianRks;
-								$PMBL3->id_dokumen=$RKS->id_dokumen;
-								$PMBL3->nama_rincian="Lampiran 3";
-								$PMBL4= new RincianRks;
-								$PMBL4->id_dokumen=$RKS->id_dokumen;
-								$PMBL4->nama_rincian="Lampiran 4";
-								$PMBL5= new RincianRks;
-								$PMBL5->id_dokumen=$RKS->id_dokumen;
-								$PMBL5->nama_rincian="Lampiran 5";
-								$PMBL6= new RincianRks;
-								$PMBL6->id_dokumen=$RKS->id_dokumen;
-								$PMBL6->nama_rincian="Lampiran 6";
-								$PMBL7= new RincianRks;
-								$PMBL7->id_dokumen=$RKS->id_dokumen;
-								$PMBL7->nama_rincian="Lampiran 7";
-								$PMBLba= new RincianRks;
-								$PMBLba->id_dokumen=$RKS->id_dokumen;
-								$PMBLba->nama_rincian="Lampiran ba";
-							} else if ($RKS->tipe_rks==2){
-								$PMBJD= new RincianRks;
-								$PMBJD->id_dokumen=$RKS->id_dokumen;
-								$PMBJD->nama_rincian="Daftar Isi";
-								$PMBJI= new RincianRks;
-								$PMBJI->id_dokumen=$RKS->id_dokumen;
-								$PMBJI->nama_rincian="Isi";
-								$PMBJL1= new RincianRks;
-								$PMBJL1->id_dokumen=$RKS->id_dokumen;
-								$PMBJL1->nama_rincian="Lampiran 1";
-								$PMBJL2= new RincianRks;
-								$PMBJL2->id_dokumen=$RKS->id_dokumen;
-								$PMBJL2->nama_rincian="Lampiran 2";
-								$PMBJL3= new RincianRks;
-								$PMBJL3->id_dokumen=$RKS->id_dokumen;
-								$PMBJL3->nama_rincian="Lampiran 3";
-								$PMBJL4= new RincianRks;
-								$PMBJL4->id_dokumen=$RKS->id_dokumen;
-								$PMBJL4->nama_rincian="Lampiran 4";
-								$PMBJL5= new RincianRks;
-								$PMBJL5->id_dokumen=$RKS->id_dokumen;
-								$PMBJL5->nama_rincian="Lampiran 5";
-								$PMBJL6= new RincianRks;
-								$PMBJL6->id_dokumen=$RKS->id_dokumen;
-								$PMBJL6->nama_rincian="Lampiran 6";
-								$PMBJLba= new RincianRks;
-								$PMBJLba->id_dokumen=$RKS->id_dokumen;
-								$PMBJLba->nama_rincian="Lampiran ba";
-							} else if ($RKS->tipe_rks==3){
-								$PMJD= new RincianRks;
-								$PMJD->id_dokumen=$RKS->id_dokumen;
-								$PMJD->nama_rincian="Daftar Isi";
-								$PMJI= new RincianRks;
-								$PMJI->id_dokumen=$RKS->id_dokumen;
-								$PMJI->nama_rincian="Isi";
-								$PMJL1= new RincianRks;
-								$PMJL1->id_dokumen=$RKS->id_dokumen;
-								$PMJL1->nama_rincian="Lampiran 1";
-								$PMJL2= new RincianRks;
-								$PMJL2->id_dokumen=$RKS->id_dokumen;
-								$PMJL2->nama_rincian="Lampiran 2";
-								$PMJL3= new RincianRks;
-								$PMJL3->id_dokumen=$RKS->id_dokumen;
-								$PMJL3->nama_rincian="Lampiran 3";
-								$PMJL4= new RincianRks;
-								$PMJL4->id_dokumen=$RKS->id_dokumen;
-								$PMJL4->nama_rincian="Lampiran 4";
-								$PMJL5= new RincianRks;
-								$PMJL5->id_dokumen=$RKS->id_dokumen;
-								$PMJL5->nama_rincian="Lampiran 5";
-							}
-						}
+						// } else if ($Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
+							// if($RKS->tipe_rks==1){
+								// $PMBD= new RincianRks;
+								// $PMBD->id_dokumen=$RKS->id_dokumen;
+								// $PMBD->nama_rincian="Daftar Isi";
+								// $PMBI= new RincianRks;
+								// $PMBI->id_dokumen=$RKS->id_dokumen;
+								// $PMBI->nama_rincian="Isi";
+								// $PMBL1= new RincianRks;
+								// $PMBL1->id_dokumen=$RKS->id_dokumen;
+								// $PMBL1->nama_rincian="Lampiran 1";
+								// $PMBL2= new RincianRks;
+								// $PMBL2->id_dokumen=$RKS->id_dokumen;
+								// $PMBL2->nama_rincian="Lampiran 2";
+								// $PMBL3= new RincianRks;
+								// $PMBL3->id_dokumen=$RKS->id_dokumen;
+								// $PMBL3->nama_rincian="Lampiran 3";
+								// $PMBL4= new RincianRks;
+								// $PMBL4->id_dokumen=$RKS->id_dokumen;
+								// $PMBL4->nama_rincian="Lampiran 4";
+								// $PMBL5= new RincianRks;
+								// $PMBL5->id_dokumen=$RKS->id_dokumen;
+								// $PMBL5->nama_rincian="Lampiran 5";
+								// $PMBL6= new RincianRks;
+								// $PMBL6->id_dokumen=$RKS->id_dokumen;
+								// $PMBL6->nama_rincian="Lampiran 6";
+								// $PMBL7= new RincianRks;
+								// $PMBL7->id_dokumen=$RKS->id_dokumen;
+								// $PMBL7->nama_rincian="Lampiran 7";
+								// $PMBLba= new RincianRks;
+								// $PMBLba->id_dokumen=$RKS->id_dokumen;
+								// $PMBLba->nama_rincian="Lampiran ba";
+							// } else if ($RKS->tipe_rks==2){
+								// $PMBJD= new RincianRks;
+								// $PMBJD->id_dokumen=$RKS->id_dokumen;
+								// $PMBJD->nama_rincian="Daftar Isi";
+								// $PMBJI= new RincianRks;
+								// $PMBJI->id_dokumen=$RKS->id_dokumen;
+								// $PMBJI->nama_rincian="Isi";
+								// $PMBJL1= new RincianRks;
+								// $PMBJL1->id_dokumen=$RKS->id_dokumen;
+								// $PMBJL1->nama_rincian="Lampiran 1";
+								// $PMBJL2= new RincianRks;
+								// $PMBJL2->id_dokumen=$RKS->id_dokumen;
+								// $PMBJL2->nama_rincian="Lampiran 2";
+								// $PMBJL3= new RincianRks;
+								// $PMBJL3->id_dokumen=$RKS->id_dokumen;
+								// $PMBJL3->nama_rincian="Lampiran 3";
+								// $PMBJL4= new RincianRks;
+								// $PMBJL4->id_dokumen=$RKS->id_dokumen;
+								// $PMBJL4->nama_rincian="Lampiran 4";
+								// $PMBJL5= new RincianRks;
+								// $PMBJL5->id_dokumen=$RKS->id_dokumen;
+								// $PMBJL5->nama_rincian="Lampiran 5";
+								// $PMBJL6= new RincianRks;
+								// $PMBJL6->id_dokumen=$RKS->id_dokumen;
+								// $PMBJL6->nama_rincian="Lampiran 6";
+								// $PMBJLba= new RincianRks;
+								// $PMBJLba->id_dokumen=$RKS->id_dokumen;
+								// $PMBJLba->nama_rincian="Lampiran ba";
+							// } else if ($RKS->tipe_rks==3){
+								// $PMJD= new RincianRks;
+								// $PMJD->id_dokumen=$RKS->id_dokumen;
+								// $PMJD->nama_rincian="Daftar Isi";
+								// $PMJI= new RincianRks;
+								// $PMJI->id_dokumen=$RKS->id_dokumen;
+								// $PMJI->nama_rincian="Isi";
+								// $PMJL1= new RincianRks;
+								// $PMJL1->id_dokumen=$RKS->id_dokumen;
+								// $PMJL1->nama_rincian="Lampiran 1";
+								// $PMJL2= new RincianRks;
+								// $PMJL2->id_dokumen=$RKS->id_dokumen;
+								// $PMJL2->nama_rincian="Lampiran 2";
+								// $PMJL3= new RincianRks;
+								// $PMJL3->id_dokumen=$RKS->id_dokumen;
+								// $PMJL3->nama_rincian="Lampiran 3";
+								// $PMJL4= new RincianRks;
+								// $PMJL4->id_dokumen=$RKS->id_dokumen;
+								// $PMJL4->nama_rincian="Lampiran 4";
+								// $PMJL5= new RincianRks;
+								// $PMJL5->id_dokumen=$RKS->id_dokumen;
+								// $PMJL5->nama_rincian="Lampiran 5";
+							// }
+						// }
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($PAP1->save(false)&&$RKS->save(false)){
 									$Cover->save(false);
-									if($Pengadaan->metode_pengadaan=="Penunjukan Langsung"){
+									// if($Pengadaan->metode_pengadaan=="Penunjukan Langsung"){
 										if($RKS->tipe_rks==1){
 											$PLBD->save(false);
 											$PLBI->save(false);										
@@ -741,38 +741,38 @@ class SiteController extends Controller
 											$PLJL4->save(false);
 											$PLJL5->save(false);
 										}
-									} else if ($Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
-										if($RKS->tipe_rks==1){
-											$PMBD->save(false);
-											$PMBI->save(false);
-											$PMBL1->save(false);
-											$PMBL2->save(false);
-											$PMBL3->save(false);
-											$PMBL4->save(false);
-											$PMBL5->save(false);
-											$PMBL6->save(false);
-											$PMBL7->save(false);
-											$PMBLba->save(false);
-										} else if ($RKS->tipe_rks==2){
-											$PMBJD->save(false);
-											$PMBJI->save(false);
-											$PMBJL1->save(false);
-											$PMBJL2->save(false);
-											$PMBJL3->save(false);
-											$PMBJL4->save(false);
-											$PMBJL5->save(false);
-											$PMBJL6->save(false);
-											$PMBJLba->save(false);
-										} else if ($RKS->tipe_rks==3){
-											$PMJD->save(false);
-											$PMJI->save(false);
-											$PMJL1->save(false);
-											$PMJL2->save(false);
-											$PMJL3->save(false);
-											$PMJL4->save(false);
-											$PMJL5->save(false);
-										}
-									}
+									// } else if ($Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
+										// if($RKS->tipe_rks==1){
+											// $PMBD->save(false);
+											// $PMBI->save(false);
+											// $PMBL1->save(false);
+											// $PMBL2->save(false);
+											// $PMBL3->save(false);
+											// $PMBL4->save(false);
+											// $PMBL5->save(false);
+											// $PMBL6->save(false);
+											// $PMBL7->save(false);
+											// $PMBLba->save(false);
+										// } else if ($RKS->tipe_rks==2){
+											// $PMBJD->save(false);
+											// $PMBJI->save(false);
+											// $PMBJL1->save(false);
+											// $PMBJL2->save(false);
+											// $PMBJL3->save(false);
+											// $PMBJL4->save(false);
+											// $PMBJL5->save(false);
+											// $PMBJL6->save(false);
+											// $PMBJLba->save(false);
+										// } else if ($RKS->tipe_rks==3){
+											// $PMJD->save(false);
+											// $PMJI->save(false);
+											// $PMJL1->save(false);
+											// $PMJL2->save(false);
+											// $PMJL3->save(false);
+											// $PMJL4->save(false);
+											// $PMJL5->save(false);
+										// }
+									// }
 									$this->redirect(array('editrks','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
