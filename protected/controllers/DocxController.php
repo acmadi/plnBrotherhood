@@ -868,9 +868,6 @@ class DocxController extends Controller
 			$jaminanterbilang = RupiahMaker::TerbilangMaker($jaminan);
 			$lama = $SPP->lama_penyerahan;
 			$lamaterbilang = RupiahMaker::TerbilangMaker($lama);
-			$noski = $SPP->no_ski;
-			$nomorski = $SPP->nomor_ski;
-			$tglski = $SPP->tanggal_ski;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
 			$perihal = $SPP->perihal;
@@ -893,13 +890,21 @@ class DocxController extends Controller
 			// $tglspp = $dokspp->tanggal;
 			
 			if ($metode == "Penunjukan Langsung"){
-			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Tunjuk).docx');
+				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Tunjuk).docx');
 			}
 			else if($metode == "Pemilihan Langsung"){
-			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Pilih).docx');
+				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Pilih).docx');
 			}
 			else if($metode == "Pelelangan"){
-			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Lelang).docx');
+				$noski = $SPP->no_ski;
+				$nomorski = $SPP->nomor_ski;
+				$tglski = $SPP->tanggal_ski;
+				
+				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Lelang).docx');
+				
+				$this->doccy->phpdocx->assign('#noski#', $noski);
+				$this->doccy->phpdocx->assign('#tglski#', $tglski);
+				$this->doccy->phpdocx->assign('#nomorski#', $nomorski);
 			}
 			
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -914,9 +919,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tgglspph#', '');
 			$this->doccy->phpdocx->assign('#nospp#', '');
 			$this->doccy->phpdocx->assign('#tglspp#', '');
-			$this->doccy->phpdocx->assign('#noski#', $noski);
-			$this->doccy->phpdocx->assign('#tglski#', $tglski);
-			$this->doccy->phpdocx->assign('#nomorski#', $nomorski);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
