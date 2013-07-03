@@ -730,11 +730,11 @@ class DocxController extends Controller
 			}
 			else if ($metode == "Dua Sampul"){
 				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 1"');
+				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
 				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
 				$noBAE1 = $BAE1->nomor;
 				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
-				$DokBAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul 2"');
+				$DokBAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Dua"');
 				$BAE2 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE2->id_dokumen);
 				$noBAE2 = $BAE2->nomor;
 				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
