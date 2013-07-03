@@ -772,7 +772,7 @@ class DocxController extends Controller
 			$tanggal = " " . Tanggal::getTanggalLengkap($Dok->tanggal);
 			// $lingkup = $SUPH->lingkup_kerja;
 			$waktukerja = $SUPH->waktu_kerja;
-			$masa = $SUPH->masa_berlaku_penawaran;
+			$masa = $rks->lama_berlaku_penawaran;
 			// $lingkup = $SUPH->lingkup_kerja;
 			$tempat = $SUPH->tempat_penyerahan;
 			$nama = $Peng->nama_pengadaan;
@@ -781,9 +781,9 @@ class DocxController extends Controller
 			
 			$terbilang = RupiahMaker::terbilangMaker($masa);
 			
-			$norks = $rks -> nomor;
-			$nohps = $hps -> nomor;
-			$tglrks = Tanggal::getTanggalLengkap($dokrks -> tanggal);
+			// $norks = $rks -> nomor;
+			// $nohps = $hps -> nomor;
+			// $tglrks = Tanggal::getTanggalLengkap($dokrks -> tanggal);
 			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
 			$dari= $NDPP->dari;
@@ -802,9 +802,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#bulan#', $masa);
 			$this->doccy->phpdocx->assign('#terbilangbulan#', $terbilang);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#RKS#', $norks);
-			$this->doccy->phpdocx->assign('#HPS#', $nohps);
-			$this->doccy->phpdocx->assign('#tglRKS#', $tglrks);
+			// $this->doccy->phpdocx->assign('#RKS#', $norks);
+			// $this->doccy->phpdocx->assign('#HPS#', $nohps);
+			// $this->doccy->phpdocx->assign('#tglRKS#', $tglrks);
 			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#tanggalpenawaran#', $tanggalpenawaran);

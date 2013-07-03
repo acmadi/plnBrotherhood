@@ -59,7 +59,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null) {?>
 				<?php if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pelelangan"){ ?>
 				Nomor Surat Undangan Pengambilan Dokumen Pengadaan : <?php echo $SUPDP->nomor ?> <br/>
-				<?php } else if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Penunjukan Langsung"||Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->metode_pengadaan=="Pemilihan Langsung") { ?>
+				<?php } else if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Penunjukan Langsung"||Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pemilihan Langsung") { ?>
 				Nomor Surat Undangan Permintaan Penawaran Harga : <?php echo $SUPPPH->nomor ?> <br/>
 				<?php } ?>
 			<?php } else { ?>

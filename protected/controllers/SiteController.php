@@ -1367,7 +1367,7 @@ class SiteController extends Controller
 				
 				
 				$SUPPP= new SuratUndanganPermintaanPenawaranHarga;
-				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;							
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
