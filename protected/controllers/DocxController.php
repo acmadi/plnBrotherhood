@@ -508,7 +508,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
 
-			$this->doccy->phpdocx->assign('#zzz#', '..........');
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
