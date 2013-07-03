@@ -18,17 +18,17 @@
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($Dokumen0,'tanggal_nota_dinas'); ?>
+			<?php echo $form->labelEx($Dokumen0,'tanggal_surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$Dokumen0,
 					'attribute'=>'tanggal',
 					'value'=>$Dokumen0->tanggal,
-					'htmlOptions'=>array('size'=>60),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
-			<?php echo $form->error($Dokumen0,'tanggal_masuk'); ?>
+			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 		
 		<div class="row">
@@ -40,13 +40,13 @@
 		<div class="row">
 			<?php echo $form->labelEx($NDPTR,'permintaan'); ?>
 			<?php echo $form->dropDownList($NDPTR,'permintaan',
-			  array('RAB'=>'Rencana Anggaran Biaya (RAB)','TOR'=>'Term Of Reference (TOR)','RAB dan TOR'=>'Rencana Anggaran Biaya (RAB) dan Term Of Reference (TOR)'),
+			  array('Rencana Anggaran Biaya (RAB)'=>'RAB','Term Of Reference (TOR)'=>'TOR','Rencana Anggaran Biaya (RAB) dan Term Of Reference (TOR)'=>'RAB dan TOR'),
 					array('empty'=>"-----Pilih Permintaan Nota Dinas------")); ?>
 			<?php echo $form->error($NDPTR,'permintaan'); ?>
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'nama_pengadaan'); ?>
+			<?php echo $form->labelEx($NDPTR,'nama pengadaan'); ?>
 			<?php echo $form->textField($NDPTR,'nama_pengadaan',array('size'=>56,'maxlength'=>256)); ?>
 			<?php echo $form->error($NDPTR,'nama_pengadaan'); ?>
 		</div>
@@ -58,12 +58,12 @@
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'tanggal_nota_dinas_permintaan'); ?>
+			<?php echo $form->labelEx($NDPTR,'tanggal nota dinas permintaan'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$NDPTR,
 					'attribute'=>'tanggal_nota_dinas_permintaan',
 					'value'=>$NDPTR->tanggal_nota_dinas_permintaan,
-					'htmlOptions'=>array('size'=>60),
+					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'dd-mm-yy',
 					),
@@ -82,8 +82,7 @@
 		<br/>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($NDPTR->isNewRecord ? 'Simpan' : 'Save',array('class'=>'sidafbutton','name'=>'simpan')); ?>
-			<?php echo CHtml::submitButton($NDPTR->isNewRecord ? 'Simpan dan Buat Nota Dinas Permintaan TOR/RAB' : 'Save',array('class'=>'sidafbutton','name'=>'simpanbuat')); ?>
+			<?php echo CHtml::submitButton($NDPTR->isNewRecord ? 'Buat Nota Dinas Permintaan TOR/RAB' : 'Save',array('class'=>'sidafbutton','name'=>'simpanbuat')); ?>
 		</div>
 
 		

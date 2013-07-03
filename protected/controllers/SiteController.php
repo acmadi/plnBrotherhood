@@ -3474,7 +3474,7 @@ class SiteController extends Controller
 			$TOR->id_dokumen=$Dokumen2->id_dokumen;
 			
 			$RAB= new Rab;
-			$RAB->id_dokumen=$Dokumen2->id_dokumen;
+			$RAB->id_dokumen=$Dokumen3->id_dokumen;
 
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
@@ -3552,7 +3552,9 @@ class SiteController extends Controller
 				if($valid){
 					if($Dokumen0->save(false)){
 						if($NDPTR->save(false)){
-							$this->redirect(array('notadinaspermintaantorrab','id'=>$Dokumen0->id_pengadaan));
+							if(isset($_POST['simpanbuat'])){
+								$this->redirect(array('docx/download', 'id'=>$NDPTR->id_dokumen));											
+							}
 						}
 					}
 				}

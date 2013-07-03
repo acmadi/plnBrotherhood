@@ -547,6 +547,33 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#17#', '.............................................');
 			$this->renderDocx("Nota Dinas Pemberitahuan Pemenang.docx", true);
 		}*/
+		else if ($Dok->nama_dokumen == "Nota Dinas Permintaan TOR/RAB"){
+			$NDPTR=NotaDinasPermintaanTorRab::model()->findByPk($id);
+			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$nomor = $NDPTR->nomor;
+			$kepada = $NDPTR->divisi_peminta;
+			$permintaan = $NDPTR->permintaan;
+			$namapengadaan = $NDPTR->nama_pengadaan;
+			$notadinaspermintaan = $NDPTR->nota_dinas_permintaan;
+			$tanggalpermintaan = $NDPTR->tanggal_nota_dinas_permintaan;
+			$perihalpermintaan = $NDPTR->perihal_permintaan;
+			
+			$this->doccy->newFile('0 Nota Dinas permintaan TOR RAB.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggalsurat);
+			$this->doccy->phpdocx->assign('#kepada#', $kepada);
+			$this->doccy->phpdocx->assign('#permintaan#', $permintaan);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#notadinaspermintaan#', $notadinaspermintaan);
+			$this->doccy->phpdocx->assign('#tanggalpermintaan#', $tanggalpermintaan);
+			$this->doccy->phpdocx->assign('#perihalpermintaan#', $perihalpermintaan);
+			$this->doccy->phpdocx->assign('#nama#', 'KDIVMUM');
+			$this->renderDocx("Nota Dinas Permintaan TOR/RAB.docx", true);
+		}
 //	=====================================Surat-Surat=====================================
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			
