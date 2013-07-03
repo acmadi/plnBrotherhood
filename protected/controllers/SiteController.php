@@ -1355,11 +1355,15 @@ class SiteController extends Controller
 				$Dokumen0->nama_dokumen='Surat Undangan Permintaan Penawaran Harga';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
-				$Dokumen0->id_pengadaan=$id;
-				
+				$Dokumen0->id_pengadaan=$id;				
 				
 				$SUPPP= new SuratUndanganPermintaanPenawaranHarga;
 				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;							
+				
+				$PP = new PenerimaPengadaan;
+				$PP->id_pengadaan = $Pengadaan->id_pengadaan;
+				$PP->status = 'Lulus';
+				// $PP->perusahaan = 'perusahaan1';
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1367,15 +1371,18 @@ class SiteController extends Controller
 				if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
+					$PP->attributes=$_POST['PenerimaPengadaan'];
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
 					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPPP->validate();
+					$valid=$valid&&$SUPPP->validate() && $PP->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPPP->save(false)){
-									$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+									if($PP->save(false)){
+										$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+									}
 								}
 							}
 						}
@@ -1383,7 +1390,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('permintaanpenawaranharga',array(
-					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,
+					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,
 				));
 			}
 		}
@@ -1404,21 +1411,25 @@ class SiteController extends Controller
 				
 				$SUPPP= SuratUndanganPermintaanPenawaranHarga::model()->findByPk($Dokumen0->id_dokumen);
 				
+				$PP = PenerimaPengadaan::model()->find('id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
 				if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
+					$PP->attributes=$_POST['PenerimaPengadaan'];
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
 					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPPP->validate();
+					$valid=$valid&&$SUPPP->validate() && $PP->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPPP->save(false)){
-									$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+									if($PP->save(false)){
+										$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+									}
 								}
 							}
 						}
@@ -1426,7 +1437,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('permintaanpenawaranharga',array(
-					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,
+					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,
 				));
 			}
 		}

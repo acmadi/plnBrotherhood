@@ -5,10 +5,11 @@
  *
  * The followings are the available columns in table 'penerima_pengadaan':
  * @property string $perusahaan
- * @property string $id_dokumen
+ * @property string $status
+ * @property string $id_pengadaan
  *
  * The followings are the available model relations:
- * @property Dokumen $idDokumen
+ * @property Pengadaan $idPengadaan
  */
 class PenerimaPengadaan extends CActiveRecord
 {
@@ -38,12 +39,13 @@ class PenerimaPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('perusahaan, id_dokumen', 'required'),
+			array('perusahaan, status, id_pengadaan', 'required'),
 			array('perusahaan', 'length', 'max'=>100),
-			array('id_dokumen', 'length', 'max'=>32),
+			array('status', 'length', 'max'=>20),
+			array('id_pengadaan', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('perusahaan, id_dokumen', 'safe', 'on'=>'search'),
+			array('perusahaan, status, id_pengadaan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +57,7 @@ class PenerimaPengadaan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
+			'idPengadaan' => array(self::BELONGS_TO, 'Pengadaan', 'id_pengadaan'),
 		);
 	}
 
@@ -66,7 +68,8 @@ class PenerimaPengadaan extends CActiveRecord
 	{
 		return array(
 			'perusahaan' => 'Perusahaan',
-			'id_dokumen' => 'Id Dokumen',
+			'status' => 'Status',
+			'id_pengadaan' => 'Id Pengadaan',
 		);
 	}
 
@@ -82,7 +85,8 @@ class PenerimaPengadaan extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('perusahaan',$this->perusahaan,true);
-		$criteria->compare('id_dokumen',$this->id_dokumen,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
