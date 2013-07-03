@@ -524,6 +524,20 @@ class DocxController extends Controller
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
 			
+			// $doksupph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+			// $supph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
+			// $nosupph = $supph->nomor;
+			// $tglsupph = $doksupph->tanggal;
+			
+			// $dokspph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengantar Penawaran Harga"');
+			// $spph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspph->id_dokumen);
+			// $nospph = $spph->nomor;
+			// $tglspph = $dokspph->tanggal;
+			
+			// $dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
+			// $spp = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspp->id_dokumen);
+			// $nospp = $spp->nomor;
+			// $tglspp = $dokspp->tanggal;
 			
 			if ($metode == "Penunjukan Langsung"){
 			$this->doccy->newFile('15 Surat Penunjukan Pemenang (Tunjuk).docx');
@@ -876,9 +890,9 @@ class DocxController extends Controller
 			$nomor = $bakn->nomor;
 			$tanggal = $Dok->tanggal;
 			$hari = Tanggal::getHari($tanggal);
-			$tanggal1 = Tanggal::getTanggal0($tanggal);
-			$bulan = Tanggal::getBulanA($tanggal);
-			$tahun = Tanggal::getTahun($tanggal);
+			$tanggal1 = RupiahMaker::terbilangMaker(Tanggal::getTanggal($tanggal));
+			$bulan = RupiahMaker::terbilangMaker(Tanggal::getBulanA($tanggal));
+			$tahun = RupiahMaker::terbilangMaker(Tanggal::getTahun($tanggal));
 			$tgll = Tanggal::getTanggalLengkap($tanggal);
 			$tempat = $Dok->tempat;
 			$kepada = $Peng->nama_penyedia;
@@ -888,7 +902,7 @@ class DocxController extends Controller
 			//$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota"')->username)->nama;
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
-			$norks = $rks->nomor;
+			$norks = $rks->nomor; 
 			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
 			$tglrks = Tanggal::getTanggalLengkap($tanggalrks);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
