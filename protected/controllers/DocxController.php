@@ -207,15 +207,25 @@ class DocxController extends Controller
 				
 				} else if ($Rincian->nama_rincian=="Isi") {
 				} else if ($Rincian->nama_rincian=="Lampiran 1") {
+					$nomor_rks = $RKS->nomor;
+					
 					$this->doccy->newFile('PL-BJ-Lamp_1.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
 					$this->renderDocx("RKS-PL-B&J-Lamp_1.docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 4") {
+					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
+					$nomor_rks = $RKS->nomor;
+					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+				
 					$this->doccy->newFile('PL-BJ-Lamp_4.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
 					$this->renderDocx("RKS-PL-B&J-Lamp_4.docx", true);
 					
 				} else if ($Rincian->nama_rincian=="Lampiran 5") {
@@ -231,11 +241,11 @@ class DocxController extends Controller
 					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
 					$this->renderDocx("RKS-PL-B&J-Lamp_5.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Lampiran 7") {
-					$this->doccy->newFile('PL-BJ-Lamp_7.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PL-B&J-Lamp_7.docx", true);
+				// } else if ($Rincian->nama_rincian=="Lampiran 7") {
+					// $this->doccy->newFile('PL-BJ-Lamp_7.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PL-B&J-Lamp_7.docx", true);
 				}
 			}  else if($RKS->tipe_rks==3){
 				if ($Rincian->nama_rincian=="Cover") {
@@ -261,9 +271,12 @@ class DocxController extends Controller
 				
 				} else if ($Rincian->nama_rincian=="Isi") {
 				} else if ($Rincian->nama_rincian=="Lampiran 1") {
+					$nomor_rks = $RKS->nomor;
+				
 					$this->doccy->newFile('PL-J-Lamp_1.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
 					$this->renderDocx("RKS-PL-J-Lamp_1.docx", true);
 				}
 			} 
