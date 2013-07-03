@@ -12,26 +12,34 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 ?>
     
     <!----------------------------------------->
-   
+	<!--
         <div class="searchdiv">
 
-            <?php $form=$this->beginWidget('CActiveForm', array(
-                    'action'=>Yii::app()->createUrl($this->route),
-                    'method'=>'get',
-            )); ?>	
+            <?php 
+				// $form=$this->beginWidget('CActiveForm', array(
+				// 'action'=>Yii::app()->createUrl($this->route),
+				// 'method'=>'get',
+				// )); 
+			?>	
                     <div class="row">
                             <?php // echo $form->label($model,'nama_pengadaan'); ?>
-                            <?php echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); ?>
-                            <?php echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); ?>
+                            <?php 
+								// echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); 
+							?>
+                            <?php 
+								// echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); 
+							?>
                     </div>
 
-            <?php $this->endWidget(); ?>
+            <?php 
+				// $this->endWidget(); 
+			?>
 
-        </div><!-- search-form -->
+        </div>
         <br/>
         <br/>
         <br/>
-        
+	-->
 
         <!----------------------------------------->
     
@@ -119,25 +127,34 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
         else if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//panitia/pejabat
 		
         ?>
-        
+        <!--
             <div class="searchdiv">
 
-                <?php $form=$this->beginWidget('CActiveForm', array(
-                        'action'=>Yii::app()->createUrl($this->route),
-                        'method'=>'get',
-                )); ?>	
+                <?php 
+					// $form=$this->beginWidget('CActiveForm', array(
+					// 'action'=>Yii::app()->createUrl($this->route),
+					// 'method'=>'get',
+					// )); 
+				?>	
                         <div class="row">
                                 <?php // echo $form->label($model,'nama_pengadaan'); ?>
-                                <?php echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); ?>
-                                <?php echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); ?>
+                                <?php 
+									// echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); 
+								?>
+                                <?php 
+									// echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); 
+								?>
                         </div>
 
-                <?php $this->endWidget(); ?>
+                <?php 
+					// $this->endWidget(); 
+				?>
 
-            </div><!-- search-form -->
+            </div>
             <br/>
             <br/>
             <br/>
+		-->
             
             <?php
 		$this->widget('zii.widgets.grid.CGridView', array(

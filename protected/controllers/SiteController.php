@@ -1351,7 +1351,7 @@ class SiteController extends Controller
 				
 				
 				$SUPPP= new SuratUndanganPermintaanPenawaranHarga;
-				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;							
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -3241,7 +3241,7 @@ class SiteController extends Controller
 				
 				$SPPM= new SuratPenunjukanPemenang;
 				$SPPM->id_dokumen=$Dokumen0->id_dokumen;
-				if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
+				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung' || $Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
 					$SPPM->jaminan='0';
 					$SPPM->nomor_ski='-';
 					$SPPM->tanggal_ski='-';
@@ -3458,7 +3458,7 @@ class SiteController extends Controller
 			$TOR->id_dokumen=$Dokumen2->id_dokumen;
 			
 			$RAB= new Rab;
-			$RAB->id_dokumen=$Dokumen2->id_dokumen;
+			$RAB->id_dokumen=$Dokumen3->id_dokumen;
 
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
@@ -3536,7 +3536,9 @@ class SiteController extends Controller
 				if($valid){
 					if($Dokumen0->save(false)){
 						if($NDPTR->save(false)){
-							$this->redirect(array('notadinaspermintaantorrab','id'=>$Dokumen0->id_pengadaan));
+							if(isset($_POST['simpanbuat'])){
+								$this->redirect(array('docx/download', 'id'=>$NDPTR->id_dokumen));											
+							}
 						}
 					}
 				}

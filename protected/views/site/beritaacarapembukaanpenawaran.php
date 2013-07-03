@@ -96,12 +96,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			</div>
 		<?php } ?>
 		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'status metode'); ?>
-			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'status_metode'); ?>
-		</div>
-	
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>

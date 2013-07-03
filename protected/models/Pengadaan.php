@@ -359,6 +359,9 @@ class Pengadaan extends CActiveRecord
 		if($this->status == '1'){
 			return 0/24;
 		}
+		else if($this->status == '0'){
+			return 0/24;
+		}
 		else if($this->status == '2'){
 			return 100/24;
 		}
@@ -437,9 +440,9 @@ class Pengadaan extends CActiveRecord
 	}
 	
 	public function dapatkanStatus(){
-		if($this->status == '2' || $this->status == '1'){
+		if($this->status == '2' || $this->status == '1' || $this->status == '0'){
 			return 'Pembuatan Dokumen Pengadaan';
-		}
+		}		
 		else if($this->status == '3'){
 			return 'Kualifikasi';
 		}		
