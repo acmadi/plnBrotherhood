@@ -714,6 +714,7 @@ class DocxController extends Controller
 			$alamat = $NDPP->alamat;
 			$NPWP = $NDPP->NPWP;
 			$biaya = $NDPP->biaya;
+			$biayaa = RupiahMaker::convertInt($biaya);
 			$metode = $Peng->metode_penawaran;
 			if ($metode == "Satu Sampul"){
 				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
@@ -772,7 +773,7 @@ class DocxController extends Controller
 				$this->doccy->phpdocx->assign('#Kal1#', $Kal1);
 				$this->doccy->phpdocx->assign('#Kal2#', $Kal2);
 				$this->doccy->phpdocx->assign('#Kal3#', $Kal3);
-			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#biaya#', $biayaa);
 			$this->doccy->phpdocx->assign('#terbilang#', $terbilang);
 			$this->renderDocx("Nota Dinas Penetapan Pemenang.docx", true);
 	
@@ -1173,8 +1174,8 @@ class DocxController extends Controller
 			}
 			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#bulan#', $masa);
@@ -1188,10 +1189,10 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalpenawaran#', $tanggalpenawaran);
 			$this->doccy->phpdocx->assign('#waktupenawaran#', $waktupenawaran);
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
-			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
-			
-			
+			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namakadiv);
+			$this->doccy->phpdocx->assign('#penerima#', '........');
+			
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Form Isian Kualifikasi"){

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2013 at 08:05 PM
+-- Generation Time: Jul 03, 2013 at 08:16 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -176,10 +176,10 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 --
 
 INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`, `jumlah_gagal`) VALUES
-('divin', 3, 0, 0),
+('divin', 2, 0, 0),
 ('divman', 3, 0, 0),
 ('divsi', 1, 0, 0),
-('divtrans', 4, 0, 0);
+('divtrans', 3, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -200,30 +200,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Nota Dinas Permintaan', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'TOR', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(3, 'RAB', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(4, 'Nota Dinas Perintah Pengadaan', '2013-07-11', 'Jakarta', 1, 'Belum Selesai'),
-(5, 'Pakta Integritas Awal Panitia', '2013-07-03', 'Jakarta', 1, 'Belum Selesai'),
-(6, 'RKS', '2013-07-03', 'Jakarta', 1, 'Belum Selesai'),
-(7, 'Nota Dinas Permintaan', '2013-07-03', 'Jakarta', 2, 'Belum Selesai'),
-(8, 'TOR', '2013-07-03', 'Jakarta', 2, 'Belum Selesai'),
-(9, 'RAB', '2013-07-03', 'Jakarta', 2, 'Belum Selesai'),
-(10, 'Nota Dinas Perintah Pengadaan', '2013-07-11', 'Jakarta', 2, 'Belum Selesai'),
-(11, 'Nota Dinas Permintaan', '2013-07-25', 'Jakarta', 3, 'Belum Selesai'),
-(12, 'TOR', '2013-07-25', 'Jakarta', 3, 'Belum Selesai'),
-(13, 'RAB', '2013-07-25', 'Jakarta', 3, 'Belum Selesai'),
-(14, 'Nota Dinas Perintah Pengadaan', '2013-07-30', 'Jakarta', 3, 'Belum Selesai'),
-(15, 'Pakta Integritas Awal Panitia', '2013-07-03', 'Jakarta', 2, 'Belum Selesai'),
-(16, 'RKS', '2013-07-03', 'Jakarta', 2, 'Belum Selesai'),
-(17, 'Pakta Integritas Awal Panitia', '2013-07-03', 'Jakarta', 3, 'Belum Selesai'),
-(18, 'RKS', '2013-07-03', 'Jakarta', 3, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -374,15 +350,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nota_dinas_perintah_pengadaan`
---
-
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(4, '035/DVMUM/2013', 'KDIVMUM', 'Gilang Laksana', 'Penunjukan Panitia Pengadaan Sepatu Futsal', 90, 'Kas PLN', 143508000),
-(10, '056/DIVMUM/2013', 'MSDAF', 'Johannes Ridho', 'Penunjukan Pejabat Pengadaan', 67, 'Kas PLN', 1354300000),
-(14, '056/DIVMUM/2013', 'KDIVMUM', 'Irvan Aditya', 'Penunjukan Panitia Pengadaan', 67, 'Kas PLN', 10567000);
-
 -- --------------------------------------------------------
 
 --
@@ -395,15 +362,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   `perihal` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `nota_dinas_permintaan`
---
-
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`) VALUES
-(1, '045/DVMAM/2013', 'Permintaan Sepatu Futsal Untuk Pemain Futsal'),
-(7, '045/DVIN/2013', 'Permintaan Fasilitas Internet untuk Ruangan Kantor'),
-(11, '073/DIVTRANS/2013', 'Permintaan sewa mobil untuk perjalanan dinas');
 
 -- --------------------------------------------------------
 
@@ -458,14 +416,16 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `pakta_integritas_panitia_1`
+-- Table structure for table `pakta_integritas_panitia_2`
 --
 
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
-(15, 2),
-(5, 3),
-(17, 4);
+CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_2` (
+  `id_dokumen` bigint(32) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -503,7 +463,7 @@ INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tahun`, `jum
 (1, 'Hanif Eridaputra', '-', 2013, 1, 'Aktif', 'Pejabat'),
 (2, 'Johannes Ridho', '-', 2013, 1, 'Aktif', 'Pejabat'),
 (3, 'Panitia-A', '024/SK/PLN', 2013, 3, 'Aktif', 'Panitia'),
-(4, 'Panitia-B', '025/SK/PLN', 2013, 3, 'Aktif', 'Panitia'),
+(4, 'Panitia-B', '025/SK/PLN', 2013, 2, 'Aktif', 'Panitia'),
 (5, 'Panitia-C', '026/SK/PLN', 2012, 0, 'Tidak Aktif', 'Panitia');
 
 -- --------------------------------------------------------
@@ -516,6 +476,8 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `perusahaan` varchar(100) NOT NULL,
   `status` varchar(20) NOT NULL,
   `id_pengadaan` bigint(255) NOT NULL,
+  `alamat` varchar(256) NOT NULL,
+  `npwp` varchar(256) NOT NULL,
   KEY `id_pengadaan` (`id_pengadaan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -552,15 +514,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengadaan`
---
-
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Sepatu Futsal', 'divman', 'Barang dan Jasa', '-', '2013-07-11', '0000-00-00', '2', 0, 3, 'Penunjukan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
-(2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-07-11', '0000-00-00', '2', 0, 2, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
-(3, 'Pengadaan Sewa Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-30', '0000-00-00', '2', 0, 4, 'Pelelangan', 'Dua Tahap', 'Pasca Kualifikasi');
-
 -- --------------------------------------------------------
 
 --
@@ -571,15 +524,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rab`
---
-
-INSERT INTO `rab` (`id_dokumen`) VALUES
-(3),
-(9),
-(13);
 
 -- --------------------------------------------------------
 
@@ -593,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `rincian_rks`
@@ -610,25 +554,7 @@ INSERT INTO `rincian_rks` (`id_rincian`, `nama_rincian`, `id_dokumen`) VALUES
 (69, 'Lampiran 5', 6),
 (70, 'Lampiran 6', 6),
 (71, 'Lampiran 7', 6),
-(72, 'Lampiran ba', 6),
-(109, 'Cover', 16),
-(110, 'Daftar Isi', 16),
-(111, 'Isi', 16),
-(112, 'Lampiran 1', 16),
-(113, 'Lampiran 2', 16),
-(114, 'Lampiran 3', 16),
-(115, 'Lampiran 4', 16),
-(116, 'Lampiran 5', 16),
-(117, 'Lampiran 6', 16),
-(118, 'Lampiran ba', 16),
-(119, 'Cover', 18),
-(120, 'Daftar Isi', 18),
-(121, 'Isi', 18),
-(122, 'Lampiran 1', 18),
-(123, 'Lampiran 2', 18),
-(124, 'Lampiran 3', 18),
-(125, 'Lampiran 4', 18),
-(126, 'Lampiran 5', 18);
+(72, 'Lampiran ba', 6);
 
 -- --------------------------------------------------------
 
@@ -703,6 +629,13 @@ CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_pengantar_penawaran_harga`
+--
+
+INSERT INTO `surat_pengantar_penawaran_harga` (`id_dokumen`) VALUES
+(9);
+
 -- --------------------------------------------------------
 
 --
@@ -748,6 +681,13 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_pernyataan_minat`
+--
+
+INSERT INTO `surat_pernyataan_minat` (`id_dokumen`) VALUES
+(10);
 
 -- --------------------------------------------------------
 
@@ -836,6 +776,13 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_permintaan_penawaran_harga`
+--
+
+INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, `waktu_kerja`, `masa_berlaku_penawaran`, `tempat_penyerahan`) VALUES
+(12, '3eq', '132', 12, 'asda');
+
 -- --------------------------------------------------------
 
 --
@@ -884,9 +831,7 @@ CREATE TABLE IF NOT EXISTS `tor` (
 --
 
 INSERT INTO `tor` (`id_dokumen`) VALUES
-(2),
-(8),
-(12);
+(2);
 
 -- --------------------------------------------------------
 
@@ -1085,6 +1030,12 @@ ALTER TABLE `pakta_integritas_panitia_1`
   ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `pakta_integritas_panitia_2`
+--
+ALTER TABLE `pakta_integritas_panitia_2`
+  ADD CONSTRAINT `pakta_integritas_panitia_2_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `pakta_integritas_penyedia`
 --
 ALTER TABLE `pakta_integritas_penyedia`
@@ -1114,79 +1065,6 @@ ALTER TABLE `rab`
 --
 ALTER TABLE `rincian_rks`
   ADD CONSTRAINT `rincian_rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `rks` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `rks`
---
-ALTER TABLE `rks`
-  ADD CONSTRAINT `rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pengantar_penawaran_harga`
---
-ALTER TABLE `surat_pengantar_penawaran_harga`
-  ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pengumuman_pelelangan`
---
-ALTER TABLE `surat_pengumuman_pelelangan`
-  ADD CONSTRAINT `surat_pengumuman_pelelangan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pernyataan_minat`
---
-ALTER TABLE `surat_pernyataan_minat`
-  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_negosiasi_klarifikasi`
---
-ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
-  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_pembukaan_penawaran`
---
-ALTER TABLE `surat_undangan_pembukaan_penawaran`
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_pengambilan_dokumen_pengadaan`
---
-ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
-  ADD CONSTRAINT `surat_undangan_pengambilan_dokumen_pengadaan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_permintaan_penawaran_harga`
---
-ALTER TABLE `surat_undangan_permintaan_penawaran_harga`
-  ADD CONSTRAINT `surat_undangan_permintaan_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_prakualifikasi`
---
-ALTER TABLE `surat_undangan_prakualifikasi`
-  ADD CONSTRAINT `surat_undangan_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `termin`
---
-ALTER TABLE `termin`
-  ADD CONSTRAINT `termin_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen_kontrak` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `termin_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tor`
---
-ALTER TABLE `tor`
-  ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `user_kontrak`
---
-ALTER TABLE `user_kontrak`
-  ADD CONSTRAINT `user_kontrak_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
