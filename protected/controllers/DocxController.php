@@ -23,7 +23,7 @@ class DocxController extends Controller
 		$DokRKS = Dokumen::model()->findByPk($RKS->id_dokumen);
 		$Peng = Pengadaan::model()->findByPk($DokRKS->id_pengadaan);
 		$Panitia = Panitia::model()->findByPk($Peng->id_panitia);
-		if ($Peng->metode_pengadaan=="Penunjukan Langsung") {
+		// if ($Peng->metode_pengadaan=="Penunjukan Langsung") {
 			if($RKS->tipe_rks==1){
 				if ($Rincian->nama_rincian=="Cover") {
 //-------------------------------------------Cover
@@ -330,18 +330,11 @@ class DocxController extends Controller
 					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
 					$this->renderDocx("RKS-PL-B&J-Lamp_4.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Lampiran 5") {
-					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
-					
-					$this->doccy->newFile('PL-BJ-Lamp_5.docx');
+				} else if ($Rincian->nama_rincian=="Lampiran 6") {					
+					$this->doccy->newFile('PL-BJ-Lamp_6.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->renderDocx("RKS-PL-B&J-Lamp_5.docx", true);
+					$this->renderDocx("RKS-PL-B&J-Lamp_6.docx", true);
 					
 				// } else if ($Rincian->nama_rincian=="Lampiran 7") {
 					// $this->doccy->newFile('PL-BJ-Lamp_7.docx');
@@ -382,167 +375,164 @@ class DocxController extends Controller
 					$this->renderDocx("RKS-PL-J-Lamp_1.docx", true);
 				}
 			} 
-		} else if ($Peng->metode_pengadaan=="Pemilihan Langsung") {
-			if($RKS->tipe_rks==1){
-				if ($Rincian->nama_rincian=="Cover") {
-//-------------------------------------------Cover
-					$metode_pengadaan = strtoupper($Peng->metode_pengadaan);
-					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
-					$this->doccy->newFile('RKS-Cover.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
-					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->renderDocx("RKS-PM-B-Cover.docx", true);
+		// } else if ($Peng->metode_pengadaan=="Pemilihan Langsung") {
+			// if($RKS->tipe_rks==1){
+				// if ($Rincian->nama_rincian=="Cover") {
+					// $metode_pengadaan = strtoupper($Peng->metode_pengadaan);
+					// $nama_pengadaan = strtoupper($Peng->nama_pengadaan);
+					// $nomor_rks = $RKS->nomor;
+					// $tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+					// $this->doccy->newFile('RKS-Cover.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
+					// $this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					// $this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+					// $this->renderDocx("RKS-PM-B-Cover.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Daftar Isi") {
-					$this->doccy->newFile('PM-B-Daftar_Isi.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B-Daftar_Isi.docx", true);
+				// } else if ($Rincian->nama_rincian=="Daftar Isi") {
+					// $this->doccy->newFile('PM-B-Daftar_Isi.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B-Daftar_Isi.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Isi") {
-					$nama_pengadaan = $Peng->nama_pengadaan;
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
-					$tempatsurat = $DokRKS->tempat;
-					$tanggal_penjelasan = Tanggal::getTanggalLengkap($RKS->tanggal_penjelasan);
-					$waktu_penjelasan = Tanggal::getJamMenit($RKS->waktu_penjelasan);
-					$tempat_penjelasan = $RKS->tempat_penjelasan;
+				// } else if ($Rincian->nama_rincian=="Isi") {
+					// $nama_pengadaan = $Peng->nama_pengadaan;
+					// $nomor_rks = $RKS->nomor;
+					// $tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+					// $tempatsurat = $DokRKS->tempat;
+					// $tanggal_penjelasan = Tanggal::getTanggalLengkap($RKS->tanggal_penjelasan);
+					// $waktu_penjelasan = Tanggal::getJamMenit($RKS->waktu_penjelasan);
+					// $tempat_penjelasan = $RKS->tempat_penjelasan;
 					
-					$this->doccy->newFile('PM-B-Isi.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assignToHeader('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assignToHeader('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->doccy->phpdocx->assign('#tempat surat#', $tempatsurat);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#tanggal penjelasan#', $tanggal_penjelasan);
-					$this->doccy->phpdocx->assign('#waktu penjelasan#', $waktu_penjelasan);
-					$this->doccy->phpdocx->assign('#tempat penjelasan#', $tempat_penjelasan);
-					$this->renderDocx("RKS-PM-B-Isi.docx", true);
+					// $this->doccy->newFile('PM-B-Isi.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->doccy->phpdocx->assignToHeader('#nomor rks#', $nomor_rks);
+					// $this->doccy->phpdocx->assignToHeader('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+					// $this->doccy->phpdocx->assign('#tempat surat#', $tempatsurat);
+					// $this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#tanggal penjelasan#', $tanggal_penjelasan);
+					// $this->doccy->phpdocx->assign('#waktu penjelasan#', $waktu_penjelasan);
+					// $this->doccy->phpdocx->assign('#tempat penjelasan#', $tempat_penjelasan);
+					// $this->renderDocx("RKS-PM-B-Isi.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Lampiran 1") {
-					$this->doccy->newFile('PM-B-Lamp_1.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B-Lamp_1.docx", true);
+				// } else if ($Rincian->nama_rincian=="Lampiran 1") {
+					// $this->doccy->newFile('PM-B-Lamp_1.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B-Lamp_1.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Lampiran 4") {
-					$this->doccy->newFile('PM-B-Lamp_4.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B-Lamp_4.docx", true);
+				// } else if ($Rincian->nama_rincian=="Lampiran 4") {
+					// $this->doccy->newFile('PM-B-Lamp_4.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B-Lamp_4.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Lampiran 5") {
-					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+				// } else if ($Rincian->nama_rincian=="Lampiran 5") {
+					// $nama_pengadaan = strtoupper($Peng->nama_pengadaan);
+					// $nomor_rks = $RKS->nomor;
+					// $tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
 					
-					$this->doccy->newFile('PM-B-Lamp_5.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->renderDocx("RKS-PM-B-Lamp_5.docx", true);
+					// $this->doccy->newFile('PM-B-Lamp_5.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					// $this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+					// $this->renderDocx("RKS-PM-B-Lamp_5.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Lampiran 7") {
-					$this->doccy->newFile('PM-B-Lamp_7.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B-Lamp_7.docx", true);
-				}
-			} else if($RKS->tipe_rks==2){
-				if ($Rincian->nama_rincian=="Cover") {
-//-------------------------------------------Cover
-					$metode_pengadaan = strtoupper($Peng->metode_pengadaan);
-					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
-					$this->doccy->newFile('RKS-Cover.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
-					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->renderDocx("RKS-PM-B&J-Cover.docx", true);
+				// } else if ($Rincian->nama_rincian=="Lampiran 7") {
+					// $this->doccy->newFile('PM-B-Lamp_7.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B-Lamp_7.docx", true);
+				// }
+			// } else if($RKS->tipe_rks==2){
+				// if ($Rincian->nama_rincian=="Cover") {
+					// $metode_pengadaan = strtoupper($Peng->metode_pengadaan);
+					// $nama_pengadaan = strtoupper($Peng->nama_pengadaan);
+					// $nomor_rks = $RKS->nomor;
+					// $tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+					// $this->doccy->newFile('RKS-Cover.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
+					// $this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					// $this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+					// $this->renderDocx("RKS-PM-B&J-Cover.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Daftar Isi") {
-					$this->doccy->newFile('PM-BJ-Daftar_Isi.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B&J-Daftar_Isi.docx", true);
+				// } else if ($Rincian->nama_rincian=="Daftar Isi") {
+					// $this->doccy->newFile('PM-BJ-Daftar_Isi.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B&J-Daftar_Isi.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Isi") {
-				} else if ($Rincian->nama_rincian=="Lampiran 1") {
-					$this->doccy->newFile('PM-BJ-Lamp_1.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B&J-Lamp_1.docx", true);
+				// } else if ($Rincian->nama_rincian=="Isi") {
+				// } else if ($Rincian->nama_rincian=="Lampiran 1") {
+					// $this->doccy->newFile('PM-BJ-Lamp_1.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B&J-Lamp_1.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Lampiran 4") {
-					$this->doccy->newFile('PM-BJ-Lamp_4.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B&J-Lamp_4.docx", true);
+				// } else if ($Rincian->nama_rincian=="Lampiran 4") {
+					// $this->doccy->newFile('PM-BJ-Lamp_4.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B&J-Lamp_4.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Lampiran 5") {
-					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+				// } else if ($Rincian->nama_rincian=="Lampiran 5") {
+					// $nama_pengadaan = strtoupper($Peng->nama_pengadaan);
+					// $nomor_rks = $RKS->nomor;
+					// $tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
 					
-					$this->doccy->newFile('PM-BJ-Lamp_5.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->renderDocx("RKS-PM-B&J-Lamp_5.docx", true);
+					// $this->doccy->newFile('PM-BJ-Lamp_5.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					// $this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+					// $this->renderDocx("RKS-PM-B&J-Lamp_5.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Lampiran 7") {
-					$this->doccy->newFile('PM-BJ-Lamp_7.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-B&J-Lamp_7.docx", true);
-				}
-			}  else if($RKS->tipe_rks==3){
-				if ($Rincian->nama_rincian=="Cover") {
-//-------------------------------------------Cover
-					$metode_pengadaan = strtoupper($Peng->metode_pengadaan);
-					$nama_pengadaan = strtoupper($Peng->nama_pengadaan);
-					$nomor_rks = $RKS->nomor;
-					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
-					$this->doccy->newFile('RKS-Cover.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
-					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
-					$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
-					$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
-					$this->renderDocx("RKS-PM-J-Cover.docx", true);
+				// } else if ($Rincian->nama_rincian=="Lampiran 7") {
+					// $this->doccy->newFile('PM-BJ-Lamp_7.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-B&J-Lamp_7.docx", true);
+				// }
+			// }  else if($RKS->tipe_rks==3){
+				// if ($Rincian->nama_rincian=="Cover") {
+					// $metode_pengadaan = strtoupper($Peng->metode_pengadaan);
+					// $nama_pengadaan = strtoupper($Peng->nama_pengadaan);
+					// $nomor_rks = $RKS->nomor;
+					// $tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+					// $this->doccy->newFile('RKS-Cover.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
+					// $this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					// $this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
+					// $this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+					// $this->renderDocx("RKS-PM-J-Cover.docx", true);
 					
-				} else if ($Rincian->nama_rincian=="Daftar Isi") {
-					$this->doccy->newFile('PM-J-Daftar_Isi.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-J-Daftar_Isi.docx", true);
+				// } else if ($Rincian->nama_rincian=="Daftar Isi") {
+					// $this->doccy->newFile('PM-J-Daftar_Isi.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-J-Daftar_Isi.docx", true);
 				
-				} else if ($Rincian->nama_rincian=="Isi") {
-				} else if ($Rincian->nama_rincian=="Lampiran 1") {
-					$this->doccy->newFile('PM-J-Lamp_1.docx');
-					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-					$this->renderDocx("RKS-PM-J-Lamp_1.docx", true);
-				}
-			}
-		}
+				// } else if ($Rincian->nama_rincian=="Isi") {
+				// } else if ($Rincian->nama_rincian=="Lampiran 1") {
+					// $this->doccy->newFile('PM-J-Lamp_1.docx');
+					// $this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+					// $this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					// $this->renderDocx("RKS-PM-J-Lamp_1.docx", true);
+				// }
+			// }
+		// }
 	}
 	
 	public function actionDownload()
