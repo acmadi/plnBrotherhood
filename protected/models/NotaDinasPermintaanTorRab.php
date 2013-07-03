@@ -1,27 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "surat_pemberitahuan_pengadaan".
+ * This is the model class for table "nota_dinas_permintaan_tor_rab".
  *
- * The followings are the available columns in table 'surat_pemberitahuan_pengadaan':
+ * The followings are the available columns in table 'nota_dinas_permintaan_tor_rab':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $id_panitia
- * @property string $perihal
- * @property string $lingkup_kerja
- * @property string $tanggal_penawaran
- * @property string $waktu_kerja
+ * @property string $divisi_peminta
+ * @property string $permintaan
+ * @property string $nama_pengadaan
+ * @property string $nota_dinas_permintaan
+ * @property string $tanggal_nota_dinas_permintaan
+ * @property string $perihal_permintaan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
- * @property Pengadaan $idPanitia
  */
-class SuratPemberitahuanPengadaan extends CActiveRecord
+class NotaDinasPermintaanTorRab extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return SuratPemberitahuanPengadaan the static model class
+	 * @return NotaDinasPermintaanTorRab the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -33,7 +33,7 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'surat_pemberitahuan_pengadaan';
+		return 'nota_dinas_permintaan_tor_rab';
 	}
 
 	/**
@@ -44,15 +44,12 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'required','message'=>'{attribute} tidak boleh kosong'),
-			array('id_dokumen, lingkup_kerja', 'length', 'max'=>32),
-			array('nomor, perihal', 'length', 'max'=>50),
-			array('id_panitia', 'length', 'max'=>11),
-			array('waktu_kerja', 'length', 'max'=>20),
-			array('nomor','Check'),
+			array('id_dokumen, nomor, divisi_peminta, permintaan, nama_pengadaan, nota_dinas_permintaan, tanggal_nota_dinas_permintaan, perihal_permintaan', 'required'),
+			array('id_dokumen, nota_dinas_permintaan', 'length', 'max'=>100),
+			array('nomor, divisi_peminta, permintaan, nama_pengadaan, perihal_permintaan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, id_panitia, perihal, lingkup_kerja, tanggal_penawaran, waktu_kerja', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, divisi_peminta, permintaan, nama_pengadaan, nota_dinas_permintaan, tanggal_nota_dinas_permintaan, perihal_permintaan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,7 +62,6 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -77,11 +73,12 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'id_panitia' => 'Id Panitia',
-			'perihal' => 'Perihal',
-			'lingkup_kerja' => 'Lingkup Kerja',
-			'tanggal_penawaran' => 'Tanggal Penawaran',
-			'waktu_kerja' => 'Waktu Kerja',
+			'divisi_peminta' => 'Divisi Peminta',
+			'permintaan' => 'Permintaan',
+			'nama_pengadaan' => 'Nama Pengadaan',
+			'nota_dinas_permintaan' => 'Nota Dinas Permintaan',
+			'tanggal_nota_dinas_permintaan' => 'Tanggal Nota Dinas Permintaan',
+			'perihal_permintaan' => 'Perihal Permintaan',
 		);
 	}
 
@@ -98,20 +95,15 @@ class SuratPemberitahuanPengadaan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('id_panitia',$this->id_panitia,true);
-		$criteria->compare('perihal',$this->perihal,true);
-		$criteria->compare('lingkup_kerja',$this->lingkup_kerja,true);
-		$criteria->compare('tanggal_penawaran',$this->tanggal_penawaran,true);
-		$criteria->compare('waktu_kerja',$this->waktu_kerja,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('permintaan',$this->permintaan,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('nota_dinas_permintaan',$this->nota_dinas_permintaan,true);
+		$criteria->compare('tanggal_nota_dinas_permintaan',$this->tanggal_nota_dinas_permintaan,true);
+		$criteria->compare('perihal_permintaan',$this->perihal_permintaan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	public function Check($attribute,$params){
-		if(strpos($this->attributes['nomor'], 'Nomor') !== false) {
-			$this->addError($attribute, 'Periksa kembali nomor surat');
-		}
 	}
 }
