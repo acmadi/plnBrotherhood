@@ -17,7 +17,7 @@ return array(
 		'application.components.*',
 		'application.extensions.coco.*',
 		'application.extensions.highcharts.*',
-		'application.extensions.EExcelView.*',
+		'application.vendors.phpexcel.*',
 	),
 
 	'modules'=>array(
