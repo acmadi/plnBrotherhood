@@ -1792,7 +1792,7 @@ class PHPExcel_Reader_Excel2007 extends PHPExcel_Reader_Abstract implements PHPE
 				if ($style->fill->patternFill->fgColor) {
 					$docStyle->getFill()->getStartColor()->setARGB(self::_readColor($style->fill->patternFill->fgColor,true));
 				} else {
-					$docStyle->getFill()->getStartColor()->setARGB('FF000000');
+					// $docStyle->getFill()->getStartColor()->setARGB('FF000000');
 				}
 				if ($style->fill->patternFill->bgColor) {
 					$docStyle->getFill()->getEndColor()->setARGB(self::_readColor($style->fill->patternFill->bgColor,true));
