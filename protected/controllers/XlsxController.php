@@ -23,6 +23,27 @@ class XlsxController extends Controller
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_2.xlsx"');
+				} else if ($crincian->nama_rincian == 'Lampiran 3') {
+					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_3.xlsx');
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C4', strtoupper($cpengadaan->nama_pengadaan));
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C7', 'Nomor : ' . $crks->nomor);
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C8', 'Tanggal : ' . Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					ob_end_clean();
+					ob_start();
+					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_3.xlsx"');
+				} else if ($crincian->nama_rincian == 'Lampiran 6') {
+					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_6.xlsx');
+					ob_end_clean();
+					ob_start();
+					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_6.xlsx"');
+				} else if ($crincian->nama_rincian == 'Lampiran ba') {
+					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_ba.xlsx');
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('D3', $crks->nomor);
+					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('D4', Tanggal::getTanggalLengkap($cdokumen->tanggal));
+
+					ob_end_clean();
+					ob_start();
+					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_BA.xlsx"');
 				}
 			}
 		}
