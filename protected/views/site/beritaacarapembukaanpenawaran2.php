@@ -68,12 +68,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
 		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'status metode'); ?>
-			<?php echo $form->textField($BAPP,'status_metode',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'status_metode'); ?>
-		</div>
 	
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>

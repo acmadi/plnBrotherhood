@@ -557,10 +557,7 @@ class SiteController extends Controller
 								$PLBL6->nama_rincian="Lampiran 6";
 								$PLBL7= new RincianRks;
 								$PLBL7->id_dokumen=$RKS->id_dokumen;
-								$PLBL7->nama_rincian="Lampiran 7";
-								$PLBL8= new RincianRks;
-								$PLBL8->id_dokumen=$RKS->id_dokumen;
-								$PLBL8->nama_rincian="Lampiran 8";
+								$PLBL7->nama_rincian="Lampiran 7";;
 								$PLBLba= new RincianRks;
 								$PLBLba->id_dokumen=$RKS->id_dokumen;
 								$PLBLba->nama_rincian="Lampiran ba";
@@ -592,9 +589,6 @@ class SiteController extends Controller
 								$PLBJL7= new RincianRks;
 								$PLBJL7->id_dokumen=$RKS->id_dokumen;
 								$PLBJL7->nama_rincian="Lampiran 7";
-								$PLBJL8= new RincianRks;
-								$PLBJL8->id_dokumen=$RKS->id_dokumen;
-								$PLBJL8->nama_rincian="Lampiran 8";
 								$PLBJLba= new RincianRks;
 								$PLBJLba->id_dokumen=$RKS->id_dokumen;
 								$PLBJLba->nama_rincian="Lampiran ba";
@@ -650,9 +644,6 @@ class SiteController extends Controller
 								$PMBL7= new RincianRks;
 								$PMBL7->id_dokumen=$RKS->id_dokumen;
 								$PMBL7->nama_rincian="Lampiran 7";
-								$PMBL8= new RincianRks;
-								$PMBL8->id_dokumen=$RKS->id_dokumen;
-								$PMBL8->nama_rincian="Lampiran 8";
 								$PMBLba= new RincianRks;
 								$PMBLba->id_dokumen=$RKS->id_dokumen;
 								$PMBLba->nama_rincian="Lampiran ba";
@@ -684,9 +675,6 @@ class SiteController extends Controller
 								$PMBJL7= new RincianRks;
 								$PMBJL7->id_dokumen=$RKS->id_dokumen;
 								$PMBJL7->nama_rincian="Lampiran 7";
-								$PMBJL8= new RincianRks;
-								$PMBJL8->id_dokumen=$RKS->id_dokumen;
-								$PMBJL8->nama_rincian="Lampiran 8";
 								$PMBJLba= new RincianRks;
 								$PMBJLba->id_dokumen=$RKS->id_dokumen;
 								$PMBJLba->nama_rincian="Lampiran ba";
@@ -730,7 +718,6 @@ class SiteController extends Controller
 											$PLBL5->save(false);
 											$PLBL6->save(false);
 											$PLBL7->save(false);
-											$PLBL8->save(false);
 											$PLBLba->save(false);
 										} else if ($RKS->tipe_rks==2){
 											$PLBJD->save(false);
@@ -742,7 +729,6 @@ class SiteController extends Controller
 											$PLBJL5->save(false);
 											$PLBJL6->save(false);
 											$PLBJL7->save(false);
-											$PLBJL8->save(false);
 											$PLBJLba->save(false);
 										} else if ($RKS->tipe_rks==3){
 											$PLJD->save(false);
@@ -764,7 +750,6 @@ class SiteController extends Controller
 											$PMBL5->save(false);
 											$PMBL6->save(false);
 											$PMBL7->save(false);
-											$PMBL8->save(false);
 											$PMBLba->save(false);
 										} else if ($RKS->tipe_rks==2){
 											$PMBJD->save(false);
@@ -777,7 +762,6 @@ class SiteController extends Controller
 											$PMBJL5->save(false);
 											$PMBJL6->save(false);
 											$PMBJL7->save(false);
-											$PMBJL8->save(false);
 											$PMBJLba->save(false);
 										} else if ($RKS->tipe_rks==3){
 											$PMJD->save(false);
@@ -3257,7 +3241,7 @@ class SiteController extends Controller
 				
 				$SPPM= new SuratPenunjukanPemenang;
 				$SPPM->id_dokumen=$Dokumen0->id_dokumen;
-				if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
+				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung' || $Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
 					$SPPM->jaminan='0';
 					$SPPM->nomor_ski='-';
 					$SPPM->tanggal_ski='-';
