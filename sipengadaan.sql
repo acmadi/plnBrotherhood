@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2013 at 07:21 PM
+-- Generation Time: Jul 03, 2013 at 08:16 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -201,24 +201,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Nota Dinas Permintaan', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'TOR', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(3, 'RAB', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(4, 'Nota Dinas Perintah Pengadaan', '2013-07-11', 'Jakarta', 1, 'Belum Selesai'),
-(5, 'Pakta Integritas Awal Panitia', '2013-07-03', 'Jakarta', 1, 'Belum Selesai'),
-(6, 'RKS', '2013-07-03', 'Jakarta', 1, 'Belum Selesai'),
-(7, 'HPS', '2013-07-03', 'Jakarta', 1, 'Belum Selesai'),
-(8, 'Pakta Integritas Penyedia', '1970-01-01', '-', 1, 'Belum Selesai'),
-(9, 'Surat Pengantar Penawaran Harga', '1970-01-01', 'Jakarta', 1, 'Belum Selesai'),
-(10, 'Surat Pernyataan Minat', '1970-01-01', '-', 1, 'Belum Selesai'),
-(11, 'Form Isian Kualifikasi', '1970-01-01', '-', 1, 'Belum Selesai'),
-(12, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-10', 'Jakarta', 1, 'Belum Selesai');
-
 -- --------------------------------------------------------
 
 --
@@ -254,13 +236,6 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `form_isian_kualifikasi`
---
-
-INSERT INTO `form_isian_kualifikasi` (`id_dokumen`) VALUES
-(11);
-
 -- --------------------------------------------------------
 
 --
@@ -272,13 +247,6 @@ CREATE TABLE IF NOT EXISTS `hps` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hps`
---
-
-INSERT INTO `hps` (`id_dokumen`, `nomor`) VALUES
-(7, 'dsfas');
 
 -- --------------------------------------------------------
 
@@ -382,13 +350,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nota_dinas_perintah_pengadaan`
---
-
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(4, '035/DVMUM/2013', 'KDIVMUM', 'Gilang Laksana', 'Penunjukan Panitia Pengadaan Sepatu Futsal', 90, 'Kas PLN', 143508000);
-
 -- --------------------------------------------------------
 
 --
@@ -401,13 +362,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   `perihal` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `nota_dinas_permintaan`
---
-
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`) VALUES
-(1, '045/DVMAM/2013', 'Permintaan Sepatu Futsal Untuk Pemain Futsal');
 
 -- --------------------------------------------------------
 
@@ -462,13 +416,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pakta_integritas_panitia_1`
---
-
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
-(5, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -490,13 +437,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pakta_integritas_penyedia`
---
-
-INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`) VALUES
-(8);
 
 -- --------------------------------------------------------
 
@@ -541,13 +481,6 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   KEY `id_pengadaan` (`id_pengadaan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `penerima_pengadaan`
---
-
-INSERT INTO `penerima_pengadaan` (`perusahaan`, `status`, `id_pengadaan`, `alamat`, `npwp`) VALUES
-('aaaa', 'Lulus', 1, '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -581,13 +514,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengadaan`
---
-
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Sepatu Futsal', 'divman', 'Barang dan Jasa', '-', '2013-07-11', '0000-00-00', '7', 0, 3, 'Penunjukan Langsung', 'Satu Sampul', 'Pasca Kualifikasi');
-
 -- --------------------------------------------------------
 
 --
@@ -598,13 +524,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rab`
---
-
-INSERT INTO `rab` (`id_dokumen`) VALUES
-(3);
 
 -- --------------------------------------------------------
 
@@ -683,7 +602,6 @@ CREATE TABLE IF NOT EXISTS `rks` (
   `tanggal_penunjukan_pemenang` date NOT NULL,
   `waktu_penunjukan_pemenang` time NOT NULL,
   `sistem_evaluasi_penawaran` varchar(50) NOT NULL,
-  `lama_berlaku_penawaran` int(10) NOT NULL,
   `jangka_waktu_penyerahan` int(100) NOT NULL,
   `tanggal_paling_lambat_penyerahan` date NOT NULL,
   `jangka_waktu_berlaku_jaminan` int(100) NOT NULL,
@@ -695,8 +613,10 @@ CREATE TABLE IF NOT EXISTS `rks` (
 -- Dumping data for table `rks`
 --
 
-INSERT INTO `rks` (`id_dokumen`, `nomor`, `tipe_rks`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_awal_pemasukan_penawaran1`, `tanggal_akhir_pemasukan_penawaran1`, `waktu_pemasukan_penawaran1`, `tempat_pemasukan_penawaran1`, `tanggal_pembukaan_penawaran1`, `waktu_pembukaan_penawaran1`, `tempat_pembukaan_penawaran1`, `tanggal_evaluasi_penawaran1`, `waktu_evaluasi_penawaran1`, `tempat_evaluasi_penawaran1`, `tanggal_awal_pemasukan_penawaran2`, `tanggal_akhir_pemasukan_penawaran2`, `waktu_pemasukan_penawaran2`, `tempat_pemasukan_penawaran2`, `tanggal_pembukaan_penawaran2`, `waktu_pembukaan_penawaran2`, `tempat_pembukaan_penawaran2`, `tanggal_evaluasi_penawaran2`, `waktu_evaluasi_penawaran2`, `tempat_evaluasi_penawaran2`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_usulan_pemenang`, `waktu_usulan_pemenang`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tanggal_pemberitahuan_pemenang`, `waktu_pemberitahuan_pemenang`, `tanggal_penunjukan_pemenang`, `waktu_penunjukan_pemenang`, `sistem_evaluasi_penawaran`, `lama_berlaku_penawaran`, `jangka_waktu_penyerahan`, `tanggal_paling_lambat_penyerahan`, `jangka_waktu_berlaku_jaminan`, `lama_waktu_tambahan`) VALUES
-(6, '011/PPJB-A/DIVMUM/2013', 1, '2013-06-11', '2013-07-04', '08:00:00', 'Kantor Pusat PLN', '2013-07-10', '2013-07-11', '08:00:00', 'Kantor Pusat PLN', '2013-07-17', '08:00:00', 'Kantor Pusat PLN', '2013-07-11', '08:00:00', 'Kantor Pusat PLN', '1970-01-01', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '2013-07-18', '08:00:00', 'Kantor Pusat PLN', '2013-07-05', '08:00:00', '2013-07-18', '08:00:00', '2013-07-17', '08:00:00', '2013-07-19', '08:00:00', 'Sistem Gugur', 4, 3, '2013-07-09', 3, 14);
+INSERT INTO `rks` (`id_dokumen`, `nomor`, `tipe_rks`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_awal_pemasukan_penawaran1`, `tanggal_akhir_pemasukan_penawaran1`, `waktu_pemasukan_penawaran1`, `tempat_pemasukan_penawaran1`, `tanggal_pembukaan_penawaran1`, `waktu_pembukaan_penawaran1`, `tempat_pembukaan_penawaran1`, `tanggal_evaluasi_penawaran1`, `waktu_evaluasi_penawaran1`, `tempat_evaluasi_penawaran1`, `tanggal_awal_pemasukan_penawaran2`, `tanggal_akhir_pemasukan_penawaran2`, `waktu_pemasukan_penawaran2`, `tempat_pemasukan_penawaran2`, `tanggal_pembukaan_penawaran2`, `waktu_pembukaan_penawaran2`, `tempat_pembukaan_penawaran2`, `tanggal_evaluasi_penawaran2`, `waktu_evaluasi_penawaran2`, `tempat_evaluasi_penawaran2`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_usulan_pemenang`, `waktu_usulan_pemenang`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tanggal_pemberitahuan_pemenang`, `waktu_pemberitahuan_pemenang`, `tanggal_penunjukan_pemenang`, `waktu_penunjukan_pemenang`, `sistem_evaluasi_penawaran`, `jangka_waktu_penyerahan`, `tanggal_paling_lambat_penyerahan`, `jangka_waktu_berlaku_jaminan`, `lama_waktu_tambahan`) VALUES
+(6, '011/PPJB-A/DIVMUM/2013', 1, '2013-06-11', '2013-07-04', '08:00:00', 'Kantor Pusat PLN', '2013-07-10', '2013-07-11', '08:00:00', 'Kantor Pusat PLN', '2013-07-17', '08:00:00', 'Kantor Pusat PLN', '2013-07-11', '08:00:00', 'Kantor Pusat PLN', '1970-01-01', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '2013-07-18', '08:00:00', 'Kantor Pusat PLN', '2013-07-05', '08:00:00', '2013-07-18', '08:00:00', '2013-07-17', '08:00:00', '2013-07-19', '08:00:00', 'Sistem Gugur', 3, '2013-07-09', 3, 14),
+(16, '021/JO/DIVMUM/2013', 2, '2013-07-17', '2013-07-21', '10:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-11', '2013-07-16', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-25', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-23', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-30', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-30', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-30', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-30', '08:00:00', '2013-07-18', '08:00:00', '2013-07-31', '08:00:00', '2013-07-18', '08:00:00', 'Sistem Gugur', 3, '2013-07-10', 3, 21),
+(18, '021/PPJB-B/DIVMUM/2013', 3, '2013-06-11', '2013-07-04', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-25', '2013-07-29', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-23', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-23', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-31', '2013-08-01', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-24', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-17', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-31', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-05', '08:00:00', '2013-07-31', '08:00:00', '2013-08-01', '08:00:00', '2013-08-06', '08:00:00', 'Sistem Gugur', 3, '2013-07-31', 3, 18);
 
 -- --------------------------------------------------------
 
@@ -1145,79 +1065,6 @@ ALTER TABLE `rab`
 --
 ALTER TABLE `rincian_rks`
   ADD CONSTRAINT `rincian_rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `rks` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `rks`
---
-ALTER TABLE `rks`
-  ADD CONSTRAINT `rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pengantar_penawaran_harga`
---
-ALTER TABLE `surat_pengantar_penawaran_harga`
-  ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pengumuman_pelelangan`
---
-ALTER TABLE `surat_pengumuman_pelelangan`
-  ADD CONSTRAINT `surat_pengumuman_pelelangan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pernyataan_minat`
---
-ALTER TABLE `surat_pernyataan_minat`
-  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_negosiasi_klarifikasi`
---
-ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
-  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_pembukaan_penawaran`
---
-ALTER TABLE `surat_undangan_pembukaan_penawaran`
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_5` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_pengambilan_dokumen_pengadaan`
---
-ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
-  ADD CONSTRAINT `surat_undangan_pengambilan_dokumen_pengadaan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_permintaan_penawaran_harga`
---
-ALTER TABLE `surat_undangan_permintaan_penawaran_harga`
-  ADD CONSTRAINT `surat_undangan_permintaan_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_prakualifikasi`
---
-ALTER TABLE `surat_undangan_prakualifikasi`
-  ADD CONSTRAINT `surat_undangan_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `termin`
---
-ALTER TABLE `termin`
-  ADD CONSTRAINT `termin_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen_kontrak` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `termin_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tor`
---
-ALTER TABLE `tor`
-  ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `user_kontrak`
---
-ALTER TABLE `user_kontrak`
-  ADD CONSTRAINT `user_kontrak_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
