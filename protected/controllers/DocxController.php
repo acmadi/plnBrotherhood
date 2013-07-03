@@ -1010,6 +1010,7 @@ class DocxController extends Controller
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#penyedia#', $penyedia);
+			$this->doccy->phpdocx->assign('#perihal#', $nama);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', '');
 			$this->doccy->phpdocx->assign('#nosupph#', '');
 			$this->doccy->phpdocx->assign('#tglsupph#', '');
@@ -1020,7 +1021,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
-			$this->doccy->phpdocx->assign('#lama#', $lama);
+			$this->doccy->phpdocx->assign('#lamapengerjaan#', $lama);
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
 			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
 			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
