@@ -968,7 +968,7 @@ class DocxController extends Controller
 			$lamaterbilang = RupiahMaker::TerbilangMaker($lama);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tempat = $Dok->tempat;
-			$perihal = $SPP->perihal;
+			//$perihal = $SPP->perihal;
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
 			
