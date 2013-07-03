@@ -3552,7 +3552,9 @@ class SiteController extends Controller
 				if($valid){
 					if($Dokumen0->save(false)){
 						if($NDPTR->save(false)){
-							$this->redirect(array('notadinaspermintaantorrab','id'=>$Dokumen0->id_pengadaan));
+							if(isset($_POST['simpanbuat'])){
+								$this->redirect(array('docx/download', 'id'=>$NDPTR->id_dokumen));											
+							}
 						}
 					}
 				}
