@@ -2835,6 +2835,8 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='17';
 				
+				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -2846,8 +2848,13 @@ class SiteController extends Controller
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
 				
-				$Dokumen1->id_dokumen=$somevariable+1;
-				$Dokumen1->nama_dokumen='Pakta Integritas Akhir Panitia';
+				$Dokumen1= new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				if ($Panitia->jenis_panitia == 'Panitia'){
+					$Dokumen1->nama_dokumen='Pakta Integritas Akhir Panitia';
+				} else if ($Panitia->jenis_panitia == 'Pejabat'){
+					$Dokumen1->nama_dokumen='Pakta Integritas Akhir Pejabat';
+				}
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
@@ -2904,9 +2911,14 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Usulan Pemenang"');
-				$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Akhir Panitia"');
+				if ($Panitia->jenis_panitia == 'Panitia'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Akhir Panitia"');
+				} else if ($Panitia->jenis_panitia == 'Pejabat'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Akhir Pejabat"');
+				}
 				
 				$NDUP=NotaDinasUsulanPemenang::model()->findByPk($Dokumen0->id_dokumen);
 				$PIP2=PaktaIntegritasPanitia2::model()->findByPk($Dokumen1->id_dokumen);

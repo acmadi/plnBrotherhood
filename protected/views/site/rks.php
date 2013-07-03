@@ -524,12 +524,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Rks,'lama_berlaku_penawaran'); ?>
-					<?php echo $form->textField($Rks,'lama_berlaku_penawaran',array('size'=>56,'maxlength'=>20)); ?>
-					<?php echo $form->error($Rks,'lama_berlaku_penawaran'); ?>
-				</div>
-				
-				<div class="row">
 					<?php echo $form->labelEx($Rks,'sistem_evaluasi_penawaran'); ?>
 					<?php echo $form->textField($Rks,'sistem_evaluasi_penawaran',array('size'=>56,'maxlength'=>20)); ?>
 					<?php echo $form->error($Rks,'sistem_evaluasi_penawaran'); ?>
