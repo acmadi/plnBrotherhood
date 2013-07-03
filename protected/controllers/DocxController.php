@@ -1068,6 +1068,7 @@ class DocxController extends Controller
 			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+			
 			$this->doccy->newFile('9a Berita Acara Aanwijzing.docx');
 			$norks = $rks->nomor;
 			
@@ -1082,9 +1083,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#haritanggal#', Tanggal::getHariTanggalLengkap($Dok->tanggal));
 			// $this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			$this->doccy->phpdocx->assign('#anggota#', $anggota1);
+			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
+			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			// $this->doccy->phpdocx->assign('#anggota#', $anggota1);
 			$DokRKS=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 			$this->doccy->phpdocx->assign('#wakturapat#', Tanggal::getJamMenit($RKS->waktu_penjelasan));
@@ -1112,11 +1113,11 @@ class DocxController extends Controller
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
-			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
-			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
-			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
-			$anggota2 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
+			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
+			// $ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			// $sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			// $anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
+			// $anggota2 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			$dokBAPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"');
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($dokBAPP->id_dokumen);
 			$jumlahperusahaan = $BAPP->jumlah_penyedia_diundang;
@@ -1146,10 +1147,14 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#hari#', $hari);
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
-			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
-			$this->doccy->phpdocx->assign('#anggota2#', '.......................');
+			
+			$namapic = $this->getListPanitiaAanwijzing($Peng->id_panitia);
+			$jenispic = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia . " sebagai berikut :" ;
+			$jenispic2 = "saya ". $namapic ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
+			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
+			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			// $this->doccy->phpdocx->assign('#anggota2#', '.......................');
 			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlahperusahaan);
 			$this->doccy->phpdocx->assign('#listperusahaan#', '.......................');
 			$this->doccy->phpdocx->assign('#listperusahaanlulus#', '.......................');
@@ -1159,9 +1164,18 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#npwp1#', $NPWP);
 			$this->doccy->phpdocx->assign('#nilai1#', $nilai);
 			$this->doccy->phpdocx->assign('#pemenang2#', $pemenang2);
-			$this->doccy->phpdocx->assign('#alamat1#', $alamat2);
+			$this->doccy->phpdocx->assign('#alamat2#', $alamat2);
 			$this->doccy->phpdocx->assign('#npwp2#', $NPWP2);
 			$this->doccy->phpdocx->assign('#nilai2#', $nilai2);
+			
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic2);				
+			}else{
+				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic);		
+				$this->doccy->phpdocx->assign('#listpic#',$namapic);				
+			}			
+			
+			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getListPanitiaTTAanwijzing($Peng->id_panitia));
 			
 			$this->renderDocx("Berita Acara Evaluasi Penawaran.docx", true);
 		}
@@ -1335,7 +1349,7 @@ class DocxController extends Controller
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
+			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
 			
 			
 			$metode = $Peng->metode_pengadaan;
@@ -1343,9 +1357,13 @@ class DocxController extends Controller
 			$user = $Peng->divisi_peminta;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
-			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
-			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
-			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
+			
+			$namapic = $this->getListPanitiaAanwijzing($Peng->id_panitia);
+			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;						
+			$jenispic2 = Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia;
+			// $ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			// $sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			// $anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			
 			$this->doccy->newFile('10a Berita Acara Pembukaan Penawaran.docx');
 			
@@ -1356,18 +1374,28 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#hari#', $hari);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#jam#', '..... : .....');
+			$this->doccy->phpdocx->assign('#jam#', Tanggal::getJamMenit($tanggal));
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
-			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
-			$this->doccy->phpdocx->assign('#anggota2#', '.............................................');
+			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
+			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			// $this->doccy->phpdocx->assign('#anggota2#', '.............................................');
 			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlah_penyedia_diundang);
 			$this->doccy->phpdocx->assign('#listperusahaandanharga#', '.............................................');
 			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
 			$this->doccy->phpdocx->assign('#jumlahsah#', $jumlah_penyedia_dokumen_sah);
 			$this->doccy->phpdocx->assign('#jumlahtidaksah#', $jumlah_penyedia_dokumen_tidak_sah);
+			
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic);				
+			}else{
+				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic2);				
+			}
+			
+			$this->doccy->phpdocx->assign('#listpic#',$namapic);
+			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getListPanitiaTTAanwijzing($Peng->id_panitia));
+			
 			$this->renderDocx("Berita Acara Pembukaan Penawaran.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Sampul Satu" || $Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Tahap Satu"){
@@ -1716,14 +1744,14 @@ class DocxController extends Controller
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
 			$list = "1. " . Panitia::model()-findByPk($idPan)->nama_panitia;
 		}else{
-			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . " : sebagai Ketua merangkap Anggota  " ;
+			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . " : sebagai Ketua merangkap Anggota" ;
 			$list .= '<w:br/>';
-			$list .= '<w:br/>';
+			// $list .= '<w:br/>';
 			$list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . " : sebagai Sekretaris merangkap Anggota";
 			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';
-				$list .= '<w:br/>';
+				// $list .= '<w:br/>';
 				$list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . " : sebagai Anggota";		
 			}
 		}
