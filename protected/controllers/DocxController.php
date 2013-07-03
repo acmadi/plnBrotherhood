@@ -560,11 +560,14 @@ class DocxController extends Controller
 			$tanggalambil = Tanggal::getTanggalLengkap($SUPDP->tanggal_pengambilan);
 			$waktuambil = Tanggal::getJamMenit($SUPDP->waktu_pengambilan);
 			$tempatambil = $SUPDP->tempat_pengambilan;
+			
 			$nama = $Peng->nama_pengadaan;
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$tanggalrks=Tanggal::getTanggalLengkap($dokrks->tanggal);
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
+			$tanggalpenjelasan = Tanggal::getTanggalLengkap($rks->tanggal_penjelasan);
+			$waktupenjelasan = Tanggal::getJamMenit($rks->waktu_penjelasan);
 			
 			$this->doccy->newFile('7 Surat Pemberitahuan Pengadaan.docx');
 			
@@ -579,6 +582,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalambil#', $tanggalambil);
 			$this->doccy->phpdocx->assign('#waktuambil#', $waktuambil);
 			$this->doccy->phpdocx->assign('#tempatambil#', $tempatambil);
+			$this->doccy->phpdocx->assign('#tanggalpenjelasan#', $tanggalpenjelasan);
+			$this->doccy->phpdocx->assign('#waktupenjelasan#', $waktupenjelasan);
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
@@ -771,9 +776,10 @@ class DocxController extends Controller
 			// $lingkup = $SUPH->lingkup_kerja;
 			$tempat = $SUPH->tempat_penyerahan;
 			$nama = $Peng->nama_pengadaan;
-			$tanggalpenawaran = Tanggal::getTanggalLengkap($rks->tanggal_pemasukan_penawaran);
-			$waktupenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran);
-			$terbilang = Tanggal::getTanggalLengkap0($tanggal);
+			$tanggalpenawaran = Tanggal::getTanggalLengkap($rks->tanggal_akhir_pemasukan_penawaran1);
+			$waktupenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran1);
+			
+			$terbilang = RupiahMaker::terbilangMaker($masa);
 			
 			$norks = $rks -> nomor;
 			$nohps = $hps -> nomor;
@@ -805,6 +811,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktupenawaran#', $waktupenawaran);
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
+			
+			
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namakadiv);
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
 		}
