@@ -43,7 +43,6 @@
  * @property string $tanggal_penunjukan_pemenang
  * @property string $waktu_penunjukan_pemenang
  * @property string $sistem_evaluasi_penawaran
- * @property integer $lama_berlaku_penawaran
  * @property integer $jangka_waktu_penyerahan
  * @property string $tanggal_paling_lambat_penyerahan
  * @property integer $jangka_waktu_berlaku_jaminan
@@ -81,8 +80,8 @@ class Rks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tipe_rks, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, lama_berlaku_penawaran, jangka_waktu_penyerahan, tanggal_paling_lambat_penyerahan, jangka_waktu_berlaku_jaminan, lama_waktu_tambahan', 'required'),
-			array('tipe_rks, lama_berlaku_penawaran, jangka_waktu_penyerahan, jangka_waktu_berlaku_jaminan, lama_waktu_tambahan', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor, tipe_rks, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tanggal_paling_lambat_penyerahan, jangka_waktu_berlaku_jaminan, lama_waktu_tambahan', 'required'),
+			array('tipe_rks, jangka_waktu_penyerahan, jangka_waktu_berlaku_jaminan, lama_waktu_tambahan', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor, sistem_evaluasi_penawaran', 'length', 'max'=>50),
 			array('tempat_penjelasan, tempat_pemasukan_penawaran1, tempat_pembukaan_penawaran1, tempat_evaluasi_penawaran1, tempat_pemasukan_penawaran2, tempat_pembukaan_penawaran2, tempat_evaluasi_penawaran2, tempat_negosiasi', 'length', 'max'=>256),
@@ -100,7 +99,7 @@ class Rks extends CActiveRecord
 			array('waktu_penunjukan_pemenang','check12'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tipe_rks, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, lama_berlaku_penawaran, jangka_waktu_penyerahan, tanggal_paling_lambat_penyerahan, jangka_waktu_berlaku_jaminan, lama_waktu_tambahan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tipe_rks, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tanggal_paling_lambat_penyerahan, jangka_waktu_berlaku_jaminan, lama_waktu_tambahan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -162,7 +161,6 @@ class Rks extends CActiveRecord
 			'tanggal_penunjukan_pemenang' => 'Tanggal Penunjukan Pemenang',
 			'waktu_penunjukan_pemenang' => 'Waktu Penunjukan Pemenang',
 			'sistem_evaluasi_penawaran' => 'Sistem Evaluasi Penawaran',
-			'lama_berlaku_penawaran' => 'Lama Berlaku Penawaran',
 			'jangka_waktu_penyerahan' => 'Jangka Waktu Penyerahan',
 			'tanggal_paling_lambat_penyerahan' => 'Tanggal Paling Lambat Penyerahan',
 			'jangka_waktu_berlaku_jaminan' => 'Jangka Waktu Berlaku Jaminan',
@@ -220,7 +218,6 @@ class Rks extends CActiveRecord
 		$criteria->compare('tanggal_penunjukan_pemenang',$this->tanggal_penunjukan_pemenang,true);
 		$criteria->compare('waktu_penunjukan_pemenang',$this->waktu_penunjukan_pemenang,true);
 		$criteria->compare('sistem_evaluasi_penawaran',$this->sistem_evaluasi_penawaran,true);
-		$criteria->compare('lama_berlaku_penawaran',$this->lama_berlaku_penawaran);
 		$criteria->compare('jangka_waktu_penyerahan',$this->jangka_waktu_penyerahan);
 		$criteria->compare('tanggal_paling_lambat_penyerahan',$this->tanggal_paling_lambat_penyerahan,true);
 		$criteria->compare('jangka_waktu_berlaku_jaminan',$this->jangka_waktu_berlaku_jaminan);
