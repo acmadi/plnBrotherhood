@@ -1333,26 +1333,55 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Panitia"){
 			
-			$PI=PaktaIntegritasPanitia1::model()->findByPk($id);
+			$PIP2=PaktaIntegritasPanitia2::model()->findByPk($id);
 			$tanggal = $Dok->tanggal;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
 			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			$nama = $Peng->nama_pengadaan;
+			$metode = $Peng->metode_pengadaan;
 			$sk = $panitia->SK_panitia;
+			
 			$this->doccy->newFile('12a Pakta Integritas Akhir Panitia.docx');
 			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#sk#', $sk);
+			$this->doccy->phpdocx->assign('#nokeputusandir#', $sk);
+			$this->doccy->phpdocx->assign('#metodepengadaan#', $metode);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
+			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			$this->renderDocx("Pakta Integritas Akhir Panitia.docx", true);
+		}
+		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Pejabat"){
+			
+			$PIP2=PaktaIntegritasPanitia2::model()->findByPk($id);
+			$tanggal = $Dok->tanggal;
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
 			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
-			$this->renderDocx("Pakta Integritas Akhir Panitia.docx", true);
+			$nama = $Peng->nama_pengadaan;
+			$metode = $Peng->metode_pengadaan;
+			$sk = $panitia->SK_panitia;
+			
+			$namapejabat=User::model()->findByPk(Anggota::model()->find('id_panitia = '.$Peng->id_panitia)->username)->nama;
+			
+			$this->doccy->newFile('12b Pakta Integritas Akhir Pejabat.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#nokeputusandir#', $sk);
+			$this->doccy->phpdocx->assign('#metodepengadaan#', $metode);
+			$this->doccy->phpdocx->assign('#namapejabat#', $namapejabat);
+			$this->renderDocx("Pakta Integritas Akhir Pejabat.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Penyedia"){
 			

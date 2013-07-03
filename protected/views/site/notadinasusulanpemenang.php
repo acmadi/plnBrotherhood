@@ -204,6 +204,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<h4><b> Buat Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Nota Dinas Usulan Pemenang', array('docx/download','id'=>$NDUP->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Pakta Integritas Akhir Panitia/Pejabat', array('docx/download','id'=>$PIP2->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>
