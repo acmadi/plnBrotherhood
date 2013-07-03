@@ -53,6 +53,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				'enableAjaxValidation'=>false,
 			)); ?>
 			
+				<?php echo $form->errorSummary($Rks); ?>
+			
 				<h4><b> RKS </b></h4>
 				
 				<div class="row">
@@ -223,6 +225,50 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<?php echo $form->error($Rks,'tempat_pembukaan_penawaran1'); ?>
 				</div>
 				
+				<div class="row">
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
+						echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul") {
+						echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran sampul 1'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran tahap 1'); 
+					} ?> 
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_evaluasi_penawaran1',
+						'value'=>$Rks->tanggal_evaluasi_penawaran1,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'dd-mm-yy',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_evaluasi_penawaran1'); ?>
+				</div>
+				
+				<div class="row">
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
+						echo $form->labelEx($Rks,'waktu_evaluasi_penawaran (Format HH:MM)'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul") {
+						echo $form->labelEx($Rks,'waktu_evaluasi_penawaran sampul 1 (Format HH:MM)'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'waktu_evaluasi_penawaran tahap 1 (Format HH:MM)'); 
+					} ?> 
+					<?php echo $form->textField($Rks,'waktu_evaluasi_penawaran1',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'waktu_evaluasi_penawaran1'); ?>
+				</div>
+				
+				<div class="row">
+					<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
+						echo $form->labelEx($Rks,'tempat_evaluasi_penawaran'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Sampul") {
+						echo $form->labelEx($Rks,'tempat_evaluasi_penawaran sampul 1'); 
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap") {
+						echo $form->labelEx($Rks,'tempat_evaluasi_penawaran tahap 1'); 
+					} ?> 
+					<?php echo $form->textArea($Rks,'tempat_evaluasi_penawaran1',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+					<?php echo $form->error($Rks,'tempat_evaluasi_penawaran1'); ?>
+				</div>
+				
 				<?php if ($Pengadaan->metode_penawaran=="Dua Sampul") { ?>
 								
 					<div class="row">
@@ -250,6 +296,31 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<?php echo $form->textArea($Rks,'tempat_pembukaan_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 						<?php echo $form->error($Rks,'tempat_pembukaan_penawaran2'); ?>
 					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran sampul 2');?> 
+						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$Rks,
+							'attribute'=>'tanggal_evaluasi_penawaran2',
+							'value'=>$Rks->tanggal_evaluasi_penawaran2,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+						));?>
+						<?php echo $form->error($Rks,'tanggal_evaluasi_penawaran2'); ?>
+					</div>
+				
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'waktu_evaluasi_penawaran sampul 2 (Format HH:MM)'); ?> 
+						<?php echo $form->textField($Rks,'waktu_evaluasi_penawaran2',array('size'=>56,'maxlength'=>20)); ?>
+						<?php echo $form->error($Rks,'waktu_evaluasi_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tempat_evaluasi_penawaran sampul 2'); ?> 
+						<?php echo $form->textArea($Rks,'tempat_evaluasi_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+						<?php echo $form->error($Rks,'tempat_evaluasi_penawaran2'); ?>
 				<?php } ?>
 				
 				<?php if ($Pengadaan->metode_penawaran=="Dua Tahap") { ?>
@@ -317,6 +388,32 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<?php echo $form->labelEx($Rks,'tempat_pembukaan_penawaran tahap 2'); ?> 
 						<?php echo $form->textArea($Rks,'tempat_pembukaan_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 						<?php echo $form->error($Rks,'tempat_pembukaan_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran tahap 2');?> 
+						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$Rks,
+							'attribute'=>'tanggal_evaluasi_penawaran2',
+							'value'=>$Rks->tanggal_evaluasi_penawaran2,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+						));?>
+						<?php echo $form->error($Rks,'tanggal_evaluasi_penawaran2'); ?>
+					</div>
+				
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'waktu_evaluasi_penawaran tahap 2 (Format HH:MM)'); ?> 
+						<?php echo $form->textField($Rks,'waktu_evaluasi_penawaran2',array('size'=>56,'maxlength'=>20)); ?>
+						<?php echo $form->error($Rks,'waktu_evaluasi_penawaran2'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'tempat_evaluasi_penawaran tahap 2'); ?> 
+						<?php echo $form->textArea($Rks,'tempat_evaluasi_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+						<?php echo $form->error($Rks,'tempat_evaluasi_penawaran2'); ?>
 					</div>
 				<?php } ?>
 				
@@ -438,6 +535,38 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<?php echo $form->error($Rks,'sistem_evaluasi_penawaran'); ?>
 				</div>
 				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'jangka_waktu_penyerahan (dalam satuan bulan)'); ?>
+					<?php echo $form->textField($Rks,'jangka_waktu_penyerahan',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'jangka_waktu_penyerahan'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'tanggal_paling_lambat_penyerahan'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Rks,
+						'attribute'=>'tanggal_paling_lambat_penyerahan',
+						'value'=>$Rks->tanggal_paling_lambat_penyerahan,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'dd-mm-yy',
+						),
+					));?>
+					<?php echo $form->error($Rks,'tanggal_paling_lambat_penyerahan'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Rks,'jangka_waktu_berlaku_jaminan (dalam satuan bulan)'); ?>
+					<?php echo $form->textField($Rks,'jangka_waktu_berlaku_jaminan',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'jangka_waktu_berlaku_jaminan'); ?>
+				</div>
+				
+					<div class="row">
+					<?php echo $form->labelEx($Rks,'lama_waktu_tambahan (dalam satuan hari)'); ?>
+					<?php echo $form->textField($Rks,'lama_waktu_tambahan',array('size'=>56,'maxlength'=>20)); ?>
+					<?php echo $form->error($Rks,'lama_waktu_tambahan'); ?>
+				</div>
+				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($Rks->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
@@ -479,7 +608,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
 							$Lamp6=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 6"');
 							$Lamp7=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 7"');
-							$Lamp8=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 8"');
 							$Lampba=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran ba"');
 						?>
 							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
@@ -489,7 +617,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 6', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 7', array('docx/downloadrks','id'=>$Lamp7->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 8', array('docx/downloadrks','id'=>$Lamp8->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran ba', array('docx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
 						<? } ?>
 					</ul>

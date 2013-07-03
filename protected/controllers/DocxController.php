@@ -62,9 +62,9 @@ class DocxController extends Controller
 					$tanggal_pembukaan= Tanggal::getTanggalLengkap($RKS->tanggal_pembukaan_penawaran1);
 					$waktu_pembukaan = Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
 					$tempat_pembukaan = $RKS->tempat_pembukaan_penawaran1;
-					// $tanggal_evaluasi= Tanggal::getTanggalLengkap($RKS->tanggal_evaluasi_penawaran1);
-					// $waktu_evaluasi = Tanggal::getJamMenit($RKS->waktu_evaluasi_penawaran1);
-					// $tempat_evaluasi = $RKS->tempat_evaluasi_penawaran1;
+					$tanggal_evaluasi= Tanggal::getTanggalLengkap($RKS->tanggal_evaluasi_penawaran1);
+					$waktu_evaluasi = Tanggal::getJamMenit($RKS->waktu_evaluasi_penawaran1);
+					$tempat_evaluasi = $RKS->tempat_evaluasi_penawaran1;
 					$tanggal_negosiasi= Tanggal::getTanggalLengkap($RKS->tanggal_negosiasi);
 					$waktu_negosiasi = Tanggal::getJamMenit($RKS->waktu_negosiasi);
 					$tempat_negosiasi = $RKS->tempat_negosiasi;
@@ -81,6 +81,13 @@ class DocxController extends Controller
 					$metode_penawaran = $Peng->metode_penawaran;
 					$jenis_kualifikasi = $Peng->jenis_kualifikasi;
 					$sistem_evaluasi = $RKS->sistem_evaluasi_penawaran;
+					$jangka_waktu_penyerahan = $RKS->jangka_waktu_penyerahan;
+					$terbilang_jangka_waktu_penyerahan = RupiahMaker::terbilangMaker($jangka_waktu_penyerahan);
+					$tanggal_terakhir_penyerahan = Tanggal::getTanggalLengkap($RKS->tanggal_paling_lambat_penyerahan);
+					$lama_berlaku_jaminan = $RKS->jangka_waktu_berlaku_jaminan;
+					$terbilang_lama_berlaku_jaminan = RupiahMaker::terbilangMaker($lama_berlaku_jaminan);
+					$lama_waktu_tambahan = $RKS->lama_waktu_tambahan;
+					$terbilang_lama_waktu_tambahan = RupiahMaker::terbilangMaker($lama_waktu_tambahan);
 					$pengesah = $NDPP->dari;
 					if ($pengesah == "MSDAF") {
 						$nama_pengesah = User::model()->findByPk(Kdivmum::model()->find('jabatan = "MSDAF"')->username)->nama;
@@ -113,9 +120,9 @@ class DocxController extends Controller
 					$this->doccy->phpdocx->assign('#tanggal pembukaan#', $tanggal_pembukaan);
 					$this->doccy->phpdocx->assign('#waktu pembukaan#', $waktu_pembukaan);
 					$this->doccy->phpdocx->assign('#tempat pembukaan#', $tempat_pembukaan);
-					// $this->doccy->phpdocx->assign('#tanggal evaluasi#', $tanggal_evaluasi);
-					// $this->doccy->phpdocx->assign('#waktu evaluasi#', $waktu_evaluasi);
-					// $this->doccy->phpdocx->assign('#tempat evaluasi#', $tempat_evaluasi);
+					$this->doccy->phpdocx->assign('#tanggal evaluasi#', $tanggal_evaluasi);
+					$this->doccy->phpdocx->assign('#waktu evaluasi#', $waktu_evaluasi);
+					$this->doccy->phpdocx->assign('#tempat evaluasi#', $tempat_evaluasi);
 					$this->doccy->phpdocx->assign('#tanggal negosiasi#', $tanggal_negosiasi);
 					$this->doccy->phpdocx->assign('#waktu negosiasi#', $waktu_negosiasi);
 					$this->doccy->phpdocx->assign('#tempat negosiasi#', $tempat_negosiasi);
@@ -130,15 +137,25 @@ class DocxController extends Controller
 					$this->doccy->phpdocx->assign('#metode penawaran#', $metode_penawaran);
 					$this->doccy->phpdocx->assign('#jenis kualifikasi#', $jenis_kualifikasi);
 					$this->doccy->phpdocx->assign('#sistem evaluasi#', $sistem_evaluasi);
+					$this->doccy->phpdocx->assign('#jangka waktu penyerahan#', $jangka_waktu_penyerahan);
+					$this->doccy->phpdocx->assign('#terbilang jangka waktu#', $terbilang_jangka_waktu_penyerahan);
+					$this->doccy->phpdocx->assign('#tanggal terakhir penyerahan#', $tanggal_terakhir_penyerahan);
+					$this->doccy->phpdocx->assign('#lama berlaku jaminan#', $lama_berlaku_jaminan);
+					$this->doccy->phpdocx->assign('#terbilang lama berlaku jaminan#', $terbilang_lama_berlaku_jaminan);
+					$this->doccy->phpdocx->assign('#lama waktu tambahan#', $lama_waktu_tambahan);
+					$this->doccy->phpdocx->assign('#terbilang lama waktu tambahan#', $terbilang_lama_waktu_tambahan);
 					$this->doccy->phpdocx->assign('#pengesah#', $pengesah);
 					$this->doccy->phpdocx->assign('#nama pengesah#', $nama_pengesah);
 					$this->doccy->phpdocx->assign('#nama pejabat / ketua panitia#', $nama_pembuat);					
 					$this->renderDocx("RKS-PL-B-Isi.docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 1") {
+					$nomor_rks = $RKS->nomor;
+					
 					$this->doccy->newFile('PL-B-Lamp_1.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
 					$this->renderDocx("RKS-PL-B-Lamp_1.docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 4") {
