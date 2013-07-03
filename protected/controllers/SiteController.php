@@ -758,7 +758,6 @@ class SiteController extends Controller
 											$PMBJI->save(false);
 											$PMBJL1->save(false);
 											$PMBJL2->save(false);
-											$PMBJL3= new RincianRks;
 											$PMBJL3->save(false);
 											$PMBJL4->save(false);
 											$PMBJL5->save(false);
