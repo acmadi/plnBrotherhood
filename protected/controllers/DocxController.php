@@ -612,6 +612,7 @@ class DocxController extends Controller
 			$alamat = $NDPP->alamat;
 			$NPWP = $NDPP->NPWP;
 			$biaya = $NDPP->biaya;
+			$biayaa = RupiahMaker::convertInt($biaya);
 			$metode = $Peng->metode_penawaran;
 			if ($metode == "Satu Sampul"){
 				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
@@ -670,7 +671,7 @@ class DocxController extends Controller
 				$this->doccy->phpdocx->assign('#Kal1#', $Kal1);
 				$this->doccy->phpdocx->assign('#Kal2#', $Kal2);
 				$this->doccy->phpdocx->assign('#Kal3#', $Kal3);
-			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#biaya#', $biayaa);
 			$this->doccy->phpdocx->assign('#terbilang#', $terbilang);
 			$this->renderDocx("Nota Dinas Penetapan Pemenang.docx", true);
 	
