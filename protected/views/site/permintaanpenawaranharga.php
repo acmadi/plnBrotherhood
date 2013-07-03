@@ -103,13 +103,14 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			</div>
 			
 			<div class="row">
-				<?php $this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'repeateEnum',        
-					'model' => PenerimaPengadaan::model(),
-					'viewName' => 'formperusahaan',
-					'labelDel' => 'Remove Row',
-					// 'cssFile' => 'css/jquery.appendo2.css'
-					)); 
+				<?php 
+					// $this->widget('application.extensions.appendo.JAppendo',array(
+					// 'id' => 'repeateEnum',        
+					// 'model' => PenerimaPengadaan::model(),
+					// 'viewName' => 'formperusahaan',
+					// 'labelDel' => 'Remove Row',
+					'cssFile' => 'css/jquery.appendo2.css'
+					// )); 
 				?>
 			</div>
 			
