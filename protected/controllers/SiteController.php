@@ -678,9 +678,6 @@ class SiteController extends Controller
 								$PMBJL6= new RincianRks;
 								$PMBJL6->id_dokumen=$RKS->id_dokumen;
 								$PMBJL6->nama_rincian="Lampiran 6";
-								$PMBJL7= new RincianRks;
-								$PMBJL7->id_dokumen=$RKS->id_dokumen;
-								$PMBJL7->nama_rincian="Lampiran 7";
 								$PMBJLba= new RincianRks;
 								$PMBJLba->id_dokumen=$RKS->id_dokumen;
 								$PMBJLba->nama_rincian="Lampiran ba";
@@ -734,7 +731,6 @@ class SiteController extends Controller
 											$PLBJL4->save(false);
 											$PLBJL5->save(false);
 											$PLBJL6->save(false);
-											$PLBJL7->save(false);
 											$PLBJLba->save(false);
 										} else if ($RKS->tipe_rks==3){
 											$PLJD->save(false);
@@ -762,12 +758,10 @@ class SiteController extends Controller
 											$PMBJI->save(false);
 											$PMBJL1->save(false);
 											$PMBJL2->save(false);
-											$PMBJL3= new RincianRks;
 											$PMBJL3->save(false);
 											$PMBJL4->save(false);
 											$PMBJL5->save(false);
 											$PMBJL6->save(false);
-											$PMBJL7->save(false);
 											$PMBJLba->save(false);
 										} else if ($RKS->tipe_rks==3){
 											$PMJD->save(false);

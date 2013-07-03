@@ -56,14 +56,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php echo $form->errorSummary($Rks); ?>
 			
 				<h4><b> RKS </b></h4>
-				
-				<div class="row">
-					<?php echo $form->labelEx($Rks,'jenis rks'); ?>
-					<?php echo $form->radioButtonList($Rks,'tipe_rks',
-						array(1=>'Barang',2=>'Barang dan Jasa',3=>'Jasa'),
-						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
-					<?php echo $form->error($Rks,'tipe_rks'); ?>
-				</div>
+				<?php if ($Rks->isNewRecord){ ?>
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'jenis rks'); ?>
+						<?php echo $form->radioButtonList($Rks,'tipe_rks',
+							array(1=>'Barang',2=>'Barang dan Jasa',3=>'Jasa'),
+							array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+						<?php echo $form->error($Rks,'tipe_rks'); ?>
+					</div>
+				<?php } ?>
 				
 				<div class="row">
 					<?php echo $form->labelEx($Rks,'nomor'); ?>
@@ -321,9 +322,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<?php echo $form->labelEx($Rks,'tempat_evaluasi_penawaran sampul 2'); ?> 
 						<?php echo $form->textArea($Rks,'tempat_evaluasi_penawaran2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 						<?php echo $form->error($Rks,'tempat_evaluasi_penawaran2'); ?>
-				<?php } ?>
-				
-				<?php if ($Pengadaan->metode_penawaran=="Dua Tahap") { ?>
+					</div>
+				<?php }	else if ($Pengadaan->metode_penawaran=="Dua Tahap") { ?>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_awal_pemasukan_penawaran tahap 2'); ?> 
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -579,7 +579,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</br>
 				<div style="border-top:1px solid lightblue">
 				<br/>
-					<h4><b> Buat Dokumen </b></h4>
+					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
 						<?php $Cover=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Cover"');?>
@@ -600,7 +600,24 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 							<li><?php echo CHtml::link('RKS - Lampiran 3', array('docx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
-						<?php } else {
+						<?php } else if  ($Rks->tipe_rks==2) {
+							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
+							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
+							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
+							$Lamp4=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 4"');
+							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
+							$Lamp6=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 6"');
+							$Lampba=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran ba"');
+						?>
+							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 2', array('docx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 3', array('docx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 6', array('docx/downloadrks','id'=>$Lamp6->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran ba', array('docx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
+						
+						<?php } else {						
 							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
 							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
 							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
@@ -612,13 +629,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						?>
 							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 2', array('xlsx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 3', array('docx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 3', array('xlsx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 6', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 6', array('xlsx/downloadrks','id'=>$Lamp6->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 7', array('docx/downloadrks','id'=>$Lamp7->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran ba', array('docx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
-						<? } ?>
+							<li><?php echo CHtml::link('RKS - Lampiran ba', array('xlsx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
+						<?php } ?>
 					</ul>
 				</div>
 			<?php } ?>
@@ -628,5 +645,4 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 	</div>
 </div>
 
-<div>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?></div>
+<div><?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?></div>
