@@ -249,7 +249,7 @@
 		<br />
 		<br />
 		
-		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Pengadaan Gagal',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("site/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 	
 	<?php } ?>
 	
