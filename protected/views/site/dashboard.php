@@ -80,7 +80,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
-				'value'=>'$data->divisi_peminta',
+				'value'=>'$data->namaDivisi->nama',
 				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),			
 				
@@ -192,7 +192,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
 				array(            // display using an expression
                                     'name'=>'divisi_peminta',
-                                    'value'=>'$data->divisi_peminta',
+                                    'value'=>'$data->namaDivisi->nama',
                                     'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
                                 ),					
 				

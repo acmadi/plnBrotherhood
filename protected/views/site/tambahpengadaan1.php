@@ -50,6 +50,7 @@
 		
 		<br/>
 		<h4><b> Nota Dinas Permintaan </b></h4>
+		
 		<div class="row">
 			<?php echo $form->labelEx($NDP,'nomor'); ?>
 			<?php echo $form->textField($NDP,'nomor',array('size'=>60,'maxlength'=>50)); ?>
@@ -74,6 +75,12 @@
 			<?php echo $form->labelEx($NDP,'perihal'); ?>
 			<?php echo $form->textArea($NDP,'perihal',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
 			<?php echo $form->error($NDP,'perihal'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($NDP,'nilai_biaya_rab'); ?>
+			<?php echo $form->textField($NDP,'nilai_biaya_rab',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->error($NDP,'nilai_biaya_rab'); ?>
 		</div>
 		
 		<div class="row buttons">
