@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2013 at 08:16 PM
+-- Generation Time: Jul 04, 2013 at 01:02 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 
 INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`, `jumlah_gagal`) VALUES
 ('divin', 2, 0, 0),
-('divman', 3, 0, 0),
+('divman', 6, 0, 0),
 ('divsi', 1, 0, 0),
 ('divtrans', 3, 0, 0);
 
@@ -200,6 +200,23 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokumen`
+--
+
+INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
+(1, 'Nota Dinas Permintaan', '2013-07-19', 'Jakarta', 1, 'Selesai'),
+(2, 'TOR', '2013-07-19', 'Jakarta', 1, 'Selesai'),
+(3, 'RAB', '2013-07-19', 'Jakarta', 1, 'Selesai'),
+(4, 'Nota Dinas Permintaan', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
+(5, 'TOR', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
+(6, 'RAB', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
+(7, 'Nota Dinas Permintaan', '2013-07-19', 'Jakarta', 3, 'Belum Selesai'),
+(8, 'TOR', '2013-07-19', 'Jakarta', 3, 'Belum Selesai'),
+(9, 'RAB', '2013-07-19', 'Jakarta', 3, 'Belum Selesai'),
+(10, 'Nota Dinas Permintaan TOR/RAB', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
+(11, 'Nota Dinas Permintaan TOR/RAB', '2013-07-02', 'Jakarta', 1, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -289,6 +306,20 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `link_dokumen`
+--
+
+INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`) VALUES
+(1, 1, '16:31:40', '2013-07-04', 'aidilsyaputra', 1, 'txt'),
+(2, 1, '16:32:37', '2013-07-04', 'aidilsyaputra', 2, 'txt'),
+(3, 1, '16:41:03', '2013-07-04', 'aidilsyaputra', 3, 'txt'),
+(4, 2, '16:52:36', '2013-07-04', 'aidilsyaputra', 1, 'php'),
+(5, 2, '16:52:47', '2013-07-04', 'aidilsyaputra', 2, 'php'),
+(6, 3, '16:53:02', '2013-07-04', 'aidilsyaputra', 1, 'php'),
+(7, 3, '16:53:07', '2013-07-04', 'aidilsyaputra', 2, 'php'),
+(8, 3, '17:02:00', '2013-07-04', 'aidilsyaputra', 3, 'php');
+
 -- --------------------------------------------------------
 
 --
@@ -363,6 +394,15 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_permintaan`
+--
+
+INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`) VALUES
+(1, '045/DVMAM/2013', 'Permintaan Pengadaan Baju Dinas Pegawai'),
+(4, '045/DVMAM/2013', 'Permintaan Pengadaan Baju Dinas Pegawai'),
+(7, '045/DVMAM/2013', 'Permintaan Pengadaan Baju Dinas Pegawai');
+
 -- --------------------------------------------------------
 
 --
@@ -372,14 +412,16 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan_tor_rab` (
   `id_dokumen` bigint(100) NOT NULL,
   `nomor` varchar(256) NOT NULL,
-  `divisi_peminta` varchar(256) NOT NULL,
   `permintaan` varchar(256) NOT NULL,
-  `nama_pengadaan` varchar(256) NOT NULL,
-  `nota_dinas_permintaan` varchar(100) NOT NULL,
-  `tanggal_nota_dinas_permintaan` date NOT NULL,
-  `perihal_permintaan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota_dinas_permintaan_tor_rab`
+--
+
+INSERT INTO `nota_dinas_permintaan_tor_rab` (`id_dokumen`, `nomor`, `permintaan`) VALUES
+(11, 'xxx', 'Term Of Reference (TOR)');
 
 -- --------------------------------------------------------
 
@@ -460,6 +502,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 --
 
 INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tahun`, `jumlah_anggota`, `status_panitia`, `jenis_panitia`) VALUES
+(-1, 'Belum ada PIC', '-', 0, 0, '-', '-'),
 (1, 'Hanif Eridaputra', '-', 2013, 1, 'Aktif', 'Pejabat'),
 (2, 'Johannes Ridho', '-', 2013, 1, 'Aktif', 'Pejabat'),
 (3, 'Panitia-A', '024/SK/PLN', 2013, 3, 'Aktif', 'Panitia'),
@@ -514,6 +557,13 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pengadaan`
+--
+
+INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
+(1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '0', 0, -1, '-', '-', '-');
+
 -- --------------------------------------------------------
 
 --
@@ -524,6 +574,14 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rab`
+--
+
+INSERT INTO `rab` (`id_dokumen`) VALUES
+(6),
+(9);
 
 -- --------------------------------------------------------
 
@@ -831,7 +889,9 @@ CREATE TABLE IF NOT EXISTS `tor` (
 --
 
 INSERT INTO `tor` (`id_dokumen`) VALUES
-(2);
+(2),
+(5),
+(8);
 
 -- --------------------------------------------------------
 
