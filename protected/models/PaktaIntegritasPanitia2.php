@@ -1,24 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "penerima_pengadaan".
+ * This is the model class for table "pakta_integritas_panitia_2".
  *
- * The followings are the available columns in table 'penerima_pengadaan':
- * @property string $perusahaan
- * @property string $status
- * @property string $id_pengadaan
- * @property string $alamat
- * @property string $npwp
+ * The followings are the available columns in table 'pakta_integritas_panitia_2':
+ * @property string $id_dokumen
  *
  * The followings are the available model relations:
- * @property Pengadaan $idPengadaan
+ * @property Dokumen $idDokumen
  */
-class PenerimaPengadaan extends CActiveRecord
+class PaktaIntegritasPanitia2 extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return PenerimaPengadaan the static model class
+	 * @return PaktaIntegritasPanitia2 the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +26,7 @@ class PenerimaPengadaan extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'penerima_pengadaan';
+		return 'pakta_integritas_panitia_2';
 	}
 
 	/**
@@ -41,13 +37,11 @@ class PenerimaPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('perusahaan, status, id_pengadaan', 'required'),
-			array('perusahaan, alamat, npwp', 'length', 'max'=>256),
-			array('status', 'length', 'max'=>20),
-			array('id_pengadaan', 'length', 'max'=>255),
+			array('id_dokumen', 'required'),
+			array('id_dokumen', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('perusahaan, status, id_pengadaan, alamat, npwp', 'safe', 'on'=>'search'),
+			array('id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +53,7 @@ class PenerimaPengadaan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idPengadaan' => array(self::BELONGS_TO, 'Pengadaan', 'id_pengadaan'),
+			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
 
@@ -69,11 +63,7 @@ class PenerimaPengadaan extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'perusahaan' => 'Perusahaan',
-			'status' => 'Status',
-			'id_pengadaan' => 'Id Pengadaan',
-			'alamat' => 'Alamat',
-			'npwp' => 'Npwp',
+			'id_dokumen' => 'Id Dokumen',
 		);
 	}
 
@@ -88,11 +78,7 @@ class PenerimaPengadaan extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('perusahaan',$this->perusahaan,true);
-		$criteria->compare('status',$this->status,true);
-		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
-		$criteria->compare('alamat',$this->alamat,true);
-		$criteria->compare('npwp',$this->npwp,true);
+		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
