@@ -109,7 +109,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					// 'model' => PenerimaPengadaan::model(),
 					// 'viewName' => 'formperusahaan',
 					// 'labelDel' => 'Remove Row',
-					'cssFile' => 'css/jquery.appendo2.css'
+					
 					// )); 
 				?>
 			</div>
