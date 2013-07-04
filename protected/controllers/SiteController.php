@@ -1360,9 +1360,7 @@ class SiteController extends Controller
 				$SUPPP= new SuratUndanganPermintaanPenawaranHarga;
 				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;							
 				
-				$PP = new PenerimaPengadaan;
-				
-						
+				$PP = array(new PenerimaPengadaan);										
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1382,12 +1380,13 @@ class SiteController extends Controller
 							
 							for($i=0;$i<$total;$i++){
 								if(isset($_POST['perusahaan'][$i])){
-									$PP = new PenerimaPengadaan;
-									$PP->id_pengadaan = $Pengadaan->id_pengadaan;
-									$PP->status = $_POST['status'][$i];
-									$PP->perusahaan=$_POST['perusahaan'][$i];
-									$PP->alamat=$_POST['alamat'][$i];
-									$PP->save();
+									$PP[$i] = new PenerimaPengadaan;
+									$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PP[$i]->status = $_POST['status'][$i];
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->npwp='-';									
+									$PP[$i]->save();
 								}
 							}
 							
@@ -1428,10 +1427,10 @@ class SiteController extends Controller
 				
 				$SUPPP= SuratUndanganPermintaanPenawaranHarga::model()->findByPk($Dokumen0->id_dokumen);
 				
-				$PP = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				// $PP = PenerimaPengadaan::model()->find('id_pengadaan = 2');
-				$PP[0]->perusahaan = 'aaaapppppp';
-				
+				// $PP[0]->perusahaan = 'aaaapppppp';
+				// $PP[0]->save();
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1446,27 +1445,33 @@ class SiteController extends Controller
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
-							$total = count($_POST['perusahaan']);
 							
-							for($i=0;$i<$total;$i++){
-								if(isset($_POST['perusahaan'][$i])){
-									// $PP1 = new PenerimaPengadaan;
-									// $PP1->id_pengadaan = $Pengadaan->id_pengadaan;
-									// $PP1->status = $_POST['status'][$i];
-									// $PP1->perusahaan=$_POST['perusahaan'][$i];
-									// if(isset($_POST['alamat'][$i])){
-										// $PP1->alamat=$_POST['alamat'][$i];
-									// }
-									// $PP1->sa$PP1 = new PenerimaPengadaan;
-									// $PP1->id_pengadaan = $Pengadaan->id_pengadaan;
-									// $PP[0]->status = $_POST['status'][$i];
-									// $PP[0]->perusahaan=$_POST['perusahaan'][$i];
-									// if(isset($_POST['alamat'][$i])){
-										// $PP[0]->alamat=$_POST['alamat'][$i];
-									// }
-									// $PP[0]->save();
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){									
+									$PP[$i]->status = $_POST['status'][$i];
+									$PP[$i]->npwp = '-';
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->save();
 								}
-							}							
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PPbaru->status = $_POST['status'][$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$i];									
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';									
+									$PPbaru->save();
+								}
+								
+							}
+							
 						}
 						
 						if($Pengadaan->save(false))

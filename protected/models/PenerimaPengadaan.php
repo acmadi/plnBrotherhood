@@ -4,6 +4,7 @@
  * This is the model class for table "penerima_pengadaan".
  *
  * The followings are the available columns in table 'penerima_pengadaan':
+ * @property string $id_penerima
  * @property string $perusahaan
  * @property string $status
  * @property string $id_pengadaan
@@ -42,12 +43,13 @@ class PenerimaPengadaan extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('perusahaan, status, id_pengadaan', 'required'),
-			array('perusahaan, alamat, npwp', 'length', 'max'=>256),
+			array('perusahaan', 'length', 'max'=>100),
 			array('status', 'length', 'max'=>20),
 			array('id_pengadaan', 'length', 'max'=>255),
+			array('alamat, npwp', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('perusahaan, status, id_pengadaan, alamat, npwp', 'safe', 'on'=>'search'),
+			array('id_penerima, perusahaan, status, id_pengadaan, alamat, npwp', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +71,7 @@ class PenerimaPengadaan extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'id_penerima' => 'Id Penerima',
 			'perusahaan' => 'Perusahaan',
 			'status' => 'Status',
 			'id_pengadaan' => 'Id Pengadaan',
@@ -88,6 +91,7 @@ class PenerimaPengadaan extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id_penerima',$this->id_penerima,true);
 		$criteria->compare('perusahaan',$this->perusahaan,true);
 		$criteria->compare('status',$this->status,true);
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
