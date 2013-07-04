@@ -1334,12 +1334,14 @@ class DocxController extends Controller
 			$PIP2=PaktaIntegritasPanitia2::model()->findByPk($id);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
-			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
-			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
-			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
+			$skpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia . " sebagai berikut :" ;
+			$skpanitia2 = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
+			// $ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			// $sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			// $anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
-			$sk = $panitia->SK_panitia;
+			// $sk = $panitia->SK_panitia;
 			
 			$this->doccy->newFile('12a Pakta Integritas Akhir Panitia.docx');
 			
@@ -1350,9 +1352,18 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#nokeputusandir#', $sk);
 			$this->doccy->phpdocx->assign('#metodepengadaan#', $metode);
-			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			$this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
+			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
+			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			
+			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Panitia'){
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);
+				$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaAanwijzing($Peng->id_panitia));
+			}else{
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);
+				$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaAanwijzing($Peng->id_panitia));
+			}
+			
 			$this->renderDocx("Pakta Integritas Akhir Panitia.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Pejabat"){
@@ -1360,12 +1371,15 @@ class DocxController extends Controller
 			$PIP2=PaktaIntegritasPanitia2::model()->findByPk($id);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
-			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
-			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
-			$anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
+			// $ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
+			// $sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
+			// $anggota1 = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Anggota1"')->username)->nama;
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
 			$sk = $panitia->SK_panitia;
+			
+			$skpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia . " sebagai berikut :" ;
+			$skpanitia2 = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
 			
 			$namapejabat=User::model()->findByPk(Anggota::model()->find('id_panitia = '.$Peng->id_panitia)->username)->nama;
 			
@@ -1379,6 +1393,15 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nokeputusandir#', $sk);
 			$this->doccy->phpdocx->assign('#metodepengadaan#', $metode);
 			$this->doccy->phpdocx->assign('#namapejabat#', $namapejabat);
+			
+			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Panitia'){
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);
+				$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
+			}else{
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);
+				$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
+			}
+			
 			$this->renderDocx("Pakta Integritas Akhir Pejabat.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Penyedia"){
