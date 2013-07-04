@@ -188,6 +188,8 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                     'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 				),
 				
+				'metode_pengadaan',
+				
 				array(            // display using an expression
                                     'name'=>'divisi_peminta',
                                     'value'=>'$data->divisi_peminta',
