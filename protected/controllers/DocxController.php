@@ -1158,8 +1158,7 @@ class DocxController extends Controller
 			$tanggalpenawaran = Tanggal::getTanggalLengkap($rks->tanggal_akhir_pemasukan_penawaran1);
 			$waktupenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran1);
 			
-			// $terbilang = RupiahMaker::terbilangMaker($masa);
-			
+			// $terbilang = RupiahMaker::terbilangMaker($masa);			
 			// $norks = $rks -> nomor;
 			// $nohps = $hps -> nomor;
 			// $tglrks = Tanggal::getTanggalLengkap($dokrks -> tanggal);
@@ -1191,7 +1190,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namakadiv);
-			$this->doccy->phpdocx->assign('#penerima#', '........');
+			$this->doccy->phpdocx->assign('#penerima#', $this->getPenyedia($Peng->id_pengadaan));
 			
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
 		}
@@ -1512,6 +1511,8 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#panitiaataupejabat2#', strtoupper($jenispic . " " . $nama));				
 			$this->doccy->phpdocx->assign('#listpic#',$namapic);
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertattd#',$this->getTTPenyedia($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#tdtgnpanitia#',$this->getListPanitiaTTAanwijzing($Peng->id_panitia));
 			
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
@@ -2243,6 +2244,28 @@ class DocxController extends Controller
 			}
 		}
 		return  $list;
+	}
+	
+	function getPenyedia($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		for($i=0;$i<count($arraypenyedia);$i++){
+			$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getTTPenyedia($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		for($i=0;$i<count($arraypenyedia);$i++){
+			$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+		}
+		
+		return $stringpenyedia;
 	}
 	
 	
