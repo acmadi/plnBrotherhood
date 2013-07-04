@@ -1374,7 +1374,7 @@ class SiteController extends Controller
 					
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
 					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPPP->validate() && $PP->validate();
+					$valid=$valid&&$SUPPP->validate();
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
@@ -1428,7 +1428,7 @@ class SiteController extends Controller
 				
 				$SUPPP= SuratUndanganPermintaanPenawaranHarga::model()->findByPk($Dokumen0->id_dokumen);
 				
-				$PP = PenerimaPengadaan::model()->find('id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				// $PP = PenerimaPengadaan::model()->find('id_pengadaan = 2');
 				
 				
@@ -1442,7 +1442,7 @@ class SiteController extends Controller
 					// $PP->perusahaan=$_POST['perusahaan'][0];
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
 					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPPP->validate() && $PP->validate();
+					$valid=$valid&&$SUPPP->validate();
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
@@ -1450,14 +1450,14 @@ class SiteController extends Controller
 							
 							for($i=0;$i<$total;$i++){
 								if(isset($_POST['perusahaan'][$i])){
-									$PP = new PenerimaPengadaan;
-									$PP->id_pengadaan = $Pengadaan->id_pengadaan;
-									$PP->status = $_POST['status'][$i];
-									$PP->perusahaan=$_POST['perusahaan'][$i];
+									$PP1 = new PenerimaPengadaan;
+									$PP1->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PP1->status = $_POST['status'][$i];
+									$PP1->perusahaan=$_POST['perusahaan'][$i];
 									if(isset($_POST['alamat'][$i])){
-										$PP->alamat=$_POST['alamat'][$i];
+										$PP1->alamat=$_POST['alamat'][$i];
 									}
-									$PP->save();
+									$PP1->save();
 								}
 							}							
 						}

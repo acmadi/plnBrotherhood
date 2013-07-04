@@ -6,7 +6,7 @@
 	</thead>
 	<tbody>
   
-	<?php if ($model->perusahaan == null){ ?>
+	<?php if ($model == null){ ?>
 		<tr>
 			<td><?php echo CHtml::textField('perusahaan[]','',array('style'=>'width:120px')); ?></td>
             <td><?php echo CHtml::textField('alamat[]','',array('style'=>'width:90px')); ?></td>
@@ -23,10 +23,10 @@
 	<?php }else{ ?>
 		<?php for($i = 0; $i < count($model); $i++){ ?>
 			<tr>
-				<td><?php echo CHtml::textField('perusahaan[]',$model->perusahaan[$i],array('style'=>'width:120px')); ?></td>
-				<td><?php //echo CHtml::textField('alamat[]',$model->alamat[$i],array('style'=>'width:90px')); ?></td>
+				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>
+				<td><?php echo CHtml::textField('alamat[]',$model[$i]->alamat,array('style'=>'width:90px')); ?></td>
 				<td>
-					<?php echo CHtml::dropDownList('status[]',$model->status[$i],
+					<?php echo CHtml::dropDownList('status[]',$model[$i]->status,
 						array(
 							"Lulus"=>"Lulus",
 							"Tidak Lulus"=>"Tidak Lulus",
