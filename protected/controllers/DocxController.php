@@ -897,12 +897,14 @@ class DocxController extends Controller
 			$NDPTR=NotaDinasPermintaanTorRab::model()->findByPk($id);
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$nomor = $NDPTR->nomor;
-			$kepada = $NDPTR->divisi_peminta;
+			$kepada = User::model()->findByPk($Peng->divisi_peminta)->nama;
 			$permintaan = $NDPTR->permintaan;
-			$namapengadaan = $NDPTR->nama_pengadaan;
-			$notadinaspermintaan = $NDPTR->nota_dinas_permintaan;
-			$tanggalpermintaan = $NDPTR->tanggal_nota_dinas_permintaan;
-			$perihalpermintaan = $NDPTR->perihal_permintaan;
+			$namapengadaan = $Peng->nama_pengadaan;
+			$DokNDP = Dokumen::model()->find('id_pengadaan = '.$Peng->id_pengadaan. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			$notadinaspermintaan = $NDP->nomor;
+			$tanggalpermintaan = Tanggal::getTanggalLengkap($DokNDP->tanggal);
+			$perihalpermintaan = $NDP->perihal;
 			$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
 			
 			$this->doccy->newFile('0 Nota Dinas permintaan TOR RAB.docx');

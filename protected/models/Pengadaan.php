@@ -336,6 +336,54 @@ class Pengadaan extends CActiveRecord
 		));
 	}	
 	
+	public function searchBuatDivisi()															//jo---msh ada bug: yg status selesai msh ditampilin
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'statusgan'=>array(
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',                            
+			),
+            'progressgan'=>array(
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',
+			),  
+			'sisahari'=>array(
+			  'asc'=>'Pengadaan.sisaHari()',
+			  'desc'=>'sisahari desc',
+			),
+			'*',
+		);
+		
+		$criteria=new CDbCriteria;				
+		$usern = Yii::app()->user->name;
+		
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+		$criteria->addcondition('divisi_peminta = "' . $usern . '"');
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>$sort,
+		));
+	}	
+	
 	public function sisaHari(){								//jo----------------------------
 		if($this->status == '100'){
 			return "-";
@@ -349,8 +397,11 @@ class Pengadaan extends CActiveRecord
 			$jmlday2 = strtotime($string2);
 
 //                        return $this->id_pengadaan;
-			return($this->findByPk($this->id_pengadaan)->notaDinasPerintahPengadaan->targetSPK_kontrak-floor(($jmlday1-$jmlday2)/3600/24));
-//                        return 0;
+			if ($this->findByPk($this->id_pengadaan)->notaDinasPerintahPengadaan == null) {
+				return '-';
+			} else {
+				return($this->findByPk($this->id_pengadaan)->notaDinasPerintahPengadaan->targetSPK_kontrak-floor(($jmlday1-$jmlday2)/3600/24));
+			}
 		}
 	}
 

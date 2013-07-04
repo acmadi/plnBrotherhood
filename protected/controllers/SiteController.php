@@ -3588,11 +3588,205 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionNotadinaspermintaantorrab()
+	public function actionTambahpengadaan1()
 	{	
 		$user = Yii::app()->user->name;
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$Pengadaan=new Pengadaan;
+			$Pengadaan->status="0";
+			$criteria=new CDbcriteria;
+			$criteria->select='max(id_pengadaan) AS maxId';
+			$row = $Pengadaan->model()->find($criteria);
+			$somevariable = $row['maxId'];
+			$Pengadaan->id_pengadaan=$somevariable+1;
+			$Pengadaan->nama_penyedia='-';
+			$Pengadaan->tanggal_selesai='-';
+			$Pengadaan->id_panitia=-1;
+			$Pengadaan->metode_pengadaan='-';
+			$Pengadaan->biaya='-';
+			$Pengadaan->metode_penawaran='-';
+			$Pengadaan->jenis_kualifikasi='-';
+			
+			$Dokumen0= new Dokumen;
+			$criteria=new CDbcriteria;
+			$criteria->select='max(id_dokumen) AS maxId';
+			$row = $Dokumen0->model()->find($criteria);
+			$somevariable = $row['maxId'];
+			$Dokumen0->id_dokumen=$somevariable+1;
+			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
+			$Dokumen0->tempat='Jakarta';
+			$Dokumen0->status_upload='Belum Selesai';
+			
+			$Dokumen1= new Dokumen;
+			$Dokumen1->id_dokumen=$somevariable+2;
+			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+			$Dokumen1->nama_dokumen='TOR';
+			$Dokumen1->tempat='Jakarta';
+			$Dokumen1->status_upload='Belum Selesai';
+			
+			$Dokumen2= new Dokumen;
+			$Dokumen2->id_dokumen=$somevariable+3;
+			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
+			$Dokumen2->nama_dokumen='RAB';
+			$Dokumen2->tempat='Jakarta';
+			$Dokumen2->status_upload='Belum Selesai';
+			
+			$NDP= new NotaDinasPermintaan;
+			$NDP->id_dokumen=$Dokumen0->id_dokumen;
+			
+			$TOR= new Tor;
+			$TOR->id_dokumen=$Dokumen1->id_dokumen;
+			
+			$RAB= new Rab;
+			$RAB->id_dokumen=$Dokumen2->id_dokumen;
 				
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+			if(isset($_POST['Pengadaan']))
+			{
+				$Pengadaan->attributes=$_POST['Pengadaan'];
+				$NDP->attributes=$_POST['NotaDinasPermintaan'];
+				// $RAB->attributes=$_POST['RAB'];
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
+				if($valid){
+					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
+					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
+					$Dokumen1->tanggal=$Dokumen0->tanggal;
+					$Dokumen2->tanggal=$Dokumen0->tanggal;
+					$valid=$valid&&$NDP->validate();
+					if($valid){
+						if($Pengadaan->save(false)&&$Divisi->save(false)) {
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($NDP->save(false)&&$TOR->save(false)&&$RAB->save(false)){
+									$this->redirect(array('tambahanpengadaan2','id'=>$Pengadaan->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+			}
+
+			$this->render('tambahpengadaan1',array(
+				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'Dokumen0'=>$Dokumen0,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,
+			));
+		}
+	}
+	
+	public function actionEditTambahPengadaan1()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$Pengadaan= Pengadaan::model()->findByPk($id);
+			
+			$Dokumen0 = Dokumen::model()->find('id_pengadaan = '. $id. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$Dokumen1 = Dokumen::model()->find('id_pengadaan = '. $id. ' and nama_dokumen = "TOR"');
+			$Dokumen2 = Dokumen::model()->find('id_pengadaan = '. $id. ' and nama_dokumen = "RAB"');
+			
+			$NDP = NotaDinasPermintaan::model()->findByPk($Dokumen0->id_dokumen);
+			// $TOR = Tor::model()->findByPk($Dokumen1->id_dokumen);
+			// $RAB = Rab::model()->findByPk($Dokumen2->id_dokumen);	
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+			if(isset($_POST['Pengadaan']))
+			{
+				$Pengadaan->attributes=$_POST['Pengadaan'];
+				$NDP->attributes=$_POST['NotaDinasPermintaan'];
+				// $RAB->attributes=$_POST['RAB'];
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
+				if($valid){
+					$Dokumen1->tanggal=$Dokumen0->tanggal;
+					$Dokumen2->tanggal=$Dokumen0->tanggal;
+					$valid=$valid&&$NDP->validate();
+					if($valid){
+						if($Pengadaan->save(false)) {
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($NDP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
+									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+			}
+
+			$this->render('tambahpengadaan1',array(
+				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'Dokumen0'=>$Dokumen0,
+			));
+		}
+	}
+	
+	public function actionTambahpengadaan2()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$modelDok = array (
+				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "Nota Dinas Permintaan"'),
+				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "TOR"'),
+				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "RAB"'),
+			);
+			
+			$newDokumen = new Dokumen;
+			$newLinkDokumen = new LinkDokumen;
+				
+			if(isset($_POST['Dokumen'])){
+				$newDokumen->attributes=$_POST['Dokumen'];
+				$fileDokumen = CUploadedFile::getInstance($newDokumen,'uploadedFile');				
+				$newDokumen = Dokumen::model()->findByPk($newDokumen->id_dokumen);
+				$newDokumen->uploadedFile=$fileDokumen;
+				
+				$newDokumen->status_upload='Selesai';
+				
+				date_default_timezone_set("Asia/Jakarta");
+				$secs = time() + (7*3600);
+				$hours = $secs / 3600 % 24;
+				$minutes = $secs / 60 % 60;
+				$seconds = $secs % 60;
+				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
+				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
+				
+				// $criteria=new CDbcriteria;
+				// $criteria->select='max(id_link) AS maxId';
+				// $row = $newLinkDokumen->model()->find($criteria);
+				// $id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
+				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
+				$newLinkDokumen->waktu_upload=$waktu_upload;
+				$newLinkDokumen->tanggal_upload=date('Y-m-d');
+				$newLinkDokumen->pengunggah=$user;
+				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
+				$newLinkDokumen->save();
+								
+				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
+				@mkdir($path,0700,true);
+				$namaFile = $newLinkDokumen->nomor_link;
+				
+				if($newDokumen->save(false)){
+					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
+					}
+			}
+
+			$this->render('tambahpengadaan2',array('modelDok'=>$modelDok));
+		}
+	}
+	
+	public function actionNotadinaspermintaantorrab()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$Pengadaan = Pengadaan::model()->findByPk($id);
+			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
 			$criteria->select='max(id_dokumen) AS maxId';
@@ -3602,7 +3796,7 @@ class SiteController extends Controller
 			$Dokumen0->nama_dokumen='Nota Dinas Permintaan TOR/RAB';
 			$Dokumen0->tempat='Jakarta';
 			$Dokumen0->status_upload='Belum Selesai';
-			$Dokumen0->id_pengadaan='0';
+			$Dokumen0->id_pengadaan=$id;
 			
 			$NDPTR= new NotaDinasPermintaanTorRab;
 			$NDPTR->id_dokumen=$Dokumen0->id_dokumen;
@@ -3619,9 +3813,7 @@ class SiteController extends Controller
 				if($valid){
 					if($Dokumen0->save(false)){
 						if($NDPTR->save(false)){
-							if(isset($_POST['simpanbuat'])){
-								$this->redirect(array('docx/download', 'id'=>$NDPTR->id_dokumen));											
-							}
+							$this->redirect(array('editnotadinaspermintaantorrab', 'id'=>$id));											
 						}
 					}
 				}
@@ -3634,7 +3826,42 @@ class SiteController extends Controller
 		}
 	}
 	
-public function actionUploader(){
+	public function actionEditNotadinaspermintaantorrab()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$Dokumen0 = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Permintaan TOR/RAB"');
+			$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+			$NDPTR = NotaDinasPermintaanTorRab::model()->findByPk($Dokumen0->id_dokumen);
+			
+			//Uncomment the following line if AJAX validation is needed
+			//$this->performAjaxValidation($model);
+
+			if(isset($_POST['NotaDinasPermintaanTorRab']))
+			{
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$NDPTR->attributes=$_POST['NotaDinasPermintaanTorRab'];
+				$valid=$NDPTR->validate();
+				$valid=$valid&&$Dokumen0->validate();
+				if($valid){
+					if($Dokumen0->save(false)){
+						if($NDPTR->save(false)){
+							$this->redirect(array('editnotadinaspermintaantorrab', 'id'=>$id));											
+						}
+					}
+				}
+			}
+
+			$this->render('notadinaspermintaantorrab',array(
+				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
+			));
+
+		}
+	}
+	
+	public function actionUploader(){
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$user = Yii::app()->user->name;
 			$objectpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id. '"');
@@ -3723,7 +3950,7 @@ public function actionUploader(){
 				if($newDokumen->save(false)){
 					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
 					}
-	}
+			}
 				$this->render('uploader',array('modelDok'=>$modelDok));
 	}
 }

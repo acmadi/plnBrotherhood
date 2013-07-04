@@ -6,12 +6,7 @@
  * The followings are the available columns in table 'nota_dinas_permintaan_tor_rab':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $divisi_peminta
  * @property string $permintaan
- * @property string $nama_pengadaan
- * @property string $nota_dinas_permintaan
- * @property string $tanggal_nota_dinas_permintaan
- * @property string $perihal_permintaan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -44,12 +39,12 @@ class NotaDinasPermintaanTorRab extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, divisi_peminta, permintaan, nama_pengadaan, nota_dinas_permintaan, tanggal_nota_dinas_permintaan, perihal_permintaan', 'required'),
-			array('id_dokumen, nota_dinas_permintaan', 'length', 'max'=>100),
-			array('nomor, divisi_peminta, permintaan, nama_pengadaan, perihal_permintaan', 'length', 'max'=>256),
+			array('id_dokumen, nomor, permintaan', 'required'),
+			array('id_dokumen', 'length', 'max'=>100),
+			array('nomor, permintaan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, divisi_peminta, permintaan, nama_pengadaan, nota_dinas_permintaan, tanggal_nota_dinas_permintaan, perihal_permintaan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, permintaan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,12 +68,7 @@ class NotaDinasPermintaanTorRab extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'divisi_peminta' => 'Divisi Peminta',
 			'permintaan' => 'Permintaan',
-			'nama_pengadaan' => 'Nama Pengadaan',
-			'nota_dinas_permintaan' => 'Nota Dinas Permintaan',
-			'tanggal_nota_dinas_permintaan' => 'Tanggal Nota Dinas Permintaan',
-			'perihal_permintaan' => 'Perihal Permintaan',
 		);
 	}
 
@@ -95,12 +85,7 @@ class NotaDinasPermintaanTorRab extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
 		$criteria->compare('permintaan',$this->permintaan,true);
-		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
-		$criteria->compare('nota_dinas_permintaan',$this->nota_dinas_permintaan,true);
-		$criteria->compare('tanggal_nota_dinas_permintaan',$this->tanggal_nota_dinas_permintaan,true);
-		$criteria->compare('perihal_permintaan',$this->perihal_permintaan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

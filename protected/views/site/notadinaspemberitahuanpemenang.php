@@ -168,9 +168,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 
 	</div><!-- form -->
 	
-	<?php if($NDBP->isNewRecord) { ?>
-		
-	<?php } else { ?>
+	<?php if(!$NDBP->isNewRecord) {?>
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
