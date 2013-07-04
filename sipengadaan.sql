@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 04, 2013 at 08:28 PM
+-- Generation Time: Jul 04, 2013 at 08:54 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -212,7 +212,8 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (4, 'Nota Dinas Permintaan', '2013-07-02', 'Jakarta', 2, 'Selesai'),
 (5, 'TOR', '2013-07-02', 'Jakarta', 2, 'Selesai'),
 (6, 'RAB', '2013-07-02', 'Jakarta', 2, 'Selesai'),
-(7, 'Nota Dinas Perintah Pengadaan', '2013-07-12', 'Jakarta', 2, 'Belum Selesai');
+(7, 'Nota Dinas Perintah Pengadaan', '2013-07-12', 'Jakarta', 2, 'Belum Selesai'),
+(8, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-03', 'Jakarta', 2, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -509,13 +510,15 @@ INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tahun`, `jum
 --
 
 CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
+  `id_penerima` bigint(255) NOT NULL AUTO_INCREMENT,
   `perusahaan` varchar(100) NOT NULL,
   `status` varchar(20) NOT NULL,
   `id_pengadaan` bigint(255) NOT NULL,
   `alamat` varchar(256) NOT NULL,
   `npwp` varchar(256) NOT NULL,
+  PRIMARY KEY (`id_penerima`),
   KEY `id_pengadaan` (`id_pengadaan`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -556,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
 (1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '-1', 0, -1, '-', '-', '-'),
-(2, 'Pengadaan Sewa Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '0', 0, 1, 'Penunjukan Langsung', '-', '-');
+(2, 'Pengadaan Sewa Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '7', 0, 1, 'Penunjukan Langsung', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -799,6 +802,7 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
 --
 
 INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, `waktu_kerja`, `masa_berlaku_penawaran`, `tempat_penyerahan`) VALUES
+(8, '12312', '123', 232, 'dsfsdf'),
 (12, '3eq', '132', 12, 'asda');
 
 -- --------------------------------------------------------
