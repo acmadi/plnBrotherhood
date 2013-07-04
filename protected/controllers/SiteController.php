@@ -1430,7 +1430,7 @@ class SiteController extends Controller
 				
 				$PP = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				// $PP = PenerimaPengadaan::model()->find('id_pengadaan = 2');
-				
+				$PP[0]->perusahaan = 'aaaapppppp';
 				
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -1450,14 +1450,21 @@ class SiteController extends Controller
 							
 							for($i=0;$i<$total;$i++){
 								if(isset($_POST['perusahaan'][$i])){
-									$PP1 = new PenerimaPengadaan;
-									$PP1->id_pengadaan = $Pengadaan->id_pengadaan;
-									$PP1->status = $_POST['status'][$i];
-									$PP1->perusahaan=$_POST['perusahaan'][$i];
-									if(isset($_POST['alamat'][$i])){
-										$PP1->alamat=$_POST['alamat'][$i];
-									}
-									$PP1->save();
+									// $PP1 = new PenerimaPengadaan;
+									// $PP1->id_pengadaan = $Pengadaan->id_pengadaan;
+									// $PP1->status = $_POST['status'][$i];
+									// $PP1->perusahaan=$_POST['perusahaan'][$i];
+									// if(isset($_POST['alamat'][$i])){
+										// $PP1->alamat=$_POST['alamat'][$i];
+									// }
+									// $PP1->sa$PP1 = new PenerimaPengadaan;
+									// $PP1->id_pengadaan = $Pengadaan->id_pengadaan;
+									// $PP[0]->status = $_POST['status'][$i];
+									// $PP[0]->perusahaan=$_POST['perusahaan'][$i];
+									// if(isset($_POST['alamat'][$i])){
+										// $PP[0]->alamat=$_POST['alamat'][$i];
+									// }
+									// $PP[0]->save();
 								}
 							}							
 						}
