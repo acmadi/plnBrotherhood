@@ -51,6 +51,25 @@ class SiteController extends Controller
 			));
 		}
 	}
+	
+	public function actionPermintaan()
+	{
+		// renders the view file 'protected/views/site/dashboard.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {		
+			$model=new Pengadaan('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Pengadaan'])){
+				$model->attributes=$_GET['Pengadaan'];                                       
+			}	           
+			$this->render('permintaan',array(
+				'model'=>$model,
+			));
+		}
+	}
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -3591,10 +3610,10 @@ class SiteController extends Controller
 	public function actionTambahpengadaan1()
 	{	
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$Pengadaan=new Pengadaan;
-			$Pengadaan->status="0";
+			$Pengadaan->status="-1";
 			$criteria=new CDbcriteria;
 			$criteria->select='max(id_pengadaan) AS maxId';
 			$row = $Pengadaan->model()->find($criteria);
@@ -3607,6 +3626,9 @@ class SiteController extends Controller
 			$Pengadaan->biaya='-';
 			$Pengadaan->metode_penawaran='-';
 			$Pengadaan->jenis_kualifikasi='-';
+			if(Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan->divisi_peminta=Yii::app()->user->name;
+			}
 			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
@@ -3661,7 +3683,7 @@ class SiteController extends Controller
 						if($Pengadaan->save(false)&&$Divisi->save(false)) {
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($NDP->save(false)&&$TOR->save(false)&&$RAB->save(false)){
-									$this->redirect(array('tambahanpengadaan2','id'=>$Pengadaan->id_pengadaan));
+									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
 								}
 							}
 						}
@@ -3679,7 +3701,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$Pengadaan= Pengadaan::model()->findByPk($id);
 			
@@ -3725,7 +3747,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 			$modelDok = array (
 				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "Nota Dinas Permintaan"'),
@@ -3858,6 +3880,100 @@ class SiteController extends Controller
 				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
 			));
 
+		}
+	}
+	
+	public function actionTunjukPanitia()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$Pengadaan = Pengadaan::model()->findByPk($id);
+			$Pengadaan->status='0';
+			
+			$Dokumen0= new Dokumen;
+			$criteria=new CDbcriteria;
+			$criteria->select='max(id_dokumen) AS maxId';
+			$row = $Dokumen0->model()->find($criteria);
+			$somevariable = $row['maxId'];
+			$Dokumen0->id_dokumen=$somevariable+1;
+			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+			$Dokumen0->nama_dokumen='Nota Dinas Perintah Pengadaan';
+			$Dokumen0->tempat='Jakarta';
+			$Dokumen0->status_upload='Belum Selesai';
+			
+			$NDPP= new NotaDinasPerintahPengadaan;
+			$NDPP->id_dokumen=$Dokumen0->id_dokumen;
+
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+			if(isset($_POST['NotaDinasPerintahPengadaan']))
+			{
+				$Pengadaan->attributes=$_POST['Pengadaan'];
+				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
+				if($valid){
+					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
+					$valid=$valid&&$NDPP->validate();
+					if($valid){
+						if($Pengadaan->save(false)) {
+							if($Dokumen0->save(false)){
+								if($NDPP->save(false)){		
+									$this->redirect(array('edittunjukpanitia','id'=>$id));
+								}
+							}
+						}
+					}
+				}
+			}
+
+			$this->render('tunjukpanitia',array(
+				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
+			));
+		}
+	}
+	
+	public function actionEditTunjukPanitia()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		$user = Yii::app()->user->name;
+		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			
+			$Pengadaan = Pengadaan::model()->findByPk($id);
+			
+			$Dokumen0= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$NDPP= NotaDinasPerintahPengadaan::model()->findByPk($Dokumen0->id_dokumen);
+
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
+			if(isset($_POST['NotaDinasPerintahPengadaan']))
+			{
+				$Pengadaan->attributes=$_POST['Pengadaan'];
+				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
+				$Dokumen0->attributes=$_POST['Dokumen'];
+				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
+				if($valid){
+					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
+					$valid=$valid&&$NDPP->validate();
+					if($valid){
+						if($Pengadaan->save(false)) {
+							if($Dokumen0->save(false)){
+								if($NDPP->save(false)){		
+									$this->redirect(array('edittunjukpanitia','id'=>$id));
+								}
+							}
+						}
+					}
+				}
+			}
+
+			$this->render('tunjukpanitia',array(
+				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
+			));
 		}
 	}
 	

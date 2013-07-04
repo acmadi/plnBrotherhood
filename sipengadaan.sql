@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 04, 2013 at 01:02 PM
+-- Generation Time: Jul 04, 2013 at 06:54 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -177,9 +177,9 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 
 INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`, `jumlah_gagal`) VALUES
 ('divin', 2, 0, 0),
-('divman', 6, 0, 0),
+('divman', 7, 0, 0),
 ('divsi', 1, 0, 0),
-('divtrans', 3, 0, 0);
+('divtrans', 4, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -200,23 +200,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Nota Dinas Permintaan', '2013-07-19', 'Jakarta', 1, 'Selesai'),
-(2, 'TOR', '2013-07-19', 'Jakarta', 1, 'Selesai'),
-(3, 'RAB', '2013-07-19', 'Jakarta', 1, 'Selesai'),
-(4, 'Nota Dinas Permintaan', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
-(5, 'TOR', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
-(6, 'RAB', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
-(7, 'Nota Dinas Permintaan', '2013-07-19', 'Jakarta', 3, 'Belum Selesai'),
-(8, 'TOR', '2013-07-19', 'Jakarta', 3, 'Belum Selesai'),
-(9, 'RAB', '2013-07-19', 'Jakarta', 3, 'Belum Selesai'),
-(10, 'Nota Dinas Permintaan TOR/RAB', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(11, 'Nota Dinas Permintaan TOR/RAB', '2013-07-02', 'Jakarta', 1, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -306,20 +289,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `link_dokumen`
---
-
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`) VALUES
-(1, 1, '16:31:40', '2013-07-04', 'aidilsyaputra', 1, 'txt'),
-(2, 1, '16:32:37', '2013-07-04', 'aidilsyaputra', 2, 'txt'),
-(3, 1, '16:41:03', '2013-07-04', 'aidilsyaputra', 3, 'txt'),
-(4, 2, '16:52:36', '2013-07-04', 'aidilsyaputra', 1, 'php'),
-(5, 2, '16:52:47', '2013-07-04', 'aidilsyaputra', 2, 'php'),
-(6, 3, '16:53:02', '2013-07-04', 'aidilsyaputra', 1, 'php'),
-(7, 3, '16:53:07', '2013-07-04', 'aidilsyaputra', 2, 'php'),
-(8, 3, '17:02:00', '2013-07-04', 'aidilsyaputra', 3, 'php');
-
 -- --------------------------------------------------------
 
 --
@@ -394,15 +363,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nota_dinas_permintaan`
---
-
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`) VALUES
-(1, '045/DVMAM/2013', 'Permintaan Pengadaan Baju Dinas Pegawai'),
-(4, '045/DVMAM/2013', 'Permintaan Pengadaan Baju Dinas Pegawai'),
-(7, '045/DVMAM/2013', 'Permintaan Pengadaan Baju Dinas Pegawai');
-
 -- --------------------------------------------------------
 
 --
@@ -415,13 +375,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan_tor_rab` (
   `permintaan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `nota_dinas_permintaan_tor_rab`
---
-
-INSERT INTO `nota_dinas_permintaan_tor_rab` (`id_dokumen`, `nomor`, `permintaan`) VALUES
-(11, 'xxx', 'Term Of Reference (TOR)');
 
 -- --------------------------------------------------------
 
@@ -557,13 +510,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengadaan`
---
-
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '0', 0, -1, '-', '-', '-');
-
 -- --------------------------------------------------------
 
 --
@@ -574,14 +520,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rab`
---
-
-INSERT INTO `rab` (`id_dokumen`) VALUES
-(6),
-(9);
 
 -- --------------------------------------------------------
 
@@ -596,23 +534,6 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
-
---
--- Dumping data for table `rincian_rks`
---
-
-INSERT INTO `rincian_rks` (`id_rincian`, `nama_rincian`, `id_dokumen`) VALUES
-(62, 'Cover', 6),
-(63, 'Daftar Isi', 6),
-(64, 'Isi', 6),
-(65, 'Lampiran 1', 6),
-(66, 'Lampiran 2', 6),
-(67, 'Lampiran 3', 6),
-(68, 'Lampiran 4', 6),
-(69, 'Lampiran 5', 6),
-(70, 'Lampiran 6', 6),
-(71, 'Lampiran 7', 6),
-(72, 'Lampiran ba', 6);
 
 -- --------------------------------------------------------
 
@@ -666,15 +587,6 @@ CREATE TABLE IF NOT EXISTS `rks` (
   `lama_waktu_tambahan` int(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rks`
---
-
-INSERT INTO `rks` (`id_dokumen`, `nomor`, `tipe_rks`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_awal_pemasukan_penawaran1`, `tanggal_akhir_pemasukan_penawaran1`, `waktu_pemasukan_penawaran1`, `tempat_pemasukan_penawaran1`, `tanggal_pembukaan_penawaran1`, `waktu_pembukaan_penawaran1`, `tempat_pembukaan_penawaran1`, `tanggal_evaluasi_penawaran1`, `waktu_evaluasi_penawaran1`, `tempat_evaluasi_penawaran1`, `tanggal_awal_pemasukan_penawaran2`, `tanggal_akhir_pemasukan_penawaran2`, `waktu_pemasukan_penawaran2`, `tempat_pemasukan_penawaran2`, `tanggal_pembukaan_penawaran2`, `waktu_pembukaan_penawaran2`, `tempat_pembukaan_penawaran2`, `tanggal_evaluasi_penawaran2`, `waktu_evaluasi_penawaran2`, `tempat_evaluasi_penawaran2`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_usulan_pemenang`, `waktu_usulan_pemenang`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tanggal_pemberitahuan_pemenang`, `waktu_pemberitahuan_pemenang`, `tanggal_penunjukan_pemenang`, `waktu_penunjukan_pemenang`, `sistem_evaluasi_penawaran`, `jangka_waktu_penyerahan`, `tanggal_paling_lambat_penyerahan`, `jangka_waktu_berlaku_jaminan`, `lama_waktu_tambahan`) VALUES
-(6, '011/PPJB-A/DIVMUM/2013', 1, '2013-06-11', '2013-07-04', '08:00:00', 'Kantor Pusat PLN', '2013-07-10', '2013-07-11', '08:00:00', 'Kantor Pusat PLN', '2013-07-17', '08:00:00', 'Kantor Pusat PLN', '2013-07-11', '08:00:00', 'Kantor Pusat PLN', '1970-01-01', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '2013-07-18', '08:00:00', 'Kantor Pusat PLN', '2013-07-05', '08:00:00', '2013-07-18', '08:00:00', '2013-07-17', '08:00:00', '2013-07-19', '08:00:00', 'Sistem Gugur', 3, '2013-07-09', 3, 14),
-(16, '021/JO/DIVMUM/2013', 2, '2013-07-17', '2013-07-21', '10:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-11', '2013-07-16', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-25', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-23', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-30', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-30', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-30', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-30', '08:00:00', '2013-07-18', '08:00:00', '2013-07-31', '08:00:00', '2013-07-18', '08:00:00', 'Sistem Gugur', 3, '2013-07-10', 3, 21),
-(18, '021/PPJB-B/DIVMUM/2013', 3, '2013-06-11', '2013-07-04', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-25', '2013-07-29', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-23', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-23', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-31', '2013-08-01', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-24', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-17', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-31', '08:00:00', 'Kantor Pusat PLN\r\nGedung 1 Lantai 5', '2013-07-05', '08:00:00', '2013-07-31', '08:00:00', '2013-08-01', '08:00:00', '2013-08-06', '08:00:00', 'Sistem Gugur', 3, '2013-07-31', 3, 18);
 
 -- --------------------------------------------------------
 
@@ -891,7 +803,9 @@ CREATE TABLE IF NOT EXISTS `tor` (
 INSERT INTO `tor` (`id_dokumen`) VALUES
 (2),
 (5),
-(8);
+(8),
+(12),
+(13);
 
 -- --------------------------------------------------------
 
@@ -1010,6 +924,12 @@ ALTER TABLE `divisi`
   ADD CONSTRAINT `divisi_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `dokumen`
+--
+ALTER TABLE `dokumen`
+  ADD CONSTRAINT `dokumen_ibfk_1` FOREIGN KEY (`id_pengadaan`) REFERENCES `pengadaan` (`id_pengadaan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `dokumen_kontrak`
 --
 ALTER TABLE `dokumen_kontrak`
@@ -1125,6 +1045,12 @@ ALTER TABLE `rab`
 --
 ALTER TABLE `rincian_rks`
   ADD CONSTRAINT `rincian_rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `rks` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rks`
+--
+ALTER TABLE `rks`
+  ADD CONSTRAINT `rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

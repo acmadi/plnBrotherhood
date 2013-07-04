@@ -1,6 +1,8 @@
 <?php
-/* @var $this SiteController */
+	$id = Yii::app()->getRequest()->getQuery('id');
+	$user=Yii::app()->user->name;
 ?>
+
 <?php 
 	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 ?>
@@ -58,6 +60,8 @@
 			</ul>
 		</div>
 	<?php } ?>
+	
+	<?php echo CHtml::button('Kembali', array('submit'=>array('site/tambahpengadaan2','id'=>$id), "class"=>'sidafbutton'));  ?>
 	
 <?php	}
 ?>

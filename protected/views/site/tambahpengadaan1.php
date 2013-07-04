@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 ?>
 <?php 
-	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 ?>
 	<div class="form">
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -18,11 +18,13 @@
 			<?php echo $form->error($Pengadaan,'nama_pengadaan'); ?>
 		</div>
 	
-		<div class="row">
-			<?php echo $form->labelEx($Pengadaan,'divisi_peminta'); ?>
-			<?php echo $form->dropDownList($Pengadaan,'divisi_peminta',CHtml::listData(Divisi::model()->findAll(), 'username', 'username'),array('empty'=>'-----Pilih Divisi-----'));?>
-			<?php echo $form->error($Pengadaan,'divisi_peminta'); ?>
-		</div>
+		<?php if(!Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
+			<div class="row">
+				<?php echo $form->labelEx($Pengadaan,'divisi_peminta'); ?>
+				<?php echo $form->dropDownList($Pengadaan,'divisi_peminta',CHtml::listData(Divisi::model()->findAll(), 'username', 'username'),array('empty'=>'-----Pilih Divisi-----'));?>
+				<?php echo $form->error($Pengadaan,'divisi_peminta'); ?>
+			</div>
+		<?php } ?>
 		
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'jenis_pengadaan'); ?>
