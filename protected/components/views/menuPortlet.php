@@ -185,7 +185,7 @@
 
 		<div style="background-color:lightblue; border:1px solid black; overflow:hidden;">
 
-			<h5 style="margin:5px;">Detil Pengadaan</h5>
+			<h5 style="margin:5px;">Detil <?php echo ucwords($cpengadaan->nama_pengadaan); ?></h5>
 
 			<div style="margin-left:-3px;">
 				<?php $this->widget('zii.widgets.CDetailView', array(

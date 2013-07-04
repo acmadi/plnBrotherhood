@@ -749,7 +749,7 @@ class DocxController extends Controller
 			$ndpp2 = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp2->id_dokumen);
 
 			$nondpp = $ndpp2->nomor;
-			$tanggalndpp = $dokndpp2->tanggal;
+			$tanggalndpp = Tanggal::getTanggalLengkap($dokndpp2->tanggal);
 			$nama = $Peng->nama_pengadaan;
 			$terbilang = RupiahMaker::terbilangMaker($biaya);
 			
@@ -805,9 +805,7 @@ class DocxController extends Controller
 			$terbilang2 = RupiahMaker::terbilangMaker($biaya2);
 			
 			$nomor = $NDUP->nomor;
-
-			//$dari = $NDUP->dari;
-
+			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$waktu = Tanggal::getTanggalLengkap($NDUP->waktu_pelaksanaan);
 			$tempat = $NDUP->tempat_penyerahan;
@@ -830,7 +828,7 @@ class DocxController extends Controller
 		
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			// $this->doccy->phpdocx->assign('#dari#', $dari);
+			$this->doccy->phpdocx->assign('#dari#', $ketua);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
@@ -1334,7 +1332,7 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Panitia"){
 			
 			$PIP2=PaktaIntegritasPanitia2::model()->findByPk($id);
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
@@ -1360,7 +1358,7 @@ class DocxController extends Controller
 		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Pejabat"){
 			
 			$PIP2=PaktaIntegritasPanitia2::model()->findByPk($id);
-			$tanggal = $Dok->tanggal;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
 			$sekretaris = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Sekretaris"')->username)->nama;
@@ -1756,7 +1754,6 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Berita Acara Negosiasi Klarifikasi.docx", true);
 		}
-		
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
 			
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	
