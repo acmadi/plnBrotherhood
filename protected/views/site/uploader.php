@@ -27,6 +27,9 @@
 				echo $form->hiddenField($modelDok[$i],'id_dokumen');
 				echo $form->error($modelDok[$i]	,'uploadedFile');	
 				echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
+				if($modelDok[$i]->status_upload=="Selesai") {
+					echo ' <span style="color:green">Dokumen telah diunggah</span>';
+				}
 				$this->endWidget();
 				echo '<br/>';
 			}
@@ -34,5 +37,5 @@
 		?>
 	</div>
 </div>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?></div>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), "class"=>'sidafbutton'));  ?></div>
     

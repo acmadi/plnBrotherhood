@@ -32,57 +32,15 @@
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'divisi_peminta'); ?>
-			<?php echo $form->textField($NDPTR,'divisi_peminta',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($NDPTR,'divisi_peminta'); ?>
-		</div>
-		
-		<div class="row">
 			<?php echo $form->labelEx($NDPTR,'permintaan'); ?>
 			<?php echo $form->dropDownList($NDPTR,'permintaan',
 			  array('Rencana Anggaran Biaya (RAB)'=>'RAB','Term Of Reference (TOR)'=>'TOR','Rencana Anggaran Biaya (RAB) dan Term Of Reference (TOR)'=>'RAB dan TOR'),
 					array('empty'=>"-----Pilih Permintaan Nota Dinas------")); ?>
 			<?php echo $form->error($NDPTR,'permintaan'); ?>
 		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'nama pengadaan'); ?>
-			<?php echo $form->textField($NDPTR,'nama_pengadaan',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($NDPTR,'nama_pengadaan'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'nomor nota dinas permintaan'); ?>
-			<?php echo $form->textField($NDPTR,'nota_dinas_permintaan',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($NDPTR,'nota_dinas_permintaan'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'tanggal nota dinas permintaan'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$NDPTR,
-					'attribute'=>'tanggal_nota_dinas_permintaan',
-					'value'=>$NDPTR->tanggal_nota_dinas_permintaan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
-					),
-			));?>
-			<?php echo $form->error($NDPTR,'tanggal_nota_dinas_permintaan'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPTR,'perihal nota dinas permintaan'); ?>
-			<?php echo $form->textArea($NDPTR,'perihal_permintaan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
-			<?php echo $form->error($NDPTR,'perihal_permintaan'); ?>
-		</div>
-		
-		<br/>
-		
-		<br/>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($NDPTR->isNewRecord ? 'Buat Nota Dinas Permintaan TOR/RAB' : 'Save',array('class'=>'sidafbutton','name'=>'simpanbuat')); ?>
+			<?php echo CHtml::submitButton($NDPTR->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		
@@ -90,6 +48,16 @@
 
 	</div><!-- form -->
 	
+	<?php if(!$NDPTR->isNewRecord) { ?>
+		<br/>
+		<div style="border-top:1px solid lightblue">
+		<br/>
+			<h4><b> Daftar Dokumen </b></h4>
+			<ul class="generatedoc">
+				<li><?php echo CHtml::link('Nota Dinas Permintaan TOR/RAB', array('docx/download','id'=>$NDPTR->id_dokumen)); ?></li>
+			</ul>
+		</div>
+	<?php } ?>
 	
 <?php	}
 ?>
