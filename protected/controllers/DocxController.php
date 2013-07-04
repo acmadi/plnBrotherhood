@@ -2167,7 +2167,7 @@ class DocxController extends Controller
 	
 	function getListPanitiaAanwijzing($idPan){
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
-			$list = "1. " . Panitia::model()->findByPk($idPan)->nama_panitia;
+			$list = Panitia::model()->findByPk($idPan)->nama_panitia;
 		}else{
 			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . " : sebagai Ketua merangkap Anggota" ;
 			$list .= '<w:br/>';
@@ -2185,7 +2185,7 @@ class DocxController extends Controller
 	
 	function getListPanitiaTTAanwijzing($idPan){ //td tgn selang-seling
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
-			$list = "1. " . Panitia::model()->findByPk($idPan)->nama_panitia;
+			$list = Panitia::model()->findByPk($idPan)->nama_panitia;
 		}else{
 			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "                                                       ...........................................";
 			$list .= '<w:br/>';		
@@ -2207,7 +2207,7 @@ class DocxController extends Controller
 	
 	function getListPanitiaNegoKlar($idPan){ //td tgn biasa
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
-			$list = "1. " . Panitia::model()->findByPk($idPan)->nama_panitia;
+			$list = Panitia::model()->findByPk($idPan)->nama_panitia;
 		}else{
 			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "/Ketua : ...........................................";
 			$list .= '<w:br/>';			
@@ -2225,7 +2225,7 @@ class DocxController extends Controller
 	
 	function getTTPanitiaPembukaanSampul1($idPan){ //td tgn biasa
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
-			$list = "1. " . Panitia::model()->findByPk($idPan)->nama_panitia;
+			$list = Panitia::model()->findByPk($idPan)->nama_panitia;
 		}else{
 			$list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "                                           (Ketua)    ...............................";
 			$list .= '<w:br/>';		

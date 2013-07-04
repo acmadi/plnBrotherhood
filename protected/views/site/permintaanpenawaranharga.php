@@ -96,21 +96,17 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				<?php echo $form->error($SUPPP,'tempat_penyerahan'); ?>
 			</div>
 
-			<div class="row">
-				<?php echo $form->labelEx($PP,'Penyedia Layanan'); ?>
-				<?php echo $form->textArea($PP,'perusahaan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
-				<?php echo $form->error($PP,'perusahaan'); ?>
-			</div>
 			
 			<div class="row">
 				<?php 
-					// $this->widget('application.extensions.appendo.JAppendo',array(
-					// 'id' => 'repeateEnum',        
-					// 'model' => PenerimaPengadaan::model(),
-					// 'viewName' => 'formperusahaan',
-					// 'labelDel' => 'Remove Row',
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					'viewName' => 'formperusahaan',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
 					
-					// )); 
+					)); 
 				?>
 			</div>
 			

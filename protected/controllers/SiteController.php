@@ -1361,9 +1361,8 @@ class SiteController extends Controller
 				$SUPPP->id_dokumen=$Dokumen0->id_dokumen;							
 				
 				$PP = new PenerimaPengadaan;
-				$PP->id_pengadaan = $Pengadaan->id_pengadaan;
-				$PP->status = 'Lulus';
-				// $PP->perusahaan = 'perusahaan1';
+				
+						
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1371,18 +1370,36 @@ class SiteController extends Controller
 				if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$PP->attributes=$_POST['PenerimaPengadaan'];
+					// $PP->attributes=$_POST['PenerimaPengadaan'][0];
+					
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$SUPPP->validate() && $PP->validate();
 					if($valid){
+					
+						if(isset($_POST['perusahaan'])){
+							$total = count($_POST['perusahaan']);
+							
+							for($i=0;$i<$total;$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									$PP = new PenerimaPengadaan;
+									$PP->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PP->status = $_POST['status'][$i];
+									$PP->perusahaan=$_POST['perusahaan'][$i];
+									$PP->alamat=$_POST['alamat'][$i];
+									$PP->save();
+								}
+							}
+							
+						}		
+
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPPP->save(false)){
-									if($PP->save(false)){
+									// if($PP->save(false)){
 										$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
-									}
+									// }
 								}
 							}
 						}
@@ -1412,24 +1429,46 @@ class SiteController extends Controller
 				$SUPPP= SuratUndanganPermintaanPenawaranHarga::model()->findByPk($Dokumen0->id_dokumen);
 				
 				$PP = PenerimaPengadaan::model()->find('id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				// $PP = PenerimaPengadaan::model()->find('id_pengadaan = 2');
+				
+				
+				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
 				if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$PP->attributes=$_POST['PenerimaPengadaan'];
+					// $PP->perusahaan=$_POST['perusahaan'][0];
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$SUPPP->validate() && $PP->validate();
 					if($valid){
+					
+						if(isset($_POST['perusahaan'])){
+							$total = count($_POST['perusahaan']);
+							
+							for($i=0;$i<$total;$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									$PP = new PenerimaPengadaan;
+									$PP->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PP->status = $_POST['status'][$i];
+									$PP->perusahaan=$_POST['perusahaan'][$i];
+									if(isset($_POST['alamat'][$i])){
+										$PP->alamat=$_POST['alamat'][$i];
+									}
+									$PP->save();
+								}
+							}							
+						}
+						
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPPP->save(false)){
-									if($PP->save(false)){
+									// if($PP->save(false)){
 										$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
-									}
+									// }
 								}
 							}
 						}

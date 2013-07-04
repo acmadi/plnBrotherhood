@@ -75,7 +75,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			array(            // display using an expression
 				'name'=>'pic',				
 				'value'=>'$data->idPanitia->nama_panitia',   
-                                'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
+				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),
 				
 			array(            // display using an expression
@@ -88,7 +88,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				'name'=>'sisahari',	
 				// 'type'=>'raw',
 				'value'=>'$data->sisaHari()',
-				// 'filter'=>'',
+				'filter'=>'',
 				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),
 			
@@ -187,6 +187,8 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                     'value'=>'$data->idPanitia->nama_panitia',   
                                     'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 				),
+				
+				'metode_pengadaan',
 				
 				array(            // display using an expression
                                     'name'=>'divisi_peminta',
