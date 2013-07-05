@@ -71,7 +71,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				Nomor Surat Undangan Permintaan Penawaran Harga : <?php echo $SUPPPH->nomor ?> <br/>
 				<?php } ?>
 			<?php } else { ?>
-				Nomor Surat Undangan Aanwijzing : <?php echo $SUP->nomor ?> <br/>
+				Nomor Nota Dinas Undangan Aanwijzing : <?php echo $SUP->nomor ?> <br/>
 			<?php } ?>
 			<?php echo $form->textField($BAP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAP,'nomor'); ?>

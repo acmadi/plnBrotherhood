@@ -22,7 +22,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
+                                    array('label'=>'ND Undangan Pembukaan Penawaran', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
                                     array('label'=>'BA Pembukaan Penawaran', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"') == null)?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),                     
                             ),
                         ));
@@ -33,7 +33,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Sampul Satu', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
+                                    array('label'=>'ND Undangan Pembukaan Penawaran Sampul Satu', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
                                     array('label'=>'BA Pembukaan Penawaran', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Sampul Satu"') == null)?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
                             ),
                         ));
@@ -44,7 +44,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Tahap Satu', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
+                                    array('label'=>'ND Undangan Pembukaan Penawaran Tahap Satu', 'url'=>array($SUPP->isNewRecord?('/site/suratundanganpembukaanpenawaran'):('/site/editsuratundanganpembukaanpenawaran'),'id'=>$id)),
                                     array('label'=>'BA Pembukaan Penawaran', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Tahap Satu"') == null)?'/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
                             ),
                         ));
@@ -73,6 +73,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'nomor'); ?>
+			Nomor Berita Acara Aanwijzing : <?php echo $BAP->nomor ?> <br/>
 			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUPP,'nomor'); ?>
 		</div>

@@ -1915,6 +1915,7 @@ class SiteController extends Controller
 				$Pengadaan->status='9';
 				
 				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
+				$BAP= BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1965,7 +1966,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('suratundanganpembukaanpenawaran',array(
-					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,
+					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAP'=>$BAP,
 				));
 			}
 		}
@@ -1990,6 +1991,10 @@ class SiteController extends Controller
 					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				}
 				
+				
+				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
+				$BAP= BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
+				
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dokumen0->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
@@ -2013,7 +2018,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('suratundanganpembukaanpenawaran',array(
-					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,
+					'SUPP'=>$SUPP,'Dokumen0'=>$Dokumen0,'BAP'=>$BAP
 				));
 
 			}
@@ -2031,6 +2036,9 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='10';
+				
+				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
+				$BAP= BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2157,10 +2165,16 @@ class SiteController extends Controller
 						}
 					}
 				}
-
-				$this->render('beritaacarapembukaanpenawaran',array(
-					'BAPP'=>$BAPP,'PP'=>$PP,
-				));
+				if ($Dok0==null) {
+					$this->render('beritaacarapembukaanpenawaran',array(
+						'BAPP'=>$BAPP,'PP'=>$PP,'BAP'=>$BAP
+					));
+				} else {
+					$SUPP= SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
+					$this->render('beritaacarapembukaanpenawaran',array(
+						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP
+					));
+				}
 			}
 		}
 	}
