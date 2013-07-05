@@ -69,6 +69,20 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
 		</div>
 	
+		<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan_pembukaan_penawaran_2',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
+		</div>
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
