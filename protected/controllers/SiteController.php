@@ -234,61 +234,63 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$category = Yii::app()->getRequest()->getQuery('category');
 		$chart = Yii::app()->getRequest()->getQuery('chart');
-		$dataProvider;
-		$title;
-		$subtitle;
-		switch ($chart) {
+		$chartData = array();
+		$chartTitle;
+		$chartSubtitle;
+		switch ($category) {
 			case '1' : {
-				$query = Yii::app()->db->createCommand('select * from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_berlangsung'] + (int)$v1['jumlah_selesai'] + (int)$v1['jumlah_gagal']);
-					array_push($dataProvider, $x);
+				switch ($chart) {
+					case '1' : {
+						$query = Yii::app()->db->createCommand('select * from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_berlangsung'] + (int)$v1['jumlah_selesai'] + (int)$v1['jumlah_gagal']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan total';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
+					case '2' : {
+						$query = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_berlangsung']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang sedang berlangsung';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
+					case '3' : {
+						$query = Yii::app()->db->createCommand('select username, jumlah_selesai from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_selesai']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang telah selesai';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
+					case '4' : {
+						$query = Yii::app()->db->createCommand('select username, jumlah_gagal from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_gagal']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang gagal';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
 				}
-				$title = 'Pengadaan total';
-				$subtitle = 'per divisi';
-				break;
-			}
-			case '2' : {
-				$query = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_berlangsung']);
-					array_push($dataProvider, $x);
-				}
-				$title = 'Pengadaan yang sedang berlangsung';
-				$subtitle = 'per divisi';
-				break;
-			}
-			case '3' : {
-				$query = Yii::app()->db->createCommand('select username, jumlah_selesai from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_selesai']);
-					array_push($dataProvider, $x);
-				}
-				$title = 'Pengadaan yang telah selesai';
-				$subtitle = 'per divisi';
-				break;
-			}
-			case '4' : {
-				$query = Yii::app()->db->createCommand('select username, jumlah_gagal from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_gagal']);
-					array_push($dataProvider, $x);
-				}
-				$title = 'Pengadaan yang gagal';
-				$subtitle = 'per divisi';
 				break;
 			}
 		}
@@ -299,9 +301,9 @@ class SiteController extends Controller
 		else {
 			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$this->render('statistik', array(
-					'dataProvider'=>$dataProvider,
-					'title'=>$title,
-					'subtitle'=>$subtitle,
+					'chartData'=>$chartData,
+					'chartTitle'=>$chartTitle,
+					'chartSubtitle'=>$chartSubtitle,
 				));
 			}
 		}
