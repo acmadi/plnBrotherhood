@@ -2138,6 +2138,7 @@ class SiteController extends Controller
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				}
+				
 				if ($Dok0==null) {
 					$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 					$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -2255,6 +2256,17 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
+				}
+				
+				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
+				$BAP= BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
 					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
@@ -2343,9 +2355,16 @@ class SiteController extends Controller
 					}
 				}
 
-				$this->render('beritaacarapembukaanpenawaran',array(
-					'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,
-				));
+				if ($Dok0==null) {
+					$this->render('beritaacarapembukaanpenawaran',array(
+						'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,'BAP'=>$BAP,'Dok0'=>$Dok0,
+					));
+				} else {
+					$SUPP= SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
+					$this->render('beritaacarapembukaanpenawaran',array(
+						'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
+					));
+				}
 
 			}
 		}
