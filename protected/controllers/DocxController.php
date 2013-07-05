@@ -1738,13 +1738,13 @@ class DocxController extends Controller
 			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			// $this->doccy->phpdocx->assign('#anggota2#', '..................');
 			
-			$this->doccy->phpdocx->assign('#listperusahaan#',$this->getPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listperusahaan#',$this->getPenyediaX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
 			// $this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulus($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulus($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#listperusahaantdklulus#',$this->getPenyediaTdkLulus($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
+			$this->doccy->phpdocx->assign('#listperusahaantdklulus#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
 			// $this->doccy->phpdocx->assign('#tdtgnpeserta#',$this->getTTPenyedia($Peng->id_pengadaan));			
-			$this->doccy->phpdocx->assign('#jmlpesertalulus#', $this->getJmlPenyediaLulus($Peng->id_pengadaan));	
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $this->getJmlPenyedia($Peng->id_pengadaan));	
+			$this->doccy->phpdocx->assign('#jmlpesertalulus#', $this->getJmlPenyediaLulus($Peng->id_pengadaan,'evaluasi_penawaran_1'));	
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $this->getJmlPenyedia($Peng->id_pengadaan,'evaluasi_penawaran_1'));	
 			
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Panitia'){
 				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);
@@ -2365,37 +2365,7 @@ class DocxController extends Controller
 		}
 		
 		return $stringpenyedia;
-	}
-	
-	function getPenyediaPenawaranHarga($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('tahap = "Penawaran Harga" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-				
-		if($arraypenyedia == null){
-			$stringpenyedia = '-';
-		}else{		
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
-			}
-		}
-		
-		return $stringpenyedia;
-	}
-	
-	function getPenyediaAanwijzing($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and tahap = "Aanwijzing" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-				
-		if($arraypenyedia == null){
-			$stringpenyedia = '-';
-		}else{		
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
-			}
-		}
-		
-		return $stringpenyedia;
-	}
+	}	
 	
 	function getPenyediaX($idpeng,$tahap){
 		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1" or ' . $tahap . ' = "0" ' . 'and id_pengadaan = ' . $idpeng);
@@ -2486,49 +2456,7 @@ class DocxController extends Controller
 		
 		return $stringpenyedia;
 	}
-	
-	function getTTPenyediaAanwijzing($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and tahap = "Aanwijzing" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-		
-		if($arraypenyedia == null){
-			$stringpenyedia = '';
-		}else{
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
-			}
-		}
-		return $stringpenyedia;
-	}
-	
-	function getTTPenyedia($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-		
-		if($arraypenyedia == null){
-			$stringpenyedia = '';
-		}else{
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
-			}
-		}
-		return $stringpenyedia;
-	}
-	
-	function getPenyediaLulus($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-				
-		if($arraypenyedia == null){
-			$stringpenyedia = '-';
-		}else{		
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
-			}
-		}		
-		return $stringpenyedia;
-	}
-	
+
 	function getPenyediaLulusPakeKoma($idpeng){
 		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
@@ -2543,35 +2471,7 @@ class DocxController extends Controller
 		}		
 		return $stringpenyedia;
 	}
-	
-	function getTTPenyediaLulus($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-				
-		if($arraypenyedia == null){
-			$stringpenyedia = '';
-		}else{
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
-			}
-		}
-		return $stringpenyedia;
-	}
-	
-	function getPenyediaTdkLulus($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Tidak Lulus" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
 		
-		if($arraypenyedia == null){
-			$stringpenyedia = '-';
-		}else{		
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
-			}
-		}
-		return $stringpenyedia;
-	}
-	
 	function getPenyediaTdkLulusPakeKoma($idpeng){
 		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Tidak Lulus" and id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
@@ -2587,13 +2487,13 @@ class DocxController extends Controller
 		return $stringpenyedia;
 	}
 	
-	function getJmlPenyedia($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);				
+	function getJmlPenyedia($idpeng, $tahap){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1" or ' . $tahap . ' = "0" ' . 'and id_pengadaan = ' . $idpeng);
 		return count($arraypenyedia);
 	}
 	
-	function getJmlPenyediaLulus($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);				
+	function getJmlPenyediaLulus($idpeng, $tahap){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1" and id_pengadaan = ' . $idpeng);
 		return count($arraypenyedia);
 	}
 	
@@ -2608,9 +2508,9 @@ class DocxController extends Controller
 				$stringpenyedia .= 	'Calon Pemenang ' . ($i+1) . '<w:br/>' . 
 									'Nama Perusahaan 	: ' . $arraypenyedia[$i]->perusahaan . '<w:br/>' . 
 									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
-									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' 
-									// 'Nilai Penawaran 	: ' . RupiahMaker::convertInt$arraypenyedia[$i]->nilai) . '<w:br/>' .
-															// 'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ' sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
+									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '<w:br/>' .
+															'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ' sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
 									;
 			}
 		}		
@@ -2625,9 +2525,9 @@ class DocxController extends Controller
 			$stringpenyedia = '-';
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  
-									// 'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
-									// 'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->nilai,1000) .'% HPS <w:br/>' . 
+				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  .
+									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
+									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->nilai,1000) .'% HPS <w:br/>'
 									;
 			}
 		}		
