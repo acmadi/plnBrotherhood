@@ -137,27 +137,25 @@
 			<li class='belum'><?php echo 'Evaluasi' ?></li>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14') { ?>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12') { ?>
 				<li class='belum'><?php echo 'Negosiasi dan Klarifikasi' ?></li>
-			<?php } else if($cpengadaan->status == '15') { ?>
-				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/suratundangannegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '16') { ?>
+			<?php } else if($cpengadaan->status == '13') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/beritaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/editberitaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13' || $cpengadaan->status == '14'||$cpengadaan->status == '15') { ?>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5' || $cpengadaan->status == '6'||$cpengadaan->status == '7' || $cpengadaan->status == '8'||$cpengadaan->status == '9' || $cpengadaan->status == '10'||$cpengadaan->status == '11' || $cpengadaan->status == '12'||$cpengadaan->status == '13') { ?>
 				<li class='belum'><?php echo 'Penentuan Pemenang' ?></li>
-			<?php } else if($cpengadaan->status == '16') { ?>
+			<?php } else if($cpengadaan->status == '14') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinasusulanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '17') { ?>
+			<?php } else if($cpengadaan->status == '15') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspenetapanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '18') { ?>
+			<?php } else if($cpengadaan->status == '16') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '19') { ?>
+			<?php } else if($cpengadaan->status == '17') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpengumumanpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '20') { ?>
+			<?php } else if($cpengadaan->status == '18') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editsuratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
