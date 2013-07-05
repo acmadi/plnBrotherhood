@@ -2553,29 +2553,9 @@ class DocxController extends Controller
 		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1" and id_pengadaan = ' . $idpeng);
 		return count($arraypenyedia);
 	}
-	
-	function getPenyediaLulusEvalSampul2Kesimpulan($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-				
-		if($arraypenyedia == null){
-			$stringpenyedia = '-';
-		}else{		
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= 	'Calon Pemenang ' . ($i+1) . '<w:br/>' . 
-									'Nama Perusahaan 	: ' . $arraypenyedia[$i]->perusahaan . '<w:br/>' . 
-									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
-									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
-									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '<w:br/>' .
-															'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ' sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
-									;
-			}
-		}		
-		return $stringpenyedia;
-	}
-	
+		
 	function getPenyediaLulusEvalSampul2($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1"  and id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
 				
 		if($arraypenyedia == null){
@@ -2591,6 +2571,26 @@ class DocxController extends Controller
 		return $stringpenyedia;
 	}
 	
+	function getPenyediaLulusEvalSampul2Kesimpulan($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1"  and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= 	'Calon Pemenang ' . ($i+1) . '<w:br/>' . 
+									'Nama Perusahaan 	: ' . $arraypenyedia[$i]->perusahaan . '<w:br/>' . 
+									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
+									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
+									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '<w:br/>' .
+															'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									;
+			}
+		}		
+		return $stringpenyedia;
+	}
+		
 	function persenMaker($nilai,$hps){
 		return 0;
 	}
