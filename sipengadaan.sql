@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 05, 2013 at 06:44 AM
+-- Generation Time: Jul 05, 2013 at 08:47 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -139,8 +139,10 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
 --
 
 INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`) VALUES
-(27, '1231', 12, 0, 0),
-(32, '123', 12, 0, 0);
+(27, '1231', 4, 0, 0),
+(32, '123', 12, 0, 0),
+(47, '21', 12, 0, 0),
+(54, '32e4q', 22, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -171,7 +173,12 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 --
 
 INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`) VALUES
-(24, '123123');
+(24, '123123'),
+(42, '2312'),
+(44, 'asdasdas'),
+(49, 'asdas'),
+(51, '12w3'),
+(56, 'dsafsdfs');
 
 -- --------------------------------------------------------
 
@@ -197,7 +204,14 @@ INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
 (30, '12:21:00', 'ewqeqw', 'Evaluasi Penawaran Sampul Satu'),
 (33, '12:21:00', 'dsadas', 'Pembukaan Penawaran Sampul Dua'),
 (35, '12:21:00', 'dsadas', 'Evaluasi Penawaran Sampul Dua'),
-(37, '12:12:00', 'asdas', 'Negosiasi dan Klarifikasi');
+(37, '12:12:00', 'asdas', 'Negosiasi dan Klarifikasi'),
+(43, '12:12:00', 'sdfsd', 'Aanwijzing'),
+(45, '12:12:00', 'sdfsd', 'Aanwijzing'),
+(48, '12:21:00', 'ewqeqw', 'Pembukaan Penawaran Sampul Satu'),
+(50, '12:12:00', 'sdfsd', 'Aanwijzing'),
+(52, '12:12:00', 'sdfsd', 'Aanwijzing'),
+(55, '12:21:00', 'ewqeqw', 'Pembukaan Penawaran Sampul Satu'),
+(57, '12:12:00', 'sdfsd', 'Aanwijzing');
 
 -- --------------------------------------------------------
 
@@ -287,7 +301,24 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (37, 'Daftar Hadir Negosiasi dan Klarifikasi', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
 (38, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
 (39, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-16', 'Jakarta', 1, 'Belum Selesai'),
-(40, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-17', 'Jakarta', 1, 'Belum Selesai');
+(40, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-17', 'Jakarta', 1, 'Belum Selesai'),
+(41, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-16', 'Jakarta', 1, 'Belum Selesai'),
+(42, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(43, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(44, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(45, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(46, 'Surat Undangan Pembukaan Penawaran Sampul Satu', '2013-07-17', 'Jakarta', 1, 'Belum Selesai'),
+(47, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(48, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(49, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(50, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(51, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(52, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(53, 'Surat Undangan Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(54, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(55, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(56, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
+(57, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -627,9 +658,20 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `npwp` varchar(256) NOT NULL,
   `nilai` bigint(255) NOT NULL,
   `tahap` varchar(256) NOT NULL,
+  `undangan_prakualifikasi` varchar(256) NOT NULL,
+  `ba_evaluasi_prakualifikasi` varchar(256) NOT NULL,
+  `undangan_pengambilan_dokumen` varchar(256) NOT NULL,
+  `ba_aanwijzing` varchar(256) NOT NULL,
+  `pembukaan_penawaran_1` varchar(256) NOT NULL,
+  `evaluasi_penawaran_1` varchar(256) NOT NULL,
+  `pembukaan_penawaran_2` varchar(256) NOT NULL,
+  `evaluasi_penawaran_2` varchar(256) NOT NULL,
+  `negosiasi_klarifikasi` varchar(256) NOT NULL,
+  `usulan_pemenang` varchar(256) NOT NULL,
+  `penetapan_pemenang` varchar(256) NOT NULL,
   PRIMARY KEY (`id_penerima`),
   KEY `id_pengadaan` (`id_pengadaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -669,7 +711,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '7', 0, 2, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
+(1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '8', 0, 2, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
 (2, 'Pengadaan Sewa Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '7', 0, 1, 'Penunjukan Langsung', '-', '-'),
 (3, 'adasda', 'divman', 'Barang dan Jasa', '-', '2013-07-03', '0000-00-00', '-1', 0, -1, '-', '-', '-'),
 (4, 'asdasdas', 'divsi', 'Barang dan Jasa', '-', '2013-07-02', '0000-00-00', '-1', 0, -1, '-', '-', '-');
@@ -895,7 +937,9 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
 
 INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `nomor`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
 (26, '1212', 'Undangan Pembukaan Penawaran Sampul Satu Pengadaan Baju Dinas', '2013-07-10', '12:21:00', 'ewqeqw'),
-(31, 'q231q2', 'Undangan Pembukaan Penawaran Sampul Dua Pengadaan Baju Dinas', '2013-07-10', '12:21:00', 'dsadas');
+(31, 'q231q2', 'Undangan Pembukaan Penawaran Sampul Dua Pengadaan Baju Dinas', '2013-07-10', '12:21:00', 'dsadas'),
+(46, '2131', 'Undangan Pembukaan Penawaran Sampul Satu Pengadaan Baju Dinas', '2013-07-02', '09:00:00', 'dsadas'),
+(53, '213e', 'Undangan Pembukaan Penawaran Sampul Satu Pengadaan Baju Dinas', '2013-07-09', '12:21:00', 'sdfsd');
 
 -- --------------------------------------------------------
 
@@ -961,7 +1005,8 @@ INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, 
 (23, '1231231231', '12', 121, 'tem'),
 (38, '32e4q', '123', 121, 'asdas'),
 (39, 'w2eq', '12', 12, 'sdasda'),
-(40, '121', '123', 1, 'asdas');
+(40, '121', '123', 1, 'asdas'),
+(41, 'adasd', '12', 12, 'asdas');
 
 -- --------------------------------------------------------
 
