@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 05, 2013 at 08:47 AM
+-- Generation Time: Jul 05, 2013 at 08:57 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -90,14 +90,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `berita_acara_evaluasi_penawaran`
---
-
-INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `nomor`, `pemenang`, `alamat`, `NPWP`, `nilai`, `pemenang_2`, `alamat_2`, `NPWP_2`, `nilai_2`) VALUES
-(29, '23e12', '-', '-', '-', 0, '-', '-', '-', 0),
-(34, '12', 'ads', 'asda', 'sadas', 121, 'asda', 'asdas', 'asda', 1212);
-
 -- --------------------------------------------------------
 
 --
@@ -111,13 +103,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   `hak_kewajiban_penyedia` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `berita_acara_negosiasi_klarifikasi`
---
-
-INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `surat_penawaran_harga`, `hak_kewajiban_penyedia`) VALUES
-(36, '12w', '-', 'dasdas');
 
 -- --------------------------------------------------------
 
@@ -133,16 +118,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   `jumlah_penyedia_dokumen_tidak_sah` int(10) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `berita_acara_pembukaan_penawaran`
---
-
-INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `jumlah_penyedia_diundang`, `jumlah_penyedia_dokumen_sah`, `jumlah_penyedia_dokumen_tidak_sah`) VALUES
-(27, '1231', 4, 0, 0),
-(32, '123', 12, 0, 0),
-(47, '21', 12, 0, 0),
-(54, '32e4q', 22, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -168,18 +143,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `berita_acara_penjelasan`
---
-
-INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`) VALUES
-(24, '123123'),
-(42, '2312'),
-(44, 'asdasdas'),
-(49, 'asdas'),
-(51, '12w3'),
-(56, 'dsafsdfs');
-
 -- --------------------------------------------------------
 
 --
@@ -193,25 +156,6 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
   `acara` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `daftar_hadir`
---
-
-INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
-(25, '12:12:00', 'sdfsd', 'Aanwijzing'),
-(28, '12:21:00', 'ewqeqw', 'Pembukaan Penawaran Sampul Satu'),
-(30, '12:21:00', 'ewqeqw', 'Evaluasi Penawaran Sampul Satu'),
-(33, '12:21:00', 'dsadas', 'Pembukaan Penawaran Sampul Dua'),
-(35, '12:21:00', 'dsadas', 'Evaluasi Penawaran Sampul Dua'),
-(37, '12:12:00', 'asdas', 'Negosiasi dan Klarifikasi'),
-(43, '12:12:00', 'sdfsd', 'Aanwijzing'),
-(45, '12:12:00', 'sdfsd', 'Aanwijzing'),
-(48, '12:21:00', 'ewqeqw', 'Pembukaan Penawaran Sampul Satu'),
-(50, '12:12:00', 'sdfsd', 'Aanwijzing'),
-(52, '12:12:00', 'sdfsd', 'Aanwijzing'),
-(55, '12:21:00', 'ewqeqw', 'Pembukaan Penawaran Sampul Satu'),
-(57, '12:12:00', 'sdfsd', 'Aanwijzing');
 
 -- --------------------------------------------------------
 
@@ -257,69 +201,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Nota Dinas Permintaan', '2013-07-31', 'Jakarta', 1, 'Selesai'),
-(2, 'TOR', '2013-07-31', 'Jakarta', 1, 'Selesai'),
-(3, 'RAB', '2013-07-31', 'Jakarta', 1, 'Selesai'),
-(4, 'Nota Dinas Permintaan', '2013-07-02', 'Jakarta', 2, 'Selesai'),
-(5, 'TOR', '2013-07-02', 'Jakarta', 2, 'Selesai'),
-(6, 'RAB', '2013-07-02', 'Jakarta', 2, 'Selesai'),
-(7, 'Nota Dinas Perintah Pengadaan', '2013-07-12', 'Jakarta', 2, 'Belum Selesai'),
-(8, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-03', 'Jakarta', 2, 'Belum Selesai'),
-(9, 'Nota Dinas Permintaan', '2013-07-09', 'Jakarta', 3, 'Belum Selesai'),
-(10, 'TOR', '2013-07-09', 'Jakarta', 3, 'Belum Selesai'),
-(11, 'RAB', '2013-07-09', 'Jakarta', 3, 'Belum Selesai'),
-(12, 'Nota Dinas Permintaan', '2013-07-02', 'Jakarta', 4, 'Belum Selesai'),
-(13, 'TOR', '2013-07-02', 'Jakarta', 4, 'Belum Selesai'),
-(14, 'RAB', '2013-07-02', 'Jakarta', 4, 'Belum Selesai'),
-(15, 'Nota Dinas Perintah Pengadaan', '2013-07-04', 'Jakarta', 1, 'Belum Selesai'),
-(16, 'Pakta Integritas Awal Panitia', '2013-07-05', 'Jakarta', 1, 'Belum Selesai'),
-(17, 'RKS', '2013-07-05', 'Jakarta', 1, 'Belum Selesai'),
-(18, 'HPS', '2013-07-08', 'Jakarta', 1, 'Belum Selesai'),
-(19, 'Pakta Integritas Penyedia', '1970-01-01', '-', 1, 'Belum Selesai'),
-(20, 'Surat Pengantar Penawaran Harga', '1970-01-01', 'Jakarta', 1, 'Belum Selesai'),
-(21, 'Surat Pernyataan Minat', '1970-01-01', '-', 1, 'Belum Selesai'),
-(22, 'Form Isian Kualifikasi', '1970-01-01', '-', 1, 'Belum Selesai'),
-(23, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(24, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(25, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(26, 'Surat Undangan Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(27, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(28, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(29, 'Berita Acara Evaluasi Penawaran Sampul Satu', '2013-07-23', 'Jakarta', 1, 'Belum Selesai'),
-(30, 'Daftar Hadir Evaluasi Penawaran Sampul Satu', '2013-07-23', 'Jakarta', 1, 'Belum Selesai'),
-(31, 'Surat Undangan Pembukaan Penawaran Sampul Dua', '2013-07-16', 'Jakarta', 1, 'Belum Selesai'),
-(32, 'Berita Acara Pembukaan Penawaran Sampul Dua', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(33, 'Daftar Hadir Pembukaan Penawaran Sampul Dua', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(34, 'Berita Acara Evaluasi Penawaran Sampul Dua', '2013-07-11', 'Jakarta', 1, 'Belum Selesai'),
-(35, 'Daftar Hadir Evaluasi Penawaran Sampul Dua', '2013-07-11', 'Jakarta', 1, 'Belum Selesai'),
-(36, 'Berita Acara Negosiasi dan Klarifikasi', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(37, 'Daftar Hadir Negosiasi dan Klarifikasi', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
-(38, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(39, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-16', 'Jakarta', 1, 'Belum Selesai'),
-(40, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-17', 'Jakarta', 1, 'Belum Selesai'),
-(41, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-16', 'Jakarta', 1, 'Belum Selesai'),
-(42, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(43, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(44, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(45, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(46, 'Surat Undangan Pembukaan Penawaran Sampul Satu', '2013-07-17', 'Jakarta', 1, 'Belum Selesai'),
-(47, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(48, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(49, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(50, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(51, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(52, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(53, 'Surat Undangan Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(54, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(55, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
-(56, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai'),
-(57, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 1, 'Belum Selesai');
-
 -- --------------------------------------------------------
 
 --
@@ -355,13 +236,6 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `form_isian_kualifikasi`
---
-
-INSERT INTO `form_isian_kualifikasi` (`id_dokumen`) VALUES
-(22);
-
 -- --------------------------------------------------------
 
 --
@@ -373,13 +247,6 @@ CREATE TABLE IF NOT EXISTS `hps` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `hps`
---
-
-INSERT INTO `hps` (`id_dokumen`, `nomor`) VALUES
-(18, '3qwe');
 
 -- --------------------------------------------------------
 
@@ -421,21 +288,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `id_dokumen` (`id_dokumen`),
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `link_dokumen`
---
-
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`) VALUES
-(1, 4, '00:42:58', '2013-07-05', 'divtrans', 1, 'txt'),
-(2, 4, '00:43:01', '2013-07-05', 'divtrans', 2, 'txt'),
-(3, 5, '00:43:05', '2013-07-05', 'divtrans', 1, 'txt'),
-(4, 6, '00:43:09', '2013-07-05', 'divtrans', 1, 'txt'),
-(5, 6, '00:43:12', '2013-07-05', 'divtrans', 2, 'txt'),
-(6, 1, '02:03:58', '2013-07-05', 'a', 1, 'txt'),
-(7, 2, '02:04:05', '2013-07-05', 'a', 1, 'txt'),
-(8, 3, '02:04:10', '2013-07-05', 'a', 1, 'txt'),
-(9, 3, '02:04:24', '2013-07-05', 'a', 2, 'txt');
 
 -- --------------------------------------------------------
 
@@ -498,14 +350,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nota_dinas_perintah_pengadaan`
---
-
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(7, '035/DVMUM/2013', 'KDIVMUM', 'Hanif Eridaputra', 'asada', 45, 'Kas PLN', 10050000),
-(15, 'sdfsdf', 'KDIVMUM', 'Johannes Ridho', 'sdfsdf', 12, 'asdas', 1212212);
-
 -- --------------------------------------------------------
 
 --
@@ -519,16 +363,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   `nilai_biaya_rab` int(200) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `nota_dinas_permintaan`
---
-
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`, `nilai_biaya_rab`) VALUES
-(1, '045/DVMAM/2013', 'Pengadaan Baju Dinas Pegawai', 12312),
-(4, '073/DIVTRANS/2013', 'bsmnbmama', 0),
-(9, '12q', 'sdas', 121),
-(12, 'asdasd2q3', 'asdas', 2112);
 
 -- --------------------------------------------------------
 
@@ -578,13 +412,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   KEY `id_panitia` (`id_panitia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pakta_integritas_panitia_1`
---
-
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`, `id_panitia`) VALUES
-(16, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -606,13 +433,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pakta_integritas_penyedia`
---
-
-INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`) VALUES
-(19);
 
 -- --------------------------------------------------------
 
@@ -706,16 +526,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengadaan`
---
-
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Baju Dinas', 'divman', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '8', 0, 2, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
-(2, 'Pengadaan Sewa Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-18', '0000-00-00', '7', 0, 1, 'Penunjukan Langsung', '-', '-'),
-(3, 'adasda', 'divman', 'Barang dan Jasa', '-', '2013-07-03', '0000-00-00', '-1', 0, -1, '-', '-', '-'),
-(4, 'asdasdas', 'divsi', 'Barang dan Jasa', '-', '2013-07-02', '0000-00-00', '-1', 0, -1, '-', '-', '-');
-
 -- --------------------------------------------------------
 
 --
@@ -726,13 +536,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rab`
---
-
-INSERT INTO `rab` (`id_dokumen`) VALUES
-(11);
 
 -- --------------------------------------------------------
 
@@ -747,23 +550,6 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=84 ;
-
---
--- Dumping data for table `rincian_rks`
---
-
-INSERT INTO `rincian_rks` (`id_rincian`, `nama_rincian`, `id_dokumen`) VALUES
-(73, 'Cover', 17),
-(74, 'Daftar Isi', 17),
-(75, 'Isi', 17),
-(76, 'Lampiran 1', 17),
-(77, 'Lampiran 2', 17),
-(78, 'Lampiran 3', 17),
-(79, 'Lampiran 4', 17),
-(80, 'Lampiran 5', 17),
-(81, 'Lampiran 6', 17),
-(82, 'Lampiran 7', 17),
-(83, 'Lampiran ba', 17);
 
 -- --------------------------------------------------------
 
@@ -818,13 +604,6 @@ CREATE TABLE IF NOT EXISTS `rks` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `rks`
---
-
-INSERT INTO `rks` (`id_dokumen`, `nomor`, `tipe_rks`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_awal_pemasukan_penawaran1`, `tanggal_akhir_pemasukan_penawaran1`, `waktu_pemasukan_penawaran1`, `tempat_pemasukan_penawaran1`, `tanggal_pembukaan_penawaran1`, `waktu_pembukaan_penawaran1`, `tempat_pembukaan_penawaran1`, `tanggal_evaluasi_penawaran1`, `waktu_evaluasi_penawaran1`, `tempat_evaluasi_penawaran1`, `tanggal_awal_pemasukan_penawaran2`, `tanggal_akhir_pemasukan_penawaran2`, `waktu_pemasukan_penawaran2`, `tempat_pemasukan_penawaran2`, `tanggal_pembukaan_penawaran2`, `waktu_pembukaan_penawaran2`, `tempat_pembukaan_penawaran2`, `tanggal_evaluasi_penawaran2`, `waktu_evaluasi_penawaran2`, `tempat_evaluasi_penawaran2`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_usulan_pemenang`, `waktu_usulan_pemenang`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tanggal_pemberitahuan_pemenang`, `waktu_pemberitahuan_pemenang`, `tanggal_penunjukan_pemenang`, `waktu_penunjukan_pemenang`, `sistem_evaluasi_penawaran`, `jangka_waktu_penyerahan`, `tanggal_paling_lambat_penyerahan`, `jangka_waktu_berlaku_jaminan`, `lama_waktu_tambahan`) VALUES
-(17, '1q2123', 1, '2013-07-01', '2013-07-09', '12:12:00', 'sdfsd', '2013-07-09', '2013-07-02', '12:11:00', 'sdfs', '2013-07-10', '12:12:00', 'sdfsdf', '2013-07-17', '12:11:00', 'sfsdf', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-09', '12:11:00', 'sdfsdfs', '2013-07-03', '11:11:00', 'asdas', '2013-07-02', '12:12:00', 'asdas', '2013-07-16', '12:12:00', '2013-07-09', '12:12:00', '2013-07-09', '12:12:00', '2013-07-16', '11:11:00', 'gugur', 12, '2013-07-10', 1, 12);
-
 -- --------------------------------------------------------
 
 --
@@ -835,14 +614,6 @@ CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `surat_pengantar_penawaran_harga`
---
-
-INSERT INTO `surat_pengantar_penawaran_harga` (`id_dokumen`) VALUES
-(9),
-(20);
 
 -- --------------------------------------------------------
 
@@ -890,14 +661,6 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `surat_pernyataan_minat`
---
-
-INSERT INTO `surat_pernyataan_minat` (`id_dokumen`) VALUES
-(10),
-(21);
-
 -- --------------------------------------------------------
 
 --
@@ -931,16 +694,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `surat_undangan_pembukaan_penawaran`
---
-
-INSERT INTO `surat_undangan_pembukaan_penawaran` (`id_dokumen`, `nomor`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
-(26, '1212', 'Undangan Pembukaan Penawaran Sampul Satu Pengadaan Baju Dinas', '2013-07-10', '12:21:00', 'ewqeqw'),
-(31, 'q231q2', 'Undangan Pembukaan Penawaran Sampul Dua Pengadaan Baju Dinas', '2013-07-10', '12:21:00', 'dsadas'),
-(46, '2131', 'Undangan Pembukaan Penawaran Sampul Satu Pengadaan Baju Dinas', '2013-07-02', '09:00:00', 'dsadas'),
-(53, '213e', 'Undangan Pembukaan Penawaran Sampul Satu Pengadaan Baju Dinas', '2013-07-09', '12:21:00', 'sdfsd');
-
 -- --------------------------------------------------------
 
 --
@@ -972,14 +725,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `surat_undangan_penjelasan`
---
-
-INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `perihal`, `tanggal_undangan`, `waktu`, `tempat`) VALUES
-(125, '333333333333', 'Undangan Aanwijzing Pengadaan Sewa Motor', '2013-07-31', '12:12:00', 'asdasd'),
-(138, '1e12312ea', 'Undangan Aanwijzing Pengadaan Sewa Mobil', '2013-06-21', '08:00:00', 'adaasa');
-
 -- --------------------------------------------------------
 
 --
@@ -989,24 +734,10 @@ INSERT INTO `surat_undangan_penjelasan` (`id_dokumen`, `nomor`, `perihal`, `tang
 CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `waktu_kerja` varchar(256) NOT NULL,
-  `masa_berlaku_penawaran` int(20) NOT NULL,
+  `waktu_kerja` int(255) NOT NULL,
   `tempat_penyerahan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `surat_undangan_permintaan_penawaran_harga`
---
-
-INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, `waktu_kerja`, `masa_berlaku_penawaran`, `tempat_penyerahan`) VALUES
-(8, '12312', '123', 232, 'dsfsdf'),
-(12, '3eq', '132', 12, 'asda'),
-(23, '1231231231', '12', 121, 'tem'),
-(38, '32e4q', '123', 121, 'asdas'),
-(39, 'w2eq', '12', 12, 'sdasda'),
-(40, '121', '123', 1, 'asdas'),
-(41, 'adasd', '12', 12, 'asdas');
 
 -- --------------------------------------------------------
 
@@ -1307,6 +1038,48 @@ ALTER TABLE `rincian_rks`
 --
 ALTER TABLE `rks`
   ADD CONSTRAINT `rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_pengantar_penawaran_harga`
+--
+ALTER TABLE `surat_pengantar_penawaran_harga`
+  ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_pernyataan_minat`
+--
+ALTER TABLE `surat_pernyataan_minat`
+  ADD CONSTRAINT `surat_pernyataan_minat_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_undangan_negosiasi_klarifikasi`
+--
+ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
+  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_undangan_pembukaan_penawaran`
+--
+ALTER TABLE `surat_undangan_pembukaan_penawaran`
+  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_undangan_penjelasan`
+--
+ALTER TABLE `surat_undangan_penjelasan`
+  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_undangan_permintaan_penawaran_harga`
+--
+ALTER TABLE `surat_undangan_permintaan_penawaran_harga`
+  ADD CONSTRAINT `surat_undangan_permintaan_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_undangan_prakualifikasi`
+--
+ALTER TABLE `surat_undangan_prakualifikasi`
+  ADD CONSTRAINT `surat_undangan_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
