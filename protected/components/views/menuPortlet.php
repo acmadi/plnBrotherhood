@@ -8,50 +8,48 @@
 		
 	<?php if(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<?php if($cpengadaan->status == '0') { ?>
-				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/penentuanmetode","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-		<?php } else if($cpengadaan->status == '1') { ?>
+				<li class='onprogress' ><?php echo CHtml::link('Penentuan Metode',array("site/penentuanmetode","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else { ?>
+			<li class='sudah' > <?php echo CHtml::link('Penentuan Metode',array("site/editpenentuanmetode","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } ?>
+		
+		<?php if ($cpengadaan->jenis_kualifikasi=="Pra Kualifikasi") { ?>
+			<?php if($cpengadaan->status == '1') { ?>
+					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/dokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '2') { ?>
+					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/undanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '3') { ?>
+					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/evaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li class='sudah' > <?php echo CHtml::link('Prakualifikasi',array("site/editevaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>
+		<?php } ?>
+		
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
+			<li class='belum'><?php echo 'Pembuatan Pengadaan' ?></li>
+		<?php } else if($cpengadaan->status == '4') { ?>
 				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/rks","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
-		<?php } else if($cpengadaan->status == '2') { ?>
+		<?php } else if($cpengadaan->status == '5') { ?>
 				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/hps","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
 		<?php } else { ?>
 			<li class='sudah' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/edithps","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
-		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2') { ?>
-				<li class='belum'><?php echo 'Kualifikasi' ?></li>
-			<?php } else if($cpengadaan->status == '3') { ?>
-				<li class='onprogress'><?php 
-					if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi'){
-						echo CHtml::link('Kualifikasi',array("site/prakualifikasi","id"=>"$cpengadaan->id_pengadaan")); 
-					} else {
-						echo CHtml::link('Kualifikasi',array("site/pascakualifikasi","id"=>"$cpengadaan->id_pengadaan"));
-					}
-				?></li>
-			<?php } else { ?>
-				<li class='sudah'><?php
-					if($cpengadaan->jenis_kualifikasi=='Pra Kualifikasi'){
-						echo CHtml::link('Kualifikasi',array("site/editprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); 
-					} else {
-						echo CHtml::link('Kualifikasi',array("site/pascakualifikasi","id"=>"$cpengadaan->id_pengadaan"));
-					} 
-				?></li>
-		<?php } ?>
 
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
-				<li class='belum' ><?php echo 'Pengambilan Dokumen Pengadaan'?></li>
-		<?php } else if($cpengadaan->status == '4') { ?>
-				<li class='onprogress' ><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/pengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
-		<?php } else if($cpengadaan->status == '5') { ?>
-			<li class='onprogress' > <?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/permintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3'|| $cpengadaan->status == '4'||$cpengadaan->status == '5') { ?>
+				<li class='belum' ><?php echo 'Undangan Pengambilan Dokumen Pengadaan'?></li>
+		<?php } else if($cpengadaan->status == '6') { ?>
+				<li class='onprogress' ><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array("site/pengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
+		<?php } else if($cpengadaan->status == '7') { ?>
+			<li class='onprogress' > <?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array("site/permintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } else { ?>
 			<?php if($cpengadaan->metode_pengadaan=='Pelelangan'){ ?>
-				<li class='sudah' ><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/editpengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' ><?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array("site/editpengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if ($cpengadaan->metode_pengadaan=='Penunjukan Langsung'||$cpengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
-				<li class='sudah' > <?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/editpermintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' > <?php echo CHtml::link('Undangan Pengambilan Dokumen Pengadaan',array("site/editpermintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5') { ?>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1' || $cpengadaan->status == '2'||$cpengadaan->status == '3' || $cpengadaan->status == '4'||$cpengadaan->status == '5'|| $cpengadaan->status == '6'||$cpengadaan->status == '7') { ?>
 				<li class='belum'><?php echo 'Aanwijzing' ?></li>
 			<?php } else if($cpengadaan->status == '7') { ?>
 				<li class='onprogress'><?php echo CHtml::link('Aanwijzing',array("site/beritaacaraaanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>

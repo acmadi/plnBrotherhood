@@ -417,11 +417,15 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status='1';
 				
 				if(isset($_POST['Pengadaan']))
 				{
 					$Pengadaan->attributes=$_POST['Pengadaan'];
+					if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+						$Pengadaan->status='1';
+					} else { 
+						$Pengadaan->status='4';
+					}
 					$valid=$Pengadaan->validate();
 					if($valid){		
 						if($Pengadaan->save(false))
@@ -476,7 +480,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='2';
+				$Pengadaan->status ='5';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -523,6 +527,51 @@ class SiteController extends Controller
 					$RKS->tempat_pemasukan_penawaran2='-';
 				}
 				
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
+					$DokumenX1= new Dokumen;
+					$DokumenX1->id_dokumen=$somevariable+3;
+					$DokumenX1->nama_dokumen='Pakta Integritas Penyedia';
+					$DokumenX1->status_upload='Belum Selesai';
+					$DokumenX1->tanggal='-';
+					$DokumenX1->tempat='-';
+					$DokumenX1->id_pengadaan=$id;
+					
+					$DokumenX2= new Dokumen;
+					$DokumenX2->id_dokumen=$somevariable+4;
+					$DokumenX2->nama_dokumen='Surat Pengantar Penawaran Harga';
+					$DokumenX2->tanggal='-';
+					$DokumenX2->tempat='Jakarta';
+					$DokumenX2->status_upload='Belum Selesai';
+					$DokumenX2->id_pengadaan=$id;
+					
+					$DokumenX3= new Dokumen;
+					$DokumenX3->id_dokumen=$somevariable+5;
+					$DokumenX3->nama_dokumen='Surat Pernyataan Minat';
+					$DokumenX3->tanggal='-';
+					$DokumenX3->tempat='-';
+					$DokumenX3->status_upload='Belum Selesai';
+					$DokumenX3->id_pengadaan=$id;
+					
+					$DokumenX4= new Dokumen;
+					$DokumenX4->id_dokumen=$somevariable+6;
+					$DokumenX4->nama_dokumen='Form Isian Kualifikasi';
+					$DokumenX4->tanggal='-';
+					$DokumenX4->tempat='-';
+					$DokumenX4->status_upload='Belum Selesai';
+					$DokumenX4->id_pengadaan=$id;
+					
+					$X1= new PaktaIntegritasPenyedia;
+					$X1->id_dokumen=$DokumenX1->id_dokumen;
+					
+					$X2= new SuratPengantarPenawaranHarga;
+					$X2->id_dokumen=$DokumenX2->id_dokumen;
+					
+					$X3= new SuratPernyataanMinat;
+					$X3->id_dokumen=$DokumenX3->id_dokumen;
+					
+					$X4= new FormIsianKualifikasi;
+					$X4->id_dokumen=$DokumenX4->id_dokumen;
+				}
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
@@ -728,6 +777,16 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($PAP1->save(false)&&$RKS->save(false)){
+									if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
+										$DokumenX1->save(false);
+										$DokumenX2->save(false);
+										$DokumenX3->save(false);
+										$DokumenX4->save(false);
+										$X1->save(false);
+										$X2->save(false);
+										$X3->save(false);
+										$X4->save(false);
+									}
 									$Cover->save(false);
 									// if($Pengadaan->metode_pengadaan=="Penunjukan Langsung"){
 										if($RKS->tipe_rks==1){
@@ -792,13 +851,13 @@ class SiteController extends Controller
 											// $PMJL5->save(false);
 										// }
 									// }
+									
 									$this->redirect(array('editrks','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
 				}
-
 				$this->render('rks',array(
 					'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,
 				));
@@ -852,6 +911,19 @@ class SiteController extends Controller
 				$RKS->tanggal_penunjukan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penunjukan_pemenang);
 				$RKS->tanggal_paling_lambat_penyerahan=Tanggal::getTanggalStrip($RKS->tanggal_paling_lambat_penyerahan);
 				
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
+					
+					$DokumenX1= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Pakta Integritas Penyedia"');
+					$DokumenX2= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Surat Pengantar Penawaran Harga"');
+					$DokumenX3= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Surat Pernyataan Minat"');
+					$DokumenX4= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Form Isian Kualifikasi"');
+					
+					$X1= PaktaIntegritasPenyedia::model()->findByPk($DokumenX1->id_dokumen);
+					$X2= SuratPengantarPenawaranHarga::model()->findByPk($DokumenX2->id_dokumen);
+					$X3= SuratPernyataanMinat::model()->findByPk($DokumenX3->id_dokumen);
+					$X4= FormIsianKualifikasi::model()->findByPk($DokumenX4->id_dokumen);
+				}
+				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
@@ -891,9 +963,15 @@ class SiteController extends Controller
 					}
 				}
 
-				$this->render('rks',array(
-					'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,
-				));
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
+					$this->render('rks',array(
+						'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
+					));
+				} else {
+					$this->render('rks',array(
+						'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,
+					));
+				}
 			}
 		}
 	}
@@ -908,7 +986,11 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='3';
+				if($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "6";
+				} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+					$Pengadaan->status= "7";
+				}
 				
 				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS= Rks::model()->findByPk($Dok->id_dokumen);
@@ -1169,54 +1251,6 @@ class SiteController extends Controller
 					} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
 						$Pengadaan->status= "5";
 					}
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->nama_dokumen='Pakta Integritas Penyedia';
-					$Dokumen0->status_upload='Belum Selesai';
-					$Dokumen0->tanggal='-';
-					$Dokumen0->tempat='-';
-					$Dokumen0->id_pengadaan=$id;
-					
-					$Dokumen1= new Dokumen;
-					$Dokumen1->id_dokumen=$somevariable+2;
-					$Dokumen1->nama_dokumen='Surat Pengantar Penawaran Harga';
-					$Dokumen1->tanggal='-';
-					$Dokumen1->tempat='Jakarta';
-					$Dokumen1->status_upload='Belum Selesai';
-					$Dokumen1->id_pengadaan=$id;
-					
-					$Dokumen2= new Dokumen;
-					$Dokumen2->id_dokumen=$somevariable+3;
-					$Dokumen2->nama_dokumen='Surat Pernyataan Minat';
-					$Dokumen2->tanggal='-';
-					$Dokumen2->tempat='-';
-					$Dokumen2->status_upload='Belum Selesai';
-					$Dokumen2->id_pengadaan=$id;
-					
-					$Dokumen3= new Dokumen;
-					$Dokumen3->id_dokumen=$somevariable+4;
-					$Dokumen3->nama_dokumen='Form Isian Kualifikasi';
-					$Dokumen3->tanggal='-';
-					$Dokumen3->tempat='-';
-					$Dokumen3->status_upload='Belum Selesai';
-					$Dokumen3->id_pengadaan=$id;
-					
-					$X0= new PaktaIntegritasPenyedia;
-					$X0->id_dokumen=$Dokumen0->id_dokumen;
-					
-					$X1= new SuratPengantarPenawaranHarga;
-					$X1->id_dokumen=$Dokumen1->id_dokumen;
-					
-					$X2= new SuratPernyataanMinat;
-					$X2->id_dokumen=$Dokumen2->id_dokumen;
-					
-					$X3= new FormIsianKualifikasi;
-					$X3->id_dokumen=$Dokumen3->id_dokumen;
-					
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1254,7 +1288,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="7";
+				$Pengadaan->status="8";
 				
 				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
 				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
@@ -1363,7 +1397,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="7";
+				$Pengadaan->status="8";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1661,7 +1695,7 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='8';
+				$Pengadaan->status ='9';
 				
 				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
