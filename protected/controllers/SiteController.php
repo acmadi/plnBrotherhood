@@ -4353,13 +4353,11 @@ class SiteController extends Controller
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
-					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
-					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$valid&&$NDP->validate();
 					if($valid){
-						if($Pengadaan->save(false)&&$Divisi->save(false)) {
+						if($Pengadaan->save(false)) {
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($NDP->save(false)&&$TOR->save(false)&&$RAB->save(false)){
 									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
@@ -4594,11 +4592,13 @@ class SiteController extends Controller
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
+					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
+					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
 					$valid=$valid&&$NDPP->validate();
 					if($valid){
-						if($Pengadaan->save(false)) {
+						if($Pengadaan->save(false)&&$Divisi->save(false)) {
 							if($Dokumen0->save(false)){
 								if($NDPP->save(false)){		
 									$this->redirect(array('edittunjukpanitia','id'=>$id));
