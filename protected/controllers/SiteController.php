@@ -1878,6 +1878,9 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status='9';
+				
+				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
+				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -1994,15 +1997,6 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='10';
 				
-				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
-				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
-				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
-				}
-				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
-				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -2020,7 +2014,6 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
-				$Dokumen1->tanggal=$SUPP->tanggal_undangan;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
@@ -2034,7 +2027,6 @@ class SiteController extends Controller
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
-				$Dokumen2->tanggal=$SUPP->tanggal_undangan;
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
@@ -2053,8 +2045,28 @@ class SiteController extends Controller
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$DH->acara="Pembukaan Penawaran Tahap Satu";
 				}
-				$DH->jam=$SUPP->waktu;
-				$DH->tempat_hadir=$SUPP->tempat;
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
+				}
+				if ($Dok0==null) {
+					$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+					$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+					$Dokumen1->tanggal=$RKS->tanggal_pembukaan_penawaran1;
+					$Dokumen2->tanggal=$RKS->tanggal_pembukaan_penawaran1;
+					$DH->jam=$RKS->waktu_pembukaan_penawaran1;
+					$DH->tempat_hadir=$RKS->tempat_pembukaan_penawaran1;
+				} else {
+					$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
+					$Dokumen1->tanggal=$SUPP->tanggal_undangan;
+					$Dokumen2->tanggal=$SUPP->tanggal_undangan;
+					$DH->jam=$SUPP->waktu;
+					$DH->tempat_hadir=$SUPP->tempat;
+				}
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);

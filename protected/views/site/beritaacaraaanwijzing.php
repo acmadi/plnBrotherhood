@@ -17,13 +17,21 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
                 <div id="menuform">
                     <?php
-                    $this->widget('zii.widgets.CMenu', array(
-                                    'items'=>array(
-                                            array('label'=>'Surat Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/aanwijzing':'/site/editaanwijzing','id'=>$id)),
-                                            array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
-                                    ),
-                            ));
-                    ?>
+					if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+						$this->widget('zii.widgets.CMenu', array(
+										'items'=>array(
+											array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/aanwijzing':'/site/editaanwijzing','id'=>$id)),
+											array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
+										),
+								));
+					} else {
+						$this->widget('zii.widgets.CMenu', array(
+										'items'=>array(
+											array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
+										),
+								));
+					}
+					?>
                 </div>
                 <br/>
             
@@ -96,7 +104,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				
 				<li><?php echo CHtml::link('Berita Acara Aanwijzing', array('docx/download','id'=>$BAP->id_dokumen)); ?></li>
