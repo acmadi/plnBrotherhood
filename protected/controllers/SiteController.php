@@ -1404,7 +1404,9 @@ class SiteController extends Controller
 									$PP[$i]->status = $_POST['status'][$i];
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = '-';
+									$PP[$i]->tahap = '-';									
 									$PP[$i]->save();
 								}
 							}
@@ -1470,6 +1472,8 @@ class SiteController extends Controller
 								if(isset($_POST['perusahaan'][$i])){									
 									$PP[$i]->status = $_POST['status'][$i];
 									$PP[$i]->npwp = '-';
+									$PP[$i]->nilai = '-';
+									$PP[$i]->tahap = '-';
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									$PP[$i]->alamat='-';									
 									$PP[$i]->save();
@@ -1485,7 +1489,9 @@ class SiteController extends Controller
 									$PPbaru->status = $_POST['status'][$i];
 									$PPbaru->perusahaan=$_POST['perusahaan'][$i];									
 									$PPbaru->alamat='-';									
-									$PPbaru->npwp='-';									
+									$PPbaru->npwp='-';		
+									$PP[$i]->nilai = '-';
+									$PP[$i]->tahap = '-';									
 									$PPbaru->save();
 								}
 								

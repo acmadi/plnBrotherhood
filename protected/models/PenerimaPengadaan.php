@@ -10,6 +10,8 @@
  * @property string $id_pengadaan
  * @property string $alamat
  * @property string $npwp
+ * @property string $nilai
+ * @property string $tahap
  *
  * The followings are the available model relations:
  * @property Pengadaan $idPengadaan
@@ -45,11 +47,11 @@ class PenerimaPengadaan extends CActiveRecord
 			array('perusahaan, status, id_pengadaan', 'required'),
 			array('perusahaan', 'length', 'max'=>100),
 			array('status', 'length', 'max'=>20),
-			array('id_pengadaan', 'length', 'max'=>255),
-			array('alamat, npwp', 'length', 'max'=>256),
+			array('id_pengadaan, nilai', 'length', 'max'=>255),
+			array('alamat, npwp, tahap', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_penerima, perusahaan, status, id_pengadaan, alamat, npwp', 'safe', 'on'=>'search'),
+			array('id_penerima, perusahaan, status, id_pengadaan, alamat, npwp, nilai, tahap', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,6 +79,8 @@ class PenerimaPengadaan extends CActiveRecord
 			'id_pengadaan' => 'Id Pengadaan',
 			'alamat' => 'Alamat',
 			'npwp' => 'Npwp',
+			'nilai' => 'Nilai',
+			'tahap' => 'Tahap',
 		);
 	}
 
@@ -97,6 +101,8 @@ class PenerimaPengadaan extends CActiveRecord
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('alamat',$this->alamat,true);
 		$criteria->compare('npwp',$this->npwp,true);
+		$criteria->compare('nilai',$this->nilai,true);
+		$criteria->compare('tahap',$this->tahap,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
