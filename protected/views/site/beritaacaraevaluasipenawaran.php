@@ -136,6 +136,20 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			</div>
 		<?php } ?>
 	
+		<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan_evaluasi_sampul_1',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
+		</div>
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAEP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
