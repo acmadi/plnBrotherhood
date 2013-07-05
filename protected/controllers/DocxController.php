@@ -1736,6 +1736,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
 			
+			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulusEvalSampul2($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertasampul2kesimpulan#',$this->getPenyediaLulusEvalSampul2Kesimpulan($Peng->id_pengadaan));
+			
 			$this->renderDocx("Berita Acara Evaluasi Penawaran Sampul 2.docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Negosiasi dan Klarifikasi"){
@@ -1952,12 +1955,13 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#jam#', Tanggal::getJamMenit($tanggal));
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
-			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
-			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
-			// $this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#listperusahaan#', '.............................................');
-			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
+			
+			// $this->doccy->phpdocx->assign('#jumlahmasuk#', $this->getJmlPenyediaLulus($Peng->id_pengadaan));						
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulus($Peng->id_pengadaan));
+			// $this->doccy->phpdocx->assign('#listpesertaluluskoma#',$this->getPenyediaLulusPakeKoma($Peng->id_pengadaan));
+			// $this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusPakeKoma($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#tdtgnpesertasampul2#',$this->getTTPenyediaLulus($Peng->id_pengadaan));	
 			
 			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
@@ -2361,6 +2365,47 @@ class DocxController extends Controller
 	function getJmlPenyediaLulus($idpeng){
 		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);				
 		return count($arraypenyedia);
+	}
+	
+	function getPenyediaLulusEvalSampul2Kesimpulan($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= 	'Calon Pemenang ' . ($i+1) . '<w:br/>' . 
+									'Nama Perusahaan 	: ' . $arraypenyedia[$i]->perusahaan . '<w:br/>' . 
+									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
+									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' 
+									// 'Nilai Penawaran 	: ' . RupiahMaker::convertInt$arraypenyedia[$i]->nilai) . '<w:br/>' .
+															// 'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ' sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									;
+			}
+		}		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaLulusEvalSampul2($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  
+									// 'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
+									// 'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->nilai,1000) .'% HPS <w:br/>' . 
+									;
+			}
+		}		
+		return $stringpenyedia;
+	}
+	
+	function persenMaker($nilai,$hps){
+		return 0;
 	}
 	
 }
