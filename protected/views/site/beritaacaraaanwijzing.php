@@ -83,7 +83,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					'id' => 'idpenyedia',        
 					'model' => $PP,
 					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan',
+					'viewName' => 'formperusahaanaanwijzing',
 					'labelAdd' => 'Tambah Penyedia',
 					'labelDel' => 'Hapus Penyedia',
 					
