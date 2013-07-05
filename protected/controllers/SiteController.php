@@ -243,11 +243,12 @@ class SiteController extends Controller
 			case '1' : {
 				switch ($chart) {
 					case '1' : {
-						$query = Yii::app()->db->createCommand('select * from divisi')->queryAll();
-						while(list($k1, $v1)=each($query)) {
+						$div = Yii::app()->db->createCommand('select username from divisi')->queryAll();
+						while(list($k1, $v1)=each($div)) {
 							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where divisi_peminta = "' . $v1['username'] . '" and status != "-1"')->queryAll();
 							array_push($x, $v1['username']);
-							array_push($x, (int)$v1['jumlah_berlangsung'] + (int)$v1['jumlah_selesai'] + (int)$v1['jumlah_gagal']);
+							array_push($x, count($peng));
 							array_push($chartData, $x);
 						}
 						$chartTitle = 'Pengadaan total';
@@ -255,11 +256,12 @@ class SiteController extends Controller
 						break;
 					}
 					case '2' : {
-						$query = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
-						while(list($k1, $v1)=each($query)) {
+						$div = Yii::app()->db->createCommand('select username from divisi')->queryAll();
+						while(list($k1, $v1)=each($div)) {
 							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where divisi_peminta = "' . $v1['username'] . '" and status != "-1" and status != "100" and status != "99"')->queryAll();
 							array_push($x, $v1['username']);
-							array_push($x, (int)$v1['jumlah_berlangsung']);
+							array_push($x, count($peng));
 							array_push($chartData, $x);
 						}
 						$chartTitle = 'Pengadaan yang sedang berlangsung';
@@ -267,11 +269,12 @@ class SiteController extends Controller
 						break;
 					}
 					case '3' : {
-						$query = Yii::app()->db->createCommand('select username, jumlah_selesai from divisi')->queryAll();
-						while(list($k1, $v1)=each($query)) {
+						$div = Yii::app()->db->createCommand('select username from divisi')->queryAll();
+						while(list($k1, $v1)=each($div)) {
 							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where divisi_peminta = "' . $v1['username'] . '" and status = "100"')->queryAll();
 							array_push($x, $v1['username']);
-							array_push($x, (int)$v1['jumlah_selesai']);
+							array_push($x, count($peng));
 							array_push($chartData, $x);
 						}
 						$chartTitle = 'Pengadaan yang telah selesai';
@@ -279,11 +282,12 @@ class SiteController extends Controller
 						break;
 					}
 					case '4' : {
-						$query = Yii::app()->db->createCommand('select username, jumlah_gagal from divisi')->queryAll();
-						while(list($k1, $v1)=each($query)) {
+						$div = Yii::app()->db->createCommand('select username from divisi')->queryAll();
+						while(list($k1, $v1)=each($div)) {
 							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where divisi_peminta = "' . $v1['username'] . '" and status = "99"')->queryAll();
 							array_push($x, $v1['username']);
-							array_push($x, (int)$v1['jumlah_gagal']);
+							array_push($x, count($peng));
 							array_push($chartData, $x);
 						}
 						$chartTitle = 'Pengadaan yang gagal';
