@@ -8,6 +8,9 @@
  * @property string $nomor
  * @property integer $waktu_kerja
  * @property string $tempat_penyerahan
+ *
+ * The followings are the available model relations:
+ * @property Dokumen $idDokumen
  */
 class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 {
@@ -56,6 +59,7 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
 

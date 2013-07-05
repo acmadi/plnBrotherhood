@@ -72,12 +72,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->error($SUNK,'perihal'); ?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($SUNK,'nama calon penyedia'); ?>
-			<?php echo $form->textField($SUNK,'kepada',array('size'=>56,'maxlength'=>30)); ?>
-			<?php echo $form->error($SUNK,'kepada'); ?>
-		</div>
-
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($SUNK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
