@@ -20,20 +20,20 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
           	<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
                 <div id="menuform">
                     <?php
-						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+						// if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
 										array('label'=>'ND Undangan Pembukaan Penawaran Sampul Dua', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Dua"') == null)?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaran2','id'=>$id)),
 										array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran2':'/site/editberitaacarapembukaanpenawaran2','id'=>$id)),
 								),
 							));
-						} else {
-							$this->widget('zii.widgets.CMenu', array(
-								'items'=>array(
-										array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran2':'/site/editberitaacarapembukaanpenawaran2','id'=>$id)),
-								),
-							));
-						} 
+						// } else {
+							// $this->widget('zii.widgets.CMenu', array(
+								// 'items'=>array(
+										// array('label'=>'BA Pembukaan Penawaran Sampul Dua', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran2':'/site/editberitaacarapembukaanpenawaran2','id'=>$id)),
+								// ),
+							// ));
+						// } 
                     ?>
                 </div>
           	<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
@@ -65,8 +65,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'berita-acara-pembukaan-penawaran-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($BAPP); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
 			<h4><b> Berita Acara Pembukaan Penawaran Sampul Dua </b></h4>

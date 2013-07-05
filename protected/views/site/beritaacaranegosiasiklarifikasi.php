@@ -22,7 +22,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
                                     array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/beritaacaranegosiasiklarifikasi':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editberitaacaranegosiasiklarifikasi'),'id'=>$id)),
+                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
                             ),
                         ));
                     ?>

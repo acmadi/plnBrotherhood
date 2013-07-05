@@ -21,8 +21,8 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array($SUNK->isNewRecord?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Negosiasi dan Klarifikasi"') == null)?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
                             ),
                         ));
                     ?>
@@ -35,8 +35,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'surat-undangan-negosiasi-klarifikasi-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($SUNK); ?>
 		
 		<h4><b> Surat Undangan Negosiasi dan Klarifikasi </b></h4>
 		<div class="row">

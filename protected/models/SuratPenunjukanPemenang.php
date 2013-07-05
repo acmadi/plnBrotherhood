@@ -6,8 +6,6 @@
  * The followings are the available columns in table 'surat_penunjukan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $nama_penyedia
- * @property integer $harga
  * @property string $lama_penyerahan
  * @property integer $jaminan
  * @property string $nomor_ski
@@ -42,13 +40,12 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, nama_penyedia, harga, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'required'),
-			array('harga, jaminan', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'required'),
+			array('jaminan', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen, nomor, lama_penyerahan, nomor_ski, no_ski', 'length', 'max'=>32),
-			array('nama_penyedia', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, nama_penyedia, harga, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,8 +68,6 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'nama_penyedia' => 'Nama Penyedia',
-			'harga' => 'Harga',
 			'lama_penyerahan' => 'Lama Penyerahan',
 			'jaminan' => 'Jaminan',
 			'nomor_ski' => 'Nomor Ski',
@@ -94,8 +89,6 @@ class SuratPenunjukanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
-		$criteria->compare('harga',$this->harga);
 		$criteria->compare('lama_penyerahan',$this->lama_penyerahan,true);
 		$criteria->compare('jaminan',$this->jaminan);
 		$criteria->compare('nomor_ski',$this->nomor_ski,true);

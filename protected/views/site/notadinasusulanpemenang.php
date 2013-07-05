@@ -22,9 +22,9 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'ND Usulan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='20'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editsuratpenunjukanpemenang')),'id'=>$id)),
+                                    array('label'=>'ND Usulan', 'url'=>array($NDUP->isNewRecord?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
+                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='15'?'':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editsuratpenunjukanpemenang')),'id'=>$id)),
                             ),
                         ));
                     ?>
@@ -34,10 +34,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'ND Usulan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                                    array('label'=>'ND Pemberitahuan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/notadinaspemberitahuanpemenang':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspemberitahuanpemenang')),'id'=>$id)),
-                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='20'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='18'?'':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editsuratpenunjukanpemenang'))),'id'=>$id)),
+                                    array('label'=>'ND Usulan', 'url'=>array($NDUP->isNewRecord?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
+                                    array('label'=>'ND Pemberitahuan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinaspemberitahuanpemenang':(Pengadaan::model()->findByPk($id)->status=='15'?'':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editnotadinaspemberitahuanpemenang')),'id'=>$id)),
+                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':(Pengadaan::model()->findByPk($id)->status=='15'?'':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editsuratpenunjukanpemenang'))),'id'=>$id)),
                             ),
                         ));
                     ?>
@@ -47,10 +47,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'ND Usulan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='16'?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
-                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                                    array('label'=>'SP Pelelangan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='19'?'/site/suratpengumumanpelelangan':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editsuratpengumumanpelelangan')),'id'=>$id)),
-                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='20'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='19'?'':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editsuratpenunjukanpemenang'))),'id'=>$id)),
+                                    array('label'=>'ND Usulan', 'url'=>array($NDUP->isNewRecord?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
+                                    array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='15'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
+                                    array('label'=>'SP Pelelangan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='17'?'/site/suratpengumumanpelelangan':(Pengadaan::model()->findByPk($id)->status=='15'?'':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editsuratpengumumanpelelangan')),'id'=>$id)),
+                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='17'?'':(Pengadaan::model()->findByPk($id)->status=='15'?'':(Pengadaan::model()->findByPk($id)->status=='14'?'':'/site/editsuratpenunjukanpemenang'))),'id'=>$id)),
                             ),
                         ));
                     ?>
@@ -65,8 +65,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'nota-dinas-usulan-pemenang-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($NDUP); ?>
 		
 		<h4><b> Nota Dinas Usulan Pemenang </b></h4>
 		<div class="row">

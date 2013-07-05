@@ -1991,6 +1991,13 @@ class SiteController extends Controller
 					$SUPP->perihal= 'Undangan Pembukaan Penawaran Tahap Satu '.$Pengadaan->nama_pengadaan;
 				}
 				
+				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+				
+				$SUPP->tanggal_undangan=Tanggal::getTanggalStrip($RKS->tanggal_pembukaan_penawaran1);
+				$SUPP->waktu=$RKS->waktu_pembukaan_penawaran1;
+				$SUPP->tempat=$RKS->tempat_pembukaan_penawaran1;
+				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
@@ -2667,7 +2674,7 @@ class SiteController extends Controller
 				} else if($Pengadaan->metode_penawaran=="Dua Tahap") {
 					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
 				}
-				$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAP->id_dokumen);
+				$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2691,6 +2698,13 @@ class SiteController extends Controller
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$SUPP->perihal= 'Undangan Pembukaan Penawaran Tahap Dua '.$Pengadaan->nama_pengadaan;
 				}
+				
+				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+				
+				$SUPP->tanggal_undangan=Tanggal::getTanggalStrip($RKS->tanggal_pembukaan_penawaran2);
+				$SUPP->waktu=$RKS->waktu_pembukaan_penawaran2;
+				$SUPP->tempat=$RKS->tempat_pembukaan_penawaran2;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -4855,13 +4869,11 @@ class SiteController extends Controller
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
-					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
-					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
 					$valid=$valid&&$NDPP->validate();
 					if($valid){
-						if($Pengadaan->save(false)&&$Divisi->save(false)) {
+						if($Pengadaan->save(false)) {
 							if($Dokumen0->save(false)){
 								if($NDPP->save(false)){		
 									$this->redirect(array('edittunjukpanitia','id'=>$id));

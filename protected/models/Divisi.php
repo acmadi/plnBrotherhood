@@ -5,8 +5,6 @@
  *
  * The followings are the available columns in table 'divisi':
  * @property string $username
- * @property string $jumlah_berlangsung
- * @property string $jumlah_selesai
  *
  * The followings are the available model relations:
  * @property User $username0
@@ -40,12 +38,11 @@ class Divisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, jumlah_berlangsung, jumlah_selesai', 'required'),
+			array('username', 'required'),
 			array('username', 'length', 'max'=>20),
-			array('jumlah_berlangsung, jumlah_selesai', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, jumlah_berlangsung, jumlah_selesai', 'safe', 'on'=>'search'),
+			array('username', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,8 +66,6 @@ class Divisi extends CActiveRecord
 	{
 		return array(
 			'username' => 'Username',
-			'jumlah_berlangsung' => 'Jumlah Berlangsung',
-			'jumlah_selesai' => 'Jumlah Selesai',
 		);
 	}
 
@@ -86,8 +81,6 @@ class Divisi extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('username',$this->username,true);
-		$criteria->compare('jumlah_berlangsung',$this->jumlah_berlangsung,true);
-		$criteria->compare('jumlah_selesai',$this->jumlah_selesai,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 05, 2013 at 12:55 PM
+-- Generation Time: Jul 05, 2013 at 05:08 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -79,14 +79,6 @@ INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `id_panitia`, `jabatan`
 CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `pemenang` varchar(100) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  `NPWP` varchar(100) NOT NULL,
-  `nilai` int(255) NOT NULL,
-  `pemenang_2` varchar(100) NOT NULL,
-  `alamat_2` varchar(255) NOT NULL,
-  `NPWP_2` varchar(100) NOT NULL,
-  `nilai_2` int(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -165,9 +157,6 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 
 CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
-  `jumlah_berlangsung` bigint(32) NOT NULL,
-  `jumlah_selesai` bigint(32) NOT NULL,
-  `jumlah_gagal` bigint(32) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -175,11 +164,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 -- Dumping data for table `divisi`
 --
 
-INSERT INTO `divisi` (`username`, `jumlah_berlangsung`, `jumlah_selesai`, `jumlah_gagal`) VALUES
-('divin', 2, 0, 0),
-('divman', 9, 0, 0),
-('divsi', 2, 0, 0),
-('divtrans', 5, 0, 0);
+INSERT INTO `divisi` (`username`) VALUES
+('divin'),
+('divman'),
+('divsi'),
+('divtrans');
 
 -- --------------------------------------------------------
 
@@ -298,16 +287,8 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `nama_penyedia` varchar(100) NOT NULL,
-  `alamat` varchar(256) NOT NULL,
-  `NPWP` varchar(20) NOT NULL,
-  `biaya` bigint(20) NOT NULL,
-  `nama_penyedia_2` varchar(100) NOT NULL,
-  `alamat_2` varchar(256) NOT NULL,
-  `NPWP_2` varchar(20) NOT NULL,
-  `biaya_2` bigint(20) NOT NULL,
   `waktu_pelaksanaan` date NOT NULL,
-  `tempat_penyerahan` varchar(20) NOT NULL,
+  `tempat_penyerahan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -320,15 +301,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `nama_penyedia` varchar(100) NOT NULL,
-  `alamat` varchar(256) NOT NULL,
-  `NPWP` varchar(20) NOT NULL,
-  `biaya` bigint(20) NOT NULL,
-  `waktu_pelaksanaan` date NOT NULL,
-  `tempat_penyerahan` varchar(256) NOT NULL,
-  `sumber_dana` varchar(50) NOT NULL,
-  `jangka_waktu_berlaku` varchar(20) NOT NULL,
-  `jangka_waktu_deadline` varchar(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -386,14 +358,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan_tor_rab` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(50) NOT NULL,
-  `nama_penyedia` varchar(100) NOT NULL,
-  `alamat` varchar(256) NOT NULL,
-  `NPWP` varchar(20) NOT NULL,
-  `biaya` bigint(20) NOT NULL,
-  `nama_penyedia_2` varchar(100) NOT NULL,
-  `alamat_2` varchar(256) NOT NULL,
-  `NPWP_2` varchar(20) NOT NULL,
-  `biaya_2` bigint(20) NOT NULL,
   `waktu_pelaksanaan` date NOT NULL,
   `tempat_penyerahan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
@@ -407,9 +371,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
 
 CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   `id_dokumen` bigint(32) NOT NULL,
-  `id_panitia` bigint(11) NOT NULL,
-  PRIMARY KEY (`id_dokumen`),
-  KEY `id_panitia` (`id_panitia`)
+  PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -624,8 +586,6 @@ CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
 CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(32) NOT NULL,
-  `nama_penyedia` varchar(100) NOT NULL,
-  `harga_penawaran` int(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   `batas_sanggahan` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
@@ -640,8 +600,6 @@ CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
 CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(32) NOT NULL,
-  `nama_penyedia` varchar(100) NOT NULL,
-  `harga` int(255) NOT NULL,
   `lama_penyerahan` bigint(32) NOT NULL,
   `jaminan` int(255) NOT NULL,
   `nomor_ski` varchar(32) NOT NULL,
@@ -980,8 +938,7 @@ ALTER TABLE `nota_dinas_usulan_pemenang`
 -- Constraints for table `pakta_integritas_panitia_1`
 --
 ALTER TABLE `pakta_integritas_panitia_1`
-  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_4` FOREIGN KEY (`id_panitia`) REFERENCES `pengadaan` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pakta_integritas_panitia_1_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pakta_integritas_panitia_2`

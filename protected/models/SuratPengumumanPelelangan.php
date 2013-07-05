@@ -6,13 +6,8 @@
  * The followings are the available columns in table 'surat_pengumuman_pelelangan':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $nama_penyedia
- * @property integer $harga_penawaran
  * @property string $keterangan
  * @property string $batas_sanggahan
- *
- * The followings are the available model relations:
- * @property Dokumen $idDokumen
  */
 class SuratPengumumanPelelangan extends CActiveRecord
 {
@@ -42,14 +37,12 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, nama_penyedia, harga_penawaran, keterangan, batas_sanggahan', 'required'),
-			array('harga_penawaran', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'required'),
 			array('id_dokumen, nomor, batas_sanggahan', 'length', 'max'=>32),
-			array('nama_penyedia', 'length', 'max'=>100),
 			array('keterangan', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, nama_penyedia, harga_penawaran, keterangan, batas_sanggahan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +54,6 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
 
@@ -73,8 +65,6 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'nama_penyedia' => 'Nama Penyedia',
-			'harga_penawaran' => 'Harga Penawaran',
 			'keterangan' => 'Keterangan',
 			'batas_sanggahan' => 'Batas Sanggahan',
 		);
@@ -93,8 +83,6 @@ class SuratPengumumanPelelangan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
-		$criteria->compare('harga_penawaran',$this->harga_penawaran);
 		$criteria->compare('keterangan',$this->keterangan,true);
 		$criteria->compare('batas_sanggahan',$this->batas_sanggahan,true);
 

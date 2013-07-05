@@ -6,15 +6,6 @@
  * The followings are the available columns in table 'nota_dinas_penetapan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $nama_penyedia
- * @property string $alamat
- * @property string $NPWP
- * @property string $biaya
- * @property string $waktu_pelaksanaan
- * @property string $tempat_penyerahan
- * @property string $sumber_dana
- * @property string $jangka_waktu_berlaku
- * @property string $jangka_waktu_deadline
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -47,15 +38,12 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'required'),
+			array('id_dokumen, nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, sumber_dana', 'length', 'max'=>50),
-			array('nama_penyedia', 'length', 'max'=>100),
-			array('alamat, tempat_penyerahan', 'length', 'max'=>256),
-			array('NPWP, biaya, jangka_waktu_berlaku, jangka_waktu_deadline', 'length', 'max'=>20),
+			array('nomor', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, nama_penyedia, alamat, NPWP, biaya, waktu_pelaksanaan, tempat_penyerahan, sumber_dana, jangka_waktu_berlaku, jangka_waktu_deadline', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,15 +67,6 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'nama_penyedia' => 'Nama Penyedia',
-			'alamat' => 'Alamat',
-			'NPWP' => 'Npwp',
-			'biaya' => 'Biaya',
-			'waktu_pelaksanaan' => 'Waktu Pelaksanaan',
-			'tempat_penyerahan' => 'Tempat Penyerahan',
-			'sumber_dana' => 'Sumber Dana',
-			'jangka_waktu_berlaku' => 'Jangka Waktu Berlaku',
-			'jangka_waktu_deadline' => 'Jangka Waktu Deadline',
 		);
 	}
 
@@ -104,15 +83,6 @@ class NotaDinasPenetapanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
-		$criteria->compare('alamat',$this->alamat,true);
-		$criteria->compare('NPWP',$this->NPWP,true);
-		$criteria->compare('biaya',$this->biaya,true);
-		$criteria->compare('waktu_pelaksanaan',$this->waktu_pelaksanaan,true);
-		$criteria->compare('tempat_penyerahan',$this->tempat_penyerahan,true);
-		$criteria->compare('sumber_dana',$this->sumber_dana,true);
-		$criteria->compare('jangka_waktu_berlaku',$this->jangka_waktu_berlaku,true);
-		$criteria->compare('jangka_waktu_deadline',$this->jangka_waktu_deadline,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

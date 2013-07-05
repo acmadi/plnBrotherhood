@@ -5,11 +5,9 @@
  *
  * The followings are the available columns in table 'pakta_integritas_panitia_1':
  * @property string $id_dokumen
- * @property string $id_panitia
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
- * @property Pengadaan $idPanitia
  */
 class PaktaIntegritasPanitia1 extends CActiveRecord
 {
@@ -39,12 +37,11 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, id_panitia', 'required','message'=>'{attribute} tidak boleh kosong'),
+			array('id_dokumen', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, id_panitia', 'safe', 'on'=>'search'),
+			array('id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +54,6 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'idPanitia' => array(self::BELONGS_TO, 'Pengadaan', 'id_panitia'),
 		);
 	}
 
@@ -68,7 +64,6 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 	{
 		return array(
 			'id_dokumen' => 'Id Dokumen',
-			'id_panitia' => 'Id Panitia',
 		);
 	}
 
@@ -84,7 +79,6 @@ class PaktaIntegritasPanitia1 extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('id_panitia',$this->id_panitia,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
