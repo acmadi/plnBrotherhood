@@ -17,17 +17,17 @@ class XlsxController extends Controller
 			if ($crks->tipe_rks == 1) {
 				if ($crincian->nama_rincian == 'Lampiran 2') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_2.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B6', 'NOMOR : ' . $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B7', 'TANGGAL : ' . strtoupper(Tanggal::getTanggalLengkap0($cdokumen->tanggal)));
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B8', strtoupper($cpengadaan->nama_pengadaan));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_2.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 3') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_3.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C4', strtoupper($cpengadaan->nama_pengadaan));
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C7', 'Nomor : ' . $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C8', 'Tanggal : ' . Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_3.xlsx"');
@@ -38,8 +38,8 @@ class XlsxController extends Controller
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_6.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran ba') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_ba.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('D3', $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('D4', Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_BA.xlsx"');
@@ -47,16 +47,17 @@ class XlsxController extends Controller
 			} else if ($crks->tipe_rks == 2) {
 				if ($crincian->nama_rincian == 'Lampiran 2') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-BJ-Lamp_2.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet2')->setCellValue('C4', 'NOMOR : ' . $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet2')->setCellValue('C5', 'TANGGAL : ' . strtoupper(Tanggal::getTanggalLengkap0($cdokumen->tanggal)));
+					$this->assign($objPHPExcel, "#nomor#", strtoupper($crks->nomor));
+					$this->assign($objPHPExcel, "#tanggal#", strtoupper(Tanggal::getTanggalLengkap0($cdokumen->tanggal)));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_2.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 3') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-BJ-Lamp_3.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C4', strtoupper($cpengadaan->nama_pengadaan));
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C7', 'Nomor : ' . $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C8', 'Tanggal : ' . Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_3.xlsx"');
@@ -67,8 +68,8 @@ class XlsxController extends Controller
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_5.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran ba') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-BJ-Lamp_ba.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('D3', $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('D4', Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_BA.xlsx"');
@@ -76,17 +77,17 @@ class XlsxController extends Controller
 			} else {
 				if ($crincian->nama_rincian == 'Lampiran 2') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-J-Lamp_2.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B3', 'RINCIAN, JUMLAH DAN PEKERJAAN ' . strtoupper($cpengadaan->nama_pengadaan));
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B6', 'NOMOR : ' . $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('B7', 'TANGGAL : ' . strtoupper(Tanggal::getTanggalLengkap0($cdokumen->tanggal)));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-J-Lamp_2.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 3') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-J-Lamp_3.xlsx');
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C4', strtoupper($cpengadaan->nama_pengadaan));
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C7', 'Nomor : ' . $crks->nomor);
-					$objPHPExcel->setActiveSheetIndexByName('Sheet1')->setCellValue('C8', 'Tanggal : ' . Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 					ob_end_clean();
 					ob_start();
 					header('Content-Disposition: attachment;filename="RKS-PL-J-Lamp_3.xlsx"');
@@ -109,17 +110,118 @@ class XlsxController extends Controller
 		$id= Yii::app()->getRequest()->getQuery('id');
 		$cdokumen = Dokumen::model()->findByPk($id);
 		$cpengadaan = Pengadaan::model()->findByPk($cdokumen->id_pengadaan);
+		$tgl = $cdokumen->tanggal;
+		$tanggal = RupiahMaker::TerbilangMaker(Tanggal::getTanggalLengkap($tgl));
+		$hari = Tanggal::getHari($tgl);
+		$bulan = Tanggal::getBulanA($tgl);
+		$tahun = RupiahMaker::TerbilangMaker(Tanggal::getTahhun($tgl));
+		$tgllengkap = Tanggal::getTanggalLengkap($tgl);
+		$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+		$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+		$norks = $rks->nomor;
+		$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
+		$skpanitia = Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia;
+		$panitia = Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia;
+		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 		if ($cdokumen->nama_dokumen == 'Lamp BA Pembukaan 1') {
 			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
-			$objPHPExcel->setActiveSheetIndexByName('BA Pembukaan Penawaran Harga')->setCellValue('B6', 'Nomor :  ' . 'anu' . ', Tanggal ' . 'tgllgkpanu');
-			$objPHPExcel->setActiveSheetIndexByName('BA Pembukaan Penawaran Harga')->setCellValue('C8', 'Pada hari ' . 'harianu' . ' tanggal ' . 'harianutbg' . ' Bulan ' . 'tglanu' . ' Tahun ' . 'thnanutbg' . '(' . 'tgllgkpanu' . ') Jam ' . 'jamanu' . ' Wib, bertempat di Jakarta, ' . 'panitianu' . ' Pengadaan Barang/Jasa PT. PLN (Persero) Kantor Pusat yang dibentuk sesuai Surat Keputusan Direksi Nomor : ' . 'noskdireksi' . ' tanggal  .......... telah melakukan Pembukaan Penawaran Harga Pekerjaan ' . 'namapengadaan' . ' yang dihadiri oleh Panitia...dan Penyedia Barang/Jasa sebagai berikut :');
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
 			header('Content-Disposition: attachment;filename="10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx"');
 		}
+		else if ($cdokumen->nama_dokumen == 'Lamp BA Pembukaan 2 ') {
+			$objPHPExcel = $objReader->load($templatePath . '13.a-Lam BA Pembukaan 2 SAMPUL.xlsx');
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			ob_end_clean();
+			ob_start();
+			header('Content-Disposition: attachment;filename="13.a-Lam BA Pembukaan 2 SAMPUL.xlsx"');
+		}
+		
+		else if ($cdokumen->nama_dokumen == 'Lamp BA Evaluasi 1') {
+			$objPHPExcel = $objReader->load($templatePath . '15.a-Lam BA Evaluasi  1 Sampul.xlsx');
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			ob_end_clean();
+			ob_start();
+			header('Content-Disposition: attachment;filename="15.a-Lam BA Evaluasi  1 Sampul.xlsx"');
+		}
+		
+		else if ($cdokumen->nama_dokumen == 'Lamp BA Evaluasi 2') {
+			$objPHPExcel = $objReader->load($templatePath . '16.a-Lam BA Evaluasi 2 SAMPUL.xlsx');
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			ob_end_clean();
+			ob_start();
+			header('Content-Disposition: attachment;filename="16.a-Lam BA Evaluasi 2 SAMPUL.xlsx"');
+		}
+		
+		else if ($cdokumen->nama_dokumen == 'Lamp BA Evaluasi 2 Sistem Bobot') {
+			$objPHPExcel = $objReader->load($templatePath . '16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx');
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", strtoupper($panitia));
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			ob_end_clean();
+			ob_start();
+			header('Content-Disposition: attachment;filename="16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx"');
+		}
+		
+		else{
+			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
+					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			ob_end_clean();
+			ob_start();
+			header('Content-Disposition: attachment;filename="10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx"');
+		}
+		
+		
 		header('Content-Type: application/vnd.ms-excel');
 		header('Cache-Control: max-age=0');
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

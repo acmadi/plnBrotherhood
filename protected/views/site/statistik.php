@@ -64,7 +64,6 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 				$this->widget('zii.widgets.grid.CGridView', array(
 					'dataProvider'=>Pengadaan::model()->searchStatistikDivisi($detail, $chart),
 					"ajaxUpdate"=>"false",
-					'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 					'columns'=>array(
 						array(
 							'name'=>'No',
