@@ -1190,7 +1190,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namakadiv);
-			$this->doccy->phpdocx->assign('#penerima#', $this->getPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#penerima#', $this->getPenyediaPenawaranHarga($Peng->id_pengadaan));
 			
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
 		}
@@ -1511,8 +1511,8 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#panitiaataupejabat2#', strtoupper($jenispic . " " . $nama));				
 			$this->doccy->phpdocx->assign('#listpic#',$namapic);
-			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyedia($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#listpesertattd#',$this->getTTPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaAanwijzing($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertattd#',$this->getTTPenyediaAanwijzing($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#tdtgnpanitia#',$this->getListPanitiaTTAanwijzing($Peng->id_panitia));
 			
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
@@ -2271,6 +2271,50 @@ class DocxController extends Controller
 		return $stringpenyedia;
 	}
 	
+	function getPenyediaPenawaranHarga($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('tahap = "Penawaran Harga" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaAanwijzing($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and tahap = "Aanwijzing" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getTTPenyediaAanwijzing($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and tahap = "Aanwijzing" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+		
+		if($arraypenyedia == null){
+			$stringpenyedia = '';
+		}else{
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+			}
+		}
+		return $stringpenyedia;
+	}
+	
 	function getTTPenyedia($idpeng){
 		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
@@ -2407,6 +2451,8 @@ class DocxController extends Controller
 	function persenMaker($nilai,$hps){
 		return 0;
 	}
+	
+	
 	
 }
 ?>
