@@ -2125,11 +2125,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
 			
 			// $this->doccy->phpdocx->assign('#jumlahmasuk#', $this->getJmlPenyediaLulus($Peng->id_pengadaan));						
-			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyedia($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulus($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaX($Peng->id_pengadaan,'pembukaan_penawaran_2'));
+			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulusX($Peng->id_pengadaan,'pembukaan_penawaran_2'));
 			// $this->doccy->phpdocx->assign('#listpesertaluluskoma#',$this->getPenyediaLulusPakeKoma($Peng->id_pengadaan));
 			// $this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusPakeKoma($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#tdtgnpesertasampul2#',$this->getTTPenyediaLulus($Peng->id_pengadaan));	
+			$this->doccy->phpdocx->assign('#tdtgnpesertasampul2#',$this->getTTPenyediaLulusX($Peng->id_pengadaan,'pembukaan_penawaran_2'));	
 			
 			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
@@ -2422,21 +2422,6 @@ class DocxController extends Controller
 			}
 		}
 		return  $list;
-	}
-	
-	function getPenyedia($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
-		$stringpenyedia = "";
-				
-		if($arraypenyedia == null){
-			$stringpenyedia = '-';
-		}else{		
-			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
-			}
-		}
-		
-		return $stringpenyedia;
 	}	
 	
 	function getPenyediaX($idpeng,$tahap){

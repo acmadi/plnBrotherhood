@@ -2803,11 +2803,70 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
+				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$valid=$BAPP->validate();
 					if($valid){
+					
+						if(isset($_POST['perusahaan'])){
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = '-';
+									// $PP[$i]->tahap = 'Penawaran Harga';		
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->ba_evaluasi_prakualifikasi = '1';
+									$PP[$i]->undangan_pengambilan_dokumen = '1';			
+									$PP[$i]->ba_aanwijzing = '1';	
+									$PP[$i]->pembukaan_penawaran_1 = '1';
+									$PP[$i]->evaluasi_penawaran_1 = '1';
+									$PP[$i]->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i];
+									$PP[$i]->evaluasi_penawaran_2 = '-';
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									// $PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = '-';
+									// $PPbaru->tahap = 'Penawaran Harga';	
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->ba_evaluasi_prakualifikasi = '1';
+									$PPbaru->undangan_pengambilan_dokumen = '1';
+									$PPbaru->ba_aanwijzing = '1';
+									$PPbaru->pembukaan_penawaran_1 = '1';
+									$PPbaru->evaluasi_penawaran_1 = '1';
+									$PPbaru->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i+$j];
+									$PPbaru->evaluasi_penawaran_2 = '-';
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang	 = '-';								
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}
+						
 						if($Pengadaan->save(false)){
 							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($BAPP->save(false)&&$DH->save(false)){
@@ -2819,7 +2878,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawaran2',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'PP'=>$PP,
 				));
 			}
 		}
@@ -2850,13 +2909,72 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
+				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
 					// $Dokumen0->attributes=$_POST['Dokumen'];
 					
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$valid=$BAPP->validate();					
-					if($valid){						
+					if($valid){	
+
+						if(isset($_POST['perusahaan'])){
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = '-';
+									// $PP[$i]->tahap = 'Penawaran Harga';		
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->ba_evaluasi_prakualifikasi = '1';
+									$PP[$i]->undangan_pengambilan_dokumen = '1';			
+									$PP[$i]->ba_aanwijzing = '1';	
+									$PP[$i]->pembukaan_penawaran_1 = '1';
+									$PP[$i]->evaluasi_penawaran_1 = '1';
+									$PP[$i]->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i];
+									$PP[$i]->evaluasi_penawaran_2 = '-';
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									// $PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = '-';
+									// $PPbaru->tahap = 'Penawaran Harga';	
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->ba_evaluasi_prakualifikasi = '1';
+									$PPbaru->undangan_pengambilan_dokumen = '1';
+									$PPbaru->ba_aanwijzing = '1';
+									$PPbaru->pembukaan_penawaran_1 = '1';
+									$PPbaru->evaluasi_penawaran_1 = '1';
+									$PPbaru->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i+$j];
+									$PPbaru->evaluasi_penawaran_2 = '-';
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang	 = '-';								
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}
+						
 						if($BAPP->save(false)&&$DH->save(false)){
 							$this->redirect(array('editberitaacarapembukaanpenawaran2','id'=>$Dokumen1->id_pengadaan));
 						}
@@ -2865,7 +2983,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawaran2',array(
-					'BAPP'=>$BAPP,'DH'=>$DH,
+					'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,
 				));
 
 			}
