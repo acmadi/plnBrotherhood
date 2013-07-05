@@ -72,7 +72,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php } ?>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
-			<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran"') == null&&Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Satu"') == null && Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Tahap Satu"') == null) {?>
+			<?php if ($Dok0==null) {?>
 				Nomor Berita Acara Aanwijzing : <?php echo $BAP->nomor ?> <br/>
 			<?php } else { ?>
 				Nomor Nota Dinas Undangan Pembukaan Penawaran : <?php echo $SUPP->nomor ?> <br/>

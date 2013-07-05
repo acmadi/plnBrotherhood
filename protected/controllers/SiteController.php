@@ -2231,12 +2231,12 @@ class SiteController extends Controller
 				}
 				if ($Dok0==null) {
 					$this->render('beritaacarapembukaanpenawaran',array(
-						'BAPP'=>$BAPP,'PP'=>$PP,'BAP'=>$BAP
+						'BAPP'=>$BAPP,'PP'=>$PP,'BAP'=>$BAP,'Dok0'=>$Dok0,
 					));
 				} else {
 					$SUPP= SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
 					$this->render('beritaacarapembukaanpenawaran',array(
-						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP
+						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
 					));
 				}
 			}
