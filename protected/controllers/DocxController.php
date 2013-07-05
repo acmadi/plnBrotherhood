@@ -1158,8 +1158,7 @@ class DocxController extends Controller
 			$tanggalpenawaran = Tanggal::getTanggalLengkap($rks->tanggal_akhir_pemasukan_penawaran1);
 			$waktupenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran1);
 			
-			// $terbilang = RupiahMaker::terbilangMaker($masa);
-			
+			// $terbilang = RupiahMaker::terbilangMaker($masa);			
 			// $norks = $rks -> nomor;
 			// $nohps = $hps -> nomor;
 			// $tglrks = Tanggal::getTanggalLengkap($dokrks -> tanggal);
@@ -1191,7 +1190,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namakadiv);
-			$this->doccy->phpdocx->assign('#penerima#', '........');
+			$this->doccy->phpdocx->assign('#penerima#', $this->getPenyediaPenawaranHarga($Peng->id_pengadaan));
 			
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga.docx", true);
 		}
@@ -1512,6 +1511,8 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#panitiaataupejabat2#', strtoupper($jenispic . " " . $nama));				
 			$this->doccy->phpdocx->assign('#listpic#',$namapic);
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaAanwijzing($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertattd#',$this->getTTPenyediaAanwijzing($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#tdtgnpanitia#',$this->getListPanitiaTTAanwijzing($Peng->id_panitia));
 			
 			$this->renderDocx("Berita Acara Penjelasan.docx", true);
@@ -1640,10 +1641,14 @@ class DocxController extends Controller
 			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
 			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			// $this->doccy->phpdocx->assign('#anggota2#', '..................');
-			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $jumlahperusahaan);
-			$this->doccy->phpdocx->assign('#listperusahaan#', '.......................');
-			$this->doccy->phpdocx->assign('#listperusahaanlulus#', '.......................');
-			$this->doccy->phpdocx->assign('#listperusahaantidaklulus#', '.......................');
+			
+			$this->doccy->phpdocx->assign('#listperusahaan#',$this->getPenyedia($Peng->id_pengadaan));
+			// $this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulus($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulus($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listperusahaantdklulus#',$this->getPenyediaTdkLulus($Peng->id_pengadaan));
+			// $this->doccy->phpdocx->assign('#tdtgnpeserta#',$this->getTTPenyedia($Peng->id_pengadaan));			
+			$this->doccy->phpdocx->assign('#jmlpesertalulus#', $this->getJmlPenyediaLulus($Peng->id_pengadaan));	
+			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $this->getJmlPenyedia($Peng->id_pengadaan));	
 			
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Panitia'){
 				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);
@@ -1730,6 +1735,9 @@ class DocxController extends Controller
 			}
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
+			
+			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulusEvalSampul2($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertasampul2kesimpulan#',$this->getPenyediaLulusEvalSampul2Kesimpulan($Peng->id_pengadaan));
 			
 			$this->renderDocx("Berita Acara Evaluasi Penawaran Sampul 2.docx", true);
 		}
@@ -1893,13 +1901,15 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#jam#', Tanggal::getJamMenit($tanggal));
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
-			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
-			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
-			// $this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#jumlahmasuk#', $jumlah_penyedia_diundang);
-			$this->doccy->phpdocx->assign('#listperusahaanmasuk#', '.............................................');
-			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
+			
+			// $this->doccy->phpdocx->assign('#jumlahmasuk#', $jumlah_penyedia_diundang);			
+			$this->doccy->phpdocx->assign('#jumlahmasuk#', $this->getJmlPenyediaLulus($Peng->id_pengadaan));			
+			
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulus($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertaluluskoma#',$this->getPenyediaLulusPakeKoma($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusPakeKoma($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#tdtgnpeserta#',$this->getTTPenyedia($Peng->id_pengadaan));	
 			
 			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
@@ -1945,12 +1955,13 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#jam#', Tanggal::getJamMenit($tanggal));
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tanggalrks);
-			// $this->doccy->phpdocx->assign('#ketua#', $ketua);
-			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
-			// $this->doccy->phpdocx->assign('#anggota2#', '.............................................');
-			$this->doccy->phpdocx->assign('#listperusahaan#', '.............................................');
-			$this->doccy->phpdocx->assign('#listperusahaanikut#', '.............................................');
+			
+			// $this->doccy->phpdocx->assign('#jumlahmasuk#', $this->getJmlPenyediaLulus($Peng->id_pengadaan));						
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyedia($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulus($Peng->id_pengadaan));
+			// $this->doccy->phpdocx->assign('#listpesertaluluskoma#',$this->getPenyediaLulusPakeKoma($Peng->id_pengadaan));
+			// $this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusPakeKoma($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#tdtgnpesertasampul2#',$this->getTTPenyediaLulus($Peng->id_pengadaan));	
 			
 			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
@@ -2244,6 +2255,203 @@ class DocxController extends Controller
 		}
 		return  $list;
 	}
+	
+	function getPenyedia($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaPenawaranHarga($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('tahap = "Penawaran Harga" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaAanwijzing($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and tahap = "Aanwijzing" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getTTPenyediaAanwijzing($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and tahap = "Aanwijzing" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+		
+		if($arraypenyedia == null){
+			$stringpenyedia = '';
+		}else{
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+			}
+		}
+		return $stringpenyedia;
+	}
+	
+	function getTTPenyedia($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+		
+		if($arraypenyedia == null){
+			$stringpenyedia = '';
+		}else{
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+			}
+		}
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaLulus($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaLulusPakeKoma($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			$stringpenyedia .= $arraypenyedia[0]->perusahaan ;
+			for($i=1;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= ', ' . $arraypenyedia[$i]->perusahaan ;
+			}
+		}		
+		return $stringpenyedia;
+	}
+	
+	function getTTPenyediaLulus($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '';
+		}else{
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+			}
+		}
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaTdkLulus($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Tidak Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+		
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaTdkLulusPakeKoma($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Tidak Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+		
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			$stringpenyedia .= $arraypenyedia[$i]->perusahaan;
+			for($i=1;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= ', ' . $arraypenyedia[$i]->perusahaan;
+			}
+		}
+		return $stringpenyedia;
+	}
+	
+	function getJmlPenyedia($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('id_pengadaan = ' . $idpeng);				
+		return count($arraypenyedia);
+	}
+	
+	function getJmlPenyediaLulus($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);				
+		return count($arraypenyedia);
+	}
+	
+	function getPenyediaLulusEvalSampul2Kesimpulan($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= 	'Calon Pemenang ' . ($i+1) . '<w:br/>' . 
+									'Nama Perusahaan 	: ' . $arraypenyedia[$i]->perusahaan . '<w:br/>' . 
+									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
+									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' 
+									// 'Nilai Penawaran 	: ' . RupiahMaker::convertInt$arraypenyedia[$i]->nilai) . '<w:br/>' .
+															// 'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ' sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									;
+			}
+		}		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaLulusEvalSampul2($idpeng){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll('status = "Lulus" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  
+									// 'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
+									// 'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->nilai,1000) .'% HPS <w:br/>' . 
+									;
+			}
+		}		
+		return $stringpenyedia;
+	}
+	
+	function persenMaker($nilai,$hps){
+		return 0;
+	}
+	
 	
 	
 }

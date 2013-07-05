@@ -102,6 +102,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'idpenyedia',        
 					'model' => $PP,
+					// 'model2' => $PP2,
 					'viewName' => 'formperusahaan',
 					'labelAdd' => 'Tambah Penyedia',
 					'labelDel' => 'Hapus Penyedia',
