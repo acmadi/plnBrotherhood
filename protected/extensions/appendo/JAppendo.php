@@ -116,7 +116,7 @@ class JAppendo extends CWidget
 	public function init()
 	{	    
 		parent::init();      	      	      	
-      	$baseUrl = CHtml::asset(dirname(__FILE__).DIRECTORY_SEPARATOR.'assets');
+      	$baseUrl = CHtml::asset(dirname(__FILE__).DIRECTORY_SEPARATOR.'asset');
         $url = ($this->cssFile!==false)
              ? $this->cssFile
              : $baseUrl.'/css/jquery.appendo.css';
