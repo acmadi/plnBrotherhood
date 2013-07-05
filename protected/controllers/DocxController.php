@@ -855,6 +855,8 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getListPanitiaNegoKlar($Peng->id_panitia));			
 			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
 			
+			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaLulusKesimpulan($Peng->id_pengadaan, 'usulan_pemenang') );
+			
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
@@ -1905,7 +1907,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
 			
 			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulusEvalSampul2($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#listpesertasampul2kesimpulan#',$this->getPenyediaLulusEvalSampul2Kesimpulan($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertasampul2kesimpulan#',$this->getPenyediaLulusKesimpulan($Peng->id_pengadaan,'evaluasi_penawaran_2'));
 			
 			$this->renderDocx("Berita Acara Evaluasi Penawaran Sampul 2.docx", true);
 		}
@@ -2571,8 +2573,8 @@ class DocxController extends Controller
 		return $stringpenyedia;
 	}
 	
-	function getPenyediaLulusEvalSampul2Kesimpulan($idpeng){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1"  and id_pengadaan = ' . $idpeng);
+	function getPenyediaLulusKesimpulan($idpeng,$tahap){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1"  and id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
 				
 		if($arraypenyedia == null){
@@ -2584,7 +2586,7 @@ class DocxController extends Controller
 									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
 									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
 									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '<w:br/>' .
-															'Terbilang : ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
 									;
 			}
 		}		
