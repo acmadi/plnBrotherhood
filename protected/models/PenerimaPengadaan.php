@@ -55,7 +55,7 @@ class PenerimaPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('perusahaan, status, id_pengadaan', 'required'),
+			array('perusahaan, id_pengadaan', 'required'),
 			array('perusahaan', 'length', 'max'=>100),
 			array('status', 'length', 'max'=>20),
 			array('id_pengadaan, nilai', 'length', 'max'=>255),
