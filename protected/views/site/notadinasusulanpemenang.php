@@ -187,6 +187,21 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->error($NDUP,'tempat_penyerahan'); ?>
 		</div>
 
+		<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan_usulan_pemenang',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
+		</div>	
+		
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($NDUP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
