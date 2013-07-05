@@ -20,34 +20,58 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
         	<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>    
                 <div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Undangan Pembukaan Penawaran', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran', 'url'=>array($BAPP->isNewRecord? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Pembukaan Penawaran', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+										array('label'=>'BA Pembukaan Penawaran', 'url'=>array($BAPP->isNewRecord? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Pembukaan Penawaran', 'url'=>array($BAPP->isNewRecord? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						}
                     ?>
                 </div>
           	<?php } else if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
           		<div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Undangan Pembukaan Penawaran Sampul Satu', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Satu"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Sampul Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Pembukaan Penawaran Sampul Satu', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Satu"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+										array('label'=>'BA Pembukaan Penawaran Sampul Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Pembukaan Penawaran Sampul Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} 
                     ?>
                 </div>
           	<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
           		<div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Undangan Pembukaan Penawaran Tahap Satu', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Tahap Satu"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Pembukaan Penawaran Tahap Satu', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Tahap Satu"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+										array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						}
                     ?>
                 </div>
           	<?php } ?>
@@ -60,8 +84,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'berita-acara-pembukaan-penawaran-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($BAPP); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 			<h4><b> Berita Acara Pembukaan Penawaran </b></h4>
