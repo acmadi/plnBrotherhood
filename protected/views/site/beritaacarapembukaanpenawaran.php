@@ -80,7 +80,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
 			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
-		</div>
+		</div>				
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 			<div class="row">
@@ -95,6 +95,20 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 				<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
 			</div>
 		<?php } ?>
+		
+		<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
+		</div>
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>

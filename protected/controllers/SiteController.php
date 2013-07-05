@@ -1486,12 +1486,12 @@ class SiteController extends Controller
 								for($j=0;$j<$PPkurang;$j++){
 									$PPbaru = new PenerimaPengadaan;
 									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
-									$PPbaru->status = $_POST['status'][$i];
-									$PPbaru->perusahaan=$_POST['perusahaan'][$i];									
+									$PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 									$PPbaru->alamat='-';									
 									$PPbaru->npwp='-';		
-									$PP[$i]->nilai = '-';
-									$PP[$i]->tahap = 'Penawaran Harga';									
+									$PPbaru->nilai = '-';
+									$PPbaru->tahap = 'Penawaran Harga';									
 									$PPbaru->save();
 								}
 								
@@ -1707,9 +1707,8 @@ class SiteController extends Controller
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
-							$total = count($_POST['perusahaan']);
 							
-							for($i=0;$i<$total;$i++){
+							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){
 									// $PP[$i] = new PenerimaPengadaan;
 									// $PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;
@@ -1721,6 +1720,23 @@ class SiteController extends Controller
 									$PP[$i]->tahap = 'Aanwijzing';									
 									$PP[$i]->save();
 								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = '-';
+									$PPbaru->tahap = 'Aanwijzing';									
+									$PPbaru->save();
+								}
+								
 							}
 							
 						}		
@@ -1811,12 +1827,12 @@ class SiteController extends Controller
 								for($j=0;$j<$PPkurang;$j++){
 									$PPbaru = new PenerimaPengadaan;
 									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
-									$PPbaru->status = $_POST['status'][$i];
-									$PPbaru->perusahaan=$_POST['perusahaan'][$i];									
+									$PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 									$PPbaru->alamat='-';									
 									$PPbaru->npwp='-';		
-									$PP[$i]->nilai = '-';
-									$PP[$i]->tahap = 'Aanwijzing';									
+									$PPbaru->nilai = '-';
+									$PPbaru->tahap = 'Aanwijzing';									
 									$PPbaru->save();
 								}
 								
@@ -2047,11 +2063,48 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
+				$PP = PenerimaPengadaan::model()->findAll('tahap = "Aanwijzing" and status = "Lulus" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$valid=$BAPP->validate();
 					if($valid){
+					
+						if(isset($_POST['perusahaan'])){
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									// $PP[$i] = new PenerimaPengadaan;
+									// $PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PP[$i]->status = $_POST['status'][$i];
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = '-';
+									$PP[$i]->tahap = 'Pembukaan Penawaran Sampul 1';									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = '-';
+									$PPbaru->tahap = 'Pembukaan Penawaran Sampul 1';									
+									$PPbaru->save();
+								}
+								
+							}
+						}		
+						
 						if($Pengadaan->save(false)){
 							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($BAPP->save(false)&&$DH->save(false)){
@@ -2063,7 +2116,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawaran',array(
-					'BAPP'=>$BAPP,
+					'BAPP'=>$BAPP,'PP'=>$PP,
 				));
 			}
 		}
@@ -2097,13 +2150,49 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
+				$PP = PenerimaPengadaan::model()->findAll('tahap = "Pembukaan Penawaran Sampul 1" and status = "Lulus" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
 					// $Dokumen0->attributes=$_POST['Dokumen'];
 					
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$valid=$BAPP->validate();					
-					if($valid){						
+					if($valid){		
+
+						if(isset($_POST['perusahaan'])){
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){									
+									$PP[$i]->status = $_POST['status'][$i];
+									$PP[$i]->npwp = '-';
+									$PP[$i]->nilai = '-';
+									$PP[$i]->tahap = 'Pembukaan Penawaran Sampul 1';									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									$PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = '-';
+									$PPbaru->tahap = 'Pembukaan Penawaran Sampul 1';									
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}
+						
 						if($BAPP->save(false)&&$DH->save(false)){
 							$this->redirect(array('editberitaacarapembukaanpenawaran','id'=>$Dokumen1->id_pengadaan));
 						}
@@ -2112,7 +2201,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacarapembukaanpenawaran',array(
-					'BAPP'=>$BAPP,'DH'=>$DH,
+					'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,
 				));
 
 			}
