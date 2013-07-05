@@ -234,61 +234,63 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/history.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$category = Yii::app()->getRequest()->getQuery('category');
 		$chart = Yii::app()->getRequest()->getQuery('chart');
-		$dataProvider;
-		$title;
-		$subtitle;
-		switch ($chart) {
+		$chartData = array();
+		$chartTitle;
+		$chartSubtitle;
+		switch ($category) {
 			case '1' : {
-				$query = Yii::app()->db->createCommand('select * from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_berlangsung'] + (int)$v1['jumlah_selesai'] + (int)$v1['jumlah_gagal']);
-					array_push($dataProvider, $x);
+				switch ($chart) {
+					case '1' : {
+						$query = Yii::app()->db->createCommand('select * from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_berlangsung'] + (int)$v1['jumlah_selesai'] + (int)$v1['jumlah_gagal']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan total';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
+					case '2' : {
+						$query = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_berlangsung']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang sedang berlangsung';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
+					case '3' : {
+						$query = Yii::app()->db->createCommand('select username, jumlah_selesai from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_selesai']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang telah selesai';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
+					case '4' : {
+						$query = Yii::app()->db->createCommand('select username, jumlah_gagal from divisi')->queryAll();
+						while(list($k1, $v1)=each($query)) {
+							$x = array();
+							array_push($x, $v1['username']);
+							array_push($x, (int)$v1['jumlah_gagal']);
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang gagal';
+						$chartSubtitle = 'per divisi';
+						break;
+					}
 				}
-				$title = 'Pengadaan total';
-				$subtitle = 'per divisi';
-				break;
-			}
-			case '2' : {
-				$query = Yii::app()->db->createCommand('select username, jumlah_berlangsung from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_berlangsung']);
-					array_push($dataProvider, $x);
-				}
-				$title = 'Pengadaan yang sedang berlangsung';
-				$subtitle = 'per divisi';
-				break;
-			}
-			case '3' : {
-				$query = Yii::app()->db->createCommand('select username, jumlah_selesai from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_selesai']);
-					array_push($dataProvider, $x);
-				}
-				$title = 'Pengadaan yang telah selesai';
-				$subtitle = 'per divisi';
-				break;
-			}
-			case '4' : {
-				$query = Yii::app()->db->createCommand('select username, jumlah_gagal from divisi')->queryAll();
-				$dataProvider = array();
-				while(list($k1, $v1)=each($query)) {
-					$x = array();
-					array_push($x, $v1['username']);
-					array_push($x, (int)$v1['jumlah_gagal']);
-					array_push($dataProvider, $x);
-				}
-				$title = 'Pengadaan yang gagal';
-				$subtitle = 'per divisi';
 				break;
 			}
 		}
@@ -299,9 +301,9 @@ class SiteController extends Controller
 		else {
 			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$this->render('statistik', array(
-					'dataProvider'=>$dataProvider,
-					'title'=>$title,
-					'subtitle'=>$subtitle,
+					'chartData'=>$chartData,
+					'chartTitle'=>$chartTitle,
+					'chartSubtitle'=>$chartSubtitle,
 				));
 			}
 		}
@@ -2138,6 +2140,7 @@ class SiteController extends Controller
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				}
+				
 				if ($Dok0==null) {
 					$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 					$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -2255,6 +2258,17 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
+				}
+				
+				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
+				$BAP= BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
 					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
@@ -2343,9 +2357,16 @@ class SiteController extends Controller
 					}
 				}
 
-				$this->render('beritaacarapembukaanpenawaran',array(
-					'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,
-				));
+				if ($Dok0==null) {
+					$this->render('beritaacarapembukaanpenawaran',array(
+						'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,'BAP'=>$BAP,'Dok0'=>$Dok0,
+					));
+				} else {
+					$SUPP= SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
+					$this->render('beritaacarapembukaanpenawaran',array(
+						'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
+					));
+				}
 
 			}
 		}

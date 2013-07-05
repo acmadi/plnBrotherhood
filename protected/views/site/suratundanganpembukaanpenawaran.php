@@ -60,8 +60,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'surat-undangan-pembukaan-penawaran-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($SUPP); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 			<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
