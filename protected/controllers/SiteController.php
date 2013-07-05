@@ -1234,50 +1234,6 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionPascakualifikasi()
-	{	
-		$id = Yii::app()->getRequest()->getQuery('id');
-		if (Yii::app()->user->isGuest) {
-			$this->redirect(array('site/login'));
-		}
-		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				
-				$Pengadaan=Pengadaan::model()->findByPk($id);
-				
-				if($Pengadaan->status=='3'){
-					if($Pengadaan->metode_pengadaan=='Pelelangan'){
-						$Pengadaan->status= "4";
-					} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
-						$Pengadaan->status= "5";
-					}
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-					if($Pengadaan->save(false))
-					{	
-						if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-							if($X0->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
-							}
-						}
-					}				
-					$this->render('pascakualifikasi',array('X0'=>$X0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3));
-				} else {
-					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
-					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengantar Penawaran Harga"');
-					$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
-					$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
-			
-					$X0= PaktaIntegritasPenyedia::model()->findByPk($Dokumen0->id_dokumen);
-					$X1= SuratPengantarPenawaranHarga::model()->findByPk($Dokumen1->id_dokumen);
-					$X2= SuratPernyataanMinat::model()->findByPk($Dokumen2->id_dokumen);
-					$X3= FormIsianKualifikasi::model()->findByPk($Dokumen3->id_dokumen);
-					$this->render('pascakualifikasi',array('X0'=>$X0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3));
-				}
-			}
-		}
-	}
-	
 	public function actionPengumumanpengadaan()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
@@ -1399,6 +1355,9 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status="8";
 				
+				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
+				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -1461,7 +1420,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('permintaanpenawaranharga',array(
-					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,
+					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,'HPS'=>$HPS,
 				));
 			}
 		}
@@ -1477,6 +1436,9 @@ class SiteController extends Controller
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
 				
 				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Permintaan Penawaran Harga"');
 				
@@ -1547,7 +1509,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('permintaanpenawaranharga',array(
-					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,
+					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,'HPS'=>$HPS,
 				));
 			}
 		}
