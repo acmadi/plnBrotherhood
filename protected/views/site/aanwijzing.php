@@ -20,7 +20,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
                                     array('label'=>'Surat Undangan Aanwijzing', 'url'=>array($SUP->isNewRecord?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
-                                    array('label'=>'Berita Acara Aanwijzing', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='7'?'/site/beritaacaraaanwijzing':'/site/editberitaacaraaanwijzing','id'=>$id)),
+                                    array('label'=>'Berita Acara Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Aanwijzing"') == null)?'/site/beritaacaraaanwijzing':'/site/editberitaacaraaanwijzing','id'=>$id)),
                             ),
                         ));
                     ?>
