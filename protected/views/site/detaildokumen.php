@@ -81,7 +81,7 @@
 		'dataProvider'=>$dataProvider,
 		"ajaxUpdate"=>"false",
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("download/download"/*, array("id"=>LinkDokumen::model()->find('id_dokumen = ' . $id)->nomor_link)*/) . "'+ '&id=' + $.fn.yiiGridView.getSelection(id);}",
+		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("download/download") . "'+ '&id=' + $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			array(
 				'name'=>'Tanggal unggah',

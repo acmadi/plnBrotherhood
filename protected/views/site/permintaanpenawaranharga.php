@@ -54,6 +54,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<h4><b> Surat Undangan Permintaan Penawaran Harga </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($SUPPP,'nomor'); ?>
+				Nomor HPS : <?php echo $HPS->nomor ?> <br/>
 				<?php echo $form->textField($SUPPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($SUPPP,'nomor'); ?>
 			</div>
@@ -77,12 +78,6 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				<?php //echo $form->textArea($SUPPP,'lingkup_kerja',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 				<?php //echo $form->error($SUPPP,'lingkup_kerja'); ?>
 			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($SUPPP,'lama berlaku penawaran harga  (dalam satuan bulan)'); ?>
-				<?php echo $form->textField($SUPPP,'masa_berlaku_penawaran',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($SUPPP,'masa_berlaku_penawaran'); ?>
-			</div>
 
 			<div class="row">
 				<?php echo $form->labelEx($SUPPP,'waktu penyelesaian pekerjaan (dalam satuan hari)'); ?>
@@ -102,6 +97,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'idpenyedia',        
 					'model' => $PP,
+					// 'model2' => $PP2,
 					'viewName' => 'formperusahaan',
 					'labelAdd' => 'Tambah Penyedia',
 					'labelDel' => 'Hapus Penyedia',
@@ -122,7 +118,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				<br/>
 				<div style="border-top:1px solid lightblue">
 				<br/>
-					<h4><b> Buat Dokumen </b></h4>
+					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Surat Undangan Permintaan Penawaran Harga', array('docx/download', 'id'=>$SUPPP->id_dokumen)); ?></li>
 					</ul>

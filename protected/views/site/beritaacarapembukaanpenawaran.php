@@ -20,34 +20,58 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
         	<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>    
                 <div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='8'?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawaran'),'id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Pembukaan Penawaran', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+										array('label'=>'BA Pembukaan Penawaran', 'url'=>array($BAPP->isNewRecord? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Pembukaan Penawaran', 'url'=>array($BAPP->isNewRecord? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						}
                     ?>
                 </div>
           	<?php } else if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
           		<div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Sampul Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='8'?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Sampul Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawaran'),'id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Pembukaan Penawaran Sampul Satu', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Satu"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+										array('label'=>'BA Pembukaan Penawaran Sampul Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Pembukaan Penawaran Sampul Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} 
                     ?>
                 </div>
           	<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
           		<div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'SU Pembukaan Penawaran Tahap Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='8'?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
-                                    array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='9'?'/site/beritaacarapembukaanpenawaran':(Pengadaan::model()->findByPk($id)->status=='8'?'':'/site/editberitaacarapembukaanpenawaran'),'id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Pembukaan Penawaran Tahap Satu', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Tahap Satu"') == null)?'/site/suratundanganpembukaanpenawaran':'/site/editsuratundanganpembukaanpenawaran','id'=>$id)),
+										array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Pembukaan Penawaran Tahap Satu', 'url'=>array($BAPP->isNewRecord ? '/site/beritaacarapembukaanpenawaran':'/site/editberitaacarapembukaanpenawaran','id'=>$id)),
+								),
+							));
+						}
                     ?>
                 </div>
           	<?php } ?>
@@ -60,8 +84,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'id'=>'berita-acara-pembukaan-penawaran-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($BAPP); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 			<h4><b> Berita Acara Pembukaan Penawaran </b></h4>
@@ -72,6 +94,11 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php } ?>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
+			<?php if ($Dok0==null) {?>
+				Nomor Berita Acara Aanwijzing : <?php echo $BAP->nomor ?> <br/>
+			<?php } else { ?>
+				Nomor Nota Dinas Undangan Pembukaan Penawaran : <?php echo $SUPP->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAPP,'nomor'); ?>
 		</div>
@@ -80,7 +107,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
 			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
-		</div>
+		</div>				
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 			<div class="row">
@@ -96,6 +123,20 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 			</div>
 		<?php } ?>
 		
+		<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan_pembukaan_penawaran_1',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
+		</div>
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
@@ -110,7 +151,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>

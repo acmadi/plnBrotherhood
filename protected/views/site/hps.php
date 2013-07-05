@@ -19,7 +19,6 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Penentuan Metode', 'url'=>array('/site/editpenentuanmetode','id'=>$id)),
 							array('label'=>'RKS', 'url'=>array('/site/editrks','id'=>$id)),
 							array('label'=>'HPS', 'url'=>array(($Hps->isNewRecord)?('/site/hps'):('/site/edithps'),'id'=>$id)),
 						),
@@ -88,7 +87,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				<br/>
 				<div style="border-top:1px solid lightblue">
 				<br/>
-					<h4><b> Buat Dokumen </b></h4>
+					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Hps', array('docx/download','id'=>$Hps->id_dokumen)); ?></li>
 					</ul>

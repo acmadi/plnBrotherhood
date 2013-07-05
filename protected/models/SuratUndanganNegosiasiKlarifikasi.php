@@ -43,13 +43,13 @@ class SuratUndanganNegosiasiKlarifikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, perihal, kepada, tanggal_undangan, waktu, tempat', 'required'),
+			array('id_dokumen, nomor, perihal, tanggal_undangan, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('perihal, kepada, tempat', 'length', 'max'=>100),
+			array('perihal, tempat', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, perihal, kepada, tanggal_undangan, waktu, tempat', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, perihal, tanggal_undangan, waktu, tempat', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,7 +74,6 @@ class SuratUndanganNegosiasiKlarifikasi extends CActiveRecord
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
 			'perihal' => 'Perihal',
-			'kepada' => 'Kepada',
 			'tanggal_undangan' => 'Tanggal Undangan',
 			'waktu' => 'Waktu',
 			'tempat' => 'Tempat',
@@ -95,7 +94,6 @@ class SuratUndanganNegosiasiKlarifikasi extends CActiveRecord
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('perihal',$this->perihal,true);
-		$criteria->compare('kepada',$this->kepada,true);
 		$criteria->compare('tanggal_undangan',$this->tanggal_undangan,true);
 		$criteria->compare('waktu',$this->waktu,true);
 		$criteria->compare('tempat',$this->tempat,true);

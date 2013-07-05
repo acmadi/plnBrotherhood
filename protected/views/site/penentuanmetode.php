@@ -19,9 +19,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Penentuan Metode', 'url'=>array(($Pengadaan->metode_penawaran=='-')?'/site/penentuanmetode':'/site/editpenentuanmetode','id'=>$id)),
-							array('label'=>'RKS', 'url'=>array(($Pengadaan->metode_penawaran=='-'?'':(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"') == null ?'/site/rks':'/site/editrks')),'id'=>$id)),
-							array('label'=>'HPS', 'url'=>array(($Pengadaan->metode_penawaran=='-'||Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"') == null?'':(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"') == null?'/site/hps':'/site/edithps')),'id'=>$id)),
-						),
+							),
 					));
 				?>
 			</div>

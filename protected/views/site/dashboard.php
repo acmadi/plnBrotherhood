@@ -47,7 +47,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'pengadaan-grid',
-		'dataProvider'=>$model->search(),
+		'dataProvider'=>$model->searchDashboard(),
 		'filter'=>$model,
 		"ajaxUpdate"=>false,	            
 		'htmlOptions'=>array('style'=>'cursor: pointer;'),			
@@ -80,7 +80,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
-				'value'=>'$data->divisi_peminta',
+				'value'=>'$data->namaDivisi->nama',
 				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),			
 				
@@ -192,7 +192,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
 				array(            // display using an expression
                                     'name'=>'divisi_peminta',
-                                    'value'=>'$data->divisi_peminta',
+                                    'value'=>'$data->namaDivisi->nama',
                                     'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
                                 ),					
 				
@@ -273,7 +273,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			'dataProvider'=>$model->searchBuatDivisi(),
 			 'filter'=>$model,
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
 			"ajaxUpdate"=>false,			
 			'columns'=>array(
 //				array(
@@ -293,17 +293,10 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                 ),		
 
 				array(            // display using an expression
-                                    'name'=>'pic',				
-                                    'filter'=>'',
+                                    'name'=>'pic',	
                                     'value'=>'$data->idPanitia->nama_panitia',   
                                     'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
-				),
-				
-				array(            // display using an expression
-                                    'name'=>'divisi_peminta',
-                                    'value'=>'$data->divisi_peminta',
-                                    'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
-                                ),					
+				),				
 				
 				array(            // display using an expression
                                     'name'=>'sisahari',	
@@ -348,7 +341,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 
 
 <?php 
-	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 		echo CHtml::button('Tambah Pengadaan', array('submit'=>array('site/tambahpengadaan1'), 'class'=>'sidafbutton'));
 	}
 ?>

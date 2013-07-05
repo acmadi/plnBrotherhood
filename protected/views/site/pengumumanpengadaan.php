@@ -117,7 +117,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 				<br/>
 				<div style="border-top:1px solid lightblue">
 				<br/>
-					<h4><b> Buat Dokumen </b></h4>
+					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
 						<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
 					</ul>

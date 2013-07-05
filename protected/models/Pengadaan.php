@@ -102,6 +102,7 @@ class Pengadaan extends CActiveRecord
 			'notaDinasUsulanPemenangs' => array(self::HAS_MANY, 'NotaDinasUsulanPemenang', 'nama_penyedia'),
 			'paktaIntegritasPanitia1s' => array(self::HAS_MANY, 'PaktaIntegritasPanitia1', 'id_panitia'),
 			'divisiPeminta' => array(self::BELONGS_TO, 'Divisi', 'divisi_peminta'),
+			'namaDivisi' => array(self::BELONGS_TO, 'User', 'divisi_peminta'),
 			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
 			'suratPemberitahuanPengadaans' => array(self::HAS_MANY, 'SuratPemberitahuanPengadaan', 'id_panitia'),
 			'suratUndanganPembukaanPenawarans' => array(self::HAS_MANY, 'SuratUndanganPembukaanPenawaran', 'id_panitia'),
@@ -141,7 +142,7 @@ class Pengadaan extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function searchDashboard()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -205,10 +206,115 @@ class Pengadaan extends CActiveRecord
 //                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
 		// $criteria->compare('sisahari',$this->sisaHari(),true);
-				
+		$criteria->addcondition("status!='-1'");
 		$criteria->addcondition("status!='100'");													//------jo-------------search yg ngga selesai doang----------------------		
  
 		// $criteria->order = 'ABS(status)';
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>$sort,
+		));
+	}
+	
+	public function searchPermintaan()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'User'=>array(
+			  'asc'=>'divisi_peminta',
+			  'desc'=>'divisi_peminta desc',
+			),
+//                        'ndpermintaan'=>array(
+//			  'asc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+//			  'desc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan desc',
+//			),
+			'*',
+		);
+		
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('jenis_pengadaan',$this->jenis_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+                
+		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
+		$criteria->addcondition("status='-1'");
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>$sort,
+		));
+	}
+	
+	public function searchPermintaanDivisi()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'User'=>array(
+			  'asc'=>'divisi_peminta',
+			  'desc'=>'divisi_peminta desc',
+			),
+//                        'ndpermintaan'=>array(
+//			  'asc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+//			  'desc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan desc',
+//			),
+			'*',
+		);
+		
+		$usern = Yii::app()->user->name;
+		
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('jenis_pengadaan',$this->jenis_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+                
+		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
+		$criteria->addcondition("status='-1'");
+		$criteria->addcondition('divisi_peminta = "' . $usern . '"');
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -377,12 +483,49 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
 		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
 		$criteria->addcondition('divisi_peminta = "' . $usern . '"');
+		$criteria->addcondition("status!='-1'");
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>$sort,
 		));
-	}	
+	}
+	
+	public function searchStatistikDivisi($div, $chart)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+
+		$criteria->addcondition('divisi_peminta = "' . $div . '"');
+		$criteria->addcondition('status != "-1"');
+
+		switch ($chart) {
+			case '2' : {
+				$criteria->addcondition('status != "100" AND status != "99" AND status != "-1"');
+				break;
+			}
+			case '3' : {
+				$criteria->addcondition('status = "100"');
+				break;
+			}
+			case '4' : {
+				$criteria->addcondition('status = "99"');
+				break;
+			}
+		}
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 	
 	public function sisaHari(){								//jo----------------------------
 		if($this->status == '100'){
