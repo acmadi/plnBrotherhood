@@ -20,7 +20,7 @@
 
 <h2><?php echo $pengadaan->nama_pengadaan; ?> : <?php echo $cdokumen->nama_dokumen?></h2>
 <?php
-	if($pengadaan->status!='Selesai'){
+	if($pengadaan->status!='100'||$pengadaan->status!='99'){
 		if((Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"'))&&(($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
 			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton')); 
 			echo '<br/>';
@@ -32,7 +32,7 @@
 ?>
 
 <?php
-	if($pengadaan->status!='Selesai'){
+	if($pengadaan->status!='100'||$pengadaan->status!='99'){
 		if((Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"'))&&(($cdokumen->nama_dokumen=='Nota Dinas Permintaan')||($cdokumen->nama_dokumen=='TOR')||($cdokumen->nama_dokumen=='RAB')||($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
 		
 		//insert uploader here

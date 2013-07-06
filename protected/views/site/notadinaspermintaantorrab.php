@@ -1,6 +1,8 @@
 <?php
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
+	$pengadaan=Pengadaan::model()->findByPk($id);
+	$this->pageTitle=Yii::app()->name . ' | Permintaan TOR/RAB '.$pengadaan->nama_pengadaan;
 ?>
 
 <?php 

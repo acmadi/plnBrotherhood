@@ -1,5 +1,6 @@
 <?php
 /* @var $this SiteController */
+$this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 ?>
 <?php 
 	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {

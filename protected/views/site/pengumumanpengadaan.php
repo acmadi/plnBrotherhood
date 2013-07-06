@@ -1,8 +1,8 @@
 <?php
 /* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$Pengadaan= Pengadaan::model()->findByPk($id);
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">

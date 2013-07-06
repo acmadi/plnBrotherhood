@@ -1,6 +1,7 @@
 <?php
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
+	$this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 ?>
 <? if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
 		<?php for($i=0;$i<count($modelDok);$i++){

@@ -1,6 +1,8 @@
 <?php
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
+	$pengadaan=Pengadaan::model()->findByPk($id);
+	$this->pageTitle=Yii::app()->name . ' | Tunjuk Panitia '.$pengadaan->nama_pengadaan;
 ?>
 
 <?php 
@@ -47,19 +49,37 @@
 			<?php echo $form->error($NDPP,'perihal'); ?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($Pengadaan,'nama panitia / pejabat pengadaan'); ?>
-			<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
-			<?php echo $form->error($Pengadaan,'id_panitia'); ?>
-		</div>
+		<?php if ($NDP->nilai_biaya_rab>500000000) { ?>
+			<div class="row">
+				<?php echo $form->labelEx($Pengadaan,'nama panitia pengadaan'); ?>
+				<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Panitia')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
+				<?php echo $form->error($Pengadaan,'id_panitia'); ?>
+			</div>
+		<?php } else { ?>
+			<div class="row">
+				<?php echo $form->labelEx($Pengadaan,'nama pejabat pengadaan'); ?>
+				<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Pejabat')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
+				<?php echo $form->error($Pengadaan,'id_panitia'); ?>
+			</div>
+		<?php } ?>
 
-		<div class="row">
-			<?php echo $form->labelEx($Pengadaan,'metode_pengadaan'); ?>
-			<?php echo $form->dropDownList($Pengadaan,'metode_pengadaan',
-			  array('Penunjukan Langsung'=>'Penunjukan Langsung','Pemilihan Langsung'=>'Pemilihan Langsung','Pelelangan'=>'Pelelangan'),
-					array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
-			<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
-		</div>
+		<?php if ($Pengadaan->jenis_pengadaan=="Barang dan Jasa") { ?>
+			<div class="row">
+				<?php echo $form->labelEx($Pengadaan,'metode_pengadaan'); ?>
+				<?php echo $form->dropDownList($Pengadaan,'metode_pengadaan',
+				  array('Penunjukan Langsung'=>'Penunjukan Langsung','Pemilihan Langsung'=>'Pemilihan Langsung','Pelelangan'=>'Pelelangan'),
+						array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
+				<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
+			</div>
+		<?php } else { ?>
+			<div class="row">
+				<?php echo $form->labelEx($Pengadaan,'metode_pengadaan'); ?>
+				<?php echo $form->dropDownList($Pengadaan,'metode_pengadaan',
+				  array('Penunjukan Langsung'=>'Penunjukan Langsung','Seleksi Langsung'=>'Seleksi Langsung','Seleksi Umum'=>'Seleksi Umum'),
+						array('empty'=>"-----Pilih Metode Pengadaan------")); ?>
+				<?php echo $form->error($Pengadaan,'metode_pengadaan'); ?>
+			</div>
+		<?php } ?>
 		
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'Target SPK/Kontrak (Ket: Dalam Satuan Hari)'); ?>

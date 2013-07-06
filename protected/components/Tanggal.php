@@ -57,7 +57,7 @@
         }
 
         public static function getHari($date) {
-        	return Tanggal::ubahBahasa(Yii::app()->dateFormatter->formatDayInWeek('EEEE', CDateTimeParser::parse($date, 'yyyy-MM-dd')));
+        	return Tanggal::ubahBahasa(date('l',strtotime($date)));
         }
 
         public static function getTanggalSlash($date) {

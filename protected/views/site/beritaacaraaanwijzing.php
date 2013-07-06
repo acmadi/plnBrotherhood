@@ -1,8 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$Pengadaan= Pengadaan::model()->findByPk($id);
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -17,7 +18,7 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		
                 <div id="menuform">
                     <?php
-					if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+					if(Panitia::model()->findByPk($Pengadaan->id_panitia)->jenis_panitia=="Panitia") {
 						$this->widget('zii.widgets.CMenu', array(
 										'items'=>array(
 											array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/aanwijzing':'/site/editaanwijzing','id'=>$id)),

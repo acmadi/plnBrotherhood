@@ -510,7 +510,6 @@ class SiteController extends Controller
 				
 				$PAP1= new PaktaIntegritasPanitia1;
 				$PAP1->id_dokumen=$Dokumen0->id_dokumen;
-				$PAP1->id_panitia=$Pengadaan->id_panitia;
 				
 				$RKS= new Rks;
 				$RKS->id_dokumen=$Dokumen1->id_dokumen;
@@ -1597,7 +1596,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
-					
+					$SUP->tanggal_undangan=date('Y-m-d',strtotime($SUP->tanggal_undangan));
 					$valid=$SUP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -1647,7 +1646,8 @@ class SiteController extends Controller
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				
 				$SUP=SuratUndanganPenjelasan::model()->findByPk($Dokumen0->id_dokumen);
-								
+				$SUP->tanggal_undangan=Tanggal::getTanggalStrip($SUP->tanggal_undangan);	
+				$SUP->waktu=Tanggal::getJamMenit($SUP->waktu);
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
@@ -1655,7 +1655,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUP->attributes=$_POST['SuratUndanganPenjelasan'];
-					
+					$SUP->tanggal_undangan=date('Y-m-d',strtotime($SUP->tanggal_undangan));
 					$valid=$SUP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -1700,9 +1700,6 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='9';
 				
-				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
-				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
-				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -1714,7 +1711,6 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
-				$Dokumen1->tanggal=$RKS->tanggal_penjelasan;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
@@ -1722,7 +1718,6 @@ class SiteController extends Controller
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
-				$Dokumen2->tanggal=$RKS->tanggal_penjelasan;
 				
 				$BAP= new BeritaAcaraPenjelasan;
 				$BAP->id_dokumen=$Dokumen1->id_dokumen;
@@ -1730,9 +1725,22 @@ class SiteController extends Controller
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
 				$DH->acara="Aanwijzing";
-				$DH->jam=$RKS->waktu_penjelasan;
-				$DH->tempat_hadir=$RKS->tempat_penjelasan;
 				
+				$DokSUP = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"');
+				if($DokSUP==null) {
+					$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+					$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+					$Dokumen1->tanggal=Tanggal::getTanggalStrip($RKS->tanggal_penjelasan);
+					$Dokumen2->tanggal=Tanggal::getTanggalStrip($RKS->tanggal_penjelasan);
+					$DH->jam=$RKS->waktu_penjelasan;
+					$DH->tempat_hadir=$RKS->tempat_penjelasan;
+				} else {
+					$SUP=SuratUndanganPenjelasan::model()->findByPk($DokSUP->id_dokumen);
+					$Dokumen1->tanggal=$SUP->tanggal_undangan;
+					$Dokumen2->tanggal=$SUP->tanggal_undangan;
+					$DH->jam=$SUP->waktu;
+					$DH->tempat_hadir=$SUP->tempat;
+				}
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				$PP = PenerimaPengadaan::model()->findAll('undangan_pengambilan_dokumen = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
@@ -1808,7 +1816,6 @@ class SiteController extends Controller
                         }
 					}
 				}
-				$DokSUP = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"');
 				if($DokSUP== null ){
 					if($Pengadaan->metode_pengadaan=="Pelelangan"){
 						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Pengambilan Dokumen Pengadaan"');
@@ -1824,9 +1831,8 @@ class SiteController extends Controller
 						));
 					}
 				} else {
-					$SUP=SuratUndanganPenjelasan::model()->findByPk($DokSUP->id_dokumen);
 					$this->render('beritaacaraaanwijzing',array(
-						'BAP'=>$BAP,'SUP'=>$SUP,'PP'=>$PP,
+						'BAP'=>$BAP,'SUP'=>$SUP,'PP'=>$PP,'Dokumen1'=>$Dokumen1,
 					));
 				}
 			}
@@ -1980,6 +1986,8 @@ class SiteController extends Controller
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
 				
 				$SUPP= new SuratUndanganPembukaanPenawaran;
 				$SUPP->id_dokumen=$Dokumen0->id_dokumen;
@@ -2005,6 +2013,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUPP->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
+					$SUPP->tanggal_undangan=date('Y-m-d',strtotime($SUPP->tanggal_undangan));
 					$valid=$SUPP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -2045,11 +2054,17 @@ class SiteController extends Controller
 					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
 				}
 				
+				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+				
 				
 				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
 				$BAP= BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
 				
 				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dokumen0->id_dokumen);
+				
+				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dokumen0->id_dokumen);
+				$SUPP->tanggal_undangan=Tanggal::getTanggalStrip($SUPP->tanggal_undangan);	
+				$SUPP->waktu=Tanggal::getJamMenit($SUPP->waktu);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2058,6 +2073,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SUPP->attributes=$_POST['SuratUndanganPembukaanPenawaran'];
+					$SUPP->tanggal_undangan=date('Y-m-d',strtotime($SUPP->tanggal_undangan));
 					$valid=$SUPP->validate();
 					if($valid){
 						if($Pengadaan->save(false))
@@ -2399,13 +2415,17 @@ class SiteController extends Controller
 				}
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran"');
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Satu"');
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Satu"');
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
 				}
-				$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
+				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($Dokumen1->id_dokumen);
+				
+				$DokRKS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2424,6 +2444,8 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen1->tanggal=date('d-m-Y');
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
@@ -2440,16 +2462,6 @@ class SiteController extends Controller
 				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
-				if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$BAEP->pemenang='-';
-					$BAEP->alamat='-';
-					$BAEP->NPWP='-';
-					$BAEP->nilai='0';
-					$BAEP->pemenang_2='-';
-					$BAEP->alamat_2='-';
-					$BAEP->NPWP_2='-';
-					$BAEP->nilai_2='0';
-				}
 				
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
@@ -2460,8 +2472,8 @@ class SiteController extends Controller
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$DH->acara="Evaluasi Penawaran Tahap Satu";
 				}
-				$DH->jam=$SUPP->waktu;
-				$DH->tempat_hadir=$SUPP->tempat;
+				$DH->jam=$RKS->waktu_evaluasi_penawaran1;
+				$DH->tempat_hadir=$RKS->tempat_evaluasi_penawaran1;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2472,6 +2484,7 @@ class SiteController extends Controller
 				{
 					$Dokumen1->attributes=$_POST['Dokumen'];
 					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$Dokumen2->tanggal=$Dokumen1->tanggal;
 					$valid=$BAEP->validate();
 					if($valid){
 					
@@ -2530,8 +2543,6 @@ class SiteController extends Controller
 							}
 							
 						}
-						
-						$Dokumen2->tanggal=$Dokumen1->tanggal;
 						if($Pengadaan->save(false)){
 							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($BAEP->save(false)&&$DH->save(false)){
@@ -2543,7 +2554,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'PP'=>$PP,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'PP'=>$PP,'BAPP'=>$BAPP,
 				));
 			}
 		}
@@ -2573,6 +2584,16 @@ class SiteController extends Controller
 				
 				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($Dokumen1->id_dokumen);
 				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
+				}
+				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($Dokumen1->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2652,7 +2673,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,'PP'=>$PP,
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,'PP'=>$PP,'BAPP'=>$BAPP,
 				));
 
 			}
@@ -4585,6 +4606,8 @@ class SiteController extends Controller
 			if(Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan->divisi_peminta=Yii::app()->user->name;
 			}
+			date_default_timezone_set("Asia/Jakarta");
+			$Pengadaan->tanggal_masuk=date('d-m-Y');
 			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
@@ -4628,6 +4651,7 @@ class SiteController extends Controller
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
 				// $RAB->attributes=$_POST['RAB'];
 				$Dokumen0->attributes=$_POST['Dokumen'];
+				$Pengadaan->tanggal_masuk=date('Y-m-d',strtotime($Pengadaan->tanggal_masuk));
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
@@ -4664,6 +4688,9 @@ class SiteController extends Controller
 			$Dokumen2 = Dokumen::model()->find('id_pengadaan = '. $id. ' and nama_dokumen = "RAB"');
 			
 			$NDP = NotaDinasPermintaan::model()->findByPk($Dokumen0->id_dokumen);
+			
+			$Pengadaan->tanggal_masuk=Tanggal::getTanggalStrip($Pengadaan->tanggal_masuk);
+			$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 			// $TOR = Tor::model()->findByPk($Dokumen1->id_dokumen);
 			// $RAB = Rab::model()->findByPk($Dokumen2->id_dokumen);	
 			// Uncomment the following line if AJAX validation is needed
@@ -4674,6 +4701,7 @@ class SiteController extends Controller
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
 				// $RAB->attributes=$_POST['RAB'];
 				$Dokumen0->attributes=$_POST['Dokumen'];
+				$Pengadaan->tanggal_masuk=date('Y-m-d',strtotime($Pengadaan->tanggal_masuk));
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
@@ -4773,6 +4801,8 @@ class SiteController extends Controller
 			$Dokumen0->tempat='Jakarta';
 			$Dokumen0->status_upload='Belum Selesai';
 			$Dokumen0->id_pengadaan=$id;
+			date_default_timezone_set("Asia/Jakarta");
+			$Dokumen0->tanggal=date('d-m-Y');
 			
 			$NDPTR= new NotaDinasPermintaanTorRab;
 			$NDPTR->id_dokumen=$Dokumen0->id_dokumen;
@@ -4856,10 +4886,15 @@ class SiteController extends Controller
 			$Dokumen0->nama_dokumen='Nota Dinas Perintah Pengadaan';
 			$Dokumen0->tempat='Jakarta';
 			$Dokumen0->status_upload='Belum Selesai';
+			date_default_timezone_set("Asia/Jakarta");
+			$Dokumen0->tanggal=date('d-m-Y');
 			
 			$NDPP= new NotaDinasPerintahPengadaan;
 			$NDPP->id_dokumen=$Dokumen0->id_dokumen;
-
+			
+			$DokNDP= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 			if(isset($_POST['NotaDinasPerintahPengadaan']))
@@ -4885,7 +4920,7 @@ class SiteController extends Controller
 			}
 
 			$this->render('tunjukpanitia',array(
-				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
+				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'NDP'=>$NDP,
 			));
 		}
 	}
@@ -4900,7 +4935,11 @@ class SiteController extends Controller
 			
 			$Dokumen0= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP= NotaDinasPerintahPengadaan::model()->findByPk($Dokumen0->id_dokumen);
+			$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 
+			$DokNDP= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 			if(isset($_POST['NotaDinasPerintahPengadaan']))
@@ -4926,7 +4965,7 @@ class SiteController extends Controller
 			}
 
 			$this->render('tunjukpanitia',array(
-				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
+				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'NDP'=>$NDP,
 			));
 		}
 	}

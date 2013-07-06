@@ -1,8 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$Pengadaan= Pengadaan::model()->findByPk($id);
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -84,7 +85,34 @@ $id = Yii::app()->getRequest()->getQuery('id');
 			<?php echo $form->textArea($SUP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUP,'perihal'); ?>
 		</div>		
+		
+		<div class="row">
+			<?php echo $form->labelEx($SUP,'tanggal Aanwijzing'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$SUP,
+					'attribute'=>'tanggal_undangan',
+					'value'=>$SUP->tanggal_undangan,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($SUP,'tanggal_undangan'); ?>
+		</div>
 
+		<div class="row">
+			<?php echo $form->labelEx($SUP,'waktu Aanwijzing (Format HH:MM)'); ?>
+			<?php echo $form->textField($SUP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($SUP,'waktu'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($SUP,'tempat Pembukaan Penawaran'); ?>
+			<?php echo $form->textArea($SUP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUP,'tempat'); ?>
+		</div>
+
+		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($SUP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			

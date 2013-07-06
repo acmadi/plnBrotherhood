@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -84,7 +84,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
@@ -104,7 +104,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$SUPP->tanggal_undangan,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($SUPP,'tanggal_undangan'); ?>
