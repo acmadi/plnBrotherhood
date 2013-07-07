@@ -3610,8 +3610,11 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-				
+				if($Pengadaan->metode_penawaran == 'Dua Sampul'){				
+					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}else if($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
 				if(isset($_POST['BeritaAcaraNegosiasiKlarifikasi']))
 				{
 					$BANK->attributes=$_POST['BeritaAcaraNegosiasiKlarifikasi'];

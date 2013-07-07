@@ -792,26 +792,8 @@ class DocxController extends Controller
 			$NDUP=NotaDinasUsulanPemenang::model()->findByPk($id);	
 
 			$metode = $Peng->metode_pengadaan;
-			
-			if (($metode == "Pemilihan Langsung")||($metode == "Pelelangan")){
-			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(lelang-pilih).docx');
-			}
-			else{
-			$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
-			}
+						
 			$nama = $Peng->nama_pengadaan;
-
-			$pemenang = $NDUP->nama_penyedia;
-			$alamat = $NDUP->alamat;
-			$NPWP = $NDUP->NPWP;
-			$biaya = $NDUP->biaya;
-			$terbilang = RupiahMaker::terbilangMaker($biaya);
-				
-			$pemenang2 = $NDUP->nama_penyedia;
-			$alamat2 = $NDUP->alamat;
-			$NPWP2 = $NDUP->NPWP;
-			$biaya2 = $NDUP->biaya;
-			$terbilang2 = RupiahMaker::terbilangMaker($biaya2);
 			
 			$nomor = $NDUP->nomor;
 			$ketua = User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama;
@@ -825,48 +807,50 @@ class DocxController extends Controller
 			$dokNDP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Permintaan"');
 			$ndp = NotaDinasPermintaan::model()->findByPk($dokNDP->id_dokumen)->nomor;
 			
+			
+			
 			if(($metode == "Pelelangan")||($metode == "Pemilihan Langsung")){
 				$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(lelang-pilih).docx');
+				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			}
 			else{
+				$PP = PenerimaPengadaan::model()->find('usulan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
+				
 				$this->doccy->newFile('13 Nota Dinas Usulan Pemenang(tunjuk).docx');
+				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+				
+				$this->doccy->phpdocx->assign('#penyedia#', $PP->perusahaan);
+				$this->doccy->phpdocx->assign('#alamatpenyedia#', $PP->alamat);
+				$this->doccy->phpdocx->assign('#NPWP#', $PP->npwp);				
+				$this->doccy->phpdocx->assign('#biaya#', $PP->nilai);
+				$this->doccy->phpdocx->assign('#terbilang#', RupiahMaker::terbilangMaker($PP->nilai));
 			}
 
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-		
+
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#dari#', $ketua);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#penyedia#', $pemenang);
-			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
-			$this->doccy->phpdocx->assign('#NPWP#', $NPWP);
-			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($biaya));
-			$this->doccy->phpdocx->assign('#terbilang#', $terbilang);
-			$this->doccy->phpdocx->assign('#penyedia2#', $pemenang2);
-			$this->doccy->phpdocx->assign('#alamatpenyedia2#', $alamat2);
-			$this->doccy->phpdocx->assign('#NPWP2#', $NPWP2);
-			$this->doccy->phpdocx->assign('#biaya2#', RupiahMaker::convertInt($biaya2));
-			$this->doccy->phpdocx->assign('#terbilang2#', $terbilang2);
-
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);			
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
-			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);
-						
-			$this->doccy->phpdocx->assign('#suratkeputusandireksi#', Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia);
-			
+			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
+			$this->doccy->phpdocx->assign('#suratkeputusandireksi#', Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia);			
 			$this->doccy->phpdocx->assign('#nondpermintaan#', $ndp);
 			$this->doccy->phpdocx->assign('#nondpp#', $ndpp);
 			
-			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;
-						
+			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;						
 			$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getListPanitiaNegoKlar($Peng->id_panitia));			
-			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
-			
-			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaLulusKesimpulan($Peng->id_pengadaan, 'usulan_pemenang') );
-			
+			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);			
+			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaLulusKesimpulan($Peng->id_pengadaan, 'usulan_pemenang') );			
 			$this->doccy->phpdocx->assign('#metode#', $metode);
+			$this->doccy->phpdocx->assign('#panitia/pejabat#', NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen)->kepada);
+
+			
+			
+			
+			
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
 		/*else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
