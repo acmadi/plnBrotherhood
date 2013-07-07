@@ -122,6 +122,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 				<?php echo $form->error($SPPM,'no_ski'); ?>
 			</div>
 			
+			<div class="row">
+				<?php echo $form->labelEx($SPPM,'Jaminan Pelaksanaan'); ?>
+				<?php echo $form->textField($SPPM,'jaminan',array('size'=>56,'maxlength'=>255)); ?>
+				<?php echo $form->error($SPPM,'jaminan'); ?>
+			</div>
+			
 		<?php } ?>
 		
 		<div class="row">
