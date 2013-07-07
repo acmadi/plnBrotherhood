@@ -508,7 +508,7 @@ class Pengadaan extends CActiveRecord
 
 		switch ($chart) {
 			case '1' : {
-				$criteria->addcondition('status != "100" AND status != "99" AND status != "-1"');
+				$criteria->addcondition('status != "100" and status != "99"');
 				break;
 			}
 			case '2' : {
@@ -543,7 +543,7 @@ class Pengadaan extends CActiveRecord
 
 		switch ($chart) {
 			case '1' : {
-				$criteria->addcondition('status != "100" AND status != "99" AND status != "-1"');
+				$criteria->addcondition('status != "100" and status != "99"');
 				break;
 			}
 			case '2' : {
