@@ -507,15 +507,16 @@ class Pengadaan extends CActiveRecord
 		$criteria->addcondition('status != "-1"');
 
 		switch ($chart) {
-			case '2' : {
-				$criteria->addcondition('status != "100" AND status != "99" AND status != "-1"');
+			case '1' : {
+				$criteria->addcondition('status != "100"');
+				$criteria->addcondition('status != "99"');
 				break;
 			}
-			case '3' : {
+			case '2' : {
 				$criteria->addcondition('status = "100"');
 				break;
 			}
-			case '4' : {
+			case '3' : {
 				$criteria->addcondition('status = "99"');
 				break;
 			}
@@ -542,15 +543,16 @@ class Pengadaan extends CActiveRecord
 		$criteria->addcondition('status != "-1"');
 
 		switch ($chart) {
-			case '2' : {
-				$criteria->addcondition('status != "100" AND status != "99" AND status != "-1"');
+			case '1' : {
+				$criteria->addcondition('status != "100"');
+				$criteria->addcondition('status != "99"');
 				break;
 			}
-			case '3' : {
+			case '2' : {
 				$criteria->addcondition('status = "100"');
 				break;
 			}
-			case '4' : {
+			case '3' : {
 				$criteria->addcondition('status = "99"');
 				break;
 			}
