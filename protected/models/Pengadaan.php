@@ -502,9 +502,43 @@ class Pengadaan extends CActiveRecord
 		$criteria->with = array("idPanitia");    
                 
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
-		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
 
 		$criteria->addcondition('divisi_peminta = "' . $div . '"');
+		$criteria->addcondition('status != "-1"');
+
+		switch ($chart) {
+			case '2' : {
+				$criteria->addcondition('status != "100" AND status != "99" AND status != "-1"');
+				break;
+			}
+			case '3' : {
+				$criteria->addcondition('status = "100"');
+				break;
+			}
+			case '4' : {
+				$criteria->addcondition('status = "99"');
+				break;
+			}
+		}
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+	
+	public function searchStatistikPanitia($pan, $chart)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+
+		$criteria->addcondition('t.id_panitia = "' . $pan . '"');
 		$criteria->addcondition('status != "-1"');
 
 		switch ($chart) {
