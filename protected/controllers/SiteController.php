@@ -2127,11 +2127,7 @@ class SiteController extends Controller
 				$Dokumen2->id_pengadaan=$id;
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
-				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$BAPP->jumlah_penyedia_dokumen_sah='0';
-					$BAPP->jumlah_penyedia_dokumen_tidak_sah='0';
-				}
+				$BAPP->id_dokumen=$Dokumen1->id_dokumen;				
 				
 				
 				$DH= new DaftarHadir;
@@ -2845,9 +2841,7 @@ class SiteController extends Controller
 				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-				$BAPP->jumlah_penyedia_dokumen_sah='0';
-				$BAPP->jumlah_penyedia_dokumen_tidak_sah='0';
-				
+
 				$DH= new DaftarHadir;
 				$DH->id_dokumen=$Dokumen2->id_dokumen;
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){

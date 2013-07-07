@@ -1389,10 +1389,21 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Surat Penunjukan Pemenang"){
 			
+			$PP = PenerimaPengadaan::model()->findAll('penetapan_pemenang = "1" and id_pengadaan = ' . $Peng->id_pengadaan);
+			
 			$SPP=SuratPenunjukanPemenang::model()->findByPk($id);	
 			$nomor = $SPP->nomor;
-			$penyedia = $SPP->nama_penyedia;
-			$biaya = $SPP->harga;
+			if($PP!=null){
+				$penyedia = $PP[0]->perusahaan;
+				$biaya = $PP[0]->nilai;
+			}else{
+				$penyedia = '-';
+				$biaya = '0';
+			}
+			
+			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
+			
 			$biayaa = RupiahMaker::convertInt($biaya);
 			$biayaterbilang = RupiahMaker::TerbilangMaker($biaya);
 			$jaminan = $SPP->jaminan;
@@ -1454,7 +1465,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#perihal#', $nama);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', '');
 			$this->doccy->phpdocx->assign('#nosupph#', $nosupph);
-			$this->doccy->phpdocx->assign('#tsupph#', $tglsupph);
+			$this->doccy->phpdocx->assign('#tglsupph#', $tglsupph);
 			$this->doccy->phpdocx->assign('#nospph#', '');
 			$this->doccy->phpdocx->assign('#tglspph#', '');
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
@@ -1464,6 +1475,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
 			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
 			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
+			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#',$ndpp->dari);
 			$this->renderDocx("Surat Penunjukan Pemenang.docx", true);
 		}
 //	=====================================Pakta Integritas=====================================
