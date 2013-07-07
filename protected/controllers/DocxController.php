@@ -869,41 +869,34 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->renderDocx("Nota Dinas Usulan Pemenang.docx", true);
 		}
-		/*else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
-			$this->doccy->newFile('nd-pemberitahuanpemenang.docx');
+		else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
+			$this->doccy->newFile('14b Nota Dinas Pemberitahuan Pemenang.docx');
 			$NDPP=NotaDinasPemberitahuanPemenang::model()->findByPk($id);	
 			$nomor = $NDPP->nomor;
-			$dari = $NDPP->dari;
-			$pemenang = $NDPP->nama_penyedia;
-			$alamat = $NDPP->alamat;
-			$NPWP = $NDPP->NPWP;
-			$biaya = $NDPP->biaya;
 			$tanggal = $Dok->tanggal;
-			$waktu = $NDPP->waktu_pelaksanaan;
-			$tempat = $NDPP->tempat_penyerahan;
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->doccy->phpdocx->assign('#6#', '.............................................');
-			$this->doccy->phpdocx->assign('#7#', '.............................................');
-			$this->doccy->phpdocx->assign('#8#', '.............................................');
-			$this->doccy->phpdocx->assign('#9#', '.............................................');
-			$this->doccy->phpdocx->assign('#10#', '.............................................');
-			$this->doccy->phpdocx->assign('#11#', '.............................................');
-			$this->doccy->phpdocx->assign('#12#', '.............................................');
-			$this->doccy->phpdocx->assign('#13#', '.............................................');
-			$this->doccy->phpdocx->assign('#14#', '.............................................');
-			$this->doccy->phpdocx->assign('#15#', '.............................................');
-			$this->doccy->phpdocx->assign('#16#', '.............................................');
-			$this->doccy->phpdocx->assign('#17#', '.............................................');
+			$this->doccy->phpdocx->assign('#nomor#',$nomor);
+			$this->doccy->phpdocx->assign('#tanggal#',$tanggal);
+			$this->doccy->phpdocx->assign('#nosupph#', '.............................................');
+			$this->doccy->phpdocx->assign('#tglsupph#', '.............................................');
+			$this->doccy->phpdocx->assign('#penyedia#', '.............................................');
+			$this->doccy->phpdocx->assign('#biaya#', '.............................................');
+			$this->doccy->phpdocx->assign('#keterangan#', '.............................................');
+			$this->doccy->phpdocx->assign('#deadline#', '.............................................');
+			$this->doccy->phpdocx->assign('#deadlineterbilang#', '.............................................');
+			$this->doccy->phpdocx->assign('#pejabat/panitia#', '.............................................');
+			$this->doccy->phpdocx->assign('#namapengadaan#', '.............................................');
+			$this->doccy->phpdocx->assign('#kalimat#', '.............................................');
+			$this->doccy->phpdocx->assign('#nama#', '.............................................');
+			// $this->doccy->phpdocx->assign('#14#', '.............................................');
+			// $this->doccy->phpdocx->assign('#15#', '.............................................');
+			// $this->doccy->phpdocx->assign('#16#', '.............................................');
+			// $this->doccy->phpdocx->assign('#17#', '.............................................');
 			$this->renderDocx("Nota Dinas Pemberitahuan Pemenang.docx", true);
-		}*/
+		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Permintaan TOR/RAB"){
 			$NDPTR=NotaDinasPermintaanTorRab::model()->findByPk($id);
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
