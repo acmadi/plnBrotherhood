@@ -6,15 +6,9 @@
  * The followings are the available columns in table 'berita_acara_pembukaan_penawaran':
  * @property string $id_dokumen
  * @property string $nomor
- * @property integer $jumlah_penyedia_diundang
- * @property integer $jumlah_penyedia_dokumen_sah
- * @property integer $jumlah_penyedia_dokumen_tidak_sah
- * @property string $status_metode
- * @property string $id_panitia
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
- * @property Pengadaan $idPanitia
  */
 class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 {
@@ -44,13 +38,12 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah', 'required'),
-			array('jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, jumlah_penyedia_diundang, jumlah_penyedia_dokumen_sah, jumlah_penyedia_dokumen_tidak_sah, id_panitia', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,9 +67,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'jumlah_penyedia_diundang' => 'Jumlah Penyedia Diundang',
-			'jumlah_penyedia_dokumen_sah' => 'Jumlah Penyedia Dokumen Sah',
-			'jumlah_penyedia_dokumen_tidak_sah' => 'Jumlah Penyedia Dokumen Tidak Sah',
 		);
 	}
 
@@ -93,9 +83,6 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('jumlah_penyedia_diundang',$this->jumlah_penyedia_diundang);
-		$criteria->compare('jumlah_penyedia_dokumen_sah',$this->jumlah_penyedia_dokumen_sah);
-		$criteria->compare('jumlah_penyedia_dokumen_tidak_sah',$this->jumlah_penyedia_dokumen_tidak_sah);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
