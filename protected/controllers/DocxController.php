@@ -739,6 +739,22 @@ class DocxController extends Controller
 				$Kal3 = "dengan ini ditetapkan Perusahaan tersebut dibawah ini sebagai pemenang untuk melaksanakan Pekerjaan";
 			
 			}
+			else if ($metode == "Dua Tahap"){
+				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
+				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
+				$noBAE1 = $BAE1->nomor;
+				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
+				$DokBAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Dua"');
+				$BAE2 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE2->id_dokumen);
+				$noBAE2 = $BAE2->nomor;
+				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
+				$Kal1 = "dan Berita Acara Evaluasi Penawaran harga (tahap) II No. : ";
+				$Kal2 = "tanggal";
+				$Kal3 = "dengan ini ditetapkan Perusahaan tersebut dibawah ini sebagai pemenang untuk melaksanakan Pekerjaan";
+			
+			}
+			
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			
 			$dokndup=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Usulan Pemenang"');
@@ -1375,7 +1391,9 @@ class DocxController extends Controller
 			
 			$PP = PenerimaPengadaan::model()->findAll('penetapan_pemenang = "1" and id_pengadaan = ' . $Peng->id_pengadaan);
 			
-			$SPP=SuratPenunjukanPemenang::model()->findByPk($id);	
+			$SPP=SuratPenunjukanPemenang::model()->findByPk($id);				
+			$dokSPP=Dokumen::model()->findByPk($id);			
+			
 			$nomor = $SPP->nomor;
 			if($PP!=null){
 				$penyedia = $PP[0]->perusahaan;
@@ -1434,8 +1452,8 @@ class DocxController extends Controller
 				// $tglspp = Tanggal::getTanggalLengkap($dokspp->tanggal);
 			
 				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Lelang).docx');
-				$this->doccy->phpdocx->assign('#nospp#', $nospp);
-				$this->doccy->phpdocx->assign('#tglspp#', $tglspp);
+				$this->doccy->phpdocx->assign('#nospp#', '');
+				$this->doccy->phpdocx->assign('#tglspp#', '');
 				$this->doccy->phpdocx->assign('#noski#', $noski);
 				$this->doccy->phpdocx->assign('#tglski#', $tglski);
 				$this->doccy->phpdocx->assign('#nomorski#', $nomorski);
@@ -1449,9 +1467,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#perihal#', $nama);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', '');
 			$this->doccy->phpdocx->assign('#nosupph#', $nosupph);
-			$this->doccy->phpdocx->assign('#tglsupph#', $tglsupph);
-			$this->doccy->phpdocx->assign('#nospph#', '');
-			$this->doccy->phpdocx->assign('#tglspph#', '');
+			$this->doccy->phpdocx->assign('#tglsupph#', $tglsupph);			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#biaya#', $biayaa);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
@@ -1459,6 +1475,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
 			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
 			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
+			$this->doccy->phpdocx->assign('#nopenawaran#', $SPP->no_surat_penawaran);
+			$this->doccy->phpdocx->assign('#tglpenawaran#', Tanggal::getTanggalLengkap($SPP->tgl_surat_penawaran));
+			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($dokSPP->tanggal));
 			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#',$ndpp->dari);
 			$this->renderDocx("Surat Penunjukan Pemenang.docx", true);
 		}

@@ -11,6 +11,8 @@
  * @property string $nomor_ski
  * @property string $tanggal_ski
  * @property string $no_ski
+ * @property string $no_surat_penawaran
+ * @property string $tgl_surat_penawaran
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -43,12 +45,13 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'required'),
+			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski, no_surat_penawaran, tgl_surat_penawaran', 'required'),
 			array('lama_penyerahan, jaminan', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen, nomor, nomor_ski, no_ski', 'length', 'max'=>32),
+			array('no_surat_penawaran', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski, no_surat_penawaran, tgl_surat_penawaran', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,8 +80,8 @@ class SuratPenunjukanPemenang extends CActiveRecord
 			'nomor_ski' => 'Nomor Ski',
 			'tanggal_ski' => 'Tanggal Ski',
 			'no_ski' => 'No Ski',
-			'no_surat_penawaran => No Surat Penawaran',
-			'tgl_surat_penawaran => Tanggal Surat Penawaran',
+			'no_surat_penawaran' => 'No Surat Penawaran',
+			'tgl_surat_penawaran' => 'Tgl Surat Penawaran',
 		);
 	}
 
@@ -100,8 +103,8 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		$criteria->compare('nomor_ski',$this->nomor_ski,true);
 		$criteria->compare('tanggal_ski',$this->tanggal_ski,true);
 		$criteria->compare('no_ski',$this->no_ski,true);
-		$criteria->compare('tanggal_ski',$this->tgl_surat_penawaran,true);
-		$criteria->compare('no_ski',$this->no_surat_penawran,true);
+		$criteria->compare('no_surat_penawaran',$this->no_surat_penawaran,true);
+		$criteria->compare('tgl_surat_penawaran',$this->tgl_surat_penawaran,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
