@@ -6,11 +6,14 @@
  * The followings are the available columns in table 'surat_penunjukan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $lama_penyerahan
+ * @property integer $lama_penyerahan
  * @property integer $jaminan
  * @property string $nomor_ski
  * @property string $tanggal_ski
  * @property string $no_ski
+ *
+ * The followings are the available model relations:
+ * @property Dokumen $idDokumen
  */
 class SuratPenunjukanPemenang extends CActiveRecord
 {
@@ -41,8 +44,8 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'required'),
-			array('jaminan', 'numerical', 'integerOnly'=>true),
-			array('id_dokumen, nomor, lama_penyerahan, nomor_ski, no_ski', 'length', 'max'=>32),
+			array('lama_penyerahan, jaminan', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor, nomor_ski, no_ski', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),
@@ -57,6 +60,7 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
 
@@ -89,7 +93,7 @@ class SuratPenunjukanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('lama_penyerahan',$this->lama_penyerahan,true);
+		$criteria->compare('lama_penyerahan',$this->lama_penyerahan);
 		$criteria->compare('jaminan',$this->jaminan);
 		$criteria->compare('nomor_ski',$this->nomor_ski,true);
 		$criteria->compare('tanggal_ski',$this->tanggal_ski,true);

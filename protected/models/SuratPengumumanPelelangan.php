@@ -7,7 +7,10 @@
  * @property string $id_dokumen
  * @property string $nomor
  * @property string $keterangan
- * @property string $batas_sanggahan
+ * @property integer $batas_sanggahan
+ *
+ * The followings are the available model relations:
+ * @property Dokumen $idDokumen
  */
 class SuratPengumumanPelelangan extends CActiveRecord
 {
@@ -38,7 +41,8 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'required'),
-			array('id_dokumen, nomor, batas_sanggahan', 'length', 'max'=>32),
+			array('batas_sanggahan', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor', 'length', 'max'=>32),
 			array('keterangan', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -54,6 +58,7 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
 
@@ -84,7 +89,7 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('keterangan',$this->keterangan,true);
-		$criteria->compare('batas_sanggahan',$this->batas_sanggahan,true);
+		$criteria->compare('batas_sanggahan',$this->batas_sanggahan);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
