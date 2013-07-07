@@ -104,26 +104,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
-		</div>				
-		
-		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
-			<div class="row">
-				<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen yang sah'); ?>
-				<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_sah',array('size'=>56,'maxlength'=>10)); ?>
-				<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_sah'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($BAPP,'jumlah penyedia dengan dokumen tidak sah'); ?>
-				<?php echo $form->textField($BAPP,'jumlah_penyedia_dokumen_tidak_sah',array('size'=>56,'maxlength'=>10)); ?>
-				<?php echo $form->error($BAPP,'jumlah_penyedia_dokumen_tidak_sah'); ?>
-			</div>
-		<?php } ?>
-		
-		<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'idpenyedia',        

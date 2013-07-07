@@ -88,13 +88,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 			<?php } ?>
 			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAPP,'nomor'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAPP,'jumlah penyedia diundang'); ?>
-			<?php echo $form->textField($BAPP,'jumlah_penyedia_diundang',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($BAPP,'jumlah_penyedia_diundang'); ?>
-		</div>
+		</div>		
 	
 		<div class="row">
 				<?php 
