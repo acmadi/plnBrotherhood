@@ -121,7 +121,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
