@@ -23,10 +23,10 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 			case '1': {
 			    $this->widget('zii.widgets.CMenu', array(
 			        'items'=>array(
-			                array('label'=>'Total', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'1')),
-			                array('label'=>'Berlangsung', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'2')),
-			                array('label'=>'Selesai', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'3')),
-			                array('label'=>'Gagal', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'4')),
+			                array('label'=>'Berlangsung', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'1')),
+			                array('label'=>'Selesai', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'2')),
+			                array('label'=>'Gagal', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'3')),
+			                array('label'=>'Total', 'url'=>array('site/statistik', 'category'=>'1', 'chart'=>'4')),
 			        ),
 			    ));
 				break;
@@ -34,10 +34,10 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 			case '2': {
 			    $this->widget('zii.widgets.CMenu', array(
 			        'items'=>array(
-			                array('label'=>'Total', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'1')),
-			                array('label'=>'Berlangsung', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'2')),
-			                array('label'=>'Selesai', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'3')),
-			                array('label'=>'Gagal', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'4')),
+			                array('label'=>'Berlangsung', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'1')),
+			                array('label'=>'Selesai', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'2')),
+			                array('label'=>'Gagal', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'3')),
+			                array('label'=>'Total', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'4')),
 			        ),
 			    ));
 				break;
