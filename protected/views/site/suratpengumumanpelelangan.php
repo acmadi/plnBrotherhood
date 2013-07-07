@@ -89,7 +89,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Surat Pengumuman Pelelangan', array('docx/download','id'=>$SPP->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Surat Pengumuman Pemenang', array('docx/download','id'=>$SPP->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>
