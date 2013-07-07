@@ -297,6 +297,63 @@ class SiteController extends Controller
 				}
 				break;
 			}
+			case '2' : {
+				switch ($chart) {
+					case '1' : {
+						$div = Yii::app()->db->createCommand('select id_panitia from panitia where id_panitia != "-1" and status_panitia = "Aktif"')->queryAll();
+						while(list($k1, $v1)=each($div)) {
+							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where id_panitia = "' . $v1['id_panitia'] . '" and status != "-1"')->queryAll();
+							array_push($x, Panitia::model()->findByPk($v1['id_panitia'])->nama_panitia);
+							array_push($x, count($peng));
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan total';
+						$chartSubtitle = 'per PIC';
+						break;
+					}
+					case '2' : {
+						$div = Yii::app()->db->createCommand('select id_panitia from panitia where id_panitia != "-1" and status_panitia = "Aktif"')->queryAll();
+						while(list($k1, $v1)=each($div)) {
+							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where id_panitia = "' . $v1['id_panitia'] . '" and status != "-1" and status != "100" and status != "99"')->queryAll();
+							array_push($x, Panitia::model()->findByPk($v1['id_panitia'])->nama_panitia);
+							array_push($x, count($peng));
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang sedang berlangsung';
+						$chartSubtitle = 'per PIC';
+						break;
+					}
+					case '3' : {
+						$div = Yii::app()->db->createCommand('select id_panitia from panitia where id_panitia != "-1" and status_panitia = "Aktif"')->queryAll();
+						while(list($k1, $v1)=each($div)) {
+							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where id_panitia = "' . $v1['id_panitia'] . '" and status = "100"')->queryAll();
+							array_push($x, Panitia::model()->findByPk($v1['id_panitia'])->nama_panitia);
+							array_push($x, count($peng));
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang telah selesai';
+						$chartSubtitle = 'per PIC';
+						break;
+					}
+					case '4' : {
+						$div = Yii::app()->db->createCommand('select id_panitia from panitia where id_panitia != "-1" and status_panitia = "Aktif"')->queryAll();
+						while(list($k1, $v1)=each($div)) {
+							$x = array();
+							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where id_panitia = "' . $v1['id_panitia'] . '" and status = "99"')->queryAll();
+							array_push($x, Panitia::model()->findByPk($v1['id_panitia'])->nama_panitia);
+							array_push($x, count($peng));
+							array_push($chartData, $x);
+						}
+						$chartTitle = 'Pengadaan yang gagal';
+						$chartSubtitle = 'per PIC';
+						break;
+					}
+				}
+				break;
+			}
 		}
 
 		if (Yii::app()->user->isGuest) {
