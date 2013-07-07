@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -73,6 +73,19 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php } ?>
 		<div class="row">
 			<?php echo $form->labelEx($BAPP,'nomor'); ?>
+			<?php if ($Dok0==null) {?>
+				<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
+					Nomor Berita Acara Evaluasi Penawaran Sampul Satu : <?php echo $BAEP->nomor ?> <br/>
+				<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
+					Nomor Berita Acara Evaluasi Penawaran Tahap Satu : <?php echo $BAEP->nomor ?> <br/>
+				<?php } ?>
+			<?php } else { ?>
+				<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
+					Nomor Nota Dinas Undangan Pembukaan Penawaran Sampul Dua : <?php echo $SUPP->nomor ?> <br/>
+				<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
+					Nomor Nota Dinas Undangan Pembukaan Penawaran Tahap Dua : <?php echo $SUPP->nomor ?> <br/>
+				<?php } ?>
+			<?php } ?>
 			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAPP,'nomor'); ?>
 		</div>

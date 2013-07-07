@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -21,7 +21,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
                                     array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
                             ),
                         ));
@@ -90,7 +90,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>

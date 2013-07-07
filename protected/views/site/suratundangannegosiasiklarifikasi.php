@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -21,7 +21,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
                             'items'=>array(
-                                    array('label'=>'SU Negosiasi Klarifikasi', 'url'=>array($SUNK->isNewRecord?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+                                    array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array($SUNK->isNewRecord?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
                                     array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Negosiasi dan Klarifikasi"') == null)?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
                             ),
                         ));
@@ -36,7 +36,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<h4><b> Surat Undangan Negosiasi dan Klarifikasi </b></h4>
+		<h4><b> Nota Dinas Undangan Negosiasi dan Klarifikasi </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUNK,'nomor'); ?>
 			<?php if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){ ?>
@@ -84,7 +84,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Undangan Negosiasi dan Klarifikasi', array('docx/download','id'=>$SUNK->id_dokumen)); ?></li>
 			</ul>

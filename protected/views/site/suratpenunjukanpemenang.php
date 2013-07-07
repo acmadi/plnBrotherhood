@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -69,6 +69,13 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<h4><b> Surat Penunjukan Pemenang </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SPPM,'nomor'); ?>
+			<?php if ($cpengadaan->metode_pengadaan=="Penunjukan Langsung") {?>
+				Nomor Nota Dinas Penetapan Pemenang : <?php echo $NDPP->nomor ?> <br/>
+			<?php } else if ($cpengadaan->metode_pengadaan=="Pemilihan Langsung") {?>
+				Nomor Nota Dinas Pemberitahuan Pemenang : <?php echo $NDBP->nomor ?> <br/>
+			<?php } else if ($cpengadaan->metode_pengadaan=="Pelelangan") {?>
+				Nomor Surat Pengumuman Pemenang : <?php echo $SPP->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($SPPM,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SPPM,'nomor'); ?>
 		</div>
@@ -81,16 +88,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($SPPM,'nama Penyedia'); ?>
-			<?php echo $form->textField($SPPM,'nama_penyedia',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($SPPM,'nama_penyedia'); ?>
 		</div>
 		
 		<?php if($cpengadaan->metode_pengadaan == 'Pelelangan') { ?>
@@ -124,12 +125,6 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php } ?>
 		
 		<div class="row">
-			<?php echo $form->labelEx($SPPM,'jumlah harga keseluruhan'); ?>
-			<?php echo $form->textField($SPPM,'harga',array('size'=>56,'maxlength'=>255)); ?>
-			<?php echo $form->error($SPPM,'harga'); ?>
-		</div>
-		
-		<div class="row">
 			<?php echo $form->labelEx($SPPM,'batas waktu penyerahan (dalam satuan hari)'); ?>
 			<?php echo $form->textField($SPPM,'lama_penyerahan',array('size'=>56,'maxlength'=>100)); ?>
 			<?php echo $form->error($SPPM,'lama_penyerahan'); ?>
@@ -149,7 +144,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Pengumuman Pelelangan', array('docx/download','id'=>$SPPM->id_dokumen)); ?></li>
 			</ul>

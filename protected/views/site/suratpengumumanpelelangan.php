@@ -39,9 +39,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<h4><b> Surat Pengumuman Pelelangan </b></h4>
+		<h4><b> Surat Pengumuman Pemenang </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SPP,'nomor'); ?>
+			Nomor Nota Dinas Penetapan Pemenang : <?php echo $NDPP->nomor ?> <br/>
 			<?php echo $form->textField($SPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SPP,'nomor'); ?>
 		</div>
@@ -54,22 +55,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($SPP,'nama Penyedia'); ?>
-			<?php echo $form->textField($SPP,'nama_penyedia',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($SPP,'nama_penyedia'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($SPP,'harga Penawaran'); ?>
-			<?php echo $form->textField($SPP,'harga_penawaran',array('size'=>56,'maxlength'=>255)); ?>
-			<?php echo $form->error($SPP,'harga_penawaran'); ?>
 		</div>
 		
 		<div class="row">
@@ -98,7 +87,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Pengumuman Pelelangan', array('docx/download','id'=>$SPP->id_dokumen)); ?></li>
 			</ul>

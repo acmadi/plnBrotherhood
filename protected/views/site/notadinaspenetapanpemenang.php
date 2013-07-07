@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -68,6 +68,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<h4><b> Nota Dinas Penetapan Pemenang </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'nomor'); ?>
+			Nomor Nota Dinas Usulan Pemenang : <?php echo $NDUP->nomor ?> <br/>
 			<?php echo $form->textField($NDPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($NDPP,'nomor'); ?>
 		</div>
@@ -80,74 +81,12 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'nama Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'nama_penyedia',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($NDPP,'nama_penyedia'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'alamat Penyedia'); ?>
-			<?php echo $form->textArea($NDPP,'alamat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($NDPP,'alamat'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'NPWP Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'NPWP',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'NPWP'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'biaya Penyedia'); ?>
-			<?php echo $form->textField($NDPP,'biaya',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($NDPP,'biaya'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'tanggal Pelaksanaan'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$NDPP,
-					'attribute'=>'waktu_pelaksanaan',
-					'value'=>$NDPP->waktu_pelaksanaan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
-					),
-			));?>
-			<?php echo $form->error($NDPP,'tanggal_undangan'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'tempat Penyerahan'); ?>
-			<?php echo $form->textArea($NDPP,'tempat_penyerahan',array('cols'=>43,'rows'=>3, 'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'tempat_penyerahan'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'sumber dana'); ?>
-			<?php echo $form->textField($NDPP,'sumber_dana',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'sumber_dana'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'jangka waktu berlaku'); ?>
-			<?php echo $form->textField($NDPP,'jangka_waktu_berlaku',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'jangka_waktu_berlaku'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($NDPP,'jangka waktu deadline'); ?>
-			<?php echo $form->textField($NDPP,'jangka_waktu_deadline',array('size'=>56,'maxlength'=>20)); ?>
-			<?php echo $form->error($NDPP,'jangka_waktu_deadline'); ?>
-		</div>
-
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($NDPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
@@ -162,7 +101,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Nota Dinas Penetapan Pemenang', array('docx/download','id'=>$NDPP->id_dokumen)); ?></li>
 			</ul>

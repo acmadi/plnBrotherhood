@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -57,6 +57,11 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<?php } ?>
 		<div class="row">
 			<?php echo $form->labelEx($BAEP,'nomor'); ?>
+			<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
+				Nomor Berita Acara Pembukaan Sampul Dua : <?php echo $BAPP->nomor ?> <br/>
+			<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
+				Nomor Berita Acara Pembukaan Tahap Dua : <?php echo $BAPP->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAEP,'nomor'); ?>
 		</div>
@@ -69,60 +74,12 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen1->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen1,'tanggal'); ?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'pemenang 1'); ?>
-			<?php echo $form->textField($BAEP,'pemenang',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($BAEP,'pemenang'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'alamat 1'); ?>
-			<?php echo $form->textArea($BAEP,'alamat',array('cols'=>40,'rows'=>3, 'maxlength'=>255)); ?>
-			<?php echo $form->error($BAEP,'alamat'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'NPWP 1'); ?>
-			<?php echo $form->textField($BAEP,'NPWP',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($BAEP,'NPWP'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'nilai 1'); ?>
-			<?php echo $form->textField($BAEP,'nilai',array('size'=>56,'maxlength'=>255)); ?>
-			<?php echo $form->error($BAEP,'nilai'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'pemenang 2'); ?>
-			<?php echo $form->textField($BAEP,'pemenang_2',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($BAEP,'pemenang_2'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'alamat 2'); ?>
-			<?php echo $form->textArea($BAEP,'alamat_2',array('cols'=>40,'rows'=>3, 'maxlength'=>255)); ?>
-			<?php echo $form->error($BAEP,'alamat_2'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'NPWP 2'); ?>
-			<?php echo $form->textField($BAEP,'NPWP_2',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($BAEP,'NPWP_2'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($BAEP,'nilai 2'); ?>
-			<?php echo $form->textField($BAEP,'nilai_2',array('size'=>56,'maxlength'=>255)); ?>
-			<?php echo $form->error($BAEP,'nilai_2'); ?>
-		</div>
-	
 		<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(

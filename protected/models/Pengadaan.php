@@ -634,37 +634,40 @@ class Pengadaan extends CActiveRecord
 	}
 	
 	public function dapatkanStatus(){
-		if($this->status == '2' || $this->status == '1' || $this->status == '0'){
-			return 'Pembuatan Dokumen Pengadaan';
-		}		
-		else if($this->status == '3'){
-			return 'Kualifikasi';
-		}		
-		else if($this->status == '5' || $this->status == '4'){
-			return 'Pengambilan Dokumen Pengadaan';
+		if($this->status == '0'){
+			return 'Penentuan Metode';
 		}
+		else if($this->status == '1' || $this->status == '2' || $this->status == '3'){
+			return 'Prakualifikasi';
+		}		
+		if($this->status == '4' || $this->status == '5'){
+			return 'Pembuatan Dokumen Pengadaan';
+		}	
 		else if($this->status == '6' || $this->status == '7'){
+			return 'Undangan Pengambilan Dokumen Pengadaan';
+		}
+		else if($this->status == '8'){
 			return 'Aanwijzing';
 		}
-		else if($this->status == '8' || $this->status == '9'){
+		else if($this->status == '9'){
 			return 'Penawaran';
 		}
 		else if($this->status == '10'){
 			return 'Evaluasi';
 		}
-		else if($this->status == '11' || $this->status == '12'){
+		else if($this->status == '11'){
 			return 'Penawaran 2';
 		}
-		else if($this->status == '13'){
+		else if($this->status == '12'){
 			return 'Evaluasi 2';
 		}
-		else if($this->status == '14' || $this->status == '15'){
+		else if($this->status == '13'){
 			return 'Klarifikasi dan Negosiasi';
 		}
-		else if($this->status == '19' || $this->status == '20' || $this->status == '16' || $this->status == '17' || $this->status == '18'){
+		else if($this->status == '14' || $this->status == '15' || $this->status == '16' || $this->status == '17' || $this->status == '18'){
 			return 'Penentuan Pemenang';
 		}
-		else if($this->status == '21'){
+		else if($this->status == '19'){
 			return 'Kontrak';
 		}
                 else if($this->status == '99'){

@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -50,12 +50,17 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		)); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
-			<h4><b> Surat Undangan Pembukaan Penawaran Sampul Dua </b></h4>
+			<h4><b> Nota Dinas Undangan Pembukaan Penawaran Sampul Dua </b></h4>
 		<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
-			<h4><b> Surat Undangan Pembukaan Penawaran Tahap Dua </b></h4>
+			<h4><b> Nota Dinas Undangan Pembukaan Penawaran Tahap Dua </b></h4>
 		<?php } ?>
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'nomor'); ?>
+			<?php if($cpengadaan->metode_penawaran=="Dua Sampul") { ?>
+				Nomor Berita Acara Evaluasi Pembukaan Penawaran Sampul Satu : <?php echo $BAEP->nomor ?> <br/>
+			<?php } else if ($cpengadaan->metode_penawaran=="Dua Tahap") { ?>
+				Nomor Berita Acara Evaluasi Pembukaan Penawaran Tahap Satu : <?php echo $BAEP->nomor ?> <br/>
+			<?php } ?>
 			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($SUPP,'nomor'); ?>
 		</div>
@@ -120,7 +125,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
 					<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>

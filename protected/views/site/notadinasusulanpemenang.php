@@ -1,9 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
 $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -69,6 +69,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<h4><b> Nota Dinas Usulan Pemenang </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($NDUP,'nomor'); ?>
+			Nomor Berita Acara Negosiasi dan Klarifikasi : <?php echo $BANK->nomor ?> <br/>
 			<?php echo $form->textField($NDUP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($NDUP,'nomor'); ?>
 		</div>
@@ -81,89 +82,11 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
-		
-		<?php if($cpengadaan->metode_pengadaan == 'Penunjukan Langsung') { ?>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'nama Penyedia'); ?>
-				<?php echo $form->textField($NDUP,'nama_penyedia',array('size'=>56,'maxlength'=>100)); ?>
-				<?php echo $form->error($NDUP,'nama_penyedia'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'alamat Penyedia'); ?>
-				<?php echo $form->textArea($NDUP,'alamat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($NDUP,'alamat'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'NPWP Penyedia'); ?>
-				<?php echo $form->textField($NDUP,'NPWP',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($NDUP,'NPWP'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'biaya Penyedia'); ?>
-				<?php echo $form->textField($NDUP,'biaya',array('size'=>56,'maxlength'=>50)); ?>
-				<?php echo $form->error($NDUP,'biaya'); ?>
-			</div>
-			
-		<?php } else { ?>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'nama Penyedia 1'); ?>
-				<?php echo $form->textField($NDUP,'nama_penyedia',array('size'=>56,'maxlength'=>100)); ?>
-				<?php echo $form->error($NDUP,'nama_penyedia'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'alamat Penyedia 1'); ?>
-				<?php echo $form->textArea($NDUP,'alamat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($NDUP,'alamat'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'NPWP Penyedia 1'); ?>
-				<?php echo $form->textField($NDUP,'NPWP',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($NDUP,'NPWP'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'biaya Penyedia 1'); ?>
-				<?php echo $form->textField($NDUP,'biaya',array('size'=>56,'maxlength'=>50)); ?>
-				<?php echo $form->error($NDUP,'biaya'); ?>
-			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'nama Penyedia 2'); ?>
-				<?php echo $form->textField($NDUP,'nama_penyedia_2',array('size'=>56,'maxlength'=>100)); ?>
-				<?php echo $form->error($NDUP,'nama_penyedia_2'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'alamat Penyedia 2'); ?>
-				<?php echo $form->textArea($NDUP,'alamat_2',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($NDUP,'alamat_2'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'NPWP Penyedia 2'); ?>
-				<?php echo $form->textField($NDUP,'NPWP_2',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($NDUP,'NPWP_2'); ?>
-			</div>
-		
-			<div class="row">
-				<?php echo $form->labelEx($NDUP,'biaya Penyedia 2'); ?>
-				<?php echo $form->textField($NDUP,'biaya_2',array('size'=>56,'maxlength'=>50)); ?>
-				<?php echo $form->error($NDUP,'biaya_2'); ?>
-			</div>
-		
-		<?php } ?>
 
 		<div class="row">
 			<?php echo $form->labelEx($NDUP,'tanggal Pelaksanaan'); ?>
@@ -173,10 +96,10 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 					'value'=>$NDUP->waktu_pelaksanaan,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
-			<?php echo $form->error($NDUP,'tanggal_undangan'); ?>
+			<?php echo $form->error($NDUP,'waktu_pelaksanaan'); ?>
 		</div>
 
 		<div class="row">
@@ -214,7 +137,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Nota Dinas Usulan Pemenang', array('docx/download','id'=>$NDUP->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Pakta Integritas Akhir Panitia/Pejabat', array('docx/download','id'=>$PIP2->id_dokumen)); ?></li>

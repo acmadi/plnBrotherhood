@@ -62,11 +62,11 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		)); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
-			<h4><b> Surat Undangan Pembukaan Penawaran </b></h4>
+			<h4><b> Nota Dinas Undangan Pembukaan Penawaran </b></h4>
 		<?php } else if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
-			<h4><b> Surat Undangan Pembukaan Penawaran Sampul Satu </b></h4>
+			<h4><b> Nota Dinas Undangan Pembukaan Penawaran Sampul Satu </b></h4>
 		<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
-			<h4><b> Surat Undangan Pembukaan Penawaran Tahap Satu </b></h4>
+			<h4><b> Nota Dinas Undangan Pembukaan Penawaran Tahap Satu </b></h4>
 		<?php } ?>
 		
 		<div class="row">

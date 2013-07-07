@@ -54,7 +54,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<h4><b> Surat Undangan Aanwijzing </b></h4>
+		<h4><b> Nota Dinas Undangan Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($SUP,'nomor'); ?>
 			<?php if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pelelangan"){ ?>
@@ -126,7 +126,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			
 		<div style="border-top:1px solid lightblue">
 		<br/>
-			<h4><b> Buat Dokumen </b></h4>
+			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Surat Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>			
 			</ul>
