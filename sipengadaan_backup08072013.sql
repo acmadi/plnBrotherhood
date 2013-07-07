@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 07, 2013 at 08:02 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jul 07, 2013 at 05:31 PM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -203,8 +203,7 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (9, 'Nota Dinas Permintaan', '2013-07-17', 'Jakarta', 3, 'Selesai'),
 (10, 'TOR', '2013-07-17', 'Jakarta', 3, 'Selesai'),
 (11, 'RAB', '2013-07-17', 'Jakarta', 3, 'Selesai'),
-(12, 'Nota Dinas Perintah Pengadaan', '2013-07-07', 'Jakarta', 3, 'Belum Selesai'),
-(14, 'RKS', '2013-07-08', 'Jakarta', 1, 'Belum Selesai');
+(12, 'Nota Dinas Perintah Pengadaan', '2013-07-07', 'Jakarta', 3, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -507,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `penetapan_pemenang` varchar(256) NOT NULL,
   PRIMARY KEY (`id_penerima`),
   KEY `id_pengadaan` (`id_pengadaan`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -547,11 +546,9 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Sepatu Futsal', 'divman', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '8', 0, 3, 'Pelelangan', 'Satu Sampul', 'Pasca Kualifikasi'),
+(1, 'Pengadaan Sepatu Futsal', 'divman', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 3, 'Pelelangan', '-', '-'),
 (2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 2, 'Pemilihan Langsung', '-', '-'),
-(3, 'Pengadaan Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 2, 'Penunjukan Langsung', '-', '-'),
-(10, 'Pengadaan 2', 'divsi', 'Barang dan Jasa', '-', '2013-07-09', '2013-07-10', '100', 1000000000, 3, 'Penunjukan Langsung', '-', '-'),
-(12, 'Pengadaan 1', 'divtrans', 'Barang dan Jasa', 'Apapun', '2013-07-02', '2013-07-03', '99', 10000000, 2, 'Pelelangan', 'Satu Sampul', '-');
+(3, 'Pengadaan Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 2, 'Penunjukan Langsung', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -585,24 +582,7 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
-
---
--- Dumping data for table `rincian_rks`
---
-
-INSERT INTO `rincian_rks` (`id_rincian`, `nama_rincian`, `id_dokumen`) VALUES
-(116, 'Cover', 14),
-(117, 'Daftar Isi', 14),
-(118, 'Isi', 14),
-(119, 'Lampiran 1', 14),
-(120, 'Lampiran 2', 14),
-(121, 'Lampiran 3', 14),
-(122, 'Lampiran 4', 14),
-(123, 'Lampiran 5', 14),
-(124, 'Lampiran 6', 14),
-(125, 'Lampiran 7', 14),
-(126, 'Lampiran ba', 14);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=116 ;
 
 -- --------------------------------------------------------
 
@@ -657,13 +637,6 @@ CREATE TABLE IF NOT EXISTS `rks` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `rks`
---
-
-INSERT INTO `rks` (`id_dokumen`, `nomor`, `tipe_rks`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_awal_pemasukan_penawaran1`, `tanggal_akhir_pemasukan_penawaran1`, `waktu_pemasukan_penawaran1`, `tempat_pemasukan_penawaran1`, `tanggal_pembukaan_penawaran1`, `waktu_pembukaan_penawaran1`, `tempat_pembukaan_penawaran1`, `tanggal_evaluasi_penawaran1`, `waktu_evaluasi_penawaran1`, `tempat_evaluasi_penawaran1`, `tanggal_awal_pemasukan_penawaran2`, `tanggal_akhir_pemasukan_penawaran2`, `waktu_pemasukan_penawaran2`, `tempat_pemasukan_penawaran2`, `tanggal_pembukaan_penawaran2`, `waktu_pembukaan_penawaran2`, `tempat_pembukaan_penawaran2`, `tanggal_evaluasi_penawaran2`, `waktu_evaluasi_penawaran2`, `tempat_evaluasi_penawaran2`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_usulan_pemenang`, `waktu_usulan_pemenang`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tanggal_pemberitahuan_pemenang`, `waktu_pemberitahuan_pemenang`, `tanggal_penunjukan_pemenang`, `waktu_penunjukan_pemenang`, `sistem_evaluasi_penawaran`, `jangka_waktu_penyerahan`, `tanggal_paling_lambat_penyerahan`, `jangka_waktu_berlaku_jaminan`, `lama_waktu_tambahan`) VALUES
-(14, '002/DIVMUM/2013', 1, '2013-07-09', '2013-07-10', '10:00:00', '-', '2013-07-11', '2013-07-12', '12:00:00', 'PLN', '2013-07-15', '09:00:00', 'PLN', '2013-07-16', '09:00:00', 'PLN', '1970-01-01', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '2013-07-16', '14:00:00', 'PLN', '2013-07-17', '17:00:00', '2013-07-18', '13:00:00', '2013-07-19', '12:00:00', '2013-07-22', '15:00:00', 'Nilai', 3, '2013-07-23', 5, 14);
-
 -- --------------------------------------------------------
 
 --
@@ -703,8 +676,6 @@ CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
   `nomor_ski` varchar(32) NOT NULL,
   `tanggal_ski` date NOT NULL,
   `no_ski` varchar(32) NOT NULL,
-  `no_surat_penawaran` varchar(256) NOT NULL,
-  `tgl_surat_penawaran` date NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
