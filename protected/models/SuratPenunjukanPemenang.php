@@ -77,6 +77,8 @@ class SuratPenunjukanPemenang extends CActiveRecord
 			'nomor_ski' => 'Nomor Ski',
 			'tanggal_ski' => 'Tanggal Ski',
 			'no_ski' => 'No Ski',
+			'no_surat_penawaran => No Surat Penawaran',
+			'tgl_surat_penawaran => Tanggal Surat Penawaran',
 		);
 	}
 
@@ -98,6 +100,8 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		$criteria->compare('nomor_ski',$this->nomor_ski,true);
 		$criteria->compare('tanggal_ski',$this->tanggal_ski,true);
 		$criteria->compare('no_ski',$this->no_ski,true);
+		$criteria->compare('tanggal_ski',$this->tgl_surat_penawaran,true);
+		$criteria->compare('no_ski',$this->no_surat_penawran,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

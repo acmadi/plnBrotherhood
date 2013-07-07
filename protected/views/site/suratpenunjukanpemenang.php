@@ -81,6 +81,25 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row">
+				<?php echo $form->labelEx($SPPM,'Nomor Surat Penawaran'); ?>
+				<?php echo $form->textField($SPPM,'nomor_surat_penawaran',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->error($SPPM,'nomor_surat_penawaran'); ?>
+		</div>
+		<div class="row">
+			<?php echo $form->labelEx($SPPM,'Tanggal Surat Penawaran'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$SPPM,
+					'attribute'=>'tanggal_surat_penawaran',
+					'value'=>$SPPM->tgl_surat_penawaran,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
+			<?php echo $form->error($SPPM,'tgl_surat_penawaran'); ?>
+		</div>
+		
+		<div class="row">
 			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$Dokumen0,
@@ -114,7 +133,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					),
 			));?>
 			<?php echo $form->error($SPPM,'tanggal'); ?>
-		</div>
+			</div>
 		
 			<div class="row">
 				<?php echo $form->labelEx($SPPM,'No.SKI'); ?>
