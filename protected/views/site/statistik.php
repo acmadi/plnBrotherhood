@@ -13,6 +13,7 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 	<ul>
 		<li><?php echo CHtml::link('Pengadaan per divisi', array('site/statistik', 'category'=>'1', 'chart'=>'1')) ?></li>
 		<li><?php echo CHtml::link('Pengadaan per PIC', array('site/statistik', 'category'=>'2', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Pengadaan per metode pengadaan', array('site/statistik', 'category'=>'3', 'chart'=>'1')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 </div>
@@ -38,6 +39,17 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 			                array('label'=>'Selesai', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'2')),
 			                array('label'=>'Gagal', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'3')),
 			                array('label'=>'Total', 'url'=>array('site/statistik', 'category'=>'2', 'chart'=>'4')),
+			        ),
+			    ));
+				break;
+			}
+			case '3': {
+			    $this->widget('zii.widgets.CMenu', array(
+			        'items'=>array(
+			                array('label'=>'Berlangsung', 'url'=>array('site/statistik', 'category'=>'3', 'chart'=>'1')),
+			                array('label'=>'Selesai', 'url'=>array('site/statistik', 'category'=>'3', 'chart'=>'2')),
+			                array('label'=>'Gagal', 'url'=>array('site/statistik', 'category'=>'3', 'chart'=>'3')),
+			                array('label'=>'Total', 'url'=>array('site/statistik', 'category'=>'3', 'chart'=>'4')),
 			        ),
 			    ));
 				break;
@@ -96,6 +108,20 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 					$this->widget('zii.widgets.grid.CGridView', array(
 						'dataProvider'=>Pengadaan::model()->searchStatistikPanitia($pan, $chart),
 						"ajaxUpdate"=>"false",
+						'columns'=>array(
+							array(
+								'name'=>'No',
+								'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
+							),
+							'nama_pengadaan',
+						),
+					));
+					break;
+				}
+				case '3' : {
+					// $pan = Panitia::model()->find('metode_pengadaan = "' . $detail . '"')->id_panitia;
+					$this->widget('zii.widgets.grid.CGridView', array(
+						'dataProvider'=>Pengadaan::model()->searchStatistikMetodePengadaan($detail, $chart),						
 						'columns'=>array(
 							array(
 								'name'=>'No',
