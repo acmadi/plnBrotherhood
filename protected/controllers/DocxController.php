@@ -934,9 +934,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nama#', $namakadiv);
 			$this->renderDocx("Nota Dinas Permintaan TOR RAB.docx", true);
 		}
-
-		
-		
 //	=================================================================Surat-Surat=================================================================
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			
@@ -978,7 +975,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#penyedia#', $this->getPenyediaLulusX($Peng->id_pengadaan,'undangan_pengambilan_dokumen'));
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
-
 		else if ($Dok->nama_dokumen == "Surat Undangan Aanwijzing") {
 			
 			$SUP=SuratUndanganPenjelasan::model()->findByPk($id);

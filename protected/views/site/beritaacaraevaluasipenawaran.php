@@ -126,7 +126,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 				<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
 					<li><?php echo CHtml::link('Daftar Hadir Evaluasi Penawaran', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
-					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran', array('xlsx/download','id'=>$BAEP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Evaluasi Penawaran', array('xlsx/download','id'=>$BAEP->id_dokumen)); ?></li>
 				<?php } else if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
 					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Satu', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
 					<li><?php echo CHtml::link('Daftar Hadir Evaluasi Penawaran Sampul Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
