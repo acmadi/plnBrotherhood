@@ -119,7 +119,6 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan';
 					break;
 				}
 				case '3' : {
-					// $pan = Panitia::model()->find('metode_pengadaan = "' . $detail . '"')->id_panitia;
 					$this->widget('zii.widgets.grid.CGridView', array(
 						'dataProvider'=>Pengadaan::model()->searchStatistikMetodePengadaan($detail, $chart),						
 						'columns'=>array(
