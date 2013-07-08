@@ -978,58 +978,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#penyedia#', $this->getPenyediaLulusX($Peng->id_pengadaan,'undangan_pengambilan_dokumen'));
 			$this->renderDocx("Surat Undangan Pengambilan Dokumen Pengadaan.docx", true);
 		}
-/*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
-			
-			$this->doccy->newFile('temp.docx');
-			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->doccy->phpdocx->assign('#6#', '.............................................');
-			$this->doccy->phpdocx->assign('#7#', '.............................................');
-			$this->doccy->phpdocx->assign('#8#', '.............................................');
-			$this->doccy->phpdocx->assign('#9#', '.............................................');
-			$this->doccy->phpdocx->assign('#10#', '.............................................');
-			$this->doccy->phpdocx->assign('#11#', '.............................................');
-			$this->doccy->phpdocx->assign('#12#', '.............................................');
-			$this->doccy->phpdocx->assign('#13#', '.............................................');
-			$this->doccy->phpdocx->assign('#14#', '.............................................');
-			$this->doccy->phpdocx->assign('#15#', '.............................................');
-			$this->doccy->phpdocx->assign('#16#', '.............................................');
-			$this->doccy->phpdocx->assign('#17#', '.............................................');
-			$this->renderDocx("Surat Undangan Pembukaan Penawaran.docx", true);
-		}*/
-/*Belum ada template*/		/*else if ($Dok->nama_dokumen == "Surat Undangan Negosiasi dan Klarifikasi"){
-			
-			$this->doccy->newFile('temp.docx');
-			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
-			$this->doccy->phpdocx->assign('#1#', '.............................................');
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
-			$this->doccy->phpdocx->assign('#4#', '.............................................');
-			$this->doccy->phpdocx->assign('#5#', '.............................................');
-			$this->doccy->phpdocx->assign('#6#', '.............................................');
-			$this->doccy->phpdocx->assign('#7#', '.............................................');
-			$this->doccy->phpdocx->assign('#8#', '.............................................');
-			$this->doccy->phpdocx->assign('#9#', '.............................................');
-			$this->doccy->phpdocx->assign('#10#', '.............................................');
-			$this->doccy->phpdocx->assign('#11#', '.............................................');
-			$this->doccy->phpdocx->assign('#12#', '.............................................');
-			$this->doccy->phpdocx->assign('#13#', '.............................................');
-			$this->doccy->phpdocx->assign('#14#', '.............................................');
-			$this->doccy->phpdocx->assign('#15#', '.............................................');
-			$this->doccy->phpdocx->assign('#16#', '.............................................');
-			$this->doccy->phpdocx->assign('#17#', '.............................................');
-			$this->renderDocx("Surat Undangan Negosiasi.docx", true);
-		}*/
+
 		else if ($Dok->nama_dokumen == "Surat Undangan Aanwijzing") {
 			
 			$SUP=SuratUndanganPenjelasan::model()->findByPk($id);
@@ -1929,7 +1878,7 @@ class DocxController extends Controller
 			$skpanitia2 = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
 			
 			if($Peng->metode_pengadaan == 'Pelelangan'){
-				$this->doccy->newFile('12c Berita Acara Klarifikasi dan Negosiasi.docx');
+				$this->doccy->newFile('12c Berita Acara Klarifikasi.docx');
 			
 				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -1973,7 +1922,12 @@ class DocxController extends Controller
 				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);				
 			}
 			
-			$this->renderDocx("Berita Acara Negosiasi Klarifikasi.docx", true);
+			if($Peng->metode_pengadaan == 'Pelelangan'){
+				$this->renderDocx("Berita Acara Klarifikasi.docx", true);
+			}else{
+				$this->renderDocx("Berita Acara Negosiasi Klarifikasi.docx", true);
+			}
+			
 		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran"){
 			
