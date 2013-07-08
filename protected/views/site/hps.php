@@ -89,7 +89,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Hps', array('docx/download','id'=>$Hps->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Hps', array('xlsx/download','id'=>$Hps->id_dokumen)); ?></li>
 					</ul>
 				</div>
 			<?php } ?>
