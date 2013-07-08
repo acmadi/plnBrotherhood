@@ -92,7 +92,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); ?></li>
+				<li><?php 
+						if(Pengadaan::model()->findByPk($id)->metode_pengadaan == 'Pelelangan'){
+							echo CHtml::link('Berita Acara Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); 
+						}else{
+							echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); 
+						}
+						
+					?>
+				</li>
 				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>

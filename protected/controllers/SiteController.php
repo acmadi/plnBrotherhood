@@ -1133,7 +1133,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionPrakualifikasi()
+	public function actionDokumenprakualifikasi()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -1236,7 +1236,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionEditPrakualifikasi()
+	public function actionEditdokumenprakualifikasi()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
