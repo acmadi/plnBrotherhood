@@ -85,7 +85,7 @@
 		'columns'=>array(
 			array(
 				'name'=>'Nama berkas',
-				'value'=>'$data->nama_file',
+				'value'=>'$data->nama_file.".".$data->format_dokumen',
 			),
 			array(
 				'name'=>'Tanggal unggah',
