@@ -111,12 +111,12 @@ class XlsxController extends Controller
 		$cdokumen = Dokumen::model()->findByPk($id);
 		$cpengadaan = Pengadaan::model()->findByPk($cdokumen->id_pengadaan);
 		$tgl = $cdokumen->tanggal;
-		$tanggal = RupiahMaker::TerbilangMaker(Tanggal::getTanggalLengkap($tgl));
+		$tanggal = Tanggal::getTanggalLengkap($tgl);
 		$hari = Tanggal::getHari($tgl);
 		$bulan = Tanggal::getBulanA($tgl);
-		$tahun = RupiahMaker::TerbilangMaker(Tanggal::getTahhun($tgl));
+		$tahun = RupiahMaker::TerbilangMaker(Tanggal::getTahun($tgl));
 		$tgllengkap = Tanggal::getTanggalLengkap($tgl);
-		$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+		$dokrks=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "RKS"');
 		$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 		$norks = $rks->nomor;
 		$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
@@ -148,14 +148,7 @@ class XlsxController extends Controller
 		}
 		else if($cdokumen->nama_dokumen == 'Berita Acara Pembukaan Penawaran Sampul Satu') {
 			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
-					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
-					$this->assign($objPHPExcel, "#hari#", $hari);
-					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
-					$this->assign($objPHPExcel, "#bulan#", $bulan);
-					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
-					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
@@ -163,14 +156,7 @@ class XlsxController extends Controller
 		}
 		else if($cdokumen->nama_dokumen == 'Berita Acara Pembukaan Penawaran Sampul Dua') {
 			$objPHPExcel = $objReader->load($templatePath . '13.a-Lam BA Pembukaan 2 SAMPUL.xlsx');
-					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
-					$this->assign($objPHPExcel, "#hari#", $hari);
-					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
-					$this->assign($objPHPExcel, "#bulan#", $bulan);
-					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
-					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
@@ -178,14 +164,7 @@ class XlsxController extends Controller
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Satu') {
 			$objPHPExcel = $objReader->load($templatePath . '15.a-Lam BA Evaluasi  1 Sampul.xlsx');
-					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
-					$this->assign($objPHPExcel, "#hari#", $hari);
-					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
-					$this->assign($objPHPExcel, "#bulan#", $bulan);
-					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
-					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
@@ -193,14 +172,7 @@ class XlsxController extends Controller
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Dua') {
 			$objPHPExcel = $objReader->load($templatePath . '16.a-Lam BA Evaluasi 2 SAMPUL.xlsx');
-					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
-					$this->assign($objPHPExcel, "#hari#", $hari);
-					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
-					$this->assign($objPHPExcel, "#bulan#", $bulan);
-					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
-					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
@@ -208,14 +180,7 @@ class XlsxController extends Controller
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Dua Sistem Bobot') {
 			$objPHPExcel = $objReader->load($templatePath . '16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx');
-					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
-					$this->assign($objPHPExcel, "#hari#", $hari);
-					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
-					$this->assign($objPHPExcel, "#bulan#", $bulan);
-					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
-					$this->assign($objPHPExcel, "#panitia#", strtoupper($panitia));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
