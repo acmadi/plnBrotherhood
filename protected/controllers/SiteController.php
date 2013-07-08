@@ -220,8 +220,17 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$this->render('kontrak');
+			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"') || UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$model=new Pengadaan('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Pengadaan'])){
+					$model->attributes=$_GET['Pengadaan'];                                       
+				}	
+				
+				$this->render('kontrak',array(
+					'model'=>$model,
+				));
+				
 			}
 		}
 	}
