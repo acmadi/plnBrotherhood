@@ -497,6 +497,11 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+					$Pengadaan->status='1';
+				} else { 
+					$Pengadaan->status='4';
+				}
 				
 				if(isset($_POST['Pengadaan']))
 				{
@@ -4459,7 +4464,6 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$NDBP->attributes=$_POST['NotaDinasPemberitahuanPemenang'];
-					$NDBP->waktu_pelaksanaan=date('Y-m-d',strtotime($NDBP->waktu_pelaksanaan));
 					$valid=$NDBP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -4499,7 +4503,6 @@ class SiteController extends Controller
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Pemberitahuan Pemenang"');
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				$NDBP=NotaDinasPemberitahuanPemenang::model()->findByPk($Dokumen0->id_dokumen);
-				$NDBP->waktu_pelaksanaan=Tanggal::getTanggalStrip($NDBP->waktu_pelaksanaan);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);

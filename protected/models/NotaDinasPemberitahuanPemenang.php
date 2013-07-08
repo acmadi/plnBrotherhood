@@ -6,8 +6,8 @@
  * The followings are the available columns in table 'nota_dinas_pemberitahuan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $waktu_pelaksanaan
- * @property string $tempat_penyerahan
+ * @property string $keterangan
+ * @property integer $batas_sanggahan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -40,13 +40,14 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, waktu_pelaksanaan, tempat_penyerahan', 'required'),
+			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'required'),
+			array('batas_sanggahan', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('tempat_penyerahan', 'length', 'max'=>256),
+			array('keterangan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, waktu_pelaksanaan, tempat_penyerahan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,8 +71,8 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'waktu_pelaksanaan' => 'Waktu Pelaksanaan',
-			'tempat_penyerahan' => 'Tempat Penyerahan',
+			'keterangan' => 'Keterangan',
+			'batas_sanggahan' => 'Batas Sanggahan',
 		);
 	}
 
@@ -88,8 +89,8 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('waktu_pelaksanaan',$this->waktu_pelaksanaan,true);
-		$criteria->compare('tempat_penyerahan',$this->tempat_penyerahan,true);
+		$criteria->compare('keterangan',$this->keterangan,true);
+		$criteria->compare('batas_sanggahan',$this->batas_sanggahan);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

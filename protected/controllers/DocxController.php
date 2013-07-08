@@ -871,6 +871,9 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
 			$this->doccy->newFile('14b Nota Dinas Pemberitahuan Pemenang.docx');
+			
+			$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
+			
 			$ndbp=NotaDinasPemberitahuanPemenang::model()->findByPk($Dok->id_dokumen);		
 			$doksupph = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 			$supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
@@ -890,16 +893,16 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
 			$this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
 			$this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
-			$this->doccy->phpdocx->assign('#penyedia#', $ndbp->nama_penyedia);
-			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($ndbp->harga_penawaran));
+			$this->doccy->phpdocx->assign('#penyedia#', $PP->perusahaan);
+			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($PP->nilai));
 			$this->doccy->phpdocx->assign('#keterangan#', $ndbp->keterangan);
-			$this->doccy->phpdocx->assign('#deadline#', $spp->batas_sanggahan);
+			$this->doccy->phpdocx->assign('#deadline#', $ndbp->batas_sanggahan);
 			$this->doccy->phpdocx->assign('#deadlineterbilang#', RupiahMaker::terbilangMaker($ndbp->batas_sanggahan));
 			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_pengadaan);
 			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#kalimat#', $kal);
-			$this->doccy->phpdocx->assign('#Pejabat/Panitia#', strtoupper($Panitia->jenis_panitia));
-			$this->renderDocx("Surat Pengumuman Pelelangan", true);
+			$this->doccy->phpdocx->assign('#pejabat_panitia#', strtoupper($Panitia->jenis_panitia));
+			$this->renderDocx("Nota Dinas Pemberitahuan Pemenang", true);
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Permintaan TOR/RAB"){
 			$NDPTR=NotaDinasPermintaanTorRab::model()->findByPk($id);

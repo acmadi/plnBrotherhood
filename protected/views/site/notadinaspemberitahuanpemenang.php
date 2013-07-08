@@ -62,23 +62,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($NDBP,'tanggal Pelaksanaan'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$NDBP,
-					'attribute'=>'waktu_pelaksanaan',
-					'value'=>$NDBP->waktu_pelaksanaan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'dd-mm-yy',
-					),
-			));?>
-			<?php echo $form->error($NDBP,'waktu_pelaksanaan'); ?>
+			<?php echo $form->labelEx($NDBP,'keterangan'); ?>
+			<?php echo $form->textArea($NDBP,'keterangan',array('cols'=>43,'rows'=>3, 'maxlength'=>255)); ?>
+			<?php echo $form->error($NDBP,'keterangan'); ?>
 		</div>
-
+		
 		<div class="row">
-			<?php echo $form->labelEx($NDBP,'tempat Penyerahan'); ?>
-			<?php echo $form->textArea($NDBP,'tempat_penyerahan',array('cols'=>43,'rows'=>3, 'maxlength'=>20)); ?>
-			<?php echo $form->error($NDBP,'tempat_penyerahan'); ?>
+			<?php echo $form->labelEx($NDBP,'batas waktu sanggahan (dalam satuan hari)'); ?>
+			<?php echo $form->textField($NDBP,'batas_sanggahan',array('size'=>56,'maxlength'=>100)); ?>
+			<?php echo $form->error($NDBP,'batas_sanggahan'); ?>
 		</div>
 
 		<div class="row buttons">
