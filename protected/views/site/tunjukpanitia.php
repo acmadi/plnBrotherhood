@@ -48,17 +48,38 @@
 			<?php echo $form->textArea($NDPP,'perihal',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
 			<?php echo $form->error($NDPP,'perihal'); ?>
 		</div>
+
+		<?php
+			function dropDownSort($v1, $v2) {
+				$c1 = count(Pengadaan::model()->findAll('id_panitia = ' . Panitia::model()->find('nama_panitia = "' . $v1 . '"')->id_panitia));
+				$c2 = count(Pengadaan::model()->findAll('id_panitia = ' . Panitia::model()->find('nama_panitia = "' . $v2 . '"')->id_panitia));
+				if ($c1 == $c2) {
+					return 0;
+				} else if ($c1 > $c2) {
+					return 1;
+				} else {
+					return -1;
+				}
+			}
+		?>
+		<?php
+			$dropDownData = CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Pejabat')), 'id_panitia', 'nama_panitia');
+			@usort($dropDownData, 'dropDownSort');
+			foreach ($dropDownData as &$item) {
+				$item = $item . ' (' . count(Pengadaan::model()->findAll('id_panitia = ' . Panitia::model()->find('nama_panitia = "' . $item . '"')->id_panitia)) . ' pekerjaan)';
+			}
+		?>
 		
 		<?php if ($NDP->nilai_biaya_rab>500000000) { ?>
 			<div class="row">
 				<?php echo $form->labelEx($Pengadaan,'nama panitia pengadaan'); ?>
-				<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Panitia')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
+				<?php echo $form->dropDownList($Pengadaan,'id_panitia',$dropDownData,array('empty'=>'-----Pilih Panitia-----'));?>
 				<?php echo $form->error($Pengadaan,'id_panitia'); ?>
 			</div>
 		<?php } else { ?>
 			<div class="row">
 				<?php echo $form->labelEx($Pengadaan,'nama pejabat pengadaan'); ?>
-				<?php echo $form->dropDownList($Pengadaan,'id_panitia',CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Pejabat')), 'id_panitia', 'nama_panitia'),array('empty'=>'-----Pilih Panitia-----'));?>
+				<?php echo $form->dropDownList($Pengadaan,'id_panitia',$dropDownData,array('empty'=>'-----Pilih Panitia-----'));?>
 				<?php echo $form->error($Pengadaan,'id_panitia'); ?>
 			</div>
 		<?php } ?>
