@@ -1972,6 +1972,9 @@ class DocxController extends Controller
 			$tglrks = Tanggal::getTanggalLengkap($tanggalrks);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			
+			$skpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia ;
+			$skpanitia2 = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
+			
 			if($Peng->metode_pengadaan == 'Pelelangan'){
 				$this->doccy->newFile('12c Berita Acara Klarifikasi dan Negosiasi.docx');
 			
@@ -2008,7 +2011,14 @@ class DocxController extends Controller
 			//$this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#boss#',$boss);
 			$this->doccy->phpdocx->assign('#listpic#',$namapic);			
+			
 			$this->doccy->phpdocx->assign('#panitiaataupejabat#', strtoupper($jenispic));
+			
+			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Panitia'){
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);				
+			}else{
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);				
+			}
 			
 			$this->renderDocx("Berita Acara Negosiasi Klarifikasi.docx", true);
 		}
@@ -2497,7 +2507,7 @@ class DocxController extends Controller
 			$stringpenyedia = '-';
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/> <w:br/>';
 			}
 		}
 		
@@ -2527,7 +2537,7 @@ class DocxController extends Controller
 			$stringpenyedia = '-';
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/> <w:br/>';
 			}
 		}
 		
@@ -2557,7 +2567,7 @@ class DocxController extends Controller
 			$stringpenyedia = '-';
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
-				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/>';
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '                                ................................................. <w:br/> <w:br/>';
 			}
 		}
 		
