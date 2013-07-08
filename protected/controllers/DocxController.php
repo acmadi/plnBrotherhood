@@ -871,31 +871,35 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Pemberitahuan Pemenang"){
 			$this->doccy->newFile('14b Nota Dinas Pemberitahuan Pemenang.docx');
-			$NDPP=NotaDinasPemberitahuanPemenang::model()->findByPk($id);	
-			$nomor = $NDPP->nomor;
-			$tanggal = $Dok->tanggal;
+			$ndbp=NotaDinasPemberitahuanPemenang::model()->findByPk($Dok->id_dokumen);		
+			$doksupph = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+			$supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
+			
+			$Panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			if($Panitia->jenis_panitia=="Panitia"){
+				$kal="Ketua";
+			} else {
+				$kal="";
+			}
+			$nama = User::model()->findByPk(Anggota::model()->find('id_panitia = '.$Panitia->id_panitia.' and jabatan = "Ketua"')->username)->nama;
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
-			$this->doccy->phpdocx->assign('#nomor#',$nomor);
-			$this->doccy->phpdocx->assign('#tanggal#',$tanggal);
-			$this->doccy->phpdocx->assign('#nosupph#', '.............................................');
-			$this->doccy->phpdocx->assign('#tglsupph#', '.............................................');
-			$this->doccy->phpdocx->assign('#penyedia#', '.............................................');
-			$this->doccy->phpdocx->assign('#biaya#', '.............................................');
-			$this->doccy->phpdocx->assign('#keterangan#', '.............................................');
-			$this->doccy->phpdocx->assign('#deadline#', '.............................................');
-			$this->doccy->phpdocx->assign('#deadlineterbilang#', '.............................................');
-			$this->doccy->phpdocx->assign('#pejabat/panitia#', '.............................................');
-			$this->doccy->phpdocx->assign('#namapengadaan#', '.............................................');
-			$this->doccy->phpdocx->assign('#kalimat#', '.............................................');
-			$this->doccy->phpdocx->assign('#nama#', '.............................................');
-			// $this->doccy->phpdocx->assign('#14#', '.............................................');
-			// $this->doccy->phpdocx->assign('#15#', '.............................................');
-			// $this->doccy->phpdocx->assign('#16#', '.............................................');
-			// $this->doccy->phpdocx->assign('#17#', '.............................................');
-			$this->renderDocx("Nota Dinas Pemberitahuan Pemenang.docx", true);
+			$this->doccy->phpdocx->assign('#nomor#', $ndbp->nomor);
+			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
+			$this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
+			$this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
+			$this->doccy->phpdocx->assign('#penyedia#', $ndbp->nama_penyedia);
+			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($ndbp->harga_penawaran));
+			$this->doccy->phpdocx->assign('#keterangan#', $ndbp->keterangan);
+			$this->doccy->phpdocx->assign('#deadline#', $spp->batas_sanggahan);
+			$this->doccy->phpdocx->assign('#deadlineterbilang#', RupiahMaker::terbilangMaker($ndbp->batas_sanggahan));
+			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_pengadaan);
+			$this->doccy->phpdocx->assign('#nama#', $nama);
+			$this->doccy->phpdocx->assign('#kalimat#', $kal);
+			$this->doccy->phpdocx->assign('#Pejabat/Panitia#', strtoupper($Panitia->jenis_panitia));
+			$this->renderDocx("Surat Pengumuman Pelelangan", true);
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Permintaan TOR/RAB"){
 			$NDPTR=NotaDinasPermintaanTorRab::model()->findByPk($id);
@@ -1605,53 +1609,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#2#', '.............................................');
 			$this->doccy->phpdocx->assign('#3#', '.............................................');
 			$this->renderDocx("Pakta Integritas Penyedia.docx", true);
-		}
-//	=====================================RKS=====================================
-		else if ($Dok->nama_dokumen == "RKS"){
-			
-			$rks=Rks::model()->findByPk($id);
-			
-			$norks = $rks->nomor;
-			$tglrks = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$nama = $Peng->nama_pengadaan;
-			$namakapital = strtoupper($nama);
-			$tanggalpermintaan = Tanggal::getTanggalLengkap($rks->tanggal_permintaan_penawaran);
-			$tanggalpenunjukan = Tanggal::getTanggalLengkap($rks->tanggal_penjelasan);
-			$waktupenunjukan = Tanggal::getJamMenit($rks->waktu_penjelasan);
-			$tempatpenunjukan = $rks->tempat_penjelasan;
-			$tanggalawalpemasukan = Tanggal::getTanggalLengkap($rks->tanggal_pemasukan_penawaran);
-			$tanggalakhirpemasukan = Tanggal::getTanggalLengkap($rks->tanggal_akhir_pemasukan_penawaran);
-			$waktupemasukanpenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran);
-			$tempatpemasukan = $rks->tempat_pemasukan_penawaran;
-			$tanggalnegosiasi = Tanggal::getTanggalLengkap($rks->tanggal_negosiasi);
-			$waktunegosiasi = Tanggal::getJamMenit($rks->waktu_negosiasi);
-			$tanggalpenunjukanpemenang = Tanggal::getTanggalLengkap($rks->tanggal_penetapan_pemenang);
-			$waktupenunjukanpemenang = Tanggal::getJamMenit($rks->waktu_penetapan_pemenang);
-			$tempatpenunjukanpemenang = $rks->tempat_penetapan_pemenang;
-			
-			$this->doccy->newFile('3a rks-tunjuklangsungjasa.docx');
-			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
-			$this->doccy->phpdocx->assign('#norks#', $norks);
-			$this->doccy->phpdocx->assign('#tglrks#', $tglrks);
-			$this->doccy->phpdocx->assign('#pengadaan#', $namakapital);
-			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#tanggalpermintaanpenawaran#', $tanggalpermintaan);
-			$this->doccy->phpdocx->assign('#tanggalpenunjukanlangsung#', $tanggalpenunjukan);
-			$this->doccy->phpdocx->assign('#waktupenunjukanlangsung#', $waktupenunjukan);
-			$this->doccy->phpdocx->assign('#tempatpenunjukanlangsung#', $tempatpenunjukan);
-			$this->doccy->phpdocx->assign('#tanggalawalpemasukansuratpenawaran#', $tanggalawalpemasukan);
-			$this->doccy->phpdocx->assign('#tanggalakhirpemasukansuratpenawaran#', $tanggalakhirpemasukan);
-			$this->doccy->phpdocx->assign('#waktupemasukansuratpenawaran#', $waktupemasukanpenawaran);
-			$this->doccy->phpdocx->assign('#tempatpemasukansuratpenawaran#', $tempatpemasukan);
-			$this->doccy->phpdocx->assign('#tanggalnegosiasidanklarifikasi#', $tanggalnegosiasi);
-			$this->doccy->phpdocx->assign('#waktunegosiasidanklarifikasi#', $waktunegosiasi);
-			$this->doccy->phpdocx->assign('#tanggalpenunjukanpemenang#', $tanggalpenunjukanpemenang);
-			$this->doccy->phpdocx->assign('#waktupenunjukanpemenang#', $waktupenunjukanpemenang);
-			$this->doccy->phpdocx->assign('#tempatpenunjukanpemenang#', $tempatpenunjukanpemenang);
-			$this->renderDocx("RKS.docx", true);
 		}
 //	=====================================Berita Acara=====================================
 		else if ($Dok->nama_dokumen == "Berita Acara Aanwijzing"){
