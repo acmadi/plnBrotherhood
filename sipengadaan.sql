@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2013 at 06:42 AM
+-- Generation Time: Jul 08, 2013 at 07:24 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -288,6 +288,7 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   `pengunggah` varchar(32) DEFAULT NULL,
   `nomor_link` int(11) DEFAULT NULL,
   `format_dokumen` varchar(12) DEFAULT NULL,
+  `nama_file` varchar(256) NOT NULL,
   PRIMARY KEY (`id_link`),
   KEY `id_dokumen` (`id_dokumen`),
   KEY `pengunggah` (`pengunggah`)
@@ -297,21 +298,21 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 -- Dumping data for table `link_dokumen`
 --
 
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`) VALUES
-(1, 1, '22:17:41', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(2, 2, '22:17:48', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(3, 3, '22:17:52', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(4, 3, '22:17:55', '2013-07-07', 'aidilsyaputra', 2, 'txt'),
-(5, 5, '22:26:14', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(6, 5, '22:26:15', '2013-07-07', 'aidilsyaputra', 2, 'txt'),
-(7, 6, '22:26:18', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(8, 7, '22:26:22', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(9, 7, '22:26:26', '2013-07-07', 'aidilsyaputra', 2, 'txt'),
-(10, 9, '22:29:40', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(11, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(12, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 2, 'txt'),
-(13, 11, '22:29:47', '2013-07-07', 'aidilsyaputra', 1, 'txt'),
-(14, 11, '22:29:50', '2013-07-07', 'aidilsyaputra', 2, 'txt');
+INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`, `nama_file`) VALUES
+(1, 1, '22:17:41', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(2, 2, '22:17:48', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(3, 3, '22:17:52', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(4, 3, '22:17:55', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
+(5, 5, '22:26:14', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(6, 5, '22:26:15', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
+(7, 6, '22:26:18', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(8, 7, '22:26:22', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(9, 7, '22:26:26', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
+(10, 9, '22:29:40', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(11, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(12, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
+(13, 11, '22:29:47', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
+(14, 11, '22:29:50', '2013-07-07', 'aidilsyaputra', 2, 'txt', '');
 
 -- --------------------------------------------------------
 
