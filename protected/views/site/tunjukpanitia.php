@@ -62,24 +62,31 @@
 				}
 			}
 		?>
-		<?php
-			$dropDownData = CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Pejabat')), 'id_panitia', 'nama_panitia');
-			@usort($dropDownData, 'dropDownSort');
-			foreach ($dropDownData as &$item) {
-				$item = $item . ' (' . count(Pengadaan::model()->findAll('id_panitia = ' . Panitia::model()->find('nama_panitia = "' . $item . '"')->id_panitia)) . ' pekerjaan)';
-			}
-		?>
 		
 		<?php if ($NDP->nilai_biaya_rab>500000000) { ?>
+			<?php
+				$dropDownData = CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Panitia')), 'id_panitia', 'nama_panitia');
+				@uasort($dropDownData, 'dropDownSort');
+				foreach ($dropDownData as &$item) {
+					$item = $item . ' (' . count(Pengadaan::model()->findAll('id_panitia = ' . Panitia::model()->find('nama_panitia = "' . $item . '"')->id_panitia)) . ' pekerjaan)';
+				}
+			?>
 			<div class="row">
 				<?php echo $form->labelEx($Pengadaan,'nama panitia pengadaan'); ?>
 				<?php echo $form->dropDownList($Pengadaan,'id_panitia',$dropDownData,array('empty'=>'-----Pilih Panitia-----'));?>
 				<?php echo $form->error($Pengadaan,'id_panitia'); ?>
 			</div>
 		<?php } else { ?>
+			<?php
+				$dropDownData = CHtml::listData(Panitia::model()->findAllByAttributes(array('status_panitia'=>'Aktif','jenis_panitia'=>'Pejabat')), 'id_panitia', 'nama_panitia');
+				@uasort($dropDownData, 'dropDownSort');
+				foreach ($dropDownData as &$item) {
+					$item = $item . ' (' . count(Pengadaan::model()->findAll('id_panitia = ' . Panitia::model()->find('nama_panitia = "' . $item . '"')->id_panitia)) . ' pekerjaan)';
+				}
+			?>
 			<div class="row">
 				<?php echo $form->labelEx($Pengadaan,'nama pejabat pengadaan'); ?>
-				<?php echo $form->dropDownList($Pengadaan,'id_panitia',$dropDownData,array('empty'=>'-----Pilih Panitia-----'));?>
+				<?php echo $form->dropDownList($Pengadaan,'id_panitia',$dropDownData,array('empty'=>'-----Pilih Pejabat-----'));?>
 				<?php echo $form->error($Pengadaan,'id_panitia'); ?>
 			</div>
 		<?php } ?>
