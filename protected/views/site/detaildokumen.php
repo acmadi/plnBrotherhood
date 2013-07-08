@@ -84,6 +84,10 @@
 		'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("download/download") . "'+ '&id=' + $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			array(
+				'name'=>'Nama berkas',
+				'value'=>'$data->nama_file',
+			),
+			array(
 				'name'=>'Tanggal unggah',
 				'value'=>'$data->tanggal_upload',
 			),
