@@ -1433,11 +1433,12 @@ class DocxController extends Controller
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tahun = Tanggal::getTahun($tanggal);
 			$namapengadaan = $Peng->nama_pengadaan;
+			$namapengadaan1 = strtoupper($Peng->nama_pengadaan);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$skpanitia = ', sesuai dengan surat tugas DIRSDM No.'.$panitia->SK_panitia;
-			$tahunsk = $panitia->tahun;
+			$tahunsk = ' tahun '.$panitia->tahun;
 			$panitiapejabat = $panitia->jenis_panitia;
-			$namapanitia = $panitia->nama_panitia;
+			$panitia = strtoupper($panitia->jenis_panitia);
 			$tujuanpengadaan = $DPK->tujuan_pengadaan;
 			$sumberdana = $NDPP->sumber_dana;
 			$biaya = RupiahMaker::convertInt($NDPP->pagu_anggaran);
@@ -1459,12 +1460,9 @@ class DocxController extends Controller
 			$bidangusaha = $DPK->bidang_usaha;
 			$subbidangusaha = $DPK->sub_bidang_usaha;
 			$kualifikasiperusahaan = $DPK->kualifikasi_perusahaan;
-						
-			if($dari=='KDIVMUM'){
-				$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
-			}else if($dari=='MSDAF'){
-				$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "MSDAF"')->username)->nama;
-			}
+			
+			$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
+				
 			$this->doccy->newFile('4 Dok Prakualifikasi.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -1473,6 +1471,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#namapengadaan1#', $namapengadaan1);
 			$this->doccy->phpdocx->assign('#tahun#', $tahun);
 			$this->doccy->phpdocx->assign('#tujuanpengadaan#', $tujuanpengadaan);
 			$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
@@ -1493,8 +1492,16 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#bidangusaha#', $bidangusaha);
 			$this->doccy->phpdocx->assign('#subbidangusaha#', $subbidangusaha);
 			$this->doccy->phpdocx->assign('#kualifikasiperusahaan#', $kualifikasiperusahaan);
-			$this->doccy->phpdocx->assign('#namapanitia#', $namapanitia);
-			$this->doccy->phpdocx->assign('#namakadiv/msdaf#', $namakadiv);
+			$this->doccy->phpdocx->assign('#panitia#', $panitia);
+			$this->doccy->phpdocx->assign('#namakadiv#', $namakadiv);
+			
+			if ($panitia->jenis_panitia == "Panitia"){
+				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);
+				$this->doccy->phpdocx->assign('#tahunsk#', $tahunsk);
+			} else if ($panitia->jenis_panitia == "Pejabat"){
+				$this->doccy->phpdocx->assign('#skpanitia#', '');
+				$this->doccy->phpdocx->assign('#tahunsk#', '');
+			}
 			
 			$this->renderDocx("Dokumen Prakualifikasi.docx", true);
 		}
