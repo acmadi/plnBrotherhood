@@ -123,9 +123,11 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 				<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>
 					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
 					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Sampul Dua', array('xlsx/download','id'=>$BAPP->id_dokumen)); ?></li>
 				<?php } else if($cpengadaan->metode_penawaran == 'Dua Tahap') { ?>
 					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
 					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Sampul Dua', array('xlsx/download','id'=>$BAPP->id_dokumen)); ?></li>
 				<?php } ?>
 			</ul>
 		</div>
