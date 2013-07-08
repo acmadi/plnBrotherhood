@@ -5169,13 +5169,7 @@ class SiteController extends Controller
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
 		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-			
-			$modelDok = array (
-				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "Nota Dinas Permintaan"'),
-				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "TOR"'),
-				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "RAB"'),
-			);
-			
+						
 			$newDokumen = new Dokumen;
 			$newLinkDokumen = new LinkDokumen;
 				
@@ -5217,6 +5211,11 @@ class SiteController extends Controller
 					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
 					}
 			}
+			$modelDok = array (
+				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "Nota Dinas Permintaan"'),
+				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "TOR"'),
+				Dokumen::model()->find('id_pengadaan = '. $id . ' and nama_dokumen = "RAB"'),
+			);
 
 			$this->render('tambahpengadaan2',array('modelDok'=>$modelDok));
 		}
