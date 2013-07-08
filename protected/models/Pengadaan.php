@@ -563,6 +563,42 @@ class Pengadaan extends CActiveRecord
 		));
 	}
 	
+	public function searchStatistikMetodePengadaan($detail, $chart)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+
+		$criteria->addcondition('metode_pengadaan = "' . $detail . '"');
+		$criteria->addcondition('status != "-1"');
+
+		switch ($chart) {
+			case '1' : {
+				$criteria->addcondition('status != "100"');
+				$criteria->addcondition('status != "99"');
+				break;
+			}
+			case '2' : {
+				$criteria->addcondition('status = "100"');
+				break;
+			}
+			case '3' : {
+				$criteria->addcondition('status = "99"');
+				break;
+			}
+		}
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+	
 	public function sisaHari(){								//jo----------------------------
 		if($this->status == '100'){
 			return "-";

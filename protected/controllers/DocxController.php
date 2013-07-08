@@ -1427,6 +1427,89 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#',$ndpp->dari);
 			$this->renderDocx("Surat Penunjukan Pemenang.docx", true);
 		}
+		else if ($Dok->nama_dokumen == "Dokumen Prakualifikasi"){
+			
+			$DPK=DokumenPrakualifikasi::model()->findByPk($id);
+			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
+			
+			$nomor = $DPK->nomor;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$tahun = Tanggal::getTahun($tanggal);
+			$namapengadaan = $Peng->nama_pengadaan;
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$skpanitia = ', sesuai dengan surat tugas DIRSDM No.'.$panitia->SK_panitia;
+			$tahunsk = $panitia->tahun;
+			$panitiapejabat = $panitia->jenis_panitia;
+			$namapanitia = $panitia->nama_panitia;
+			$tujuanpengadaan = $DPK->tujuan_pengadaan;
+			$sumberdana = $NDPP->sumber_dana;
+			$biaya = RupiahMaker::convertInt($NDPP->pagu_anggaran);
+			$biayaterbilang = RupiahMaker::terbilangMaker($NDPP->pagu_anggaran);
+			
+			$haripemasukan1 = $DPK->hari_pemasukan1;
+			$tanggalpemasukan1 = $DPK->tanggal_pemasukan1;
+			$haripemasukan2 = $DPK->hari_pemasukan2;
+			$tanggalpemasukan2 = $DPK->tanggal_pemasukan2;
+			$waktupemasukan1 = $DPK->waktu_pemasukan1;
+			$waktupemasukan2 = $DPK->waktu_pemasukan2;
+			$tempatpemasukan = $DPK->tempat_pemasukan;
+			
+			$harievaluasi = $DPK->hari_evaluasi;
+			$tanggalevaluasi = $DPK->tanggal_evaluasi;
+			$waktuevaluasi = $DPK->waktu_evaluasi;
+			$tempatevaluasi = $DPK->tempat_evaluasi;
+			$haripenetapan = $DPK->hari_penetapan;
+			$tanggalpenetapan = $DPK->tanggal_penetapan;
+			$waktupenetapan = $DPK->waktu_penetapan;
+			$tempatpenetapan = $DPK->tempat_penetapan;
+			
+			$bidangusaha = $DPK->bidang_usaha;
+			$subbidangusaha = $DPK->sub_bidang_usaha;
+			$kualifikasiperusahaan = $DPK->kualifikasi_perusahaan;
+						
+			if($dari=='KDIVMUM'){
+				$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
+			}else if($dari=='MSDAF'){
+				$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "MSDAF"')->username)->nama;
+			}
+			$this->doccy->newFile('4 Dok Prakualifikasi.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+		
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#tahun#', $tahun);
+			$this->doccy->phpdocx->assign('#tujuanpengadaan#', $tujuanpengadaan);
+			$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
+			$this->doccy->phpdocx->assign('#sumberdana#', $sumberdana);
+			$this->doccy->phpdocx->assign('#biaya#', $biaya);
+			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
+			$this->doccy->phpdocx->assign('#haripemasukan1#', $haripemasukan1);
+			$this->doccy->phpdocx->assign('#tanggalpemasukan1#', $tanggalpemasukan1);
+			$this->doccy->phpdocx->assign('#haripemasukan2#', $haripemasukan2);
+			$this->doccy->phpdocx->assign('#tanggalpemasukan2#', $tanggalpemasukan2);
+			$this->doccy->phpdocx->assign('#waktupemasukan1#', $waktupemasukan1);
+			$this->doccy->phpdocx->assign('#waktupemasukan2#', $waktupemasukan2);
+			$this->doccy->phpdocx->assign('#tempatpemasukan#', $tempatpemasukan);
+			$this->doccy->phpdocx->assign('#harievaluasi#', $harievaluasi);
+			$this->doccy->phpdocx->assign('#tanggalevaluasi#', $tanggalevaluasi);
+			$this->doccy->phpdocx->assign('#waktuevaluasi#', $waktuevaluasi);
+			$this->doccy->phpdocx->assign('#tempatevaluasi#', $tempatevaluasi);
+			$this->doccy->phpdocx->assign('#haripenetapan#', $haripenetapan);
+			$this->doccy->phpdocx->assign('#tanggalpenetapan#', $tanggalpenetapan);
+			$this->doccy->phpdocx->assign('#waktupenetapan#', $waktupenetapan);
+			$this->doccy->phpdocx->assign('#tempatpenetapan#', $tempatpenetapan);
+			$this->doccy->phpdocx->assign('#bidangusaha#', $bidangusaha);
+			$this->doccy->phpdocx->assign('#subbidangusaha#', $subbidangusaha);
+			$this->doccy->phpdocx->assign('#kualifikasiperusahaan#', $kualifikasiperusahaan);
+			$this->doccy->phpdocx->assign('#namapanitia#', $namapanitia);
+			$this->doccy->phpdocx->assign('#namakadiv/msdaf#', $namakadiv);
+			
+			$this->renderDocx("Dokumen Prakualifikasi.docx", true);
+		}
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Awal Panitia"){
 			
