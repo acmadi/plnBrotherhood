@@ -497,6 +497,11 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+					$Pengadaan->status='1';
+				} else { 
+					$Pengadaan->status='4';
+				}
 				
 				if(isset($_POST['Pengadaan']))
 				{
@@ -1133,7 +1138,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionPrakualifikasi()
+	public function actionDokumenprakualifikasi()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -1236,7 +1241,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionEditPrakualifikasi()
+	public function actionEditdokumenprakualifikasi()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -1319,6 +1324,8 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
+				$PP = array(new PenerimaPengadaan);	
+				
 				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
@@ -1327,6 +1334,38 @@ class SiteController extends Controller
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$SUPDP->validate();
 					if($valid){
+					
+						if(isset($_POST['perusahaan'])){
+							$total = count($_POST['perusahaan']);
+							
+							for($i=0;$i<$total;$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									$PP[$i] = new PenerimaPengadaan;									
+									$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;
+									// $PP[$i]->status = $_POST['status'][$i];
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = '-';
+									// $PP[$i]->tahap = 'Penawaran Harga';		
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->ba_evaluasi_prakualifikasi = '1';
+									$PP[$i]->undangan_pengambilan_dokumen = $_POST['undangan_pengambilan_dokumen'][$i];			
+									$PP[$i]->ba_aanwijzing = '-';
+									$PP[$i]->pembukaan_penawaran_1 = '-';
+									$PP[$i]->evaluasi_penawaran_1 = '-';
+									$PP[$i]->pembukaan_penawaran_2 = '-';			
+									$PP[$i]->evaluasi_penawaran_2 = '-';
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+						}
+						
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)){
@@ -1339,7 +1378,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('pengumumanpengadaan',array(
-					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS
+					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,'PP'=>$PP,
 				));
 			}
 		}
@@ -1368,7 +1407,9 @@ class SiteController extends Controller
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
-
+				
+				$PP = PenerimaPengadaan::model()->findAll('undangan_pengambilan_dokumen = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
@@ -1377,6 +1418,64 @@ class SiteController extends Controller
 					$valid=$Dokumen0->validate();
 					$valid=$valid&&$SUPDP->validate();
 					if($valid){	
+					
+						if(isset($_POST['perusahaan'])){
+														
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){																																				
+									
+									// $PP[$i]->status = $_POST['status'][$i];
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat='-';									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = '-';
+									// $PP[$i]->tahap = 'Penawaran Harga';		
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->ba_evaluasi_prakualifikasi = '1';
+									$PP[$i]->undangan_pengambilan_dokumen = $_POST['undangan_pengambilan_dokumen'][$i];			
+									$PP[$i]->ba_aanwijzing = '-';
+									$PP[$i]->pembukaan_penawaran_1 = '-';
+									$PP[$i]->evaluasi_penawaran_1 = '-';
+									$PP[$i]->pembukaan_penawaran_2 = '-';			
+									$PP[$i]->evaluasi_penawaran_2 = '-';
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
+									// $PPbaru->status = $_POST['status'][$j+$i];
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = '-';
+									// $PPbaru->tahap = 'Penawaran Harga';	
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->ba_evaluasi_prakualifikasi = '1';
+									$PPbaru->undangan_pengambilan_dokumen = $_POST['undangan_pengambilan_dokumen'][$i+$j];			
+									$PPbaru->ba_aanwijzing = '-';
+									$PPbaru->pembukaan_penawaran_1 = '-';
+									$PPbaru->evaluasi_penawaran_1 = '-';
+									$PPbaru->pembukaan_penawaran_2 = '-';			
+									$PPbaru->evaluasi_penawaran_2 = '-';
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang	 = '-';								
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}
+						
 						if($Dokumen0->save(false)){
 							if($SUPDP->save(false)){
 								$this->redirect(array('editpengumumanpengadaan','id'=>$Dokumen0->id_pengadaan));
@@ -1386,7 +1485,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('pengumumanpengadaan',array(
-					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,
+					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,'PP'=>$PP,
 				));
 			}
 		}
@@ -1508,7 +1607,7 @@ class SiteController extends Controller
 				
 				$SUPPP= SuratUndanganPermintaanPenawaranHarga::model()->findByPk($Dokumen0->id_dokumen);
 				
-				$PP = PenerimaPengadaan::model()->findAll('undangan_pengambilan_dokumen = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				// $PP = PenerimaPengadaan::model()->find('id_pengadaan = 2');
 				// $PP[0]->perusahaan = 'aaaapppppp';
 				// $PP[0]->save();
@@ -1516,6 +1615,8 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
+				$PP = PenerimaPengadaan::model()->findAll('undangan_pengambilan_dokumen = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
 				if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
@@ -2931,7 +3032,7 @@ class SiteController extends Controller
 				
 				if($Pengadaan->metode_penawaran=="Dua Sampul") {
 					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
-				} else if($Pengadaan->metode_penawaran=="Dua Sampul") {
+				} else if($Pengadaan->metode_penawaran=="Dua Tahap") {
 					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
 				}
 				$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
@@ -3610,7 +3711,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				if($Pengadaan->metode_penawaran == 'Dua Sampul'){				
+				if($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){				
 					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				}else if($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
@@ -3699,7 +3800,7 @@ class SiteController extends Controller
 						$this->render('beritaacaranegosiasiklarifikasi',array(
 							'BANK'=>$BANK,'Eval'=>$Eval,'PP'=>$PP,
 						));
-					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap"){
 						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
 						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
 						$this->render('beritaacaranegosiasiklarifikasi',array(
@@ -3823,7 +3924,7 @@ class SiteController extends Controller
 						$this->render('beritaacaranegosiasiklarifikasi',array(
 							'BANK'=>$BANK, 'DH'=>$DH, 'Eval'=>$Eval,'PP'=>$PP,
 						));
-					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap"){
 						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
 						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
 						$this->render('beritaacaranegosiasiklarifikasi',array(
@@ -4363,7 +4464,6 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$NDBP->attributes=$_POST['NotaDinasPemberitahuanPemenang'];
-					$NDBP->waktu_pelaksanaan=date('Y-m-d',strtotime($NDBP->waktu_pelaksanaan));
 					$valid=$NDBP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -4403,7 +4503,6 @@ class SiteController extends Controller
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Pemberitahuan Pemenang"');
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				$NDBP=NotaDinasPemberitahuanPemenang::model()->findByPk($Dokumen0->id_dokumen);
-				$NDBP->waktu_pelaksanaan=Tanggal::getTanggalStrip($NDBP->waktu_pelaksanaan);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -4580,6 +4679,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SPPM->attributes=$_POST['SuratPenunjukanPemenang'];
+					$SPPM->tgl_surat_penawaran=date('Y-m-d',strtotime($SPPM->tgl_surat_penawaran));
 					$valid=$SPPM->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -4631,6 +4731,7 @@ class SiteController extends Controller
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Penunjukan Pemenang"');
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				$SPPM=SuratPenunjukanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+				$SPPM->tgl_surat_penawaran=Tanggal::getTanggalStrip($SPPM->tgl_surat_penawaran);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -4639,6 +4740,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$SPPM->attributes=$_POST['SuratPenunjukanPemenang'];
+					$SPPM->tgl_surat_penawaran=date('Y-m-d',strtotime($SPPM->tgl_surat_penawaran));
 					$valid=$SPPM->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){

@@ -19,12 +19,20 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                 
                 <div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
-                            ),
-                        ));
+						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+										array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
+								),
+							));
+						} else {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+										array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
+								),
+							));
+						}
                     ?>
                 </div>
                 <br/>
@@ -92,7 +100,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); ?></li>
+				<li><?php 
+						if(Pengadaan::model()->findByPk($id)->metode_pengadaan == 'Pelelangan'){
+							echo CHtml::link('Berita Acara Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); 
+						}else{
+							echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); 
+						}
+						
+					?>
+				</li>
 				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>

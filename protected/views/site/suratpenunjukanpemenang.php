@@ -81,25 +81,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row">
-				<?php echo $form->labelEx($SPPM,'Nomor Surat Penawaran'); ?>
-				<?php echo $form->textField($SPPM,'nomor_surat_penawaran',array('size'=>56,'maxlength'=>50)); ?>
-				<?php echo $form->error($SPPM,'nomor_surat_penawaran'); ?>
-		</div>
-		<div class="row">
-			<?php echo $form->labelEx($SPPM,'Tanggal Surat Penawaran'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SPPM,
-					'attribute'=>'tanggal_surat_penawaran',
-					'value'=>$SPPM->tgl_surat_penawaran,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
-					),
-			));?>
-			<?php echo $form->error($SPPM,'tgl_surat_penawaran'); ?>
-		</div>
-		
-		<div class="row">
 			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$Dokumen0,
@@ -141,12 +122,37 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 				<?php echo $form->error($SPPM,'no_ski'); ?>
 			</div>
 			
+			<div class="row">
+				<?php echo $form->labelEx($SPPM,'Jaminan Pelaksanaan'); ?>
+				<?php echo $form->textField($SPPM,'jaminan',array('size'=>56,'maxlength'=>255)); ?>
+				<?php echo $form->error($SPPM,'jaminan'); ?>
+			</div>
+			
 		<?php } ?>
 		
 		<div class="row">
 			<?php echo $form->labelEx($SPPM,'batas waktu penyerahan (dalam satuan hari)'); ?>
 			<?php echo $form->textField($SPPM,'lama_penyerahan',array('size'=>56,'maxlength'=>100)); ?>
 			<?php echo $form->error($SPPM,'lama_penyerahan'); ?>
+		</div>
+		
+		<div class="row">
+				<?php echo $form->labelEx($SPPM,'Nomor Surat Penawaran'); ?>
+				<?php echo $form->textField($SPPM,'no_surat_penawaran',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->error($SPPM,'no_surat_penawaran'); ?>
+		</div>
+		<div class="row">
+			<?php echo $form->labelEx($SPPM,'Tanggal Surat Penawaran'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$SPPM,
+					'attribute'=>'tgl_surat_penawaran',
+					'value'=>$SPPM->tgl_surat_penawaran,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($SPPM,'tgl_surat_penawaran'); ?>
 		</div>
 
 		<div class="row buttons">
@@ -165,7 +171,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Surat Pengumuman Pelelangan', array('docx/download','id'=>$SPPM->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Surat Penunjukan Pemenang', array('docx/download','id'=>$SPPM->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>

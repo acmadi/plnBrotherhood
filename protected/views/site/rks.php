@@ -52,8 +52,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				'enableAjaxValidation'=>false,
 			)); ?>
 			
-				<?php echo $form->errorSummary($Rks); ?>
-			
 				<h4><b> RKS </b></h4>
 				<?php if ($Rks->isNewRecord){ ?>
 					<div class="row">
