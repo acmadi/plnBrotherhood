@@ -4871,33 +4871,39 @@ class SiteController extends Controller
 			$Pengadaan->metode_penawaran='-';
 			$Pengadaan->jenis_kualifikasi='-';
 			
+			$Dokumen1= new Dokumen;
+			$Dokumen1->id_dokumen=$somevariable+1;
+			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+			$Dokumen1->nama_dokumen='Dokumen Lain-lain';			
+			$Dokumen1->status_upload='Belum Selesai';
+			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
 			$criteria->select='max(id_dokumen) AS maxId';
 			$row = $Dokumen0->model()->find($criteria);
 			$somevariable = $row['maxId'];
-			$Dokumen0->id_dokumen=$somevariable+1;
+			$Dokumen0->id_dokumen=$somevariable+2;
 			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
 			$Dokumen0->tempat='Jakarta';
 			$Dokumen0->status_upload='Belum Selesai';
 			
 			$Dokumen1= new Dokumen;
-			$Dokumen1->id_dokumen=$somevariable+4;
+			$Dokumen1->id_dokumen=$somevariable+5;
 			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
 			$Dokumen1->tempat='Jakarta';
 			$Dokumen1->status_upload='Belum Selesai';
-			
+						
 			$Dokumen2= new Dokumen;
-			$Dokumen2->id_dokumen=$somevariable+2;
+			$Dokumen2->id_dokumen=$somevariable+3;
 			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen2->nama_dokumen='TOR';
 			$Dokumen2->tempat='Jakarta';
 			$Dokumen2->status_upload='Belum Selesai';
 			
 			$Dokumen3= new Dokumen;
-			$Dokumen3->id_dokumen=$somevariable+3;
+			$Dokumen3->id_dokumen=$somevariable+4;
 			$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen3->nama_dokumen='RAB';
 			$Dokumen3->tempat='Jakarta';

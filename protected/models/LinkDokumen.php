@@ -11,6 +11,7 @@
  * @property string $pengunggah
  * @property integer $nomor_link
  * @property string $format_dokumen
+ * @property string $nama_file
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -22,7 +23,7 @@ class LinkDokumen extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return LinkDokumen the static model class
-	 */	 
+	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -48,10 +49,11 @@ class LinkDokumen extends CActiveRecord
 			array('nomor_link', 'numerical', 'integerOnly'=>true),
 			array('id_link, id_dokumen, pengunggah', 'length', 'max'=>32),
 			array('format_dokumen', 'length', 'max'=>12),
+			array('nama_file', 'length', 'max'=>256),
 			array('waktu_upload, tanggal_upload', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_link, id_dokumen, waktu_upload, tanggal_upload, pengunggah, nomor_link, format_dokumen', 'safe', 'on'=>'search'),
+			array('id_link, id_dokumen, waktu_upload, tanggal_upload, pengunggah, nomor_link, format_dokumen, nama_file', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +83,7 @@ class LinkDokumen extends CActiveRecord
 			'pengunggah' => 'Pengunggah',
 			'nomor_link' => 'Nomor Link',
 			'format_dokumen' => 'Format Dokumen',
+			'nama_file' => 'Nama File',
 		);
 	}
 
@@ -102,6 +105,7 @@ class LinkDokumen extends CActiveRecord
 		$criteria->compare('pengunggah',$this->pengunggah,true);
 		$criteria->compare('nomor_link',$this->nomor_link);
 		$criteria->compare('format_dokumen',$this->format_dokumen,true);
+		$criteria->compare('nama_file',$this->nama_file,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
