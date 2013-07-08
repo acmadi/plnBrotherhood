@@ -123,14 +123,17 @@ class XlsxController extends Controller
 		$skpanitia = Panitia::model()->findByPk($cpengadaan->id_panitia)->SK_panitia;
 		$panitia = Panitia::model()->findByPk($cpengadaan->id_panitia)->nama_panitia;
 		$jenis = $cpengadaan->jenis_pengadaan;
+		$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
 		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 		if ($cdokumen->nama_dokumen == 'HPS') {
-			if ($jenis == 'Barang dan Jasa'){
+			if (($jenis == 'Barang dan Jasa') || ($jenis == 'Barang')){
 			$objPHPExcel = $objReader->load($templatePath . 'HPS Barang.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#namakadiv#", $namakadiv);
+					//$this->assign($objPHPExcel, "#ketua#", $ketua);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
 			ob_start();
@@ -139,6 +142,7 @@ class XlsxController extends Controller
 			else if ($jenis == 'Jasa'){
 			$objPHPExcel = $objReader->load($templatePath . 'HPS Jasa.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#namakadiv#", $namakadiv);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			ob_end_clean();
@@ -178,7 +182,7 @@ class XlsxController extends Controller
 			ob_start();
 			header('Content-Disposition: attachment;filename="16.a-Lam BA Evaluasi 2 SAMPUL.xlsx"');
 		}
-		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Dua Sistem Bobot') {
+		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran') {
 			$objPHPExcel = $objReader->load($templatePath . '16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
@@ -188,7 +192,6 @@ class XlsxController extends Controller
 		}
 		else{
 			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
-					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#hari#", $hari);
 					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
 					$this->assign($objPHPExcel, "#bulan#", $bulan);
@@ -209,8 +212,39 @@ class XlsxController extends Controller
 		$objWriter->save('php://output');
 	}
 
-	private function assign($objPHPExcel, $pattern, $replacement)
-	{
+	// function getListPanitiaTanpaKetua($idPan){
+		// if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
+			// $list = "";
+		// }else{
+			// $list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama;
+			// $n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			// for ( $i=1;$i<=$n;$i++){
+				// $list .= '<w:br/>';
+				// $list .= $i+1 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama;				
+			// }
+		// }
+		// return  $list;
+	// }
+
+	// function getListPanitia($idPan){
+		// if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
+			// $list = "";
+		// }else{
+			// $list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "																			Ketua								(.................................)";
+			// $list .= '<w:br/>';
+			// $list .= '<w:br/>';
+			// $list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . "																	Sekretaris								(.................................)";
+			// $n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			// for ( $i=1;$i<=$n;$i++){
+				// $list .= '<w:br/>';
+				// $list .= '<w:br/>';
+				// $list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . "																	Anggota								(.................................)";				
+			// }
+		// }
+		// return  $list;
+	// }
+	
+	private function assign($objPHPExcel, $pattern, $replacement){
 		$sheets = $objPHPExcel->getAllSheets();
 		foreach ($sheets as $sheet) {
 			foreach ($sheet->getRowIterator() as $row) {
