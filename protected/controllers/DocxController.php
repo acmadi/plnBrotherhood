@@ -1443,21 +1443,17 @@ class DocxController extends Controller
 			$biaya = RupiahMaker::convertInt($NDPP->pagu_anggaran);
 			$biayaterbilang = RupiahMaker::terbilangMaker($NDPP->pagu_anggaran);
 			
-			$haripemasukan1 = $DPK->hari_pemasukan1;
-			$tanggalpemasukan1 = $DPK->tanggal_pemasukan1;
-			$haripemasukan2 = $DPK->hari_pemasukan2;
-			$tanggalpemasukan2 = $DPK->tanggal_pemasukan2;
-			$waktupemasukan1 = $DPK->waktu_pemasukan1;
-			$waktupemasukan2 = $DPK->waktu_pemasukan2;
+			$tanggalpemasukan1 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pemasukan1);
+			$tanggalpemasukan2 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pemasukan2);
+			$waktupemasukan1 = Tanggal::getJamMenit($DPK->waktu_pemasukan1);
+			$waktupemasukan2 = Tanggal::getJamMenit($DPK->waktu_pemasukan2);
 			$tempatpemasukan = $DPK->tempat_pemasukan;
 			
-			$harievaluasi = $DPK->hari_evaluasi;
-			$tanggalevaluasi = $DPK->tanggal_evaluasi;
-			$waktuevaluasi = $DPK->waktu_evaluasi;
+			$tanggalevaluasi = Tanggal::getHariTanggalLengkap($DPK->tanggal_evaluasi);
+			$waktuevaluasi = Tanggal::getJamMenit($DPK->waktu_evaluasi);
 			$tempatevaluasi = $DPK->tempat_evaluasi;
-			$haripenetapan = $DPK->hari_penetapan;
-			$tanggalpenetapan = $DPK->tanggal_penetapan;
-			$waktupenetapan = $DPK->waktu_penetapan;
+			$tanggalpenetapan = Tanggal::getHariTanggalLengkap($DPK->tanggal_penetapan);
+			$waktupenetapan = Tanggal::getJamMenit($DPK->waktu_penetapan);
 			$tempatpenetapan = $DPK->tempat_penetapan;
 			
 			$bidangusaha = $DPK->bidang_usaha;
@@ -1483,18 +1479,14 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sumberdana#', $sumberdana);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
-			$this->doccy->phpdocx->assign('#haripemasukan1#', $haripemasukan1);
 			$this->doccy->phpdocx->assign('#tanggalpemasukan1#', $tanggalpemasukan1);
-			$this->doccy->phpdocx->assign('#haripemasukan2#', $haripemasukan2);
 			$this->doccy->phpdocx->assign('#tanggalpemasukan2#', $tanggalpemasukan2);
 			$this->doccy->phpdocx->assign('#waktupemasukan1#', $waktupemasukan1);
 			$this->doccy->phpdocx->assign('#waktupemasukan2#', $waktupemasukan2);
 			$this->doccy->phpdocx->assign('#tempatpemasukan#', $tempatpemasukan);
-			$this->doccy->phpdocx->assign('#harievaluasi#', $harievaluasi);
 			$this->doccy->phpdocx->assign('#tanggalevaluasi#', $tanggalevaluasi);
 			$this->doccy->phpdocx->assign('#waktuevaluasi#', $waktuevaluasi);
 			$this->doccy->phpdocx->assign('#tempatevaluasi#', $tempatevaluasi);
-			$this->doccy->phpdocx->assign('#haripenetapan#', $haripenetapan);
 			$this->doccy->phpdocx->assign('#tanggalpenetapan#', $tanggalpenetapan);
 			$this->doccy->phpdocx->assign('#waktupenetapan#', $waktupenetapan);
 			$this->doccy->phpdocx->assign('#tempatpenetapan#', $tempatpenetapan);

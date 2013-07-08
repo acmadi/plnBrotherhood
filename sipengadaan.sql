@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2013 at 07:24 AM
+-- Generation Time: Jul 08, 2013 at 10:23 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -232,6 +232,33 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dokumen_prakualifikasi`
+--
+
+CREATE TABLE IF NOT EXISTS `dokumen_prakualifikasi` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(100) NOT NULL,
+  `tujuan_pengadaan` varchar(256) NOT NULL,
+  `tanggal_pemasukan1` date NOT NULL,
+  `tanggal_pemasukan2` date NOT NULL,
+  `waktu_pemasukan1` time NOT NULL,
+  `waktu_pemasukan2` time NOT NULL,
+  `tempat_pemasukan` varchar(256) NOT NULL,
+  `tanggal_evaluasi` date NOT NULL,
+  `waktu_evaluasi` time NOT NULL,
+  `tempat_evaluasi` varchar(256) NOT NULL,
+  `tanggal_penetapan` date NOT NULL,
+  `waktu_penetapan` time NOT NULL,
+  `tempat_penetapan` varchar(256) NOT NULL,
+  `bidang_usaha` varchar(256) NOT NULL,
+  `sub_bidang_usaha` varchar(256) NOT NULL,
+  `kualifikasi_perusahaan` varchar(256) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `form_isian_kualifikasi`
 --
 
@@ -299,20 +326,20 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
 --
 
 INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`, `nama_file`) VALUES
-(1, 1, '22:17:41', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(2, 2, '22:17:48', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(3, 3, '22:17:52', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(4, 3, '22:17:55', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
-(5, 5, '22:26:14', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(6, 5, '22:26:15', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
-(7, 6, '22:26:18', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(8, 7, '22:26:22', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(9, 7, '22:26:26', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
-(10, 9, '22:29:40', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(11, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(12, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 2, 'txt', ''),
-(13, 11, '22:29:47', '2013-07-07', 'aidilsyaputra', 1, 'txt', ''),
-(14, 11, '22:29:50', '2013-07-07', 'aidilsyaputra', 2, 'txt', '');
+(1, 1, '22:17:41', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(2, 2, '22:17:48', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(3, 3, '22:17:52', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(4, 3, '22:17:55', '2013-07-07', 'aidilsyaputra', 2, 'txt', 'dummy'),
+(5, 5, '22:26:14', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(6, 5, '22:26:15', '2013-07-07', 'aidilsyaputra', 2, 'txt', 'dummy'),
+(7, 6, '22:26:18', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(8, 7, '22:26:22', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(9, 7, '22:26:26', '2013-07-07', 'aidilsyaputra', 2, 'txt', 'dummy'),
+(10, 9, '22:29:40', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(11, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(12, 10, '22:29:43', '2013-07-07', 'aidilsyaputra', 2, 'txt', 'dummy'),
+(13, 11, '22:29:47', '2013-07-07', 'aidilsyaputra', 1, 'txt', 'dummy'),
+(14, 11, '22:29:50', '2013-07-07', 'aidilsyaputra', 2, 'txt', 'dummy');
 
 -- --------------------------------------------------------
 
@@ -547,8 +574,8 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Sepatu Futsal', 'divman', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '8', 0, 3, 'Pelelangan', 'Satu Sampul', 'Pasca Kualifikasi'),
-(2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '18', 0, 2, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
+(1, 'Pengadaan Sepatu Futsal', 'divman', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 3, 'Pelelangan', 'Satu Sampul', 'Pasca Kualifikasi'),
+(2, 'Pengadaan Internet', 'divin', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 2, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi'),
 (3, 'Pengadaan Mobil', 'divtrans', 'Barang dan Jasa', '-', '2013-07-07', '0000-00-00', '0', 0, 2, 'Penunjukan Langsung', '-', '-');
 
 -- --------------------------------------------------------
@@ -959,6 +986,12 @@ ALTER TABLE `dokumen_kontrak`
 --
 ALTER TABLE `dokumen_penawaran`
   ADD CONSTRAINT `dokumen_penawaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dokumen_prakualifikasi`
+--
+ALTER TABLE `dokumen_prakualifikasi`
+  ADD CONSTRAINT `dokumen_prakualifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `form_isian_kualifikasi`

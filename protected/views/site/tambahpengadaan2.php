@@ -12,7 +12,7 @@
 					'htmlOptions'=>array('enctype'=>'multipart/form-data'),	
 					));
 		?>
-					<div id="rows">
+					<div class="rows">
 		<?php
 						echo $form->labelEx($modelDok[$i],$modelDok[$i]->nama_dokumen);
 						echo '<br>';

@@ -45,7 +45,7 @@
 					'items'=>array(
 						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>!Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						array('label'=>'Permintaan', 'url'=>array('/site/permintaan'), 'visible'=>Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"') || Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>!Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						array('label'=>'Statistik', 'url'=>array('/site/statistik', 'category'=>'1', 'chart'=>'1'), 'visible'=>Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						array('label'=>'Pengguna', 'url'=>array('/user/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),

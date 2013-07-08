@@ -217,6 +217,80 @@ class Pengadaan extends CActiveRecord
 		));
 	}
 	
+	public function searchKontrak()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		
+		$sort = new CSort();
+		$sort->attributes = array(
+			'nama_pengadaan'=>array(
+			  'asc'=>'nama_pengadaan',
+			  'desc'=>'nama_pengadaan desc',
+			),
+			'User'=>array(
+			  'asc'=>'divisi_peminta',
+			  'desc'=>'divisi_peminta desc',
+			),
+			'statusgan'=>array(
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',                            
+			),
+			'progressgan'=>array(
+			  'asc'=>'ABS(status)',
+			  'desc'=>'ABS(status) desc',
+			),       
+			'pic'=>array(
+			  'asc'=>'idPanitia.nama_panitia',
+			  'desc'=>'idPanitia.nama_panitia desc',
+			),
+//                        'ndpermintaan'=>array(
+//			  'asc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan',
+//			  'desc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan desc',
+//			),
+                                       
+			'sisahari'=>array(
+			  'asc'=>'status+status',
+			  'desc'=>'sisahari desc',
+			),
+			'*',
+		);
+		
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('jenis_pengadaan',$this->jenis_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+                
+		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
+//                $criteria->compare('notaDinasPerintahPengadaan.nota_dinas_permintaan',$this->ndpermintaan,true);                           //withnya blm ditambah
+//                $criteria->compare($this->sisahari(),$this->sisahari,true);
+				
+		// $criteria->compare('sisahari',$this->sisaHari(),true);
+		$criteria->addcondition("status='19'");		
+ 
+		// $criteria->order = 'ABS(status)';
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>$sort,
+		));
+	}
+	
 	public function searchPermintaan()
 	{
 		// Warning: Please modify the following code to remove attributes that
@@ -540,6 +614,42 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
 
 		$criteria->addcondition('t.id_panitia = "' . $pan . '"');
+		$criteria->addcondition('status != "-1"');
+
+		switch ($chart) {
+			case '1' : {
+				$criteria->addcondition('status != "100"');
+				$criteria->addcondition('status != "99"');
+				break;
+			}
+			case '2' : {
+				$criteria->addcondition('status = "100"');
+				break;
+			}
+			case '3' : {
+				$criteria->addcondition('status = "99"');
+				break;
+			}
+		}
+		
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+	
+	public function searchStatistikMetodePengadaan($detail, $chart)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+		$criteria=new CDbCriteria;
+
+		$criteria->together=true;
+//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->with = array("idPanitia");    
+                
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+
+		$criteria->addcondition('metode_pengadaan = "' . $detail . '"');
 		$criteria->addcondition('status != "-1"');
 
 		switch ($chart) {
