@@ -194,6 +194,10 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Dokumen Prakualifikasi', array('docx/download','id'=>$DPK->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Pakta Integritas Penyedia', array('docx/download','id'=>$X1->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Surat Pengantar Penawaran Harga', array('docx/download','id'=>$X2->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Surat Pernyataan Minat', array('docx/download','id'=>$X3->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Form Isian Kualifikasi', array('docx/download','id'=>$X4->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>

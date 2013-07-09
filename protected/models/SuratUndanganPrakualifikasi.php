@@ -6,9 +6,7 @@
  * The followings are the available columns in table 'surat_undangan_prakualifikasi':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $tanggal
- * @property string $waktu
- * @property string $tempat
+ * @property string $perihal
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -41,13 +39,13 @@ class SuratUndanganPrakualifikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tanggal, waktu, tempat', 'required'),
+			array('id_dokumen, nomor, perihal', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>100),
-			array('tempat', 'length', 'max'=>256),
+			array('perihal', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tanggal, waktu, tempat', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, perihal', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,9 +69,7 @@ class SuratUndanganPrakualifikasi extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'tanggal' => 'Tanggal',
-			'waktu' => 'Waktu',
-			'tempat' => 'Tempat',
+			'perihal' => 'Perihal',
 		);
 	}
 
@@ -90,9 +86,7 @@ class SuratUndanganPrakualifikasi extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('tanggal',$this->tanggal,true);
-		$criteria->compare('waktu',$this->waktu,true);
-		$criteria->compare('tempat',$this->tempat,true);
+		$criteria->compare('perihal',$this->perihal,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
