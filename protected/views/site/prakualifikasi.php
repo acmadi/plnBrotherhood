@@ -74,21 +74,19 @@ $id = Yii::app()->getRequest()->getQuery('id');
 
 			</div><!-- form -->
 		
-		<?php if (!$Dokumen0->isNewRecord){ ?>
+			<?php if($DPK->isNewRecord) { ?>
+			
+			<?php } else { ?>
 				<br/>
 				<div style="border-top:1px solid lightblue">
-				<br/>
-					<h4><b> Buat Dokumen </b></h4>
+					<br/>
+					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Surat Undangan Prakualifikasi', array('docx/download','id'=>$X0->id_dokumen)); ?></li>
-						<li><?php echo CHtml::link('Pakta Integritas Penyedia', array('docx/download','id'=>$X1->id_dokumen)); ?></li>
-						<li><?php echo CHtml::link('Surat Pengantar Penawaran Harga', array('docx/download','id'=>$X2->id_dokumen)); ?></li>
-						<li><?php echo CHtml::link('Surat Pernyataan Minat', array('docx/download','id'=>$X3->id_dokumen)); ?></li>
-						<li><?php echo CHtml::link('Form Isian Kualifikasi', array('docx/download','id'=>$X4->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Surat Undangan Prakualifikasi', array('docx/download','id'=>$SUPK->id_dokumen)); ?></li>
 					</ul>
 				</div>
-		<?php } ?>
-    <?php } ?>
+			<?php } ?>
+    	<?php } ?>
 	</div>
 </div>
 

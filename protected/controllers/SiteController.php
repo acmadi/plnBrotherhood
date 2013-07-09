@@ -1229,8 +1229,52 @@ class SiteController extends Controller
 				date_default_timezone_set("Asia/Jakarta");
 				$Dokumen0->tanggal=date('d-m-Y');
 				
+				$Dokumen1= new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Pakta Integritas Penyedia';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->tanggal='-';
+				$Dokumen1->tempat='-';
+				$Dokumen1->id_pengadaan=$id;
+				
+				$Dokumen2= new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Surat Pengantar Penawaran Harga';
+				$Dokumen2->tanggal='-';
+				$Dokumen2->tempat='Jakarta';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$Dokumen3= new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+4;
+				$Dokumen3->nama_dokumen='Surat Pernyataan Minat';
+				$Dokumen3->tanggal='-';
+				$Dokumen3->tempat='-';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
+				$Dokumen4= new Dokumen;
+				$Dokumen4->id_dokumen=$somevariable+5;
+				$Dokumen4->nama_dokumen='Form Isian Kualifikasi';
+				$Dokumen4->tanggal='-';
+				$Dokumen4->tempat='-';
+				$Dokumen4->status_upload='Belum Selesai';
+				$Dokumen4->id_pengadaan=$id;
+				
 				$DPK= new DokumenPrakualifikasi;
 				$DPK->id_dokumen=$Dokumen0->id_dokumen;
+				
+				$X1= new PaktaIntegritasPenyedia;
+				$X1->id_dokumen=$Dokumen1->id_dokumen;
+				
+				$X2= new SuratPengantarPenawaranHarga;
+				$X2->id_dokumen=$Dokumen2->id_dokumen;
+				
+				$X3= new SuratPernyataanMinat;
+				$X3->id_dokumen=$Dokumen3->id_dokumen;
+				
+				$X4= new FormIsianKualifikasi;
+				$X4->id_dokumen=$Dokumen4->id_dokumen;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1244,8 +1288,8 @@ class SiteController extends Controller
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)){
-								if($DPK->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
+								if($DPK->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
 									$this->redirect(array('editdokumenprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1254,7 +1298,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('dokumenprakualifikasi',array(
-					'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,
+					'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
 				));
 			}
 		}
@@ -1272,12 +1316,21 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
+				$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengantar Penawaran Harga"');
+				$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
+				$Dokumen4= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
 				
 				$DPK= DokumenPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
 				$DPK->waktu_pemasukan1=Tanggal::getJamMenit($DPK->waktu_pemasukan1);
 				$DPK->waktu_pemasukan2=Tanggal::getJamMenit($DPK->waktu_pemasukan2);
 				$DPK->waktu_evaluasi=Tanggal::getJamMenit($DPK->waktu_evaluasi);
 				$DPK->waktu_penetapan=Tanggal::getJamMenit($DPK->waktu_penetapan);
+				
+				$X1= PaktaIntegritasPenyedia::model()->findByPk($Dokumen1->id_dokumen);
+				$X2= SuratPengantarPenawaranHarga::model()->findByPk($Dokumen2->id_dokumen);
+				$X3= SuratPernyataanMinat::model()->findByPk($Dokumen3->id_dokumen);
+				$X4= FormIsianKualifikasi::model()->findByPk($Dokumen4->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1291,8 +1344,8 @@ class SiteController extends Controller
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)){
-								if($DPK->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$Dokumen4->save(false)){
+								if($DPK->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)&&$X4->save(false)){
 									$this->redirect(array('editdokumenprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
@@ -1301,9 +1354,105 @@ class SiteController extends Controller
 				}
 
 				$this->render('dokumenprakualifikasi',array(
-					'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,
+					'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
 				));
 
+			}
+		}
+	}
+	
+	public function actionSuratundanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status= "4";
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Undangan Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
+				$A1=Rks::model()->findByPk($A->id_dokumen);
+				$SUPK= new SuratUndanganPrakualifikasi;
+				$SUPK->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPK->perihal= 'Undangan Prakualifikasi '.$Pengadaan->nama_pengadaan;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPrakualifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$valid=$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPK->save(false)){
+									$this->redirect(array('editsuratundanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('suratundanganprakualifikasi',array(
+					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,
+				));
+			}
+		}
+	}
+	
+	public function actionEditSuratundanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
+				
+				$SUPK= SuratUndanganPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				if(isset($_POST['SuratUndanganPrakualifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$valid=$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPK->save(false)){
+									$this->redirect(array('editsuratundanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('suratundanganprakualifikasi',array(
+					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,
+				));
 			}
 		}
 	}
