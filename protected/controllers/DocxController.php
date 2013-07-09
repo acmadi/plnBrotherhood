@@ -1438,7 +1438,7 @@ class DocxController extends Controller
 			$skpanitia = ', sesuai dengan surat tugas DIRSDM No.'.$panitia->SK_panitia;
 			$tahunsk = ' tahun '.$panitia->tahun;
 			$panitiapejabat = $panitia->jenis_panitia;
-			$panitia = strtoupper($panitia->jenis_panitia);
+			$panitia2 = strtoupper($panitia->jenis_panitia);
 			$tujuanpengadaan = $DPK->tujuan_pengadaan;
 			$sumberdana = $NDPP->sumber_dana;
 			$biaya = RupiahMaker::convertInt($NDPP->pagu_anggaran);
@@ -1492,7 +1492,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#bidangusaha#', $bidangusaha);
 			$this->doccy->phpdocx->assign('#subbidangusaha#', $subbidangusaha);
 			$this->doccy->phpdocx->assign('#kualifikasiperusahaan#', $kualifikasiperusahaan);
-			$this->doccy->phpdocx->assign('#panitia#', $panitia);
+			$this->doccy->phpdocx->assign('#panitia#', $panitia2);
 			$this->doccy->phpdocx->assign('#namakadiv#', $namakadiv);
 			
 			if ($panitia->jenis_panitia == "Panitia"){
@@ -1680,7 +1680,7 @@ class DocxController extends Controller
 				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic2);								
 			}
 			
-			$this->doccy->phpdocx->assign('#panitiaataupejabat2#', strtoupper($jenispic . " " . $nama));				
+			$this->doccy->phpdocx->assign('#panitiaataupejabat2#', strtoupper($jenispic));				
 			$this->doccy->phpdocx->assign('#listpic#',$namapic);
 			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaLulusX($Peng->id_pengadaan,'ba_aanwijzing'));
 			$this->doccy->phpdocx->assign('#listpesertattd#',$this->getTTPenyediaLulusX($Peng->id_pengadaan,'ba_aanwijzing'));
@@ -1742,7 +1742,7 @@ class DocxController extends Controller
 			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			// $this->doccy->phpdocx->assign('#anggota2#', '.......................');			
 			
-			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispicgan . " " . $nama));
+			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispicgan));
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
 			
 			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaLulusEval1Sampul($Peng->id_pengadaan));
@@ -1913,7 +1913,7 @@ class DocxController extends Controller
 				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);
 				$this->doccy->phpdocx->assign('#listpic#', "");
 			}
-			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
+			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic));
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
 			
 			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulusEvalSampul2($Peng->id_pengadaan));
@@ -2057,8 +2057,12 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,"pembukaan_penawaran_1"));
 			$this->doccy->phpdocx->assign('#tdtgnpeserta#',$this->getTTPenyediaX($Peng->id_pengadaan,"pembukaan_penawaran_1"));	
 			
-			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
-			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic);
+			}else{
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia);
+			}
+			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic));
 			$this->doccy->phpdocx->assign('#listpic#', $this->getListPanitiaAanwijzing($Peng->id_panitia));
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
@@ -2112,8 +2116,12 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,"pembukaan_penawaran_1"));
 			$this->doccy->phpdocx->assign('#tdtgnpeserta#',$this->getTTPenyediaX($Peng->id_pengadaan,"pembukaan_penawaran_1"));	
 			
-			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
-			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic);
+			}else{
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia);
+			}			
+			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic));
 			$this->doccy->phpdocx->assign('#listpic#', $this->getListPanitiaAanwijzing($Peng->id_panitia));
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
@@ -2164,8 +2172,13 @@ class DocxController extends Controller
 			// $this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaTdkLulusPakeKoma($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#tdtgnpesertasampul2#',$this->getTTPenyediaLulusX($Peng->id_pengadaan,'pembukaan_penawaran_2'));	
 			
-			$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic . " " . $nama);
-			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic . " " . $nama));
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic);
+			}else{
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia);
+			}
+				
+			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic));
 			$this->doccy->phpdocx->assign('#listpic#', $this->getListPanitiaAanwijzing($Peng->id_panitia));
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
