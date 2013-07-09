@@ -533,25 +533,45 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='Pakta Integritas Awal Panitia';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$PAP1= new PaktaIntegritasPanitia1;
+				$PAP1->id_dokumen=$Dokumen0->id_dokumen;
+				
 				if(isset($_POST['Pengadaan']))
 				{
 					$Pengadaan->attributes=$_POST['Pengadaan'];
 					if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
 						$Pengadaan->status='1';
 					} else { 
-						$Pengadaan->status='4';
+						$Pengadaan->status='9';
 					}
 					$valid=$Pengadaan->validate();
 					if($valid){		
 						if($Pengadaan->save(false))
 						{	
-							$this->redirect(array('editpenentuanmetode','id'=>$Pengadaan->id_pengadaan));
+							if($Dokumen0->save(false)){
+								if($PAP1->save(false)){
+									$this->redirect(array('editpenentuanmetode','id'=>$id));
+								}
+							}
 						}
 					}
 				}
 
 				$this->render('penentuanmetode',array(
-					'Pengadaan'=>$Pengadaan,
+					'Pengadaan'=>$Pengadaan,'PAP1'=>$PAP1,
 				));
 			}
 		}
@@ -565,15 +585,18 @@ class SiteController extends Controller
 		else {
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
-					$Pengadaan->status='1';
-				} else { 
-					$Pengadaan->status='4';
-				}
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Awal Panitia"');
+				$PAP1=PaktaIntegritasPanitia1::model()->findByPk($Dokumen0->id_dokumen);
 				
 				if(isset($_POST['Pengadaan']))
 				{
 					$Pengadaan->attributes=$_POST['Pengadaan'];
+					if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+						$Pengadaan->status='1';
+					} else { 
+						$Pengadaan->status='9';
+					}
 					$valid=$Pengadaan->validate();
 					if($valid){		
 						if($Pengadaan->save(false))
@@ -584,7 +607,7 @@ class SiteController extends Controller
 				}
 
 				$this->render('penentuanmetode',array(
-					'Pengadaan'=>$Pengadaan,
+					'Pengadaan'=>$Pengadaan,'PAP1'=>$PAP1,
 				));
 			}
 		}
@@ -600,7 +623,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='5';
+				$Pengadaan->status ='7';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -609,24 +632,14 @@ class SiteController extends Controller
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
 				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-				$Dokumen0->nama_dokumen='Pakta Integritas Awal Panitia';
+				$Dokumen0->nama_dokumen='RKS';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
-				
-				$Dokumen1= new Dokumen;
-				$Dokumen1->id_dokumen=$somevariable+2;
-				$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-				$Dokumen1->nama_dokumen='RKS';
-				$Dokumen1->tempat='Jakarta';
-				$Dokumen1->status_upload='Belum Selesai';
 				date_default_timezone_set("Asia/Jakarta");
-				$Dokumen1->tanggal=date('d-m-Y');
-				
-				$PAP1= new PaktaIntegritasPanitia1;
-				$PAP1->id_dokumen=$Dokumen0->id_dokumen;
+				$Dokumen0->tanggal=date('d-m-Y');
 				
 				$RKS= new Rks;
-				$RKS->id_dokumen=$Dokumen1->id_dokumen;
+				$RKS->id_dokumen=$Dokumen0->id_dokumen;
 				
 				if ($Pengadaan->metode_penawaran=="Satu Sampul"){
 					$RKS->tanggal_awal_pemasukan_penawaran2='00-00-0000';
@@ -714,9 +727,7 @@ class SiteController extends Controller
 					$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
 					$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
 					$RKS->tanggal_paling_lambat_penyerahan=date('Y-m-d', strtotime($RKS->tanggal_paling_lambat_penyerahan));
-					$valid=$PAP1->validate()&&$RKS->validate();
-					$valid=$valid&&$Dokumen1->validate();
-					$Dokumen0->tanggal=$Dokumen1->tanggal;
+					$valid=$RKS->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
 						$Cover = new RincianRks;
@@ -894,8 +905,8 @@ class SiteController extends Controller
 						// }
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-								if($PAP1->save(false)&&$RKS->save(false)){
+							if($Dokumen0->save(false)){
+								if($RKS->save(false)){
 									if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
 										$DokumenX1->save(false);
 										$DokumenX2->save(false);
@@ -971,14 +982,14 @@ class SiteController extends Controller
 										// }
 									// }
 									
-									$this->redirect(array('editrks','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editrks','id'=>$id));
 								}
 							}
 						}
 					}
 				}
 				$this->render('rks',array(
-					'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,
+					'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,
 				));
 			}
 		}
@@ -995,7 +1006,6 @@ class SiteController extends Controller
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
-				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Awal Panitia"');
 				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$Dokumen1->tanggal=Tanggal::getTanggalStrip($Dokumen1->tanggal);
 				
@@ -1084,11 +1094,11 @@ class SiteController extends Controller
 
 				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
 					$this->render('rks',array(
-						'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
+						'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,'X4'=>$X4,
 					));
 				} else {
 					$this->render('rks',array(
-						'Rks'=>$RKS,'Dokumen1'=>$Dokumen1,'PAP1'=>$PAP1,
+						'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,
 					));
 				}
 			}

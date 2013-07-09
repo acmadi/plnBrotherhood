@@ -25,11 +25,11 @@
 			<?php } ?>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8') { ?>
 			<li class='belum'><?php echo 'Pembuatan Pengadaan' ?></li>
-		<?php } else if($cpengadaan->status == '4') { ?>
+		<?php } else if($cpengadaan->status == '9') { ?>
 				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/rks","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
-		<?php } else if($cpengadaan->status == '5') { ?>
+		<?php } else if($cpengadaan->status == '10') { ?>
 				<li class='onprogress' ><?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/hps","id"=>"$cpengadaan->id_pengadaan")); ?></li>	
 		<?php } else { ?>
 			<li class='sudah' > <?php echo CHtml::link('Pembuatan Dokumen Pengadaan',array("site/edithps","id"=>"$cpengadaan->id_pengadaan")); ?></li>
