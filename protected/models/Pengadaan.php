@@ -102,7 +102,6 @@ class Pengadaan extends CActiveRecord
 			'notaDinasUsulanPemenangs' => array(self::HAS_MANY, 'NotaDinasUsulanPemenang', 'nama_penyedia'),
 			'paktaIntegritasPanitia1s' => array(self::HAS_MANY, 'PaktaIntegritasPanitia1', 'id_panitia'),
 			'divisiPeminta' => array(self::BELONGS_TO, 'Divisi', 'divisi_peminta'),
-			'namaDivisi' => array(self::BELONGS_TO, 'User', 'divisi_peminta'),
 			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
 			'suratPemberitahuanPengadaans' => array(self::HAS_MANY, 'SuratPemberitahuanPengadaan', 'id_panitia'),
 			'suratUndanganPembukaanPenawarans' => array(self::HAS_MANY, 'SuratUndanganPembukaanPenawaran', 'id_panitia'),

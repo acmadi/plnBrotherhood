@@ -5,9 +5,10 @@
  *
  * The followings are the available columns in table 'divisi':
  * @property string $username
+ * @property string $nama_divisi
+ * @property string $password
  *
  * The followings are the available model relations:
- * @property User $username0
  * @property Pengadaan[] $pengadaans
  */
 class Divisi extends CActiveRecord
@@ -38,11 +39,12 @@ class Divisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'required'),
+			array('username, nama_divisi, password', 'required'),
 			array('username', 'length', 'max'=>20),
+			array('nama_divisi, password', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username', 'safe', 'on'=>'search'),
+			array('username, nama_divisi, password', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,7 +56,6 @@ class Divisi extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'username0' => array(self::BELONGS_TO, 'User', 'username'),
 			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'divisi_peminta'),
 		);
 	}
@@ -66,6 +67,8 @@ class Divisi extends CActiveRecord
 	{
 		return array(
 			'username' => 'Username',
+			'nama_divisi' => 'Nama Divisi',
+			'password' => 'Password',
 		);
 	}
 
@@ -81,6 +84,8 @@ class Divisi extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('username',$this->username,true);
+		$criteria->compare('nama_divisi',$this->nama_divisi,true);
+		$criteria->compare('password',$this->password,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

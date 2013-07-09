@@ -220,7 +220,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"') || UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'kdivmum' || UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$model=new Pengadaan('search');
 				$model->unsetAttributes();  // clear any default values
 				if(isset($_GET['Pengadaan'])){
@@ -426,7 +426,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'kdivmum') {
 				$this->render('statistik', array(
 					'chartData'=>$chartData,
 					'chartTitle'=>$chartTitle,
@@ -447,15 +447,16 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				if(Pengadaan::model()->findByPk($id)->status=="0"){
 					$this->redirect(array('site/penentuanmetode','id'=>$id));
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="1"){
 					$this->redirect(array('site/dokumenprakualifikasi','id'=>$id));
 				}
-				// if(Pengadaan::model()->findByPk($id)->status=="2"){
-				// }
+				if(Pengadaan::model()->findByPk($id)->status=="2"){
+					$this->redirect(array('site/suratundanganprakualifikasi','id'=>$id));
+				}
 				// if(Pengadaan::model()->findByPk($id)->status=="3"){
 		
 				// }
@@ -517,7 +518,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				$this->render('checkpoint2');
 			}
 		}
@@ -529,7 +530,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				if(isset($_POST['Pengadaan']))
@@ -562,7 +563,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
 					$Pengadaan->status='1';
@@ -596,7 +597,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='5';
@@ -990,7 +991,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -1101,7 +1102,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if($Pengadaan->metode_pengadaan=='Pelelangan'){
@@ -1164,7 +1165,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
@@ -1212,7 +1213,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status= "2";
 				
@@ -1311,7 +1312,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -1368,7 +1369,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status= "4";
@@ -1384,8 +1385,6 @@ class SiteController extends Controller
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
 				
-				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
-				$A1=Rks::model()->findByPk($A->id_dokumen);
 				$SUPK= new SuratUndanganPrakualifikasi;
 				$SUPK->id_dokumen=$Dokumen0->id_dokumen;
 				$SUPK->perihal= 'Undangan Prakualifikasi '.$Pengadaan->nama_pengadaan;
@@ -1395,8 +1394,10 @@ class SiteController extends Controller
 
 				if(isset($_POST['SuratUndanganPrakualifikasi']))
 				{
-					$Dokumen0->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
 					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPK->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
@@ -1423,7 +1424,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -1436,8 +1437,10 @@ class SiteController extends Controller
 
 				if(isset($_POST['SuratUndanganPrakualifikasi']))
 				{
-					$Dokumen0->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
 					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPK->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
@@ -1464,7 +1467,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status="8";
@@ -1560,7 +1563,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -1667,7 +1670,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status="8";
@@ -1764,7 +1767,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -1879,7 +1882,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -1954,7 +1957,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -2011,7 +2014,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='9';
@@ -2162,7 +2165,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -2280,7 +2283,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				$DokBAP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Aanwijzing"');
@@ -2358,7 +2361,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -2417,7 +2420,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='10';
@@ -2588,7 +2591,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -2714,7 +2717,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
@@ -2876,7 +2879,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -2998,7 +3001,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				if($Pengadaan->metode_penawaran=="Dua Sampul") {
@@ -3076,7 +3079,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -3134,7 +3137,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='12';
@@ -3308,7 +3311,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -3433,7 +3436,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='13';
@@ -3583,7 +3586,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -3700,7 +3703,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -3778,7 +3781,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -3838,7 +3841,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='14';
@@ -3994,7 +3997,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -4118,7 +4121,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='15';
@@ -4255,7 +4258,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
@@ -4371,7 +4374,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
@@ -4496,7 +4499,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -4602,7 +4605,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='18';
@@ -4662,7 +4665,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -4709,7 +4712,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='18';
@@ -4769,7 +4772,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -4814,7 +4817,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Pengadaan->status ='19';
@@ -4893,7 +4896,7 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
@@ -5025,7 +5028,7 @@ class SiteController extends Controller
 	public function actionTambahpengadaan()
 	{	
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			
 			$Pengadaan=new Pengadaan;
 			$Pengadaan->status="0";
@@ -5107,7 +5110,7 @@ class SiteController extends Controller
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$Dokumen3->tanggal=$Dokumen0->tanggal;
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
+					$NDPP->kepada=(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->nama);
 					$valid=$valid&&$NDP->validate();
 					if($valid){
 						$valid=$valid&&$NDPP->validate();
@@ -5138,7 +5141,7 @@ class SiteController extends Controller
 	public function actionTambahpengadaan1()
 	{	
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum'||Yii::app()->user->getState('role') == 'divisi') {
 			
 			$Pengadaan=new Pengadaan;
 			$Pengadaan->status="-1";
@@ -5154,7 +5157,7 @@ class SiteController extends Controller
 			$Pengadaan->biaya='-';
 			$Pengadaan->metode_penawaran='-';
 			$Pengadaan->jenis_kualifikasi='-';
-			if(Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if(Yii::app()->user->getState('role') == 'divisi') {
 				$Pengadaan->divisi_peminta=Yii::app()->user->name;
 			}
 			date_default_timezone_set("Asia/Jakarta");
@@ -5230,7 +5233,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum'||Yii::app()->user->getState('role') == 'divisi') {
 			
 			$Pengadaan= Pengadaan::model()->findByPk($id);
 			
@@ -5280,7 +5283,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum'||Yii::app()->user->getState('role') == 'divisi') {
 						
 			$newDokumen = new Dokumen;
 			$newLinkDokumen = new LinkDokumen;
@@ -5337,7 +5340,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			
 			$Pengadaan = Pengadaan::model()->findByPk($id);
 			
@@ -5386,7 +5389,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			
 			$Dokumen0 = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Permintaan TOR/RAB"');
 			$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
@@ -5421,7 +5424,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			
 			$Pengadaan = Pengadaan::model()->findByPk($id);
 			$Pengadaan->status='0';
@@ -5455,7 +5458,7 @@ class SiteController extends Controller
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
+					$NDPP->kepada=(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->nama);
 					$valid=$valid&&$NDPP->validate();
 					if($valid){
 						if($Pengadaan->save(false)) {
@@ -5479,7 +5482,7 @@ class SiteController extends Controller
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$user = Yii::app()->user->name;
-		if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			
 			$Pengadaan = Pengadaan::model()->findByPk($id);
 			
@@ -5500,7 +5503,7 @@ class SiteController extends Controller
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
 					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-					$NDPP->kepada=(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
+					$NDPP->kepada=(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->nama);
 					$valid=$valid&&$NDPP->validate();
 					if($valid){
 						if($Pengadaan->save(false)) {

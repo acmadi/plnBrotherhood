@@ -17,22 +17,71 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-	/*
-		$users=array(
-			// username => password
-			'kadiv'=>'kadiv',
-			'panitia'=>'panitia',
-		);
-	*/
-	
-		$users = User::model()->findByAttributes(array('username'=>$this->username));
+		// kode lokal
+
+		if (Admin::model()->exists('username = "' . $this->username . '"')) {
+			$user = Admin::model()->findByAttributes(array('username'=>$this->username));
+			if (sha1($this->password) == $user->password) {
+				Yii::app()->user->setState('role', 'admin');
+				$this->errorCode = self::ERROR_NONE;	
+			} else {
+				$this->errorCode=self::ERROR_PASSWORD_INVALID;
+			}
+		} else if (Anggota::model()->exists('username = "' . $this->username . '"')) {
+			$user = Anggota::model()->findByAttributes(array('username'=>$this->username));
+			if (sha1($this->password) == $user->password) {
+				Yii::app()->user->setState('role', 'anggota');
+				$this->errorCode = self::ERROR_NONE;	
+			} else {
+				$this->errorCode=self::ERROR_PASSWORD_INVALID;
+			}
+		} else if (Divisi::model()->exists('username = "' . $this->username . '"')) {
+			$user = Divisi::model()->findByAttributes(array('username'=>$this->username));
+			if (sha1($this->password) == $user->password) {
+				Yii::app()->user->setState('role', 'divisi');
+				$this->errorCode = self::ERROR_NONE;	
+			} else {
+				$this->errorCode=self::ERROR_PASSWORD_INVALID;
+			}
+		} else if (Kdivmum::model()->exists('username = "' . $this->username . '"')) {
+			$user = Kdivmum::model()->findByAttributes(array('username'=>$this->username));
+			if (sha1($this->password) == $user->password) {
+				Yii::app()->user->setState('role', 'kdivmum');
+				$this->errorCode = self::ERROR_NONE;	
+			} else {
+				$this->errorCode=self::ERROR_PASSWORD_INVALID;
+			}
+		} else {
+			$this->errorCode = self::ERROR_USERNAME_INVALID;
+		}
+
+
+		// kode server
+
+		// $options = Yii::app()->params['ldap'];
+		// $connection = ldap_connect($options['host']);
+		// ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+		// ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
 		
-		if($users===null)
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users->password!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
+		// if ($connection) {
+		// 	// Connect to server succeeds
+		// 	try {
+		// 		// Bind with given username & password
+		// 		$bind = @ldap_bind($connection, $options['domain'] . '\\' . $this->username, $this->password);
+
+		// 		if (!$bind) {
+		// 		// Bind failed
+		// 			$this->errorCode = self::ERROR_PASSWORD_INVALID;
+		// 		} else {
+		// 		// Bind success
+		// 			$this->errorCode = self::ERROR_NONE;
+		// 		}
+		// 	} catch (Exception $e) {
+		// 	// There're something error when binding
+		// 		$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
+		// 	}
+		// }
+
 		return !$this->errorCode;
 	}
 }

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2013 at 11:12 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Jul 09, 2013 at 07:11 AM
+-- Server version: 5.1.44
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -28,8 +27,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(20) NOT NULL,
-  `nama` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -37,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
-('jo', 'Johan', 'bd73d35759d75cc215150d1bbc94f1b1078bee01');
+INSERT INTO `admin` (`username`) VALUES
+('jo');
 
 -- --------------------------------------------------------
 
@@ -49,14 +46,10 @@ INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
 CREATE TABLE IF NOT EXISTS `anggota` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `nama` varchar(256) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `divisi` varchar(100) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
   `jabatan` varchar(32) NOT NULL,
-  `status_user` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `id_panitia` (`id_panitia`)
@@ -66,13 +59,15 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `NIP`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
-(1, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
-(2, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
-(3, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
-(4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
-(5, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Ketua', 'Aktif'),
-(6, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 2, 'Ketua', 'Aktif');
+INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `id_panitia`, `jabatan`) VALUES
+(1, 'kevinindra', '123456784', 'kevin@gmail.com', 3, 'Sekretaris'),
+(2, 'irvanaditya', '123456785', 'irvan@gmail.com', 4, 'Ketua'),
+(3, 'gilanglaksana', '123456786', 'gilang@gmail.com', 3, 'Ketua'),
+(4, 'johannesridho', '123456787', 'johan@gmail.com', 4, 'Sekretaris'),
+(5, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 3, 'Anggota1'),
+(6, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 1, 'Ketua'),
+(7, 'johannesridho', '123456787', 'johan@gmail.com', 2, 'Ketua'),
+(8, 'b', '123123', 'bb@bb.bb', 4, 'Anggota1');
 
 -- --------------------------------------------------------
 
@@ -85,6 +80,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_evaluasi_penawaran`
+--
+
 
 -- --------------------------------------------------------
 
@@ -100,6 +100,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_negosiasi_klarifikasi`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +116,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_pembukaan_penawaran`
+--
+
 
 -- --------------------------------------------------------
 
@@ -124,6 +134,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berita_acara_pengadaan_gagal`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -135,6 +150,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_penjelasan`
+--
+
 
 -- --------------------------------------------------------
 
@@ -150,6 +170,11 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `daftar_hadir`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -158,8 +183,6 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 
 CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
-  `nama_divisi` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -167,11 +190,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 -- Dumping data for table `divisi`
 --
 
-INSERT INTO `divisi` (`username`, `nama_divisi`, `password`) VALUES
-('divin', 'Divisi Internet', '8c43d3b2add61b1cff1ff5373e548fe9808c31a6'),
-('divman', 'Divisi Manajemen', '35e5dd2a4a3d599fcdfe62ec64e40b9e70841806'),
-('divsi', 'Divisi Sistem Informasi', '2a553a3d07a93933784f7826119d9dcd05335ba4'),
-('divtrans', 'Divisi Transportasi', 'a085f26cf56aea0d3cc6688b9c5084aecba722df');
+INSERT INTO `divisi` (`username`) VALUES
+('divin'),
+('divman'),
+('divsi'),
+('divtrans');
 
 -- --------------------------------------------------------
 
@@ -230,6 +253,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_kontrak` (
   UNIQUE KEY `Nomor` (`Nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dokumen_kontrak`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -240,6 +268,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_penawaran` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokumen_penawaran`
+--
+
 
 -- --------------------------------------------------------
 
@@ -305,6 +338,11 @@ CREATE TABLE IF NOT EXISTS `hps` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `hps`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -313,12 +351,9 @@ CREATE TABLE IF NOT EXISTS `hps` (
 
 CREATE TABLE IF NOT EXISTS `kdivmum` (
   `username` varchar(20) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `nama` varchar(256) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `jabatan` varchar(32) NOT NULL,
-  `status_user` varchar(100) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -326,9 +361,9 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
 -- Dumping data for table `kdivmum`
 --
 
-INSERT INTO `kdivmum` (`username`, `password`, `nama`, `NIP`, `email`, `jabatan`, `status_user`) VALUES
-('aidil.syaputra', 'e58b8152bd0328baceafd4b178ff0a8fd77e5420', 'Aidil Syaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM', 'Aktif'),
-('kevin.indra', 'ffb4761cba839470133bee36aeb139f58d7dbaa9', 'Kevin Indra', '111111', 'a@aa.aa', 'MSDAF', 'Aktif');
+INSERT INTO `kdivmum` (`username`, `NIP`, `email`, `jabatan`) VALUES
+('a', '111111', 'a@aa.aa', 'MSDAF'),
+('aidilsyaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM');
 
 -- --------------------------------------------------------
 
@@ -384,6 +419,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_pemberitahuan_pemenang`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -395,6 +435,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   `nomor` varchar(50) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota_dinas_penetapan_pemenang`
+--
+
 
 -- --------------------------------------------------------
 
@@ -459,6 +504,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan_tor_rab` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_permintaan_tor_rab`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -473,6 +523,11 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_usulan_pemenang`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -484,6 +539,11 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pakta_integritas_panitia_1`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -494,6 +554,11 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_2` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pakta_integritas_panitia_2`
+--
+
 
 -- --------------------------------------------------------
 
@@ -572,6 +637,11 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   KEY `id_pengadaan` (`id_pengadaan`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
+--
+-- Dumping data for table `penerima_pengadaan`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -648,6 +718,11 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   KEY `id_dokumen` (`id_dokumen`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=138 ;
 
+--
+-- Dumping data for table `rincian_rks`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -701,6 +776,11 @@ CREATE TABLE IF NOT EXISTS `rks` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `rks`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -733,6 +813,11 @@ CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_pengumuman_pelelangan`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -751,6 +836,11 @@ CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
   `tgl_surat_penawaran` date NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_penunjukan_pemenang`
+--
+
 
 -- --------------------------------------------------------
 
@@ -786,6 +876,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_negosiasi_klarifikasi`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -802,6 +897,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_pembukaan_penawaran`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -816,6 +916,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
   `tempat_pengambilan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_pengambilan_dokumen_pengadaan`
+--
+
 
 -- --------------------------------------------------------
 
@@ -833,6 +938,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `surat_undangan_penjelasan`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -846,6 +956,11 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
   `tempat_penyerahan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_undangan_permintaan_penawaran_harga`
+--
+
 
 -- --------------------------------------------------------
 
@@ -888,6 +1003,11 @@ CREATE TABLE IF NOT EXISTS `termin` (
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `termin`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -907,6 +1027,43 @@ INSERT INTO `tor` (`id_dokumen`) VALUES
 (2),
 (6),
 (10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `username` varchar(20) NOT NULL,
+  `nama` varchar(32) NOT NULL,
+  `password` varchar(24) NOT NULL,
+  `divisi` varchar(32) NOT NULL,
+  `status_user` varchar(32) NOT NULL,
+  PRIMARY KEY (`username`),
+  KEY `nama` (`nama`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `nama`, `password`, `divisi`, `status_user`) VALUES
+('a', 'a', 'a', 'divisi umum', 'Aktif'),
+('aidilsyaputra', 'Aidil Syaputra', 'aidil', 'Divisi Umum', 'Aktif'),
+('b', 'b', 'b', 'panitia', 'Aktif'),
+('divin', 'Divisi Internet', 'divin', 'Divisi Internet', 'Aktif'),
+('divman', 'Divisi Manajemen', 'divman', 'Divisi Manajemen', 'Aktif'),
+('divsi', 'Divisi Sistem Informasi', 'divsi', 'Divisi Sistem Informasi', 'Aktif'),
+('divtrans', 'Divisi Transportasi', 'divtrans', 'Divisi Transportasi', 'Aktif'),
+('gilanglaksana', 'Gilang Laksana', 'gilang', 'Divisi Umum', 'Aktif'),
+('haniferidaputra', 'Hanif Eridaputra', 'hanif', 'Divisi Umum', 'Aktif'),
+('irvanaditya', 'Irvan Aditya', 'irvan', 'Divisi Umum', 'Aktif'),
+('jo', 'johan', 'jo', 'Divisi Khusus', 'Aktif'),
+('johannesridho', 'Johannes Ridho', 'johan', 'Divisi Umum', 'Aktif'),
+('kadiv', 'kadiv', 'kadiv', 'Divisi Umum', 'Tidak Aktif'),
+('kevinindra', 'Kevin Indra', 'kevin', 'Divisi Umum', 'Aktif'),
+('panitia', 'panitia', 'panitia', 'Divisi Umum', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -933,9 +1090,16 @@ INSERT INTO `user_kontrak` (`id_user_kontrak`, `username`) VALUES
 --
 
 --
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `anggota`
 --
 ALTER TABLE `anggota`
+  ADD CONSTRAINT `anggota_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `anggota_ibfk_3` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -975,6 +1139,12 @@ ALTER TABLE `daftar_hadir`
   ADD CONSTRAINT `daftar_hadir_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `divisi`
+--
+ALTER TABLE `divisi`
+  ADD CONSTRAINT `divisi_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `dokumen`
 --
 ALTER TABLE `dokumen`
@@ -1011,10 +1181,17 @@ ALTER TABLE `hps`
   ADD CONSTRAINT `hps_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `kdivmum`
+--
+ALTER TABLE `kdivmum`
+  ADD CONSTRAINT `kdivmum_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `link_dokumen`
 --
 ALTER TABLE `link_dokumen`
-  ADD CONSTRAINT `link_dokumen_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `link_dokumen_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `link_dokumen_ibfk_2` FOREIGN KEY (`pengunggah`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nota_dinas_pemberitahuan_pemenang`
@@ -1166,7 +1343,3 @@ ALTER TABLE `surat_undangan_prakualifikasi`
 --
 ALTER TABLE `tor`
   ADD CONSTRAINT `tor_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
