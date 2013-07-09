@@ -1239,7 +1239,11 @@ class SiteController extends Controller
 		else {
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "2";
+				if ($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "3";
+				} else {	
+					$Pengadaan->status= "2";
+				}
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1396,7 +1400,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "4";
+				$Pengadaan->status= "6";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1480,6 +1484,96 @@ class SiteController extends Controller
 				$this->render('suratundanganprakualifikasi',array(
 					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,
 				));
+			}
+		}
+	}
+	
+	public function actionSuratpengumumanpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="4";
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('suratpengumumanpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionEditSuratpengumumanpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('suratpengumumanpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionPendaftaranpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="5";
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('pendaftaranpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionEditPendaftaranpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('pendaftaranpelelanganprakualifikasi');
 			}
 		}
 	}
@@ -2041,7 +2135,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='9';
+				$Pengadaan->status ='17';
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2447,7 +2541,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='10';
+				$Pengadaan->status ='18';
 						
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2745,9 +2839,9 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Pengadaan->status ='13';
+					$Pengadaan->status ='21';
 				} else {
-					$Pengadaan->status ='11';
+					$Pengadaan->status ='19';
 				}
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
@@ -3164,7 +3258,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='12';
+				$Pengadaan->status ='20';
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -3463,7 +3557,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='13';
+				$Pengadaan->status ='21';
 				
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
@@ -3868,7 +3962,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='14';
+				$Pengadaan->status ='22';
 				
 				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -4148,7 +4242,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='15';
+				$Pengadaan->status ='23';
 				
 				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 				
@@ -4402,11 +4496,11 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
-					$Pengadaan->status ='18';
+					$Pengadaan->status ='26';
 				} else if ($Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
-					$Pengadaan->status ='16';
+					$Pengadaan->status ='25';
 				} else if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
-					$Pengadaan->status ='17';
+					$Pengadaan->status ='24';
 				}
 				
 				$DokNDUP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Usulan Pemenang"');
@@ -4632,7 +4726,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='18';
+				$Pengadaan->status ='26';
 				
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
@@ -4739,7 +4833,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='18';
+				$Pengadaan->status ='26';
 				
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
@@ -4844,7 +4938,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='19';
+				$Pengadaan->status ='27';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
