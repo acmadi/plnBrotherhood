@@ -54,7 +54,7 @@
 						array('label'=>'KDIVMUM / MSDAF', 'url'=>array('/kdivmum/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
 						// array('label'=>'Admin', 'url'=>array('/admin/index')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
-						array('label'=>User::model()->find('username = "' . Yii::app()->user->name . '"')->nama, 'itemOptions'=>array('style'=>'color:white;float:right'))
+						array('label'=>(Yii::app()->user->getState('role') == 'admin') ? (Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama))), 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),
 				));
 			}

@@ -88,5 +88,10 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		// 'adminEmail'=>'webmaster@example.com',
+		'ldap'=>array(
+			'host'=>'adpusat01.corp.pln.co.id',
+			'port'=>389,
+			'domain'=>'pusat',
+		),
 	),
 );
