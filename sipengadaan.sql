@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2013 at 07:31 AM
+-- Generation Time: Jul 09, 2013 at 07:35 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -48,6 +48,7 @@ INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
 CREATE TABLE IF NOT EXISTS `anggota` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
+  `password` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
@@ -64,13 +65,13 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `username`, `nama`, `NIP`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
-(2, 'irvan.aditya', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
-(3, 'gilang.laksana', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
-(4, 'johannes.ridho', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
-(5, 'hanif.eridaputra', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
-(6, 'hanif.eridaputra', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Ketua', 'Aktif'),
-(7, 'johannes.ridho', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 2, 'Ketua', 'Aktif');
+INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `NIP`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
+(2, 'irvan.aditya', '', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
+(3, 'gilang.laksana', '', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
+(4, 'johannes.ridho', '', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
+(5, 'hanif.eridaputra', '', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
+(6, 'hanif.eridaputra', '', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Ketua', 'Aktif'),
+(7, 'johannes.ridho', '', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 2, 'Ketua', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -356,6 +357,7 @@ CREATE TABLE IF NOT EXISTS `hps` (
 
 CREATE TABLE IF NOT EXISTS `kdivmum` (
   `username` varchar(20) NOT NULL,
+  `password` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
@@ -368,9 +370,9 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
 -- Dumping data for table `kdivmum`
 --
 
-INSERT INTO `kdivmum` (`username`, `nama`, `NIP`, `email`, `jabatan`, `status_user`) VALUES
-('aidil.syaputra', 'Aidil Syaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM', 'Aktif'),
-('kevin.indra', 'Kevin Indra', '111111', 'a@aa.aa', 'MSDAF', 'Aktif');
+INSERT INTO `kdivmum` (`username`, `password`, `nama`, `NIP`, `email`, `jabatan`, `status_user`) VALUES
+('aidil.syaputra', '', 'Aidil Syaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM', 'Aktif'),
+('kevin.indra', '', 'Kevin Indra', '111111', 'a@aa.aa', 'MSDAF', 'Aktif');
 
 -- --------------------------------------------------------
 
