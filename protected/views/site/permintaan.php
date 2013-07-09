@@ -5,8 +5,6 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 		
 ?>
 
-<h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
-
 <?php if(Yii::app()->user->getState('role') == 'kdivmum'){		//kadiv
 	
 ?>    
@@ -35,7 +33,7 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
-				'value'=>'$data->namaDivisi->nama',
+				'value'=>'$data->divisiPeminta->nama_divisi',
 				'htmlOptions'=>array('width'=>200, 'style'=>'text-align:center;'),
 			),
 		),
