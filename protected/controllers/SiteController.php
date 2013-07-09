@@ -235,6 +235,17 @@ class SiteController extends Controller
 		}
 	}
 
+	private function in_multiarray($needle, $haystack) {
+		if(in_array($needle, $haystack)) {
+			return true;
+		}
+		foreach($haystack as $element) {
+			if(is_array($element) && $this->in_multiarray($needle, $element))
+				return true;
+			}
+		return false;
+	}
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -366,13 +377,15 @@ class SiteController extends Controller
 			case '3' : {
 				switch ($chart) {
 					case '1' : {
-						$met = Yii::app()->db->createCommand('select metode_pengadaan from pengadaan')->queryAll();
+						$met = Yii::app()->db->createCommand('select metode_pengadaan from pengadaan where metode_pengadaan != "-"')->queryAll();
 						while(list($k1, $v1)=each($met)) {
-							$x = array();
-							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status != "-1" and status != "100" and status != "99"')->queryAll();
-							array_push($x, $v1['metode_pengadaan']);
-							array_push($x, count($peng));
-							array_push($chartData, $x);
+							if (!$this->in_multiarray($v1['metode_pengadaan'], $chartData)) {
+								$x = array();
+								$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status != "-1" and status != "100" and status != "99"')->queryAll();
+								array_push($x, $v1['metode_pengadaan']);
+								array_push($x, count($peng));
+								array_push($chartData, $x);
+							}
 						}
 						$chartTitle = 'Pengadaan yang sedang berlangsung';
 						$chartSubtitle = 'per metode pengadaan';
@@ -381,11 +394,13 @@ class SiteController extends Controller
 					case '2' : {
 						$met = Yii::app()->db->createCommand('select metode_pengadaan from pengadaan')->queryAll();
 						while(list($k1, $v1)=each($met)) {
-							$x = array();
-							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status = "100"')->queryAll();
-							array_push($x, $v1['metode_pengadaan']);
-							array_push($x, count($peng));
-							array_push($chartData, $x);
+							if (!$this->in_multiarray($v1['metode_pengadaan'], $chartData)) {
+								$x = array();
+								$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status = "100"')->queryAll();
+								array_push($x, $v1['metode_pengadaan']);
+								array_push($x, count($peng));
+								array_push($chartData, $x);
+							}
 						}
 						$chartTitle = 'Pengadaan yang telah selesai';
 						$chartSubtitle = 'per metode pengadaan';
@@ -394,11 +409,13 @@ class SiteController extends Controller
 					case '3' : {
 						$met = Yii::app()->db->createCommand('select metode_pengadaan from pengadaan')->queryAll();
 						while(list($k1, $v1)=each($met)) {
-							$x = array();
-							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status = "99"')->queryAll();
-							array_push($x, $v1['metode_pengadaan']);
-							array_push($x, count($peng));
-							array_push($chartData, $x);
+							if (!$this->in_multiarray($v1['metode_pengadaan'], $chartData)) {
+								$x = array();
+								$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status = "99"')->queryAll();
+								array_push($x, $v1['metode_pengadaan']);
+								array_push($x, count($peng));
+								array_push($chartData, $x);
+							}
 						}
 						$chartTitle = 'Pengadaan yang gagal';
 						$chartSubtitle = 'per metode pengadaan';
@@ -407,11 +424,13 @@ class SiteController extends Controller
 					case '4' : {
 						$met = Yii::app()->db->createCommand('select metode_pengadaan from pengadaan')->queryAll();
 						while(list($k1, $v1)=each($met)) {
-							$x = array();
-							$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status != "-1"')->queryAll();
-							array_push($x, $v1['metode_pengadaan']);
-							array_push($x, count($peng));
-							array_push($chartData, $x);
+							if (!$this->in_multiarray($v1['metode_pengadaan'], $chartData)) {
+								$x = array();
+								$peng = Yii::app()->db->createCommand('select id_pengadaan from pengadaan where metode_pengadaan = "' . $v1['metode_pengadaan'] . '" and status != "-1"')->queryAll();
+								array_push($x, $v1['metode_pengadaan']);
+								array_push($x, count($peng));
+								array_push($chartData, $x);
+							}
 						}
 						$chartTitle = 'Pengadaan total';
 						$chartSubtitle = 'per metode pengadaan';
@@ -5152,7 +5171,7 @@ class SiteController extends Controller
 			
 			$Pengadaan=new Pengadaan;
 			$Pengadaan->status="-1";
-			$criteria=new CDbcriteria;
+			$criteria=new CDbCriteria;
 			$criteria->select='max(id_pengadaan) AS maxId';
 			$row = $Pengadaan->model()->find($criteria);
 			$somevariable = $row['maxId'];
