@@ -7,42 +7,9 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 
 <h2 style="margin-left:30px">Selamat datang, <b><?php echo User::model()->find('username = "' . Yii::app()->user->name . '"')->nama; ?></b>!</h2>
 
-<?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){		//kadiv
+<?php if(Yii::app()->user->getState('role') == 'kdivmum'){		//kadiv
 	
-?>
-    
-    <!----------------------------------------->
-	<!--
-        <div class="searchdiv">
-
-            <?php 
-				// $form=$this->beginWidget('CActiveForm', array(
-				// 'action'=>Yii::app()->createUrl($this->route),
-				// 'method'=>'get',
-				// )); 
-			?>	
-                    <div class="row">
-                            <?php // echo $form->label($model,'nama_pengadaan'); ?>
-                            <?php 
-								// echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); 
-							?>
-                            <?php 
-								// echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); 
-							?>
-                    </div>
-
-            <?php 
-				// $this->endWidget(); 
-			?>
-
-        </div>
-        <br/>
-        <br/>
-        <br/>
-	-->
-
-        <!----------------------------------------->
-    
+?>    
     
 <?php
 	$this->widget('zii.widgets.grid.CGridView', array(
@@ -81,38 +48,9 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 		'summaryText' => '',
 	)); 
 	} 
-	else if (Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//Divisi lain / user
+	else if (Yii::app()->user->getState('role') == 'divisi') {		//Divisi lain / user
 		
-        ?>
-        <!--
-            <div class="searchdiv">
-
-                <?php 
-					// $form=$this->beginWidget('CActiveForm', array(
-					// 'action'=>Yii::app()->createUrl($this->route),
-					// 'method'=>'get',
-					// )); 
-				?>	
-                        <div class="row">
-                                <?php // echo $form->label($model,'nama_pengadaan'); ?>
-                                <?php 
-									// echo $form->textField($model,'nama_pengadaan',array('size'=>20,'maxlength'=>100)); 
-								?>
-                                <?php 
-									// echo CHtml::submitButton('Cari Nama Pengadaan',array('class'=>'sidafbutton')); 
-								?>
-                        </div>
-
-                <?php 
-					// $this->endWidget(); 
-				?>
-
-            </div>
-            <br/>
-            <br/>
-            <br/>
-		-->
-            
+        ?>            
             <?php
 		$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'pengadaan-grid',
