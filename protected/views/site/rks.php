@@ -70,17 +70,17 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				
 				<div class="row">
-					<?php echo $form->labelEx($Dokumen1,'tanggal rks'); ?>
+					<?php echo $form->labelEx($Dokumen0,'tanggal rks'); ?>
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-						'model'=>$Dokumen1,
+						'model'=>$Dokumen0,
 						'attribute'=>'tanggal',
-						'value'=>$Dokumen1->tanggal,
+						'value'=>$Dokumen0->tanggal,
 						'htmlOptions'=>array('size'=>56),
 						'options'=>array(
 						'dateFormat'=>'dd-mm-yy',
 						),
 					));?>
-					<?php echo $form->error($Dokumen1,'tanggal'); ?>
+					<?php echo $form->error($Dokumen0,'tanggal'); ?>
 				</div>
 				
 				<div class="row">
@@ -572,7 +572,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
 						<?php $Cover=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Cover"');?>
 						<li><?php echo CHtml::link('RKS - Cover', array('docx/downloadrks','id'=>$Cover->id_rincian)); ?></li>
 						<?php $DaftarIsi=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Daftar Isi"');?>

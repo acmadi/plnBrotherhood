@@ -76,6 +76,17 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 
 			</div><!-- form -->
 			
+			<?php if (!$PAP1->isNewRecord){ ?>
+				</br>
+				<div style="border-top:1px solid lightblue">
+				<br/>
+					<h4><b> Daftar Dokumen </b></h4>
+					<ul class="generatedoc">
+						<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
+					</ul>
+				</div>
+			<?php } ?>
+			
 		<?php }
 		?>
 	</div>
