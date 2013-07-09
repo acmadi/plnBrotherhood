@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2013 at 07:31 AM
+-- Generation Time: Jul 09, 2013 at 07:11 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -27,8 +27,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(20) NOT NULL,
-  `nama` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -36,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
-('jo', 'Johan', '');
+INSERT INTO `admin` (`username`) VALUES
+('jo');
 
 -- --------------------------------------------------------
 
@@ -48,13 +46,10 @@ INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
 CREATE TABLE IF NOT EXISTS `anggota` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `nama` varchar(256) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `divisi` varchar(100) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
   `jabatan` varchar(32) NOT NULL,
-  `status_user` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `id_panitia` (`id_panitia`)
@@ -64,13 +59,15 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `username`, `nama`, `NIP`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
-(2, 'irvan.aditya', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
-(3, 'gilang.laksana', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
-(4, 'johannes.ridho', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
-(5, 'hanif.eridaputra', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
-(6, 'hanif.eridaputra', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Ketua', 'Aktif'),
-(7, 'johannes.ridho', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 2, 'Ketua', 'Aktif');
+INSERT INTO `anggota` (`id`, `username`, `NIP`, `email`, `id_panitia`, `jabatan`) VALUES
+(1, 'kevinindra', '123456784', 'kevin@gmail.com', 3, 'Sekretaris'),
+(2, 'irvanaditya', '123456785', 'irvan@gmail.com', 4, 'Ketua'),
+(3, 'gilanglaksana', '123456786', 'gilang@gmail.com', 3, 'Ketua'),
+(4, 'johannesridho', '123456787', 'johan@gmail.com', 4, 'Sekretaris'),
+(5, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 3, 'Anggota1'),
+(6, 'haniferidaputra', '123456788', 'he.23292@gmail.com', 1, 'Ketua'),
+(7, 'johannesridho', '123456787', 'johan@gmail.com', 2, 'Ketua'),
+(8, 'b', '123123', 'bb@bb.bb', 4, 'Anggota1');
 
 -- --------------------------------------------------------
 
@@ -186,8 +183,6 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 
 CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
-  `nama_divisi` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -195,11 +190,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 -- Dumping data for table `divisi`
 --
 
-INSERT INTO `divisi` (`username`, `nama_divisi`, `password`) VALUES
-('divin', 'Divisi Internet', ''),
-('divman', 'Divisi Manajemen', ''),
-('divsi', 'Divisi Sistem Informasi', ''),
-('divtrans', 'Divisi Transportasi', '');
+INSERT INTO `divisi` (`username`) VALUES
+('divin'),
+('divman'),
+('divsi'),
+('divtrans');
 
 -- --------------------------------------------------------
 
@@ -356,11 +351,9 @@ CREATE TABLE IF NOT EXISTS `hps` (
 
 CREATE TABLE IF NOT EXISTS `kdivmum` (
   `username` varchar(20) NOT NULL,
-  `nama` varchar(256) NOT NULL,
   `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `jabatan` varchar(32) NOT NULL,
-  `status_user` varchar(100) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -368,9 +361,9 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
 -- Dumping data for table `kdivmum`
 --
 
-INSERT INTO `kdivmum` (`username`, `nama`, `NIP`, `email`, `jabatan`, `status_user`) VALUES
-('aidil.syaputra', 'Aidil Syaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM', 'Aktif'),
-('kevin.indra', 'Kevin Indra', '111111', 'a@aa.aa', 'MSDAF', 'Aktif');
+INSERT INTO `kdivmum` (`username`, `NIP`, `email`, `jabatan`) VALUES
+('a', '111111', 'a@aa.aa', 'MSDAF'),
+('aidilsyaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM');
 
 -- --------------------------------------------------------
 
@@ -1038,6 +1031,43 @@ INSERT INTO `tor` (`id_dokumen`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `username` varchar(20) NOT NULL,
+  `nama` varchar(32) NOT NULL,
+  `password` varchar(24) NOT NULL,
+  `divisi` varchar(32) NOT NULL,
+  `status_user` varchar(32) NOT NULL,
+  PRIMARY KEY (`username`),
+  KEY `nama` (`nama`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `nama`, `password`, `divisi`, `status_user`) VALUES
+('a', 'a', 'a', 'divisi umum', 'Aktif'),
+('aidilsyaputra', 'Aidil Syaputra', 'aidil', 'Divisi Umum', 'Aktif'),
+('b', 'b', 'b', 'panitia', 'Aktif'),
+('divin', 'Divisi Internet', 'divin', 'Divisi Internet', 'Aktif'),
+('divman', 'Divisi Manajemen', 'divman', 'Divisi Manajemen', 'Aktif'),
+('divsi', 'Divisi Sistem Informasi', 'divsi', 'Divisi Sistem Informasi', 'Aktif'),
+('divtrans', 'Divisi Transportasi', 'divtrans', 'Divisi Transportasi', 'Aktif'),
+('gilanglaksana', 'Gilang Laksana', 'gilang', 'Divisi Umum', 'Aktif'),
+('haniferidaputra', 'Hanif Eridaputra', 'hanif', 'Divisi Umum', 'Aktif'),
+('irvanaditya', 'Irvan Aditya', 'irvan', 'Divisi Umum', 'Aktif'),
+('jo', 'johan', 'jo', 'Divisi Khusus', 'Aktif'),
+('johannesridho', 'Johannes Ridho', 'johan', 'Divisi Umum', 'Aktif'),
+('kadiv', 'kadiv', 'kadiv', 'Divisi Umum', 'Tidak Aktif'),
+('kevinindra', 'Kevin Indra', 'kevin', 'Divisi Umum', 'Aktif'),
+('panitia', 'panitia', 'panitia', 'Divisi Umum', 'Aktif');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_kontrak`
 --
 
@@ -1060,9 +1090,16 @@ INSERT INTO `user_kontrak` (`id_user_kontrak`, `username`) VALUES
 --
 
 --
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `anggota`
 --
 ALTER TABLE `anggota`
+  ADD CONSTRAINT `anggota_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `anggota_ibfk_3` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1102,6 +1139,12 @@ ALTER TABLE `daftar_hadir`
   ADD CONSTRAINT `daftar_hadir_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `divisi`
+--
+ALTER TABLE `divisi`
+  ADD CONSTRAINT `divisi_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `dokumen`
 --
 ALTER TABLE `dokumen`
@@ -1138,10 +1181,17 @@ ALTER TABLE `hps`
   ADD CONSTRAINT `hps_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `kdivmum`
+--
+ALTER TABLE `kdivmum`
+  ADD CONSTRAINT `kdivmum_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `link_dokumen`
 --
 ALTER TABLE `link_dokumen`
-  ADD CONSTRAINT `link_dokumen_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `link_dokumen_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `link_dokumen_ibfk_2` FOREIGN KEY (`pengunggah`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nota_dinas_pemberitahuan_pemenang`
