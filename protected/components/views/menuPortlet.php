@@ -17,7 +17,7 @@
 			<?php if($cpengadaan->status == '1') { ?>
 					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/dokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '2') { ?>
-					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/undanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/suratundanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '3') { ?>
 					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/evaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>

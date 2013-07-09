@@ -454,8 +454,9 @@ class SiteController extends Controller
 				if(Pengadaan::model()->findByPk($id)->status=="1"){
 					$this->redirect(array('site/dokumenprakualifikasi','id'=>$id));
 				}
-				// if(Pengadaan::model()->findByPk($id)->status=="2"){
-				// }
+				if(Pengadaan::model()->findByPk($id)->status=="2"){
+					$this->redirect(array('site/suratundanganprakualifikasi','id'=>$id));
+				}
 				// if(Pengadaan::model()->findByPk($id)->status=="3"){
 		
 				// }
@@ -1384,8 +1385,6 @@ class SiteController extends Controller
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
 				
-				$A=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"'); 
-				$A1=Rks::model()->findByPk($A->id_dokumen);
 				$SUPK= new SuratUndanganPrakualifikasi;
 				$SUPK->id_dokumen=$Dokumen0->id_dokumen;
 				$SUPK->perihal= 'Undangan Prakualifikasi '.$Pengadaan->nama_pengadaan;
@@ -1395,8 +1394,10 @@ class SiteController extends Controller
 
 				if(isset($_POST['SuratUndanganPrakualifikasi']))
 				{
-					$Dokumen0->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
 					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPK->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	
@@ -1436,8 +1437,10 @@ class SiteController extends Controller
 
 				if(isset($_POST['SuratUndanganPrakualifikasi']))
 				{
-					$Dokumen0->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
 					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPK->validate();
 					if($valid){
 						if($Pengadaan->save(false))
 						{	

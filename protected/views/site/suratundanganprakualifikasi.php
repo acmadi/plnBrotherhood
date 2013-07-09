@@ -1,8 +1,9 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Generator';
 $id = Yii::app()->getRequest()->getQuery('id');
+$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -16,14 +17,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 		?>
 		
 			<div id="menuform">
-				<?php
-				$this->widget('zii.widgets.CMenu', array(
-						'items'=>array(
-							array('label'=>'Dokumen Kualifikasi', 'url'=>array($Dokumen0->isNewRecord?('/site/prakualifikasi'):('/site/editprakualifikasi'),'id'=>$id)),
-						),
-					));
-				?>
-			</div>
+              	<?php
+                  	$this->widget('zii.widgets.CMenu', array(
+                     	'items'=>array(
+                           	array('label'=>'Dokumen Prakualifikasi', 'url'=>array($DPK->isNewRecord?('/site/dokumenprakualifikasi'):('/site/editdokumenprakualifikasi'),'id'=>$id)),
+                          	array('label'=>'Surat Undangan Prakualifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/suratundanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editsuratundanganprakualifikasi'),'id'=>$id)),
+                      	),
+                 	));
+              	?>
+           	</div>
 			<br/>
 			
 				<?php if(Yii::app()->user->hasFlash('sukses')): ?>
@@ -44,14 +46,23 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					</div>
 				<?php endif; ?>
 				
-				<div class="form">
+			<div class="form">
 
 				<?php $form=$this->beginWidget('CActiveForm', array(
 				'id'=>'surat-undangan-prakualifikasi-form',
 				'enableAjaxValidation'=>false,
 				)); ?>
 				
-				<h4><b> Surat Undangan Prakualifikasi</b></h4>		
+				<?php echo $form->errorSummary($SUPK); ?>
+				
+				<h4><b> Surat Undangan Prakualifikasi</b></h4>
+				
+				<div class="row">
+					<?php echo $form->labelEx($SUPK,'nomor'); ?>
+					<?php echo $form->textField($SUPK,'nomor',array('size'=>56,'maxlength'=>100)); ?>
+					<?php echo $form->error($SUPK,'nomor'); ?>
+				</div>
+				
 				<div class="row">
 					<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -66,15 +77,21 @@ $id = Yii::app()->getRequest()->getQuery('id');
 					<?php echo $form->error($Dokumen0,'tanggal'); ?>
 				</div>
 				
+				<div class="row">
+					<?php echo $form->labelEx($SUPK,'perihal'); ?>
+					<?php echo $form->textArea($SUPK,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
+					<?php echo $form->error($SUPK,'perihal'); ?>
+				</div>
+				
 				<div class="row buttons">
-					<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+					<?php echo CHtml::submitButton($SUPK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
 				
 				<?php $this->endWidget(); ?>
 
 			</div><!-- form -->
 		
-			<?php if($DPK->isNewRecord) { ?>
+			<?php if($SUPK->isNewRecord) { ?>
 			
 			<?php } else { ?>
 				<br/>

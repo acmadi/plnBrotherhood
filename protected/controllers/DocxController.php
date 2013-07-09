@@ -1505,6 +1505,46 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Dokumen Prakualifikasi.docx", true);
 		}
+		else if ($Dok->nama_dokumen == "Surat Undangan Prakualifikasi"){
+			
+			$SUPK=SuratUndanganPrakualifikasi::model()->findByPk($id);
+			$dokDPK=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
+			$DPK=DokumenPrakualifikasi::model()->findByPk($dokDPK->id_dokumen);
+			
+			$nomor = $SUPK->nomor;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$perihal = $SUPK->perihal;
+			$namapengadaan = $Peng->nama_pengadaan;
+			
+			$tanggalpemasukan1 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pemasukan1);
+			$tanggalpemasukan2 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pemasukan2);
+			$waktupemasukan1 = Tanggal::getJamMenit($DPK->waktu_pemasukan1);
+			$waktupemasukan2 = Tanggal::getJamMenit($DPK->waktu_pemasukan2);
+			$tempatpemasukan = $DPK->tempat_pemasukan;
+			
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$panitiapejabat = strtoupper($panitia->jenis_panitia);
+			$namaketua = strtoupper(User::model()->findByPk(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->username)->nama);
+				
+			$this->doccy->newFile('4a Surat Undangan Prakualifikasi.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+		
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);
+			$this->doccy->phpdocx->assign('#perihal#', $perihal);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#panitiapejabat#', $panitiapejabat);
+			$this->doccy->phpdocx->assign('#tanggalpemasukan1#', $tanggalpemasukan1);
+			$this->doccy->phpdocx->assign('#tanggalpemasukan2#', $tanggalpemasukan2);
+			$this->doccy->phpdocx->assign('#waktupemasukan1#', $waktupemasukan1);
+			$this->doccy->phpdocx->assign('#waktupemasukan2#', $waktupemasukan2);
+			$this->doccy->phpdocx->assign('#tempatpemasukan#', $tempatpemasukan);
+			$this->doccy->phpdocx->assign('#namaketua#', $namaketua);
+			
+			$this->renderDocx("Surat Undangan Prakualifikasi.docx", true);
+		}
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Awal Panitia"){
 			
