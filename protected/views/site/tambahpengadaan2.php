@@ -3,7 +3,7 @@
 	$user=Yii::app()->user->name;
 	$this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 ?>
-<? if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
+<?php if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
 		<?php for($i=0;$i<count($modelDok);$i++){
 				if($modelDok[$i]!=null){
 					$form = $this->beginWidget('CActiveForm', array(

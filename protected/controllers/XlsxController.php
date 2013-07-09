@@ -20,28 +20,28 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_2.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 3') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_3.xlsx');
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_3.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 6') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_6.xlsx');
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_6.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran ba') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_ba.xlsx');
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-B-Lamp_BA.xlsx"');
 				}
 			} else if ($crks->tipe_rks == 2) {
@@ -50,28 +50,28 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nomor#", strtoupper($crks->nomor));
 					$this->assign($objPHPExcel, "#tanggal#", strtoupper(Tanggal::getTanggalLengkap0($cdokumen->tanggal)));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_2.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 3') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-BJ-Lamp_3.xlsx');
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_3.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 5') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-BJ-Lamp_5.xlsx');
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_5.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran ba') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-BJ-Lamp_ba.xlsx');
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-BJ-Lamp_BA.xlsx"');
 				}
 			} else {
@@ -80,21 +80,21 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-J-Lamp_2.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 3') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-J-Lamp_3.xlsx');
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-J-Lamp_3.xlsx"');
 				} else if ($crincian->nama_rincian == 'Lampiran 5') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-J-Lamp_5.xlsx');
-					ob_end_clean();
-					ob_start();
+					
+					
 					header('Content-Disposition: attachment;filename="RKS-PL-J-Lamp_5.xlsx"');
 				}
 			}
@@ -135,8 +135,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#namakadiv#", $namakadiv);
 					//$this->assign($objPHPExcel, "#ketua#", $ketua);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="HPS Barang.xlsx"');
 			}
 			else if ($jenis == 'Jasa'){
@@ -145,8 +144,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#namakadiv#", $namakadiv);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="HPS Jasa.xlsx"');
 			}
 		}
@@ -160,8 +158,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx"');
 		}
 		else if($cdokumen->nama_dokumen == 'Berita Acara Pembukaan Penawaran Sampul Dua') {
@@ -174,8 +171,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="13.a-Lam BA Pembukaan 2 SAMPUL.xlsx"');
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Satu') {
@@ -193,8 +189,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nomor#", $nomor);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="15.a-Lam BA Evaluasi  1 Sampul.xlsx"');
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Dua') {
@@ -207,8 +202,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="16.a-Lam BA Evaluasi 2 SAMPUL.xlsx"');
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran') {
@@ -221,8 +215,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx"');
 		}
 		else{
@@ -235,8 +228,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
-			ob_end_clean();
-			ob_start();
+			
 			header('Content-Disposition: attachment;filename="10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx"');
 		}
 		
