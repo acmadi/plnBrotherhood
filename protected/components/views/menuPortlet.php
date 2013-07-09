@@ -19,7 +19,9 @@
 			<?php } else if($cpengadaan->status == '2') { ?>
 					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/suratundanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '3') { ?>
-					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/evaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/suratpengumumanpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '4') { ?>
+					<li class='onprogress' ><?php echo CHtml::link('Prakualifikasi',array("site/pendaftaranpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li class='sudah' > <?php echo CHtml::link('Prakualifikasi',array("site/editevaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>

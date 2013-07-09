@@ -1239,7 +1239,11 @@ class SiteController extends Controller
 		else {
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "2";
+				if ($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "3";
+				} else {	
+					$Pengadaan->status= "2";
+				}
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1396,7 +1400,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "4";
+				$Pengadaan->status= "6";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1480,6 +1484,96 @@ class SiteController extends Controller
 				$this->render('suratundanganprakualifikasi',array(
 					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,
 				));
+			}
+		}
+	}
+	
+	public function actionSuratpengumumanpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="4";
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('suratpengumumanpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionEditSuratpengumumanpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('suratpengumumanpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionPendaftaranpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="5";
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('pendaftaranpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionEditPendaftaranpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('pendaftaranpelelanganprakualifikasi');
 			}
 		}
 	}
