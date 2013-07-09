@@ -1274,6 +1274,10 @@ class SiteController extends Controller
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
 				
 				$DPK= DokumenPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+				$DPK->waktu_pemasukan1=Tanggal::getJamMenit($DPK->waktu_pemasukan1);
+				$DPK->waktu_pemasukan2=Tanggal::getJamMenit($DPK->waktu_pemasukan2);
+				$DPK->waktu_evaluasi=Tanggal::getJamMenit($DPK->waktu_evaluasi);
+				$DPK->waktu_penetapan=Tanggal::getJamMenit($DPK->waktu_penetapan);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
