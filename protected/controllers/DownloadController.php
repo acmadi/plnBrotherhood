@@ -9,7 +9,7 @@ class DownloadController extends Controller
 		$clink = LinkDokumen::model()->findByPk($id);
 		$cdok = Dokumen::model()->findByPk($clink->id_dokumen);
 		$dl = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $cdok->id_pengadaan . '/' . $clink->id_dokumen . '/' . $clink->nomor_link . '.' . $clink->format_dokumen;
-		Yii::app()->getRequest()->sendFile($cdok->nama_dokumen . ' - ' . Pengadaan::model()->findByPk($cdok->id_pengadaan)->nama_pengadaan . '.' . $clink->format_dokumen, @file_get_contents($dl));
+		Yii::app()->getRequest()->sendFile($clink->nama_file . '.' . $clink->format_dokumen, @file_get_contents($dl));
 	}
 }
 ?>

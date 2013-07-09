@@ -1,6 +1,6 @@
 <?php
 	$model=Dokumen::model();
-    $this->pageTitle=Yii::app()->name . ' | Uploader';
+    $this->pageTitle=Yii::app()->name . ' | Unggah Dokumen';
 	//id pengadaan
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;

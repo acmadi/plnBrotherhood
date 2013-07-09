@@ -194,6 +194,7 @@ class SiteController extends Controller
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
 				$newLinkDokumen->pengunggah=$user;
 				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $tempDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->nama_file=$pathinfo['filename'];
 				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
 				$newLinkDokumen->save();
 								
@@ -5341,6 +5342,7 @@ class SiteController extends Controller
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
 				$newLinkDokumen->pengunggah=$user;
 				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->nama_file=$pathinfo['filename'];
 				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
 				$newLinkDokumen->save();
 								
@@ -5564,6 +5566,49 @@ class SiteController extends Controller
 				$metode_penawaran2='Sampul 2';
 			}	
 			
+			$newDokumen = new Dokumen;
+			$newLinkDokumen = new LinkDokumen;
+				
+			if(isset($_POST['Dokumen'])){
+				$newDokumen->attributes=$_POST['Dokumen'];
+				$fileDokumen = CUploadedFile::getInstance($newDokumen,'uploadedFile');				
+				$newDokumen = Dokumen::model()->findByPk($newDokumen->id_dokumen);
+				$newDokumen->uploadedFile=$fileDokumen;
+				
+				$newDokumen->status_upload='Selesai';
+				
+				date_default_timezone_set("Asia/Jakarta");
+				$secs = time() + (7*3600);
+				$hours = $secs / 3600 % 24;
+				$minutes = $secs / 60 % 60;
+				$seconds = $secs % 60;
+				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
+				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
+				
+				// $criteria=new CDbcriteria;
+				// $criteria->select='max(id_link) AS maxId';
+				// $row = $newLinkDokumen->model()->find($criteria);
+				// $id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
+				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
+				$newLinkDokumen->waktu_upload=$waktu_upload;
+				$newLinkDokumen->tanggal_upload=date('Y-m-d');
+				$newLinkDokumen->pengunggah=$user;
+				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->nama_file=$pathinfo['filename'];
+				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
+				$newLinkDokumen->save();
+								
+				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
+				@mkdir($path,0700,true);
+				$namaFile = $newLinkDokumen->nomor_link;
+				
+				if($newDokumen->save(false)){
+					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
+					}
+			}
+			
 			$modelDok = array(Dokumen::model()->find('nama_dokumen="Pakta Integritas Awal Panitia" AND id_pengadaan="' . $id . '"'),
 										 Dokumen::model()->find('nama_dokumen="RKS" AND id_pengadaan="' . $id . '"'),
 										 Dokumen::model()->find('nama_dokumen="Surat Undangan Prakualifikasi" AND id_pengadaan="' . $id . '"'),
@@ -5597,48 +5642,6 @@ class SiteController extends Controller
 												Dokumen::model()->find('nama_dokumen="RAB" AND id_pengadaan="' . $id . '"'),
 												Dokumen::model()->find('nama_dokumen="Nota Dinas Perintah Pengadaan" AND id_pengadaan="' . $id . '"')
 										);
-			
-			$newDokumen = new Dokumen;
-			$newLinkDokumen = new LinkDokumen;
-				
-			if(isset($_POST['Dokumen'])){
-				$newDokumen->attributes=$_POST['Dokumen'];
-				$fileDokumen = CUploadedFile::getInstance($newDokumen,'uploadedFile');				
-				$newDokumen = Dokumen::model()->findByPk($newDokumen->id_dokumen);
-				$newDokumen->uploadedFile=$fileDokumen;
-				
-				$newDokumen->status_upload='Selesai';
-				
-				date_default_timezone_set("Asia/Jakarta");
-				$secs = time() + (7*3600);
-				$hours = $secs / 3600 % 24;
-				$minutes = $secs / 60 % 60;
-				$seconds = $secs % 60;
-				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
-				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
-				
-				// $criteria=new CDbcriteria;
-				// $criteria->select='max(id_link) AS maxId';
-				// $row = $newLinkDokumen->model()->find($criteria);
-				// $id_link = $row['maxId'] + 1;
-				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
-				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
-				$newLinkDokumen->waktu_upload=$waktu_upload;
-				$newLinkDokumen->tanggal_upload=date('Y-m-d');
-				$newLinkDokumen->pengunggah=$user;
-				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
-				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
-				$newLinkDokumen->save();
-								
-				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
-				@mkdir($path,0700,true);
-				$namaFile = $newLinkDokumen->nomor_link;
-				
-				if($newDokumen->save(false)){
-					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
-					}
-			}
 				$this->render('uploader',array('modelDok'=>$modelDok));
 	}
 }
