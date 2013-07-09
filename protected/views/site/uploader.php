@@ -25,7 +25,7 @@
 				echo '<br>';
 				echo $form->fileField($modelDok[$i],'uploadedFile');
 				echo $form->hiddenField($modelDok[$i],'id_dokumen');
-				echo $form->error($modelDok[$i]	,'uploadedFile');	
+				echo $form->error($modelDok[$i]	,'uploadedFile', array('accept'=>'.docx, .xlsx, application/pdf'));	
 				echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
 				if($modelDok[$i]->status_upload=="Selesai") {
 					echo ' <span style="color:green">Dokumen telah diunggah</span>';

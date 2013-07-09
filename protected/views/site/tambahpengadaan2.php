@@ -16,7 +16,7 @@
 		<?php
 						echo $form->labelEx($modelDok[$i],$modelDok[$i]->nama_dokumen);
 						echo '<br>';
-						echo $form->fileField($modelDok[$i],'uploadedFile');
+						echo $form->fileField($modelDok[$i],'uploadedFile', array('accept'=>'.docx, .xlsx, application/pdf'));
 						echo $form->hiddenField($modelDok[$i],'id_dokumen');
 						echo $form->error($modelDok[$i]	,'uploadedFile');	
 						echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));
