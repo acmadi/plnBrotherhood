@@ -17,7 +17,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				break;
 			}
 			case 'divisi' : {
-				echo Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama;
+				echo Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama_divisi;
 				break;
 			}
 			case 'kdivmum' : {
@@ -57,7 +57,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
-				'value'=>'$data->namaDivisi->nama',
+				'value'=>'$data->divisiPeminta->nama_divisi',
 				'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 			),			
 				

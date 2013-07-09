@@ -43,18 +43,18 @@
 			} else {
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
-						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>!Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Permintaan', 'url'=>array('/site/permintaan'), 'visible'=>Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"') || Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>!Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Statistik', 'url'=>array('/site/statistik', 'category'=>'1', 'chart'=>'1'), 'visible'=>Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Pengguna', 'url'=>array('/user/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Panitia', 'url'=>array('/panitia/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'Anggota', 'url'=>array('/anggota/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
-						array('label'=>'KDIVMUM / MSDAF', 'url'=>array('/kdivmum/index'), 'visible'=>Admin::model()->exists('username = "' . Yii::app()->user->name . '"')),
+						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>Yii::app()->user->getState('role') != 'admin'),
+						array('label'=>'Permintaan', 'url'=>array('/site/permintaan'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum' || Yii::app()->user->getState('role') == 'divisi'),
+						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"') || Yii::app()->user->getState('role') == 'kdivmum'),
+						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>Yii::app()->user->getState('role') != 'admin'),
+						array('label'=>'Statistik', 'url'=>array('/site/statistik', 'category'=>'1', 'chart'=>'1'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum'),
+						array('label'=>'Pengguna', 'url'=>array('/user/index'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
+						array('label'=>'Panitia', 'url'=>array('/panitia/index'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
+						array('label'=>'Anggota', 'url'=>array('/anggota/index'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
+						array('label'=>'KDIVMUM / MSDAF', 'url'=>array('/kdivmum/index'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						// array('label'=>'Admin', 'url'=>array('/admin/index')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
-						array('label'=>(Yii::app()->user->getState('role') == 'admin') ? (Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama))), 'itemOptions'=>array('style'=>'color:white;float:right'))
+						array('label'=>(Yii::app()->user->getState('role') == 'admin') ? (Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama_divisi) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama))), 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),
 				));
 			}
