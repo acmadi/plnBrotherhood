@@ -13,7 +13,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 
 	<div id="maincontent">
 		<?php 
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
 			<div id="menuform">
 				<?php

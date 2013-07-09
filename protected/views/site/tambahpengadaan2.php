@@ -3,7 +3,7 @@
 	$user=Yii::app()->user->name;
 	$this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 ?>
-<?php if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
+<?php if (Yii::app()->user->getState('role') == 'kdivmum' || Yii::app()->user->getState('role') == 'divisi') { ?>
 		<?php for($i=0;$i<count($modelDok);$i++){
 				if($modelDok[$i]!=null){
 					$form = $this->beginWidget('CActiveForm', array(
@@ -30,7 +30,7 @@
 				}
 			}
 		?>
-	<?php if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
+	<?php if (Yii::app()->user->getState('role') == 'kdivmum') { ?>
 		<?php if ($modelDok[0]->status_upload=="Selesai" && $modelDok[1]->status_upload=="Selesai" && $modelDok[2]->status_upload=="Selesai") {
 			echo CHtml::button('Tunjuk PIC', array('submit'=>array(Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')==null?'site/tunjukpanitia':'site/edittunjukpanitia','id'=>$id), "class"=>'sidafbutton'));  
 		} ?> 

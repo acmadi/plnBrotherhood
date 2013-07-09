@@ -12,7 +12,7 @@
 
 <div id="pagecontent">
 	<div id="sidebar">
-		<?php if((!Yii::app()->user->isGuest)&&(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"'))) $this->widget('MenuPortlet'); ?>
+		<?php if((!Yii::app()->user->isGuest)&&(Yii::app()->user->getState('role') == 'anggota')) $this->widget('MenuPortlet'); ?>
 	</div>
 
 	<div id="maincontent">
@@ -45,9 +45,9 @@
 	</div>
 </div>
 <?php 
-	if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	if (Yii::app()->user->getState('role') == 'anggota') {
 		echo CHtml::button('Kembali', array('submit'=>array('site/generator', 'id'=>$id), 'class'=>'sidafbutton'));
-	} else if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	} else if (Yii::app()->user->getState('role') == 'kdivmum') {
 		echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$id), 'class'=>'sidafbutton'));
 	}
 ?>

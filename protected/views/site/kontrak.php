@@ -6,7 +6,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrak';
 Sedang dalam pengembangan
 
 <?php 
-	if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {		//kadiv atau panitia kontrak
+	if(Yii::app()->user->getState('role') == 'kdivmum') {		//kadiv atau panitia kontrak
 	
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',

@@ -111,7 +111,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 		</div>
 	<?php } ?>
 <div>
-<?php if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
+<?php if(Yii::app()->user->getState('role') == 'kdivmum'){ ?>
 	<div style="width:75%; margin:auto;">
 		<?php
 			$this->widget('zii.widgets.grid.CGridView', array(

@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' | Pengadaan Lampau';
+$this->pageTitle=Yii::app()->name . ' | Arsip Pengadaan';
 ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
