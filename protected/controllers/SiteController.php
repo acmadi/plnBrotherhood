@@ -555,7 +555,7 @@ class SiteController extends Controller
 					if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
 						$Pengadaan->status='1';
 					} else { 
-						$Pengadaan->status='9';
+						$Pengadaan->status='10';
 					}
 					$valid=$Pengadaan->validate();
 					if($valid){		
@@ -592,11 +592,6 @@ class SiteController extends Controller
 				if(isset($_POST['Pengadaan']))
 				{
 					$Pengadaan->attributes=$_POST['Pengadaan'];
-					if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
-						$Pengadaan->status='1';
-					} else { 
-						$Pengadaan->status='9';
-					}
 					$valid=$Pengadaan->validate();
 					if($valid){		
 						if($Pengadaan->save(false))
@@ -623,7 +618,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='7';
+				$Pengadaan->status ='11';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -709,7 +704,7 @@ class SiteController extends Controller
 
 				if(isset($_POST['Rks']))
 				{
-					$Dokumen1->attributes=$_POST['Dokumen'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
 					$RKS->attributes=$_POST['Rks'];
 					$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
 					$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
@@ -1006,11 +1001,10 @@ class SiteController extends Controller
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
-				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
-				$Dokumen1->tanggal=Tanggal::getTanggalStrip($Dokumen1->tanggal);
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				
-				$PAP1= PaktaIntegritasPanitia1::model()->findByPk($Dokumen0->id_dokumen);
-				$RKS= Rks::model()->findByPk($Dokumen1->id_dokumen);
+				$RKS= Rks::model()->findByPk($Dokumen0->id_dokumen);
 				$RKS->waktu_penjelasan=Tanggal::getJamMenit($RKS->waktu_penjelasan);
 				$RKS->waktu_pemasukan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran1);
 				$RKS->waktu_pembukaan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
@@ -1058,7 +1052,7 @@ class SiteController extends Controller
 
 				if(isset($_POST['Rks']))
 				{
-					$Dokumen1->attributes=$_POST['Dokumen'];
+					$Dokumen0->attributes=$_POST['Dokumen'];
 					$RKS->attributes=$_POST['Rks'];
 					$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
 					$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
@@ -1076,16 +1070,14 @@ class SiteController extends Controller
 					$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
 					$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
 					$RKS->tanggal_paling_lambat_penyerahan=date('Y-m-d', strtotime($RKS->tanggal_paling_lambat_penyerahan));
-					$valid=$PAP1->validate()&&$RKS->validate();
-					$valid=$valid&&$Dokumen1->validate();
-					$Dokumen0->tanggal=$Dokumen1->tanggal;
+					$valid=$RKS->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){		
 						if($Pengadaan->save(false))
 						{	
-							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-								if($PAP1->save(false)&&$RKS->save(false)){
-									$this->redirect(array('editrks','id'=>$Dokumen0->id_pengadaan));
+							if($Dokumen0->save(false)){
+								if($RKS->save(false)){
+									$this->redirect(array('editrks','id'=>$id));
 								}
 							}
 						}

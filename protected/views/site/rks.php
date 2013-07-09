@@ -572,7 +572,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Pakta Integritas Awal Panitia', array('docx/download','id'=>$PAP1->id_dokumen)); ?></li>
 						<?php $Cover=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Cover"');?>
 						<li><?php echo CHtml::link('RKS - Cover', array('docx/downloadrks','id'=>$Cover->id_rincian)); ?></li>
 						<?php $DaftarIsi=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Daftar Isi"');?>
