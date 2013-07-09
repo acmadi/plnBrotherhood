@@ -123,7 +123,6 @@ class XlsxController extends Controller
 		$skpanitia = Panitia::model()->findByPk($cpengadaan->id_panitia)->SK_panitia;
 		$panitia = Panitia::model()->findByPk($cpengadaan->id_panitia)->nama_panitia;
 		$jenis = $cpengadaan->jenis_pengadaan;
-		$namakadiv = User::model()->findByPk(kdivmum::model()->find('jabatan = "KDIVMUM"')->username)->nama;
 		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
@@ -132,7 +131,7 @@ class XlsxController extends Controller
 			if (($jenis == 'Barang dan Jasa') || ($jenis == 'Barang')){
 			$objPHPExcel = $objReader->load($templatePath . 'HPS Barang.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#namakadiv#", $namakadiv);
+					$this->assign($objPHPExcel, "#namakadiv#", '');
 					//$this->assign($objPHPExcel, "#ketua#", $ketua);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			
@@ -141,7 +140,7 @@ class XlsxController extends Controller
 			else if ($jenis == 'Jasa'){
 			$objPHPExcel = $objReader->load($templatePath . 'HPS Jasa.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#namakadiv#", $namakadiv);
+					$this->assign($objPHPExcel, "#namakadiv#", '');
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			
