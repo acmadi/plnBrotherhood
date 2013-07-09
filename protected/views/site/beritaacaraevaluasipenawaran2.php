@@ -14,7 +14,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 	<div id="maincontent">
 		
 		<?php 
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
            	
            	<?php if($cpengadaan->metode_penawaran == 'Dua Sampul') { ?>

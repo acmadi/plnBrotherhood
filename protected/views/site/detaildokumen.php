@@ -21,10 +21,10 @@
 <h2><?php echo $pengadaan->nama_pengadaan; ?> : <?php echo $cdokumen->nama_dokumen?></h2>
 <?php
 	if($pengadaan->status!='100'||$pengadaan->status!='99'){
-		if((Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"'))&&(($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
+		if((Yii::app()->user->getState('role') == 'kdivmum')&&(($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
 			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton')); 
 			echo '<br/>';
-		} else if ((Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
+		} else if ((Yii::app()->user->getState('role') == 'anggota'&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
 			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton'));
 			echo '<br/>';
 		}
@@ -33,7 +33,7 @@
 
 <?php
 	if($pengadaan->status!='100'||$pengadaan->status!='99'){
-		if((Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"'))&&(($cdokumen->nama_dokumen=='Nota Dinas Permintaan')||($cdokumen->nama_dokumen=='TOR')||($cdokumen->nama_dokumen=='RAB')||($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
+		if((Yii::app()->user->getState('role') == 'kdivmum')&&(($cdokumen->nama_dokumen=='Nota Dinas Permintaan')||($cdokumen->nama_dokumen=='TOR')||($cdokumen->nama_dokumen=='RAB')||($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
 		
 		//insert uploader here
 		$chosenDokumen = Dokumen::model()->findByPk($id);
@@ -52,7 +52,7 @@
 		
 		$this->endWidget();
 		
-		} else if ((Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
+		} else if ((Yii::app()->user->getState('role') == 'anggota'&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
 	
 		//insert uploader
 		$chosenDokumen = Dokumen::model()->findByPk($id);
@@ -104,9 +104,9 @@
 	if($pengadaan->status=="Selesai"){
 		echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$cdokumen->id_pengadaan), 'class'=>'sidafbutton'));
 	} else{
-		if(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')){
+		if(Yii::app()->user->getState('role') == 'anggota'){
 			echo CHtml::button('Kembali', array('submit'=>array('site/dokumengenerator', 'id'=>$cdokumen->id_pengadaan), 'class'=>'sidafbutton'));
-		} else if(Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')){
+		} else if(Yii::app()->user->getState('role') == 'kdivmum'){
 			echo CHtml::button('Kembali', array('submit'=>array('site/detailpengadaan', 'id'=>$cdokumen->id_pengadaan), 'class'=>'sidafbutton'));
 		}
 	}  

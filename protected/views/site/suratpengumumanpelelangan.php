@@ -14,7 +14,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	<div id="maincontent">
 	
 		<?php 
-			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
             
                 <div id="menuform">

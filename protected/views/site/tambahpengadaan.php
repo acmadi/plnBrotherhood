@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 ?>
 <?php 
-	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	if (Yii::app()->user->getState('role') == 'kdivmum') {
 ?>
 	<div class="form">
 		<?php $form=$this->beginWidget('CActiveForm', array(

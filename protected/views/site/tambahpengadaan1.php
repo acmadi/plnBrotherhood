@@ -3,7 +3,7 @@
 $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 ?>
 <?php 
-	if (Kdivmum::model()->exists('username = "' . Yii::app()->user->name . '"')||Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+	if (Yii::app()->user->getState('role') == 'kdivmum' || Yii::app()->user->getState('role') == 'divisi') {
 ?>
 	<div class="form">
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -19,7 +19,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 			<?php echo $form->error($Pengadaan,'nama_pengadaan'); ?>
 		</div>
 	
-		<?php if(!Divisi::model()->exists('username = "' . Yii::app()->user->name . '"')) { ?>
+		<?php if(Yii::app()->user->getState('role') != 'divisi') { ?>
 			<div class="row">
 				<?php echo $form->labelEx($Pengadaan,'divisi_peminta'); ?>
 				<?php echo $form->dropDownList($Pengadaan,'divisi_peminta',CHtml::listData(Divisi::model()->findAll(), 'username', 'username'),array('empty'=>'-----Pilih Divisi-----'));?>
