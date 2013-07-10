@@ -663,7 +663,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='11';
+				$Pengadaan->status ='2';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1152,10 +1152,14 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				if($Pengadaan->metode_pengadaan=='Pelelangan'){
-					$Pengadaan->status= "13";
-				} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
-					$Pengadaan->status= "12";
+				if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+					$Pengadaan->status="3";
+				} else {
+					if($Pengadaan->metode_pengadaan=='Pelelangan'){
+						$Pengadaan->status= "14";
+					} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+						$Pengadaan->status= "13";
+					}
 				}
 				
 				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
