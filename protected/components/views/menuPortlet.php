@@ -89,7 +89,7 @@
 				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12') { ?>
 					<li class='belum' ><?php echo 'Pengumuman dan Pendaftaran'?></li>
 				<?php } else if($cpengadaan->status == '14') { ?>
-					<li class='sudah' > <?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/pengumumanpengadaan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='sudah' > <?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/suratpengumumanpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else if($cpengadaan->status == '15') { ?>
 					<li class='sudah' > <?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/pendaftaranpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
