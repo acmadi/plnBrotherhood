@@ -10,7 +10,7 @@
 		<tr>
 			<td><?php echo CHtml::textField('perusahaan[]','',array('style'=>'width:120px')); ?></td>            
             <td>
-				<?php echo CHtml::dropDownList('undangan_pengambilan_dokumen[]',"string",
+				<?php echo CHtml::dropDownList('pendaftaran_pelelangan_pq[]',"string",
 					array(
 						"1"=>"Lulus",
 						"0"=>"Tidak Lulus",
@@ -24,7 +24,7 @@
 			<tr>
 				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>				
 				<td>
-					<?php echo CHtml::dropDownList('undangan_pengambilan_dokumen[]',$model[$i]->status,
+					<?php echo CHtml::dropDownList('pendaftaran_pelelangan_pq[]',$model[$i]->pendaftaran_pelelangan_pq,
 						array(
 							"1"=>"Lulus",
 							"0"=>"Tidak Lulus",
