@@ -1412,7 +1412,7 @@ class DocxController extends Controller
 			$namapengadaan1 = strtoupper($Peng->nama_pengadaan);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$skpanitia = ', sesuai dengan surat tugas DIRSDM No.'.$panitia->SK_panitia;
-			$tahunsk = ' tahun '.$panitia->tahun;
+			$tahunsk = ' tahun '.Tanggal::getTahun($panitia->tanggal_sk);
 			$panitiapejabat = $panitia->jenis_panitia;
 			$panitia2 = strtoupper($panitia->jenis_panitia);
 			$tujuanpengadaan = $DPK->tujuan_pengadaan;

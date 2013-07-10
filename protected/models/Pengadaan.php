@@ -791,7 +791,7 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '12'){
 			return 'Undangan Penawaran Harga';
 		}
-		else if($this->status == '6' || $this->status == '7'){
+		else if($this->status == '13'){
 			return 'Pengumuman Lelang';
 		}
 		else if($this->status == '14'){
