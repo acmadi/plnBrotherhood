@@ -99,7 +99,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'id' => 'idpenyedia',        
 					'model' => $PP,
 					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_evaluasi_sampul_1',
+					'viewName' => 'formperusahaan_evaluasi_1_sampul',
 					'labelAdd' => 'Tambah Penyedia',
 					'labelDel' => 'Hapus Penyedia',
 					
