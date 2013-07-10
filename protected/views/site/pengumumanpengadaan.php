@@ -19,7 +19,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pengadaan', 'url'=>array($Dokumen0->isNewRecord?('/site/pengumumanpengadaan'):('/site/editpengumumanpengadaan'),'id'=>$id)),
+							array('label'=>'Pengumuman Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/site/pengumumanpengadaan'):('/site/editpengumumanpengadaan'),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
 						),
 					));
 				?>
@@ -51,7 +52,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			'enableAjaxValidation'=>false,
 			)); ?>
 			
-			<h4><b> Surat Undangan Pengambilan Dokumen Pengadaan </b></h4>
+			<h4><b> Surat Pengumuman Pelelangan </b></h4>
 			<div class="row">
 				<?php echo $form->labelEx($SUPDP,'nomor'); ?>
 				Nomor HPS : <?php echo $HPS->nomor ?> <br/>
@@ -104,20 +105,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php echo $form->textArea($SUPDP,'tempat_pengambilan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 				<?php echo $form->error($SUPDP,'tempat_pengambilan'); ?>
 			</div>
-
-			<div class="row">
-				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pengumuman_pengadaan',
-					'labelAdd' => 'Tambah Penyedia',
-					'labelDel' => 'Hapus Penyedia',
-					
-					)); 
-				?>
-		</div>
 			
 			<div class="row buttons">
 				<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
