@@ -2245,17 +2245,17 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Prakualifikasi.docx", true);
 		}
-		else if ($Dok->nama_dokumen == "Surat Pengumuman Pelelangan"){
+		else if ($Dok->nama_dokumen == "Surat Pengumuman Pemenang"){
 			
 			$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
 			
-			$spp = SuratPengumumanPelelangan::model()->findByPk($id);				
+			$spp = SuratPengumumanPemenang::model()->findByPk($id);				
 			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;				
 			
 			// $doksupph = Dokumen::model()->find('id_pengadaan = /"'. $Dok->id_pengadaan . '/" and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 			// $supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
 			
-			$this->doccy->newFile('14a Pengumuman Pelelangan.docx');
+			$this->doccy->newFile('14a Pengumuman Pemenang.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -2281,7 +2281,7 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaX($Peng->id_pengadaan,'penetapan_pemenang'));
 			
-			$this->renderDocx("Surat Pengumuman Pelelangan", true);
+			$this->renderDocx("Surat Pengumuman Pemenang.docx", true);
 		}
 		else {
 			$this->doccy->newFile('temp.docx');
