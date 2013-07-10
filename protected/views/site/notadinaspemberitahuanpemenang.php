@@ -24,7 +24,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                                     array('label'=>'ND Usulan', 'url'=>array('/site/editnotadinasusulanpemenang','id'=>$id)),
                                     array('label'=>'ND Penetapan', 'url'=>array('site/editnotadinaspenetapanpemenang','id'=>$id)),
                                     array('label'=>'ND Pemberitahuan', 'url'=>array($NDBP->isNewRecord?'/site/notadinaspemberitahuanpemenang':'/site/editnotadinaspemberitahuanpemenang','id'=>$id)),
-                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='18'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='16'?'':'/site/editsuratpenunjukanpemenang'),'id'=>$id)),
+                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='27'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='25'?'':'/site/editsuratpenunjukanpemenang'),'id'=>$id)),
                             ),
                         ));
                     ?>
