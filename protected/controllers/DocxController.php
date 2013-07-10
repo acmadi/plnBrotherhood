@@ -670,7 +670,7 @@ class DocxController extends Controller
 			$perihalnotadinaspermintaan = $NDP->perihal;
 			$target = $NDPP->targetSPK_kontrak;
 			$metode = $Peng->metode_pengadaan;
-			$user = $Peng->divisi_peminta;
+			$user = Divisi::model()->findByPk($Peng->divisi_peminta)->nama_divisi;
 			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
