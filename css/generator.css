@@ -30,11 +30,6 @@
 	font-weight:normal !important;
 }
 
-.sudah:hover
-{
-	background-color:#E5FFCC;
-}
-
 li
 {
 	font-weight:bold;
@@ -43,6 +38,11 @@ li
 .portlet-title
 {
 	color: black;
+}
+
+.sudah:hover
+{
+	background-color:#E5FFCC;
 }
 
 .onprogress
