@@ -2150,7 +2150,7 @@ class SiteController extends Controller
 									$PP[$i]->penyampaian_lelang = '1';
 									$PP[$i]->evaluasi_pq = '1';
 									$PP[$i]->penetapan_pq = '1';
-									$PP[$i]->undangan_supph =$_POST['undangan_supph'][$i];		
+									$PP[$i]->undangan_supph ='1';		
 									$PP[$i]->pendaftaran_pc = '-';
 									$PP[$i]->pengambilan_dokumen = '-';									
 									$PP[$i]->ba_aanwijzing = '-';
@@ -2217,8 +2217,10 @@ class SiteController extends Controller
 
 				$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
+				
 				if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 				{
+					
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					// $PP->perusahaan=$_POST['perusahaan'][0];
 					$SUPPP->attributes=$_POST['SuratUndanganPermintaanPenawaranHarga'];
@@ -2227,7 +2229,7 @@ class SiteController extends Controller
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
-												
+
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){																																																
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
@@ -2243,7 +2245,7 @@ class SiteController extends Controller
 									// $PP[$i]->penyampaian_lelang = '-';
 									// $PP[$i]->evaluasi_pq = '-';
 									// $PP[$i]->penetapan_pq = '-';
-									$PP[$i]->undangan_supph = $_POST['undangan_supph'][$i];	
+									// $PP[$i]->undangan_supph = $_POST['undangan_supph'][$i];	
 									// $PP[$i]->pendaftaran_pc = '-';
 									// $PP[$i]->pengambilan_dokumen = '-';									
 									// $PP[$i]->ba_aanwijzing = '-';
@@ -2278,7 +2280,7 @@ class SiteController extends Controller
 									$PPbaru->penyampaian_lelang = '1';
 									$PPbaru->evaluasi_pq = '1';
 									$PPbaru->penetapan_pq = '1';
-									$PPbaru->undangan_supph = $_POST['undangan_supph'][$i+$j];
+									$PPbaru->undangan_supph = '1';
 									$PPbaru->pendaftaran_pc = '-';
 									$PPbaru->pengambilan_dokumen = '-';
 									$PPbaru->pengambilan_dokumen = '-';
@@ -2310,6 +2312,7 @@ class SiteController extends Controller
 					}
 				}
 
+				
 				$this->render('permintaanpenawaranharga',array(
 					'SUPPP'=>$SUPPP,'Dokumen0'=>$Dokumen0,'PP'=>$PP,'HPS'=>$HPS,
 				));
@@ -2522,12 +2525,12 @@ class SiteController extends Controller
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';				
-									$PP[$i]->nomor_surat_penawaran = '-';									
-									$PP[$i]->tanggal_penawaran = '-';												
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = '-';									
+									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
 									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 									$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -2987,12 +2990,12 @@ class SiteController extends Controller
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';				
-									$PP[$i]->nomor_surat_penawaran = '-';									
-									$PP[$i]->tanggal_penawaran = '-';												
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = '-';									
+									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
 									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 									$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -3134,12 +3137,12 @@ class SiteController extends Controller
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';				
-									$PP[$i]->nomor_surat_penawaran = '-';									
-									$PP[$i]->tanggal_penawaran = '-';												
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = '-';									
+									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
 									// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
 									// $PP[$i]->pengambilan_lelang_pq = '1';	
@@ -3320,10 +3323,10 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat=$_POST['alamat'][$i];									
 										$PP[$i]->npwp=$_POST['npwp'][$i];	
-										$PP[$i]->nilai = '-';									
-										$PP[$i]->biaya = '-';				
-										$PP[$i]->nomor_surat_penawaran = '-';									
-										$PP[$i]->tanggal_penawaran = '-';												
+										// $PP[$i]->nilai = '-';									
+										// $PP[$i]->biaya = '-';				
+										// $PP[$i]->nomor_surat_penawaran = '-';									
+										// $PP[$i]->tanggal_penawaran = '-';												
 										$PP[$i]->undangan_prakualifikasi = '1';
 										$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 										$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -3389,11 +3392,12 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										$PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = '-';						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
-										$PP[$i]->nomor_surat_penawaran = '-';									
-										$PP[$i]->tanggal_penawaran = '-';												
+										$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];
+										$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];
+										
 										$PP[$i]->undangan_prakualifikasi = '1';
 										$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 										$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -3428,8 +3432,8 @@ class SiteController extends Controller
 										$PPbaru->nilai = '-';
 										$PPbaru->biaya = $_POST['biaya'][$j+$i];	
 										
-										$PPbaru->nomor_surat_penawaran = '-';
-										$PPbaru->tanggal_penawaran = '-';														
+										$PPbaru->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$j+$i];	
+										$PPbaru->tanggal_penawaran = $_POST['tanggal_penawaran'][$j+$i];													
 										$PPbaru->undangan_prakualifikasi = '1';
 										$PPbaru->pendaftaran_pelelangan_pq = '1';
 										$PPbaru->pengambilan_lelang_pq = '1';	
@@ -3601,8 +3605,8 @@ class SiteController extends Controller
 										// $PP[$i]->nilai = '-';						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
-										// $PP[$i]->nomor_surat_penawaran = '-';									
-										// $PP[$i]->tanggal_penawaran = '-';												
+										$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];								
+										$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];										
 										// $PP[$i]->undangan_prakualifikasi = '1';
 										// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
 										// $PP[$i]->pengambilan_lelang_pq = '1';	
@@ -3637,8 +3641,8 @@ class SiteController extends Controller
 										$PPbaru->nilai = '-';
 										$PPbaru->biaya = $_POST['biaya'][$j+$i];	
 										
-										$PPbaru->nomor_surat_penawaran = '-';
-										$PPbaru->tanggal_penawaran = '-';														
+										$PPbaru->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$j+$i];	
+										$PPbaru->tanggal_penawaran = $_POST['tanggal_penawaran'][$j+$i];														
 										$PPbaru->undangan_prakualifikasi = '1';
 										$PPbaru->pendaftaran_pelelangan_pq = '1';
 										$PPbaru->pengambilan_lelang_pq = '1';	
@@ -3915,12 +3919,12 @@ class SiteController extends Controller
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){									
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';				
-									$PP[$i]->nomor_surat_penawaran = '-';									
-									$PP[$i]->tanggal_penawaran = '-';												
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = '-';									
+									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
 									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 									$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -4232,9 +4236,9 @@ class SiteController extends Controller
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){									
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = '-';									
 									$PP[$i]->biaya = $_POST['biaya'][$i];			
 									$PP[$i]->nomor_surat_penawaran = '-';									
 									$PP[$i]->tanggal_penawaran = '-';												
@@ -4655,12 +4659,12 @@ class SiteController extends Controller
 							for($i=0;$i<count($PP);$i++){
 								if(isset($_POST['perusahaan'][$i])){
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';				
-									$PP[$i]->nomor_surat_penawaran = '-';									
-									$PP[$i]->tanggal_penawaran = '-';												
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = '-';									
+									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
 									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 									$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -4973,11 +4977,11 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										$PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = '-';						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
-										$PP[$i]->nomor_surat_penawaran = '-';									
-										$PP[$i]->tanggal_penawaran = '-';												
+										// $PP[$i]->nomor_surat_penawaran = '-';									
+										// $PP[$i]->tanggal_penawaran = '-';												
 										$PP[$i]->undangan_prakualifikasi = '1';
 										$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 										$PP[$i]->pengambilan_lelang_pq = '1';	
@@ -5251,11 +5255,11 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										$PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = '-';						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
-										$PP[$i]->nomor_surat_penawaran = '-';									
-										$PP[$i]->tanggal_penawaran = '-';												
+										// $PP[$i]->nomor_surat_penawaran = '-';									
+										// $PP[$i]->tanggal_penawaran = '-';												
 										$PP[$i]->undangan_prakualifikasi = '1';
 										$PP[$i]->pendaftaran_pelelangan_pq = '1';	
 										$PP[$i]->pengambilan_lelang_pq = '1';	
