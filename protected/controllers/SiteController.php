@@ -1615,7 +1615,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="14";
+				$Pengadaan->status="15";
 				
 				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
 				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
@@ -1816,7 +1816,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="15";
+				$Pengadaan->status="16";
 
 				$PP = array(new PenerimaPengadaan);	
 					
@@ -1985,7 +1985,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="16";
+				$Pengadaan->status="17";
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -2192,7 +2192,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="15";
+				$Pengadaan->status="17";
 				
 				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
 				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
@@ -2557,7 +2557,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='17';
+				$Pengadaan->status ='18';
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2999,7 +2999,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='18';
+				$Pengadaan->status ='19';
 						
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -3332,9 +3332,9 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Pengadaan->status ='21';
+					$Pengadaan->status ='22';
 				} else {
-					$Pengadaan->status ='19';
+					$Pengadaan->status ='20';
 				}
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
@@ -3928,7 +3928,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='20';
+				$Pengadaan->status ='21';
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -4259,7 +4259,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='21';
+				$Pengadaan->status ='22';
 				
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
@@ -4697,7 +4697,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='22';
+				$Pengadaan->status ='23';
 				
 				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -5014,7 +5014,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='23';
+				$Pengadaan->status ='24';
 				
 				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 				
@@ -5566,7 +5566,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='26';
+				$Pengadaan->status ='27';
 				
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
@@ -5673,7 +5673,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='26';
+				$Pengadaan->status ='27';
 				
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
@@ -5778,7 +5778,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='27';
+				$Pengadaan->status ='28';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
