@@ -1,23 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "surat_pengumuman_pelelangan".
+ * This is the model class for table "surat_pengumuman_pemenang".
  *
- * The followings are the available columns in table 'surat_pengumuman_pelelangan':
+ * The followings are the available columns in table 'surat_pengumuman_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $cara_pendaftaran
- * @property string $syarat_mengikuti_lelang
+ * @property string $keterangan
+ * @property integer $batas_sanggahan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
  */
-class SuratPengumumanPelelangan extends CActiveRecord
+class SuratPengumumanPemenang extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return SuratPengumumanPelelangan the static model class
+	 * @return SuratPengumumanPemenang the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +29,7 @@ class SuratPengumumanPelelangan extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'surat_pengumuman_pelelangan';
+		return 'surat_pengumuman_pemenang';
 	}
 
 	/**
@@ -40,13 +40,13 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'required'),
-			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
-			array('syarat_mengikuti_lelang', 'length', 'max'=>256),
+			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'required'),
+			array('batas_sanggahan', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor', 'length', 'max'=>32),
+			array('keterangan', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +70,8 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'syarat_mengikuti_lelang' => 'Syarat Mengikuti Lelang',
+			'keterangan' => 'Keterangan',
+			'batas_sanggahan' => 'Batas Sanggahan',
 		);
 	}
 
@@ -87,7 +88,8 @@ class SuratPengumumanPelelangan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('syarat_mengikuti_lelang',$this->syarat_mengikuti_lelang,true);
+		$criteria->compare('keterangan',$this->keterangan,true);
+		$criteria->compare('batas_sanggahan',$this->batas_sanggahan);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
