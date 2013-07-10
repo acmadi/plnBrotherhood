@@ -1,7 +1,7 @@
 <table class="appendo-gii" id="<?php echo $id ?>">
 	<thead>
 		<tr>
-			<th>Perusahaan </th><th>Status</th><th>NPWP</th><th>Alamat</th>
+			<th>Perusahaan </th><th>NPWP</th><th>Alamat</th><th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
