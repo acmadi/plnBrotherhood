@@ -20,7 +20,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editpengumumanpengadaan','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($PP->isNewRecord?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status == '14' ?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
 						),
 					));
 				?>
@@ -69,7 +69,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($Pengadaan->status == '14' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
 			
 		<?php $this->endWidget(); ?>

@@ -1816,59 +1816,49 @@ class SiteController extends Controller
 				$Pengadaan->status="15";
 
 				$PP = array(new PenerimaPengadaan);	
-				
-				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
-				{
-					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
-					$SUPDP->tanggal_pengambilan=date('Y-m-d', strtotime($SUPDP->tanggal_pengambilan));
-					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPDP->validate();
-					if($valid){
 					
-						if(isset($_POST['perusahaan'])){
-							$total = count($_POST['perusahaan']);
+				if(isset($_POST['perusahaan'])){
+					$total = count($_POST['perusahaan']);
+					
+					for($i=0;$i<$total;$i++){
+						if(isset($_POST['perusahaan'][$i])){
+							$PP[$i] = new PenerimaPengadaan;									
+							$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;									
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							$PP[$i]->alamat='-';									
+							$PP[$i]->npwp='-';		
+							$PP[$i]->nilai = '-';									
+							$PP[$i]->biaya = '-';									
+							$PP[$i]->nomor_surat_penawaran = '-';									
+							$PP[$i]->tanggal_penawaran = '-';									
+							$PP[$i]->undangan_prakualifikasi = '1';
+							$PP[$i]->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i];		
+							$PP[$i]->pengambilan_lelang_pq = '-';
+							$PP[$i]->penyampaian_lelang = '-';
+							$PP[$i]->evaluasi_pq = '-';
+							$PP[$i]->penetapan_pq = '-';
+							$PP[$i]->undangan_supph = '-';
+							$PP[$i]->pendaftaran_pc = '-';
+							$PP[$i]->pengambilan_dokumen = '-';									
+							$PP[$i]->ba_aanwijzing = '-';
+							$PP[$i]->pembukaan_penawaran_1 = '-';
+							$PP[$i]->evaluasi_penawaran_1 = '-';
+							$PP[$i]->pembukaan_penawaran_2 = '-';			
+							$PP[$i]->evaluasi_penawaran_2 = '-';
+							$PP[$i]->negosiasi_klarifikasi = '-';
+							$PP[$i]->usulan_pemenang = '-';
+							$PP[$i]->penetapan_pemenang	 = '-';								
 							
-							for($i=0;$i<$total;$i++){
-								if(isset($_POST['perusahaan'][$i])){
-									$PP[$i] = new PenerimaPengadaan;									
-									$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;									
-									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';									
-									$PP[$i]->undangan_prakualifikasi = '1';
-									$PP[$i]->pendaftaran_pelelangan = $_POST['pendaftaran_pelelangan'][$i];		
-									$PP[$i]->pengambilan_lelang = '-';
-									$PP[$i]->penyampaian_lelang = '-';
-									$PP[$i]->evaluasi_kualifikasi = '-';
-									$PP[$i]->pengambilan_dokumen = '-';									
-									$PP[$i]->ba_aanwijzing = '-';
-									$PP[$i]->pembukaan_penawaran_1 = '-';
-									$PP[$i]->evaluasi_penawaran_1 = '-';
-									$PP[$i]->pembukaan_penawaran_2 = '-';			
-									$PP[$i]->evaluasi_penawaran_2 = '-';
-									$PP[$i]->negosiasi_klarifikasi = '-';
-									$PP[$i]->usulan_pemenang = '-';
-									$PP[$i]->penetapan_pemenang	 = '-';								
-									
-									$PP[$i]->save();
-								}
-							}
-							
-						}
-						
-						if($Pengadaan->save(false))
-						{	
-							if($Dokumen0->save(false)){
-								if($SUPDP->save(false)){
-									$this->redirect(array('editpendaftaranpelelangan','id'=>$Dokumen0->id_pengadaan));
-								}
-							}
+							$PP[$i]->save();
 						}
 					}
+						
+					if($Pengadaan->save(false))
+					{						
+						$this->redirect(array('editpendaftaranpelelangan','id'=>$id));					
+					}
 				}
+
 
 				$this->render('pendaftaranpelelangan',array(
 					'PP'=>$PP,
@@ -1887,98 +1877,96 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				
-				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
-				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
-				
-				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pengambilan Dokumen Pengadaan"');
-				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-				
-				$SUPDP= SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($Dokumen0->id_dokumen);
-				$SUPDP->waktu_pengambilan=Tanggal::getJamMenit($SUPDP->waktu_pengambilan);
-				$SUPDP->tanggal_pengambilan=Tanggal::getTanggalStrip($SUPDP->tanggal_pengambilan);
-				
+								
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				$PP = PenerimaPengadaan::model()->findAll('undangan_pengambilan_dokumen = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-				
-				if(isset($_POST['SuratUndanganPengambilanDokumenPengadaan']))
-				{
-					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SUPDP->attributes=$_POST['SuratUndanganPengambilanDokumenPengadaan'];
-					$SUPDP->tanggal_pengambilan=date('Y-m-d', strtotime($SUPDP->tanggal_pengambilan));
-					$valid=$Dokumen0->validate();
-					$valid=$valid&&$SUPDP->validate();
-					if($valid){	
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
-						if(isset($_POST['perusahaan'])){
-														
-							for($i=0;$i<count($PP);$i++){
-								if(isset($_POST['perusahaan'][$i])){																																				
-									
-									// $PP[$i]->status = $_POST['status'][$i];
-									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->alamat='-';									
-									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';
-									// $PP[$i]->tahap = 'Penawaran Harga';		
-									$PP[$i]->undangan_prakualifikasi = '1';
-									$PP[$i]->ba_evaluasi_prakualifikasi = '1';
-									$PP[$i]->undangan_pengambilan_dokumen = $_POST['undangan_pengambilan_dokumen'][$i];			
-									$PP[$i]->ba_aanwijzing = '-';
-									$PP[$i]->pembukaan_penawaran_1 = '-';
-									$PP[$i]->evaluasi_penawaran_1 = '-';
-									$PP[$i]->pembukaan_penawaran_2 = '-';			
-									$PP[$i]->evaluasi_penawaran_2 = '-';
-									$PP[$i]->negosiasi_klarifikasi = '-';
-									$PP[$i]->usulan_pemenang = '-';
-									$PP[$i]->penetapan_pemenang	 = '-';								
-									
-									$PP[$i]->save();
-								}
-							}
+				if($PP == null){
+					$this->redirect(array('pendaftaranpelelangan','id'=>$id));		
+				}
+				
+				if(isset($_POST['perusahaan'])){
+												
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							// $PP[$i]->alamat='-';									
+							// $PP[$i]->npwp='-';		
+							// $PP[$i]->nilai = '-';									
+							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nomor_surat_penawaran = '-';									
+							// $PP[$i]->tanggal_penawaran = '-';												
+							// $PP[$i]->undangan_prakualifikasi = '1';
+							$PP[$i]->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i];		
+							// $PP[$i]->pengambilan_lelang_pq = '-';
+							// $PP[$i]->penyampaian_lelang = '-';
+							// $PP[$i]->evaluasi__pq = '-';
+							// $PP[$i]->penetapan_pq = '-';
+							// $PP[$i]->undangan_supph = '-';
+							// $PP[$i]->pendaftaran_pc = '-';
+							// $PP[$i]->pengambilan_dokumen = '-';									
+							// $PP[$i]->ba_aanwijzing = '-';
+							// $PP[$i]->pembukaan_penawaran_1 = '-';
+							// $PP[$i]->evaluasi_penawaran_1 = '-';
+							// $PP[$i]->pembukaan_penawaran_2 = '-';			
+							// $PP[$i]->evaluasi_penawaran_2 = '-';
+							// $PP[$i]->negosiasi_klarifikasi = '-';
+							// $PP[$i]->usulan_pemenang = '-';
+							// $PP[$i]->penetapan_pemenang	 = '-';								
 							
-							$total = count($_POST['perusahaan']);
-							if(count($PP)<$total){
-								$PPkurang = $total - count($PP);
-								for($j=0;$j<$PPkurang;$j++){
-									$PPbaru = new PenerimaPengadaan;
-									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;
-									// $PPbaru->status = $_POST['status'][$j+$i];
-									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-									$PPbaru->alamat='-';									
-									$PPbaru->npwp='-';		
-									$PPbaru->nilai = '-';
-									// $PPbaru->tahap = 'Penawaran Harga';	
-									$PPbaru->undangan_prakualifikasi = '1';
-									$PPbaru->ba_evaluasi_prakualifikasi = '1';
-									$PPbaru->undangan_pengambilan_dokumen = $_POST['undangan_pengambilan_dokumen'][$i+$j];			
-									$PPbaru->ba_aanwijzing = '-';
-									$PPbaru->pembukaan_penawaran_1 = '-';
-									$PPbaru->evaluasi_penawaran_1 = '-';
-									$PPbaru->pembukaan_penawaran_2 = '-';			
-									$PPbaru->evaluasi_penawaran_2 = '-';
-									$PPbaru->negosiasi_klarifikasi = '-';
-									$PPbaru->usulan_pemenang = '-';
-									$PPbaru->penetapan_pemenang	 = '-';								
-									$PPbaru->save();
-								}
-								
-							}
-							
-						}
-						
-						if($Dokumen0->save(false)){
-							if($SUPDP->save(false)){
-								$this->redirect(array('editpendaftaranpelelangan','id'=>$Dokumen0->id_pengadaan));
-							}
+							$PP[$i]->save();
 						}
 					}
+					
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = '-';
+							$PPbaru->biaya = '-';							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';														
+							$PPbaru->undangan_prakualifikasi = '1';
+							$PPbaru->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i+$j];		
+							$PPbaru->pengambilan_lelang_pq = '-';
+							$PPbaru->penyampaian_lelang = '-';
+							$PPbaru->evaluasi_pq = '-';
+							$PPbaru->penetapan_pq = '-';
+							$PPbaru->undangan_supph = '-';
+							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->ba_aanwijzing = '-';
+							$PPbaru->pembukaan_penawaran_1 = '-';
+							$PPbaru->evaluasi_penawaran_1 = '-';
+							$PPbaru->pembukaan_penawaran_2 = '-';
+							$PPbaru->evaluasi_penawaran_2 = '-';
+							$PPbaru->negosiasi_klarifikasi = '-';
+							$PPbaru->usulan_pemenang = '-';
+							$PPbaru->penetapan_pemenang = '-';
+							
+							$PPbaru->save();
+						}
+						
+					}
+					
+					
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpendaftaranpelelangan','id'=>$id));					
+					}			
+					
 				}
-
+					
+					
 				$this->render('pendaftaranpelelangan',array(
-					'SUPDP'=>$SUPDP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 				));
 			}
 		}
