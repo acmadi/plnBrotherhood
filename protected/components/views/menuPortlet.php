@@ -107,7 +107,7 @@
 		<?php } ?>
 		
 		<?php if($cpengadaan->metode_pengadaan=='Pelelangan'){ ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14') { ?>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15') { ?>
 				<li class='belum' ><?php echo 'Pengambilan Dokumen Pengadaan'?></li>
 			<?php } else if($cpengadaan->status == '16') { ?>
 				<li class='sudah' ><?php echo CHtml::link('Pengambilan Dokumen Pengadaan',array("site/pengambilandokumen","id"=>"$cpengadaan->id_pengadaan")); ?></li>	

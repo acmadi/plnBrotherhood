@@ -20,7 +20,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/site/pengumumanpengadaan'):('/site/editpengumumanpengadaan'),'id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='15'?('/site/pendaftaranpelelangan'):($Pengadaan->status=='14'?'':('/site/editpendaftaranpelelangan')),'id'=>$id)),
 						),
 					));
 				?>
@@ -48,7 +48,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div class="form" >
 
 			<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
+			'id'=>'surat-pengumuman-pelelangan-form',
 			'enableAjaxValidation'=>false,
 			)); ?>
 			
