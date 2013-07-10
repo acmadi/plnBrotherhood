@@ -670,7 +670,7 @@ class DocxController extends Controller
 			$perihalnotadinaspermintaan = $NDP->perihal;
 			$target = $NDPP->targetSPK_kontrak;
 			$metode = $Peng->metode_pengadaan;
-			$user = $Peng->divisi_peminta;
+			$user = Divisi::model()->findByPk($Peng->divisi_peminta)->nama_divisi;
 			$nama = $Peng->nama_pengadaan;
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$namapanitia=$panitia->nama_panitia;
@@ -1412,7 +1412,7 @@ class DocxController extends Controller
 			$namapengadaan1 = strtoupper($Peng->nama_pengadaan);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$skpanitia = ', sesuai dengan surat tugas DIRSDM No.'.$panitia->SK_panitia;
-			$tahunsk = ' tahun '.$panitia->tahun;
+			$tahunsk = ' tahun '.Tanggal::getTahun($panitia->tanggal_sk);
 			$panitiapejabat = $panitia->jenis_panitia;
 			$panitia2 = strtoupper($panitia->jenis_panitia);
 			$tujuanpengadaan = $DPK->tujuan_pengadaan;
@@ -2552,7 +2552,7 @@ class DocxController extends Controller
 	}
 	
 	function getPenyediaLulusKesimpulan($idpeng,$tahap){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1"  and id_pengadaan = ' . $idpeng);
+		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1"  and id_pengadaan = ' . $idpeng . ' order by nilai');
 		$stringpenyedia = "";
 				
 		if($arraypenyedia == null){
@@ -2564,7 +2564,7 @@ class DocxController extends Controller
 									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
 									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
 									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '<w:br/>' .
-									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/> <w:br/>'
 									;
 			}
 		}		
@@ -2593,8 +2593,6 @@ class DocxController extends Controller
 	function persenMaker($nilai,$hps){
 		return 0;
 	}
-	
-	
 	
 }
 ?>

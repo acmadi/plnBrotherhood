@@ -785,31 +785,40 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '1' || $this->status == '2' || $this->status == '3'){
 			return 'Prakualifikasi';
 		}		
-		if($this->status == '4' || $this->status == '5'){
+		if($this->status == '10' || $this->status == '11'){
 			return 'Pembuatan Dokumen Pengadaan';
 		}	
-		else if($this->status == '6' || $this->status == '7'){
-			return 'Undangan Pengambilan Dokumen Pengadaan';
-		}
-		else if($this->status == '8'){
-			return 'Aanwijzing';
-		}
-		else if($this->status == '9'){
-			return 'Penawaran';
-		}
-		else if($this->status == '10'){
-			return 'Evaluasi';
-		}
-		else if($this->status == '11'){
-			return 'Penawaran 2';
-		}
 		else if($this->status == '12'){
-			return 'Evaluasi 2';
+			return 'Undangan Penawaran Harga';
 		}
 		else if($this->status == '13'){
+			return 'Pengumuman Lelang';
+		}
+		else if($this->status == '14'){
+			return 'Pendaftaran Lelang';
+		}
+		else if($this->status == '15'){
+			return 'Undangan Pengambilan Dokumen Pengadaan';
+		}
+		else if($this->status == '16'){
+			return 'Aanwijzing';
+		}
+		else if($this->status == '17'){
+			return 'Penawaran';
+		}
+		else if($this->status == '18'){
+			return 'Evaluasi';
+		}
+		else if($this->status == '19'){
+			return 'Penawaran 2';
+		}
+		else if($this->status == '20'){
+			return 'Evaluasi 2';
+		}
+		else if($this->status == '21'){
 			return 'Klarifikasi dan Negosiasi';
 		}
-		else if($this->status == '14' || $this->status == '15' || $this->status == '16' || $this->status == '17' || $this->status == '18'){
+		else if($this->status == '22' || $this->status == '23' || $this->status == '24' || $this->status == '25' || $this->status == '26'){
 			return 'Penentuan Pemenang';
 		}
 		else if($this->status == '19'){
