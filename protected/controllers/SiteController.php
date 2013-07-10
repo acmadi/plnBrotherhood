@@ -2511,7 +2511,7 @@ class SiteController extends Controller
 				if($Pengadaan->metode_pengadaan == 'Pelelangan'){
 					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				}
-				else if($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
+				else{
 					$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				}
 				if(isset($_POST['BeritaAcaraPenjelasan']))
