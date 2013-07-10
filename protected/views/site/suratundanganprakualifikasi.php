@@ -18,14 +18,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		
 			<div id="menuform">
               	<?php
-                  	$this->widget('zii.widgets.CMenu', array(
-                     	'items'=>array(
-                           	array('label'=>'Dokumen Prakualifikasi', 'url'=>array($DPK->isNewRecord?('/site/dokumenprakualifikasi'):('/site/editdokumenprakualifikasi'),'id'=>$id)),
-                          	array('label'=>'Surat Undangan Prakualifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/suratundanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editsuratundanganprakualifikasi'),'id'=>$id)),
-                      	),
-                 	));
-              	?>
-           	</div>
+						$this->widget('zii.widgets.CMenu', array(
+							'items'=>array(
+								array('label'=>'Undangan PQ', 'url'=>array($DPK->isNewRecord??'/site/suratundanganprakualifikasi':'/site/editsuratundanganprakualifikasi','id'=>$id)),
+							),
+						));
+					?>
+            </div>
 			<br/>
 			
 				<?php if(Yii::app()->user->hasFlash('sukses')): ?>

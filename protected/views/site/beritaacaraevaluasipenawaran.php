@@ -95,15 +95,25 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 	
 		<div class="row">
 				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_evaluasi_sampul_1',
-					'labelAdd' => 'Tambah Penyedia',
-					'labelDel' => 'Hapus Penyedia',
-					
-					)); 
+					if($cpengadaan->metode_penawaran == 'Satu Sampul'){
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,
+						// 'model2' => $PP2,
+						'viewName' => 'formperusahaan_evaluasi_1_sampul',
+						'labelAdd' => 'Tambah Penyedia',
+						'labelDel' => 'Hapus Penyedia',						
+						)); 
+					}else if($cpengadaan->metode_penawaran == 'Dua Sampul'){
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,
+						// 'model2' => $PP2,
+						'viewName' => 'formperusahaan_evaluasi_sampul_1',
+						'labelAdd' => 'Tambah Penyedia',
+						'labelDel' => 'Hapus Penyedia',						
+						)); 
+					}
 				?>
 		</div>
 		

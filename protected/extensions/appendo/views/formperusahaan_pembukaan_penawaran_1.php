@@ -12,11 +12,12 @@
             <td>
 				<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',"string",
 					array(
-						"1"=>"Lulus",
-						"0"=>"Tidak Lulus",
-					),array('style'=>'width:100px'));
+						"1"=>"Memasukkan dokumen",
+						"0"=>"Tidak Memasukkan dokumen",
+					),array('style'=>'width:220px'));
 				?>
             </td>
+			
 		</tr>
 		
 	<?php }else{ ?>
@@ -24,13 +25,14 @@
 			<tr>
 				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>				
 				<td>
-					<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',$model[$i]->status,
+					<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',$model[$i]->pembukaan_penawaran_1,
 						array(
-							"1"=>"Lulus",
-							"0"=>"Tidak Lulus",
-						),array('style'=>'width:100px'));
+							"1"=>"Memasukkan dokumen",
+							"0"=>"Tidak Memasukkan dokumen",
+						),array('style'=>'width:220px'));
 					?>
 				</td>
+				
 			</tr>
 		<?php } ?>
 		

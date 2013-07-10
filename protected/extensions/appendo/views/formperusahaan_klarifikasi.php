@@ -24,7 +24,7 @@
 			<tr>
 				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>				
 				<td>
-					<?php echo CHtml::dropDownList('negosiasi_klarifikasi[]',$model[$i]->status,
+					<?php echo CHtml::dropDownList('negosiasi_klarifikasi[]',$model[$i]->negosiasi_klarifikasi,
 						array(
 							"1"=>"Lulus",
 							"0"=>"Tidak Lulus",

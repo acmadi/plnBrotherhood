@@ -1412,7 +1412,7 @@ class DocxController extends Controller
 			$namapengadaan1 = strtoupper($Peng->nama_pengadaan);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$skpanitia = ', sesuai dengan surat tugas DIRSDM No.'.$panitia->SK_panitia;
-			$tahunsk = ' tahun '.$panitia->tahun;
+			$tahunsk = ' tahun '.Tanggal::getTahun($panitia->tanggal_sk);
 			$panitiapejabat = $panitia->jenis_panitia;
 			$panitia2 = strtoupper($panitia->jenis_panitia);
 			$tujuanpengadaan = $DPK->tujuan_pengadaan;
@@ -1546,21 +1546,13 @@ class DocxController extends Controller
 				$this->doccy->newFile('2 Pakta Integritas Awal Panitia.docx');
 				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-				$this->doccy->phpdocx->assign('#tempat surat#', $tempat);
-				$this->doccy->phpdocx->assign('#tanggal surat#', $tanggal);
-				$this->doccy->phpdocx->assign('#tahun#', $tahun);
-				$this->doccy->phpdocx->assign('#nama pengadaan#', $namapengadaan);
-				$this->doccy->phpdocx->assign('#listpanitia#', $listpanitia);
+				$this->doccy->phpdocx->assign('#tempat surat#',$tempat);
+				$this->doccy->phpdocx->assign('#tanggal surat#',$tanggal);
+				$this->doccy->phpdocx->assign('#tahun#',$tahun);
+				$this->doccy->phpdocx->assign('#nama_pengadaan#',$namapengadaan);
+				$this->doccy->phpdocx->assign('#listpanitia#',$listpanitia);
 				$this->renderDocx("Pakta Integritas Awal Panitia.docx", true);
 			}
-			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
-			$this->doccy->phpdocx->assign('#tempat surat#', $tempat);
-			$this->doccy->phpdocx->assign('#tanggal surat#', $tanggal);
-			$this->doccy->phpdocx->assign('#nama pengadaan#', $namapengadaan);
-			$this->renderDocx("Pakta Integritas Awal Panitia.docx", true);
 			
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Panitia"){
@@ -2253,17 +2245,17 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->renderDocx("Daftar Hadir Prakualifikasi.docx", true);
 		}
-		else if ($Dok->nama_dokumen == "Surat Pengumuman Pelelangan"){
+		else if ($Dok->nama_dokumen == "Surat Pengumuman Pemenang"){
 			
 			$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
 			
-			$spp = SuratPengumumanPelelangan::model()->findByPk($id);				
+			$spp = SuratPengumumanPemenang::model()->findByPk($id);				
 			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;				
 			
 			// $doksupph = Dokumen::model()->find('id_pengadaan = /"'. $Dok->id_pengadaan . '/" and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 			// $supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
 			
-			$this->doccy->newFile('14a Pengumuman Pelelangan.docx');
+			$this->doccy->newFile('14a Pengumuman Pemenang.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -2289,7 +2281,7 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaX($Peng->id_pengadaan,'penetapan_pemenang'));
 			
-			$this->renderDocx("Surat Pengumuman Pelelangan", true);
+			$this->renderDocx("Surat Pengumuman Pemenang.docx", true);
 		}
 		else {
 			$this->doccy->newFile('temp.docx');

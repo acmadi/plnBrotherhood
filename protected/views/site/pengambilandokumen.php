@@ -18,9 +18,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div id="menuform">
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
-						'items'=>array(
-							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editpengumumanpengadaan','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status == '14' ?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
+						'items'=>array(							
+							array('label'=>'Pengambilan Dokumen Pengadaan', 'url'=>array($Pengadaan->status == '16' ?('/site/pengambilandokumen&'):('/site/editpengambilandokumen&'),'id'=>$id)),
 						),
 					));
 				?>
@@ -52,7 +51,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			'enableAjaxValidation'=>false,
 			)); ?>
 			
-			<h4><b> Penyedia yang Mendaftar: </b></h4>
+			<h4><b> Penyedia yang Mengambil Dokumen Pengadaan: </b></h4>
 	
 			<div class="row">
 				<?php 
@@ -60,7 +59,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'id' => 'idpenyedia',        
 					'model' => $PP,
 					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pendaftaran_pelelangan',
+					'viewName' => 'formperusahaan_pengambilan_dokumen',
 					'labelAdd' => 'Tambah Penyedia',
 					'labelDel' => 'Hapus Penyedia',
 					
