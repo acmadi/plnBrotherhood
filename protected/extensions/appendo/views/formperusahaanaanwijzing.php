@@ -12,8 +12,8 @@
             <td>
 				<?php echo CHtml::dropDownList('ba_aanwijzing[]',"string",
 					array(
-						"1"=>"Lulus",
-						"0"=>"Tidak Lulus",
+						"1"=>"Hadir",
+						"0"=>"Tidak Hadir",
 					),array('style'=>'width:100px'));
 				?>
             </td>
@@ -26,8 +26,8 @@
 				<td>
 					<?php echo CHtml::dropDownList('ba_aanwijzing[]',$model[$i]->ba_aanwijzing,
 						array(
-							"1"=>"Lulus",
-							"0"=>"Tidak Lulus",
+							"1"=>"Hadir",
+							"0"=>"Tidak Hadir",
 						),array('style'=>'width:100px'));
 					?>
 				</td>

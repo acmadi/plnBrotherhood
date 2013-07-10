@@ -12,9 +12,9 @@
             <td>
 				<?php echo CHtml::dropDownList('pengambilan_lelang_pq[]',"string",
 					array(
-						"1"=>"Lulus",
-						"0"=>"Tidak Lulus",
-					),array('style'=>'width:100px'));
+						"1"=>"Mengambil",
+						"0"=>"Tidak Mengambil",
+					),array('style'=>'width:140px'));
 				?>
             </td>
 		</tr>
@@ -26,9 +26,9 @@
 				<td>
 					<?php echo CHtml::dropDownList('pengambilan_lelang_pq[]',$model[$i]->pengambilan_lelang_pq,
 						array(
-							"1"=>"Lulus",
-							"0"=>"Tidak Lulus",
-						),array('style'=>'width:100px'));
+							"1"=>"Mengambil",
+							"0"=>"Tidak Mengambil",
+						),array('style'=>'width:140px'));
 					?>
 				</td>
 			</tr>
