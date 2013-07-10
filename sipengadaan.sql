@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2013 at 05:10 PM
+-- Generation Time: Jul 10, 2013 at 05:17 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -1113,6 +1113,25 @@ INSERT INTO `surat_pengantar_penawaran_harga` (`id_dokumen`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `surat_pengumuman_pelelangan`
+--
+
+CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(100) NOT NULL,
+  `cara_pendaftaran` varchar(256) NOT NULL,
+  `syarat_mengikuti_lelang` varchar(256) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_pengumuman_pelelangan`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `surat_pengumuman_pemenang`
 --
 
@@ -1554,6 +1573,12 @@ ALTER TABLE `rks`
 --
 ALTER TABLE `surat_pengantar_penawaran_harga`
   ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `surat_pengumuman_pelelangan`
+--
+ALTER TABLE `surat_pengumuman_pelelangan`
+  ADD CONSTRAINT `surat_pengumuman_pelelangan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_pengumuman_pemenang`
