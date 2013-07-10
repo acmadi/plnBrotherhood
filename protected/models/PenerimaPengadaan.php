@@ -28,6 +28,8 @@
  * @property string $negosiasi_klarifikasi
  * @property string $usulan_pemenang
  * @property string $penetapan_pemenang
+ * @property string $nomor_surat_penawaran
+ * @property string $tanggal_penawaran
  *
  * The followings are the available model relations:
  * @property Pengadaan $idPengadaan
@@ -63,10 +65,10 @@ class PenerimaPengadaan extends CActiveRecord
 			array('perusahaan, id_pengadaan', 'required'),
 			array('perusahaan', 'length', 'max'=>100),
 			array('id_pengadaan, nilai', 'length', 'max'=>255),
-			array('alamat, npwp, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, pembukaan_penawaran_1, evaluasi_penawaran_1, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang', 'length', 'max'=>256),
+			array('alamat, npwp, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, pembukaan_penawaran_1, evaluasi_penawaran_1, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_penerima, perusahaan, id_pengadaan, alamat, npwp, nilai, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, pembukaan_penawaran_1, evaluasi_penawaran_1, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang', 'safe', 'on'=>'search'),
+			array('id_penerima, perusahaan, id_pengadaan, alamat, npwp, nilai, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, pembukaan_penawaran_1, evaluasi_penawaran_1, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -112,6 +114,8 @@ class PenerimaPengadaan extends CActiveRecord
 			'negosiasi_klarifikasi' => 'Negosiasi Klarifikasi',
 			'usulan_pemenang' => 'Usulan Pemenang',
 			'penetapan_pemenang' => 'Penetapan Pemenang',
+			'nomor_surat_penawaran' => 'Nomor Surat Penawaran',
+			'tanggal_penawaran' => 'Tanggal Penawaran',
 		);
 	}
 
@@ -150,6 +154,8 @@ class PenerimaPengadaan extends CActiveRecord
 		$criteria->compare('negosiasi_klarifikasi',$this->negosiasi_klarifikasi,true);
 		$criteria->compare('usulan_pemenang',$this->usulan_pemenang,true);
 		$criteria->compare('penetapan_pemenang',$this->penetapan_pemenang,true);
+		$criteria->compare('nomor_surat_penawaran',$this->nomor_surat_penawaran,true);
+		$criteria->compare('tanggal_penawaran',$this->tanggal_penawaran,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
