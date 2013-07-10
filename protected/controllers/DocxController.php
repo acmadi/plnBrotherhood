@@ -1546,21 +1546,13 @@ class DocxController extends Controller
 				$this->doccy->newFile('2 Pakta Integritas Awal Panitia.docx');
 				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-				$this->doccy->phpdocx->assign('#tempat surat#', $tempat);
-				$this->doccy->phpdocx->assign('#tanggal surat#', $tanggal);
-				$this->doccy->phpdocx->assign('#tahun#', $tahun);
-				$this->doccy->phpdocx->assign('#nama pengadaan#', $namapengadaan);
-				$this->doccy->phpdocx->assign('#listpanitia#', $listpanitia);
+				$this->doccy->phpdocx->assign('#tempat surat#',$tempat);
+				$this->doccy->phpdocx->assign('#tanggal surat#',$tanggal);
+				$this->doccy->phpdocx->assign('#tahun#',$tahun);
+				$this->doccy->phpdocx->assign('#nama_pengadaan#',$namapengadaan);
+				$this->doccy->phpdocx->assign('#listpanitia#',$listpanitia);
 				$this->renderDocx("Pakta Integritas Awal Panitia.docx", true);
 			}
-			
-			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
-			$this->doccy->phpdocx->assign('#tempat surat#', $tempat);
-			$this->doccy->phpdocx->assign('#tanggal surat#', $tanggal);
-			$this->doccy->phpdocx->assign('#nama pengadaan#', $namapengadaan);
-			$this->renderDocx("Pakta Integritas Awal Panitia.docx", true);
 			
 		}
 		else if ($Dok->nama_dokumen == "Pakta Integritas Akhir Panitia"){

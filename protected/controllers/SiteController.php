@@ -474,23 +474,23 @@ class SiteController extends Controller
 					$this->redirect(array('site/penentuanmetode','id'=>$id));
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="1"){
-					$this->redirect(array('site/dokumenprakualifikasi','id'=>$id));
+					$this->redirect(array('site/rks','id'=>$id));
 				}
 				if(Pengadaan::model()->findByPk($id)->status=="2"){
+					$this->redirect(array('site/hps','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="3"){
+					$this->redirect(array('site/dokumenprakualifikasi','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="4"){
 					$this->redirect(array('site/suratundanganprakualifikasi','id'=>$id));
 				}
-				// if(Pengadaan::model()->findByPk($id)->status=="3"){
-		
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="4"){
-		
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="5"){
-		
-				// }
-				// if(Pengadaan::model()->findByPk($id)->status=="6"){
-		
-				// }
+				if(Pengadaan::model()->findByPk($id)->status=="5"){
+					$this->redirect(array('site/pengumumanlelangprakualifikasi','id'=>$id));
+				}
+				if(Pengadaan::model()->findByPk($id)->status=="6"){
+					$this->redirect(array('site/pendaftaranlelangprakualifikasi','id'=>$id));
+				}
 				// if(Pengadaan::model()->findByPk($id)->status=="7"){
 		
 				// }
@@ -500,55 +500,58 @@ class SiteController extends Controller
 				// if(Pengadaan::model()->findByPk($id)->status=="9"){
 		
 				// }
-				if(Pengadaan::model()->findByPk($id)->status=="10"){
-					$this->redirect(array('site/rks','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="11"){
-					$this->redirect(array('site/hps','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="12"){
-					$this->redirect(array('site/permintaanpenawaranharga','id'=>$id));
-				}
-				if(Pengadaan::model()->findByPk($id)->status=="13"){
-					$this->redirect(array('site/pengumumanpengadaan','id'=>$id));
-				}
+				// if(Pengadaan::model()->findByPk($id)->status=="10"){
+					// $this->redirect(array('site/rks','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="11"){
+					// $this->redirect(array('site/hps','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="12"){
+					// $this->redirect(array('site/permintaanpenawaranharga','id'=>$id));
+				// }
+				// if(Pengadaan::model()->findByPk($id)->status=="13"){
+					// $this->redirect(array('site/pengumumanpengadaan','id'=>$id));
+				// }
 				// if(Pengadaan::model()->findByPk($id)->status=="14"){
 		
 				// }
 				// if(Pengadaan::model()->findByPk($id)->status=="15"){
 		
 				// }
-				if(Pengadaan::model()->findByPk($id)->status=="16"){
+				// if(Pengadaan::model()->findByPk($id)->status=="16"){
+		
+				// }
+				if(Pengadaan::model()->findByPk($id)->status=="17"){
 					$this->redirect(array('site/beritaacaraaanwijzing','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="17"){
+				if(Pengadaan::model()->findByPk($id)->status=="18"){
 					$this->redirect(array('site/beritaacarapembukaanpenawaran','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="18"){
+				if(Pengadaan::model()->findByPk($id)->status=="19"){
 					$this->redirect(array('site/beritaacaraevaluasipenawaran','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="19"){
+				if(Pengadaan::model()->findByPk($id)->status=="20"){
 					$this->redirect(array('site/beritaacarapembukaanpenawaran2','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="20"){
+				if(Pengadaan::model()->findByPk($id)->status=="21"){
 					$this->redirect(array('site/beritaacaraevaluasipenawaran2','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="21"){
+				if(Pengadaan::model()->findByPk($id)->status=="22"){
 					$this->redirect(array('site/beritaacaranegosiasiklarifikasi','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="22"){
+				if(Pengadaan::model()->findByPk($id)->status=="23"){
 					$this->redirect(array('site/notadinasusulanpemenang','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="23"){
+				if(Pengadaan::model()->findByPk($id)->status=="24"){
 					$this->redirect(array('site/notadinaspenetapanpemenang','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="24"){
+				if(Pengadaan::model()->findByPk($id)->status=="25"){
 					$this->redirect(array('site/notadinaspemberitahuanpemenang','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="25"){
+				if(Pengadaan::model()->findByPk($id)->status=="26"){
 					$this->redirect(array('site/suratpengumumanpelelangan','id'=>$id));
 				}
-				if(Pengadaan::model()->findByPk($id)->status=="26"){
+				if(Pengadaan::model()->findByPk($id)->status=="27"){
 					$this->redirect(array('site/suratpenunjukanpemenang','id'=>$id));
 				}
 				else{
@@ -578,6 +581,7 @@ class SiteController extends Controller
 		else {
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status='1';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -598,11 +602,6 @@ class SiteController extends Controller
 				if(isset($_POST['Pengadaan']))
 				{
 					$Pengadaan->attributes=$_POST['Pengadaan'];
-					if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
-						$Pengadaan->status='1';
-					} else { 
-						$Pengadaan->status='10';
-					}
 					$valid=$Pengadaan->validate();
 					if($valid){		
 						if($Pengadaan->save(false))
@@ -664,7 +663,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='11';
+				$Pengadaan->status ='2';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1153,10 +1152,14 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				if($Pengadaan->metode_pengadaan=='Pelelangan'){
-					$Pengadaan->status= "13";
-				} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
-					$Pengadaan->status= "12";
+				if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+					$Pengadaan->status="3";
+				} else {
+					if($Pengadaan->metode_pengadaan=='Pelelangan'){
+						$Pengadaan->status= "14";
+					} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+						$Pengadaan->status= "13";
+					}
 				}
 				
 				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
