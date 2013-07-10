@@ -5572,7 +5572,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionSuratpengumumanpelelangan()
+	public function actionSuratpengumumanpemenang()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -5593,23 +5593,23 @@ class SiteController extends Controller
 				$row = $Dokumen0->model()->find($criteria);
 				$somevariable = $row['maxId'];
 				$Dokumen0->id_dokumen=$somevariable+1;
-				$Dokumen0->nama_dokumen='Surat Pengumuman Pelelangan';
+				$Dokumen0->nama_dokumen='Surat Pengumuman Pemenang';
 				$Dokumen0->tempat='Jakarta';
 				$Dokumen0->status_upload='Belum Selesai';
 				$Dokumen0->id_pengadaan=$id;
 				date_default_timezone_set("Asia/Jakarta");
 				$Dokumen0->tanggal=date('d-m-Y');
 				
-				$SPP= new SuratPengumumanPelelangan;
+				$SPP= new SuratPengumumanPemenang;
 				$SPP->id_dokumen=$Dokumen0->id_dokumen;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				if(isset($_POST['SuratPengumumanPelelangan']))
+				if(isset($_POST['SuratPengumumanPemenang']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SPP->attributes=$_POST['SuratPengumumanPelelangan'];
+					$SPP->attributes=$_POST['SuratPengumumanPemenang'];
 					$valid=$SPP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -5617,14 +5617,14 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SPP->save(false)){
-									$this->redirect(array('editsuratpengumumanpelelangan','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editsuratpengumumanpemenang','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('suratpengumumanpelelangan',array(
+				$this->render('suratpengumumanpemenang',array(
 					'SPP'=>$SPP,'Dokumen0'=>$Dokumen0,'NDPP'=>$NDPP,
 				));
 
@@ -5632,7 +5632,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionEditSuratpengumumanpelelangan()
+	public function actionEditSuratpengumumanpemenang()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -5646,15 +5646,15 @@ class SiteController extends Controller
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
 				
-				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pelelangan"');
+				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pemenang"');
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				$SPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
 				
 				
-				if(isset($_POST['SuratPengumumanPelelangan']))
+				if(isset($_POST['SuratPengumumanPemenang']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
-					$SPP->attributes=$_POST['SuratPengumumanPelelangan'];
+					$SPP->attributes=$_POST['SuratPengumumanPemenang'];
 					$valid=$SPP->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){
@@ -5662,14 +5662,14 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SPP->save(false)){
-									$this->redirect(array('editsuratpengumumanpelelangan','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editsuratpengumumanpemenang','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('suratpengumumanpelelangan',array(
+				$this->render('suratpengumumanpemenang',array(
 					'SPP'=>$SPP,'Dokumen0'=>$Dokumen0,'NDPP'=>$NDPP,
 				));
 
