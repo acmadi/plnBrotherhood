@@ -19,13 +19,24 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		      
                 <div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'Dokumen Prakualifikasi', 'url'=>array($DPK->isNewRecord?('/site/dokumenprakualifikasi'):('/site/editdokumenprakualifikasi'),'id'=>$id)),
-                                    array('label'=>'Surat Undangan Prakualifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/suratundanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editsuratundanganprakualifikasi'),'id'=>$id)),
-                            ),
-                        ));
-                    ?>
+						if($cpengadaan->metode_pengadaan=="Penunjukan Langsung"||$cpengadaan->metode_pengadaan=="Pemilihan Langsung") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+									array('label'=>'Dokumen PQ', 'url'=>array($DPK->isNewRecord?('/site/dokumenprakualifikasi'):('/site/editdokumenprakualifikasi'),'id'=>$id)),
+									array('label'=>'Undangan PQ', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/suratundanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editsuratundanganprakualifikasi'),'id'=>$id)),
+								),
+							));
+						} else if ($cpengadaan->metode_pengadaan=="Pelelangan") {
+							$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+									array('label'=>'Dokumen PQ', 'url'=>array($DPK->isNewRecord?('/site/dokumenprakualifikasi'):('/site/editdokumenprakualifikasi'),'id'=>$id)),
+									array('label'=>'Pengumuman Pelelangan dengan PQ', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='3'?'site/pengumumanpelelanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='1'?'':'site/editpengumumanpelelanganprakualifikasi'),'id'=>$id)),
+									array('label'=>'Pendaftaran', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='4'?'/site/pendaftaranpelelanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='3'?'':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editpendaftaranpelelanganprakualifikasi')),'id'=>$id)),
+									array('label'=>'Pengambilan PQ', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='5'?'/site/pengambilandokumenprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='4'?'':(Pengadaan::model()->findByPk($id)->status=='3'?'':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editpendaftaranpelelanganprakualifikasi'))),'id'=>$id)),
+								),
+							));
+						}
+					?>
                 </div>
                 
                 <br/>
