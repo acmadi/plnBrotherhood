@@ -19,7 +19,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/site/pengumumanpengadaan'):('/site/editpengumumanpengadaan'),'id'=>$id)),
+							array('label'=>'Pengumuman Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/site/suratpengumumanpelelangan'):('/site/editsuratpengumumanpelelangan'),'id'=>$id)),
 							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='15'?('/site/pendaftaranpelelangan'):($Pengadaan->status=='14'?'':('/site/editpendaftaranpelelangan')),'id'=>$id)),
 						),
 					));

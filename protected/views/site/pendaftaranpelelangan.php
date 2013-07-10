@@ -19,7 +19,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editpengumumanpengadaan','id'=>$id)),
+							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelangan','id'=>$id)),
 							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status == '15' ?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
 						),
 					));
@@ -61,7 +61,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'model' => $PP,
 					// 'model2' => $PP2,
 					'viewName' => 'formperusahaan_pendaftaran_pelelangan',
-					'labelAdd' => 'Tambah Penyedia',
+					'labelAdd' => '',
 					'labelDel' => 'Hapus Penyedia',
 					
 					)); 

@@ -49,7 +49,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                             'items'=>array(
                                     array('label'=>'ND Usulan', 'url'=>array('/site/editnotadinasusulanpemenang','id'=>$id)),
                                     array('label'=>'ND Penetapan', 'url'=>array('site/editnotadinaspenetapanpemenang','id'=>$id)),
-                                    array('label'=>'SP Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelangan','id'=>$id)),
+                                    array('label'=>'SP Pemenang', 'url'=>array('/site/editsuratpengumumanpemenang','id'=>$id)),
                                     array('label'=>'Surat Penunjukan Pemenang', 'url'=>array($SPPM->isNewRecord?'/site/suratpenunjukanpemenang':'/site/editsuratpenunjukanpemenang','id'=>$id)),
                             ),
                         ));
