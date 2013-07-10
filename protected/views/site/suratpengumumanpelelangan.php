@@ -54,10 +54,10 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			
 			<h4><b> Surat Pengumuman Pelelangan </b></h4>
 			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'nomor'); ?>
+				<?php echo $form->labelEx($SPP,'nomor'); ?>
 				Nomor HPS : <?php echo $HPS->nomor ?> <br/>
-				<?php echo $form->textField($SUPDP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-				<?php echo $form->error($SUPDP,'nomor'); ?>
+				<?php echo $form->textField($SPP,'nomor',array('size'=>56,'maxlength'=>100)); ?>
+				<?php echo $form->error($SPP,'nomor'); ?>
 			</div>
 			
 			<div class="row">
@@ -75,52 +75,26 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			</div>
 
 			<div class="row">
-				<?php //echo $form->labelEx($SUPDP,'perihal'); ?>
-				<?php //echo $form->textArea($SUPDP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php //echo $form->error($SUPDP,'perihal'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'tanggal pengambilan'); ?>
-				<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-						'model'=>$SUPDP,
-						'attribute'=>'tanggal_pengambilan',
-						'value'=>$SUPDP->tanggal_pengambilan,
-						'htmlOptions'=>array('size'=>56),
-						'options'=>array(
-						'dateFormat'=>'dd-mm-yy',
-						),
-				));?>
-				<?php echo $form->error($SUPDP,'tanggal_pengambilan'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'waktu pengambilan'); ?>
-				<?php echo $form->textField($SUPDP,'waktu_pengambilan',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($SUPDP,'waktu_pengambilan'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($SUPDP,'tempat_pengambilan'); ?>
-				<?php echo $form->textArea($SUPDP,'tempat_pengambilan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($SUPDP,'tempat_pengambilan'); ?>
+				<?php echo $form->labelEx($SPP,'syarat_mengikuti_lelang'); ?>
+				<?php echo $form->textArea($SPP,'syarat_mengikuti_lelang',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
+				<?php echo $form->error($SPP,'syarat_mengikuti_lelang'); ?>
 			</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Dokumen0->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($SPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
 			
 		<?php $this->endWidget(); ?>
 		
 		<br/>
 		</div><!-- form -->
-		<?php if (!$Dokumen0->isNewRecord){ ?>
+		<?php if (!$SPP->isNewRecord){ ?>
 				<br/>
 				<div style="border-top:1px solid lightblue">
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Surat Undangan Pengambilan Dokumen Pengadaan', array('docx/download', 'id'=>$SUPDP->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Surat Pengumuman Pelelangan', array('docx/download', 'id'=>$SPP->id_dokumen)); ?></li>
 					</ul>
 				</div>
 		<?php } ?>

@@ -40,13 +40,13 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, cara_pendaftaran, syarat_mengikuti_lelang', 'required'),
+			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>100),
-			array('cara_pendaftaran, syarat_mengikuti_lelang', 'length', 'max'=>256),
+			array('syarat_mengikuti_lelang', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, cara_pendaftaran, syarat_mengikuti_lelang', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,7 +70,6 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'cara_pendaftaran' => 'Cara Pendaftaran',
 			'syarat_mengikuti_lelang' => 'Syarat Mengikuti Lelang',
 		);
 	}
@@ -88,7 +87,6 @@ class SuratPengumumanPelelangan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('cara_pendaftaran',$this->cara_pendaftaran,true);
 		$criteria->compare('syarat_mengikuti_lelang',$this->syarat_mengikuti_lelang,true);
 
 		return new CActiveDataProvider($this, array(
