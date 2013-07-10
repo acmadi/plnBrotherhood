@@ -2552,7 +2552,7 @@ class DocxController extends Controller
 	}
 	
 	function getPenyediaLulusKesimpulan($idpeng,$tahap){
-		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1"  and id_pengadaan = ' . $idpeng);
+		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1"  and id_pengadaan = ' . $idpeng . ' order by nilai');
 		$stringpenyedia = "";
 				
 		if($arraypenyedia == null){
@@ -2564,7 +2564,7 @@ class DocxController extends Controller
 									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
 									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
 									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->nilai) . '<w:br/>' .
-									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/> <w:br/>'
 									;
 			}
 		}		
@@ -2593,8 +2593,6 @@ class DocxController extends Controller
 	function persenMaker($nilai,$hps){
 		return 0;
 	}
-	
-	
 	
 }
 ?>
