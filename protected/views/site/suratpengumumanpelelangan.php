@@ -48,7 +48,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div class="form" >
 
 			<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
+			'id'=>'surat-pengumuman-pelelangan-form',
 			'enableAjaxValidation'=>false,
 			)); ?>
 			
