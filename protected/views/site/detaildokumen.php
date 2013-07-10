@@ -45,7 +45,7 @@
 		));
 		
 		echo $form->labelEx($chosenDokumen, 'Unggah berkas');
-		echo $form->fileField($chosenDokumen, 'uploadedFile');
+		echo $form->fileField($chosenDokumen, 'uploadedFile', array('accept'=>'.docx, .xlsx, application/pdf'));
 		echo $form->hiddenField($chosenDokumen, 'id_dokumen');
 		echo $form->error($chosenDokumen, 'uploadedFile');
 		echo CHtml::submitButton('Unggah', array('class'=>'sidafbutton'));

@@ -71,6 +71,7 @@ class Dokumen extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('uploadedFile', 'file', 'types'=>'docx, xlsx, pdf', 'allowEmpty'=>true, 'on'=>'update'),
 			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen, id_pengadaan', 'length', 'max'=>32),
 			array('nama_dokumen', 'length', 'max'=>50),

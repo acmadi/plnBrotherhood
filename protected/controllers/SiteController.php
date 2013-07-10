@@ -187,23 +187,26 @@ class SiteController extends Controller
 				// $criteria->select='max(id_link) AS maxId';
 				// $row = $newLinkDokumen->model()->find($criteria);
 				// $id_link = $row['maxId'] + 1;
-				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
-				$newLinkDokumen->id_dokumen=$tempDokumen->id_dokumen;
-				$newLinkDokumen->waktu_upload=$waktu_upload;
-				$newLinkDokumen->tanggal_upload=date('Y-m-d');
-				$newLinkDokumen->pengunggah=$user;
-				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $tempDokumen->id_dokumen . '"') + 1;
-				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
-				$newLinkDokumen->save();
 								
 				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $tempDokumen->id_pengadaan . '/' . $tempDokumen->id_dokumen . '/';
 				@mkdir($path,0700,true);
 				$namaFile = $newLinkDokumen->nomor_link;
 				
-				if($tempDokumen->save(false)){
-					$tempDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
+				if ($tempDokumen->validate()) {
+					if($tempDokumen->save(false)){
+						$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
+						$newLinkDokumen->id_dokumen=$tempDokumen->id_dokumen;
+						$newLinkDokumen->waktu_upload=$waktu_upload;
+						$newLinkDokumen->tanggal_upload=date('Y-m-d');
+						$newLinkDokumen->pengunggah=$user;
+						$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $tempDokumen->id_dokumen . '"') + 1;
+						$newLinkDokumen->nama_file=$pathinfo['filename'];
+						$newLinkDokumen->format_dokumen=$pathinfo['extension'];
+						$newLinkDokumen->save();
+
+						$tempDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
 					}
+				}
 			}
 			$this->render('detaildokumen');
 		}
@@ -1236,7 +1239,11 @@ class SiteController extends Controller
 		else {
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "2";
+				if ($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "3";
+				} else {	
+					$Pengadaan->status= "2";
+				}
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1393,7 +1400,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status= "4";
+				$Pengadaan->status= "6";
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -1477,6 +1484,96 @@ class SiteController extends Controller
 				$this->render('suratundanganprakualifikasi',array(
 					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,
 				));
+			}
+		}
+	}
+	
+	public function actionSuratpengumumanpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="4";
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('suratpengumumanpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionEditSuratpengumumanpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('suratpengumumanpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionPendaftaranpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="5";
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('pendaftaranpelelanganprakualifikasi');
+			}
+		}
+	}
+	
+	public function actionEditPendaftaranpelelanganprakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					if($Pengadaan->save(false))
+					{
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi'));
+					}
+				}
+				$this->render('pendaftaranpelelanganprakualifikasi');
 			}
 		}
 	}
@@ -2217,7 +2314,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='9';
+				$Pengadaan->status ='17';
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2623,7 +2720,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='10';
+				$Pengadaan->status ='18';
 						
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -2921,9 +3018,9 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Pengadaan->status ='13';
+					$Pengadaan->status ='21';
 				} else {
-					$Pengadaan->status ='11';
+					$Pengadaan->status ='19';
 				}
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
@@ -3340,7 +3437,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='12';
+				$Pengadaan->status ='20';
 				
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -3639,7 +3736,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='13';
+				$Pengadaan->status ='21';
 				
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
@@ -4044,7 +4141,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='14';
+				$Pengadaan->status ='22';
 				
 				$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -4324,7 +4421,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='15';
+				$Pengadaan->status ='23';
 				
 				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
 				
@@ -4578,11 +4675,11 @@ class SiteController extends Controller
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
-					$Pengadaan->status ='18';
+					$Pengadaan->status ='26';
 				} else if ($Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
-					$Pengadaan->status ='16';
+					$Pengadaan->status ='25';
 				} else if ($Pengadaan->metode_pengadaan == 'Pelelangan'){
-					$Pengadaan->status ='17';
+					$Pengadaan->status ='24';
 				}
 				
 				$DokNDUP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Usulan Pemenang"');
@@ -4808,7 +4905,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='18';
+				$Pengadaan->status ='26';
 				
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
@@ -4915,7 +5012,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='18';
+				$Pengadaan->status ='26';
 				
 				$DokNDPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Penetapan Pemenang"');
 				$NDPP=NotaDinasPenetapanPemenang::model()->findByPk($DokNDPP->id_dokumen);
@@ -5020,7 +5117,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='19';
+				$Pengadaan->status ='27';
 				
 				$Dokumen0= new Dokumen;
 				$criteria=new CDbcriteria;
@@ -5230,118 +5327,112 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 	
-	public function actionTambahpengadaan()
-	{	
-		$user = Yii::app()->user->name;
-		if (Yii::app()->user->getState('role') == 'kdivmum') {
+	// public function actionTambahpengadaan()
+	// {	
+	// 	$user = Yii::app()->user->name;
+	// 	if (Yii::app()->user->getState('role') == 'kdivmum') {
 			
-			$Pengadaan=new Pengadaan;
-			$Pengadaan->status="0";
-			$criteria=new CDbcriteria;
-			$criteria->select='max(id_pengadaan) AS maxId';
-			$row = $Pengadaan->model()->find($criteria);
-			$somevariable = $row['maxId'];
-			$Pengadaan->id_pengadaan=$somevariable+1;
-			$Pengadaan->nama_penyedia='-';
-			$Pengadaan->tanggal_selesai='-';
-			$Pengadaan->biaya='-';
-			$Pengadaan->metode_penawaran='-';
-			$Pengadaan->jenis_kualifikasi='-';
+	// 		$Pengadaan=new Pengadaan;
+	// 		$Pengadaan->status="0";
+	// 		$criteria=new CDbcriteria;
+	// 		$criteria->select='max(id_pengadaan) AS maxId';
+	// 		$row = $Pengadaan->model()->find($criteria);
+	// 		$somevariable = $row['maxId'];
+	// 		$Pengadaan->id_pengadaan=$somevariable+1;
+	// 		$Pengadaan->nama_penyedia='-';
+	// 		$Pengadaan->tanggal_selesai='-';
+	// 		$Pengadaan->biaya='-';
+	// 		$Pengadaan->metode_penawaran='-';
+	// 		$Pengadaan->jenis_kualifikasi='-';
 			
-			$Dokumen1= new Dokumen;
-			$Dokumen1->id_dokumen=$somevariable+1;
-			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen1->nama_dokumen='Dokumen Lain-lain';			
-			$Dokumen1->status_upload='Belum Selesai';
+	// 		$Dokumen0= new Dokumen;
+	// 		$criteria=new CDbcriteria;
+	// 		$criteria->select='max(id_dokumen) AS maxId';
+	// 		$row = $Dokumen0->model()->find($criteria);
+	// 		$somevariable = $row['maxId'];
+	// 		$Dokumen0->id_dokumen=$somevariable+2;
+	// 		$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+	// 		$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
+	// 		$Dokumen0->tempat='Jakarta';
+	// 		$Dokumen0->status_upload='Belum Selesai';
 			
-			$Dokumen0= new Dokumen;
-			$criteria=new CDbcriteria;
-			$criteria->select='max(id_dokumen) AS maxId';
-			$row = $Dokumen0->model()->find($criteria);
-			$somevariable = $row['maxId'];
-			$Dokumen0->id_dokumen=$somevariable+2;
-			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
-			$Dokumen0->tempat='Jakarta';
-			$Dokumen0->status_upload='Belum Selesai';
-			
-			$Dokumen1= new Dokumen;
-			$Dokumen1->id_dokumen=$somevariable+5;
-			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
-			$Dokumen1->tempat='Jakarta';
-			$Dokumen1->status_upload='Belum Selesai';
+	// 		$Dokumen1= new Dokumen;
+	// 		$Dokumen1->id_dokumen=$somevariable+5;
+	// 		$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+	// 		$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
+	// 		$Dokumen1->tempat='Jakarta';
+	// 		$Dokumen1->status_upload='Belum Selesai';
 						
-			$Dokumen2= new Dokumen;
-			$Dokumen2->id_dokumen=$somevariable+3;
-			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen2->nama_dokumen='TOR';
-			$Dokumen2->tempat='Jakarta';
-			$Dokumen2->status_upload='Belum Selesai';
+	// 		$Dokumen2= new Dokumen;
+	// 		$Dokumen2->id_dokumen=$somevariable+3;
+	// 		$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
+	// 		$Dokumen2->nama_dokumen='TOR';
+	// 		$Dokumen2->tempat='Jakarta';
+	// 		$Dokumen2->status_upload='Belum Selesai';
 			
-			$Dokumen3= new Dokumen;
-			$Dokumen3->id_dokumen=$somevariable+4;
-			$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
-			$Dokumen3->nama_dokumen='RAB';
-			$Dokumen3->tempat='Jakarta';
-			$Dokumen3->status_upload='Belum Selesai';
+	// 		$Dokumen3= new Dokumen;
+	// 		$Dokumen3->id_dokumen=$somevariable+4;
+	// 		$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
+	// 		$Dokumen3->nama_dokumen='RAB';
+	// 		$Dokumen3->tempat='Jakarta';
+	// 		$Dokumen3->status_upload='Belum Selesai';
 			
-			$NDP= new NotaDinasPermintaan;
-			$NDP->id_dokumen=$Dokumen0->id_dokumen;
+	// 		$NDP= new NotaDinasPermintaan;
+	// 		$NDP->id_dokumen=$Dokumen0->id_dokumen;
 			
-			$NDPP= new NotaDinasPerintahPengadaan;
-			$NDPP->id_dokumen=$Dokumen1->id_dokumen;
+	// 		$NDPP= new NotaDinasPerintahPengadaan;
+	// 		$NDPP->id_dokumen=$Dokumen1->id_dokumen;
 			
-			$TOR= new Tor;
-			$TOR->id_dokumen=$Dokumen2->id_dokumen;
+	// 		$TOR= new Tor;
+	// 		$TOR->id_dokumen=$Dokumen2->id_dokumen;
 			
-			$RAB= new Rab;
-			$RAB->id_dokumen=$Dokumen3->id_dokumen;
+	// 		$RAB= new Rab;
+	// 		$RAB->id_dokumen=$Dokumen3->id_dokumen;
 
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
-			if(isset($_POST['Pengadaan']))
-			{
-				$Pengadaan->attributes=$_POST['Pengadaan'];
-				$NDP->attributes=$_POST['NotaDinasPermintaan'];
-				$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
-				$Dokumen0->attributes=$_POST['Dokumen'];
-				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
+	// 		// Uncomment the following line if AJAX validation is needed
+	// 		// $this->performAjaxValidation($model);
+	// 		if(isset($_POST['Pengadaan']))
+	// 		{
+	// 			$Pengadaan->attributes=$_POST['Pengadaan'];
+	// 			$NDP->attributes=$_POST['NotaDinasPermintaan'];
+	// 			$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
+	// 			$Dokumen0->attributes=$_POST['Dokumen'];
+	// 			$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				
-				if($valid){
-					$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
-					$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
-					$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
-					$Dokumen2->tanggal=$Dokumen0->tanggal;
-					$Dokumen3->tanggal=$Dokumen0->tanggal;
-					$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-					$NDPP->kepada=(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->nama);
-					$valid=$valid&&$NDP->validate();
-					if($valid){
-						$valid=$valid&&$NDPP->validate();
-						if($valid){
-							if($Pengadaan->save(false)&&$Divisi->save(false)) {
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-									if($NDP->save(false)&&$NDPP->save(false)&&$TOR->save(false)&&$RAB->save(false)){										
-										if(isset($_POST['simpan'])){
-											$this->redirect(array('dashboard'));
-										}
-										if(isset($_POST['simpanbuat'])){
-											$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));											
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+	// 			if($valid){
+	// 				$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
+	// 				$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
+	// 				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
+	// 				$Dokumen2->tanggal=$Dokumen0->tanggal;
+	// 				$Dokumen3->tanggal=$Dokumen0->tanggal;
+	// 				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
+	// 				$NDPP->kepada=(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->nama);
+	// 				$valid=$valid&&$NDP->validate();
+	// 				if($valid){
+	// 					$valid=$valid&&$NDPP->validate();
+	// 					if($valid){
+	// 						if($Pengadaan->save(false)&&$Divisi->save(false)) {
+	// 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$DokumenL->save(false)){
+	// 								if($NDP->save(false)&&$NDPP->save(false)&&$TOR->save(false)&&$RAB->save(false)){										
+	// 									if(isset($_POST['simpan'])){
+	// 										$this->redirect(array('dashboard'));
+	// 									}
+	// 									if(isset($_POST['simpanbuat'])){
+	// 										$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));											
+	// 									}
+	// 								}
+	// 							}
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+	// 		}
 
-			$this->render('tambahpengadaan',array(
-				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
-			));
-		}
-	}
+	// 		$this->render('tambahpengadaan',array(
+	// 			'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
+	// 		));
+	// 	}
+	// }
 	
 	public function actionTambahpengadaan1()
 	{	
@@ -5373,25 +5464,32 @@ class SiteController extends Controller
 			$criteria->select='max(id_dokumen) AS maxId';
 			$row = $Dokumen0->model()->find($criteria);
 			$somevariable = $row['maxId'];
-			$Dokumen0->id_dokumen=$somevariable+1;
+			$Dokumen0->id_dokumen=$somevariable+2;
 			$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
 			$Dokumen0->tempat='Jakarta';
 			$Dokumen0->status_upload='Belum Selesai';
 			
 			$Dokumen1= new Dokumen;
-			$Dokumen1->id_dokumen=$somevariable+2;
+			$Dokumen1->id_dokumen=$somevariable+3;
 			$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen1->nama_dokumen='TOR';
 			$Dokumen1->tempat='Jakarta';
 			$Dokumen1->status_upload='Belum Selesai';
 			
 			$Dokumen2= new Dokumen;
-			$Dokumen2->id_dokumen=$somevariable+3;
+			$Dokumen2->id_dokumen=$somevariable+4;
 			$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
 			$Dokumen2->nama_dokumen='RAB';
 			$Dokumen2->tempat='Jakarta';
 			$Dokumen2->status_upload='Belum Selesai';
+			
+			$DokumenL= new Dokumen;
+			$DokumenL->id_dokumen=$somevariable+1;
+			$DokumenL->id_pengadaan=$Pengadaan->id_pengadaan;
+			$DokumenL->nama_dokumen='Dokumen Lain-lain';
+			$DokumenL->tempat='Jakarta';
+			$DokumenL->status_upload='Belum Selesai';
 			
 			$NDP= new NotaDinasPermintaan;
 			$NDP->id_dokumen=$Dokumen0->id_dokumen;
@@ -5418,7 +5516,7 @@ class SiteController extends Controller
 					$valid=$valid&&$NDP->validate();
 					if($valid){
 						if($Pengadaan->save(false)) {
-							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$DokumenL->save(false)){
 								if($NDP->save(false)&&$TOR->save(false)&&$RAB->save(false)){
 									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
 								}
@@ -5520,6 +5618,7 @@ class SiteController extends Controller
 				$newLinkDokumen->tanggal_upload=date('Y-m-d');
 				$newLinkDokumen->pengunggah=$user;
 				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->nama_file=$pathinfo['filename'];
 				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
 				$newLinkDokumen->save();
 								
@@ -5743,6 +5842,49 @@ class SiteController extends Controller
 				$metode_penawaran2='Sampul 2';
 			}	
 			
+			$newDokumen = new Dokumen;
+			$newLinkDokumen = new LinkDokumen;
+				
+			if(isset($_POST['Dokumen'])){
+				$newDokumen->attributes=$_POST['Dokumen'];
+				$fileDokumen = CUploadedFile::getInstance($newDokumen,'uploadedFile');				
+				$newDokumen = Dokumen::model()->findByPk($newDokumen->id_dokumen);
+				$newDokumen->uploadedFile=$fileDokumen;
+				
+				$newDokumen->status_upload='Selesai';
+				
+				date_default_timezone_set("Asia/Jakarta");
+				$secs = time() + (7*3600);
+				$hours = $secs / 3600 % 24;
+				$minutes = $secs / 60 % 60;
+				$seconds = $secs % 60;
+				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
+				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
+				
+				// $criteria=new CDbcriteria;
+				// $criteria->select='max(id_link) AS maxId';
+				// $row = $newLinkDokumen->model()->find($criteria);
+				// $id_link = $row['maxId'] + 1;
+				
+				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
+				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
+				$newLinkDokumen->waktu_upload=$waktu_upload;
+				$newLinkDokumen->tanggal_upload=date('Y-m-d');
+				$newLinkDokumen->pengunggah=$user;
+				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
+				$newLinkDokumen->nama_file=$pathinfo['filename'];
+				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
+				$newLinkDokumen->save();
+								
+				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
+				@mkdir($path,0700,true);
+				$namaFile = $newLinkDokumen->nomor_link;
+				
+				if($newDokumen->save(false)){
+					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
+					}
+			}
+			
 			$modelDok = array(Dokumen::model()->find('nama_dokumen="Pakta Integritas Awal Panitia" AND id_pengadaan="' . $id . '"'),
 										 Dokumen::model()->find('nama_dokumen="RKS" AND id_pengadaan="' . $id . '"'),
 										 Dokumen::model()->find('nama_dokumen="Surat Undangan Prakualifikasi" AND id_pengadaan="' . $id . '"'),
@@ -5776,48 +5918,6 @@ class SiteController extends Controller
 												Dokumen::model()->find('nama_dokumen="RAB" AND id_pengadaan="' . $id . '"'),
 												Dokumen::model()->find('nama_dokumen="Nota Dinas Perintah Pengadaan" AND id_pengadaan="' . $id . '"')
 										);
-			
-			$newDokumen = new Dokumen;
-			$newLinkDokumen = new LinkDokumen;
-				
-			if(isset($_POST['Dokumen'])){
-				$newDokumen->attributes=$_POST['Dokumen'];
-				$fileDokumen = CUploadedFile::getInstance($newDokumen,'uploadedFile');				
-				$newDokumen = Dokumen::model()->findByPk($newDokumen->id_dokumen);
-				$newDokumen->uploadedFile=$fileDokumen;
-				
-				$newDokumen->status_upload='Selesai';
-				
-				date_default_timezone_set("Asia/Jakarta");
-				$secs = time() + (7*3600);
-				$hours = $secs / 3600 % 24;
-				$minutes = $secs / 60 % 60;
-				$seconds = $secs % 60;
-				$waktu_upload = $hours . ':' . $minutes . ':' . $seconds;				
-				$pathinfo = pathinfo($newDokumen->uploadedFile->getName());
-				
-				// $criteria=new CDbcriteria;
-				// $criteria->select='max(id_link) AS maxId';
-				// $row = $newLinkDokumen->model()->find($criteria);
-				// $id_link = $row['maxId'] + 1;
-				
-				$newLinkDokumen->id_link=LinkDokumen::model()->count() + 1;
-				$newLinkDokumen->id_dokumen=$newDokumen->id_dokumen;
-				$newLinkDokumen->waktu_upload=$waktu_upload;
-				$newLinkDokumen->tanggal_upload=date('Y-m-d');
-				$newLinkDokumen->pengunggah=$user;
-				$newLinkDokumen->nomor_link=LinkDokumen::model()->count('id_dokumen="' . $newDokumen->id_dokumen . '"') + 1;
-				$newLinkDokumen->format_dokumen=$pathinfo['extension'];
-				$newLinkDokumen->save();
-								
-				$path = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/uploads/' . $newDokumen->id_pengadaan . '/' . $newDokumen->id_dokumen . '/';
-				@mkdir($path,0700,true);
-				$namaFile = $newLinkDokumen->nomor_link;
-				
-				if($newDokumen->save(false)){
-					$newDokumen->uploadedFile->saveAs($path . $namaFile . '.' . $pathinfo['extension']);
-					}
-			}
 				$this->render('uploader',array('modelDok'=>$modelDok));
 	}
 }
