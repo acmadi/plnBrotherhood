@@ -49,7 +49,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                             'items'=>array(
                                     array('label'=>'ND Usulan', 'url'=>array($NDUP->isNewRecord?'/site/notadinasusulanpemenang':'/site/editnotadinasusulanpemenang','id'=>$id)),
                                     array('label'=>'ND Penetapan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='24'?'/site/notadinaspenetapanpemenang':(Pengadaan::model()->findByPk($id)->status=='23'?'':'/site/editnotadinaspenetapanpemenang'),'id'=>$id)),
-                                    array('label'=>'SP Pelelangan', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='26'?'/site/suratpengumumanpelelangan':(Pengadaan::model()->findByPk($id)->status=='24'?'':(Pengadaan::model()->findByPk($id)->status=='23'?'':'/site/editsuratpengumumanpelelangan')),'id'=>$id)),
+                                    array('label'=>'SP Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='26'?'/site/suratpengumumanpemenang':(Pengadaan::model()->findByPk($id)->status=='24'?'':(Pengadaan::model()->findByPk($id)->status=='23'?'':'/site/editsuratpengumumanpemenang')),'id'=>$id)),
                                     array('label'=>'Surat Penunjukan Pemenang', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='27'?'/site/suratpenunjukanpemenang':(Pengadaan::model()->findByPk($id)->status=='26'?'':(Pengadaan::model()->findByPk($id)->status=='24'?'':(Pengadaan::model()->findByPk($id)->status=='23'?'':'/site/editsuratpenunjukanpemenang'))),'id'=>$id)),
                             ),
                         ));
