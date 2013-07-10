@@ -2375,8 +2375,8 @@ class SiteController extends Controller
 				}
 
 				if($Pengadaan->metode_pengadaan=="Pelelangan"){
-					$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Pengambilan Dokumen Pengadaan"');
-					$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($DokPengumuman->id_dokumen);
+					$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+					$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
 					$this->render('aanwijzing',array(
 						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPDP'=>$SUPDP,
 					));
@@ -2433,8 +2433,8 @@ class SiteController extends Controller
 					}
 				}
 				if($Pengadaan->metode_pengadaan=="Pelelangan"){
-					$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Pengambilan Dokumen Pengadaan"');
-					$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($DokPengumuman->id_dokumen);
+					$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+					$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
 					$this->render('aanwijzing',array(
 						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPDP'=>$SUPDP,
 					));
@@ -2600,8 +2600,8 @@ class SiteController extends Controller
 				}
 				if($DokSUP== null ){
 					if($Pengadaan->metode_pengadaan=="Pelelangan"){
-						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Pengambilan Dokumen Pengadaan"');
-						$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($DokPengumuman->id_dokumen);
+						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+						$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
 						$this->render('beritaacaraaanwijzing',array(
 							'BAP'=>$BAP,'SUPDP'=>$SUPDP,'PP'=>$PP,
 						));
@@ -2731,8 +2731,8 @@ class SiteController extends Controller
 				$DokSUP = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"');
 				if($DokSUP== null ){
 					if($Pengadaan->metode_pengadaan=="Pelelangan"){
-						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Pengambilan Dokumen Pengadaan"');
-						$SUPDP=SuratUndanganPengambilanDokumenPengadaan::model()->findByPk($DokPengumuman->id_dokumen);
+						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+						$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
 						$this->render('beritaacaraaanwijzing',array(
 							'BAP'=>$BAP,'DH'=>$DH,'SUPDP'=>$SUPDP,'PP'=>$PP,
 						));
@@ -5641,7 +5641,7 @@ class SiteController extends Controller
 				
 				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pemenang"');
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-				$SPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
+				$SPP=SuratPengumumanPemenang::model()->findByPk($Dokumen0->id_dokumen);
 				
 				
 				if(isset($_POST['SuratPengumumanPemenang']))
@@ -5739,8 +5739,8 @@ class SiteController extends Controller
 						'SPPM'=>$SPPM,'Dokumen0'=>$Dokumen0,'NDBP'=>$NDBP,
 					));
 				} else if ($Pengadaan->metode_pengadaan=="Pelelangan") {
-					$DokSPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pelelangan"');
-					$SPP=SuratPengumumanPelelangan::model()->findByPk($DokSPP->id_dokumen);
+					$DokSPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pemenang"');
+					$SPP=SuratPengumumanPemenang::model()->findByPk($DokSPP->id_dokumen);
 					$this->render('suratpenunjukanpemenang',array(
 						'SPPM'=>$SPPM,'Dokumen0'=>$Dokumen0,'SPP'=>$SPP,
 					));
@@ -5800,8 +5800,8 @@ class SiteController extends Controller
 						'SPPM'=>$SPPM,'Dokumen0'=>$Dokumen0,'NDBP'=>$NDBP,
 					));
 				} else if ($Pengadaan->metode_pengadaan=="Pelelangan") {
-					$DokSPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pelelangan"');
-					$SPP=SuratPengumumanPelelangan::model()->findByPk($DokSPP->id_dokumen);
+					$DokSPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pengumuman Pemenang"');
+					$SPP=SuratPengumumanPemenang::model()->findByPk($DokSPP->id_dokumen);
 					$this->render('suratpenunjukanpemenang',array(
 						'SPPM'=>$SPPM,'Dokumen0'=>$Dokumen0,'SPP'=>$SPP,
 					));
