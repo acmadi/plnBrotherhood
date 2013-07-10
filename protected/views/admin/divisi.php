@@ -1,13 +1,13 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Pengguna';
+	$this->pageTitle=Yii::app()->name . ' | Divisi';
 ?>
 
 <div id="pagecontent">
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah pengguna', array('site/statistik', 'category'=>'1', 'chart'=>'1')) ?></li>
-		<li><?php echo CHtml::link('Hapus pengguna', array('site/statistik', 'category'=>'2', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Tambah divisi', array('site/statistik', 'category'=>'1', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Hapus divisi', array('site/statistik', 'category'=>'2', 'chart'=>'1')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -22,12 +22,7 @@
 					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
 				),
 				'username',
-				'NIP',
-				'nama',
-				array(
-					'name'=>'Peran',
-					'value'=>'$data->idPanitia->jenis_panitia',
-				),
+				'nama_divisi',
 			),
 		));
 		?>

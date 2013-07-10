@@ -50,9 +50,9 @@
 						array('label'=>'Statistik', 'url'=>array('/site/statistik', 'category'=>'1', 'chart'=>'1'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum'),
 						array('label'=>'Pengguna', 'url'=>array('/admin/pengguna'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Panitia/Pejabat Pengadaan', 'url'=>array('/admin/panitia'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						array('label'=>'KDIV/MS', 'url'=>array('/admin/kdiv'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
+						array('label'=>'Pejabat Berwenang', 'url'=>array('/admin/kdiv'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Divisi', 'url'=>array('/admin/divisi'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						// array('label'=>'Admin', 'url'=>array('/admin/index')),
+						array('label'=>'Manajemen Akun', 'url'=>array('/admin/admin'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>(Yii::app()->user->getState('role') == 'admin') ? (Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama_divisi) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama))), 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),
