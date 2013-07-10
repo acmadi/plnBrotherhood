@@ -45,6 +45,11 @@ li
 	background-color:#E5FFCC;
 }
 
+.sudah:focus
+{
+	background-color:#98FB98;
+}
+
 .onprogress
 {
 	background-color:#98FB98;
