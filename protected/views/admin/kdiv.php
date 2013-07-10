@@ -1,18 +1,18 @@
 <?php
-/* @var $this AdminController */
+/* @var $this AnggotaController */
 /* @var $dataProvider CActiveDataProvider */
 
 // $this->breadcrumbs=array(
-	// 'Admins',
+	// 'Anggotas',
 // );
 
 $this->menu=array(
-	array('label'=>'Tambah Admin', 'url'=>array('create')),
-	array('label'=>'Kelola Admin', 'url'=>array('admin')),
+	array('label'=>'Tambah Anggota', 'url'=>array('create')),
+	array('label'=>'Kelola Anggota', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Daftar Admin</h1>
+<h1>Daftar Anggota</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
