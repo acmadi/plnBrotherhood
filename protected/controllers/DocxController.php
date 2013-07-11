@@ -1696,17 +1696,7 @@ class DocxController extends Controller
 			$norks = $rks->nomor;
 			$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
 			$dokBAPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"');
-			// $BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($dokBAPP->id_dokumen);
-			// $jumlahperusahaan = $BAPP->jumlah_penyedia_diundang;
 			
-			// $pemenang = $BAEP->pemenang;
-			// $alamat = $BAEP->alamat;
-			// $NPWP = $BAEP->NPWP;
-			// $nilai = $BAEP->nilai;
-			// $pemenang2 = $BAEP->pemenang_2;
-			// $alamat2 = $BAEP->alamat_2;
-			// $NPWP2 = $BAEP->NPWP_2;
-			// $nilai2 = $BAEP->nilai_2;
 			$metode = $Peng->metode_pengadaan;
 			$metode2 = $Peng->metode_penawaran;
 			$user = $Peng->divisi_peminta;

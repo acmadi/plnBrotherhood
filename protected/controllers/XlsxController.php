@@ -173,6 +173,19 @@ class XlsxController extends Controller
 			
 			header('Content-Disposition: attachment;filename="13.a-Lam BA Pembukaan 2 SAMPUL.xlsx"');
 		}
+		else if($cdokumen->nama_dokumen == 'Berita Acara Pembukaan Penawaran') {
+			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
+					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
+					$this->assign($objPHPExcel, "#hari#", $hari);
+					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
+					$this->assign($objPHPExcel, "#bulan#", $bulan);
+					$this->assign($objPHPExcel, "#tahun#", $tahun);
+					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
+					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			
+			header('Content-Disposition: attachment;filename="10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx"');
+		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran Sampul Satu') {
 			$objPHPExcel = $objReader->load($templatePath . '15.a-Lam BA Evaluasi  1 Sampul.xlsx');
 				
@@ -205,7 +218,7 @@ class XlsxController extends Controller
 			header('Content-Disposition: attachment;filename="16.a-Lam BA Evaluasi 2 SAMPUL.xlsx"');
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Penawaran') {
-			$objPHPExcel = $objReader->load($templatePath . '16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx');
+			$objPHPExcel = $objReader->load($templatePath . 'BA Evaluasi Penawaran.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
 					$this->assign($objPHPExcel, "#hari#", $hari);
 					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
@@ -215,20 +228,13 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#panitia#", $panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			
-			header('Content-Disposition: attachment;filename="16-Lam BA Evaluasi 2 Sampul Sd Edited, SistemBobot.xlsx"');
+			header('Content-Disposition: attachment;filename="BA Evaluasi Penawaran.xlsx"');
 		}
 		else{
-			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
-					$this->assign($objPHPExcel, "#hari#", $hari);
-					$this->assign($objPHPExcel, "#tanggal#", $tanggal);
-					$this->assign($objPHPExcel, "#bulan#", $bulan);
-					$this->assign($objPHPExcel, "#tahun#", $tahun);
-					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#nosk#", $skpanitia);
-					$this->assign($objPHPExcel, "#panitia#", $panitia);
-					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+			$objPHPExcel = $objReader->load($templatePath . 'test.xlsx');
+				$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cdokumen->nama_dokumen));	
 			
-			header('Content-Disposition: attachment;filename="10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx"');
+			header('Content-Disposition: attachment;filename="test.xlsx"');
 		}
 		
 		
