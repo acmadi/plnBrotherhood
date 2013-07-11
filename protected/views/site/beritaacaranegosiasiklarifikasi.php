@@ -22,14 +22,14 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-										array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
+										array('label'=>'ND Undangan Klarifikasi Negosiasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+										array('label'=>'BA Klarifikasi Negosiasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
 								),
 							));
 						} else {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
+										array('label'=>'BA Klarifikasi Negosiasi', 'url'=>array($BANK->isNewRecord?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
 								),
 							));
 						}
@@ -46,7 +46,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 
 		<?php echo $form->errorSummary($BANK); ?>
 		
-		<h4><b> Berita Acara Negosiasi dan Klarifikasi </b></h4>
+		<h4><b> Berita Acara Klarifikasi dan Negosiasi </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BANK,'nomor'); ?>
 			<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null) {?>
