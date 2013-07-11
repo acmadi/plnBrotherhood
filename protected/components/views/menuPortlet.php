@@ -60,19 +60,19 @@
 			<?php } else if($cpengadaan->status == '8') { ?>
 				<li class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("site/penyampaiandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '9') { ?>
-				<li class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("site/evaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("site/evaluasidokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("site/editevaluasiprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("site/editevaluasidokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 			
 			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9') { ?>
 				<li class='belum' ><?php echo 'Usulan dan Penetapan Hasil Kualifikasi'?></li>
 			<?php } else if($cpengadaan->status == '10') { ?>
-				<li class='sudah' ><?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("site/penetapanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' ><?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("site/usulanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '11') { ?>
-				<li class='sudah' ><?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("site/pengumumanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' ><?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("site/penetapanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah' > <?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("site/editpengumumanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah' > <?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("site/editpenetapanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 			
 			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11') { ?>
@@ -204,11 +204,11 @@
 		<?php } ?>
 		
 		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21') { ?>
-				<li class='belum'><?php echo 'Negosiasi dan Klarifikasi' ?></li>
+				<li class='belum'><?php echo 'Klarifikasi dan Negosiasi' ?></li>
 			<?php } else if($cpengadaan->status == '22') { ?>
-				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/beritaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/beritaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
-				<li class='sudah'><?php echo CHtml::link('Negosiasi dan Klarifikasi',array("site/editberitaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/editberitaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22') { ?>

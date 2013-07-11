@@ -24,7 +24,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                             'items'=>array(
                                     array('label'=>'ND Usulan', 'url'=>array('/site/editnotadinasusulanpemenang','id'=>$id)),
                                     array('label'=>'ND Penetapan', 'url'=>array('site/editnotadinaspenetapanpemenang','id'=>$id)),
-                                    array('label'=>'Surat Penunjukan Pemenang', 'url'=>array($SPPM->isNewRecord?'/site/suratpenunjukanpemenang':'/site/editsuratpenunjukanpemenang','id'=>$id)),
+                                    array('label'=>'Surat Penunjukan Penyedia', 'url'=>array($SPPM->isNewRecord?'/site/suratpenunjukanpemenang':'/site/editsuratpenunjukanpemenang','id'=>$id)),
                             ),
                         ));
                     ?>
@@ -66,7 +66,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<h4><b> Surat Penunjukan Pemenang </b></h4>
+		<?php if ($cpengadaan->metode_pengadaan=="Penunjukan Langsung") {?>
+			<h4><b> Surat Penunjukan Penyedia </b></h4>
+		<?php }else{ ?>
+			<h4><b> Surat Penunjukan Pemenang </b></h4>
+		<?php } ?>
+		
+		
 		<div class="row">
 			<?php echo $form->labelEx($SPPM,'nomor'); ?>
 			<?php if ($cpengadaan->metode_pengadaan=="Penunjukan Langsung") {?>

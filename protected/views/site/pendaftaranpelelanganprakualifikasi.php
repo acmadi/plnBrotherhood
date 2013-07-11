@@ -21,7 +21,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelanganprakualifikasi','id'=>$id)),
 							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='6'?'/site/pendaftaranpelelanganprakualifikasi':'/site/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenkualifikasi'):($Pengadaan->status=='6'?'':('/site/editpengambilandokumenkualifikasi')),'id'=>$id)),
+							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenprakualifikasi'):($Pengadaan->status=='6'?'':('/site/editpengambilandokumenprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
