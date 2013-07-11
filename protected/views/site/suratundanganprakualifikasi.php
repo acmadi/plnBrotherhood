@@ -20,7 +20,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
               	<?php
 						$this->widget('zii.widgets.CMenu', array(
 							'items'=>array(
-								array('label'=>'Undangan PQ', 'url'=>array($DPK->isNewRecord??'/site/suratundanganprakualifikasi':'/site/editsuratundanganprakualifikasi','id'=>$id)),
+								array('label'=>'Undangan PQ', 'url'=>array($SUPK->isNewRecord?'/site/suratundanganprakualifikasi':'/site/editsuratundanganprakualifikasi','id'=>$id)),
 							),
 						));
 					?>
