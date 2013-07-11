@@ -1879,7 +1879,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionPenyampaianDokumenPrakualifikasi()
+	public function actionEditPengambilanDokumenPrakualifikasi()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -1889,18 +1889,18 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="9";
+				$Pengadaan->status="8";
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				// $PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
-				// if(isset($_POST['perusahaan'])){
+				if(isset($_POST['perusahaan'])){
 												
-					// for($i=0;$i<count($PP);$i++){
-						// if(isset($_POST['perusahaan'][$i])){																																																
-							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
 							// $PP[$i]->nilai = 0;									
@@ -1909,7 +1909,7 @@ class SiteController extends Controller
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
 							// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-							// $PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
+							$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
 							// $PP[$i]->penyampaian_lelang = '-';
 							// $PP[$i]->evaluasi_pq = '-';
 							// $PP[$i]->penetapan_pq = '-';
@@ -1925,57 +1925,158 @@ class SiteController extends Controller
 							// $PP[$i]->usulan_pemenang = '-';
 							// $PP[$i]->penetapan_pemenang	 = '-';								
 							
-							// $PP[$i]->save();
-						// }
-					// }
+							$PP[$i]->save();
+						}
+					}
 					
-					// $total = count($_POST['perusahaan']);
-					// if(count($PP)<$total){
-						// $PPkurang = $total - count($PP);
-						// for($j=0;$j<$PPkurang;$j++){
-							// $PPbaru = new PenerimaPengadaan;
-							// $PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-							// $PPbaru->alamat='-';									
-							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = 0;
-							// $PPbaru->biaya = '0';							
-							// $PPbaru->nomor_surat_penawaran = '-';
-							// $PPbaru->tanggal_penawaran = '-';														
-							// $PPbaru->undangan_prakualifikasi = '1';
-							// $PPbaru->pendaftaran_pelelangan_pq = '1';
-							// $PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-							// $PPbaru->penyampaian_lelang = '-';
-							// $PPbaru->evaluasi_pq = '-';
-							// $PPbaru->penetapan_pq = '-';
-							// $PPbaru->undangan_supph = '-';
-							// $PPbaru->pendaftaran_pc = '-';
-							// $PPbaru->pengambilan_dokumen = '-';
-							// $PPbaru->ba_aanwijzing = '-';
-							// $PPbaru->pembukaan_penawaran_1 = '-';
-							// $PPbaru->evaluasi_penawaran_1 = '-';
-							// $PPbaru->pembukaan_penawaran_2 = '-';
-							// $PPbaru->evaluasi_penawaran_2 = '-';
-							// $PPbaru->negosiasi_klarifikasi = '-';
-							// $PPbaru->usulan_pemenang = '-';
-							// $PPbaru->penetapan_pemenang = '-';
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = 0;
+							$PPbaru->biaya = '0';							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';														
+							$PPbaru->undangan_prakualifikasi = '1';
+							$PPbaru->pendaftaran_pelelangan_pq = '1';
+							$PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
+							$PPbaru->penyampaian_lelang = '-';
+							$PPbaru->evaluasi_pq = '-';
+							$PPbaru->penetapan_pq = '-';
+							$PPbaru->undangan_supph = '-';
+							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->ba_aanwijzing = '-';
+							$PPbaru->pembukaan_penawaran_1 = '-';
+							$PPbaru->evaluasi_penawaran_1 = '-';
+							$PPbaru->pembukaan_penawaran_2 = '-';
+							$PPbaru->evaluasi_penawaran_2 = '-';
+							$PPbaru->negosiasi_klarifikasi = '-';
+							$PPbaru->usulan_pemenang = '-';
+							$PPbaru->penetapan_pemenang = '-';
 							
-							// $PPbaru->save();
-						// }
+							$PPbaru->save();
+						}
 						
-					// }
+					}
 					
 					
-					// if($Pengadaan->save(false)){	
-						// $this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
-					// }			
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
+					}			
 					
-				// }
+				}
+					
+					
+				$this->render('pengambilandokumenprakualifikasi',array(
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+				));
+			}
+		}
+	}
+	
+	public function actionPenyampaianDokumenPrakualifikasi()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="9";
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+				
+				$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['perusahaan'])){
+												
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							// $PP[$i]->alamat='-';									
+							// $PP[$i]->npwp='-';		
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
+							// $PP[$i]->nomor_surat_penawaran = '-';									
+							// $PP[$i]->tanggal_penawaran = '-';												
+							$PP[$i]->undangan_prakualifikasi = '1';
+							$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+							$PP[$i]->pengambilan_lelang_pq = '1';	
+							$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
+							$PP[$i]->evaluasi_pq = '-';
+							$PP[$i]->penetapan_pq = '-';
+							$PP[$i]->undangan_supph = '-';
+							$PP[$i]->pendaftaran_pc = '-';
+							$PP[$i]->pengambilan_dokumen = '-';									
+							$PP[$i]->ba_aanwijzing = '-';
+							$PP[$i]->pembukaan_penawaran_1 = '-';
+							$PP[$i]->evaluasi_penawaran_1 = '-';
+							$PP[$i]->pembukaan_penawaran_2 = '-';			
+							$PP[$i]->evaluasi_penawaran_2 = '-';
+							$PP[$i]->negosiasi_klarifikasi = '-';
+							$PP[$i]->usulan_pemenang = '-';
+							$PP[$i]->penetapan_pemenang	 = '-';								
+							
+							$PP[$i]->save();
+						}
+					}
+					
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = 0;
+							$PPbaru->biaya = '0';							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';														
+							$PPbaru->undangan_prakualifikasi = '1';
+							$PPbaru->pendaftaran_pelelangan_pq = '1';
+							$PPbaru->pengambilan_lelang_pq = '1';
+							$PPbaru->penyampaian_lelang =  $_POST['penyampaian_lelang'][$i+$j];	
+							$PPbaru->evaluasi_pq = '-';
+							$PPbaru->penetapan_pq = '-';
+							$PPbaru->undangan_supph = '-';
+							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->ba_aanwijzing = '-';
+							$PPbaru->pembukaan_penawaran_1 = '-';
+							$PPbaru->evaluasi_penawaran_1 = '-';
+							$PPbaru->pembukaan_penawaran_2 = '-';
+							$PPbaru->evaluasi_penawaran_2 = '-';
+							$PPbaru->negosiasi_klarifikasi = '-';
+							$PPbaru->usulan_pemenang = '-';
+							$PPbaru->penetapan_pemenang = '-';
+							
+							$PPbaru->save();
+						}
+						
+					}
+					
+					
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
+					}			
+					
+				}
 					
 				$Pengadaan->save();
 				
 				$this->render('penyampaiandokumenprakualifikasi',array(
-					// 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 				));
 			}
 		}
@@ -1995,13 +2096,13 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				// $PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
-				// if(isset($_POST['perusahaan'])){
+				if(isset($_POST['perusahaan'])){
 												
-					// for($i=0;$i<count($PP);$i++){
-						// if(isset($_POST['perusahaan'][$i])){																																																
-							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
 							// $PP[$i]->nilai = 0;									
@@ -2010,8 +2111,8 @@ class SiteController extends Controller
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
 							// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-							// $PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-							// $PP[$i]->penyampaian_lelang = '-';
+							// $PP[$i]->pengambilan_lelang_pq = '1';	
+							$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
 							// $PP[$i]->evaluasi_pq = '-';
 							// $PP[$i]->penetapan_pq = '-';
 							// $PP[$i]->undangan_supph = '-';
@@ -2026,57 +2127,57 @@ class SiteController extends Controller
 							// $PP[$i]->usulan_pemenang = '-';
 							// $PP[$i]->penetapan_pemenang	 = '-';								
 							
-							// $PP[$i]->save();
-						// }
-					// }
+							$PP[$i]->save();
+						}
+					}
 					
-					// $total = count($_POST['perusahaan']);
-					// if(count($PP)<$total){
-						// $PPkurang = $total - count($PP);
-						// for($j=0;$j<$PPkurang;$j++){
-							// $PPbaru = new PenerimaPengadaan;
-							// $PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-							// $PPbaru->alamat='-';									
-							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = 0;
-							// $PPbaru->biaya = '0';							
-							// $PPbaru->nomor_surat_penawaran = '-';
-							// $PPbaru->tanggal_penawaran = '-';														
-							// $PPbaru->undangan_prakualifikasi = '1';
-							// $PPbaru->pendaftaran_pelelangan_pq = '1';
-							// $PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-							// $PPbaru->penyampaian_lelang = '-';
-							// $PPbaru->evaluasi_pq = '-';
-							// $PPbaru->penetapan_pq = '-';
-							// $PPbaru->undangan_supph = '-';
-							// $PPbaru->pendaftaran_pc = '-';
-							// $PPbaru->pengambilan_dokumen = '-';
-							// $PPbaru->ba_aanwijzing = '-';
-							// $PPbaru->pembukaan_penawaran_1 = '-';
-							// $PPbaru->evaluasi_penawaran_1 = '-';
-							// $PPbaru->pembukaan_penawaran_2 = '-';
-							// $PPbaru->evaluasi_penawaran_2 = '-';
-							// $PPbaru->negosiasi_klarifikasi = '-';
-							// $PPbaru->usulan_pemenang = '-';
-							// $PPbaru->penetapan_pemenang = '-';
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = 0;
+							$PPbaru->biaya = '0';							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';														
+							$PPbaru->undangan_prakualifikasi = '1';
+							$PPbaru->pendaftaran_pelelangan_pq = '1';
+							$PPbaru->pengambilan_lelang_pq = '1';
+							$PPbaru->penyampaian_lelang =  $_POST['penyampaian_lelang'][$i+$j];	
+							$PPbaru->evaluasi_pq = '-';
+							$PPbaru->penetapan_pq = '-';
+							$PPbaru->undangan_supph = '-';
+							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->ba_aanwijzing = '-';
+							$PPbaru->pembukaan_penawaran_1 = '-';
+							$PPbaru->evaluasi_penawaran_1 = '-';
+							$PPbaru->pembukaan_penawaran_2 = '-';
+							$PPbaru->evaluasi_penawaran_2 = '-';
+							$PPbaru->negosiasi_klarifikasi = '-';
+							$PPbaru->usulan_pemenang = '-';
+							$PPbaru->penetapan_pemenang = '-';
 							
-							// $PPbaru->save();
-						// }
+							$PPbaru->save();
+						}
 						
-					// }
+					}
 					
 					
-					// if($Pengadaan->save(false)){	
-						// $this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
-					// }			
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
+					}			
 					
-				// }
+				}
 					
 				$Pengadaan->save();
 				
 				$this->render('penyampaiandokumenprakualifikasi',array(
-					// 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 				));
 			}
 		}
@@ -2097,88 +2198,82 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				// $PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
-				// if(isset($_POST['perusahaan'])){
+				if(isset($_POST['perusahaan'])){
 												
-					// for($i=0;$i<count($PP);$i++){
-						// if(isset($_POST['perusahaan'][$i])){																																																
-							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-							// $PP[$i]->alamat='-';									
-							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = 0;									
-							// $PP[$i]->biaya = '0';				
-							// $PP[$i]->nomor_surat_penawaran = '-';									
-							// $PP[$i]->tanggal_penawaran = '-';												
-							// $PP[$i]->undangan_prakualifikasi = '1';
-							// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-							// $PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-							// $PP[$i]->penyampaian_lelang = '-';
-							// $PP[$i]->evaluasi_pq = '-';
-							// $PP[$i]->penetapan_pq = '-';
-							// $PP[$i]->undangan_supph = '-';
-							// $PP[$i]->pendaftaran_pc = '-';
-							// $PP[$i]->pengambilan_dokumen = '-';									
-							// $PP[$i]->ba_aanwijzing = '-';
-							// $PP[$i]->pembukaan_penawaran_1 = '-';
-							// $PP[$i]->evaluasi_penawaran_1 = '-';
-							// $PP[$i]->pembukaan_penawaran_2 = '-';			
-							// $PP[$i]->evaluasi_penawaran_2 = '-';
-							// $PP[$i]->negosiasi_klarifikasi = '-';
-							// $PP[$i]->usulan_pemenang = '-';
-							// $PP[$i]->penetapan_pemenang	 = '-';								
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																									
+							$PP[$i]->undangan_prakualifikasi = '1';
+							$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+							$PP[$i]->pengambilan_lelang_pq = '1';
+							$PP[$i]->penyampaian_lelang = '1';
+							$PP[$i]->evaluasi_pq = $_POST['evaluasi_pq'][$i];	
+							$PP[$i]->penetapan_pq = '-';
+							$PP[$i]->undangan_supph = '-';
+							$PP[$i]->pendaftaran_pc = '-';
+							$PP[$i]->pengambilan_dokumen = '-';									
+							$PP[$i]->ba_aanwijzing = '-';
+							$PP[$i]->pembukaan_penawaran_1 = '-';
+							$PP[$i]->evaluasi_penawaran_1 = '-';
+							$PP[$i]->pembukaan_penawaran_2 = '-';			
+							$PP[$i]->evaluasi_penawaran_2 = '-';
+							$PP[$i]->negosiasi_klarifikasi = '-';
+							$PP[$i]->usulan_pemenang = '-';
+							$PP[$i]->penetapan_pemenang	 = '-';								
 							
-							// $PP[$i]->save();
-						// }
-					// }
+							$PP[$i]->save();
+						}
+					}
 					
-					// $total = count($_POST['perusahaan']);
-					// if(count($PP)<$total){
-						// $PPkurang = $total - count($PP);
-						// for($j=0;$j<$PPkurang;$j++){
-							// $PPbaru = new PenerimaPengadaan;
-							// $PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-							// $PPbaru->alamat='-';									
-							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = 0;
-							// $PPbaru->biaya = '0';							
-							// $PPbaru->nomor_surat_penawaran = '-';
-							// $PPbaru->tanggal_penawaran = '-';														
-							// $PPbaru->undangan_prakualifikasi = '1';
-							// $PPbaru->pendaftaran_pelelangan_pq = '1';
-							// $PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-							// $PPbaru->penyampaian_lelang = '-';
-							// $PPbaru->evaluasi_pq = '-';
-							// $PPbaru->penetapan_pq = '-';
-							// $PPbaru->undangan_supph = '-';
-							// $PPbaru->pendaftaran_pc = '-';
-							// $PPbaru->pengambilan_dokumen = '-';
-							// $PPbaru->ba_aanwijzing = '-';
-							// $PPbaru->pembukaan_penawaran_1 = '-';
-							// $PPbaru->evaluasi_penawaran_1 = '-';
-							// $PPbaru->pembukaan_penawaran_2 = '-';
-							// $PPbaru->evaluasi_penawaran_2 = '-';
-							// $PPbaru->negosiasi_klarifikasi = '-';
-							// $PPbaru->usulan_pemenang = '-';
-							// $PPbaru->penetapan_pemenang = '-';
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = 0;
+							$PPbaru->biaya = '0';							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';														
+							$PPbaru->undangan_prakualifikasi = '1';
+							$PPbaru->pendaftaran_pelelangan_pq = '1';
+							$PPbaru->pengambilan_lelang_pq = '1';
+							$PPbaru->penyampaian_lelang = '-';
+							$PPbaru->evaluasi_pq = $_POST['evaluasi_pq'][$i+$j];		
+							$PPbaru->penetapan_pq = '-';
+							$PPbaru->undangan_supph = '-';
+							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->ba_aanwijzing = '-';
+							$PPbaru->pembukaan_penawaran_1 = '-';
+							$PPbaru->evaluasi_penawaran_1 = '-';
+							$PPbaru->pembukaan_penawaran_2 = '-';
+							$PPbaru->evaluasi_penawaran_2 = '-';
+							$PPbaru->negosiasi_klarifikasi = '-';
+							$PPbaru->usulan_pemenang = '-';
+							$PPbaru->penetapan_pemenang = '-';
 							
-							// $PPbaru->save();
-						// }
+							$PPbaru->save();
+						}
 						
-					// }
+					}
 					
 					
-					// if($Pengadaan->save(false)){	
-						// $this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
-					// }			
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
+					}			
 					
-				// }
+				}
 					
 				$Pengadaan->save();
 				
 				$this->render('evaluasidokumenprakualifikasi',array(
-					// 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 				));
 			}
 		}
@@ -2198,88 +2293,65 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				// $PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
-				// if(isset($_POST['perusahaan'])){
+				if(isset($_POST['perusahaan'])){
 												
-					// for($i=0;$i<count($PP);$i++){
-						// if(isset($_POST['perusahaan'][$i])){																																																
-							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-							// $PP[$i]->alamat='-';									
-							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = 0;									
-							// $PP[$i]->biaya = '0';				
-							// $PP[$i]->nomor_surat_penawaran = '-';									
-							// $PP[$i]->tanggal_penawaran = '-';												
-							// $PP[$i]->undangan_prakualifikasi = '1';
-							// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-							// $PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-							// $PP[$i]->penyampaian_lelang = '-';
-							// $PP[$i]->evaluasi_pq = '-';
-							// $PP[$i]->penetapan_pq = '-';
-							// $PP[$i]->undangan_supph = '-';
-							// $PP[$i]->pendaftaran_pc = '-';
-							// $PP[$i]->pengambilan_dokumen = '-';									
-							// $PP[$i]->ba_aanwijzing = '-';
-							// $PP[$i]->pembukaan_penawaran_1 = '-';
-							// $PP[$i]->evaluasi_penawaran_1 = '-';
-							// $PP[$i]->pembukaan_penawaran_2 = '-';			
-							// $PP[$i]->evaluasi_penawaran_2 = '-';
-							// $PP[$i]->negosiasi_klarifikasi = '-';
-							// $PP[$i]->usulan_pemenang = '-';
-							// $PP[$i]->penetapan_pemenang	 = '-';								
-							
-							// $PP[$i]->save();
-						// }
-					// }
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];															
+							$PP[$i]->evaluasi_pq = $_POST['evaluasi_pq'][$i];															
+							$PP[$i]->save();
+						}
+					}
 					
-					// $total = count($_POST['perusahaan']);
-					// if(count($PP)<$total){
-						// $PPkurang = $total - count($PP);
-						// for($j=0;$j<$PPkurang;$j++){
-							// $PPbaru = new PenerimaPengadaan;
-							// $PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-							// $PPbaru->alamat='-';									
-							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = 0;
-							// $PPbaru->biaya = '0';							
-							// $PPbaru->nomor_surat_penawaran = '-';
-							// $PPbaru->tanggal_penawaran = '-';														
-							// $PPbaru->undangan_prakualifikasi = '1';
-							// $PPbaru->pendaftaran_pelelangan_pq = '1';
-							// $PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-							// $PPbaru->penyampaian_lelang = '-';
-							// $PPbaru->evaluasi_pq = '-';
-							// $PPbaru->penetapan_pq = '-';
-							// $PPbaru->undangan_supph = '-';
-							// $PPbaru->pendaftaran_pc = '-';
-							// $PPbaru->pengambilan_dokumen = '-';
-							// $PPbaru->ba_aanwijzing = '-';
-							// $PPbaru->pembukaan_penawaran_1 = '-';
-							// $PPbaru->evaluasi_penawaran_1 = '-';
-							// $PPbaru->pembukaan_penawaran_2 = '-';
-							// $PPbaru->evaluasi_penawaran_2 = '-';
-							// $PPbaru->negosiasi_klarifikasi = '-';
-							// $PPbaru->usulan_pemenang = '-';
-							// $PPbaru->penetapan_pemenang = '-';
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = 0;
+							$PPbaru->biaya = '0';							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';														
+							$PPbaru->undangan_prakualifikasi = '1';
+							$PPbaru->pendaftaran_pelelangan_pq = '1';
+							$PPbaru->pengambilan_lelang_pq = '1';		
+							$PPbaru->penyampaian_lelang = '1';
+							$PPbaru->evaluasi_pq = $_POST['evaluasi_pq'][$i+$j];
+							$PPbaru->penetapan_pq = '-';
+							$PPbaru->undangan_supph = '-';
+							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->ba_aanwijzing = '-';
+							$PPbaru->pembukaan_penawaran_1 = '-';
+							$PPbaru->evaluasi_penawaran_1 = '-';
+							$PPbaru->pembukaan_penawaran_2 = '-';
+							$PPbaru->evaluasi_penawaran_2 = '-';
+							$PPbaru->negosiasi_klarifikasi = '-';
+							$PPbaru->usulan_pemenang = '-';
+							$PPbaru->penetapan_pemenang = '-';
 							
-							// $PPbaru->save();
-						// }
+							$PPbaru->save();
+						}
 						
-					// }
+					}
 					
 					
-					// if($Pengadaan->save(false)){	
-						// $this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
-					// }			
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
+					}			
 					
-				// }
+				}
 					
 				$Pengadaan->save();
 				
 				$this->render('evaluasidokumenprakualifikasi',array(
-					// 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 				));
 			}
 		}
