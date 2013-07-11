@@ -7,7 +7,7 @@
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
 		<li><?php echo CHtml::link('Tambah divisi', array('admin/tambahdivisi')) ?></li>
-		<li><?php echo CHtml::link('Hapus divisi', array('admin/hapusdivisi'), array('class'=>'onprogress')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Hapus divisi', array('admin/hapusdivisi')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
