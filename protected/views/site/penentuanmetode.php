@@ -8,6 +8,9 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#0').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
