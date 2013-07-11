@@ -82,6 +82,42 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionTambahdivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$divisi = new Divisi;
+			if (isset($_POST['Divisi'])) {
+				$divisi->attributes = $_POST['Divisi'];
+				$divisi->password = $divisi->username;
+				$divisi->oldpass = $divisi->password;
+				$divisi->newpass = $divisi->password;
+				$divisi->confirmpass = $divisi->password;
+				if ($divisi->save(false)) {
+					$this->redirect(array('divisi'));
+				}
+			}
+			$this->render('tambahdivisi', array(
+				'divisi'=>$divisi,
+			));
+		}
+	}
+
+	public function actionHapusdivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$divisi = Divisi::model();
+			if (isset($_POST['Divisi'])) {
+				foreach ($_POST['Divisi']['username'] as $item) {
+					$divisi->deleteByPk($item);
+				}
+				$this->redirect(array('divisi'));
+			}
+			$this->render('hapusdivisi', array(
+				'divisi'=>$divisi,
+			));
+		}
+	}
+
 	public function actionAdmin()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -91,7 +127,7 @@ class AdminController extends Controller
 				$admin->attributes = $_POST['Admin'];
 				if ($admin->validate()) {
 					if ($admin->save(false)) {
-						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+						$this->redirect(array('site/logout'));
 					}
 				}
 			}

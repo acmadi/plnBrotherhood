@@ -117,7 +117,6 @@ class Divisi extends CActiveRecord
 	public function beforeSave()
 	{
 		if (parent::beforeSave() && !empty($this->newpass) && !empty($this->confirmpass)) {
-			Yii::app()->user->name = $this->username;
 			$this->password = sha1($this->newpass);
 			return true;
 		}
