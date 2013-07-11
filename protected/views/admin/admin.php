@@ -1,48 +1,64 @@
 <?php
-/* @var $this AdminController */
-/* @var $model Admin */
-
-// $this->breadcrumbs=array(
-	// 'Admins'=>array('index'),
-	// 'Manage',
-// );
-
-$this->menu=array(
-	array('label'=>'Daftar Admin', 'url'=>array('index')),
-	array('label'=>'Tambah Admin', 'url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#admin-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
+	$this->pageTitle=Yii::app()->name . ' | Manajemen Akun Administrator';
 ?>
 
-<h1>Kelola Admin</h1>
+<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+	<div class="flash-success">
+		<?php echo Yii::app()->user->getFlash('sukses'); ?>
+		<script type="text/javascript">
+			setTimeout(function() {
+				$('.flash-success').animate({
+					height: '0px',
+					marginBottom: '0em',
+					padding: '0em',
+					opacity: '0.0'
+				}, 1000, function() {
+					$('.flash-success').hide();
+				});
+			}, 2000);
+		</script>
+	</div>
+<?php endif; ?>
 
-<?php echo CHtml::link('Pencarian Lanjut','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<div class="form">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'admin-form',
+		'enableAjaxValidation'=>false,
+	)); ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'admin-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'username',
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+	<div class="row">
+		<?php echo $form->labelEx($admin,'Nama pengguna'); ?> 
+		<?php echo $form->textField($admin,'username',array('size'=>56,'maxlength'=>20)); ?>
+		<?php echo $form->error($admin,'username'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($admin,'Nama'); ?> 
+		<?php echo $form->textField($admin,'nama',array('size'=>56,'maxlength'=>20)); ?>
+		<?php echo $form->error($admin,'nama'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($admin,'Kata sandi'); ?> 
+		<?php echo $form->passwordField($admin,'oldpass',array('size'=>56,'maxlength'=>20)); ?>
+		<?php echo $form->error($admin,'oldpass'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($admin,'Kata sandi baru'); ?> 
+		<?php echo $form->passwordField($admin,'newpass',array('size'=>56,'maxlength'=>20)); ?>
+		<?php echo $form->error($admin,'newpass'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($admin,'Konfirmasi kata sandi baru'); ?> 
+		<?php echo $form->passwordField($admin,'confirmpass',array('size'=>56,'maxlength'=>20)); ?>
+		<?php echo $form->error($admin,'confirmpass'); ?>
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
+	</div>
+
+	<?php $this->endWidget(); ?>
+</div>

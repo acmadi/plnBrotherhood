@@ -1759,7 +1759,7 @@ class SiteController extends Controller
 							$PP[$i]->nomor_surat_penawaran = '-';									
 							$PP[$i]->tanggal_penawaran = '-';									
 							$PP[$i]->undangan_prakualifikasi = '1';
-							$PP[$i]->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i];		
+							$PP[$i]->pendaftaran_pelelangan_pq = '1';		
 							$PP[$i]->pengambilan_lelang_pq = '-';
 							$PP[$i]->penyampaian_lelang = '-';
 							$PP[$i]->evaluasi_pq = '-';
@@ -1826,7 +1826,7 @@ class SiteController extends Controller
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
-							$PP[$i]->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i];		
+							// $PP[$i]->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i];		
 							// $PP[$i]->pengambilan_lelang_pq = '-';
 							// $PP[$i]->penyampaian_lelang = '-';
 							// $PP[$i]->evaluasi_pq = '-';
@@ -1861,7 +1861,7 @@ class SiteController extends Controller
 							$PPbaru->nomor_surat_penawaran = '-';
 							$PPbaru->tanggal_penawaran = '-';														
 							$PPbaru->undangan_prakualifikasi = '1';
-							$PPbaru->pendaftaran_pelelangan_pq = $_POST['pendaftaran_pelelangan_pq'][$i+$j];		
+							$PPbaru->pendaftaran_pelelangan_pq = '1';		
 							$PPbaru->pengambilan_lelang_pq = '-';
 							$PPbaru->penyampaian_lelang = '-';
 							$PPbaru->evaluasi_pq = '-';
@@ -2015,7 +2015,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 				if($PP == null){
 					$this->redirect(array('pengambilandokumen','id'=>$id));		
@@ -2533,7 +2533,7 @@ class SiteController extends Controller
 				if($Pengadaan->metode_pengadaan == 'Pelelangan'){
 					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				}
-				else if($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
+				else{
 					$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				}
 				if(isset($_POST['BeritaAcaraPenjelasan']))
@@ -3144,7 +3144,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('(ba_aanwijzing = "1" or ba_aanwijzing = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
@@ -3328,7 +3328,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_1 = "1" or pembukaan_penawaran_1 = "2" ) and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
 				{
@@ -3539,7 +3539,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_1 = "1" or pembukaan_penawaran_1 = "2" ) and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
 				{
@@ -4067,7 +4067,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 				{
@@ -4377,7 +4377,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
 				{
@@ -4808,7 +4808,11 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('negosiasi_klarifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				if($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){				
+					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}else if($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
 				
 				if($PP=='null'){
 					$this->redirect(array('beritaacaranegosiasiklarifikasi','id'=>$Dokumen1->id_pengadaan));
@@ -5115,7 +5119,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('usulan_pemenang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('negosiasi_klarifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if($PP=='null'){
 					$this->redirect(array('notadinasusulanpemenang','id'=>$Dokumen1->id_pengadaan));
@@ -5383,7 +5387,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 
-				$PP = PenerimaPengadaan::model()->findAll('penetapan_pemenang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('usulan_pemenang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['NotaDinasPenetapanPemenang']))
 				{

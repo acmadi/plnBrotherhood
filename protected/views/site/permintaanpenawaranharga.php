@@ -94,15 +94,27 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			
 			<div class="row">
 				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan',
-					'labelAdd' => 'Tambah Penyedia',
-					'labelDel' => 'Hapus Penyedia',
-					
-					)); 
+					if($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,
+						// 'model2' => $PP2,
+						'viewName' => 'formperusahaan',
+						'labelAdd' => '',
+						'labelDel' => 'Hapus Penyedia',
+						// 'allowDelete' => true,					
+						)); 
+					}else{
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,
+						// 'model2' => $PP2,
+						'viewName' => 'formperusahaan',
+						'labelAdd' => 'Tambah Penyedia',
+						'labelDel' => 'Hapus Penyedia',
+						// 'allowDelete' => true,					
+						)); 
+					}
 				?>
 			</div>
 			
