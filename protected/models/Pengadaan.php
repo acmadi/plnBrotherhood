@@ -280,7 +280,7 @@ class Pengadaan extends CActiveRecord
 //                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
 		// $criteria->compare('sisahari',$this->sisaHari(),true);
-		$criteria->addcondition("status='19'");		
+		$criteria->addcondition("status='28'");		
  
 		// $criteria->order = 'ABS(status)';
 		
@@ -437,6 +437,7 @@ class Pengadaan extends CActiveRecord
 		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
 
 		$criteria->addcondition("status='100'");	
+		$criteria->addcondition("status='99'");	
 
 		// $criteria->order = 'nama_pengadaan';
 		
@@ -695,84 +696,100 @@ class Pengadaan extends CActiveRecord
 
 	public function progressPengadaan(){					//jo---------------------------
 		
-		if($this->status == '1'){
-			return 0/24;
+		if($this->status == '-1'){
+			return 0/28;
 		}
 		else if($this->status == '0'){
-			return 0/24;
+			return 0/28;
+		}
+		else if($this->status == '1'){
+			return 100/28;
 		}
 		else if($this->status == '2'){
-			return 100/24;
+			return 200/28;
 		}
 		else if($this->status == '3'){
-			return 200/24;
+			return 300/28;
 		}
 		else if($this->status == '4'){
-			return 300/24;
+			return 400/28;
 		}
 		else if($this->status == '5'){
-			return 400/24;
+			return 500/28;
 		}
 		else if($this->status == '6' ){
-			return 500/24;
+			return 600/28;
 		}
 		else if($this->status == '7'){
-			return 600/24;
+			return 700/28;
 		}
 		else if($this->status == '8'){
-			return 700/24;
+			return 800/28;
 		}
 		else if($this->status == '9'){
-			return 800/24;
+			return 900/28;
 		}
 		else if($this->status == '10'){
-			return 900/24;
+			return 1000/28;
 		}
 		else if($this->status == '11'){
-			return 1000/24;
+			return 1100/28;
 		}
 		else if($this->status == '12'){
-			return 1100/24;
+			return 1200/28;
 		}
 		else if($this->status == '13' ){
-			return 1200/24;
+			return 1300/28;
 		}
 		else if($this->status == '14'){
-			return 1300/24;
+			return 1400/28;
 		}
 		else if($this->status == '15'){
-			return 1400/24;
+			return 1500/28;
 		}
 		else if($this->status == '16'){
-			return 1500/24;
+			return 1600/28;
 		}
 		else if($this->status == '17'){
-			return 1600/24;
+			return 1700/28;
 		}
 		else if($this->status == '18'){
-			return 1700/24;
+			return 1800/28;
 		}
 		else if($this->status == '19'){
-			return 1800/24;
+			return 1900/28;
 		}
 		else if($this->status == '20' ){
-			return 1900/24;
+			return 2000/28;
 		}
 		else if($this->status == '21'){
-			return 2000/24;
+			return 2100/28;
 		}
 		else if($this->status == '22'){
-			return 2100/24;
+			return 2200/28;
 		}
 		else if($this->status == '23'){
-			return 2200/24;
+			return 2300/28;
 		}
 		else if($this->status == '24'){
-			return 2300/24;
+			return 2400/28;
+		}		
+		else if($this->status == '25'){
+			return 2500/28;
+		}		
+		else if($this->status == '26'){
+			return 2600/28;
+		}		
+		else if($this->status == '27'){
+			return 2700/28;
+		}		
+		else if($this->status == '28'){
+			return 2800/28;
 		}		
 		else if($this->status == '100' || $this->status == '99'){
-			return 2400/24;
-		}
+			return 2800/28;
+		}		
+		
 		else{
 			return 0;
 		}
@@ -781,50 +798,50 @@ class Pengadaan extends CActiveRecord
 	public function dapatkanStatus(){
 		if($this->status == '0'){
 			return 'Penentuan Metode';
-		}
-		else if($this->status == '1' || $this->status == '2' || $this->status == '3'){
-			return 'Prakualifikasi';
 		}		
-		if($this->status == '10' || $this->status == '11'){
+		else if($this->status == '1' || $this->status == '2'){
 			return 'Pembuatan Dokumen Pengadaan';
-		}	
-		else if($this->status == '12'){
-			return 'Undangan Penawaran Harga';
 		}
-		else if($this->status == '13'){
-			return 'Pengumuman Lelang';
+		else if($this->status == '3' || $this->status == '4' || $this->status == '5'|| $this->status == '6'|| $this->status == '7'|| $this->status == '8'|| $this->status == '9'|| $this->status == '10'|| $this->status == '11'|| $this->status == '12'){
+			return 'Prakualifikasi';
+		}				
+		else if($this->status == '13' || $this->status == '14' || $this->status == '15' || $this->status == '16'){
+			return 'Pengumuman Pengadaan';
 		}
-		else if($this->status == '14'){
-			return 'Pendaftaran Lelang';
-		}
-		else if($this->status == '15'){
-			return 'Undangan Pengambilan Dokumen Pengadaan';
-		}
-		else if($this->status == '16'){
+		// else if($this->status == '13'){
+			// return 'Pengumuman Lelang';
+		// }
+		// else if($this->status == '14'){
+			// return 'Pendaftaran Lelang';
+		// }
+		// else if($this->status == '15'){
+			// return 'Undangan Pengambilan Dokumen Pengadaan';
+		// }
+		else if($this->status == '17'){
 			return 'Aanwijzing';
 		}
-		else if($this->status == '17'){
+		else if($this->status == '18'){
 			return 'Penawaran';
 		}
-		else if($this->status == '18'){
+		else if($this->status == '19'){
 			return 'Evaluasi';
 		}
-		else if($this->status == '19'){
+		else if($this->status == '20'){
 			return 'Penawaran 2';
 		}
-		else if($this->status == '20'){
+		else if($this->status == '21'){
 			return 'Evaluasi 2';
 		}
-		else if($this->status == '21'){
+		else if($this->status == '22'){
 			return 'Klarifikasi dan Negosiasi';
 		}
-		else if($this->status == '22' || $this->status == '23' || $this->status == '24' || $this->status == '25' || $this->status == '26'){
+		else if($this->status == '27' || $this->status == '23' || $this->status == '24' || $this->status == '25' || $this->status == '26'){
 			return 'Penentuan Pemenang';
 		}
-		else if($this->status == '19'){
+		else if($this->status == '28'){
 			return 'Kontrak';
 		}
-                else if($this->status == '99'){
+		else if($this->status == '99'){
 			return 'Gagal';
 		}
 		else if($this->status == '100'){

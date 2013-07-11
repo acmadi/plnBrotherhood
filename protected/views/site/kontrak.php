@@ -43,7 +43,7 @@ Sedang dalam pengembangan
 					
 				array(            // display using an expression
 					'name'=>'divisi_peminta',
-					'value'=>'$data->namaDivisi->nama',
+					'value'=>'$data->divisiPeminta->nama_divisi',
 					'htmlOptions'=>array('width'=>60, 'style'=>'text-align:center;'),
 				),			
 					
