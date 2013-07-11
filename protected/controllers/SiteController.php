@@ -1267,9 +1267,9 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				if ($Pengadaan->metode_pengadaan=='Pelelangan'){
-					$Pengadaan->status= "3";
+					$Pengadaan->status= "5";
 				} else {	
-					$Pengadaan->status= "2";
+					$Pengadaan->status= "4";
 				}
 				
 				$Dokumen0= new Dokumen;
@@ -1524,7 +1524,27 @@ class SiteController extends Controller
 		else {
 			if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="4";
+				$Pengadaan->status="6";
+				
+				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Pengumuman Pelelangan Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$SPPP= new SuratPengumumanPelelangan;
+				$SPPP->id_dokumen=$Dokumen0->id_dokumen;
+				
 				
 				if(isset($_POST['Pengadaan']))
 				{
@@ -1533,7 +1553,9 @@ class SiteController extends Controller
 						$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi'));
 					}
 				}
-				$this->render('suratpengumumanpelelanganprakualifikasi');
+				$this->render('suratpengumumanpelelanganprakualifikasi',array(
+					'SPPP'=>$SPPP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,
+				));
 			}
 		}
 	}
