@@ -102,7 +102,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 						'labelAdd' => 'Tambah Penyedia',
 						'labelDel' => 'Hapus Penyedia',						
 						)); 
-					}else if($cpengadaan->metode_penawaran == 'Dua Sampul'){
+					}else if($cpengadaan->metode_penawaran == 'Dua Sampul' || $cpengadaan->metode_penawaran == 'Dua Tahap'){
 						$this->widget('application.extensions.appendo.JAppendo',array(
 						'id' => 'idpenyedia',        
 						'model' => $PP,

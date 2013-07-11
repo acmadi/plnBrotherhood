@@ -1,9 +1,8 @@
 <?php
 /* @var $this SiteController */
-
 $id = Yii::app()->getRequest()->getQuery('id');
-$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
-$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
+$Pengadaan= Pengadaan::model()->findByPk($id);
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -12,40 +11,74 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 	</div>
 
 	<div id="maincontent">
-	
 		<?php 
-			if (Yii::app()->user->getState('role') == 'anggota') {
+		if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
-		      
-                <div id="menuform">
-                    <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'Dokumen Prakualifikasi', 'url'=>array($DPK->isNewRecord?('/site/dokumenprakualifikasi'):('/site/editdokumenprakualifikasi'),'id'=>$id)),
-                                    array('label'=>'Surat Undangan Prakualifikasi', 'url'=>array(Pengadaan::model()->findByPk($id)->status=='2'?'/site/suratundanganprakualifikasi':(Pengadaan::model()->findByPk($id)->status=='1'?'':'/site/editsuratundanganprakualifikasi'),'id'=>$id)),
-                            ),
-                        ));
-                    ?>
-                </div>
-                
-                <br/>
-                
-		<div class="form">
+			
+			<div id="menuform">
+				<?php
+				$this->widget('zii.widgets.CMenu', array(
+						'items'=>array(
+							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelanganprakualifikasi','id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='6'?'/site/pendaftaranpelelanganprakualifikasi':'/site/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
+							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenkualifikasi'):($Pengadaan->status=='6'?'':('/site/editpengambilandokumenkualifikasi')),'id'=>$id)),
+						),
+					));
+				?>
+			</div>
+			<br/>
+			
+			<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+				<div class="flash-success">
+					<?php echo Yii::app()->user->getFlash('sukses'); ?>
+					<script type="text/javascript">
+						setTimeout(function() {
+							$('.flash-success').animate({
+								height: '0px',
+								marginBottom: '0em',
+								padding: '0em',
+								opacity: '0.0'
+							}, 1000, function() {
+								$('.flash-success').hide();
+							});
+						}, 2000);
+					</script>
+				</div>
+			<?php endif; ?>
+			
+			<div class="form" >
 
-		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'dokumen-prakualifikasi-form',
-		'enableAjaxValidation'=>false,
-		)); ?>
-
-		<div class="row buttons">
-			<?php echo CHtml::submitButton('Next',array('class'=>'sidafbutton')); ?>
-		</div>
-		
-	<?php $this->endWidget(); ?>
-
-	</div><!-- form -->
+			<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
+			'enableAjaxValidation'=>false,
+			)); ?>
+			
+			<h4><b> Penyedia yang Mendaftar: </b></h4>
 	
-<?php	} ?>
+			<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan_pendaftaran_pelelangan_prakualifikasi',
+					'labelAdd' => 'Tambah Penyadia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
+		</div>
+			
+			<div class="row buttons">
+				<?php echo CHtml::submitButton($Pengadaan->status == '6' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			</div>
+			
+		<?php $this->endWidget(); ?>
+		
+		<br/>
+		</div><!-- form -->
+		
+	<?php	} ?>
 	</div>
 </div>
 

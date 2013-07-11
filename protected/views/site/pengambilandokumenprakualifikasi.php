@@ -19,8 +19,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelangan','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status == '15' ?('/site/pendaftaranpelelangan'):('/site/editpendaftaranpelelangan'),'id'=>$id)),
+							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelanganprakualifikasi','id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array('/site/pendaftaranpelelanganprakualifikasi':'/site/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
+							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenkualifikasi'):($Pengadaan->status=='6'?'':('/site/editpengambilandokumenkualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
@@ -52,7 +53,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			'enableAjaxValidation'=>false,
 			)); ?>
 			
-			<h4><b> Penyedia yang Mendaftar: </b></h4>
+			<h4><b> Penyedia yang Mengambil Dokumen Prakualifikasi: </b></h4>
 	
 			<div class="row">
 				<?php 
@@ -60,7 +61,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'id' => 'idpenyedia',        
 					'model' => $PP,
 					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pendaftaran_pelelangan',
+					'viewName' => 'formperusahaan_pengambilan_dokumen',
 					'labelAdd' => 'Tambah Penyedia',
 					'labelDel' => 'Hapus Penyedia',
 					
