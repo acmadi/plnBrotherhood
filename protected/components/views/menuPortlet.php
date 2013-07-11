@@ -45,7 +45,7 @@
 				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
 					<li class='belum'><?php echo 'Pengumuman dan Pendaftaran' ?></li>
 				<?php } else if($cpengadaan->status == '5') { ?>
-					<li class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/pengumumanpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/suratpengumumanpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else if($cpengadaan->status == '6') { ?>
 					<li class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/pendaftaranpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else if($cpengadaan->status == '7') { ?>
@@ -247,10 +247,10 @@
 								'label'=>'Pemohon',
 								'value'=>$cpengadaan->divisi_peminta,
 							),
-							array(
-								'label'=>'Perihal',
-								'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
-							),
+							// array(
+								// 'label'=>'Perihal',
+								// 'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
+							// ),
 							array(
 								'label'=>'Metode pengadaan',
 								'value'=>$cpengadaan->metode_pengadaan,

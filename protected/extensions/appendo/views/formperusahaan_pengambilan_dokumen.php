@@ -10,7 +10,7 @@
 		<tr>
 			<td><?php echo CHtml::textField('perusahaan[]','',array('style'=>'width:120px')); ?></td>            
             <td>
-				<?php echo CHtml::dropDownList('pengambilan_lelang_pq[]',"string",
+				<?php echo CHtml::dropDownList('pengambilan_dokumen[]',"string",
 					array(
 						"1"=>"Mengambil",
 						"0"=>"Tidak Mengambil",
@@ -24,7 +24,7 @@
 			<tr>
 				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>				
 				<td>
-					<?php echo CHtml::dropDownList('pengambilan_lelang_pq[]',$model[$i]->pengambilan_lelang_pq,
+					<?php echo CHtml::dropDownList('pengambilan_dokumen[]',$model[$i]->pengambilan_dokumen,
 						array(
 							"1"=>"Mengambil",
 							"0"=>"Tidak Mengambil",
