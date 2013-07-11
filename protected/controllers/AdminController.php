@@ -30,6 +30,30 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetailpanitia()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$panitia = Panitia::model()->findByPk($id);
+			$anggota = Anggota::model()->findAll('id_panitia = ' . $id);
+			$panitia->tanggal_sk = Tanggal::getTanggalStrip($panitia->tanggal_sk);
+			if (isset($_POST['Panitia'])) {
+				$panitia->attributes = $_POST['Panitia'];
+				$panitia->tanggal_sk = date('Y-m-d', strtotime($panitia->tanggal_sk));
+				if ($panitia->validate()) {
+					if ($panitia->save(false)) {
+						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+					}
+				}
+			}
+			$this->render('detailpanitia', array(
+				'id'=>$id,
+				'panitia'=>$panitia,
+				'anggota'=>$anggota,
+			));
+		}
+	}
+
 	public function actionKdiv()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {

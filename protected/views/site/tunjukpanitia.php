@@ -2,7 +2,7 @@
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$user=Yii::app()->user->name;
 	$pengadaan=Pengadaan::model()->findByPk($id);
-	$this->pageTitle=Yii::app()->name . ' | Tunjuk Panitia '.$pengadaan->nama_pengadaan;
+	$this->pageTitle=Yii::app()->name . ' | Tunjuk PIC '.$pengadaan->nama_pengadaan;
 ?>
 
 <?php 
