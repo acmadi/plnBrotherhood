@@ -6,8 +6,8 @@
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah divisi', array('site/statistik', 'category'=>'1', 'chart'=>'1')) ?></li>
-		<li><?php echo CHtml::link('Hapus divisi', array('site/statistik', 'category'=>'2', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Tambah divisi', array('admin/tambahdivisi')) ?></li>
+		<li><?php echo CHtml::link('Hapus divisi', array('admin/hapusdivisi')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>

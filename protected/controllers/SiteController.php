@@ -7867,4 +7867,22 @@ class SiteController extends Controller
 										);
 				$this->render('uploader',array('modelDok'=>$modelDok));
 	}
+
+	public function actionAkun()
+	{
+		if (Yii::app()->user->getState('role') == 'divisi') {
+			$divisi = Divisi::model()->findByAttributes(array('username'=>Yii::app()->user->name));
+			if (isset($_POST['Divisi'])) {
+				$divisi->attributes = $_POST['Divisi'];
+				if ($divisi->validate()) {
+					if ($divisi->save(false)) {
+						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+					}
+				}
+			}
+			$this->render('akun', array(
+				'divisi'=>$divisi,
+			));
+		}
+	}
 }

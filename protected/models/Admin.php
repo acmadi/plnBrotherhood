@@ -14,6 +14,7 @@ class Admin extends CActiveRecord
 	public $oldpass;
 	public $newpass;
 	public $confirmpass;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
