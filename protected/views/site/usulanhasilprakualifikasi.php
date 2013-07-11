@@ -19,9 +19,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='6'?'/site/pendaftaranpelelanganprakualifikasi':'/site/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenprakualifikasi'):($Pengadaan->status=='6'?'':('/site/editpengambilandokumenprakualifikasi')),'id'=>$id)),
+							array('label'=>'Usulan Hasil', 'url'=>array($Pengadaan->status=='10'?('/site/usulanhasilprakualifikasi'):('/site/editusulanhasilprakualifikasi'),'id'=>$id)),
+							array('label'=>'Penetapan Hasil', 'url'=>array($Pengadaan->status=='11'?('/site/penetapanhasilprakualifikasi'):($Pengadaan->status=='10'?'':('/site/editpenetapanhasilprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
@@ -45,35 +44,36 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</script>
 				</div>
 			<?php endif; ?>
-			
-			<div class="form" >
+	<!---------------------
+			// <div class="form" >
 
-			<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
-			'enableAjaxValidation'=>false,
-			)); ?>
+			<?php //$form=$this->beginWidget('CActiveForm', array(
+			// 'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
+			// 'enableAjaxValidation'=>false,
+			// )); ?>
 			
-			<h4><b> Penyedia yang Mendaftar: </b></h4>
+			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
 	
 			<div class="row">
 				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
+					// $this->widget('application.extensions.appendo.JAppendo',array(
+					// 'id' => 'idpenyedia',        
+					// 'model' => $PP,
 					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pendaftaran_pelelangan_prakualifikasi',
-					'labelAdd' => 'Tambah Penyadia',
-					'labelDel' => 'Hapus Penyedia',
+					// 'viewName' => 'formperusahaan_pengambilan_dokumen_prakualifikasi',
+					// 'labelAdd' => '',
+					// 'labelDel' => 'Hapus Penyedia',
 					
-					)); 
+					// )); 
 				?>
-		</div>
-			
-			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '6' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
 			
-		<?php $this->endWidget(); ?>
+			<div class="row buttons">
+				<?php //echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			</div>
+		--->
+			
+		<?php //$this->endWidget(); ?>
 		
 		<br/>
 		</div><!-- form -->

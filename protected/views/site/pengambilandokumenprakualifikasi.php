@@ -20,8 +20,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/site/editsuratpengumumanpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array('/site/pendaftaranpelelanganprakualifikasi':'/site/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenkualifikasi'):($Pengadaan->status=='6'?'':('/site/editpengambilandokumenkualifikasi')),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array('/site/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
+							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/site/pengambilandokumenprakualifikasi'):('/site/editpengambilandokumenprakualifikasi'),'id'=>$id)),
 						),
 					));
 				?>
@@ -61,8 +61,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'id' => 'idpenyedia',        
 					'model' => $PP,
 					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pengambilan_dokumen',
-					'labelAdd' => 'Tambah Penyedia',
+					'viewName' => 'formperusahaan_pengambilan_dokumen_prakualifikasi',
+					'labelAdd' => '',
 					'labelDel' => 'Hapus Penyedia',
 					
 					)); 
@@ -70,7 +70,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '14' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($Pengadaan->status == '7' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
 			
 		<?php $this->endWidget(); ?>
