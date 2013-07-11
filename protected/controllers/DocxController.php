@@ -1521,6 +1521,49 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Surat Undangan Prakualifikasi.docx", true);
 		}
+		else if ($Dok->nama_dokumen == "Surat Pengumuman Pelelangan"){
+			
+			$SPP = SuratPengumumanPelelangan::model()->findByPk($id);
+			$nomor = $SPP->nomor;
+			$namapengadaan = $Peng->nama_pengadaan;
+			$namapengadaan1 = strtoupper($Peng->nama_pengadaan);
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$panitiapejabat = $panitia->jenis_panitia;
+			$panitiapejabat1 = strtoupper($panitia->jenis_panitia);
+			$syaratmengikutilelang = $SPP->syarat_mengikuti_lelang;
+			$tempat = $Dok->tempat;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$namaketua = strtoupper(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama);
+			
+			// $doksupph = Dokumen::model()->find('id_pengadaan = /"'. $Dok->id_pengadaan . '/" and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+			// $supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
+			
+			$this->doccy->newFile('7a Surat Pengumuman Pelelangan.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#namapengadaan1#', $namapengadaan1);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
+			$this->doccy->phpdocx->assign('#bidangusaha#', '........................');
+			$this->doccy->phpdocx->assign('#subbidangusaha#', '........................');
+			$this->doccy->phpdocx->assign('#kualifikasi#', '........................');
+			$this->doccy->phpdocx->assign('#haripengambilan1#', '........................');
+			$this->doccy->phpdocx->assign('#haripengambilan2#', '........................');
+			$this->doccy->phpdocx->assign('#tanggalpengambilan1#', '........................');
+			$this->doccy->phpdocx->assign('#tanggalpengambilan2#', '........................');
+			$this->doccy->phpdocx->assign('#waktupengambilan1#', '........................');
+			$this->doccy->phpdocx->assign('#waktupengambilan2#', '........................');
+			$this->doccy->phpdocx->assign('#syaratmengikutilelang#', $syaratmengikutilelang);
+			$this->doccy->phpdocx->assign('#tempat#', $tempat);
+			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);
+			$this->doccy->phpdocx->assign('#panitia/pejabat1#', $panitiapejabat1);
+			$this->doccy->phpdocx->assign('#namaketua#', $namaketua);
+			
+			$this->renderDocx("Surat Pengumuman Pelelangan.docx", true);
+		}
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Awal Panitia"){
 			

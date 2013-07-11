@@ -56,8 +56,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		'id'=>'berita-acara-evaluasi-penawaran-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
-
-		<?php echo $form->errorSummary($BAEP); ?>
 		
 		<?php if($cpengadaan->metode_penawaran == 'Satu Sampul') { ?>
 			<h4><b> Berita Acara Evaluasi Penawaran</b></h4>
