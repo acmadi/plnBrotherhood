@@ -1738,12 +1738,12 @@ class SiteController extends Controller
 							$PP[$i]->tanggal_penawaran = '-';									
 							$PP[$i]->undangan_prakualifikasi = '1';
 							$PP[$i]->pendaftaran_pelelangan_pq = '1';		
-							$PP[$i]->pengambilan_lelang_pq = '-';
-							$PP[$i]->penyampaian_lelang = '-';
-							$PP[$i]->evaluasi_pq = '-';
-							$PP[$i]->penetapan_pq = '-';
-							$PP[$i]->undangan_supph = '-';
-							$PP[$i]->pendaftaran_pc = '-';
+							$PP[$i]->pengambilan_lelang_pq = '1';	
+							$PP[$i]->penyampaian_lelang = '1';	
+							$PP[$i]->evaluasi_pq = '1';	
+							$PP[$i]->penetapan_pq = '1';	
+							$PP[$i]->undangan_supph = '1';	
+							$PP[$i]->pendaftaran_pc = '1';	
 							$PP[$i]->pengambilan_dokumen = '-';									
 							$PP[$i]->ba_aanwijzing = '-';
 							$PP[$i]->pembukaan_penawaran_1 = '-';
@@ -1840,12 +1840,12 @@ class SiteController extends Controller
 							$PPbaru->tanggal_penawaran = '-';														
 							$PPbaru->undangan_prakualifikasi = '1';
 							$PPbaru->pendaftaran_pelelangan_pq = '1';		
-							$PPbaru->pengambilan_lelang_pq = '-';
-							$PPbaru->penyampaian_lelang = '-';
-							$PPbaru->evaluasi_pq = '-';
-							$PPbaru->penetapan_pq = '-';
-							$PPbaru->undangan_supph = '-';
-							$PPbaru->pendaftaran_pc = '-';
+							$PPbaru->pengambilan_lelang_pq = '1';	
+							$PPbaru->penyampaian_lelang = '1';	
+							$PPbaru->evaluasi_pq = '1';	
+							$PPbaru->penetapan_pq = '1';	
+							$PPbaru->undangan_supph = '1';	
+							$PPbaru->pendaftaran_pc = '1';
 							$PPbaru->pengambilan_dokumen = '-';
 							$PPbaru->pengambilan_dokumen = '-';
 							$PPbaru->ba_aanwijzing = '-';
@@ -1892,28 +1892,28 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['perusahaan'])){
 												
 					for($i=0;$i<count($PP);$i++){
 						if(isset($_POST['perusahaan'][$i])){																																																
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-							$PP[$i]->alamat='-';									
-							$PP[$i]->npwp='-';		
-							$PP[$i]->nilai = '-';									
-							$PP[$i]->biaya = '-';				
-							$PP[$i]->nomor_surat_penawaran = '-';									
-							$PP[$i]->tanggal_penawaran = '-';												
+							// $PP[$i]->alamat='-';									
+							// $PP[$i]->npwp='-';		
+							// $PP[$i]->nilai = '-';									
+							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nomor_surat_penawaran = '-';									
+							// $PP[$i]->tanggal_penawaran = '-';												
 							$PP[$i]->undangan_prakualifikasi = '1';
 							$PP[$i]->pendaftaran_pelelangan_pq = '1';	
-							$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-							$PP[$i]->penyampaian_lelang = '-';
-							$PP[$i]->evaluasi_pq = '-';
-							$PP[$i]->penetapan_pq = '-';
-							$PP[$i]->undangan_supph = '-';
-							$PP[$i]->pendaftaran_pc = '-';
-							$PP[$i]->pengambilan_dokumen = '-';									
+							$PP[$i]->pengambilan_lelang_pq = '1';	
+							$PP[$i]->penyampaian_lelang = '1';	
+							$PP[$i]->evaluasi_pq = '1';	
+							$PP[$i]->penetapan_pq = '1';	
+							$PP[$i]->undangan_supph = '1';	
+							$PP[$i]->pendaftaran_pc = 	'1';	
+							$PP[$i]->pengambilan_dokumen = $_POST['pengambilan_dokumen'][$i];								
 							$PP[$i]->ba_aanwijzing = '-';
 							$PP[$i]->pembukaan_penawaran_1 = '-';
 							$PP[$i]->evaluasi_penawaran_1 = '-';
@@ -1942,14 +1942,13 @@ class SiteController extends Controller
 							$PPbaru->tanggal_penawaran = '-';														
 							$PPbaru->undangan_prakualifikasi = '1';
 							$PPbaru->pendaftaran_pelelangan_pq = '1';
-							$PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-							$PPbaru->penyampaian_lelang = '-';
-							$PPbaru->evaluasi_pq = '-';
-							$PPbaru->penetapan_pq = '-';
-							$PPbaru->undangan_supph = '-';
-							$PPbaru->pendaftaran_pc = '-';
-							$PPbaru->pengambilan_dokumen = '-';
-							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->pengambilan_lelang_pq = '1';
+							$PPbaru->penyampaian_lelang = '1';
+							$PPbaru->evaluasi_pq = '1';
+							$PPbaru->penetapan_pq = '1';
+							$PPbaru->undangan_supph = '1';
+							$PPbaru->pendaftaran_pc ='1';					
+							$PPbaru->pengambilan_dokumen =$_POST['pengambilan_dokumen'][$i+$j];		
 							$PPbaru->ba_aanwijzing = '-';
 							$PPbaru->pembukaan_penawaran_1 = '-';
 							$PPbaru->evaluasi_penawaran_1 = '-';
@@ -1993,7 +1992,7 @@ class SiteController extends Controller
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 				
-				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 				if($PP == null){
 					$this->redirect(array('pengambilandokumen','id'=>$id));		
@@ -2012,13 +2011,13 @@ class SiteController extends Controller
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
 							// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-							$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
+							// $PP[$i]->pengambilan_lelang_pq = 
 							// $PP[$i]->penyampaian_lelang = '-';
 							// $PP[$i]->evaluasi_pq = '-';
 							// $PP[$i]->penetapan_pq = '-';
 							// $PP[$i]->undangan_supph = '-';
 							// $PP[$i]->pendaftaran_pc = '-';
-							// $PP[$i]->pengambilan_dokumen = '-';									
+							$PP[$i]->pengambilan_dokumen = $_POST['pengambilan_dokumen'][$i];									
 							// $PP[$i]->ba_aanwijzing = '-';
 							// $PP[$i]->pembukaan_penawaran_1 = '-';
 							// $PP[$i]->evaluasi_penawaran_1 = '-';
@@ -2047,14 +2046,13 @@ class SiteController extends Controller
 							$PPbaru->tanggal_penawaran = '-';														
 							$PPbaru->undangan_prakualifikasi = '1';
 							$PPbaru->pendaftaran_pelelangan_pq = '1';
-							$PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-							$PPbaru->penyampaian_lelang = '-';
-							$PPbaru->evaluasi_pq = '-';
-							$PPbaru->penetapan_pq = '-';
-							$PPbaru->undangan_supph = '-';
-							$PPbaru->pendaftaran_pc = '-';
-							$PPbaru->pengambilan_dokumen = '-';
-							$PPbaru->pengambilan_dokumen = '-';
+							$PPbaru->pengambilan_lelang_pq = 	'1';
+							$PPbaru->penyampaian_lelang = '1';
+							$PPbaru->evaluasi_pq = '1';
+							$PPbaru->penetapan_pq = '1';
+							$PPbaru->undangan_supph = '1';
+							$PPbaru->pendaftaran_pc = '1';						
+							$PPbaru->pengambilan_dokumen = $_POST['pengambilan_dokumen'][$i+$j];	
 							$PPbaru->ba_aanwijzing = '-';
 							$PPbaru->pembukaan_penawaran_1 = '-';
 							$PPbaru->evaluasi_penawaran_1 = '-';
@@ -2509,7 +2507,7 @@ class SiteController extends Controller
 				//$this->performAjaxValidation($model);
 				
 				if($Pengadaan->metode_pengadaan == 'Pelelangan'){
-					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				}
 				else{
 					$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
@@ -2641,7 +2639,12 @@ class SiteController extends Controller
 				$BAP=BeritaAcaraPenjelasan::model()->findByPk($Dokumen1->id_dokumen);
 				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
 
-				$PP = PenerimaPengadaan::model()->findAll('(ba_aanwijzing = "1" or ba_aanwijzing = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				if($Pengadaan->metode_pengadaan == 'Pelelangan'){
+					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
+				else{
+					$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
 

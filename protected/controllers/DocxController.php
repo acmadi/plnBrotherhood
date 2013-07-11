@@ -23,6 +23,7 @@ class DocxController extends Controller
 		$DokRKS = Dokumen::model()->findByPk($RKS->id_dokumen);
 		$Peng = Pengadaan::model()->findByPk($DokRKS->id_pengadaan);
 		$Panitia = Panitia::model()->findByPk($Peng->id_panitia);
+		
 		// if ($Peng->metode_pengadaan=="Penunjukan Langsung") {
 			if($RKS->tipe_rks==1){
 				if ($Rincian->nama_rincian=="Cover") {
