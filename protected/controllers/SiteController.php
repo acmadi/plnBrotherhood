@@ -1633,8 +1633,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							$PP[$i]->alamat='-';									
 							$PP[$i]->npwp='-';		
-							$PP[$i]->nilai = '-';									
-							$PP[$i]->biaya = '-';									
+							$PP[$i]->nilai = 0;									
+							$PP[$i]->biaya = '0';									
 							$PP[$i]->nomor_surat_penawaran = '-';									
 							$PP[$i]->tanggal_penawaran = '-';									
 							$PP[$i]->undangan_prakualifikasi = '1';
@@ -1700,8 +1700,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -1802,8 +1802,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							$PP[$i]->alamat='-';									
 							$PP[$i]->npwp='-';		
-							$PP[$i]->nilai = '-';									
-							$PP[$i]->biaya = '-';				
+							$PP[$i]->nilai = 0;									
+							$PP[$i]->biaya = '0';				
 							$PP[$i]->nomor_surat_penawaran = '-';									
 							$PP[$i]->tanggal_penawaran = '-';												
 							$PP[$i]->undangan_prakualifikasi = '1';
@@ -1903,8 +1903,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -1938,8 +1938,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2004,8 +2004,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2039,8 +2039,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2106,8 +2106,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2141,8 +2141,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2207,8 +2207,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2242,8 +2242,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2309,8 +2309,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2344,8 +2344,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2410,8 +2410,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2445,8 +2445,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2512,8 +2512,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2547,8 +2547,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2613,8 +2613,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2648,8 +2648,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2718,8 +2718,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2753,8 +2753,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -2819,8 +2819,8 @@ class SiteController extends Controller
 							// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -2854,8 +2854,8 @@ class SiteController extends Controller
 							// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
 							// $PPbaru->alamat='-';									
 							// $PPbaru->npwp='-';		
-							// $PPbaru->nilai = '-';
-							// $PPbaru->biaya = '-';							
+							// $PPbaru->nilai = 0;
+							// $PPbaru->biaya = '0';							
 							// $PPbaru->nomor_surat_penawaran = '-';
 							// $PPbaru->tanggal_penawaran = '-';														
 							// $PPbaru->undangan_prakualifikasi = '1';
@@ -3024,8 +3024,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							$PP[$i]->alamat='-';									
 							$PP[$i]->npwp='-';		
-							$PP[$i]->nilai = '-';									
-							$PP[$i]->biaya = '-';									
+							$PP[$i]->nilai = 0;									
+							$PP[$i]->biaya = '0';									
 							$PP[$i]->nomor_surat_penawaran = '-';									
 							$PP[$i]->tanggal_penawaran = '-';									
 							$PP[$i]->undangan_prakualifikasi = '1';
@@ -3091,8 +3091,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -3193,8 +3193,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							$PP[$i]->undangan_prakualifikasi = '1';
@@ -3297,8 +3297,8 @@ class SiteController extends Controller
 							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 							// $PP[$i]->alamat='-';									
 							// $PP[$i]->npwp='-';		
-							// $PP[$i]->nilai = '-';									
-							// $PP[$i]->biaya = '-';				
+							// $PP[$i]->nilai = 0;									
+							// $PP[$i]->biaya = '0';				
 							// $PP[$i]->nomor_surat_penawaran = '-';									
 							// $PP[$i]->tanggal_penawaran = '-';												
 							// $PP[$i]->undangan_prakualifikasi = '1';
@@ -3430,8 +3430,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									$PP[$i]->alamat='-';									
 									$PP[$i]->npwp='-';		
-									$PP[$i]->nilai = '-';									
-									$PP[$i]->biaya = '-';									
+									$PP[$i]->nilai = 0;									
+									$PP[$i]->biaya = '0';									
 									$PP[$i]->nomor_surat_penawaran = '-';									
 									$PP[$i]->tanggal_penawaran = '-';									
 									$PP[$i]->undangan_prakualifikasi = '1';
@@ -3525,8 +3525,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -3821,8 +3821,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
@@ -3964,8 +3964,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -4296,8 +4296,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
@@ -4443,8 +4443,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -4627,8 +4627,8 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat=$_POST['alamat'][$i];									
 										$PP[$i]->npwp=$_POST['npwp'][$i];	
-										// $PP[$i]->nilai = '-';									
-										// $PP[$i]->biaya = '-';				
+										// $PP[$i]->nilai = 0;									
+										// $PP[$i]->biaya = '0';				
 										// $PP[$i]->nomor_surat_penawaran = '-';									
 										// $PP[$i]->tanggal_penawaran = '-';												
 										$PP[$i]->undangan_prakualifikasi = '1';
@@ -4696,7 +4696,7 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										// $PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = 0;						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
 										$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];
@@ -4837,8 +4837,8 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat=$_POST['alamat'][$i];									
 										$PP[$i]->npwp=$_POST['npwp'][$i];		
-										// $PP[$i]->nilai = '-';									
-										// $PP[$i]->biaya = '-';				
+										// $PP[$i]->nilai = 0;									
+										// $PP[$i]->biaya = '0';				
 										// $PP[$i]->nomor_surat_penawaran = '-';									
 										// $PP[$i]->tanggal_penawaran = '-';												
 										// $PP[$i]->undangan_prakualifikasi = '1';
@@ -4906,7 +4906,7 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										// $PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = 0;						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
 										$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];								
@@ -5225,8 +5225,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
@@ -5366,8 +5366,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -5542,7 +5542,7 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
+									// $PP[$i]->nilai = 0;									
 									$PP[$i]->biaya = $_POST['biaya'][$i];			
 									$PP[$i]->nomor_surat_penawaran = '-';									
 									$PP[$i]->tanggal_penawaran = '-';												
@@ -5675,8 +5675,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -5965,8 +5965,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									$PP[$i]->undangan_prakualifikasi = '1';
@@ -6115,8 +6115,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -6285,7 +6285,7 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										// $PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = 0;						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
 										// $PP[$i]->nomor_surat_penawaran = '-';									
@@ -6422,8 +6422,8 @@ class SiteController extends Controller
 									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 									// $PP[$i]->alamat='-';									
 									// $PP[$i]->npwp='-';		
-									// $PP[$i]->nilai = '-';									
-									// $PP[$i]->biaya = '-';				
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
 									// $PP[$i]->nomor_surat_penawaran = '-';									
 									// $PP[$i]->tanggal_penawaran = '-';												
 									// $PP[$i]->undangan_prakualifikasi = '1';
@@ -6563,7 +6563,7 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										// $PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = 0;						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
 										// $PP[$i]->nomor_surat_penawaran = '-';									
@@ -6685,7 +6685,7 @@ class SiteController extends Controller
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 										$PP[$i]->alamat = $_POST['alamat'][$i];								
 										$PP[$i]->npwp = $_POST['npwp'][$i];
-										// $PP[$i]->nilai = '-';						
+										// $PP[$i]->nilai = 0;						
 										$PP[$i]->biaya = $_POST['biaya'][$i];		
 										
 										// $PP[$i]->nomor_surat_penawaran = '-';									
