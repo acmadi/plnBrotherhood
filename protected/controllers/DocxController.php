@@ -2337,7 +2337,7 @@ class DocxController extends Controller
 			$list = "";
 		}else{
 			$list = "1. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama;
-			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';
 				$list .= $i+1 . ". " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->nama;				
@@ -2354,7 +2354,7 @@ class DocxController extends Controller
 			$list .= '<w:br/>';
 			$list .= '<w:br/>';
 			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . "																	Sekretaris								(.................................)";
-			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';
 				$list .= '<w:br/>';
@@ -2372,7 +2372,7 @@ class DocxController extends Controller
 			$list .= '<w:br/>';
 			// $list .= '<w:br/>';
 			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . " : sebagai Sekretaris merangkap Anggota";
-			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';
 				// $list .= '<w:br/>';
@@ -2390,7 +2390,7 @@ class DocxController extends Controller
 			$list .= '<w:br/>';		
 			$list .= '<w:br/>';					
 			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . "                  ...........................................";
-			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';				
 				$list .= '<w:br/>';		
@@ -2412,7 +2412,7 @@ class DocxController extends Controller
 			$list .= '<w:br/>';			
 			$list .= '<w:br/>';		
 			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . "/Sekretaris : ...........................................";
-			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';						
 				$list .= '<w:br/>';		
@@ -2430,7 +2430,7 @@ class DocxController extends Controller
 			$list .= '<w:br/>';		
 			$list .= '<w:br/>';					
 			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . "         (Sekretaris)   ..................................";
-			$n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
+			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
 			for ( $i=1;$i<=$n;$i++){
 				$list .= '<w:br/>';				
 				$list .= '<w:br/>';		
