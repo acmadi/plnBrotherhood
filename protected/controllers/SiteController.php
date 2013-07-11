@@ -3317,7 +3317,7 @@ class SiteController extends Controller
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
-							if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+							if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
@@ -3527,7 +3527,7 @@ class SiteController extends Controller
 					if($valid){
 					
 						if(isset($_POST['perusahaan'])){
-							if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+							if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){
 										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
