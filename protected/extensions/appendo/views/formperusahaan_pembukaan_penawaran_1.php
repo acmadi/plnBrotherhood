@@ -12,9 +12,12 @@
             <td>
 				<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',"string",
 					array(
-						"1"=>"Memasukkan dokumen",
+						"1"=>"Dokumen Sah dan Penyedia Hadir",
+						"2"=>"Dokumen Sah dan Penyedia Tidak Hadir",
+						"3"=>"Dokumen Tidak Sah dan Penyedia Hadir",
+						"4"=>"Dokumen Tidak Sah dan Penyedia Tidak Hadir",
 						"0"=>"Tidak Memasukkan dokumen",
-					),array('style'=>'width:220px'));
+					),array('style'=>'width:330px'));
 				?>
             </td>
 			
@@ -27,9 +30,12 @@
 				<td>
 					<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',$model[$i]->pembukaan_penawaran_1,
 						array(
-							"1"=>"Memasukkan dokumen",
+							"1"=>"Dokumen Sah dan Penyedia Hadir",
+							"2"=>"Dokumen Sah dan Penyedia Tidak Hadir",
+							"3"=>"Dokumen Tidak Sah dan Penyedia Hadir",
+							"4"=>"Dokumen Tidak Sah dan Penyedia Tidak Hadir",
 							"0"=>"Tidak Memasukkan dokumen",
-						),array('style'=>'width:220px'));
+						),array('style'=>'width:330px'));
 					?>
 				</td>
 				

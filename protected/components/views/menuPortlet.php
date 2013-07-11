@@ -247,10 +247,10 @@
 								'label'=>'Pemohon',
 								'value'=>$cpengadaan->divisi_peminta,
 							),
-							array(
-								'label'=>'Perihal',
-								'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
-							),
+							// array(
+								// 'label'=>'Perihal',
+								// 'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
+							// ),
 							array(
 								'label'=>'Metode pengadaan',
 								'value'=>$cpengadaan->metode_pengadaan,
