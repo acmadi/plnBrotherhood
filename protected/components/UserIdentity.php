@@ -35,14 +35,6 @@ class UserIdentity extends CUserIdentity
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
-		} else if (Panitia::model()->exists('username = "' . $this->username . '" and jenis_panitia = "Pejabat" and status_panitia = "Aktif"')) {
-			$user = Panitia::model()->findByAttributes(array('username'=>$this->username));
-			if (sha1($this->password) == $user->password) {
-				Yii::app()->user->setState('role', 'anggota');
-				$this->errorCode = self::ERROR_NONE;	
-			} else {
-				$this->errorCode=self::ERROR_PASSWORD_INVALID;
-			}
 		} else if (Divisi::model()->exists('username = "' . $this->username . '"')) {
 			$user = Divisi::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
