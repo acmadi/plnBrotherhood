@@ -94,6 +94,14 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
+		<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>
+			<h4><b> Berita Acara Evaluasi Penawaran</b></h4>
+		<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
+			<h4><b> Berita Acara Evaluasi Penawaran Sampul Satu</b></h4>
+		<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
+			<h4><b> Berita Acara Evaluasi Penawaran Tahap Satu</b></h4>
+		<?php } ?>
+		
 		<div class="row">
 			<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
