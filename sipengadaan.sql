@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2013 at 06:19 AM
+-- Generation Time: Jul 12, 2013 at 10:43 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `id_panitia` (`id_panitia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `anggota`
@@ -71,8 +71,12 @@ INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `NIP`, `email`, `di
 (2, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
 (3, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
 (4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
-(7, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', '123123123', 'asdasdasd', 'dasdas', 3, 'Anggota1', 'Aktif'),
-(8, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', '1234567', 'ice@juice.com', 'Divisi Umum', 4, 'Anggota1', 'Aktif');
+(5, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', '123123123', 'asdasdasd', 'dasdas', 3, 'Anggota1', 'Aktif'),
+(6, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', '1234567', 'ice@juice.com', 'Divisi Umum', 4, 'Anggota1', 'Aktif'),
+(7, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Pejabat', 'Aktif'),
+(8, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 2, 'Pejabat', 'Aktif'),
+(9, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 6, 'Pejabat', 'Aktif'),
+(10, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 7, 'Pejabat', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -444,7 +448,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
 
 CREATE TABLE IF NOT EXISTS `panitia` (
   `id_panitia` bigint(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(256) NOT NULL,
   `nama_panitia` varchar(50) NOT NULL,
   `SK_panitia` varchar(50) NOT NULL,
   `tanggal_sk` date NOT NULL,
@@ -457,15 +460,15 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 -- Dumping data for table `panitia`
 --
 
-INSERT INTO `panitia` (`id_panitia`, `username`, `nama_panitia`, `SK_panitia`, `tanggal_sk`, `status_panitia`, `jenis_panitia`) VALUES
-(-1, '-', 'Belum ada PIC', '-', '0000-00-00', '-', '-'),
-(1, 'hanif.eridaputra', 'Hanif Eridaputra', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(2, 'johannes.ridho', 'Johannes Ridho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(3, '-', 'Panitia-A', '024/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
-(4, '-', 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
-(5, '-', 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
-(6, 'irvan.aditya', 'Irvan Aditya', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(7, 'gilang.laksana', 'Gilang Laksana', '-', '0000-00-00', 'Aktif', 'Pejabat');
+INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tanggal_sk`, `status_panitia`, `jenis_panitia`) VALUES
+(-1, 'Belum ada PIC', '-', '0000-00-00', '-', '-'),
+(1, 'Hanif Eridaputra', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(2, 'Johannes Ridho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(3, 'Panitia-A', '024/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
+(4, 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
+(5, 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
+(6, 'Irvan Aditya', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(7, 'Gilang Laksana', '-', '0000-00-00', 'Aktif', 'Pejabat');
 
 -- --------------------------------------------------------
 

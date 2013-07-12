@@ -1,13 +1,13 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Hapus Divisi';
+	$this->pageTitle=Yii::app()->name . ' | Hapus Pejabat Berwenang';
 ?>
 
 <div id="pagecontent">
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah divisi', array('admin/tambahdivisi')) ?></li>
-		<li class="onprogress"><?php echo CHtml::link('Hapus divisi', array('admin/hapusdivisi')) ?></li>
+		<li><?php echo CHtml::link('Tambah pejabat', array('admin/tambahkdiv')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Hapus pejabat', array('admin/hapuskdiv')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -19,8 +19,8 @@
 			)); ?>
 
 			<div class="row">
-				<?php echo $form->checkBoxList($divisi, 'username', CHtml::listData($divisi->findAll(), 'username', 'nama_divisi')); ?>
-				<?php echo $form->error($divisi,'username'); ?>
+				<?php echo $form->checkBoxList($kdiv, 'username', CHtml::listData($kdiv->findAll(), 'username', 'nama')); ?>
+				<?php echo $form->error($kdiv,'username'); ?>
 			</div>
 
 			<div class="row buttons">
@@ -30,5 +30,5 @@
 			<?php $this->endWidget(); ?>
 		</div>
 	</div>
-	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/divisi'), 'class'=>'sidafbutton'));  ?></div>
+	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/kdiv'), 'class'=>'sidafbutton'));  ?></div>
 </div>
