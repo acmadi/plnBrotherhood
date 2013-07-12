@@ -6,8 +6,8 @@
  * The followings are the available columns in table 'berita_acara_negosiasi_klarifikasi':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $surat_penawaran_harga
- * @property string $hak_kewajiban_penyedia
+ * @property string $waktu
+ * @property string $tempat
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -40,12 +40,13 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, surat_penawaran_harga, hak_kewajiban_penyedia', 'required'),
+			array('id_dokumen, nomor, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, surat_penawaran_harga, hak_kewajiban_penyedia', 'length', 'max'=>50),
+			array('nomor', 'length', 'max'=>50),
+			array('tempat', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, surat_penawaran_harga, hak_kewajiban_penyedia', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, waktu, tempat', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,8 +70,8 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'surat_penawaran_harga' => 'Surat Penawaran Harga',
-			'hak_kewajiban_penyedia' => 'Hak Kewajiban Penyedia',
+			'waktu' => 'Waktu',
+			'tempat' => 'Tempat',
 		);
 	}
 
@@ -87,8 +88,8 @@ class BeritaAcaraNegosiasiKlarifikasi extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('surat_penawaran_harga',$this->surat_penawaran_harga,true);
-		$criteria->compare('hak_kewajiban_penyedia',$this->hak_kewajiban_penyedia,true);
+		$criteria->compare('waktu',$this->waktu,true);
+		$criteria->compare('tempat',$this->tempat,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
