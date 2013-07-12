@@ -27,7 +27,7 @@ class UserIdentity extends CUserIdentity
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
-		} else if (Anggota::model()->exists('username = "' . $this->username . '"')) {
+		} else if (Anggota::model()->exists('username = "' . $this->username . '" and status_user = "Aktif"')) {
 			$user = Anggota::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
 				Yii::app()->user->setState('role', 'anggota');
@@ -35,7 +35,7 @@ class UserIdentity extends CUserIdentity
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
-		} else if (Panitia::model()->exists('username = "' . $this->username . '" and jenis_panitia = "Pejabat"')) {
+		} else if (Panitia::model()->exists('username = "' . $this->username . '" and jenis_panitia = "Pejabat" and status_panitia = "Aktif"')) {
 			$user = Panitia::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
 				Yii::app()->user->setState('role', 'anggota');
@@ -51,7 +51,7 @@ class UserIdentity extends CUserIdentity
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
-		} else if (Kdivmum::model()->exists('username = "' . $this->username . '"')) {
+		} else if (Kdivmum::model()->exists('username = "' . $this->username . '" and status_user = "Aktif"')) {
 			$user = Kdivmum::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
 				Yii::app()->user->setState('role', 'kdivmum');
