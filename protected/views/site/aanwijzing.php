@@ -9,6 +9,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#11').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -18,17 +21,26 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		
                 <div id="menuform">
                     <?php
-                        $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'Surat Undangan Aanwijzing', 'url'=>array($SUP->isNewRecord?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
-                                    array('label'=>'Berita Acara Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Aanwijzing"') == null)?'/site/beritaacaraaanwijzing':'/site/editberitaacaraaanwijzing','id'=>$id)),
-                            ),
-                        ));
-                    ?>
+					if(Panitia::model()->findByPk($Pengadaan->id_panitia)->jenis_panitia=="Panitia") {
+						$this->widget('zii.widgets.CMenu', array(
+										'items'=>array(
+											array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/undanganaanwijzing':'/site/editundanganaanwijzing','id'=>$id)),
+											array('label'=>'Aanwijzing', 'url'=>array($Pengadaan->status=='20'?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
+											array('label'=>'BA Aanwijzing', 'url'=>array($Pengadaan->status=='21'?'/site/beritaacaraaanwijzing':($Pengadaan->status=='20'?'':'/site/editberitaacaraaanwijzing'),'id'=>$id)),
+										),
+								));
+					} else {
+						$this->widget('zii.widgets.CMenu', array(
+										'items'=>array(
+											array('label'=>'Aanwijzing', 'url'=>array($Pengadaan->status=='20'?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
+											array('label'=>'BA Aanwijzing', 'url'=>array($Pengadaan->status=='21'?'/site/beritaacaraaanwijzing':($Pengadaan->status=='20'?'':'/site/editberitaacaraaanwijzing'),'id'=>$id)),
+										),
+								));
+					}
+					?>
                 </div>
-            
                 <br/>
-                
+            
 		<?php if(Yii::app()->user->hasFlash('sukses')): ?>
  			<div class="flash-success">
 				<?php echo Yii::app()->user->getFlash('sukses'); ?>
@@ -50,87 +62,84 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'surat-undangan-penjelasan-form',
+		'id'=>'berita-acara-penjelasan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<h4><b> Nota Dinas Undangan Aanwijzing </b></h4>
-		<div class="row">
-			<?php echo $form->labelEx($SUP,'nomor'); ?>
-			<?php if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pelelangan"){ ?>
-			Nomor Surat Undangan Pengambilan Dokumen Pengadaan : <?php echo $SUPDP->nomor ?> <br/>
-			<?php } else if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Penunjukan Langsung"||Pengadaan::model()->findByPk($Dokumen0->id_pengadaan)->metode_pengadaan=="Pemilihan Langsung") { ?>
-			Nomor Surat Undangan Permintaan Penawaran Harga : <?php echo $SUPPPH->nomor ?> <br/>
-			<?php } ?>
-			<?php echo $form->textField($SUP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($SUP,'nomor'); ?>
-		</div>
 		
+		<h4><b> Aanwijzing </b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
+			<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$Dokumen0,
+					'model'=>$Dokumen1,
 					'attribute'=>'tanggal',
-					'value'=>$Dokumen0->tanggal,
+					'value'=>$Dokumen1->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
-			<?php echo $form->error($Dokumen0,'tanggal'); ?>
+			<?php echo $form->error($Dokumen1,'tanggal'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'perihal'); ?>
-			<?php echo $form->textArea($SUP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUP,'perihal'); ?>
-		</div>		
-		
-		<div class="row">
-			<?php echo $form->labelEx($SUP,'tanggal Aanwijzing'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SUP,
-					'attribute'=>'tanggal_undangan',
-					'value'=>$SUP->tanggal_undangan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'dd-mm-yy',
-					),
-			));?>
-			<?php echo $form->error($SUP,'tanggal_undangan'); ?>
+			<?php echo $form->labelEx($BAP,'waktu Aanwijzing (Format HH:MM)'); ?>
+			<?php echo $form->textField($BAP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAP,'waktu'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'waktu Aanwijzing (Format HH:MM)'); ?>
-			<?php echo $form->textField($SUP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($SUP,'waktu'); ?>
+			<?php echo $form->labelEx($BAP,'tempat Aanwijzing'); ?>
+			<?php echo $form->textArea($BAP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($BAP,'tempat'); ?>
 		</div>
+
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'tempat Pembukaan Penawaran'); ?>
-			<?php echo $form->textArea($SUP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUP,'tempat'); ?>
+				<?php 
+					if($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,
+						// 'model2' => $PP2,
+						'viewName' => 'formperusahaanaanwijzing',
+						'labelAdd' => '',
+						'labelDel' => 'Hapus Penyedia',					
+						)); 
+					}else{
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,
+						// 'model2' => $PP2,
+						'viewName' => 'formperusahaanaanwijzing',
+						'labelAdd' => 'Tambah Penyedia',
+						'labelDel' => 'Hapus Penyedia',					
+						)); 
+					}
+				?>
 		</div>
-
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($SUP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-			
+			<?php echo CHtml::submitButton($BAP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>			
 		</div>
 		
 	<?php $this->endWidget(); ?>
-	
+
 	</div><!-- form -->
 	
-	<?php if (!$SUP->isNewRecord){ ?>
-			
+	<?php if (!$BAP->isNewRecord){ ?>
+	
+		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Surat Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>			
+				
+				<li><?php echo CHtml::link('Lampiran Berita Acara Aanwijzing', array('docx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Daftar Hadir Aanwijzing', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
+	
 	<?php } ?>
 	
 	

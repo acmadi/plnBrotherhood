@@ -86,19 +86,19 @@
 
 		<?php if ($cpengadaan->jenis_kualifikasi=="Pasca Kualifikasi") { ?>
 			<?php if($cpengadaan->metode_pengadaan=='Pelelangan'){ ?>
-				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12') { ?>
+				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15') { ?>
 					<li class='belum' ><?php echo 'Pengumuman dan Pendaftaran'?></li>
-				<?php } else if($cpengadaan->status == '14') { ?>
+				<?php } else if($cpengadaan->status == '17') { ?>
 					<li id="8" class='sudah' > <?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/suratpengumumanpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else if($cpengadaan->status == '15') { ?>
+				<?php } else if($cpengadaan->status == '18') { ?>
 					<li id="8" class='sudah' > <?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/pendaftaranpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li id="8" class='sudah' > <?php echo CHtml::link('Pengumuman dan Pendaftaran',array("site/editpendaftaranpelelangan","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 			<?php } else if ($cpengadaan->metode_pengadaan=='Penunjukan Langsung'||$cpengadaan->metode_pengadaan=='Pemilihan Langsung'){ ?>
-				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12') { ?>
+				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15') { ?>
 					<li class='belum' ><?php echo 'Undangan Permintaan Penawaran'?></li>
-				<?php } else if($cpengadaan->status == '13') { ?>
+				<?php } else if($cpengadaan->status == '16') { ?>
 					<li id="9" class='sudah' > <?php echo CHtml::link('Undangan Permintaan Penawaran',array("site/permintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li id="9" class='sudah' > <?php echo CHtml::link('Undangan Permintaan Penawaran',array("site/editpermintaanpenawaranharga","id"=>"$cpengadaan->id_pengadaan")); ?></li>
@@ -116,115 +116,147 @@
 			<?php } ?>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16') { ?>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19') { ?>
 				<li class='belum'><?php echo 'Aanwijzing' ?></li>
-			<?php } else if($cpengadaan->status == '17') { ?>
+			<?php } else if($cpengadaan->status == '20') { ?>
+				<li id="11" class='sudah'><?php echo CHtml::link('Aanwijzing',array("site/aanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '21') { ?>
 				<li id="11" class='sudah'><?php echo CHtml::link('Aanwijzing',array("site/beritaacaraaanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li id="11" class='sudah'><?php echo CHtml::link('Aanwijzing',array("site/editberitaacaraaanwijzing","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<?php if($cpengadaan->metode_penawaran=='Satu Sampul') { ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17') { ?>
-					<li class='belum'><?php echo 'Penawaran' ?></li>
-				<?php } else if($cpengadaan->status == '18') { ?>
-					<li id="12" class='sudah'><?php echo CHtml::link('Penawaran',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="12" class='sudah'><?php echo CHtml::link('Penawaran',array("site/editberitaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21') { ?>
+				<li class='belum'><?php echo 'Penawaran' ?></li>
+			<?php } else if($cpengadaan->status == '22') { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran',array("site/pembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '23') { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran',array("site/editberitaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18') { ?>
-					<li class='belum'><?php echo 'Evaluasi' ?></li>
-				<?php } else if($cpengadaan->status == '19') { ?>
-					<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23') { ?>
+				<li class='belum'><?php echo 'Evaluasi' ?></li>
+			<?php } else if($cpengadaan->status == '24') { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi',array("site/evaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '25') { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 			
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Sampul') { ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17') { ?>
-					<li class='belum'><?php echo 'Penawaran Sampul Satu' ?></li>
-				<?php } else if($cpengadaan->status == '18') { ?>
-					<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Sampul Satu',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Sampul Satu',array("site/editberitaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18') { ?>
-					<li class='belum'><?php echo 'Evaluasi Sampul Satu' ?></li>
-				<?php } else if($cpengadaan->status == '19') { ?>
-					<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Satu',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Satu',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19') { ?>
-					<li class='belum'><?php echo 'Penawaran Sampul Dua' ?></li>
-				<?php } else if($cpengadaan->status == '20') { ?>
-					<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Sampul Dua',array("site/beritaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Sampul Dua',array("site/editberitaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20') { ?>
-					<li class='belum'><?php echo 'Evaluasi Sampul Dua' ?></li>
-				<?php } else if($cpengadaan->status == '21') { ?>
-					<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Dua',array("site/beritaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Dua',array("site/editberitaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21') { ?>
+				<li class='belum'><?php echo 'Penawaran Sampul Satu' ?></li>
+			<?php } else if($cpengadaan->status == '22') { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Sampul Satu',array("site/pembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '23') { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Sampul Satu',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Sampul Satu',array("site/editberitaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23') { ?>
+				<li class='belum'><?php echo 'Evaluasi Sampul Satu' ?></li>
+			<?php } else if($cpengadaan->status == '24') { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Satu',array("site/evaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '25') { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Satu',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Satu',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>
+			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23'||$cpengadaan->status == '24'||$cpengadaan->status == '25') { ?>
+				<li class='belum'><?php echo 'Penawaran Sampul Dua' ?></li>
+			<?php } else if($cpengadaan->status == '26') { ?>
+				<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Sampul Dua',array("site/pembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '27') { ?>
+				<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Sampul Dua',array("site/beritaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Sampul Dua',array("site/editberitaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>
+			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23'||$cpengadaan->status == '24'||$cpengadaan->status == '25'||$cpengadaan->status == '26'||$cpengadaan->status == '27') { ?>
+				<li class='belum'><?php echo 'Evaluasi Sampul Dua' ?></li>
+			<?php } else if($cpengadaan->status == '28') { ?>
+				<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Dua',array("site/evaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '29') { ?>
+				<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Dua',array("site/beritaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Sampul Dua',array("site/editberitaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } ?>
+				
 		<?php } else if($cpengadaan->metode_penawaran=='Dua Tahap') { ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17') { ?>
-					<li class='belum'><?php echo 'Penawaran Tahap Satu' ?></li>
-				<?php } else if($cpengadaan->status == '18') { ?>
-					<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Tahap Satu',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Tahap Satu',array("site/editberitaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21') { ?>
+				<li class='belum'><?php echo 'Penawaran Tahap Satu' ?></li>
+			<?php } else if($cpengadaan->status == '22') { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Tahap SatuS',array("site/pembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '23') { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Tahap Satu',array("site/beritaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="12" class='sudah'><?php echo CHtml::link('Penawaran Tahap Satu',array("site/editberitaacarapembukaanpenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18') { ?>
-					<li class='belum'><?php echo 'Evaluasi Tahap Satu' ?></li>
-				<?php } else if($cpengadaan->status == '19') { ?>
-					<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Satu',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Satu',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23') { ?>
+				<li class='belum'><?php echo 'Evaluasi Tahap Satu' ?></li>
+			<?php } else if($cpengadaan->status == '24') { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Satu',array("site/evaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '25') { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Satu',array("site/beritaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="13" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Satu',array("site/editberitaacaraevaluasipenawaran","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19') { ?>
-				<?php } else if($cpengadaan->status == '20') { ?>
-					<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Tahap Dua',array("site/beritaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Tahap Dua',array("site/editberitaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23'||$cpengadaan->status == '24'||$cpengadaan->status == '25') { ?>
+				<li class='belum'><?php echo 'Penawaran Tahap Dua' ?></li>
+			<?php } else if($cpengadaan->status == '26') { ?>
+				<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Tahap Dua',array("site/pembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '27') { ?>
+				<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Tahap Dua',array("site/beritaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="14" class='sudah'><?php echo CHtml::link('Penawaran Tahap Dua',array("site/editberitaacarapembukaanpenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20') { ?>
-					<li class='belum'><?php echo 'Evaluasi Tahap Dua' ?></li>
-				<?php } else if($cpengadaan->status == '21') { ?>
-					<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Dua',array("site/beritaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-				<?php } else { ?>
-					<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Dua',array("site/editberitaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23'||$cpengadaan->status == '24'||$cpengadaan->status == '25'||$cpengadaan->status == '26'||$cpengadaan->status == '27') { ?>
+				<li class='belum'><?php echo 'Evaluasi Tahap Dua' ?></li>
+			<?php } else if($cpengadaan->status == '28') { ?>
+				<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Dua',array("site/evaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '29') { ?>
+				<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Dua',array("site/beritaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else { ?>
+				<li id="15" class='sudah'><?php echo CHtml::link('Evaluasi Tahap Dua',array("site/editberitaacaraevaluasipenawaran2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 		<?php } else {?>
 			<li class='belum'><?php echo 'Penawaran' ?></li>
 			<li class='belum'><?php echo 'Evaluasi' ?></li>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21') { ?>
-				<li class='belum'><?php echo 'Klarifikasi dan Negosiasi' ?></li>
-			<?php } else if($cpengadaan->status == '22') { ?>
-				<li id="16" class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/beritaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else { ?>
-				<li id="16" class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/editberitaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23'||$cpengadaan->status == '24'||$cpengadaan->status == '25'||$cpengadaan->status == '26'||$cpengadaan->status == '27'||$cpengadaan->status == '28'||$cpengadaan->status == '29') { ?>
+			<li class='belum'><?php echo 'Klarifikasi dan Negosiasi' ?></li>
+		<?php } else if($cpengadaan->status == '30') { ?>
+			<li id="16" class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/negosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '31') { ?>
+			<li id="16" class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/beritaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else { ?>
+			<li id="16" class='sudah'><?php echo CHtml::link('Klarifikasi dan Negosiasi',array("site/editberitaacaranegosiasiklarifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
-		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22') { ?>
-				<li class='belum'><?php echo 'Penentuan Pemenang' ?></li>
-			<?php } else if($cpengadaan->status == '23') { ?>
-				<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinasusulanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '24') { ?>
-				<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspenetapanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '25') { ?>
-				<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '26') { ?>
-				<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpengumumanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '27') { ?>
-				<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else { ?>
-				<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editsuratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14'||$cpengadaan->status == '15'||$cpengadaan->status == '16'||$cpengadaan->status == '17'||$cpengadaan->status == '18'||$cpengadaan->status == '19'||$cpengadaan->status == '20'||$cpengadaan->status == '21'||$cpengadaan->status == '22'||$cpengadaan->status == '23'||$cpengadaan->status == '24'||$cpengadaan->status == '25'||$cpengadaan->status == '26'||$cpengadaan->status == '27'||$cpengadaan->status == '28'||$cpengadaan->status == '29'||$cpengadaan->status == '30'||$cpengadaan->status == '31') { ?>
+			<li class='belum'><?php echo 'Penentuan Pemenang' ?></li>
+		<?php } else if($cpengadaan->status == '32') { ?>
+			<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinasusulanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '33') { ?>
+			<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspenetapanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '34') { ?>
+			<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/notadinaspemberitahuanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '35') { ?>
+			<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpengumumanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '36') { ?>
+			<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/suratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else { ?>
+			<li id="17" class='sudah'><?php echo CHtml::link('Penentuan Pemenang',array("site/editsuratpenunjukanpemenang","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
 		
 		<br/> 

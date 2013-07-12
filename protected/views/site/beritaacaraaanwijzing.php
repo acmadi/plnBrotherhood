@@ -20,18 +20,20 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		?>
 		
                 <div id="menuform">
-                    <?php
+                   <?php
 					if(Panitia::model()->findByPk($Pengadaan->id_panitia)->jenis_panitia=="Panitia") {
 						$this->widget('zii.widgets.CMenu', array(
 										'items'=>array(
-											array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/aanwijzing':'/site/editaanwijzing','id'=>$id)),
-											array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
+											array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/undanganaanwijzing':'/site/editundanganaanwijzing','id'=>$id)),
+											array('label'=>'Aanwijzing', 'url'=>array($Pengadaan->status=='20'?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
+											array('label'=>'BA Aanwijzing', 'url'=>array($Pengadaan->status=='21'?'/site/beritaacaraaanwijzing':($Pengadaan->status=='20'?'':'/site/editberitaacaraaanwijzing'),'id'=>$id)),
 										),
 								));
 					} else {
 						$this->widget('zii.widgets.CMenu', array(
 										'items'=>array(
-											array('label'=>'Berita Acara Aanwijzing', 'url'=>array(($BAP->isNewRecord)?('/site/beritaacaraaanwijzing'):('/site/editberitaacaraaanwijzing'),'id'=>$id)),                                        
+											array('label'=>'Aanwijzing', 'url'=>array($Pengadaan->status=='20'?('/site/aanwijzing'):('/site/editaanwijzing'),'id'=>$id)),
+											array('label'=>'BA Aanwijzing', 'url'=>array($Pengadaan->status=='21'?'/site/beritaacaraaanwijzing':($Pengadaan->status=='20'?'':'/site/editberitaacaraaanwijzing'),'id'=>$id)),
 										),
 								));
 					}
@@ -83,48 +85,22 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->error($BAP,'nomor'); ?>
 		</div>
 
-		<div class="row">
-				<?php 
-					if($Pengadaan->metode_pengadaan == 'Penunjukan Langsung'){
-						$this->widget('application.extensions.appendo.JAppendo',array(
-						'id' => 'idpenyedia',        
-						'model' => $PP,
-						// 'model2' => $PP2,
-						'viewName' => 'formperusahaanaanwijzing',
-						'labelAdd' => '',
-						'labelDel' => 'Hapus Penyedia',					
-						)); 
-					}else{
-						$this->widget('application.extensions.appendo.JAppendo',array(
-						'id' => 'idpenyedia',        
-						'model' => $PP,
-						// 'model2' => $PP2,
-						'viewName' => 'formperusahaanaanwijzing',
-						'labelAdd' => 'Tambah Penyedia',
-						'labelDel' => 'Hapus Penyedia',					
-						)); 
-					}
-				?>
-		</div>
-		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($BAP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>			
+			<?php echo CHtml::submitButton($Pengadaan->status=='21'? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>			
 		</div>
 		
 	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->
 	
-	<?php if (!$BAP->isNewRecord){ ?>
+	<?php if ($Pengadaan->status!='21'){ ?>
 	
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				
 				<li><?php echo CHtml::link('Berita Acara Aanwijzing', array('docx/download','id'=>$BAP->id_dokumen)); ?></li>
-				<li><?php echo CHtml::link('Daftar Hadir Aanwijzing', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	

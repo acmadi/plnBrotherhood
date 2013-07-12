@@ -72,7 +72,7 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 				<br/>
 				
 				<div class="row buttons">
-					<?php echo CHtml::submitButton($Pengadaan->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+					<?php echo CHtml::submitButton($Pengadaan->status=='0' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
 
 				<?php $this->endWidget(); ?>
