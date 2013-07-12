@@ -8,6 +8,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#5').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -44,36 +47,35 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</script>
 				</div>
 			<?php endif; ?>
-	<!---------------------
-			// <div class="form" >
+	
+			 <div class="form" >
 
-			<?php //$form=$this->beginWidget('CActiveForm', array(
-			// 'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
-			// 'enableAjaxValidation'=>false,
-			// )); ?>
+			<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
+			'enableAjaxValidation'=>false,
+			 )); ?>
 			
 			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
 	
 			<div class="row">
 				<?php 
-					// $this->widget('application.extensions.appendo.JAppendo',array(
-					// 'id' => 'idpenyedia',        
-					// 'model' => $PP,
-					// 'model2' => $PP2,
-					// 'viewName' => 'formperusahaan_pengambilan_dokumen_prakualifikasi',
-					// 'labelAdd' => '',
-					// 'labelDel' => 'Hapus Penyedia',
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,					
+					'viewName' => 'formperusahaan_penyampaian_dokumen_prakualifikasi',
+					'labelAdd' => '',
+					'labelDel' => 'Hapus Penyedia',
 					
-					// )); 
+					)); 
 				?>
 			</div>
 			
 			<div class="row buttons">
-				<?php //echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
-		--->
+		
 			
-		<?php //$this->endWidget(); ?>
+		<?php $this->endWidget(); ?>
 		
 		<br/>
 		</div><!-- form -->

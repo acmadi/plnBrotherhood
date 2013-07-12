@@ -6,6 +6,8 @@
  * The followings are the available columns in table 'berita_acara_penjelasan':
  * @property string $id_dokumen
  * @property string $nomor
+ * @property string $waktu
+ * @property string $tempat
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -38,12 +40,13 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor', 'required'),
+			array('id_dokumen, nomor, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
+			array('tempat', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, waktu, tempat', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +70,8 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
+			'waktu' => 'Waktu',
+			'tempat' => 'Tempat',
 		);
 	}
 
@@ -83,6 +88,8 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
+		$criteria->compare('waktu',$this->waktu,true);
+		$criteria->compare('tempat',$this->tempat,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
