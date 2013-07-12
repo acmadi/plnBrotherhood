@@ -74,7 +74,7 @@ class Dokumen extends CActiveRecord
 			array('uploadedFile', 'file', 'types'=>'docx, xlsx, pdf', 'allowEmpty'=>true, 'on'=>'update'),
 			array('id_dokumen, nama_dokumen, tanggal, tempat, id_pengadaan, status_upload', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen, id_pengadaan', 'length', 'max'=>32),
-			array('nama_dokumen', 'length', 'max'=>50),
+			array('nama_dokumen', 'length', 'max'=>256),
 			array('tempat, status_upload', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

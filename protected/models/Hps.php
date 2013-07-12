@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'hps':
  * @property string $id_dokumen
  * @property string $nomor
+ * @property integer $nilai_hps
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -38,12 +39,13 @@ class Hps extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor', 'required'),
+			array('id_dokumen, nomor, nilai_hps', 'required'),
+			array('nilai_hps', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>20),
 			array('nomor', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, nilai_hps', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,7 @@ class Hps extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
+			'nilai_hps' => 'Nilai Hps',
 		);
 	}
 
@@ -83,6 +86,7 @@ class Hps extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
+		$criteria->compare('nilai_hps',$this->nilai_hps);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

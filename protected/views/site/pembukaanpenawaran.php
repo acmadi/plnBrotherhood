@@ -9,14 +9,17 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#12').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
-	
+
 		<?php 
 			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
-		
+            
         	<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>    
                 <div id="menuform">
                    <?php
@@ -81,86 +84,73 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
                     ?>
                 </div>
           	<?php } ?>
-     
+          	
             <br/>
                 
 		<div class="form">
 
 		<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'surat-undangan-pembukaan-penawaran-form',
+		'id'=>'berita-acara-pembukaan-penawaran-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
 		<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>
-			<h4><b> Nota Dinas Undangan Pembukaan Penawaran </b></h4>
+			<h4><b> Pembukaan Penawaran </b></h4>
 		<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-			<h4><b> Nota Dinas Undangan Pembukaan Penawaran Sampul Satu </b></h4>
+			<h4><b> Pembukaan Penawaran Sampul Satu </b></h4>
 		<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-			<h4><b> Nota Dinas Undangan Pembukaan Penawaran Tahap Satu </b></h4>
+			<h4><b> Pembukaan Penawaran Tahap Satu </b></h4>
 		<?php } ?>
 		
 		<div class="row">
-			<?php echo $form->labelEx($SUPP,'nomor'); ?>
-			Nomor Berita Acara Aanwijzing : <?php echo $BAP->nomor ?> <br/>
-			<?php echo $form->textField($SUPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($SUPP,'nomor'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
+			<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$Dokumen0,
+					'model'=>$Dokumen1,
 					'attribute'=>'tanggal',
-					'value'=>$Dokumen0->tanggal,
+					'value'=>$Dokumen1->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
 					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
-			<?php echo $form->error($Dokumen0,'tanggal'); ?>
+			<?php echo $form->error($Dokumen1,'tanggal'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($BAPP,'waktu (Format HH:MM)'); ?>
+			<?php echo $form->textField($BAPP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAPP,'waktu'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($BAPP,'tempat'); ?>
+			<?php echo $form->textArea($BAPP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($BAPP,'tempat'); ?>
+		</div>
+
+		<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,
+					// 'model2' => $PP2,
+					'viewName' => 'formperusahaan_pembukaan_penawaran_1',
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',
+					
+					)); 
+				?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($SUPP,'perihal'); ?>
-			<?php echo $form->textArea($SUPP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPP,'perihal'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUPP,'tanggal Pembukaan Penawaran'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$SUPP,
-					'attribute'=>'tanggal_undangan',
-					'value'=>$SUPP->tanggal_undangan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'dd-mm-yy',
-					),
-			));?>
-			<?php echo $form->error($SUPP,'tanggal_undangan'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUPP,'waktu Pembukaan Penawaran (Format HH:MM)'); ?>
-			<?php echo $form->textField($SUPP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
-			<?php echo $form->error($SUPP,'waktu'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUPP,'tempat Pembukaan Penawaran'); ?>
-			<?php echo $form->textArea($SUPP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPP,'tempat'); ?>
-		</div>
-
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($SUPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
-	<?php $this->endWidget(); ?>
+		<?php $this->endWidget(); ?>
 
-	</div><!-- form -->
-	
-	<?php if($SUPP->isNewRecord) { ?>
+		</div><!-- form -->
+		
+	<?php if($BAPP->isNewRecord) { ?>
 		
 	<?php } else { ?>
 		<br/>
@@ -169,19 +159,23 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>
-					<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-					<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Sampul Satu', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-					<li><?php echo CHtml::link('Surat Undangan Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$SUPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Tahap Satu', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } ?>
 			</ul>
 		</div>
 	<?php } ?>
 	
-<?php	} ?>
+	
+	<?php	} ?>
 	</div>
 </div>
 
 <div>
-<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'style'=>'background:url(css/bg.gif)'));  ?></div>
+<?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?></div>

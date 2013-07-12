@@ -485,7 +485,7 @@ class Pengadaan extends CActiveRecord
 		
 		for($i=0;$i<count($modelUser);$i++){
 			$idpan[$i] = $modelUser[$i]->id_panitia;
-		};
+		}
 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);

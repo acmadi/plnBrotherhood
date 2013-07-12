@@ -31,7 +31,6 @@
 		<?php endif; ?>
 
 		<h2><?php echo $panitia->nama_panitia ?></h2>
-		<br />
 		<div class="form">
 			<?php $form=$this->beginWidget('CActiveForm', array(
 				'enableAjaxValidation'=>false,
@@ -47,14 +46,6 @@
 				<?php echo $form->labelEx($panitia,'Nomor SK panitia'); ?> 
 				<?php echo $form->textField($panitia,'SK_panitia',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($panitia,'SK_panitia'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($panitia,'Status panitia'); ?> 
-				<?php echo $form->dropDownList($panitia,'status_panitia',
-					array('Aktif'=>'Aktif','Tidak Aktif'=>'Tidak Aktif'),
-					array('empty'=>"------Pilih Status Panitia------")); ?>
-				<?php echo $form->error($panitia,'status_panitia'); ?>
 			</div>
 				
 			<div class="row">
@@ -72,11 +63,27 @@
 			</div>
 
 			<div class="row">
+				<?php echo $form->labelEx($panitia,'Anggota dari Divisi Umum'); ?>
 				<?php
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'anggota',
 					'model' => $anggota,
 					'viewName' => 'formdetailpanitia',
+					'labelAdd' => 'Tambah Anggota',
+					'labelDel' => 'Hapus Anggota',
+					));
+				?>
+			</div>
+
+			<br />
+
+			<div class="row">
+				<?php echo $form->labelEx($panitia,'Anggota dari luar Divisi Umum'); ?>
+				<?php
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'anggotaluar',
+					'model' => $anggotaluar,
+					'viewName' => 'formdetailpanitialuar',
 					'labelAdd' => 'Tambah Anggota',
 					'labelDel' => 'Hapus Anggota',
 					));
