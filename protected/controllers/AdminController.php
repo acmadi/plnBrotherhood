@@ -127,7 +127,8 @@ class AdminController extends Controller
 				$admin->attributes = $_POST['Admin'];
 				if ($admin->validate()) {
 					if ($admin->save(false)) {
-						$this->redirect(array('site/logout'));
+						Yii::app()->user->name = $admin->username;
+						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 					}
 				}
 			}

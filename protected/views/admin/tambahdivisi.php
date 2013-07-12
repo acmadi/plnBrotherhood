@@ -30,6 +30,10 @@
 				<?php echo $form->error($divisi,'nama_divisi'); ?>
 			</div>
 
+			<div class="row">
+				<?php echo $form->labelEx($divisi,'(Ket: kata sandi standard : P@ssw0rd)'); ?>
+			</div>
+
 			<div class="row buttons">
 				<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
 			</div>
