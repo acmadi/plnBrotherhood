@@ -15,7 +15,6 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'application.extensions.coco.*',
 		'application.extensions.highcharts.*',
 		'application.vendors.phpexcel.*',
 	),

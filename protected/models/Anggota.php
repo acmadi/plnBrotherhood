@@ -116,4 +116,28 @@ class Anggota extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function searchAnggota()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('username',$this->username,true);
+		$criteria->compare('password',$this->password,true);
+		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('NIP',$this->NIP,true);
+		$criteria->compare('email',$this->email,true);
+		$criteria->compare('divisi',$this->divisi,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('jabatan',$this->jabatan,true);
+		$criteria->compare('status_user',$this->status_user,true);
+		$criteria->addcondition('status_user = "Aktif"');
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }
