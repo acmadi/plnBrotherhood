@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2013 at 05:49 AM
+-- Generation Time: Jul 12, 2013 at 06:19 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
-('jo', 'Johan', 'bd73d35759d75cc215150d1bbc94f1b1078bee01');
+('admin', 'Administrator', 'd033e22ae348aeb5660fc2140aec35850c4da997');
 
 -- --------------------------------------------------------
 
@@ -444,6 +444,7 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
 
 CREATE TABLE IF NOT EXISTS `panitia` (
   `id_panitia` bigint(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(256) NOT NULL,
   `nama_panitia` varchar(50) NOT NULL,
   `SK_panitia` varchar(50) NOT NULL,
   `tanggal_sk` date NOT NULL,
@@ -456,15 +457,15 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 -- Dumping data for table `panitia`
 --
 
-INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tanggal_sk`, `status_panitia`, `jenis_panitia`) VALUES
-(-1, 'Belum ada PIC', '-', '0000-00-00', '-', '-'),
-(1, 'Hanif Eridaputra', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(2, 'Johannes Ridho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(3, 'Panitia-A', '024/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
-(4, 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
-(5, 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
-(6, 'Irvan Aditya', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(7, 'Gilang Laksana', '-', '0000-00-00', 'Aktif', 'Pejabat');
+INSERT INTO `panitia` (`id_panitia`, `username`, `nama_panitia`, `SK_panitia`, `tanggal_sk`, `status_panitia`, `jenis_panitia`) VALUES
+(-1, '-', 'Belum ada PIC', '-', '0000-00-00', '-', '-'),
+(1, 'hanif.eridaputra', 'Hanif Eridaputra', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(2, 'johannes.ridho', 'Johannes Ridho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(3, '-', 'Panitia-A', '024/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
+(4, '-', 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
+(5, '-', 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
+(6, 'irvan.aditya', 'Irvan Aditya', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(7, 'gilang.laksana', 'Gilang Laksana', '-', '0000-00-00', 'Aktif', 'Pejabat');
 
 -- --------------------------------------------------------
 

@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'panitia':
  * @property string $id_panitia
+ * @property string $username
  * @property string $nama_panitia
  * @property string $SK_panitia
  * @property string $tanggal_sk
@@ -43,13 +44,14 @@ class Panitia extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama_panitia, SK_panitia, tanggal_sk, status_panitia, jenis_panitia', 'required'),
+			array('username, nama_panitia, SK_panitia, tanggal_sk, status_panitia, jenis_panitia', 'required'),
+			array('username', 'length', 'max'=>256),
 			array('nama_panitia, SK_panitia', 'length', 'max'=>50),
 			array('status_panitia', 'length', 'max'=>32),
 			array('jenis_panitia', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_panitia, nama_panitia, SK_panitia, tanggal_sk, status_panitia, jenis_panitia', 'safe', 'on'=>'search'),
+			array('id_panitia, username, nama_panitia, SK_panitia, tanggal_sk, status_panitia, jenis_panitia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +75,7 @@ class Panitia extends CActiveRecord
 	{
 		return array(
 			'id_panitia' => 'Id Panitia',
+			'username' => 'Username',
 			'nama_panitia' => 'Nama Panitia',
 			'SK_panitia' => 'Sk Panitia',
 			'tanggal_sk' => 'Tanggal Sk',
@@ -93,6 +96,7 @@ class Panitia extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('username',$this->username,true);
 		$criteria->compare('nama_panitia',$this->nama_panitia,true);
 		$criteria->compare('SK_panitia',$this->SK_panitia,true);
 		$criteria->compare('tanggal_sk',$this->tanggal_sk,true);
@@ -112,6 +116,7 @@ class Panitia extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('username',$this->username,true);
 		$criteria->compare('nama_panitia',$this->nama_panitia,true);
 		$criteria->compare('SK_panitia',$this->SK_panitia,true);
 		$criteria->compare('tanggal_sk',$this->tanggal_sk,true);
@@ -132,6 +137,7 @@ class Panitia extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('username',$this->username,true);
 		$criteria->compare('nama_panitia',$this->nama_panitia,true);
 		$criteria->compare('SK_panitia',$this->SK_panitia,true);
 		$criteria->compare('tanggal_sk',$this->tanggal_sk,true);
