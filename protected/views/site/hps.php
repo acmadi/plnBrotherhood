@@ -2,7 +2,8 @@
 /* @var $this SiteController */
 
 $id = Yii::app()->getRequest()->getQuery('id');
-$this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nama_pengadaan;
+$Pengadaan = Pengadaan::model()->findByPk($id);
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -76,7 +77,14 @@ $this->pageTitle=Yii::app()->name . ' | '.Pengadaan::model()->findByPk($id)->nam
 					));?>
 					<?php echo $form->error($Dokumen0,'tanggal'); ?>
 				</div>
-				<br/>
+			
+				<?php if ($Pengadaan->status!='2') { ?>
+					<div class="row">
+						<?php echo $form->labelEx($Hps,'nilai_hps'); ?>
+						<?php echo $form->textField($Hps,'nilai_hps',array('size'=>56,'maxlength'=>50)); ?>
+						<?php echo $form->error($Hps,'nilai_hps'); ?>
+					</div>
+				<?php } ?>
 				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($Hps->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>

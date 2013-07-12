@@ -15,12 +15,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 	</div>
 
 	<div id="maincontent">
-	
+
 		<?php 
 			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
-          	
-          	<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
+            
+        	<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
           		<div id="menuform">
                    <?php
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
@@ -63,8 +63,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
                     ?>
                 </div>
           	<?php } ?>
-                
-                <br/>
+          	
+            <br/>
                 
 		<div class="form">
 
@@ -74,29 +74,37 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		)); ?>
 		
 		<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-			<h4><b> Berita Acara Pembukaan Penawaran Sampul Dua </b></h4>
+			<h4><b> Pembukaan Penawaran Sampul Dua </b></h4>
 		<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-			<h4><b> Berita Acara Pembukaan Penawaran Tahap Dua </b></h4>
+			<h4><b> Pembukaan Penawaran Tahap Dua </b></h4>
 		<?php } ?>
+		
 		<div class="row">
-			<?php echo $form->labelEx($BAPP,'nomor'); ?>
-			<?php if ($Dok0==null) {?>
-				<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-					Nomor Berita Acara Evaluasi Penawaran Sampul Satu : <?php echo $BAEP->nomor ?> <br/>
-				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-					Nomor Berita Acara Evaluasi Penawaran Tahap Satu : <?php echo $BAEP->nomor ?> <br/>
-				<?php } ?>
-			<?php } else { ?>
-				<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-					Nomor Nota Dinas Undangan Pembukaan Penawaran Sampul Dua : <?php echo $SUPP->nomor ?> <br/>
-				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-					Nomor Nota Dinas Undangan Pembukaan Penawaran Tahap Dua : <?php echo $SUPP->nomor ?> <br/>
-				<?php } ?>
-			<?php } ?>
-			<?php echo $form->textField($BAPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($BAPP,'nomor'); ?>
-		</div>		
-	
+			<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen1,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen1->tanggal,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($Dokumen1,'tanggal'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($BAPP,'waktu (Format HH:MM)'); ?>
+			<?php echo $form->textField($BAPP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAPP,'waktu'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($BAPP,'tempat'); ?>
+			<?php echo $form->textArea($BAPP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($BAPP,'tempat'); ?>
+		</div>
+
 		<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
@@ -112,23 +120,27 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->status=='27'? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($BAPP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 		<?php $this->endWidget(); ?>
 
 		</div><!-- form -->
 		
-	<?php if($Pengadaan->status!='27') { ?>
+	<?php if($BAPP->isNewRecord) { ?>
+		
+	<?php } else { ?>
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Sampul Dua', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-					<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$BAPP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Tahap Dua', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } ?>
 			</ul>
 		</div>

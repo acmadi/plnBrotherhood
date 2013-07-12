@@ -641,7 +641,7 @@ class SiteController extends Controller
 					if($valid){		
 						if($Pengadaan->save(false))
 						{	
-							$this->redirect(array('editpenentuanmetode','id'=>$Pengadaan->id_pengadaan));
+							$this->redirect(array('editpenentuanmetode','id'=>$id));
 						}
 					}
 				}
@@ -1172,6 +1172,7 @@ class SiteController extends Controller
 				
 				$HPS= new Hps;
 				$HPS->id_dokumen=$Dokumen0->id_dokumen;
+				$HPS->nilai_hps=0;
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -1187,7 +1188,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($HPS->save(false)){
-									$this->redirect(array('edithps','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('edithps','id'=>$id));
 								}
 							}
 						}						
@@ -1226,6 +1227,7 @@ class SiteController extends Controller
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$HPS->attributes=$_POST['Hps'];
+					if($HPS->nilai_hps>0){
 						if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
 							$Pengadaan->status="4";
 						} else {
@@ -1235,6 +1237,7 @@ class SiteController extends Controller
 								$Pengadaan->status= "16";
 							}
 						}
+					}
 					$valid=$HPS->validate();;
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){						
@@ -1243,7 +1246,7 @@ class SiteController extends Controller
 							if($Dokumen0->save(false)){
 								if($HPS->save(false)){
 									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-									$this->redirect(array('edithps','id'=>$Dokumen0->id_pengadaan,));
+									$this->redirect(array('edithps','id'=>$id));
 								}
 							}
 						}
@@ -3027,7 +3030,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SPP->save(false)){
-									$this->redirect(array('editsuratpengumumanpelelangan','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editsuratpengumumanpelelangan','id'=>$id));
 								}
 							}
 						}
@@ -3507,7 +3510,7 @@ class SiteController extends Controller
 							if($Dokumen0->save(false)){
 								if($SUPPP->save(false)){
 									// if($PP->save(false)){
-										$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+										$this->redirect(array('editpermintaanpenawaranharga','id'=>$id));
 									// }
 								}
 							}
@@ -3638,7 +3641,7 @@ class SiteController extends Controller
 							if($Dokumen0->save(false)){
 								if($SUPPP->save(false)){
 									// if($PP->save(false)){
-										$this->redirect(array('editpermintaanpenawaranharga','id'=>$Dokumen0->id_pengadaan));
+										$this->redirect(array('editpermintaanpenawaranharga','id'=>$id));
 									// }
 								}
 							}
@@ -3703,7 +3706,7 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)){
 									if($SUP->save(false)){
-										$this->redirect(array('editundanganaanwijzing','id'=>$Dokumen0->id_pengadaan));
+										$this->redirect(array('editundanganaanwijzing','id'=>$id));
 									}
 								}
 							}
@@ -3711,24 +3714,27 @@ class SiteController extends Controller
 					}
 				}
 				
-				 $this->render('undanganaanwijzing',array(
-						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
+					if($Pengadaan->metode_pengadaan=="Pelelangan"){
+						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+						$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
+						$this->render('undanganaanwijzing',array(
+							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPDP'=>$SUPDP,
+						));
+					} else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
+						$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+						$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
+						$this->render('undanganaanwijzing',array(
+							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
+						));
+					}
+				} else {
+					$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+					$SPHK=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
+					$this->render('undanganaanwijzing',array(
+						'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SPHK'=>$SPHK,
 					));
-					
-				// if($Pengadaan->metode_pengadaan=="Pelelangan"){
-					// $DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
-					// $SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
-					// $this->render('aanwijzing',array(
-						// 'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPDP'=>$SUPDP,
-					// ));
-				// } else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
-					// $DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
-					// $SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
-					// $this->render('aanwijzing',array(
-						// 'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
-					// ));
-				// }
-
+				}
 			}
 		}
 	}
@@ -3766,7 +3772,7 @@ class SiteController extends Controller
 							{	
 								if($Dokumen0->save(false)){
 									if($SUP->save(false)){
-										$this->redirect(array('editundanganaanwijzing','id'=>$Dokumen0->id_pengadaan));
+										$this->redirect(array('editundanganaanwijzing','id'=>$id));
 									}
 								}
 							}
@@ -4279,7 +4285,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPP->save(false)){
-									$this->redirect(array('editsuratundanganpembukaanpenawaran','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editsuratundanganpembukaanpenawaran','id'=>$id));
 								}
 							}
 						}
@@ -4337,7 +4343,7 @@ class SiteController extends Controller
 						{	
 							if($Dokumen0->save(false)){
 								if($SUPP->save(false)){
-									$this->redirect(array('editsuratundanganpembukaanpenawaran','id'=>$Dokumen0->id_pengadaan));
+									$this->redirect(array('editsuratundanganpembukaanpenawaran','id'=>$id));
 								}
 							}
 						}
@@ -4819,6 +4825,7 @@ class SiteController extends Controller
 						'BAPP'=>$BAPP,'PP'=>$PP,'BAP'=>$BAP,'Dok0'=>$Dok0,
 					));
 				} else {
+					$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
 					$this->render('beritaacarapembukaanpenawaran',array(
 						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
 					));
@@ -4955,6 +4962,7 @@ class SiteController extends Controller
 						'BAPP'=>$BAPP,'PP'=>$PP,'BAP'=>$BAP,'Dok0'=>$Dok0,
 					));
 				} else {
+					$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
 					$this->render('beritaacarapembukaanpenawaran',array(
 						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
 					));
@@ -4963,7 +4971,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionBeritaacaraevaluasipenawaran()
+	public function actionEvaluasipenawaran()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -4973,21 +4981,7 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Pengadaan->status ='22';
-				} else {
-					$Pengadaan->status ='20';
-				}
-				
-				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
-				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
-				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
-				}
-				
-				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				$Pengadaan->status ='25';
 				
 				$DokRKS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"');
 				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
@@ -5009,27 +5003,42 @@ class SiteController extends Controller
 				$Dokumen1->tempat='Jakarta';
 				$Dokumen1->status_upload='Belum Selesai';
 				$Dokumen1->id_pengadaan=$id;
-				date_default_timezone_set("Asia/Jakarta");
-				$Dokumen1->tanggal=date('d-m-Y');
+				$Dokumen1->tanggal=RKS->tanggal_evaluasi_penawaran1;
 				
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$Dokumen2->nama_dokumen='Daftar Hadir Evaluasi Penawaran';
+					$Dokumen2->nama_dokumen='Lampiran Berita Acara Evaluasi Penawaran';
 				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$Dokumen2->nama_dokumen='Daftar Hadir Evaluasi Penawaran Sampul Satu';
+					$Dokumen2->nama_dokumen='Lampiran Berita Acara Evaluasi Penawaran Sampul Satu';
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$Dokumen2->nama_dokumen='Daftar Hadir Evaluasi Penawaran Tahap Satu';
+					$Dokumen2->nama_dokumen='Lampiran Berita Acara Evaluasi Penawaran Tahap Satu';
 				}
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
 				
+				$Dokumen3=new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+3;
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Dokumen3->nama_dokumen='Daftar Hadir Evaluasi Penawaran';
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen3->nama_dokumen='Daftar Hadir Evaluasi Penawaran Sampul Satu';
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen3->nama_dokumen='Daftar Hadir Evaluasi Penawaran Tahap Satu';
+				}
+				$Dokumen3->tempat='Jakarta';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
 				$BAEP= new BeritaAcaraEvaluasiPenawaran;
 				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
+				$BAEP->waktu=$RKS->waktu_evaluasi_penawaran1;
+				$BAEP->tempat=$RKS->tempat_evaluasi_penawaran1;
+				$BAEP->nomor='-';
 				
 				$DH= new DaftarHadir;
-				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				$DH->id_dokumen=$Dokumen3->id_dokumen;
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$DH->acara="Evaluasi Penawaran";
 				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
@@ -5037,8 +5046,7 @@ class SiteController extends Controller
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$DH->acara="Evaluasi Penawaran Tahap Satu";
 				}
-				$DH->jam=$RKS->waktu_evaluasi_penawaran1;
-				$DH->tempat_hadir=$RKS->tempat_evaluasi_penawaran1;
+				
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -5049,10 +5057,12 @@ class SiteController extends Controller
 				{
 					$Dokumen1->attributes=$_POST['Dokumen'];
 					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
-					$Dokumen2->tanggal=$Dokumen1->tanggal;
-					$valid=$BAEP->validate();
+					$valid=$Dokumen1->validate()&&$BAEP->validate();
 					if($valid){
-					
+						$DH->jam=$BAEP->waktu;
+						$DH->tempat_hadir=$BAEP->tempat;
+						$Dokumen2->tanggal=$Dokumen1->tanggal;
+						$Dokumen3->tanggal=$Dokumen1->tanggal;
 						if(isset($_POST['perusahaan'])){
 							if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
 								for($i=0;$i<count($PP);$i++){
@@ -5198,23 +5208,23 @@ class SiteController extends Controller
 						}//end isset perusahaan		
 						
 						if($Pengadaan->save(false)){
-							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($BAEP->save(false)&&$DH->save(false)){
-									$this->redirect(array('editberitaacaraevaluasipenawaran','id'=>$Dokumen1->id_pengadaan));
+									$this->redirect(array('editevaluasipenawaran','id'=>$id));
 								}
 							}
 						}
 					}
 				}
 
-				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'PP'=>$PP,'BAPP'=>$BAPP,
+				$this->render('evaluasipenawaran',array(
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'PP'=>$PP,
 				));
 			}
 		}
 	}
 	
-	public function actionEditBeritaacaraevaluasipenawaran()
+	public function actionEditEvaluasipenawaran()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -5227,29 +5237,22 @@ class SiteController extends Controller
 				
 				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
 					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Lampiran Berita Acara Evaluasi Penawaran"');
+					$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Satu"');
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran Sampul Satu"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Lampiran Berita Acara Evaluasi Penawaran Sampul Satu"');
+					$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran Sampul Satu"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Satu"');
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran Tahap Satu"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Lampiran Berita Acara Evaluasi Penawaran Tahap Satu"');
+					$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran Tahap Satu"');
 				}
 				
 				$Dokumen1->tanggal=Tanggal::getTanggalStrip($Dokumen1->tanggal);
-				
 				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($Dokumen1->id_dokumen);
-				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
-				
-				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
-					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
-				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
-				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
-				}
-				
-				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				$DH=DaftarHadir::model()->findByPk($Dokumen3->id_dokumen);
+			
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -5406,19 +5409,419 @@ class SiteController extends Controller
 							}//end satu sampul
 						}//end isset perusahaan		
 						
-						$Dokumen2->tanggal=$Dokumen1->tanggal;
-						if($Pengadaan->save(false)){
-							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
-								if($BAEP->save(false)&&$DH->save(false)){
-									$this->redirect(array('editberitaacaraevaluasipenawaran','id'=>$Dokumen1->id_pengadaan));
+					
+						if($BAEP->save(false)){
+							$this->redirect(array('editevaluasipenawaran','id'=>$id));
+						}
+					}
+				}
+
+				$this->render('evaluasipenawaran',array(
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,'PP'=>$PP,'Dokumen2'=>$Dokumen2,
+				));
+
+			}
+		}
+	}
+	
+	public function actionBeritaacaraevaluasipenawaran()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$Pengadaan->status ='30';
+				} else {
+					$Pengadaan->status ='26';
+				}
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
+				}
+				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$DokBAEP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAEP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAEP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Satu"');
+				}
+				
+				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+				
+				$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_1 = "1" or pembukaan_penawaran_1 = "2" ) and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
+				{
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$BAEP->validate();
+					if($valid){
+						if(isset($_POST['perusahaan'])){
+							if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->alamat=$_POST['alamat'][$i];									
+										$PP[$i]->npwp=$_POST['npwp'][$i];	
+										// $PP[$i]->nilai = 0;									
+										// $PP[$i]->biaya = '0';				
+										// $PP[$i]->nomor_surat_penawaran = '-';									
+										// $PP[$i]->tanggal_penawaran = '-';												
+										$PP[$i]->undangan_prakualifikasi = '1';
+										$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+										$PP[$i]->pengambilan_lelang_pq = '1';	
+										$PP[$i]->penyampaian_lelang = '1';
+										$PP[$i]->evaluasi_pq = '1';
+										$PP[$i]->penetapan_pq = '1';
+										$PP[$i]->undangan_supph = '1';
+										$PP[$i]->pendaftaran_pc = '1';
+										$PP[$i]->pengambilan_dokumen = '1';								
+										$PP[$i]->ba_aanwijzing = '1';	
+										$PP[$i]->pembukaan_penawaran_1 = '1';	
+										$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];
+										$PP[$i]->pembukaan_penawaran_2 = '-';			
+										$PP[$i]->evaluasi_penawaran_2 = '-';
+										$PP[$i]->negosiasi_klarifikasi = '-';
+										$PP[$i]->usulan_pemenang = '-';
+										$PP[$i]->penetapan_pemenang	 = '-';								
+										
+										$PP[$i]->save();
+									}
 								}
+								
+								$total = count($_POST['perusahaan']);
+								if(count($PP)<$total){
+									$PPkurang = $total - count($PP);
+									for($j=0;$j<$PPkurang;$j++){
+										$PPbaru = new PenerimaPengadaan;
+										$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+										$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+										$PPbaru->alamat=$_POST['alamat'][$j+$i];									
+										$PPbaru->npwp=$_POST['npwp'][$j+$i];			
+										$PPbaru->nilai = 0;
+										$PPbaru->biaya = '0';							
+										$PPbaru->nomor_surat_penawaran = '-';
+										$PPbaru->tanggal_penawaran = '-';														
+										$PPbaru->undangan_prakualifikasi = '1';
+										$PPbaru->pendaftaran_pelelangan_pq = '1';
+										$PPbaru->pengambilan_lelang_pq = '1';	
+										$PPbaru->penyampaian_lelang = '1';
+										$PPbaru->evaluasi_pq = '1';
+										$PPbaru->penetapan_pq = '1';
+										$PPbaru->undangan_supph = '1';
+										$PPbaru->pendaftaran_pc = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->ba_aanwijzing = '1';
+										$PPbaru->pembukaan_penawaran_1 = '1';
+										$PPbaru->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i+$j];	
+										$PPbaru->pembukaan_penawaran_2 = '-';
+										$PPbaru->evaluasi_penawaran_2 = '-';
+										$PPbaru->negosiasi_klarifikasi = '-';
+										$PPbaru->usulan_pemenang = '-';
+										$PPbaru->penetapan_pemenang = '-';
+										
+										$PPbaru->save();
+									}
+									
+								}
+							}//end dua sampul
+							else if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->alamat = $_POST['alamat'][$i];								
+										$PP[$i]->npwp = $_POST['npwp'][$i];
+										// $PP[$i]->nilai = 0;						
+										$PP[$i]->biaya = $_POST['biaya'][$i];		
+										
+										$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];
+										$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];
+										
+										$PP[$i]->undangan_prakualifikasi = '1';
+										$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+										$PP[$i]->pengambilan_lelang_pq = '1';	
+										$PP[$i]->penyampaian_lelang = '1';
+										$PP[$i]->evaluasi_pq = '1';
+										$PP[$i]->penetapan_pq = '1';
+										$PP[$i]->undangan_supph = '1';
+										$PP[$i]->pendaftaran_pc = '1';
+										$PP[$i]->pengambilan_dokumen = '1';								
+										$PP[$i]->ba_aanwijzing = '1';	
+										$PP[$i]->pembukaan_penawaran_1 = '1';	
+										$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];
+										$PP[$i]->pembukaan_penawaran_2 = '-';			
+										$PP[$i]->evaluasi_penawaran_2 = '-';
+										$PP[$i]->negosiasi_klarifikasi = '-';
+										$PP[$i]->usulan_pemenang = '-';
+										$PP[$i]->penetapan_pemenang	 = '-';								
+										
+										$PP[$i]->save();
+									}
+								}
+								
+								$total = count($_POST['perusahaan']);
+								if(count($PP)<$total){
+									$PPkurang = $total - count($PP);
+									for($j=0;$j<$PPkurang;$j++){
+										$PPbaru = new PenerimaPengadaan;
+										$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+										$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+										$PPbaru->alamat=$_POST['alamat'][$j+$i];									
+										$PPbaru->npwp=$_POST['npwp'][$j+$i];		
+										$PPbaru->nilai = 0;
+										$PPbaru->biaya = $_POST['biaya'][$j+$i];	
+										
+										$PPbaru->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$j+$i];	
+										$PPbaru->tanggal_penawaran = $_POST['tanggal_penawaran'][$j+$i];													
+										$PPbaru->undangan_prakualifikasi = '1';
+										$PPbaru->pendaftaran_pelelangan_pq = '1';
+										$PPbaru->pengambilan_lelang_pq = '1';	
+										$PPbaru->penyampaian_lelang = '1';
+										$PPbaru->evaluasi_pq = '1';
+										$PPbaru->penetapan_pq = '1';
+										$PPbaru->undangan_supph = '1';
+										$PPbaru->pendaftaran_pc = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->ba_aanwijzing = '1';
+										$PPbaru->pembukaan_penawaran_1 = '1';
+										$PPbaru->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i+$j];	
+										$PPbaru->pembukaan_penawaran_2 = '-';
+										$PPbaru->evaluasi_penawaran_2 = '-';
+										$PPbaru->negosiasi_klarifikasi = '-';
+										$PPbaru->usulan_pemenang = '-';
+										$PPbaru->penetapan_pemenang = '-';
+										
+										$PPbaru->save();
+									}
+									
+								}
+							}//end satu sampul
+						}//end isset perusahaan		
+						
+						if($Pengadaan->save(false)){
+							if($BAEP->save(false)){
+								$this->redirect(array('editberitaacaraevaluasipenawaran','id'=>$id));
 							}
 						}
 					}
 				}
 
 				$this->render('beritaacaraevaluasipenawaran',array(
-					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,'PP'=>$PP,'BAPP'=>$BAPP,
+					'BAEP'=>$BAEP,'PP'=>$PP,'BAPP'=>$BAPP,
+				));
+			}
+		}
+	}
+	
+	public function actionEditBeritaacaraevaluasipenawaran()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$DokBAEP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAEP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAEP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Satu"');
+				}
+				
+				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Satu"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Satu"');
+				}
+				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_1 = "1" or pembukaan_penawaran_1 = "2" ) and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
+				{
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$BAEP->validate();
+					if($valid){
+					
+						if(isset($_POST['perusahaan'])){
+							if ($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->alamat=$_POST['alamat'][$i];									
+										$PP[$i]->npwp=$_POST['npwp'][$i];		
+										// $PP[$i]->nilai = 0;									
+										// $PP[$i]->biaya = '0';				
+										// $PP[$i]->nomor_surat_penawaran = '-';									
+										// $PP[$i]->tanggal_penawaran = '-';												
+										// $PP[$i]->undangan_prakualifikasi = '1';
+										// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
+										// $PP[$i]->pengambilan_lelang_pq = '1';	
+										// $PP[$i]->penyampaian_lelang = '1';
+										// $PP[$i]->evaluasi_pq = '1';
+										// $PP[$i]->penetapan_pq = '1';
+										// $PP[$i]->undangan_supph = '1';
+										// $PP[$i]->pendaftaran_pc = '1';
+										// $PP[$i]->pengambilan_dokumen = '1';								
+										// $PP[$i]->ba_aanwijzing = '1';	
+										// $PP[$i]->pembukaan_penawaran_1 = '1';	
+										$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];
+										// $PP[$i]->pembukaan_penawaran_2 = '-';			
+										// $PP[$i]->evaluasi_penawaran_2 = '-';
+										// $PP[$i]->negosiasi_klarifikasi = '-';
+										// $PP[$i]->usulan_pemenang = '-';
+										// $PP[$i]->penetapan_pemenang	 = '-';								
+										
+										$PP[$i]->save();
+									}
+								}
+								
+								$total = count($_POST['perusahaan']);
+								if(count($PP)<$total){
+									$PPkurang = $total - count($PP);
+									for($j=0;$j<$PPkurang;$j++){
+										$PPbaru = new PenerimaPengadaan;
+										$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+										$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+										$PPbaru->alamat=$_POST['alamat'][$j+$i];										
+										$PPbaru->npwp=$_POST['npwp'][$j+$i];			
+										$PPbaru->nilai = 0;
+										$PPbaru->biaya = '0';							
+										$PPbaru->nomor_surat_penawaran = '-';
+										$PPbaru->tanggal_penawaran = '-';														
+										$PPbaru->undangan_prakualifikasi = '1';
+										$PPbaru->pendaftaran_pelelangan_pq = '1';
+										$PPbaru->pengambilan_lelang_pq = '1';	
+										$PPbaru->penyampaian_lelang = '1';
+										$PPbaru->evaluasi_pq = '1';
+										$PPbaru->penetapan_pq = '1';
+										$PPbaru->undangan_supph = '1';
+										$PPbaru->pendaftaran_pc = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->ba_aanwijzing = '1';
+										$PPbaru->pembukaan_penawaran_1 = '1';
+										$PPbaru->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i+$j];	
+										$PPbaru->pembukaan_penawaran_2 = '-';
+										$PPbaru->evaluasi_penawaran_2 = '-';
+										$PPbaru->negosiasi_klarifikasi = '-';
+										$PPbaru->usulan_pemenang = '-';
+										$PPbaru->penetapan_pemenang = '-';
+										
+										$PPbaru->save();
+									}
+									
+								}
+							}//end dua sampul
+							else if ($Pengadaan->metode_penawaran == 'Satu Sampul'){
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->alamat = $_POST['alamat'][$i];								
+										$PP[$i]->npwp = $_POST['npwp'][$i];
+										// $PP[$i]->nilai = 0;						
+										$PP[$i]->biaya = $_POST['biaya'][$i];		
+										
+										$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];								
+										$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];										
+										// $PP[$i]->undangan_prakualifikasi = '1';
+										// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
+										// $PP[$i]->pengambilan_lelang_pq = '1';	
+										// $PP[$i]->penyampaian_lelang = '1';
+										// $PP[$i]->evaluasi_pq = '1';
+										// $PP[$i]->penetapan_pq = '1';
+										// $PP[$i]->undangan_supph = '1';
+										// $PP[$i]->pendaftaran_pc = '1';
+										// $PP[$i]->pengambilan_dokumen = '1';								
+										// $PP[$i]->ba_aanwijzing = '1';	
+										// $PP[$i]->pembukaan_penawaran_1 = '1';	
+										$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];
+										// $PP[$i]->pembukaan_penawaran_2 = '-';			
+										// $PP[$i]->evaluasi_penawaran_2 = '-';
+										// $PP[$i]->negosiasi_klarifikasi = '-';
+										// $PP[$i]->usulan_pemenang = '-';
+										// $PP[$i]->penetapan_pemenang	 = '-';								
+										
+										$PP[$i]->save();
+									}
+								}
+								
+								$total = count($_POST['perusahaan']);
+								if(count($PP)<$total){
+									$PPkurang = $total - count($PP);
+									for($j=0;$j<$PPkurang;$j++){
+										$PPbaru = new PenerimaPengadaan;
+										$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+										$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+										$PPbaru->alamat=$_POST['alamat'][$j+$i];									
+										$PPbaru->npwp=$_POST['npwp'][$j+$i];		
+										$PPbaru->nilai = 0;
+										$PPbaru->biaya = $_POST['biaya'][$j+$i];	
+										
+										$PPbaru->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$j+$i];	
+										$PPbaru->tanggal_penawaran = $_POST['tanggal_penawaran'][$j+$i];														
+										$PPbaru->undangan_prakualifikasi = '1';
+										$PPbaru->pendaftaran_pelelangan_pq = '1';
+										$PPbaru->pengambilan_lelang_pq = '1';	
+										$PPbaru->penyampaian_lelang = '1';
+										$PPbaru->evaluasi_pq = '1';
+										$PPbaru->penetapan_pq = '1';
+										$PPbaru->undangan_supph = '1';
+										$PPbaru->pendaftaran_pc = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->pengambilan_dokumen = '1';
+										$PPbaru->ba_aanwijzing = '1';
+										$PPbaru->pembukaan_penawaran_1 = '1';
+										$PPbaru->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i+$j];	
+										$PPbaru->pembukaan_penawaran_2 = '-';
+										$PPbaru->evaluasi_penawaran_2 = '-';
+										$PPbaru->negosiasi_klarifikasi = '-';
+										$PPbaru->usulan_pemenang = '-';
+										$PPbaru->penetapan_pemenang = '-';
+										
+										$PPbaru->save();
+									}
+									
+								}
+							}//end satu sampul
+						}//end isset perusahaan		
+			
+						if($BAEP->save(false)){
+							$this->redirect(array('editberitaacaraevaluasipenawaran','id'=>$id));
+						}
+					}
+				}
+
+				$this->render('beritaacaraevaluasipenawaran',array(
+					'BAEP'=>$BAEP,'PP'=>$PP,'BAPP'=>$BAPP,
 				));
 
 			}
@@ -5561,7 +5964,7 @@ class SiteController extends Controller
 		}
 	}
 	
-	public function actionBeritaacarapembukaanpenawaran2()
+	public function actionPembukaanpenawaran2()
 	{	
 		$id = Yii::app()->getRequest()->getQuery('id');
 		if (Yii::app()->user->isGuest) {
@@ -5571,8 +5974,8 @@ class SiteController extends Controller
 			if (Yii::app()->user->getState('role') == 'anggota') {
 			
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status ='21';
-				
+				$Pengadaan->status ='27';
+						
 				$Dokumen1= new Dokumen;
 				$criteria=new CDbcriteria;
 				$criteria->select='max(id_dokumen) AS maxId';
@@ -5592,25 +5995,37 @@ class SiteController extends Controller
 				$Dokumen2=new Dokumen;
 				$Dokumen2->id_dokumen=$somevariable+2;
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$Dokumen2->nama_dokumen='Daftar Hadir Pembukaan Penawaran Sampul Dua';
+					$Dokumen2->nama_dokumen='Lampiran Berita Acara Pembukaan Penawaran Sampul Dua';
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$Dokumen2->nama_dokumen='Daftar Hadir Pembukaan Penawaran Tahap Dua';
+					$Dokumen2->nama_dokumen='Lampiran Berita Acara Pembukaan Penawaran Tahap Dua';
 				}
 				$Dokumen2->tempat='Jakarta';
 				$Dokumen2->status_upload='Belum Selesai';
 				$Dokumen2->id_pengadaan=$id;
 				
+				$Dokumen3=new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+3;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen3->nama_dokumen='Daftar Hadir Pembukaan Penawaran Sampul Dua';
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen3->nama_dokumen='Daftar Hadir Pembukaan Penawaran Tahap Dua';
+				}
+				$Dokumen3->tempat='Jakarta';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
 				$BAPP= new BeritaAcaraPembukaanPenawaran;
 				$BAPP->id_dokumen=$Dokumen1->id_dokumen;
-
+				$BAPP->nomor='-';
+				
+				
 				$DH= new DaftarHadir;
-				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				$DH->id_dokumen=$Dokumen3->id_dokumen;
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$DH->acara="Pembukaan Penawaran Sampul Dua";
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 					$DH->acara="Pembukaan Penawaran Tahap Dua";
 				}
-				
 				
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
@@ -5622,23 +6037,15 @@ class SiteController extends Controller
 					$DokRKS=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 					$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 					$Dokumen1->tanggal=$RKS->tanggal_pembukaan_penawaran2;
-					$Dokumen2->tanggal=$RKS->tanggal_pembukaan_penawaran2;
-					$DH->jam=$RKS->waktu_pembukaan_penawaran2;
-					$DH->tempat_hadir=$RKS->tempat_pembukaan_penawaran2;
+					$BAPP->waktu=$RKS->waktu_pembukaan_penawaran2;
+					$BAPP->tempat=$RKS->tempat_pembukaan_penawaran2;
 				} else {
 					$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
 					$Dokumen1->tanggal=$SUPP->tanggal_undangan;
 					$Dokumen2->tanggal=$SUPP->tanggal_undangan;
-					$DH->jam=$SUPP->waktu;
-					$DH->tempat_hadir=$SUPP->tempat;
+					$BAPP->waktu=$SUPP->waktu;
+					$BAPP->tempat=$SUPP->tempat;
 				}
-				
-				if($Pengadaan->metode_penawaran=="Dua Sampul") {
-					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
-				} else if($Pengadaan->metode_penawaran=="Dua Tahap") {
-					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
-				}
-				$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
 				
 				//Uncomment the following line if AJAX validation is needed
 				//$this->performAjaxValidation($model);
@@ -5650,7 +6057,10 @@ class SiteController extends Controller
 					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 					$valid=$BAPP->validate();
 					if($valid){
-					
+						$Dokumen2->tanggal=$Dokumen1->tanggal;
+						$Dokumen3->tanggal=$Dokumen1->tanggal;
+						$DH->jam=$BAPP->waktu;
+						$DH->tempat_hadir=$BAPP->tempat;
 						if(isset($_POST['perusahaan'])){							
 							
 							for($i=0;$i<count($PP);$i++){
@@ -5724,10 +6134,273 @@ class SiteController extends Controller
 						}//end isset perusahaan
 						
 						if($Pengadaan->save(false)){
-							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
 								if($BAPP->save(false)&&$DH->save(false)){
-									$this->redirect(array('editberitaacarapembukaanpenawaran2','id'=>$Dokumen1->id_pengadaan));
+									$this->redirect(array('editpembukaanpenawaran2','id'=>$id));
 								}
+							}
+						}
+					}
+				}
+				
+				$this->render('pembukaanpenawaran2',array(
+					'BAPP'=>$BAPP,'PP'=>$PP,'Dokumen1'=>$Dokumen1,
+				));
+			}
+		}
+	}
+	
+	public function actionEditPembukaanpenawaran2()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
+				}
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Lampiran Berita Acara Pembukaan Penawaran Sampul Dua"');
+					$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Dua"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Lampiran Berita Acara Pembukaan Penawaran Tahap Dua"');
+					$Dokumen3=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran Tahap Dua"');
+				}
+				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($Dokumen1->id_dokumen);
+				$DH=DaftarHadir::model()->findByPk($Dokumen3->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
+				{
+					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
+					$valid=$BAPP->validate();
+					if($valid){
+						$Dokumen2->tanggal=$Dokumen1->tanggal;
+						$Dokumen3->tanggal=$Dokumen1->tanggal;
+						$DH->jam=$BAPP->waktu;
+						$DH->tempat_hadir=$BAPP->tempat;
+						if(isset($_POST['perusahaan'])){							
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+									$PP[$i]->pengambilan_lelang_pq = '1';	
+									$PP[$i]->penyampaian_lelang = '1';
+									$PP[$i]->evaluasi_pq = '1';
+									$PP[$i]->penetapan_pq = '1';
+									$PP[$i]->undangan_supph = '1';
+									$PP[$i]->pendaftaran_pc = '1';
+									$PP[$i]->pengambilan_dokumen = '1';								
+									$PP[$i]->ba_aanwijzing = '1';	
+									$PP[$i]->pembukaan_penawaran_1 = '1';	
+									$PP[$i]->evaluasi_penawaran_1 = '1';	
+									$PP[$i]->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i];			
+									$PP[$i]->evaluasi_penawaran_2 = '-';
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = 0;
+									$PPbaru->biaya = '0';							
+									$PPbaru->nomor_surat_penawaran = '-';
+									$PPbaru->tanggal_penawaran = '-';														
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->pendaftaran_pelelangan_pq = '1';
+									$PPbaru->pengambilan_lelang_pq = '1';	
+									$PPbaru->penyampaian_lelang = '1';
+									$PPbaru->evaluasi_pq = '1';
+									$PPbaru->penetapan_pq = '1';
+									$PPbaru->undangan_supph = '1';
+									$PPbaru->pendaftaran_pc = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->ba_aanwijzing = '1';	
+									$PPbaru->pembukaan_penawaran_1 = '1';	
+									$PPbaru->evaluasi_penawaran_1 = '1';	
+									$PPbaru->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i+$j];	
+									$PPbaru->evaluasi_penawaran_2 = '-';
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang = '-';
+									
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}//end isset perusahaan
+						
+						if($Pengadaan->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($BAPP->save(false)&&$DH->save(false)){
+									$this->redirect(array('editpembukaanpenawaran2','id'=>$id));
+								}
+							}
+						}
+					}
+				}
+				$this->render('pembukaanpenawaran2',array(
+					'BAPP'=>$BAPP,'PP'=>$PP,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,'DH'=>$DH,
+				));
+
+			}
+		}
+	}
+	
+	public function actionBeritaacarapembukaanpenawaran2()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='28';
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Dua"');
+				}
+				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
+				}
+				
+				if($Pengadaan->metode_penawaran=="Dua Sampul") {
+					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
+				} else if($Pengadaan->metode_penawaran=="Dua Tahap") {
+					$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
+				}
+				$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+				
+				$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
+				{
+					$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
+					$valid=$BAPP->validate();
+					if($valid){
+						if(isset($_POST['perusahaan'])){							
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+									$PP[$i]->pengambilan_lelang_pq = '1';	
+									$PP[$i]->penyampaian_lelang = '1';
+									$PP[$i]->evaluasi_pq = '1';
+									$PP[$i]->penetapan_pq = '1';
+									$PP[$i]->undangan_supph = '1';
+									$PP[$i]->pendaftaran_pc = '1';
+									$PP[$i]->pengambilan_dokumen = '1';								
+									$PP[$i]->ba_aanwijzing = '1';	
+									$PP[$i]->pembukaan_penawaran_1 = '1';	
+									$PP[$i]->evaluasi_penawaran_1 = '1';	
+									$PP[$i]->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i];			
+									$PP[$i]->evaluasi_penawaran_2 = '-';
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = 0;
+									$PPbaru->biaya = '0';							
+									$PPbaru->nomor_surat_penawaran = '-';
+									$PPbaru->tanggal_penawaran = '-';														
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->pendaftaran_pelelangan_pq = '1';
+									$PPbaru->pengambilan_lelang_pq = '1';	
+									$PPbaru->penyampaian_lelang = '1';
+									$PPbaru->evaluasi_pq = '1';
+									$PPbaru->penetapan_pq = '1';
+									$PPbaru->undangan_supph = '1';
+									$PPbaru->pendaftaran_pc = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->ba_aanwijzing = '1';	
+									$PPbaru->pembukaan_penawaran_1 = '1';	
+									$PPbaru->evaluasi_penawaran_1 = '1';	
+									$PPbaru->pembukaan_penawaran_2 = $_POST['pembukaan_penawaran_2'][$i+$j];	
+									$PPbaru->evaluasi_penawaran_2 = '-';
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang = '-';
+									
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}//end isset perusahaan
+						
+						if($Pengadaan->save(false)){
+							if($BAPP->save(false)){
+								$this->redirect(array('editberitaacarapembukaanpenawaran2','id'=>$id));
 							}
 						}
 					}
@@ -5743,6 +6416,7 @@ class SiteController extends Controller
 						'BAPP'=>$BAPP,'PP'=>$PP,'BAEP'=>$BAEP,'Dok0'=>$Dok0,
 					));
 				} else {
+					$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
 					$this->render('beritaacarapembukaanpenawaran2',array(
 						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
 					));
@@ -5763,15 +6437,12 @@ class SiteController extends Controller
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
-					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran Sampul Dua"');
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
 				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
-					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Dua"');
-					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Pembukaan Penawaran Tahap Dua"');
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Dua"');
 				}
 				
-				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($Dokumen1->id_dokumen);
-				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
 				
 				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
@@ -5864,8 +6535,8 @@ class SiteController extends Controller
 							
 						}//end isset perusahaan
 						
-						if($BAPP->save(false)&&$DH->save(false)){
-							$this->redirect(array('editberitaacarapembukaanpenawaran2','id'=>$Dokumen1->id_pengadaan));
+						if($BAPP->save(false)){
+							$this->redirect(array('editberitaacarapembukaanpenawaran2','id'=>$id));
 						}
 						
 					}
@@ -5879,14 +6550,316 @@ class SiteController extends Controller
 					}
 					$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
 					$this->render('beritaacarapembukaanpenawaran2',array(
-						'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,'BAEP'=>$BAEP,'Dok0'=>$Dok0,
+						'BAPP'=>$BAPP,'PP'=>$PP,'BAEP'=>$BAEP,'Dok0'=>$Dok0,
 					));
 				} else {
 					$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($Dok0->id_dokumen);
 					$this->render('beritaacarapembukaanpenawaran2',array(
-						'BAPP'=>$BAPP,'DH'=>$DH,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
+						'BAPP'=>$BAPP,'PP'=>$PP,'SUPP'=>$SUPP,'Dok0'=>$Dok0,
 					));
 				}
+
+			}
+		}
+	}
+	
+	public function actionEvaluasipenawaran2()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='29';
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Dua"');
+				}				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				
+				$DokRKS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "RKS"');
+				$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
+				
+				$Dokumen1= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen1->model()->find($criteria);
+				$somevariable = $row['maxId'];				
+								
+				$Dokumen1->id_dokumen=$somevariable+1;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen1->nama_dokumen='Berita Acara Evaluasi Penawaran Sampul Dua';
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen1->nama_dokumen='Berita Acara Evaluasi Penawaran Tahap Dua';
+				}
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$id;
+				$Dokumen1->tanggal=$RKS->tanggal_evaluasi_penawaran2;
+				
+				$Dokumen2=new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+2;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen2->nama_dokumen='Daftar Hadir Evaluasi Penawaran Sampul Dua';
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen2->nama_dokumen='Daftar Hadir Evaluasi Penawaran Tahap Dua';
+				}
+				$Dokumen2->tempat='Jakarta';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$BAEP= new BeritaAcaraEvaluasiPenawaran;
+				$BAEP->id_dokumen=$Dokumen1->id_dokumen;
+				$BAEP->waktu=$RKS->waktu_evaluasi_penawaran2;
+				$BAEP->tempat=$RKS->tempat_evaluasi_penawaran2;
+				
+				$DH= new DaftarHadir;
+				$DH->id_dokumen=$Dokumen2->id_dokumen;
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DH->acara="Evaluasi Penawaran Sampul Dua";
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DH->acara="Evaluasi Penawaran Tahap Dua";
+				}
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+				
+				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
+				{
+					$Dokumen1->attributes=$_POST['Dokumen'];
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$BAEP->validate();
+					if($valid){
+						$DH->jam=$BAEP->waktu;
+						$DH->tempat_hadir=$BAEP->tempat;
+						$Dokumen2->tanggal=$Dokumen1->tanggal;
+						$Dokumen3->tanggal=$Dokumen1->tanggal;
+						if(isset($_POST['perusahaan'])){							
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = 0;									
+									$PP[$i]->biaya = $_POST['biaya'][$i];			
+									$PP[$i]->nomor_surat_penawaran = '-';									
+									$PP[$i]->tanggal_penawaran = '-';												
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+									$PP[$i]->pengambilan_lelang_pq = '1';	
+									$PP[$i]->penyampaian_lelang = '1';
+									$PP[$i]->evaluasi_pq = '1';
+									$PP[$i]->penetapan_pq = '1';
+									$PP[$i]->undangan_supph = '1';
+									$PP[$i]->pendaftaran_pc = '1';
+									$PP[$i]->pengambilan_dokumen = '1';								
+									$PP[$i]->ba_aanwijzing = '1';	
+									$PP[$i]->pembukaan_penawaran_1 = '1';	
+									$PP[$i]->evaluasi_penawaran_1 = '1';	
+									$PP[$i]->pembukaan_penawaran_2 = '1';			
+									$PP[$i]->evaluasi_penawaran_2 = $_POST['evaluasi_penawaran_2'][$i];
+									$PP[$i]->negosiasi_klarifikasi = '-';
+									$PP[$i]->usulan_pemenang = '-';
+									$PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = 0;
+									$PPbaru->biaya = $_POST['biaya'][$j+$i];					
+									$PPbaru->nomor_surat_penawaran = '-';
+									$PPbaru->tanggal_penawaran = '-';														
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->pendaftaran_pelelangan_pq = '1';
+									$PPbaru->pengambilan_lelang_pq = '1';	
+									$PPbaru->penyampaian_lelang = '1';
+									$PPbaru->evaluasi_pq = '1';
+									$PPbaru->penetapan_pq = '1';
+									$PPbaru->undangan_supph = '1';
+									$PPbaru->pendaftaran_pc = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->ba_aanwijzing = '1';	
+									$PPbaru->pembukaan_penawaran_1 = '1';	
+									$PPbaru->evaluasi_penawaran_1 = '1';	
+									$PPbaru->pembukaan_penawaran_2 ='1';
+									$PPbaru->evaluasi_penawaran_2 =  $_POST['evaluasi_penawaran_2'][$i+$j];	
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang = '-';
+									
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}//end isset perusahaan
+						
+						$Dokumen2->tanggal=$Dokumen1->tanggal;
+						if($Pengadaan->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($BAEP->save(false)&&$DH->save(false)){
+									$this->redirect(array('editberitaacaraevaluasipenawaran2','id'=>$Dokumen1->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('beritaacaraevaluasipenawaran2',array(
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'PP'=>$PP,'BAPP'=>$BAPP
+				));
+			}
+		}
+	}
+	
+	public function actionEditBeritaacaraevaluasipenawaran2()
+	{	
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {
+			if (Yii::app()->user->getState('role') == 'anggota') {
+			
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$DokBAPP=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Pembukaan Penawaran Tahap Dua"');
+				}				
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($DokBAPP->id_dokumen);
+				
+				if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Sampul Dua"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran Sampul Dua"');
+				} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+					$Dokumen1=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
+					$Dokumen2=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Penawaran Tahap Dua"');
+				}
+				
+				$Dokumen1->tanggal=Tanggal::getTanggalStrip($Dokumen1->tanggal);
+				
+				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($Dokumen1->id_dokumen);
+				$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+
+				$PP = PenerimaPengadaan::model()->findAll('pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['BeritaAcaraEvaluasiPenawaran']))
+				{
+					$Dokumen1->attributes=$_POST['Dokumen'];
+					$BAEP->attributes=$_POST['BeritaAcaraEvaluasiPenawaran'];
+					$valid=$BAEP->validate();
+					if($valid){
+					
+						if(isset($_POST['perusahaan'])){							
+							
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									// $PP[$i]->alamat='-';									
+									// $PP[$i]->npwp='-';		
+									// $PP[$i]->nilai = 0;									
+									// $PP[$i]->biaya = '0';				
+									// $PP[$i]->nomor_surat_penawaran = '-';									
+									// $PP[$i]->tanggal_penawaran = '-';												
+									// $PP[$i]->undangan_prakualifikasi = '1';
+									// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
+									// $PP[$i]->pengambilan_lelang_pq = '1';	
+									// $PP[$i]->penyampaian_lelang = '1';
+									// $PP[$i]->evaluasi_pq = '1';
+									// $PP[$i]->penetapan_pq = '1';
+									// $PP[$i]->undangan_supph = '1';
+									// $PP[$i]->pendaftaran_pc = '1';
+									// $PP[$i]->pengambilan_dokumen = '1';								
+									// $PP[$i]->ba_aanwijzing = '1';	
+									// $PP[$i]->pembukaan_penawaran_1 = '1';	
+									// $PP[$i]->evaluasi_penawaran_1 = '1';	
+									// $PP[$i]->pembukaan_penawaran_2 = '1';			
+									$PP[$i]->evaluasi_penawaran_2 = $_POST['evaluasi_penawaran_2'][$i];
+									// $PP[$i]->negosiasi_klarifikasi = '-';
+									// $PP[$i]->usulan_pemenang = '-';
+									// $PP[$i]->penetapan_pemenang	 = '-';								
+									
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat='-';									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = 0;
+									$PPbaru->biaya = '0';							
+									$PPbaru->nomor_surat_penawaran = '-';
+									$PPbaru->tanggal_penawaran = '-';														
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->pendaftaran_pelelangan_pq = '1';
+									$PPbaru->pengambilan_lelang_pq = '1';	
+									$PPbaru->penyampaian_lelang = '1';
+									$PPbaru->evaluasi_pq = '1';
+									$PPbaru->penetapan_pq = '1';
+									$PPbaru->undangan_supph = '1';
+									$PPbaru->pendaftaran_pc = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->pengambilan_dokumen = '1';
+									$PPbaru->ba_aanwijzing = '1';	
+									$PPbaru->pembukaan_penawaran_1 = '1';	
+									$PPbaru->evaluasi_penawaran_1 = '1';	
+									$PPbaru->pembukaan_penawaran_2 ='1';
+									$PPbaru->evaluasi_penawaran_2 =  $_POST['evaluasi_penawaran_2'][$i+$j];	
+									$PPbaru->negosiasi_klarifikasi = '-';
+									$PPbaru->usulan_pemenang = '-';
+									$PPbaru->penetapan_pemenang = '-';
+									
+									$PPbaru->save();
+								}
+								
+							}
+							
+						}//end isset perusahaan
+							
+						$Dokumen2->tanggal=$Dokumen1->tanggal;
+						if($Pengadaan->save(false)){
+							if($Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($BAEP->save(false)&&$DH->save(false)){
+									$this->redirect(array('editberitaacaraevaluasipenawaran2','id'=>$Dokumen1->id_pengadaan));
+								}
+							}
+						}
+					}
+				}
+
+				$this->render('beritaacaraevaluasipenawaran2',array(
+					'BAEP'=>$BAEP,'Dokumen1'=>$Dokumen1,'DH'=>$DH,'PP'=>$PP,'BAPP'=>$BAPP,
+				));
 
 			}
 		}
