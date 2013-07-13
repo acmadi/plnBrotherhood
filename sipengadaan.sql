@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2013 at 10:43 AM
+-- Generation Time: Jul 12, 2013 at 05:38 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -191,7 +191,7 @@ INSERT INTO `divisi` (`username`, `nama_divisi`, `password`) VALUES
 
 CREATE TABLE IF NOT EXISTS `dokumen` (
   `id_dokumen` bigint(32) NOT NULL,
-  `nama_dokumen` varchar(50) NOT NULL,
+  `nama_dokumen` varchar(256) NOT NULL,
   `tanggal` date NOT NULL,
   `tempat` varchar(20) NOT NULL,
   `id_pengadaan` bigint(32) NOT NULL,
@@ -274,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
 CREATE TABLE IF NOT EXISTS `hps` (
   `id_dokumen` bigint(20) NOT NULL,
   `nomor` varchar(50) NOT NULL,
+  `nilai_hps` int(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

@@ -14,12 +14,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		</script>
 	</div>
 
-	<div id="maincontent">
-		
+	<div id="maincontent">		
+	
 		<?php 
 			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
-           	<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
+        	<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
           		<div id="menuform">
                    <?php
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
@@ -62,8 +62,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
                     ?>
                 </div>
           	<?php } ?>
-                
-                <br/>
+			
+            <br/>
                 
 		<div class="form">
 
@@ -79,16 +79,31 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		<?php } ?>
 		
 		<div class="row">
-			<?php echo $form->labelEx($BAEP,'nomor'); ?>
-			<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-				Nomor Berita Acara Pembukaan Sampul Dua : <?php echo $BAPP->nomor ?> <br/>
-			<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-				Nomor Berita Acara Pembukaan Tahap Dua : <?php echo $BAPP->nomor ?> <br/>
-			<?php } ?>
-			<?php echo $form->textField($BAEP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($BAEP,'nomor'); ?>
+			<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen1,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen1->tanggal,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
+			<?php echo $form->error($Dokumen1,'tanggal'); ?>
 		</div>
-		
+	
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'waktu (Format HH:MM)'); ?>
+			<?php echo $form->textField($BAEP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BAEP,'waktu'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($BAEP,'tempat'); ?>
+			<?php echo $form->textArea($BAEP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($BAEP,'tempat'); ?>
+		</div>
+	
 		<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
@@ -101,26 +116,30 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					
 					)); 
 				?>
-		</div>	
-	
+		</div>
+		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->status=='29'? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($BAEP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 		<?php $this->endWidget(); ?>
 
 		</div><!-- form -->
 		
-	<?php if($Pengadaan->status!='29') { ?>
+	<?php if($BAEP->isNewRecord) { ?>
+		
+	<?php } else { ?>
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
 				<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
-					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Sampul Dua', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Evaluasi Penawaran Sampul Dua', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Evaluasi Penawaran Sampul Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
-					<li><?php echo CHtml::link('Berita Acara Evaluasi Penawaran Tahap Dua', array('docx/download','id'=>$BAEP->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Lampiran Berita Acara Evaluasi Penawaran Tahap Dua', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Evaluasi Penawaran Tahap Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } ?>
 			</ul>
 		</div>
