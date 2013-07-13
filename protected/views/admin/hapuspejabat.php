@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Hapus Divisi';
+	$this->pageTitle=Yii::app()->name . ' | Hapus Pejabat Pengadaan';
 ?>
 
 <div id="pagecontent">
@@ -8,8 +8,8 @@
 	<ul>
 		<li><?php echo CHtml::link('Tambah pejabat pengadaan', array('admin/tambahpejabat')) ?></li>
 		<li><?php echo CHtml::link('Tambah panitia pengadaan', array('admin/tambahpanitia')) ?></li>
-		<li><?php echo CHtml::link('Hapus pejabat pengadaan', array('admin/hapuspejabat')) ?></li>
-		<li class="onprogress"><?php echo CHtml::link('Hapus panitia pengadaan', array('admin/hapuspanitia')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Hapus pejabat pengadaan', array('admin/hapuspejabat')) ?></li>
+		<li><?php echo CHtml::link('Hapus panitia pengadaan', array('admin/hapuspanitia')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -21,8 +21,8 @@
 			)); ?>
 
 			<div class="row">
-				<?php echo $form->checkBoxList($panitia, 'id_panitia', CHtml::listData($panitia->findAllByAttributes(array('jenis_panitia'=>'Panitia', 'status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia')); ?>
-				<?php echo $form->error($panitia,'id_panitia'); ?>
+				<?php echo $form->checkBoxList($pejabat, 'id_panitia', CHtml::listData($pejabat->findAllByAttributes(array('jenis_panitia'=>'Pejabat', 'status_panitia'=>'Aktif')), 'id_panitia', 'nama_panitia')); ?>
+				<?php echo $form->error($pejabat,'id_panitia'); ?>
 			</div>
 
 			<div class="row buttons">
@@ -32,5 +32,5 @@
 			<?php $this->endWidget(); ?>
 		</div>
 	</div>
-	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/divisi'), 'class'=>'sidafbutton'));  ?></div>
+	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/panitia'), 'class'=>'sidafbutton'));  ?></div>
 </div>

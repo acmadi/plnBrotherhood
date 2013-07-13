@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Detail ' . $panitia->nama_panitia;
+	$this->pageTitle=Yii::app()->name . ' | Detil ' . $panitia->nama_panitia;
 ?>
 
 <div id="pagecontent">
