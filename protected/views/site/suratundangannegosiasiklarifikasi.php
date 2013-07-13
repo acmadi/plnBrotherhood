@@ -2,8 +2,8 @@
 /* @var $this SiteController */
 
 $id = Yii::app()->getRequest()->getQuery('id');
-$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
-$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
+$Pengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
@@ -20,11 +20,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                 <div id="menuform">
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array($SUNK->isNewRecord?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Negosiasi dan Klarifikasi"') == null)?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
-                            ),
-                        ));
+							'items'=>array(
+									array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+									array('label'=>'Klarifikasi dan Negosiasi', 'url'=>array($Pengadaan->status=='30'?('/site/negosiasiklarifikasi'):('/site/editnegosiasiklarifikasi'),'id'=>$id)),
+									array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='31'?'/site/beritaacaranegosiasiklarifikasi':($Pengadaan->status=='30'?'':'/site/editberitaacaranegosiasiklarifikasi'),'id'=>$id)),
+							),
+						));
                     ?>
                 </div>
                 <br/>
