@@ -9,6 +9,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#16').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -64,11 +67,31 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($SUNK,'tanggal'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$SUNK,
+					'attribute'=>'tanggal_undangan',
+					'value'=>$SUNK->tanggal_undangan,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($SUNK,'tanggal_undangan'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($SUNK,'waktu (Format HH:MM)'); ?>
+			<?php echo $form->textField($SUNK,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($SUNK,'waktu'); ?>
+		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUNK,'perihal'); ?>
-			<?php echo $form->textArea($SUNK,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUNK,'perihal'); ?>
+			<?php echo $form->labelEx($SUNK,'tempat'); ?>
+			<?php echo $form->textArea($SUNK,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUNK,'tempat'); ?>
 		</div>
 		
 		<div class="row buttons">

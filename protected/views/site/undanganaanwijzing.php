@@ -9,6 +9,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#11').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -80,12 +83,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($SUP,'perihal'); ?>
-			<?php echo $form->textArea($SUP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUP,'perihal'); ?>
-		</div>		
 		
 		<div class="row">
 			<?php echo $form->labelEx($SUP,'tanggal Aanwijzing'); ?>
@@ -102,13 +99,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'waktu Aanwijzing (Format HH:MM)'); ?>
+			<?php echo $form->labelEx($SUP,'waktu (Format HH:MM)'); ?>
 			<?php echo $form->textField($SUP,'waktu',array('size'=>56,'maxlength'=>10)); ?>
 			<?php echo $form->error($SUP,'waktu'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUP,'tempat Pembukaan Penawaran'); ?>
+			<?php echo $form->labelEx($SUP,'tempat'); ?>
 			<?php echo $form->textArea($SUP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($SUP,'tempat'); ?>
 		</div>
@@ -129,7 +126,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">
-				<li><?php echo CHtml::link('Surat Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>			
+				<li><?php echo CHtml::link('Nota Dinas Undangan Aanwijzing', array('docx/download','id'=>$SUP->id_dokumen)); ?></li>			
 			</ul>
 		</div>
 	<?php } ?>

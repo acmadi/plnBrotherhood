@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2013 at 05:38 PM
+-- Generation Time: Jul 13, 2013 at 03:04 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -397,6 +397,21 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan_tor_rab` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nota_dinas_undangan`
+--
+
+CREATE TABLE IF NOT EXISTS `nota_dinas_undangan` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(50) NOT NULL,
+  `tanggal_undangan` date NOT NULL,
+  `waktu` time NOT NULL,
+  `tempat` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nota_dinas_usulan_pemenang`
 --
 
@@ -506,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `tanggal_penawaran` varchar(256) NOT NULL,
   PRIMARY KEY (`id_penerima`),
   KEY `id_pengadaan` (`id_pengadaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 -- --------------------------------------------------------
 
@@ -564,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=182 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=192 ;
 
 -- --------------------------------------------------------
 
@@ -690,38 +705,6 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `surat_undangan_negosiasi_klarifikasi`
---
-
-CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `perihal` varchar(100) NOT NULL,
-  `tanggal_undangan` date NOT NULL,
-  `waktu` time NOT NULL,
-  `tempat` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `surat_undangan_pembukaan_penawaran`
---
-
-CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `perihal` varchar(100) NOT NULL,
-  `tanggal_undangan` date NOT NULL,
-  `waktu` time NOT NULL,
-  `tempat` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `surat_undangan_pengambilan_dokumen_pengadaan`
 --
 
@@ -731,22 +714,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
   `tanggal_pengambilan` date NOT NULL,
   `waktu_pengambilan` time NOT NULL,
   `tempat_pengambilan` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `surat_undangan_penjelasan`
---
-
-CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `perihal` varchar(100) NOT NULL,
-  `tanggal_undangan` date NOT NULL,
-  `waktu` time NOT NULL,
-  `tempat` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -948,6 +915,12 @@ ALTER TABLE `nota_dinas_permintaan_tor_rab`
   ADD CONSTRAINT `nota_dinas_permintaan_tor_rab_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `nota_dinas_undangan`
+--
+ALTER TABLE `nota_dinas_undangan`
+  ADD CONSTRAINT `nota_dinas_undangan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `nota_dinas_usulan_pemenang`
 --
 ALTER TABLE `nota_dinas_usulan_pemenang`
@@ -1033,28 +1006,10 @@ ALTER TABLE `surat_pernyataan_minat`
   ADD CONSTRAINT `surat_pernyataan_minat_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `surat_undangan_negosiasi_klarifikasi`
---
-ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
-  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_pembukaan_penawaran`
---
-ALTER TABLE `surat_undangan_pembukaan_penawaran`
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `surat_undangan_pengambilan_dokumen_pengadaan`
 --
 ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
   ADD CONSTRAINT `surat_undangan_pengambilan_dokumen_pengadaan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_penjelasan`
---
-ALTER TABLE `surat_undangan_penjelasan`
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_permintaan_penawaran_harga`
