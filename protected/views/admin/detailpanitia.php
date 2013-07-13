@@ -1,13 +1,13 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Detail ' . $panitia->nama_panitia;
+	$this->pageTitle=Yii::app()->name . ' | Detil ' . $panitia->nama_panitia;
 ?>
 
 <div id="pagecontent">
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah panitia', array('site/statistik', 'category'=>'1', 'chart'=>'1')) ?></li>
-		<li><?php echo CHtml::link('Hapus panitia', array('site/statistik', 'category'=>'2', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Tambah panitia pengadaan', array('admin/tambahpanitia')) ?></li>
+		<li><?php echo CHtml::link('Hapus panitia pengadaan', array('admin/hapuspanitia')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -62,6 +62,13 @@
 				<?php echo $form->error($panitia,'tanggal_sk'); ?>
 			</div>
 
+			<script type="text/javascript">
+				function emptyNewRow(row) {
+					row.find('#id').attr('value',-1);
+					row.find('#idluar').attr('value',-1);
+				}
+			</script>
+
 			<div class="row">
 				<?php echo $form->labelEx($panitia,'Anggota dari Divisi Umum'); ?>
 				<?php
@@ -71,6 +78,7 @@
 					'viewName' => 'formdetailpanitia',
 					'labelAdd' => 'Tambah Anggota',
 					'labelDel' => 'Hapus Anggota',
+					'onAdd'=>'emptyNewRow',
 					));
 				?>
 			</div>
@@ -86,6 +94,7 @@
 					'viewName' => 'formdetailpanitialuar',
 					'labelAdd' => 'Tambah Anggota',
 					'labelDel' => 'Hapus Anggota',
+					'onAdd'=>'emptyNewRow',
 					));
 				?>
 			</div>
