@@ -13,7 +13,7 @@
 	</div>
 	<div id="maincontent">
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
-			'dataProvider'=>$model->search(),
+			'dataProvider'=>$model->searchAnggota(),
 			// 'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 			// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 			'columns'=>array(

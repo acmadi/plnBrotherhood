@@ -6,8 +6,8 @@
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah panitia', array('site/statistik', 'category'=>'1', 'chart'=>'1')) ?></li>
-		<li><?php echo CHtml::link('Hapus panitia', array('site/statistik', 'category'=>'2', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Tambah panitia pengadaan', array('admin/tambahpanitia')) ?></li>
+		<li><?php echo CHtml::link('Hapus panitia pengadaan', array('admin/hapuspanitia')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -25,8 +25,6 @@
 				'nama_panitia',
 				'SK_panitia',
 				'tanggal_sk',
-				'jumlah_anggota',
-				'status_panitia',
 			),
 		));
 		?>
@@ -42,10 +40,6 @@
 					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
 				),
 				'nama_panitia',
-				array(
-					'name'=>'Status pejabat',
-					'value'=>'$data->status_panitia',
-				),
 			),
 		));
 		?>
