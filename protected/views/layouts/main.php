@@ -48,7 +48,6 @@
 						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"') || Yii::app()->user->getState('role') == 'kdivmum'),
 						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>Yii::app()->user->getState('role') != 'admin'),
 						array('label'=>'Statistik', 'url'=>array('/site/statistik', 'category'=>'1', 'chart'=>'1'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum'),
-						array('label'=>'Pengguna', 'url'=>array('/admin/pengguna'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Panitia/Pejabat Pengadaan', 'url'=>array('/admin/panitia'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Pejabat Berwenang', 'url'=>array('/admin/kdiv'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Divisi', 'url'=>array('/admin/divisi'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
