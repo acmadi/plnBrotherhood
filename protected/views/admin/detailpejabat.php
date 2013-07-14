@@ -45,12 +45,6 @@
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($pejabat,'NIP'); ?> 
-				<?php echo $form->textField($pejabat,'NIP',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($pejabat,'NIP'); ?>
-			</div>
-
-			<div class="row">
 				<?php echo $form->labelEx($pejabat,'E-mail'); ?> 
 				<?php echo $form->textField($pejabat,'email',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($pejabat,'email'); ?>

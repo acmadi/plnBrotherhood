@@ -6,8 +6,8 @@
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah pejabat', array('admin/tambahkdiv')) ?></li>
-		<li><?php echo CHtml::link('Hapus pejabat', array('admin/hapuskdiv')) ?></li>
+		<li><?php echo CHtml::link('Tambah pejabat berwenang', array('admin/tambahkdiv')) ?></li>
+		<li><?php echo CHtml::link('Hapus pejabat berwenang', array('admin/hapuskdiv')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -22,7 +22,6 @@
 					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
 				),
 				'username',
-				'NIP',
 				'nama',
 				'jabatan',
 			),

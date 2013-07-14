@@ -22,27 +22,25 @@ class AdminController extends Controller
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$panitia = Panitia::model()->findByPk($id);
 			$panitia->tanggal_sk = Tanggal::getTanggalStrip($panitia->tanggal_sk);
-			if (isset($_POST['Panitia']) && isset($_POST['nama']) && isset($_POST['namaluar'])) {
+			if (isset($_POST['Panitia']) && isset($_POST['nama'])) {
 				$panitia->attributes = $_POST['Panitia'];
 				$panitia->tanggal_sk = date('Y-m-d', strtotime($panitia->tanggal_sk));
 				$n = count($_POST['nama']);
 				for ($i=0; $i < $n; $i++) {
 					if (isset($_POST['id'])) {
 						if ($_POST['status'][$i] == 'Tidak Aktif') {
-							$current = Anggota::model()->findByAttributes(array('username'=>$_POST['nama'][$i], 'id_panitia'=>$id, 'jabatan'=>$_POST['jabatan'][$i]));
+							$current = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i], 'id_panitia'=>$id, 'jabatan'=>$_POST['jabatan'][$i]));
 							if ($current != null) {
 								$current->status_user = 'Tidak Aktif';
 								$current->save(false);
 							}
 							else {
-								$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['nama'][$i]));
+								$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i]));
 								$new = new Anggota;
-								$new->username = $_POST['nama'][$i];
+								$new->username = $_POST['username'][$i];
 								$new->nama = $ang->nama;
 								$new->password = $ang->password;
-								$new->NIP = $ang->NIP;
 								$new->email = $ang->email;
-								$new->divisi = 'Divisi Umum';
 								$new->id_panitia = $id;
 								$new->jabatan = $_POST['jabatan'][$i];
 								$new->status_user = 'Tidak Aktif';
@@ -55,7 +53,7 @@ class AdminController extends Controller
 								$current->status_user = 'Tidak Aktif';
 								$current->save(false);
 							}
-							$old = Anggota::model()->findByAttributes(array('username'=>$_POST['nama'][$i], 'id_panitia'=>$id));
+							$old = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i], 'id_panitia'=>$id));
 							if ($old != null) {
 								$old->jabatan = $_POST['jabatan'][$i];
 								$old->status_user = 'Aktif';
@@ -64,12 +62,10 @@ class AdminController extends Controller
 							else {
 								$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['nama'][$i]));
 								$new = new Anggota;
-								$new->username = $_POST['nama'][$i];
+								$new->username = $_POST['username'][$i];
 								$new->nama = $ang->nama;
 								$new->password = $ang->password;
-								$new->NIP = $ang->NIP;
 								$new->email = $ang->email;
-								$new->divisi = 'Divisi Umum';
 								$new->id_panitia = $id;
 								$new->jabatan = $_POST['jabatan'][$i];
 								$new->status_user = 'Aktif';
@@ -78,80 +74,14 @@ class AdminController extends Controller
 						}
 					}
 					else {
-						$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['nama'][$i]));
+						$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i]));
 						$new = new Anggota;
-						$new->username = $_POST['nama'][$i];
+						$new->username = $_POST['username'][$i];
 						$new->nama = $ang->nama;
 						$new->password = $ang->password;
-						$new->NIP = $ang->NIP;
 						$new->email = $ang->email;
-						$new->divisi = 'Divisi Umum';
 						$new->id_panitia = $id;
 						$new->jabatan = $_POST['jabatan'][$i];
-						$new->status_user = 'Aktif';
-						$new->save(false);
-					}
-				}
-				$n = count($_POST['namaluar']);
-				for ($i=0; $i < $n; $i++) {
-					if (isset($_POST['idluar'])) {
-						if ($_POST['statusluar'][$i] == 'Tidak Aktif') {
-							$current = Anggota::model()->findByAttributes(array('username'=>$_POST['userluar'][$i], 'id_panitia'=>$id, 'jabatan'=>$_POST['jabatanluar'][$i]));
-							if ($current != null) {
-								$current->status_user = 'Tidak Aktif';
-								$current->save(false);
-							}
-							else {
-								$new = new Anggota;
-								$new->username = $_POST['userluar'][$i];
-								$new->nama = $_POST['namaluar'][$i];
-								$new->password = sha1($new->username);
-								$new->NIP = $_POST['NIPluar'][$i];
-								$new->email = $_POST['emailluar'][$i];
-								$new->divisi = $_POST['divisiluar'][$i];
-								$new->id_panitia = $id;
-								$new->jabatan = $_POST['jabatanluar'][$i];
-								$new->status_user = 'Tidak Aktif';
-								$new->save(false);
-							}
-						}
-						else {
-							if ($_POST['idluar'][$i] != -1) {
-								$current = Anggota::model()->findByPk($_POST['idluar'][$i]);
-								$current->status_user = 'Tidak Aktif';
-								$current->save(false);
-							}
-							$old = Anggota::model()->findByAttributes(array('username'=>$_POST['userluar'][$i], 'id_panitia'=>$id));
-							if ($old != null) {
-								$old->jabatan = $_POST['jabatanluar'][$i];
-								$old->status_user = 'Aktif';
-								$old->save(false);
-							}
-							else {
-								$new = new Anggota;
-								$new->username = $_POST['userluar'][$i];
-								$new->nama = $_POST['namaluar'][$i];
-								$new->password = sha1($new->username);
-								$new->NIP = $_POST['NIPluar'][$i];
-								$new->email = $_POST['emailluar'][$i];
-								$new->divisi = $_POST['divisiluar'][$i];
-								$new->id_panitia = $id;
-								$new->jabatan = $_POST['jabatanluar'][$i];
-								$new->status_user = 'Aktif';
-								$new->save(false);
-							}
-						}
-					}
-					else {
-						$new = new Anggota;
-						$new->username = $_POST['userluar'][$i];
-						$new->nama = $_POST['namaluar'][$i];
-						$new->password = sha1($new->username);
-						$new->NIP = $_POST['NIPluar'][$i];
-						$new->email = $_POST['emailluar'][$i];
-						$new->divisi = $_POST['divisiluar'][$i];
-						$new->id_panitia = $id;
-						$new->jabatan = $_POST['jabatanluar'][$i];
 						$new->status_user = 'Aktif';
 						$new->save(false);
 					}
@@ -162,13 +92,11 @@ class AdminController extends Controller
 					}
 				}
 			}
-			$anggota = Anggota::model()->findAll('id_panitia = ' . $id . ' and divisi = "Divisi Umum" and status_user = "Aktif"');
-			$anggotaluar = Anggota::model()->findAll('id_panitia = ' . $id . ' and divisi != "Divisi Umum" and status_user = "Aktif"');
+			$anggota = Anggota::model()->findAll('id_panitia = ' . $id . ' and status_user = "Aktif"');
 			$this->render('detailpanitia', array(
 				'id'=>$id,
 				'panitia'=>$panitia,
 				'anggota'=>$anggota,
-				'anggotaluar'=>$anggotaluar,
 			));
 		}
 	}
@@ -225,7 +153,6 @@ class AdminController extends Controller
 				$panitia->jenis_panitia = 'Pejabat';
 				if ($panitia->save(false)) {
 					$pejabat->password = sha1($pejabat->username);
-					$pejabat->divisi = 'Divisi Umum';
 					$pejabat->id_panitia = $panitia->id_panitia;
 					$pejabat->jabatan = 'Pejabat';
 					$pejabat->status_user = 'Aktif';

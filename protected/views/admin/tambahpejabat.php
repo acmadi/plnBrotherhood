@@ -33,12 +33,6 @@
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($pejabat,'NIP'); ?> 
-				<?php echo $form->textField($pejabat,'NIP',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($pejabat,'NIP'); ?>
-			</div>
-
-			<div class="row">
 				<?php echo $form->labelEx($pejabat,'E-mail'); ?> 
 				<?php echo $form->textField($pejabat,'email',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($pejabat,'email'); ?>
@@ -51,5 +45,5 @@
 			<?php $this->endWidget(); ?>
 		</div>
 	</div>
-	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/divisi'), 'class'=>'sidafbutton'));  ?></div>
+	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/panitia'), 'class'=>'sidafbutton'));  ?></div>
 </div>

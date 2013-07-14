@@ -62,36 +62,18 @@
 				<?php echo $form->error($panitia,'tanggal_sk'); ?>
 			</div>
 
-			<script type="text/javascript">
-				function emptyNewRow(row) {
-					row.find('#id').attr('value',-1);
-					row.find('#idluar').attr('value',-1);
-				}
-			</script>
-
 			<div class="row">
-				<?php echo $form->labelEx($panitia,'Anggota dari Divisi Umum'); ?>
+				<script type="text/javascript">
+					function emptyNewRow(row) {
+						row.find('#id').attr('value',-1);
+					}
+				</script>
+				<?php echo $form->labelEx($panitia, 'Anggota panitia'); ?>
 				<?php
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'anggota',
 					'model' => $anggota,
 					'viewName' => 'formdetailpanitia',
-					'labelAdd' => 'Tambah Anggota',
-					'labelDel' => 'Hapus Anggota',
-					'onAdd'=>'emptyNewRow',
-					));
-				?>
-			</div>
-
-			<br />
-
-			<div class="row">
-				<?php echo $form->labelEx($panitia,'Anggota dari luar Divisi Umum'); ?>
-				<?php
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'anggotaluar',
-					'model' => $anggotaluar,
-					'viewName' => 'formdetailpanitialuar',
 					'labelAdd' => 'Tambah Anggota',
 					'labelDel' => 'Hapus Anggota',
 					'onAdd'=>'emptyNewRow',
