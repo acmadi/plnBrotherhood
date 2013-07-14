@@ -6,7 +6,9 @@
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
+		<li><?php echo CHtml::link('Tambah pejabat pengadaan', array('admin/tambahpejabat')) ?></li>
 		<li><?php echo CHtml::link('Tambah panitia pengadaan', array('admin/tambahpanitia')) ?></li>
+		<li><?php echo CHtml::link('Hapus pejabat pengadaan', array('admin/hapuspejabat')) ?></li>
 		<li><?php echo CHtml::link('Hapus panitia pengadaan', array('admin/hapuspanitia')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
@@ -24,6 +26,24 @@
 							opacity: '0.0'
 						}, 1000, function() {
 							$('.flash-success').hide();
+						});
+					}, 2000);
+				</script>
+			</div>
+		<?php endif; ?>
+		
+		<?php if(Yii::app()->user->hasFlash('gagal')): ?>
+			<div class="flash-error">
+				<?php echo Yii::app()->user->getFlash('gagal'); ?>
+				<script type="text/javascript">
+					setTimeout(function() {
+						$('.flash-error').animate({
+							height: '0px',
+							marginBottom: '0em',
+							padding: '0em',
+							opacity: '0.0'
+						}, 1000, function() {
+							$('.flash-error').hide();
 						});
 					}, 2000);
 				</script>
@@ -64,8 +84,11 @@
 
 			<div class="row">
 				<script type="text/javascript">
-					function emptyNewRow(row) {
+					function newRow(row) {
 						row.find('#id').attr('value',-1);
+						var autocomplete = row.find('input');
+						prev = autocomplete[0];
+						prev.id = prev.id + 1;
 					}
 				</script>
 				<?php echo $form->labelEx($panitia, 'Anggota panitia'); ?>
@@ -76,10 +99,12 @@
 					'viewName' => 'formdetailpanitia',
 					'labelAdd' => 'Tambah Anggota',
 					'labelDel' => 'Hapus Anggota',
-					'onAdd'=>'emptyNewRow',
+					'onAdd'=>'newRow',
 					));
 				?>
 			</div>
+			
+			<br />
 
 			<div class="row buttons">
 				<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
