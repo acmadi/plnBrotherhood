@@ -76,8 +76,22 @@ class XlsxController extends Controller
 		$norks = $rks->nomor;
 		$tanggalrks = Tanggal::getTanggalLengkap(Dokumen::model()->find($rks->id_dokumen)->tanggal);
 		$skpanitia = Panitia::model()->findByPk($cpengadaan->id_panitia)->SK_panitia;
-		$panitia = Panitia::model()->findByPk($cpengadaan->id_panitia)->nama_panitia;
+		$panitia = Panitia::model()->findByPk($cpengadaan->id_panitia);
+		if($panitia->jenis_panitia=="Pejabat") { 
+			$nama_panitia = "Pejabat";
+		} else { 
+			$nama_panitia = $panitia->nama_panitia;
+		}
 		$jenis = $cpengadaan->jenis_pengadaan;
+		$DokNDPP=Dokumen::model()->find('id_pengadaan = '.$cpengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($DokNDPP->id_dokumen);
+		if($NDPP->dari=="MSDAF"){
+			$pengesah = "MANAJER SENIOR PENGADAAN ALAT DAN FASILITAS";
+			$nama_pengesah = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
+		} else {
+			$pengesah = "KEPALA DIVISI UMUM DAN MANAJEMEN";
+			$nama_pengesah = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
+		}
 		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
@@ -86,17 +100,20 @@ class XlsxController extends Controller
 			if (($jenis == 'Barang dan Jasa') || ($jenis == 'Barang')){
 			$objPHPExcel = $objReader->load($templatePath . 'HPS Barang.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#namakadiv#", '');
-					//$this->assign($objPHPExcel, "#ketua#", $ketua);
-					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
+					$this->assign($objPHPExcel, "#namapanitia#", $nama_panitia);
+					$this->assign($objPHPExcel, "#pengesah#", $pengesah);
+					$this->assign($objPHPExcel, "#namapengesah#", $nama_pengesah);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
+					$this->getListPanitiaTandaTangan($cpengadaan->id_panitia, "BoQ","E",34,$objPHPExcel);
 			
 			header('Content-Disposition: attachment;filename="HPS Barang-'.$cpengadaan->nama_pengadaan.'.xlsx"');
 			}
 			else if ($jenis == 'Jasa'){
 			$objPHPExcel = $objReader->load($templatePath . 'HPS Jasa.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
-					$this->assign($objPHPExcel, "#namakadiv#", '');
-					$this->assign($objPHPExcel, "#panitia#", $panitia);
+					$this->assign($objPHPExcel, "#namapanitia#", $nama_panitia);
+					$this->assign($objPHPExcel, "#pengesah#", $pengesah);
+					$this->assign($objPHPExcel, "#namapengesah#", $nama_pengesah);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			
 			header('Content-Disposition: attachment;filename="HPS Jasa-'.$cpengadaan->nama_pengadaan.'.xlsx"');
@@ -184,6 +201,18 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			header('Content-Disposition: attachment;filename="Lampiran Berita Acara Evaluasi Penawaran.xlsx"');
 		}
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Aanwijzing') {
+			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", $DH->jam);
+					$this->assign($objPHPExcel, "#tempat#", $DH->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $DH->acara." ".$cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+					$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'ba_aanwijzing');
+			header('Content-Disposition: attachment;filename="Daftar Hadir Aanwijzing - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+		}
 		else{
 			$objPHPExcel = $objReader->load($templatePath . 'test.xlsx');
 				$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cdokumen->nama_dokumen));
@@ -211,23 +240,80 @@ class XlsxController extends Controller
 		// return  $list;
 	// }
 
-	// function getListPanitia($idPan){
-		// if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
-			// $list = "";
-		// }else{
-			// $list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->username)->nama . "																			Ketua								(.................................)";
-			// $list .= '<w:br/>';
-			// $list .= '<w:br/>';
-			// $list .= "2. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama . "																	Sekretaris								(.................................)";
-			// $n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
-			// for ( $i=1;$i<=$n;$i++){
-				// $list .= '<w:br/>';
-				// $list .= '<w:br/>';
-				// $list .= $i+2 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama . "																	Anggota								(.................................)";				
-			// }
-		// }
-		// return  $list;
-	// }
+	function getListPanitiaTandaTangan($idPan, $namasheet, $kolomawal, $barisawal, $objPHPExcel){
+		$Pan = Panitia::model()->findByPk($idPan);
+		$kolom= $kolomawal;
+		if($Pan->jenis_panitia == "Pejabat"){
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue($kolomawal.$barisawal,$Pan->nama_panitia);
+		}else{
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue($kolom.$barisawal,"1. ".Anggota::model()->find('id_panitia = '.$idPan. ' and jabatan = "Ketua" and status_user = "Aktif"')->nama);
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue(++$kolom.$barisawal,"Ketua");
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue(++$kolom.$barisawal,"(....................)");
+			$barisselanjutnya = $barisawal+1;
+			$kolom= $kolomawal;
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue($kolom.$barisselanjutnya,"2. ".Anggota::model()->find('id_panitia = '.$idPan. ' and jabatan = "Sekretaris" and status_user = "Aktif"')->nama);
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue(++$kolom.$barisselanjutnya,"Sekretaris");
+			$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue(++$kolom.$barisselanjutnya,"(....................)");
+			$barisselanjutnya = $barisselanjutnya+1;
+			$kolom= $kolomawal;
+			$i=3;
+			$anggota = Anggota::model()->findAll('id_panitia = '.$idPan. ' and jabatan = "Anggota" and status_user = "Aktif"');
+			foreach($anggota as $item) {
+				$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue($kolom.$barisselanjutnya,$i.". ".$item->nama);
+				$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue(++$kolom.$barisselanjutnya,"Anggota");
+				$objPHPExcel->setActiveSheetIndexByName($namasheet)->setCellValue(++$kolom.$barisselanjutnya,"(....................)");
+				$barisselanjutnya = $barisselanjutnya+1;
+				$kolom= $kolomawal;
+				$i++;
+			}
+		}
+	}
+	
+	function getDaftarHadir($idPan, $idPeng, $objPHPExcel, $tahap){
+		$Pan = Panitia::model()->findByPk($idPan);
+		$barisawal = 18;
+		if($Pan->jenis_panitia == "Pejabat"){
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B17','I');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C17','Pejabat Pengadaan Barang/Jasa');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'1');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,$Pan->nama_panitia);
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('D'.$barisawal,'Pejabat');
+			$barisawal = $barisawal+1;
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'II');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,'Penyadia Barang/Jasa');
+		}else{
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B17','I');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C17','Panitia Pengadaan Barang/Jasa');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'1');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,Anggota::model()->find('id_panitia = '.$idPan. ' and jabatan = "Ketua" and status_user = "Aktif"')->nama);
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('D'.$barisawal,'Ketua');
+			$barisawal = $barisawal+1;
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'2');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,Anggota::model()->find('id_panitia = '.$idPan. ' and jabatan = "Sekretaris" and status_user = "Aktif"')->nama);
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('D'.$barisawal,'Sekretaris');
+			$anggota = Anggota::model()->findAll('id_panitia = '.$idPan. ' and jabatan = "Anggota" and status_user = "Aktif"');
+			$barisawal = $barisawal+1;
+			$i=3;
+			foreach($anggota as $item) {
+				$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,$i);
+				$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,$item->nama);
+				$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('D'.$barisawal,'Anggota');
+				$barisawal = $barisawal+1;
+				$i++;
+			}
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'II');
+			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,'Penyadia Barang/Jasa');
+			$penyedia = PenerimaPengadaan::model()->findAll('(' . $tahap . ' = "1" or ' . $tahap . ' = "0") and id_pengadaan = ' . $idPeng);
+			$barisawal = $barisawal+1;
+			$i=1;
+			foreach($penyedia as $item) {
+				$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,$i);
+				$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('D'.$barisawal,$item->perusahaan);
+				$barisawal = $barisawal+1;
+				$i++;
+			}
+		}
+	}
 	
 	private function assign($objPHPExcel, $pattern, $replacement){
 		$sheets = $objPHPExcel->getAllSheets();
