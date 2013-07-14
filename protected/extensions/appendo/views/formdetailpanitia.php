@@ -9,7 +9,7 @@
 	<?php if (empty($model)){ ?>
 		<tr>
 			<td><?php echo CHtml::textField('username[]','',array('style'=>'width:200px')); ?></td>
-			<td><?php echo CHtml::textField('jabatan[]','',array('style'=>'width:100px')); ?></td>
+			<td><?php echo CHtml::dropDownList('jabatan[]','string',array('Ketua'=>'Ketua','Sekretaris'=>'Sekretaris', 'Anggota'=>'Anggota'),array('style'=>'width:100px')); ?></td>
 			<td><?php echo CHtml::dropDownList('status[]','string',array('Aktif'=>'Aktif','Tidak Aktif'=>'Tidak Aktif'),array('style'=>'width:100px')); ?></td>
 		</tr>
 		
@@ -17,7 +17,7 @@
 		<?php for($i = 0; $i < count($model); $i++){ ?>
 			<tr>
 				<td><?php echo CHtml::textField('username[]',$model[$i]->username,array('style'=>'width:200px')); ?></td>
-				<td><?php echo CHtml::textField('jabatan[]',$model[$i]->jabatan,array('style'=>'width:100px')); ?></td>
+				<td><?php echo CHtml::dropDownList('jabatan[]',$model[$i]->jabatan,array('Ketua'=>'Ketua','Sekretaris'=>'Sekretaris', 'Anggota'=>'Anggota'),array('style'=>'width:100px')); ?></td>
 				<td><?php echo CHtml::dropDownList('status[]','string',array('Aktif'=>'Aktif','Tidak Aktif'=>'Tidak Aktif'),array('style'=>'width:100px')); ?></td>
 				<td><?php echo CHtml::hiddenField('id[]',$model[$i]->id); ?></td>
 			</tr>
