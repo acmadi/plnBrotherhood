@@ -128,29 +128,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->error($BAEP,'tempat'); ?>
 		</div>
 	
-		<div class="row">
-				<?php 
-					if($Pengadaan->metode_penawaran == 'Satu Sampul'){
-						$this->widget('application.extensions.appendo.JAppendo',array(
-						'id' => 'idpenyedia',        
-						'model' => $PP,
-						// 'model2' => $PP2,
-						'viewName' => 'formperusahaan_evaluasi_1_sampul',
-						'labelAdd' => 'Tambah Penyedia',
-						'labelDel' => 'Hapus Penyedia',						
-						)); 
-					}else if($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
-						$this->widget('application.extensions.appendo.JAppendo',array(
-						'id' => 'idpenyedia',        
-						'model' => $PP,
-						// 'model2' => $PP2,
-						'viewName' => 'formperusahaan_evaluasi_sampul_1',
-						'labelAdd' => 'Tambah Penyedia',
-						'labelDel' => 'Hapus Penyedia',						
-						)); 
-					}
-				?>
-		</div>
+		
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAEP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>

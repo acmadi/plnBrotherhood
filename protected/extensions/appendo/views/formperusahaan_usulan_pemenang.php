@@ -1,7 +1,7 @@
 <table class="appendo-gii" id="<?php echo $id ?>">
 	<thead>
 		<tr>
-			<th>Perusahaan </th><th>Status</th><th>NPWP</th><th>Alamat</th><th>Biaya</th>
+			<th>Perusahaan </th><th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,10 +16,7 @@
 						"0"=>"Tidak Lulus",
 					),array('style'=>'width:100px'));
 				?>
-            </td>
-			<td><?php echo CHtml::textField('npwp[]','',array('style'=>'width:80px')); ?></td> 
-			<td><?php echo CHtml::textField('alamat[]','',array('style'=>'width:80px')); ?></td> 
-			<td><?php echo CHtml::textField('biaya[]','',array('style'=>'width:80px')); ?></td> 
+            </td>			
 		</tr>
 		
 	<?php }else{ ?>
@@ -33,10 +30,7 @@
 							"0"=>"Tidak Lulus",
 						),array('style'=>'width:100px'));
 					?>
-				</td>
-				<td><?php echo CHtml::textField('npwp[]',$model[$i]->npwp,array('style'=>'width:80px')); ?></td> 
-				<td><?php echo CHtml::textField('alamat[]',$model[$i]->alamat,array('style'=>'width:80px')); ?></td> 
-				<td><?php echo CHtml::textField('biaya[]',$model[$i]->biaya,array('style'=>'width:80px')); ?></td> 
+				</td>				
 			</tr>
 		<?php } ?>
 		

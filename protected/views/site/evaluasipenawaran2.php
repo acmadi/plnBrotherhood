@@ -103,20 +103,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->textArea($BAEP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($BAEP,'tempat'); ?>
 		</div>
-	
-		<div class="row">
-				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_evaluasi_sampul_2',
-					'labelAdd' => 'Tambah Penyedia',
-					'labelDel' => 'Hapus Penyedia',
-					
-					)); 
-				?>
-		</div>
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAEP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>

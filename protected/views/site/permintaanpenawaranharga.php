@@ -58,7 +58,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div class="row">
 				<?php echo $form->labelEx($SUPPP,'nomor'); ?>
 				Nomor HPS : <?php echo $HPS->nomor ?> <br/>
-				<?php echo $form->textField($SUPPP,'nomor',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($SUPPP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 				<?php echo $form->error($SUPPP,'nomor'); ?>
 			</div>
 			

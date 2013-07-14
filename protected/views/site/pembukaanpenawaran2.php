@@ -112,8 +112,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'model' => $PP,
 					// 'model2' => $PP2,
 					'viewName' => 'formperusahaan_pembukaan_penawaran_2',
-					'labelAdd' => 'Tambah Penyedia',
-					'labelDel' => 'Hapus Penyedia',
+					'labelAdd' => '',
+					'labelDel' => '',
 					
 					)); 
 				?>

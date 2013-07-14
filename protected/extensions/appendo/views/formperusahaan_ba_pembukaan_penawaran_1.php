@@ -10,11 +10,11 @@
 		<tr>
 			<td><?php echo CHtml::textField('perusahaan[]','',array('style'=>'width:120px')); ?></td>            
             <td>
-				<?php echo CHtml::dropDownList('penetapan_pemenang[]',"string",
+				<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',"string",
 					array(
-						"1"=>"Lulus",
-						"0"=>"Tidak Lulus",
-					),array('style'=>'width:100px'));
+						"1"=>"Dokumen Sah",						
+						"0"=>"Dokumen Tidak Sah",
+					),array('style'=>'width:330px'));
 				?>
             </td>
 			
@@ -25,14 +25,14 @@
 			<tr>
 				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>				
 				<td>
-					<?php echo CHtml::dropDownList('penetapan_pemenang[]',$model[$i]->penetapan_pemenang,
+					<?php echo CHtml::dropDownList('pembukaan_penawaran_1[]',$model[$i]->pembukaan_penawaran_1,
 						array(
-							"1"=>"Lulus",
-							"0"=>"Tidak Lulus",
-						),array('style'=>'width:100px'));
+							"1"=>"Dokumen Sah",						
+							"0"=>"Dokumen Tidak Sah",
+						),array('style'=>'width:330px'));
 					?>
 				</td>
-			
+				
 			</tr>
 		<?php } ?>
 		
