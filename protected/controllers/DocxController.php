@@ -1676,16 +1676,14 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#nomorba#', $nomor);
 			$this->doccy->phpdocx->assign('#haritanggal#', Tanggal::getHariTanggalLengkap($Dok->tanggal));
-			// $this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#namapengadaankapital#', strtoupper($nama));
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			// $this->doccy->phpdocx->assign('#anggota#', $anggota1);
 			$DokRKS=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$RKS=Rks::model()->findByPk($DokRKS->id_dokumen);
 			$this->doccy->phpdocx->assign('#wakturapat#', Tanggal::getJamMenit($RKS->waktu_penjelasan));
 			$this->doccy->phpdocx->assign('#norks#', $RKS->nomor);
-			$this->doccy->phpdocx->assign('#tanggal_rks#', Tanggal::getHariTanggalLengkap($DokRKS->tanggal));
+			$this->doccy->phpdocx->assign('#tanggal_rks#', Tanggal::getTanggalLengkap($DokRKS->tanggal));
 			
 			if($jenispic == 'Pejabat'){
 				$this->doccy->phpdocx->assign('#panitiaataupejabat#', $jenispic);				
@@ -2147,6 +2145,33 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaX($Peng->id_pengadaan,'penetapan_pemenang'));
 			
 			$this->renderDocx("Surat Pengumuman Pemenang-".$Peng->nama_pengadaan.".docx", true);
+		}
+		else if ($Dok->nama_dokumen == "Lampiran Berita Acara Aanwijzing"){
+			$Pengadaan = Pengadaan::model()->findByPk($Dok->id_pengadaan);
+			$DokBAP = Dokumen::model()->find('id_pengadaan = '.$Dok->id_pengadaan.' and nama_dokumen = "Berita Acara Aanwijzing"');
+			$BAP = BeritaAcaraPenjelasan::model()->findByPk($DokBAP->id_dokumen);
+			$DokHPS = Dokumen::model()->find('id_pengadaan = '.$Dok->id_pengadaan.' and nama_dokumen = "HPS"');
+			$HPS = Hps::model()->findByPk($DokHPS->id_dokumen);
+			$Panitia = Panitia::model()->findByPk($Pengadaan->id_panitia);
+			$this->doccy->newFile('9b Lampiran Berita Acara Aanwijzing.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			$this->doccy->phpdocx->assignToHeader("#nomor#", $BAP->nomor);
+			$this->doccy->phpdocx->assignToHeader("#tanggal#", Tanggal::getTanggalLengkap($DokBAP->tanggal)); 
+			$this->doccy->phpdocx->assign('#namapengadaan#', $Pengadaan->nama_pengadaan);
+			$this->doccy->phpdocx->assign('#nilaihps#', RupiahMaker::convertInt($HPS->nilai_hps));
+			$this->doccy->phpdocx->assign('#terbilang#', RupiahMaker::terbilangMaker($HPS->nilai_hps));
+			
+			if($Panitia->jenis_panitia == "Panitia"){
+				$this->doccy->phpdocx->assign('#panitia/pejabat#', $Panitia->nama_panitia);
+				$this->doccy->phpdocx->assign('#listpanitia#', $this->getListPanitia($Panitia->id_panitia));
+			}else{
+				$this->doccy->phpdocx->assign('#panitia/pejabat#', $Panitia->jenis_panitia);
+				$this->doccy->phpdocx->assign('#listpanitia#', $Panitia->nama_panitia);
+			}			
+			$this->doccy->phpdocx->assign('#listpeserta#', $this->getTTPenyediaX($Peng->id_pengadaan,'ba_aanwijzing'));			
+			$this->renderDocx("Lampiran Berita Acara Aanwijzing-".$Peng->nama_pengadaan.".docx", true);
 		}
 		else {
 			$this->doccy->newFile('temp.docx');
