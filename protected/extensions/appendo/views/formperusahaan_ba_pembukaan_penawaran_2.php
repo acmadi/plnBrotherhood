@@ -10,15 +10,13 @@
 		<tr>
 			<td><?php echo CHtml::textField('perusahaan[]','',array('style'=>'width:120px')); ?></td>            
             <td>
-				<?php echo CHtml::dropDownList('hadir_pembukaan_penawaran_1[]',"string",
+				<?php echo CHtml::dropDownList('pembukaan_penawaran_2[]',"string",
 					array(
-						"1"=>"Penyedia Hadir",
-						"2"=>"Penyedia Tidak Hadir",						
-						"0"=>"Tidak Memasukkan dokumen",
-					),array('style'=>'width:330px'));
+						"1"=>"Mengikuti",
+						"0"=>"Tidak Mengikuti",
+					),array('style'=>'width:150px'));
 				?>
             </td>
-			
 		</tr>
 		
 	<?php }else{ ?>
@@ -26,15 +24,13 @@
 			<tr>
 				<td><?php echo CHtml::textField('perusahaan[]',$model[$i]->perusahaan,array('style'=>'width:120px')); ?></td>				
 				<td>
-					<?php echo CHtml::dropDownList('hadir_pembukaan_penawaran_1[]',$model[$i]->hadir_pembukaan_penawaran_1,
+					<?php echo CHtml::dropDownList('pembukaan_penawaran_2[]',$model[$i]->hadir_pembukaan_penawaran_2,
 						array(
-							"1"=>"Penyedia Hadir",
-							"2"=>"Penyedia Tidak Hadir",						
-							"0"=>"Tidak Memasukkan dokumen",
-						),array('style'=>'width:330px'));
+							"1"=>"Mengikuti",
+							"0"=>"Tidak Mengikuti",
+						),array('style'=>'width:150px'));
 					?>
 				</td>
-				
 			</tr>
 		<?php } ?>
 		

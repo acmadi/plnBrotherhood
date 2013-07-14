@@ -21,8 +21,10 @@
  * @property string $pendaftaran_pc
  * @property string $pengambilan_dokumen
  * @property string $ba_aanwijzing
+ * @property string $hadir_pembukaan_penawaran_1
  * @property string $pembukaan_penawaran_1
  * @property string $evaluasi_penawaran_1
+ * @property string $hadir_pembukaan_penawaran_2
  * @property string $pembukaan_penawaran_2
  * @property string $evaluasi_penawaran_2
  * @property string $negosiasi_klarifikasi
@@ -65,10 +67,10 @@ class PenerimaPengadaan extends CActiveRecord
 			array('perusahaan, id_pengadaan', 'required'),
 			array('perusahaan', 'length', 'max'=>100),
 			array('id_pengadaan, nilai', 'length', 'max'=>255),
-			array('alamat, npwp, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, pembukaan_penawaran_1, evaluasi_penawaran_1, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'length', 'max'=>256),
+			array('alamat, npwp, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_penerima, perusahaan, id_pengadaan, alamat, npwp, nilai, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, pembukaan_penawaran_1, evaluasi_penawaran_1, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'safe', 'on'=>'search'),
+			array('id_penerima, perusahaan, id_pengadaan, alamat, npwp, nilai, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -107,8 +109,10 @@ class PenerimaPengadaan extends CActiveRecord
 			'pendaftaran_pc' => 'Pendaftaran Pc',
 			'pengambilan_dokumen' => 'Pengambilan Dokumen',
 			'ba_aanwijzing' => 'Ba Aanwijzing',
+			'hadir_pembukaan_penawaran_1' => 'Hadir Pembukaan Penawaran 1',
 			'pembukaan_penawaran_1' => 'Pembukaan Penawaran 1',
 			'evaluasi_penawaran_1' => 'Evaluasi Penawaran 1',
+			'hadir_pembukaan_penawaran_2' => 'Hadir Pembukaan Penawaran 2',
 			'pembukaan_penawaran_2' => 'Pembukaan Penawaran 2',
 			'evaluasi_penawaran_2' => 'Evaluasi Penawaran 2',
 			'negosiasi_klarifikasi' => 'Negosiasi Klarifikasi',
@@ -147,8 +151,10 @@ class PenerimaPengadaan extends CActiveRecord
 		$criteria->compare('pendaftaran_pc',$this->pendaftaran_pc,true);
 		$criteria->compare('pengambilan_dokumen',$this->pengambilan_dokumen,true);
 		$criteria->compare('ba_aanwijzing',$this->ba_aanwijzing,true);
+		$criteria->compare('hadir_pembukaan_penawaran_1',$this->hadir_pembukaan_penawaran_1,true);
 		$criteria->compare('pembukaan_penawaran_1',$this->pembukaan_penawaran_1,true);
 		$criteria->compare('evaluasi_penawaran_1',$this->evaluasi_penawaran_1,true);
+		$criteria->compare('hadir_pembukaan_penawaran_2',$this->hadir_pembukaan_penawaran_2,true);
 		$criteria->compare('pembukaan_penawaran_2',$this->pembukaan_penawaran_2,true);
 		$criteria->compare('evaluasi_penawaran_2',$this->evaluasi_penawaran_2,true);
 		$criteria->compare('negosiasi_klarifikasi',$this->negosiasi_klarifikasi,true);
