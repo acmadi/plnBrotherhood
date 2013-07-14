@@ -136,7 +136,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<ul class="generatedoc">
 				
 				<li><?php echo CHtml::link('Lampiran Berita Acara Aanwijzing', array('docx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
-				<li><?php echo CHtml::link('Daftar Hadir Aanwijzing', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Daftar Hadir Aanwijzing', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	
