@@ -22,10 +22,11 @@ class AdminController extends Controller
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$panitia = Panitia::model()->findByPk($id);
 			$panitia->tanggal_sk = Tanggal::getTanggalStrip($panitia->tanggal_sk);
-			if (isset($_POST['Panitia']) && isset($_POST['nama'])) {
+			if (isset($_POST['Panitia']) && isset($_POST['username'])) {
+				$success = true;
 				$panitia->attributes = $_POST['Panitia'];
 				$panitia->tanggal_sk = date('Y-m-d', strtotime($panitia->tanggal_sk));
-				$n = count($_POST['nama']);
+				$n = count($_POST['username']);
 				for ($i=0; $i < $n; $i++) {
 					if (isset($_POST['id'])) {
 						if ($_POST['status'][$i] == 'Tidak Aktif') {
@@ -35,16 +36,21 @@ class AdminController extends Controller
 								$current->save(false);
 							}
 							else {
-								$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i]));
-								$new = new Anggota;
-								$new->username = $_POST['username'][$i];
-								$new->nama = $ang->nama;
-								$new->password = $ang->password;
-								$new->email = $ang->email;
-								$new->id_panitia = $id;
-								$new->jabatan = $_POST['jabatan'][$i];
-								$new->status_user = 'Tidak Aktif';
-								$new->save(false);
+								$ang = $this->getRecordByUsername($_POST['username'][0]);
+								if (empty($ang)) {
+									$success = false;
+									$gagal = $_POST['username'][$i];
+								}
+								else {
+									$new = new Anggota;
+									$new->username = $_POST['username'][$i];
+									$new->nama = $ang['nama'];
+									$new->email = $ang['email'];
+									$new->id_panitia = $id;
+									$new->jabatan = $_POST['jabatan'][$i];
+									$new->status_user = 'Tidak Aktif';
+									$new->save(false);
+								}
 							}
 						}
 						else {
@@ -60,36 +66,49 @@ class AdminController extends Controller
 								$old->save(false);
 							}
 							else {
-								$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['nama'][$i]));
-								$new = new Anggota;
-								$new->username = $_POST['username'][$i];
-								$new->nama = $ang->nama;
-								$new->password = $ang->password;
-								$new->email = $ang->email;
-								$new->id_panitia = $id;
-								$new->jabatan = $_POST['jabatan'][$i];
-								$new->status_user = 'Aktif';
-								$new->save(false);
+								$ang = $this->getRecordByUsername($_POST['username'][$i]);
+								if (empty($ang)) {
+									$success = false;
+									$gagal = $_POST['username'][$i];
+								}
+								else {
+									$new = new Anggota;
+									$new->username = $_POST['username'][$i];
+									$new->nama = $ang['nama'];
+									$new->email = $ang['email'];
+									$new->id_panitia = $id;
+									$new->jabatan = $_POST['jabatan'][$i];
+									$new->status_user = 'Aktif';
+									$new->save(false);
+								}
 							}
 						}
 					}
 					else {
-						$ang = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i]));
-						$new = new Anggota;
-						$new->username = $_POST['username'][$i];
-						$new->nama = $ang->nama;
-						$new->password = $ang->password;
-						$new->email = $ang->email;
-						$new->id_panitia = $id;
-						$new->jabatan = $_POST['jabatan'][$i];
-						$new->status_user = 'Aktif';
-						$new->save(false);
+						$ang = $this->getRecordByUsername($_POST['username'][$i]);
+						if (empty($ang)) {
+							$success = false;
+							$gagal = $_POST['username'][$i];
+						}
+						else {
+							$new = new Anggota;
+							$new->username = $_POST['username'][$i];
+							$new->nama = $ang['nama'];
+							$new->email = $ang['email'];
+							$new->id_panitia = $id;
+							$new->jabatan = $_POST['jabatan'][$i];
+							$new->status_user = 'Aktif';
+							$new->save(false);
+						}
 					}
 				}
-				if ($panitia->validate()) {
+				if ($success) {
 					if ($panitia->save(false)) {
 						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 					}
+				}
+				else {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $gagal . '" tidak terdaftar dalam basis data pegawai.');
 				}
 			}
 			$anggota = Anggota::model()->findAll('id_panitia = ' . $id . ' and status_user = "Aktif"');
@@ -334,5 +353,25 @@ class AdminController extends Controller
 				'admin'=>$admin,
 			));
 		}
+	}
+	
+	private function getRecordByUsername($username) {
+		$ldap = Yii::app()->params['ldap'];
+		$conn = ldap_connect($ldap['host']);
+		if ($conn) {
+			ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+			ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
+			if (ldap_bind($conn, $ldap['bind_rdn'], $ldap['bind_pwd'])) {
+				$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=' . $username . '*)');
+				$data = ldap_get_entries($conn, $result);
+				if ($data != null) {
+					if ($username == $data[0]['samaccountname'][0]) {
+						return array('nama'=>$data[0]['displayname'][0], 'email'=>$data[0]['mail'][0]);
+					}
+				}
+				ldap_close($conn);
+			}
+		}
+		return array();
 	}
 }
