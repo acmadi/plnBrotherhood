@@ -91,6 +91,9 @@ return array(
 			'host'=>'adpusat01.pusat.corp.pln.co.id',
 			'port'=>389,
 			'domain'=>'pusat',
+			'base_dn'=>'ou=accounts,dc=pusat,dc=corp,dc=pln,dc=co,dc=id',
+			'bind_rdn'=>'pusat\\pln',
+			'bind_pwd'=>'P@ssw0rd',
 		),
 	),
 );
