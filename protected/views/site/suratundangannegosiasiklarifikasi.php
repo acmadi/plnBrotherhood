@@ -2,13 +2,16 @@
 /* @var $this SiteController */
 
 $id = Yii::app()->getRequest()->getQuery('id');
-$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
-$this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
+$Pengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+$this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#16').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -20,11 +23,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
                 <div id="menuform">
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
-                            'items'=>array(
-                                    array('label'=>'ND Undangan Negosiasi Klarifikasi', 'url'=>array($SUNK->isNewRecord?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
-                                    array('label'=>'BA Negosiasi Klarifikasi', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Berita Acara Negosiasi dan Klarifikasi"') == null)?'/site/beritaacaranegosiasiklarifikasi':'/site/editberitaacaranegosiasiklarifikasi','id'=>$id)),
-                            ),
-                        ));
+							'items'=>array(
+									array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null)?'/site/suratundangannegosiasiklarifikasi':'/site/editsuratundangannegosiasiklarifikasi','id'=>$id)),
+									array('label'=>'Klarifikasi dan Negosiasi', 'url'=>array($Pengadaan->status=='30'?('/site/negosiasiklarifikasi'):('/site/editnegosiasiklarifikasi'),'id'=>$id)),
+									array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='31'?'/site/beritaacaranegosiasiklarifikasi':($Pengadaan->status=='30'?'':'/site/editberitaacaranegosiasiklarifikasi'),'id'=>$id)),
+							),
+						));
                     ?>
                 </div>
                 <br/>
@@ -63,11 +67,31 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($SUNK,'tanggal'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$SUNK,
+					'attribute'=>'tanggal_undangan',
+					'value'=>$SUNK->tanggal_undangan,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($SUNK,'tanggal_undangan'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($SUNK,'waktu (Format HH:MM)'); ?>
+			<?php echo $form->textField($SUNK,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($SUNK,'waktu'); ?>
+		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($SUNK,'perihal'); ?>
-			<?php echo $form->textArea($SUNK,'perihal',array('cols'=>40,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUNK,'perihal'); ?>
+			<?php echo $form->labelEx($SUNK,'tempat'); ?>
+			<?php echo $form->textArea($SUNK,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($SUNK,'tempat'); ?>
 		</div>
 		
 		<div class="row buttons">

@@ -70,17 +70,18 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		<h4><b> Berita Acara Aanwijzing </b></h4>
 		<div class="row">
 			<?php echo $form->labelEx($BAP,'nomor'); ?>
-			<?php //if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null) {?>
-				<?php //if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pelelangan"){ ?>
-				<!----
-				Nomor Surat Undangan Pengambilan Dokumen Pengadaan : <?php // echo $SUPDP->nomor ?> <br/>
-				<?php // } else if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Penunjukan Langsung"||Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pemilihan Langsung") { ?>
-				Nomor Surat Undangan Permintaan Penawaran Harga : <?php //echo $SUPPPH->nomor ?> <br/>
-				<?php //} ?>
-			<?php //} else { ?>
-				Nomor Nota Dinas Undangan Aanwijzing : <?php // echo $SUP->nomor ?> <br/>
-			<?php //} ?>
-				----->
+				<?php if ($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") { ?>
+				<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null) {?>
+					<?php if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pelelangan"){ ?>
+					Nomor Surat Undangan Pengambilan Dokumen Pengadaan : <?php echo $SUPDP->nomor ?> <br/>
+					<?php } else if(Pengadaan::model()->findByPk($id)->metode_pengadaan=="Penunjukan Langsung"||Pengadaan::model()->findByPk($id)->metode_pengadaan=="Pemilihan Langsung") { ?>
+					Nomor Surat Undangan Permintaan Penawaran Harga : <?php echo $SUPPPH->nomor ?> <br/>
+					<?php } ?>
+				<?php } else { ?>
+					Nomor Nota Dinas Undangan Aanwijzing : <?php echo $SUP->nomor ?> <br/>
+				<?php } ?>
+			<?php } else { ?>
+			<?php } ?>
 			<?php echo $form->textField($BAP,'nomor',array('size'=>56,'maxlength'=>50)); ?>
 			<?php echo $form->error($BAP,'nomor'); ?>
 		</div>

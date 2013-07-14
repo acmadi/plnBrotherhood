@@ -44,6 +44,7 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
 			array('tempat', 'length', 'max'=>256),
+			array('waktu', 'check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, waktu, tempat', 'safe', 'on'=>'search'),
@@ -94,5 +95,11 @@ class BeritaAcaraPembukaanPenawaran extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function Check($attribute,$params){		
+		if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $this->attributes['waktu'])){
+			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
+		}
 	}
 }

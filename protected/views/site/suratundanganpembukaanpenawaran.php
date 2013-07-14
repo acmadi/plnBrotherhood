@@ -9,6 +9,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#12').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -120,12 +123,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
 		</div>
 		
-		<div class="row">
-			<?php echo $form->labelEx($SUPP,'perihal'); ?>
-			<?php echo $form->textArea($SUPP,'perihal',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-			<?php echo $form->error($SUPP,'perihal'); ?>
-		</div>
-
 		<div class="row">
 			<?php echo $form->labelEx($SUPP,'tanggal Pembukaan Penawaran'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(

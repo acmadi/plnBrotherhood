@@ -21,7 +21,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		?>
                 
                 <div id="menuform">
-                    <?php
+                   <?php
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
@@ -49,22 +49,31 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<h4><b> Berita Acara Klarifikasi dan Negosiasi </b></h4>
+		<h4><b> Klarifikasi dan Negosiasi </b></h4>
 		<div class="row">
-			<?php echo $form->labelEx($BANK,'nomor'); ?>
-			<?php if (Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Negosiasi dan Klarifikasi"') == null) {?>
-				<?php if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Satu Sampul"){ ?>
-				Nomor Berita Acara Evaluasi Penawaran : <?php echo $Eval->nomor ?> <br/>
-				<?php } else if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Sampul"){ ?>
-				Nomor Berita Acara Evaluasi Penawaran Sampul Dua : <?php echo $Eval->nomor ?> <br/>
-				<?php } else if(Pengadaan::model()->findByPk($id)->metode_penawaran=="Dua Tahap"){ ?>
-				Nomor Berita Acara Evaluasi Penawaran Tahap Dua : <?php echo $Eval->nomor ?> <br/>
-				<?php } ?>
-			<?php } else { ?>
-				Nomor Surat Undangan Negosiasi dan Klarifikasi : <?php echo $SUNK->nomor ?> <br/>
-			<?php } ?>
-			<?php echo $form->textField($BANK,'nomor',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($BANK,'nomor'); ?>
+			<?php echo $form->labelEx($Dokumen1,'tanggal'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen1,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen1->tanggal,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+			));?>
+			<?php echo $form->error($Dokumen1,'tanggal'); ?>
+		</div>
+	
+		<div class="row">
+			<?php echo $form->labelEx($BANK,'waktu (Format HH:MM)'); ?>
+			<?php echo $form->textField($BANK,'waktu',array('size'=>56,'maxlength'=>10)); ?>
+			<?php echo $form->error($BANK,'waktu'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($BANK,'tempat'); ?>
+			<?php echo $form->textArea($BANK,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
+			<?php echo $form->error($BANK,'tempat'); ?>
 		</div>
 	
 		<div class="row">
@@ -82,14 +91,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row buttons">
-			<?php echo CHtml::submitButton($Pengadaan->status=='31'? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton($BANK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 		
 		<?php $this->endWidget(); ?>
 
 		</div><!-- form -->
 		
-	<?php if($Pengadaan->status!='31') { ?>
+	<?php if($BANK->isNewRecord) { ?>
+		
+	<?php } else { ?>
 		<br/>
 		<div style="border-top:1px solid lightblue">
 		<br/>
@@ -97,13 +108,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<ul class="generatedoc">
 				<li><?php 
 						if(Pengadaan::model()->findByPk($id)->metode_pengadaan == 'Pelelangan'){
-							echo CHtml::link('Berita Acara Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); 
+							echo CHtml::link('Lampiran Berita Acara Klarifikasi', array('docx/download','id'=>$Dokumen2->id_dokumen)); 
 						}else{
-							echo CHtml::link('Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$BANK->id_dokumen)); 
+							echo CHtml::link('Lampiran Berita Acara Negosiasi dan Klarifikasi', array('docx/download','id'=>$Dokumen2->id_dokumen)); 
 						}
-						
 					?>
 				</li>
+				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>

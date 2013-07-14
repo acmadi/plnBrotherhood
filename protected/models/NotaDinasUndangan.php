@@ -1,12 +1,11 @@
 <?php
 
 /**
- * This is the model class for table "surat_undangan_penjelasan".
+ * This is the model class for table "nota_dinas_undangan".
  *
- * The followings are the available columns in table 'surat_undangan_penjelasan':
+ * The followings are the available columns in table 'nota_dinas_undangan':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $perihal
  * @property string $tanggal_undangan
  * @property string $waktu
  * @property string $tempat
@@ -14,12 +13,12 @@
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
  */
-class SuratUndanganPenjelasan extends CActiveRecord
+class NotaDinasUndangan extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return SuratUndanganPenjelasan the static model class
+	 * @return NotaDinasUndangan the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -31,7 +30,7 @@ class SuratUndanganPenjelasan extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'surat_undangan_penjelasan';
+		return 'nota_dinas_undangan';
 	}
 
 	/**
@@ -42,14 +41,14 @@ class SuratUndanganPenjelasan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, perihal, tanggal_undangan, waktu, tempat', 'required'),
+			array('id_dokumen, nomor, tanggal_undangan, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('perihal', 'length', 'max'=>100),
-			array('tempat', 'length', 'max'=>256),
+			array('tempat', 'length', 'max'=>100),
+			array('waktu', 'check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, perihal, tanggal_undangan, waktu, tempat', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tanggal_undangan, waktu, tempat', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,7 +72,6 @@ class SuratUndanganPenjelasan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'perihal' => 'Perihal',
 			'tanggal_undangan' => 'Tanggal Undangan',
 			'waktu' => 'Waktu',
 			'tempat' => 'Tempat',
@@ -93,7 +91,6 @@ class SuratUndanganPenjelasan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('perihal',$this->perihal,true);
 		$criteria->compare('tanggal_undangan',$this->tanggal_undangan,true);
 		$criteria->compare('waktu',$this->waktu,true);
 		$criteria->compare('tempat',$this->tempat,true);
@@ -101,5 +98,11 @@ class SuratUndanganPenjelasan extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function Check($attribute,$params){		
+		if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $this->attributes['waktu'])){
+			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
+		}
 	}
 }
