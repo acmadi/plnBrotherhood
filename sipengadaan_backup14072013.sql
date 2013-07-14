@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 14, 2013 at 10:14 AM
+-- Generation Time: Jul 13, 2013 at 03:04 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   `username` varchar(20) NOT NULL,
   `password` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
+  `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `divisi` varchar(100) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
@@ -65,17 +66,17 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
-(1, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
-(2, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
-(3, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
-(4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
-(5, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', 'asdasdasd', 'dasdas', 3, 'Anggota', 'Aktif'),
-(6, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', 'ice@juice.com', 'Divisi Umum', 4, 'Anggota', 'Aktif'),
-(7, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Pejabat', 'Aktif'),
-(8, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 'Divisi Umum', 2, 'Pejabat', 'Aktif'),
-(9, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 'Divisi Umum', 6, 'Pejabat', 'Aktif'),
-(10, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 'Divisi Umum', 7, 'Pejabat', 'Aktif');
+INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `NIP`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
+(1, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
+(2, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
+(3, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
+(4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
+(5, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', '123123123', 'asdasdasd', 'dasdas', 3, 'Anggota1', 'Aktif'),
+(6, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', '1234567', 'ice@juice.com', 'Divisi Umum', 4, 'Anggota1', 'Aktif'),
+(7, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', '123456788', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Pejabat', 'Aktif'),
+(8, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', '123456787', 'johan@gmail.com', 'Divisi Umum', 2, 'Pejabat', 'Aktif'),
+(9, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', '123456785', 'irvan@gmail.com', 'Divisi Umum', 6, 'Pejabat', 'Aktif'),
+(10, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', '123456786', 'gilang@gmail.com', 'Divisi Umum', 7, 'Pejabat', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -287,6 +288,7 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
   `username` varchar(20) NOT NULL,
   `password` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
+  `NIP` varchar(32) NOT NULL,
   `email` varchar(32) NOT NULL,
   `jabatan` varchar(32) NOT NULL,
   `status_user` varchar(100) NOT NULL,
@@ -297,9 +299,9 @@ CREATE TABLE IF NOT EXISTS `kdivmum` (
 -- Dumping data for table `kdivmum`
 --
 
-INSERT INTO `kdivmum` (`username`, `password`, `nama`, `email`, `jabatan`, `status_user`) VALUES
-('aidil.syaputra', 'e58b8152bd0328baceafd4b178ff0a8fd77e5420', 'Aidil Syaputra', 'aidil@gmail.com', 'KDIVMUM', 'Aktif'),
-('kevin.indra', 'ffb4761cba839470133bee36aeb139f58d7dbaa9', 'Kevin Indra', 'a@aa.aa', 'MSDAF', 'Aktif');
+INSERT INTO `kdivmum` (`username`, `password`, `nama`, `NIP`, `email`, `jabatan`, `status_user`) VALUES
+('aidil.syaputra', 'e58b8152bd0328baceafd4b178ff0a8fd77e5420', 'Aidil Syaputra', '123456789', 'aidil@gmail.com', 'KDIVMUM', 'Aktif'),
+('kevin.indra', 'ffb4761cba839470133bee36aeb139f58d7dbaa9', 'Kevin Indra', '111111', 'a@aa.aa', 'MSDAF', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -389,6 +391,21 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan_tor_rab` (
   `id_dokumen` bigint(100) NOT NULL,
   `nomor` varchar(256) NOT NULL,
   `permintaan` varchar(256) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nota_dinas_undangan`
+--
+
+CREATE TABLE IF NOT EXISTS `nota_dinas_undangan` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(50) NOT NULL,
+  `tanggal_undangan` date NOT NULL,
+  `waktu` time NOT NULL,
+  `tempat` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -504,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `tanggal_penawaran` varchar(256) NOT NULL,
   PRIMARY KEY (`id_penerima`),
   KEY `id_pengadaan` (`id_pengadaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 -- --------------------------------------------------------
 
@@ -562,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=182 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=192 ;
 
 -- --------------------------------------------------------
 
@@ -688,38 +705,6 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `surat_undangan_negosiasi_klarifikasi`
---
-
-CREATE TABLE IF NOT EXISTS `surat_undangan_negosiasi_klarifikasi` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `perihal` varchar(100) NOT NULL,
-  `tanggal_undangan` date NOT NULL,
-  `waktu` time NOT NULL,
-  `tempat` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `surat_undangan_pembukaan_penawaran`
---
-
-CREATE TABLE IF NOT EXISTS `surat_undangan_pembukaan_penawaran` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `perihal` varchar(100) NOT NULL,
-  `tanggal_undangan` date NOT NULL,
-  `waktu` time NOT NULL,
-  `tempat` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `surat_undangan_pengambilan_dokumen_pengadaan`
 --
 
@@ -729,22 +714,6 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_pengambilan_dokumen_pengadaan` (
   `tanggal_pengambilan` date NOT NULL,
   `waktu_pengambilan` time NOT NULL,
   `tempat_pengambilan` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `surat_undangan_penjelasan`
---
-
-CREATE TABLE IF NOT EXISTS `surat_undangan_penjelasan` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(50) NOT NULL,
-  `perihal` varchar(100) NOT NULL,
-  `tanggal_undangan` date NOT NULL,
-  `waktu` time NOT NULL,
-  `tempat` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -946,6 +915,12 @@ ALTER TABLE `nota_dinas_permintaan_tor_rab`
   ADD CONSTRAINT `nota_dinas_permintaan_tor_rab_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `nota_dinas_undangan`
+--
+ALTER TABLE `nota_dinas_undangan`
+  ADD CONSTRAINT `nota_dinas_undangan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `nota_dinas_usulan_pemenang`
 --
 ALTER TABLE `nota_dinas_usulan_pemenang`
@@ -1031,28 +1006,10 @@ ALTER TABLE `surat_pernyataan_minat`
   ADD CONSTRAINT `surat_pernyataan_minat_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `surat_undangan_negosiasi_klarifikasi`
---
-ALTER TABLE `surat_undangan_negosiasi_klarifikasi`
-  ADD CONSTRAINT `surat_undangan_negosiasi_klarifikasi_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_pembukaan_penawaran`
---
-ALTER TABLE `surat_undangan_pembukaan_penawaran`
-  ADD CONSTRAINT `surat_undangan_pembukaan_penawaran_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `surat_undangan_pengambilan_dokumen_pengadaan`
 --
 ALTER TABLE `surat_undangan_pengambilan_dokumen_pengadaan`
   ADD CONSTRAINT `surat_undangan_pengambilan_dokumen_pengadaan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_undangan_penjelasan`
---
-ALTER TABLE `surat_undangan_penjelasan`
-  ADD CONSTRAINT `surat_undangan_penjelasan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_undangan_permintaan_penawaran_harga`
