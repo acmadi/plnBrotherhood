@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Hapus Divisi';
+	$this->pageTitle=Yii::app()->name . ' | Hapus Panitia Pengadaan';
 ?>
 
 <div id="pagecontent">
@@ -32,5 +32,5 @@
 			<?php $this->endWidget(); ?>
 		</div>
 	</div>
-	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/divisi'), 'class'=>'sidafbutton'));  ?></div>
+	<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/panitia'), 'class'=>'sidafbutton'));  ?></div>
 </div>

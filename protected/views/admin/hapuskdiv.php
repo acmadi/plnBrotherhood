@@ -6,8 +6,8 @@
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li><?php echo CHtml::link('Tambah pejabat', array('admin/tambahkdiv')) ?></li>
-		<li class="onprogress"><?php echo CHtml::link('Hapus pejabat', array('admin/hapuskdiv')) ?></li>
+		<li><?php echo CHtml::link('Tambah pejabat berwenang', array('admin/tambahkdiv')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Hapus pejabat berwenang', array('admin/hapuskdiv')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>

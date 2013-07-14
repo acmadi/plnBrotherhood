@@ -6,8 +6,8 @@
 	<div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li class="onprogress"><?php echo CHtml::link('Tambah divisi', array('admin/tambahkdiv')) ?></li>
-		<li><?php echo CHtml::link('Hapus divisi', array('admin/hapuskdiv')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Tambah pejabat berwenang', array('admin/tambahkdiv')) ?></li>
+		<li><?php echo CHtml::link('Hapus pejabat berwenang', array('admin/hapuskdiv')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -22,12 +22,6 @@
 				<?php echo $form->labelEx($kdiv,'Nama pengguna'); ?> 
 				<?php echo $form->textField($kdiv,'username',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($kdiv,'username'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($kdiv,'NIP'); ?> 
-				<?php echo $form->textField($kdiv,'NIP',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($kdiv,'NIP'); ?>
 			</div>
 
 			<div class="row">
