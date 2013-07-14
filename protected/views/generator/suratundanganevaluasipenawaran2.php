@@ -10,7 +10,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
 		<script type="text/javascript">
-			$('#13').attr('class','onprogress');
+			$('#15').attr('class','onprogress');
 		</script>
 	</div>
 
@@ -20,43 +20,22 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			if (Yii::app()->user->getState('role') == 'anggota') {
 		?>
 		
-        	<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>    
-                <div id="menuform">
-                   <?php
-						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
-							$this->widget('zii.widgets.CMenu', array(
-								'items'=>array(
-										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Evaluasi Penawaran"') == null)?'/site/suratundanganevaluasipenawaran':'/site/editsuratundanganevaluasipenawaran','id'=>$id)),
-										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='24'?('/site/evaluasipenawaran'):('/site/editevaluasipenawaran'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='25'?'/site/beritaacaraevaluasipenawaran':($Pengadaan->status=='24'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
-								),
-							));
-						} else {
-							$this->widget('zii.widgets.CMenu', array(
-								'items'=>array(
-										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='24'?('/site/evaluasipenawaran'):('/site/editevaluasipenawaran'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='25'?'/site/beritaacaraevaluasipenawaran':($Pengadaan->status=='24'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
-								),
-							));
-						}
-                    ?>
-                </div>
-          	<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
+        	<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
           		<div id="menuform">
                    <?php
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Evaluasi Penawaran Sampul Satu"') == null)?'/site/suratundanganevaluasipenawaran':'/site/editsuratundanganevaluasipenawaran','id'=>$id)),
-										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='24'?('/site/evaluasipenawaran'):('/site/editevaluasipenawaran'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='25'?'/site/beritaacaraevaluasipenawaran':($Pengadaan->status=='24'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
+										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Evaluasi Penawaran Sampul Dua"') == null)?'/generator/suratundanganevaluasipenawaran2':'/generator/editsuratundanganevaluasipenawaran2','id'=>$id)),
+										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='28'?('/generator/evaluasipenawaran2'):('/generator/editevaluasipenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='29'?'/generator/beritaacaraevaluasipenawaran2':($Pengadaan->status=='28'?'':'/generator/editberitaacaraevaluasipenawaran2'),'id'=>$id)),
 								),
 							));
 						} else {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='24'?('/site/evaluasipenawaran'):('/site/editevaluasipenawaran'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='25'?'/site/beritaacaraevaluasipenawaran':($Pengadaan->status=='24'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
+										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='28'?('/generator/evaluasipenawaran2'):('/generator/editevaluasipenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='29'?'/generator/beritaacaraevaluasipenawaran2':($Pengadaan->status=='28'?'':'/generator/editberitaacaraevaluasipenawaran2'),'id'=>$id)),
 								),
 							));
 						}
@@ -68,16 +47,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Evaluasi Penawaran Tahap Satu"') == null)?'/site/suratundanganevaluasipenawaran':'/site/editsuratundanganevaluasipenawaran','id'=>$id)),
-										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='24'?('/site/evaluasipenawaran'):('/site/editevaluasipenawaran'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='25'?'/site/beritaacaraevaluasipenawaran':($Pengadaan->status=='24'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
+										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Evaluasi Penawaran Tahap Dua"') == null)?'/generator/suratundanganevaluasipenawaran2':'/generator/editsuratundanganevaluasipenawaran2','id'=>$id)),
+										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='28'?('/generator/evaluasipenawaran2'):('/generator/editevaluasipenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='29'?'/generator/beritaacaraevaluasipenawaran2':($Pengadaan->status=='28'?'':'/generator/editberitaacaraevaluasipenawaran2'),'id'=>$id)),
 								),
 							));
 						} else {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='24'?('/site/evaluasipenawaran'):('/site/editevaluasipenawaran'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='25'?'/site/beritaacaraevaluasipenawaran':($Pengadaan->status=='24'?'':'/site/editberitaacaraevaluasipenawaran'),'id'=>$id)),
+										array('label'=>'Evaluasi Penawaran', 'url'=>array($Pengadaan->status=='28'?('/generator/evaluasipenawaran2'):('/generator/editevaluasipenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='29'?'/generator/beritaacaraevaluasipenawaran2':($Pengadaan->status=='28'?'':'/generator/editberitaacaraevaluasipenawaran2'),'id'=>$id)),
 								),
 							));
 						}
@@ -94,9 +73,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		'enableAjaxValidation'=>false,
 		)); ?>
 		
-		<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>
-			<h4><b> Nota Dinas Undangan Evaluasi Penawaran </b></h4>
-		<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
+		<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
 			<h4><b> Nota Dinas Undangan Evaluasi Penawaran Sampul Satu </b></h4>
 		<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
 			<h4><b> Nota Dinas Undangan Evaluasi Penawaran Tahap Satu </b></h4>
@@ -104,9 +81,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		
 		<div class="row">
 			<?php echo $form->labelEx($SUEP,'nomor'); ?>
-			<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>
-				Nomor Berita Acara Pembukaan Penawaran : <?php echo $BAPP->nomor ?> <br/>
-			<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
+			<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
 				Nomor Berita Acara Pembukaan Penawaran Sampul Satu : <?php echo $BAPP->nomor ?> <br/>
 			<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
 				Nomor Berita Acara Pembukaan Penawaran Tahap Satu: <?php echo $BAPP->nomor ?> <br/>

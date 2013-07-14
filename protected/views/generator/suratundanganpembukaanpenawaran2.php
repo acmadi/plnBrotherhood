@@ -26,16 +26,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Dua"') == null)?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaran2','id'=>$id)),
-										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/site/pembukaanpenawaran2'):('/site/editpembukaanpenawaran2'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/site/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/site/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Sampul Dua"') == null)?'/generator/suratundanganpembukaanpenawaran2':'/generator/editsuratundanganpembukaanpenawaran2','id'=>$id)),
+										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/generator/pembukaanpenawaran2'):('/generator/editpembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/generator/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/generator/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
 								),
 							));
 						} else {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/site/pembukaanpenawaran2'):('/site/editpembukaanpenawaran2'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/site/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/site/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/generator/pembukaanpenawaran2'):('/generator/editpembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/generator/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/generator/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
 								),
 							));
 						}
@@ -47,16 +47,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Tahap Dua"') == null)?'/site/suratundanganpembukaanpenawaran2':'/site/editsuratundanganpembukaanpenawaran2','id'=>$id)),
-										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/site/pembukaanpenawaran2'):('/site/editpembukaanpenawaran2'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/site/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/site/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran Tahap Dua"') == null)?'/generator/suratundanganpembukaanpenawaran2':'/generator/editsuratundanganpembukaanpenawaran2','id'=>$id)),
+										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/generator/pembukaanpenawaran2'):('/generator/editpembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/generator/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/generator/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
 								),
 							));
 						} else {
 							$this->widget('zii.widgets.CMenu', array(
 								'items'=>array(
-										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/site/pembukaanpenawaran2'):('/site/editpembukaanpenawaran2'),'id'=>$id)),
-										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/site/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/site/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Pembukaan Penawaran', 'url'=>array($Pengadaan->status=='26'?('/generator/pembukaanpenawaran2'):('/generator/editpembukaanpenawaran2'),'id'=>$id)),
+										array('label'=>'Berita Acara', 'url'=>array($Pengadaan->status=='27'?'/generator/beritaacarapembukaanpenawaran2':($Pengadaan->status=='26'?'':'/generator/editberitaacarapembukaanpenawaran2'),'id'=>$id)),
 								),
 							));
 						}
