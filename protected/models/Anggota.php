@@ -8,7 +8,6 @@
  * @property string $username
  * @property string $password
  * @property string $nama
- * @property string $NIP
  * @property string $email
  * @property string $divisi
  * @property string $id_panitia
@@ -46,16 +45,16 @@ class Anggota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, nama, NIP, email, divisi, id_panitia, jabatan, status_user', 'required'),
+			array('username, password, nama, email, divisi, id_panitia, jabatan, status_user', 'required'),
 			array('username', 'length', 'max'=>20),
 			array('password, nama', 'length', 'max'=>256),
-			array('NIP, email, jabatan', 'length', 'max'=>32),
+			array('email, jabatan', 'length', 'max'=>32),
 			array('divisi', 'length', 'max'=>100),
 			array('id_panitia', 'length', 'max'=>11),
 			array('status_user', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, nama, NIP, email, divisi, id_panitia, jabatan, status_user', 'safe', 'on'=>'search'),
+			array('id, username, password, nama, email, divisi, id_panitia, jabatan, status_user', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,7 +80,6 @@ class Anggota extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'nama' => 'Nama',
-			'NIP' => 'Nip',
 			'email' => 'Email',
 			'divisi' => 'Divisi',
 			'id_panitia' => 'Id Panitia',
@@ -105,7 +103,6 @@ class Anggota extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('divisi',$this->divisi,true);
 		$criteria->compare('id_panitia',$this->id_panitia,true);
@@ -128,7 +125,6 @@ class Anggota extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('divisi',$this->divisi,true);
 		$criteria->compare('id_panitia',$this->id_panitia,true);

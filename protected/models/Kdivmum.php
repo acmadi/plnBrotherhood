@@ -7,7 +7,6 @@
  * @property string $username
  * @property string $password
  * @property string $nama
- * @property string $NIP
  * @property string $email
  * @property string $jabatan
  * @property string $status_user
@@ -40,14 +39,14 @@ class Kdivmum extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, nama, NIP, email, jabatan, status_user', 'required'),
+			array('username, password, nama, email, jabatan, status_user', 'required'),
 			array('username', 'length', 'max'=>20),
 			array('password, nama', 'length', 'max'=>256),
-			array('NIP, email, jabatan', 'length', 'max'=>32),
+			array('email, jabatan', 'length', 'max'=>32),
 			array('status_user', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, password, nama, NIP, email, jabatan, status_user', 'safe', 'on'=>'search'),
+			array('username, password, nama, email, jabatan, status_user', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,7 +70,6 @@ class Kdivmum extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'nama' => 'Nama',
-			'NIP' => 'Nip',
 			'email' => 'Email',
 			'jabatan' => 'Jabatan',
 			'status_user' => 'Status User',
@@ -92,7 +90,6 @@ class Kdivmum extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('status_user',$this->status_user,true);
@@ -112,7 +109,6 @@ class Kdivmum extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('NIP',$this->NIP,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('status_user',$this->status_user,true);

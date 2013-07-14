@@ -304,10 +304,16 @@ class AdminController extends Controller
 			$kdiv = new Kdivmum;
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
-				$kdiv->status_user = 'Aktif';
-				if ($kdiv->save(false)) {
-					$this->redirect(array('kdiv'));
+				$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
+				if ($old != null) {
+					$old->status_user = 'Aktif';
+					$old->save(false);
 				}
+				else {
+					$kdiv->status_user = 'Aktif';
+					$kdiv->save(false);
+				}
+				$this->redirect(array('kdiv'));
 			}
 			$this->render('tambahkdiv', array(
 				'kdiv'=>$kdiv,
