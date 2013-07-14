@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 14, 2013 at 10:14 AM
+-- Generation Time: Jul 14, 2013 at 10:30 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -52,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   `password` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `divisi` varchar(100) NOT NULL,
   `id_panitia` bigint(11) NOT NULL,
   `jabatan` varchar(32) NOT NULL,
   `status_user` varchar(50) NOT NULL,
@@ -65,17 +64,17 @@ CREATE TABLE IF NOT EXISTS `anggota` (
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `email`, `divisi`, `id_panitia`, `jabatan`, `status_user`) VALUES
-(1, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 'Divisi Umum', 4, 'Ketua', 'Aktif'),
-(2, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 'Divisi Umum', 3, 'Ketua', 'Aktif'),
-(3, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 'Divisi Umum', 4, 'Sekretaris', 'Aktif'),
-(4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 'Divisi Umum', 3, 'Sekretaris', 'Aktif'),
-(5, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', 'asdasdasd', 'dasdas', 3, 'Anggota', 'Aktif'),
-(6, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', 'ice@juice.com', 'Divisi Umum', 4, 'Anggota', 'Aktif'),
-(7, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 'Divisi Umum', 1, 'Pejabat', 'Aktif'),
-(8, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 'Divisi Umum', 2, 'Pejabat', 'Aktif'),
-(9, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 'Divisi Umum', 6, 'Pejabat', 'Aktif'),
-(10, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 'Divisi Umum', 7, 'Pejabat', 'Aktif');
+INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `email`, `id_panitia`, `jabatan`, `status_user`) VALUES
+(1, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 4, 'Ketua', 'Aktif'),
+(2, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 3, 'Ketua', 'Aktif'),
+(3, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 4, 'Sekretaris', 'Aktif'),
+(4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 3, 'Sekretaris', 'Aktif'),
+(5, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', 'asdasdasd', 3, 'Anggota', 'Aktif'),
+(6, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', 'ice@juice.com', 4, 'Anggota', 'Aktif'),
+(7, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 1, 'Pejabat', 'Aktif'),
+(8, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 2, 'Pejabat', 'Aktif'),
+(9, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 6, 'Pejabat', 'Aktif'),
+(10, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 7, 'Pejabat', 'Aktif');
 
 -- --------------------------------------------------------
 
