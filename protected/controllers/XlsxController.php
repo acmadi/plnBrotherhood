@@ -45,6 +45,7 @@ class XlsxController extends Controller
 				}
 				else if ($crincian->nama_rincian == 'Lampiran ba') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_ba.xlsx');
+					$metode_pengadaan = $cpengadaan->metode_pengadaan;
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#tahun#", Tanggal::getTahun($cdokumen->tanggal));
