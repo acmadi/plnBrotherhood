@@ -823,9 +823,9 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					if ($Pengadaan->metode_pengadaan=='Pelelangan'){
-						$Pengadaan->status= "5";
+						$Pengadaan->status= "6";
 					} else {	
-						$Pengadaan->status= "4";
+						$Pengadaan->status= "5";
 					}
 					
 					$Dokumen0= new Dokumen;
@@ -983,7 +983,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status= "8";
+					$Pengadaan->status= "9";
 					
 					$Dokumen0= new Dokumen;
 					$criteria=new CDbcriteria;
@@ -1080,7 +1080,7 @@
 			else {
 				if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="6";
+					$Pengadaan->status="7";
 					
 					$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
 					$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
@@ -1175,7 +1175,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="7";
+					$Pengadaan->status="8";
 
 					$PP = array(new PenerimaPengadaan);	
 						
@@ -1322,7 +1322,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+					$Pengadaan->status="9";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1402,7 +1402,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+					$Pengadaan->status="9";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1482,7 +1482,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="9";
+					$Pengadaan->status="11";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1641,7 +1641,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="10";
+					$Pengadaan->status="13";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1815,7 +1815,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="11";
+					$Pengadaan->status="14";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -2018,7 +2018,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="12";
+					$Pengadaan->status="15";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
