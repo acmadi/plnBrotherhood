@@ -227,6 +227,17 @@ class XlsxController extends Controller
 						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Tahap Satu - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
 		}
+		else if ($cdokumen->nama_dokumen == 'Pengumuman kualifikasi') {
+			$PHPQ=pengumumanhasilprakualifikasi::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . '4b BA dan Hasil Kualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", $PHPQ->jam);
+					$this->assign($objPHPExcel, "#tempat#", $PHPQ->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $PHPQ->acara." ".$cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+					
+		}
 		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Satu') {
 			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
 			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');

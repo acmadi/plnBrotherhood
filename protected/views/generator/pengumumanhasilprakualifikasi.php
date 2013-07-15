@@ -80,6 +80,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		<br/>
 		</div><!-- form -->
 		
+		<li><?php echo CHtml::link('Hasil Prakualifikasi', array('xlsx/download','id'=>$PHPQ->id_dokumen)); ?></li>
+		
 	<?php	} ?>
 	</div>
 </div>
