@@ -22,8 +22,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Usulan Hasil', 'url'=>array($Pengadaan->status=='10'?('/generator/usulanhasilprakualifikasi'):('/generator/editusulanhasilprakualifikasi'),'id'=>$id)),
-							array('label'=>'Penetapan Hasil', 'url'=>array($Pengadaan->status=='11'?('/generator/penetapanhasilprakualifikasi'):($Pengadaan->status=='10'?'':('/generator/editpenetapanhasilprakualifikasi')),'id'=>$id)),
+							array('label'=>'Usulan Hasil', 'url'=>array($Pengadaan->status=='13'?('/generator/usulanhasilprakualifikasi'):('/generator/editusulanhasilprakualifikasi'),'id'=>$id)),
+							array('label'=>'Penetapan Hasil', 'url'=>array($Pengadaan->status=='14'?('/generator/penetapanhasilprakualifikasi'):($Pengadaan->status=='13'?'':('/generator/editpenetapanhasilprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
@@ -70,7 +70,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($Pengadaan->status == '14' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
 		
 			

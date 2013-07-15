@@ -121,8 +121,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						'model' => $PP,
 						// 'model2' => $PP2,
 						'viewName' => 'formperusahaan_evaluasi_1_sampul',
-						'labelAdd' => 'Tambah Penyedia',
-						'labelDel' => 'Hapus Penyedia',						
+						'labelAdd' => '',
+						'labelDel' => '',						
 						)); 
 					}else if($Pengadaan->metode_penawaran == 'Dua Sampul' || $Pengadaan->metode_penawaran == 'Dua Tahap'){
 						$this->widget('application.extensions.appendo.JAppendo',array(
@@ -130,8 +130,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						'model' => $PP,
 						// 'model2' => $PP2,
 						'viewName' => 'formperusahaan_evaluasi_sampul_1',
-						'labelAdd' => 'Tambah Penyedia',
-						'labelDel' => 'Hapus Penyedia',						
+						'labelAdd' => '',
+						'labelDel' => '',						
 						)); 
 					}
 				?>

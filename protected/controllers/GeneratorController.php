@@ -19,78 +19,104 @@
 						$this->redirect(array('generator/hps','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="3"){
-						$this->redirect(array('generator/dokumenprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/edithps','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="4"){
-						$this->redirect(array('generator/suratundanganprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/dokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="5"){
-						$this->redirect(array('generator/pengumumanlelangprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/suratpengumumanpelelanganprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="6"){
-						$this->redirect(array('generator/pendaftaranlelangprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/pendaftaranpelelanganprakualifikasi','id'=>$id));
 					}
-					// if(Pengadaan::model()->findByPk($id)->status=="7"){
-			
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="8"){
-			
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="9"){
-			
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="10"){
-						// $this->redirect(array('generator/rks','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="11"){
-						// $this->redirect(array('generator/hps','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="12"){
-						// $this->redirect(array('generator/permintaanpenawaranharga','id'=>$id));
-					// }
+					if(Pengadaan::model()->findByPk($id)->status=="7"){
+						$this->redirect(array('generator/pengambilandokumenprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="8"){
+						$this->redirect(array('generator/penyampaiandokumenprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="9"){
+						$this->redirect(array('generator/evaluasidokumenprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="10"){
+						$this->redirect(array('generator/usulanhasilprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="11"){
+						$this->redirect(array('generator/penetapanhasilprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="12"){
+						$this->redirect(array('generator/pengumumanhasilprakualifikasi','id'=>$id));
+					}
 					// if(Pengadaan::model()->findByPk($id)->status=="13"){
 						// $this->redirect(array('generator/pengumumanpengadaan','id'=>$id));
 					// }
-					if(Pengadaan::model()->findByPk($id)->status=="14"){
+					// if(Pengadaan::model()->findByPk($id)->status=="14"){
+						// $this->redirect(array('generator/suratpengumumanpelelangan','id'=>$id));
+					// }
+					// if(Pengadaan::model()->findByPk($id)->status=="15"){
+					// }
+					if(Pengadaan::model()->findByPk($id)->status=="16"){
+						$this->redirect(array('generator/permintaanpenawaranharga','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="17"){
 						$this->redirect(array('generator/suratpengumumanpelelangan','id'=>$id));
 					}
-					// if(Pengadaan::model()->findByPk($id)->status=="15"){
-			
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="16"){
-			
-					// }
-					if(Pengadaan::model()->findByPk($id)->status=="17"){
-						$this->redirect(array('generator/beritaacaraaanwijzing','id'=>$id));
-					}
 					if(Pengadaan::model()->findByPk($id)->status=="18"){
-						$this->redirect(array('generator/beritaacarapembukaanpenawaran','id'=>$id));
+						$this->redirect(array('generator/pendaftaranpelelangan','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="19"){
-						$this->redirect(array('generator/beritaacaraevaluasipenawaran','id'=>$id));
+						$this->redirect(array('generator/pengambilandokumen','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="20"){
-						$this->redirect(array('generator/beritaacarapembukaanpenawaran2','id'=>$id));
+						$this->redirect(array('generator/aanwijzing','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="21"){
-						$this->redirect(array('generator/beritaacaraevaluasipenawaran2','id'=>$id));
+						$this->redirect(array('generator/beritaacaraaanwijzing','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="22"){
-						$this->redirect(array('generator/beritaacaranegosiasiklarifikasi','id'=>$id));
+						$this->redirect(array('generator/pembukaanpenawaran','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="23"){
-						$this->redirect(array('generator/notadinasusulanpemenang','id'=>$id));
+						$this->redirect(array('generator/beritaacarapembukaanpenawaran','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="24"){
-						$this->redirect(array('generator/notadinaspenetapanpemenang','id'=>$id));
+						$this->redirect(array('generator/evaluasipenawaran','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="25"){
-						$this->redirect(array('generator/notadinaspemberitahuanpemenang','id'=>$id));
+						$this->redirect(array('generator/beritaacaraevaluasipenawaran','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="26"){
-						$this->redirect(array('generator/suratpengumumanpemenang','id'=>$id));
+						$this->redirect(array('generator/pembukaanpenawaran2','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="27"){
+						$this->redirect(array('generator/beritaacarapembukaanpenawaran2','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="28"){
+						$this->redirect(array('generator/evaluasipenawaran2','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="29"){
+						$this->redirect(array('generator/beritaacaraevaluasipenawaran2','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="30"){
+						$this->redirect(array('generator/negosiasiklarifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="31"){
+						$this->redirect(array('generator/beritaacaranegosiasiklarifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="32"){
+						$this->redirect(array('generator/notadinasusulanpemenang','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="33"){
+						$this->redirect(array('generator/notadinaspenetapanpemenang','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="34"){
+						$this->redirect(array('generator/notadinaspemberitahuanpemenang','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="35"){
+						$this->redirect(array('generator/suratpengumumanpemenang','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="36"){
 						$this->redirect(array('generator/suratpenunjukanpemenang','id'=>$id));
 					}
 					else{
@@ -797,9 +823,9 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					if ($Pengadaan->metode_pengadaan=='Pelelangan'){
-						$Pengadaan->status= "5";
+						$Pengadaan->status= "6";
 					} else {	
-						$Pengadaan->status= "4";
+						$Pengadaan->status= "5";
 					}
 					
 					$Dokumen0= new Dokumen;
@@ -957,7 +983,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status= "8";
+					$Pengadaan->status= "9";
 					
 					$Dokumen0= new Dokumen;
 					$criteria=new CDbcriteria;
@@ -1054,7 +1080,7 @@
 			else {
 				if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="6";
+					$Pengadaan->status="7";
 					
 					$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
 					$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
@@ -1149,7 +1175,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="7";
+					$Pengadaan->status="8";
 
 					$PP = array(new PenerimaPengadaan);	
 						
@@ -1296,7 +1322,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+					$Pengadaan->status="9";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1376,7 +1402,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+					$Pengadaan->status="9";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1456,7 +1482,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="9";
+					$Pengadaan->status="11";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1615,7 +1641,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="10";
+					$Pengadaan->status="13";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1789,7 +1815,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="11";
+					$Pengadaan->status="14";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1992,7 +2018,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="12";
+					$Pengadaan->status="15";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -4821,7 +4847,7 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 					
-					$PP = PenerimaPengadaan::model()->findAll('hadir_pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('(hadir_pembukaan_penawaran_2 = "1" or hadir_pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
@@ -4895,7 +4921,7 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 
-					$PP = PenerimaPengadaan::model()->findAll('hadir_pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_2 = "1" or pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
