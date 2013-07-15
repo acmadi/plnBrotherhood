@@ -48,14 +48,15 @@
 					if(Pengadaan::model()->findByPk($id)->status=="12"){
 						$this->redirect(array('generator/pengumumanhasilprakualifikasi','id'=>$id));
 					}
-					// if(Pengadaan::model()->findByPk($id)->status=="13"){
-						// $this->redirect(array('generator/pengumumanpengadaan','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="14"){
-						// $this->redirect(array('generator/suratpengumumanpelelangan','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="15"){
-					// }
+					if(Pengadaan::model()->findByPk($id)->status=="13"){
+						$this->redirect(array('generator/usulanhasilprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="14"){
+						$this->redirect(array('generator/penetapanhasilprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="15"){
+						$this->redirect(array('generator/pengumumanhasilprakualifikasi','id'=>$id));
+					}
 					if(Pengadaan::model()->findByPk($id)->status=="16"){
 						$this->redirect(array('generator/permintaanpenawaranharga','id'=>$id));
 					}
