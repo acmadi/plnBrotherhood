@@ -955,13 +955,13 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Aanwijzing") {
 			
-			$SUP=NotaDinasUndangan::model()->findByPk($id);
-			$nomor = $SUP->nomor;
+			$NDU=NotaDinasUndangan::model()->findByPk($id);
+			$nomor = $NDU->nomor;
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$perihal = "Undangan Aanwijzing";
-			$tanggal_undangan = Tanggal::getTanggalLengkap($SUP->tanggal_undangan);			
-			$tempat = $SUP->tempat;
-			$waktu = Tanggal::getJamMenit($SUP->waktu);
+			$tanggal_undangan = Tanggal::getTanggalLengkap($NDU->tanggal_undangan);			
+			$tempat = $NDU->tempat;
+			$waktu = Tanggal::getJamMenit($NDU->waktu);
 			$nama_pengadaan = $Peng->nama_pengadaan;
 			$kegiatan = "Aanwijzing";
 			$acara = $kegiatan." ".$nama_pengadaan;
@@ -970,9 +970,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
 			$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
-			$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);
-			$this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
-				
+			$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);				
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
@@ -1007,37 +1005,24 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran" || $Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Sampul Satu" || $Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Tahap Satu" || $Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Sampul Dua" || $Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Tahap Dua") {
 			
-			$SUPP=SuratUndanganPembukaanPenawaran::model()->findByPk($id);
-			$nomor = $SUPP->nomor;
-			$tanggal = Tanggal::getTanggalLengkap($SUPP->tanggal_undangan);
+			$NDU=NotaDinasUndangan::model()->findByPk($id);
+			$nomor = $NDU->nomor;
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$tempat = $SUPP->tempat;
-			$waktu = Tanggal::getJamMenit($SUPP->waktu);
-			$nama = $Peng->nama_pengadaan;
-			$perihal = $SUPP->perihal;
+			$tanggal_undangan = Tanggal::getTanggalLengkap($NDU->tanggal_undangan);			
+			$tempat = $NDU->tempat;
+			$waktu = Tanggal::getJamMenit($NDU->waktu);
+			$nama_pengadaan = $Peng->nama_pengadaan;
 			
-			$this->doccy->newFile('8 Surat Undangan Aanwijzing.docx');
+			$this->doccy->newFile('8 Nota Dinas Undangan Panitia.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			if(Panitia::model()->findByPk($Peng->id_panitia)->jumlah_anggota == 1){
-				$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
-				// $this->doccy->phpdocx->assign('#ketua#', $ketua);
-				// $listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua(3);
-				
-				// $this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
-			}
-			else{
-				$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
-				$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);
-				
-				$this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
-					
-			}
+			$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
+			$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);				
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$hari = Tanggal::getHari($tanggal);
+			$hari = Tanggal::getHari($tanggal_undangan);
 			
 			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
@@ -1048,80 +1033,156 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal_undangan);
 			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggalsurat);
 			$this->doccy->phpdocx->assign('#norks#', $norks);
-			// $this->doccy->phpdocx->assign('#acara#', '..........');
-			$this->doccy->phpdocx->assign('#pekerjaan#', $nama);
-			$this->doccy->phpdocx->assign('#perihal#', $perihal);
+			$this->doccy->phpdocx->assign('#pekerjaan#', $nama_pengadaan);
 			$this->doccy->phpdocx->assign('#hari#', $hari);
-			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#waktu#', $waktu);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
-			if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
-				$this->doccy->phpdocx->assign('#surat#', 'Pembukaan Penawaran');
-			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Sampul Satu"){
-				$this->doccy->phpdocx->assign('#surat#', 'Pembukaan Penawaran Sampul Satu');
-			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Tahap Satu"){
-				$this->doccy->phpdocx->assign('#surat#', 'Pembukaan Penawaran Tahap Satu');
-			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Sampul Dua"){
-				$this->doccy->phpdocx->assign('#surat#', 'Pembukaan Penawaran Sampul Dua');
-			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Tahap Dua"){
-				$this->doccy->phpdocx->assign('#surat#', 'Pembukaan Penawaran Tahap Dua');
-			}
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
 			$this->doccy->phpdocx->assign('#nomorNdPerintahPengadaan#', $nomorNdPerintahPengadaan);
 			$this->doccy->phpdocx->assign('#tanggalNdPerintahPengadaan#', $tanggalNdPerintahPengadaan);
-			$this->doccy->phpdocx->assign('#perihalNdPerintahPengadaan#', $perihalNdPerintahPengadaan);						
-			
+			$this->doccy->phpdocx->assign('#perihalNdPerintahPengadaan#', $perihalNdPerintahPengadaan);	
 			if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran"){
+				$kegiatan = 'Pembukaan Penawaran';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Pembukaan Penawaran');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
 				$this->renderDocx("Surat Undangan Pembukaan Penawaran-".$Peng->nama_pengadaan.".docx", true);
 			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Sampul Satu"){
+				$kegiatan = 'Pembukaan Penawaran Sampul Satu';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Pembukaan Penawaran Sampul Satu');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
 				$this->renderDocx("Surat Undangan Pembukaan Penawaran Sampul Satu-".$Peng->nama_pengadaan.".docx", true);
 			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Tahap Satu"){
+				$kegiatan = 'Pembukaan Penawaran Tahap Satu';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Pembukaan Penawaran Tahap Satu');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
 				$this->renderDocx("Surat Undangan Pembukaan Penawaran Tahap Satu-".$Peng->nama_pengadaan.".docx", true);
 			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Sampul Dua"){
+				$kegiatan = 'Pembukaan Penawaran Sampul Dua';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Pembukaan Penawaran Sampul Dua');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
 				$this->renderDocx("Surat Undangan Pembukaan Penawaran Sampul Dua-".$Peng->nama_pengadaan.".docx", true);
 			} else if ($Dok->nama_dokumen == "Surat Undangan Pembukaan Penawaran Tahap Dua"){
+				$kegiatan = 'Pembukaan Penawaran Tahap Dua';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Pembukaan Penawaran Tahap Dua');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
 				$this->renderDocx("Surat Undangan Pembukaan Penawaran Tahap Dua-".$Peng->nama_pengadaan.".docx", true);
+			}
+
+		}
+		else if ($Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran" || $Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Sampul Satu" || $Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Tahap Satu" || $Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Sampul Dua" || $Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Tahap Dua") {
+			
+			$NDU=NotaDinasUndangan::model()->findByPk($id);
+			$nomor = $NDU->nomor;
+			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$tanggal_undangan = Tanggal::getTanggalLengkap($NDU->tanggal_undangan);			
+			$tempat = $NDU->tempat;
+			$waktu = Tanggal::getJamMenit($NDU->waktu);
+			$nama_pengadaan = $Peng->nama_pengadaan;
+			
+			$this->doccy->newFile('8 Nota Dinas Undangan Panitia.docx');
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
+			
+			$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
+			$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);				
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+			$norks = $rks->nomor;
+			$hari = Tanggal::getHari($tanggal_undangan);
+			
+			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
+			
+			$nomorNdPerintahPengadaan = $NDPP->nomor;
+			$tanggalNdPerintahPengadaan = Tanggal::getTanggalLengkap($dokNDPP->tanggal);
+			$perihalNdPerintahPengadaan = $NDPP->perihal;
+			
+			$this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
+			$this->doccy->phpdocx->assign('#nomor#', $nomor);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal_undangan);
+			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggalsurat);
+			$this->doccy->phpdocx->assign('#norks#', $norks);
+			$this->doccy->phpdocx->assign('#pekerjaan#', $nama_pengadaan);
+			$this->doccy->phpdocx->assign('#hari#', $hari);
+			$this->doccy->phpdocx->assign('#waktu#', $waktu);
+			$this->doccy->phpdocx->assign('#tempat#', $tempat);
+			$this->doccy->phpdocx->assign('#ketua#', $ketua);
+			$this->doccy->phpdocx->assign('#nomorNdPerintahPengadaan#', $nomorNdPerintahPengadaan);
+			$this->doccy->phpdocx->assign('#tanggalNdPerintahPengadaan#', $tanggalNdPerintahPengadaan);
+			$this->doccy->phpdocx->assign('#perihalNdPerintahPengadaan#', $perihalNdPerintahPengadaan);	
+			if ($Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran"){
+				$kegiatan = 'Evaluasi Penawaran';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Evaluasi Penawaran');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
+				$this->renderDocx("Surat Undangan Evaluasi Penawaran-".$Peng->nama_pengadaan.".docx", true);
+			} else if ($Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Sampul Satu"){
+				$kegiatan = 'Evaluasi Penawaran Sampul Satu';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Evaluasi Penawaran Sampul Satu');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
+				$this->renderDocx("Surat Undangan Evaluasi Penawaran Sampul Satu-".$Peng->nama_pengadaan.".docx", true);
+			} else if ($Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Tahap Satu"){
+				$kegiatan = 'Evaluasi Penawaran Tahap Satu';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Evaluasi Penawaran Tahap Satu');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
+				$this->renderDocx("Surat Undangan Evaluasi Penawaran Tahap Satu-".$Peng->nama_pengadaan.".docx", true);
+			} else if ($Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Sampul Dua"){
+				$kegiatan = 'Evaluasi Penawaran Sampul Dua';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Evaluasi Penawaran Sampul Dua');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
+				$this->renderDocx("Surat Undangan Evaluasi Penawaran Sampul Dua-".$Peng->nama_pengadaan.".docx", true);
+			} else if ($Dok->nama_dokumen == "Surat Undangan Evaluasi Penawaran Tahap Dua"){
+				$kegiatan = 'Evaluasi Penawaran Tahap Dua';
+				$acara = $kegiatan." ".$nama_pengadaan;
+				$this->doccy->phpdocx->assign('#perihal#', 'Undangan Evaluasi Penawaran Tahap Dua');
+				$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+				$this->doccy->phpdocx->assign('#acara#', $acara);
+				$this->renderDocx("Surat Undangan Evaluasi Penawaran Tahap Dua-".$Peng->nama_pengadaan.".docx", true);
 			}
 
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Negosiasi dan Klarifikasi") {
 			
-			$SUNK=SuratUndanganNegosiasiKlarifikasi::model()->findByPk($id);
-			$nomor = $SUNK->nomor;
-			$tanggal = Tanggal::getTanggalLengkap($SUNK->tanggal_undangan);
+			$NDU=NotaDinasUndangan::model()->findByPk($id);
+			$nomor = $NDU->nomor;
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$tempat = $SUNK->tempat;
-			$waktu = Tanggal::getJamMenit($SUNK->waktu);
-			$nama = $Peng->nama_pengadaan;
-			$perihal = $SUNK->perihal;
-			
-			$this->doccy->newFile('8 Surat Undangan Aanwijzing.docx');
+			$perihal = "Undangan Klarifikasi dan Negosiasi";
+			$tanggal_undangan = Tanggal::getTanggalLengkap($NDU->tanggal_undangan);			
+			$tempat = $NDU->tempat;
+			$waktu = Tanggal::getJamMenit($NDU->waktu);
+			$nama_pengadaan = $Peng->nama_pengadaan;
+			$kegiatan = "Klarifikasi dan Negosiasi";
+			$acara = $kegiatan." ".$nama_pengadaan;
+			$this->doccy->newFile('8 Nota Dinas Undangan Panitia.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#","");
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#","");
 			
-			if(Panitia::model()->findByPk($Peng->id_panitia)->jumlah_anggota == 1){
-				$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
-				// $this->doccy->phpdocx->assign('#ketua#', $ketua);
-				// $listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua(3);
-				
-				// $this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
-			}
-			else{
-				$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
-				$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);
-				
-				$this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
-								
-			}
+			$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
+			$listPanitiaTanpaKetua = $this->getListPanitiaTanpaKetua($Peng->id_panitia);				
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor;
-			$hari = Tanggal::getHari($tanggal);
+			$hari = Tanggal::getHari($tanggal_undangan);
 			
 			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
@@ -1132,23 +1193,20 @@ class DocxController extends Controller
 									
 			$this->doccy->phpdocx->assign('#listPanitiaTanpaKetua#', $listPanitiaTanpaKetua);
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal_undangan);
 			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggalsurat);
 			$this->doccy->phpdocx->assign('#norks#', $norks);
-			// $this->doccy->phpdocx->assign('#acara#', '..........');
-			$this->doccy->phpdocx->assign('#pekerjaan#', $nama);
+			$this->doccy->phpdocx->assign('#pekerjaan#', $nama_pengadaan);
 			$this->doccy->phpdocx->assign('#perihal#', $perihal);
 			$this->doccy->phpdocx->assign('#hari#', $hari);
-			$this->doccy->phpdocx->assign('#nama#', $nama);
 			$this->doccy->phpdocx->assign('#waktu#', $waktu);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
-			$this->doccy->phpdocx->assign('#surat#', 'Negosiasi dan Klarifikasi');
 			$this->doccy->phpdocx->assign('#ketua#', $ketua);
-			// $this->doccy->phpdocx->assign('#sekretaris#', $sekretaris);
-			// $this->doccy->phpdocx->assign('#anggota1#', $anggota1);
+			$this->doccy->phpdocx->assign('#kegiatan#', $kegiatan);
+			$this->doccy->phpdocx->assign('#acara#', $acara);
 			$this->doccy->phpdocx->assign('#nomorNdPerintahPengadaan#', $nomorNdPerintahPengadaan);
 			$this->doccy->phpdocx->assign('#tanggalNdPerintahPengadaan#', $tanggalNdPerintahPengadaan);
-			$this->doccy->phpdocx->assign('#perihalNdPerintahPengadaan#', $perihalNdPerintahPengadaan);						
+			$this->doccy->phpdocx->assign('#perihalNdPerintahPengadaan#', $perihalNdPerintahPengadaan);					
 			
 			$this->renderDocx("Surat Undangan Negosiasi dan Klarifikasi-".$Peng->nama_pengadaan.".docx", true);
 
@@ -1652,7 +1710,7 @@ class DocxController extends Controller
 			$namapic = $this->getListPanitiaAanwijzing($Peng->id_panitia);
 			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;						
 			$jenispic2 = Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia;
-			$kalimatpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia . " sebagai berikut :" ;
+			$kalimatpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia;
 			$kalimatpejabat = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -2188,7 +2246,7 @@ class DocxController extends Controller
 		}else{
 			$list = "1. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris" and status_user = "Aktif"')->nama;
 			$Anggota = Anggota::model()->findAll('id_panitia = ' . $idPan. ' and jabatan = "Anggota" and status_user = "Aktif"');
-			$i=3;
+			$i=2;
 			foreach ($Anggota as $item) {
 				$list .= '<w:br/>';
 				$list .= $i.". ". $item->nama;
@@ -2265,15 +2323,17 @@ class DocxController extends Controller
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
 			$list = Panitia::model()->findByPk($idPan)->nama_panitia;
 		}else{
-			$list = "1. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->nama . "/Ketua : ...........................................";
+			$list = "1. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua" and status_user = "Aktif"')->nama . "/Ketua : ...........................................";
 			$list .= '<w:br/>';			
 			$list .= '<w:br/>';		
-			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . "/Sekretaris : ...........................................";
-			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
-			for ( $i=1;$i<=$n;$i++){
-				$list .= '<w:br/>';						
-				$list .= '<w:br/>';		
-				$list .= $i+2 . ". " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->nama . "/Anggota : ...........................................";						
+			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris" and status_user = "Aktif"')->nama . "/Sekretaris : ...........................................";
+			$anggota=Anggota::model()->findAll('id_panitia = ' . $idPan . ' and jabatan = "Anggota" and status_user = "Aktif"');
+			$i=3;
+			foreach ($anggota as $item){
+				$list .= '<w:br/>';
+				$list .= '<w:br/>';
+				$list .= $i.". " .$item->nama."/Anggota : ...........................................";
+				$i++;
 			}
 		}
 		return  $list;

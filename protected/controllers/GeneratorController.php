@@ -5336,7 +5336,7 @@
 						$this->render('suratundangannegosiasiklarifikasi',array(
 							'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
 						));
-					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap"){
 						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
 						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
 						$this->render('suratundangannegosiasiklarifikasi',array(
@@ -5396,7 +5396,7 @@
 						$this->render('suratundangannegosiasiklarifikasi',array(
 							'SUNK'=>$SUNK,'Dokumen0'=>$Dokumen0,'Eval'=>$Eval,
 						));
-					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					} else if ($Pengadaan->metode_penawaran=="Dua Tahap"){
 						$DokEval=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Penawaran Tahap Dua"');
 						$Eval=BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokEval->id_dokumen);
 						$this->render('suratundangannegosiasiklarifikasi',array(
