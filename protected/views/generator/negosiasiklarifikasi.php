@@ -75,11 +75,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->textArea($BANK,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($BANK,'tempat'); ?>
 		</div>
-<<<<<<< HEAD
-	
-		
-=======
->>>>>>> e5d6d55536a099b56735109cf4034fb8d7bbd00d
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BANK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
