@@ -75,20 +75,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->textArea($BANK,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($BANK,'tempat'); ?>
 		</div>
-	
-		<div class="row">
-				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_klarifikasi',
-					'labelAdd' => 'Tambah Penyedia',
-					'labelDel' => 'Hapus Penyedia',
-					
-					)); 
-				?>
-		</div>
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BANK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
@@ -114,7 +100,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						}
 					?>
 				</li>
-				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>
