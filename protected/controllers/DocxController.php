@@ -2270,19 +2270,21 @@ class DocxController extends Controller
 		if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
 			$list = Panitia::model()->findByPk($idPan)->nama_panitia;
 		}else{
-			$list = "1. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua"')->nama . "                                           (Ketua)    ...............................";
+			$list = "1. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Ketua" and status_user = "Aktif"')->nama . "                                                       ...........................................";
 			$list .= '<w:br/>';		
 			$list .= '<w:br/>';					
-			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->nama . "         (Sekretaris)   ..................................";
-			$n = (count(Anggota::model()->findAll('id_panitia = ' . $idPan)))-2;
-			for ( $i=1;$i<=$n;$i++){
-				$list .= '<w:br/>';				
-				$list .= '<w:br/>';		
+			$list .= "2. " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris" and status_user = "Aktif"')->nama . "                  ...........................................";
+			$anggota=Anggota::model()->findAll('id_panitia = ' . $idPan . ' and jabatan = "Anggota" and status_user = "Aktif"');
+			$i=3;
+			foreach ($anggota as $item){
+				$list .= '<w:br/>';
+				$list .= '<w:br/>';
 				if($i%2==0){
-					$list .= $i+2 . ". " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->nama . "            (Anggota)	............................";
+					$list .= $i.". " .$item->nama. "                  ...........................................";
 				}else{
-					$list .= $i+2 . ". " . Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->nama . "                                       (Anggota)   ...............................";
-				}				
+					$list .= $i.". " .$item->nama . "                                                       ...........................................";
+				}
+				$i++;
 			}
 		}
 		return  $list;

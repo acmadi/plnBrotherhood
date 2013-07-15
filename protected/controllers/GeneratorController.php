@@ -25,25 +25,36 @@
 						$this->redirect(array('generator/dokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="5"){
-						$this->redirect(array('generator/suratundanganprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/suratpengumumanpelelanganprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="6"){
-						$this->redirect(array('generator/pengumumanlelangprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/pendaftaranpelelanganprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="7"){
-						$this->redirect(array('generator/pendaftaranlelangprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/pengambilandokumenprakualifikasi','id'=>$id));
 					}
-					// if(Pengadaan::model()->findByPk($id)->status=="8"){
-			
+					if(Pengadaan::model()->findByPk($id)->status=="8"){
+						$this->redirect(array('generator/penyampaiandokumenprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="9"){
+						$this->redirect(array('generator/evaluasidokumenprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="10"){
+						$this->redirect(array('generator/usulanhasilprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="11"){
+						$this->redirect(array('generator/penetapanhasilprakualifikasi','id'=>$id));
+					}
+					if(Pengadaan::model()->findByPk($id)->status=="12"){
+						$this->redirect(array('generator/pengumumanhasilprakualifikasi','id'=>$id));
+					}
+					// if(Pengadaan::model()->findByPk($id)->status=="13"){
+						// $this->redirect(array('generator/pengumumanpengadaan','id'=>$id));
 					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="9"){
-			
+					// if(Pengadaan::model()->findByPk($id)->status=="14"){
+						// $this->redirect(array('generator/suratpengumumanpelelangan','id'=>$id));
 					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="10"){
-						// $this->redirect(array('generator/rks','id'=>$id));
-					// }
-					// if(Pengadaan::model()->findByPk($id)->status=="11"){
-						// $this->redirect(array('generator/hps','id'=>$id));
+					// if(Pengadaan::model()->findByPk($id)->status=="15"){
 					// }
 					if(Pengadaan::model()->findByPk($id)->status=="16"){
 						$this->redirect(array('generator/permintaanpenawaranharga','id'=>$id));
