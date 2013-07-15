@@ -1867,8 +1867,8 @@ class DocxController extends Controller
 			$tanggal1 = RupiahMaker::terbilangMaker(Tanggal::getTanggal($tanggal));
 			$bulan = Tanggal::getBulanA($tanggal);
 			$tahun = RupiahMaker::terbilangMaker(Tanggal::getTahun($tanggal));
-			$tgll = Tanggal::getTanggalLengkap($tanggal);
-			$tempat = $Dok->tempat;
+			$tanggallengkap = Tanggal::getTanggalLengkap($tanggal);
+			$tempat = $bakn->tempat;
 			$kepada = $Peng->nama_penyedia;
 			$nama = $Peng->nama_pengadaan;
 			
@@ -1877,13 +1877,18 @@ class DocxController extends Controller
 			
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
-			$boss = $ndpp->dari;
+			if($ndpp->dari=="MSDAF"){
+				$boss = "MANAJER SENIOR PENGADAAN ALAT DAN FASILITAS";
+				$namaboss = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
+			} else {
+				$boss = "KEPALA DIVISI UMUM DAN MANAJEMEN";
+				$namaboss = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
+			}
 			
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
 			$norks = $rks->nomor; 
-			$tanggalrks = Dokumen::model()->find($rks->id_dokumen)->tanggal;
-			$tglrks = Tanggal::getTanggalLengkap($tanggalrks);
+			$tglrks = Tanggal::getTanggalLengkap($dokrks->tanggal);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			
 			$skpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia ;
@@ -1905,22 +1910,23 @@ class DocxController extends Controller
 				
 				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-				$this->doccy->phpdocx->assign('#sk#', $nosk);
-				$this->doccy->phpdocx->assign('#tanggalsk#', $tgll);
 				$this->doccy->phpdocx->assign('#nospph#', $nospph);
 			}
 			
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#namapengadaankapital#', strtoupper($nama));
 			$this->doccy->phpdocx->assign('#norks#', $norks);
 			$this->doccy->phpdocx->assign('#tanggalrks#', $tglrks);
-			$this->doccy->phpdocx->assign('#ha#', $hari);
+			$this->doccy->phpdocx->assign('#hari#', $hari);
 			$this->doccy->phpdocx->assign('#tgl#', $tanggal1);
 			$this->doccy->phpdocx->assign('#bulan#', $bulan);
 			$this->doccy->phpdocx->assign('#tahun#', $tahun);
+			$this->doccy->phpdocx->assign('#tempat#', $tempat);
 			
-			$this->doccy->phpdocx->assign('#tan#', $tgll);
+			$this->doccy->phpdocx->assign('#tanggallengkap#', $tanggallengkap);
 			$this->doccy->phpdocx->assign('#boss#',$boss);
+			$this->doccy->phpdocx->assign('#namaboss#',$namaboss);
 			$this->doccy->phpdocx->assign('#listpic#',$namapic);			
 			
 			$this->doccy->phpdocx->assign('#panitiaataupejabat#', strtoupper($jenispic));
