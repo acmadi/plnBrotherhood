@@ -29,55 +29,61 @@
 				<li class='belum' ><?php echo 'Dokumen Kualifikasi'?></li>
 			<?php } else if($cpengadaan->status == '3') { ?>
 				<li id="2" class='sudah' ><?php echo CHtml::link('Dokumen Kualifikasi',array("generator/dokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '4') { ?>
+				<li id="2" class='sudah' > <?php echo CHtml::link('Dokumen Kualifikasi',array("generator/editdokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li id="2" class='sudah' > <?php echo CHtml::link('Dokumen Kualifikasi',array("generator/editdokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } ?>			
+			<?php } ?>
 			
 			<?php if($cpengadaan->metode_pengadaan=="Penunjukan Langsung"||$cpengadaan->metode_pengadaan=="Pemilihan Langsung") { ?>
-				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
+				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4') { ?>
 					<li class='belum'><?php echo 'Undangan Prakualifikasi' ?></li>
-				<?php } else if($cpengadaan->status == '4') { ?>
+				<?php } else if($cpengadaan->status == '5') { ?>
 					<li id="3" class='sudah' ><?php echo CHtml::link('Undangan Prakualifikasi',array("generator/suratundanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li id="3" class='sudah' ><?php echo CHtml::link('Undangan Prakualifikasi',array("generator/editsuratundanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 			<?php } else if ($cpengadaan->metode_pengadaan=="Pelelangan") { ?>
-				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
+				<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5') { ?>
 					<li class='belum'><?php echo 'Pengumuman dan Pendaftaran' ?></li>
-				<?php } else if($cpengadaan->status == '5') { ?>
-					<li id="4" class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("generator/suratpengumumanpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else if($cpengadaan->status == '6') { ?>
-					<li id="4" class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("generator/pendaftaranpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+					<li id="4" class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("generator/suratpengumumanpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else if($cpengadaan->status == '7') { ?>
+					<li id="4" class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("generator/pendaftaranpelelanganprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<?php } else if($cpengadaan->status == '8') { ?>
 					<li id="4" class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("generator/pengambilandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } else { ?>
 					<li id="4" class='sudah' ><?php echo CHtml::link('Pengumuman dan Pendaftaran',array("generator/editpengambilandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 				<?php } ?>
 			<?php } ?>
 		
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7') { ?>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8') { ?>
 				<li class='belum' ><?php echo 'Penyampaian dan Evaluasi Kualifikasi'?></li>
-			<?php } else if($cpengadaan->status == '8') { ?>
-				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '9') { ?>
+				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '10') { ?>
+				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '11') { ?>
+				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/evaluasidokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+			<?php } else if($cpengadaan->status == '12') { ?>
 				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/evaluasidokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/editevaluasidokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 			
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9') { ?>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12') { ?>
 				<li class='belum' ><?php echo 'Usulan dan Penetapan Hasil Kualifikasi'?></li>
-			<?php } else if($cpengadaan->status == '10') { ?>
+			<?php } else if($cpengadaan->status == '13') { ?>
 				<li id="6" class='sudah' ><?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("generator/usulanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-			<?php } else if($cpengadaan->status == '11') { ?>
+			<?php } else if($cpengadaan->status == '14') { ?>
 				<li id="6" class='sudah' ><?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("generator/penetapanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li id="6" class='sudah' > <?php echo CHtml::link('Usulan dan Penetapan Hasil Kualifikasi',array("generator/editpenetapanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
 			
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11') { ?>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '9'||$cpengadaan->status == '10'||$cpengadaan->status == '11'||$cpengadaan->status == '12'||$cpengadaan->status == '13'||$cpengadaan->status == '14') { ?>
 				<li class='belum' ><?php echo 'Pengumuman Hasil Kualifikasi'?></li>
-			<?php } else if($cpengadaan->status == '12') { ?>
+			<?php } else if($cpengadaan->status == '15') { ?>
 				<li id="7" class='sudah' ><?php echo CHtml::link('Pengumuman Hasil Kualifikasi',array("generator/pengumumanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li id="7" class='sudah' > <?php echo CHtml::link('Pengumuman Hasil Kualifikasi',array("generator/editpengumumanhasilprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>

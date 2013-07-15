@@ -70,7 +70,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($Pengadaan->status == '11' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
 	
 			
