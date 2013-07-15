@@ -726,42 +726,28 @@ class DocxController extends Controller
 				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran"');
 				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
-				$noBAE1 = $BAE1->nomor;
 				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
-				$noBAE2 = "";
-				$tglBAE2 = "";
-				$Kal1 = "";
-				$Kal2 = "";
-				$Kal3 = "";
+				$KalimatEvaluasi = "Berita Acara Evaluasi Penawaran Satu Sampul No. : ".$BAE1->nomor." tanggal ".$tglBAE1;
 			}
 			else if ($metode == "Dua Sampul"){
 				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
 				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
-				$noBAE1 = $BAE1->nomor;
 				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
 				$DokBAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Dua"');
 				$BAE2 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE2->id_dokumen);
-				$noBAE2 = $BAE2->nomor;
 				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
-				$Kal1 = "dan Berita Acara Evaluasi Penawaran harga (sampul) II No. : ";
-				$Kal2 = "tanggal";
-				$Kal3 = "dengan ini ditetapkan Perusahaan tersebut dibawah ini sebagai pemenang untuk melaksanakan Pekerjaan";
+				$KalimatEvaluasi = "Berita Acara Evaluasi Adminitrasi dan Teknis (Sampul I) No. : ".$BAE1->nomor." tanggal ".$tglBAE1." dan Berita Acara Evaluasi Penawaran Harga (Sampul II) No. : ".$BAE2->nomor." tanggal ".$tglBAE2;
 			
 			}
 			else if ($metode == "Dua Tahap"){
-				$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 				$DokBAE1=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
 				$BAE1 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE1->id_dokumen);
-				$noBAE1 = $BAE1->nomor;
 				$tglBAE1 = Tanggal::getTanggalLengkap($DokBAE1->tanggal);
 				$DokBAE2=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Dua"');
 				$BAE2 = BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAE2->id_dokumen);
-				$noBAE2 = $BAE2->nomor;
 				$tglBAE2 = Tanggal::getTanggalLengkap($DokBAE2->tanggal);
-				$Kal1 = "dan Berita Acara Evaluasi Penawaran harga (tahap) II No. : ";
-				$Kal2 = "tanggal";
-				$Kal3 = "dengan ini ditetapkan Perusahaan tersebut dibawah ini sebagai pemenang untuk melaksanakan Pekerjaan";
+				$KalimatEvaluasi = "Berita Acara Evaluasi Adminitrasi dan Teknis (Tahap I) No. : ".$BAE1->nomor." tanggal ".$tglBAE1." dan Berita Acara Evaluasi Penawaran Harga (Tahap II) No. : ".$BAE2->nomor." tanggal ".$tglBAE2;
 			
 			}
 			
@@ -772,7 +758,7 @@ class DocxController extends Controller
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-		
+			$namapengirim = Kdivmum::model()->find('jabatan = "'.$ndpp->dari.'" and status_user = "Aktif"')->nama;
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
 				$pejabatketuapanitia = "Pejabat";
 			}else{
@@ -780,36 +766,22 @@ class DocxController extends Controller
 			}
 			
 			$nama = $Peng->nama_pengadaan;
-			// $terbilang = RupiahMaker::terbilangMaker($biaya);
 			
 			$this->doccy->newFile('14 Nota Dinas Penetapan Pemenang.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			
 			$this->doccy->phpdocx->assign('#pejabat/ketuapanitia#', $ndpp->kepada);
 			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#', $ndpp->dari);
+			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namapengirim);
 			$this->doccy->phpdocx->assign('#KetuaPanitia/Pejabat#', $pejabatketuapanitia);
 			$this->doccy->phpdocx->assign('#nousulan#', $ndup->nomor);
 			$this->doccy->phpdocx->assign('#tanggalusulan#', Tanggal::getTanggalLengkap($dokndup->tanggal));
-			
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			$this->doccy->phpdocx->assign('#sifat#', 'Biasa');			
-			
+			$this->doccy->phpdocx->assign('#sifat#', 'Biasa');	
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#noBAEsampul1#', $noBAE1);
-			$this->doccy->phpdocx->assign('#noBAEsampul2#', $noBAE2);
-			$this->doccy->phpdocx->assign('#tanggalBAEsampul1#', $tglBAE1);
-			$this->doccy->phpdocx->assign('#tanggalBAEsampul2#', $tglBAE2);
 			$this->doccy->phpdocx->assign('#penyedia#', $this->getPenyediaLulusPenetapanPemenang($Peng->id_pengadaan));
-			// $this->doccy->phpdocx->assign('#alamatpenyedia#', $alamat);
-			// $this->doccy->phpdocx->assign('#NPWP#', $NPWP);
-				$this->doccy->phpdocx->assign('#Kal1#', $Kal1);
-				$this->doccy->phpdocx->assign('#Kal2#', $Kal2);
-				$this->doccy->phpdocx->assign('#Kal3#', $Kal3);
-			// $this->doccy->phpdocx->assign('#biaya#', $biayaa);
-			// $this->doccy->phpdocx->assign('#terbilang#', $terbilang);
+			$this->doccy->phpdocx->assign('#kalimatevaluasi#', $KalimatEvaluasi);
 			$this->renderDocx("Nota Dinas Penetapan Pemenang-".$Peng->nama_pengadaan.".docx", true);
 	
 		}
@@ -1300,14 +1272,27 @@ class DocxController extends Controller
 			$nomor = $SPP->nomor;
 			if($PP!=null){
 				$penyedia = $PP[0]->perusahaan;
-				$biaya = $PP[0]->nilai;
+				$biaya = $PP[0]->biaya;
+				$nosuratpenawaran = $PP[0]->nomor_surat_penawaran;
+				$tglsuratpenawaran = date('Y-m-d', strtotime($PP[0]->tanggal_penawaran));;
+				$alamatpenyedia = $PP[0]->alamat;
 			}else{
 				$penyedia = '-';
 				$biaya = '0';
+				$nosuratpenawaran = '-';
+				$tglsuratpenawaran = '-';
+				$alamatpenyedia = '';
 			}
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
+			if($ndpp->dari=="MSDAF"){
+				$pengirim = "MANAJER SENIOR PENGADAAN ALAT DAN FASILITAS";
+				$namapengirim = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
+			} else {
+				$pengirim = "KEPALA DIVISI UMUM DAN MANAJEMEN";
+				$namapengirim = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
+			}
 			
 			$biayaa = RupiahMaker::convertInt($biaya);
 			$biayaterbilang = RupiahMaker::TerbilangMaker($biaya);
@@ -1365,8 +1350,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#penyedia#', $penyedia);
 			$this->doccy->phpdocx->assign('#perihal#', $nama);
-			$this->doccy->phpdocx->assign('#alamatpenyedia#', '');
-					
+			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamatpenyedia);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#biaya#', $biayaa);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
@@ -1374,10 +1358,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
 			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
 			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
-			$this->doccy->phpdocx->assign('#nopenawaran#', $SPP->no_surat_penawaran);
-			$this->doccy->phpdocx->assign('#tglpenawaran#', Tanggal::getTanggalLengkap($SPP->tgl_surat_penawaran));
+			$this->doccy->phpdocx->assign('#nopenawaran#', $nosuratpenawaran);
+			$this->doccy->phpdocx->assign('#tglpenawaran#', Tanggal::getTanggalLengkap($tglsuratpenawaran));
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($dokSPP->tanggal));
-			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#',$ndpp->dari);
+			$this->doccy->phpdocx->assign('#pengirim#',$pengirim);
+			$this->doccy->phpdocx->assign('#namapengirim#',$namapengirim);
 			$this->renderDocx("Surat Penunjukan Pemenang-".$Peng->nama_pengadaan.".docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Dokumen Prakualifikasi"){
