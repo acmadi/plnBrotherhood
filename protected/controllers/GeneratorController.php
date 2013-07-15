@@ -4821,7 +4821,7 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 					
-					$PP = PenerimaPengadaan::model()->findAll('hadir_pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('(hadir_pembukaan_penawaran_2 = "1" or hadir_pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
@@ -4895,7 +4895,7 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 
-					$PP = PenerimaPengadaan::model()->findAll('hadir_pembukaan_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_2 = "1" or pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
