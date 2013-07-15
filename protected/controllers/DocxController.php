@@ -2469,16 +2469,19 @@ class DocxController extends Controller
 	}
 	
 	function getPenyediaLulusEvalSampul2($idpeng){
+		$dokhps = Dokumen::model()->find('id_pengadaan = ' . $idpeng . ' and nama_dokumen = "HPS"');
+		$hps = HPS::model()->findByPk($dokhps->id_dokumen);
+		
 		$arraypenyedia = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1"  and id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
-				
+		
 		if($arraypenyedia == null){
 			$stringpenyedia = '-';
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
 				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  .
-									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
-									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->nilai) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->nilai,1000) .'% HPS <w:br/>'
+									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
+									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->biaya,$hps->nilai_hps) .'% HPS <w:br/>'
 									;
 			}
 		}		
@@ -2486,6 +2489,9 @@ class DocxController extends Controller
 	}
 	
 	function getPenyediaLulusEval1Sampul($idpeng){
+		$dokhps = Dokumen::model()->find('id_pengadaan = ' . $idpeng . ' and nama_dokumen = "HPS"');
+		$hps = HPS::model()->findByPk($dokhps->id_dokumen);
+
 		$arraypenyedia = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1"  and id_pengadaan = ' . $idpeng);
 		$stringpenyedia = "";
 				
@@ -2495,7 +2501,7 @@ class DocxController extends Controller
 			for($i=0;$i<count($arraypenyedia);$i++){
 				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  .
 									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
-									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->nilai,1000) .'% HPS <w:br/>'
+									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->biaya,$hps->nilai_hps) .'% HPS <w:br/>'
 									;
 			}
 		}		
@@ -2617,8 +2623,8 @@ class DocxController extends Controller
 	}
 
 	
-	function persenMaker($biaya,$hps){
-		return 0;
+	function persenMaker($biaya,$hps){				
+		return ($biaya/$hps)*100;
 	}
 	
 	

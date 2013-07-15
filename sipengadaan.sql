@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 15, 2013 at 06:17 PM
+-- Generation Time: Jul 15, 2013 at 07:51 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -97,7 +97,11 @@ CREATE TABLE IF NOT EXISTS `berita_acara_evaluasi_penawaran` (
 INSERT INTO `berita_acara_evaluasi_penawaran` (`id_dokumen`, `nomor`, `waktu`, `tempat`) VALUES
 (21, '-', '12:11:00', 'asdasdas'),
 (27, '-', '12:11:00', 'asdasdas'),
-(50, '-', '12:11:00', 'asdasd');
+(50, '-', '12:11:00', 'asdasd'),
+(80, '-', '12:11:00', 'ljhkl'),
+(86, '-', '11:11:00', 'dyfjuh'),
+(96, '-', '12:11:00', 'asdasdas'),
+(119, '-', '12:11:00', 'rtyrtyrt');
 
 -- --------------------------------------------------------
 
@@ -112,6 +116,13 @@ CREATE TABLE IF NOT EXISTS `berita_acara_negosiasi_klarifikasi` (
   `tempat` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `berita_acara_negosiasi_klarifikasi`
+--
+
+INSERT INTO `berita_acara_negosiasi_klarifikasi` (`id_dokumen`, `nomor`, `waktu`, `tempat`) VALUES
+(122, '-', '12:12:00', 'rtyrt');
 
 -- --------------------------------------------------------
 
@@ -135,7 +146,11 @@ INSERT INTO `berita_acara_pembukaan_penawaran` (`id_dokumen`, `nomor`, `waktu`, 
 (18, '432fdefssf', '12:12:00', 'asdasdas'),
 (24, '-', '12:12:00', 'asdasdas'),
 (47, 'asdasdas', '12:12:00', 'asdasdasd'),
-(53, 'asdasda', '12:11:00', 'sadasdas');
+(53, 'asdasda', '12:11:00', 'sadasdas'),
+(77, '-', '12:12:00', 'kjb'),
+(83, '-', '12:11:00', 'khjlk'),
+(93, '-', '12:12:00', 'asdasdas'),
+(116, '-', '12:12:00', 'rtyrty');
 
 -- --------------------------------------------------------
 
@@ -169,7 +184,10 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penjelasan` (
 
 INSERT INTO `berita_acara_penjelasan` (`id_dokumen`, `nomor`, `waktu`, `tempat`) VALUES
 (15, '12341234qweda', '12:12:00', 'asdasda'),
-(44, '23ewaqdas', '12:12:00', 'asdasdasdasd');
+(44, '23ewaqdas', '12:12:00', 'asdasdasdasd'),
+(74, 'asdas', '12:12:00', 'jkh'),
+(90, '-', '12:12:00', 'asdasda'),
+(113, 'asda', '12:12:00', 'tyhryr');
 
 -- --------------------------------------------------------
 
@@ -198,7 +216,19 @@ INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
 (46, '12:12', 'asdasdasdasd', 'Aanwijzing'),
 (49, '12:12', 'asdasdasd', 'Pembukaan Penawaran Sampul Satu'),
 (52, '12:11', 'asdasd', 'Evaluasi Penawaran Sampul Satu'),
-(55, '12:11', 'sadasdas', 'Pembukaan Penawaran Sampul Dua');
+(55, '12:11', 'sadasdas', 'Pembukaan Penawaran Sampul Dua'),
+(76, '12:12', 'jkh', 'Aanwijzing'),
+(79, '12:12', 'kjb', 'Pembukaan Penawaran Sampul Satu'),
+(82, '12:11', 'ljhkl', 'Evaluasi Penawaran Sampul Satu'),
+(85, '12:11', 'khjlk', 'Pembukaan Penawaran Sampul Dua'),
+(88, '11:11', 'dyfjuh', 'Evaluasi Penawaran Sampul Dua'),
+(92, '12:12', 'asdasda', 'Aanwijzing'),
+(95, '12:12', 'asdasdas', 'Pembukaan Penawaran Sampul Satu'),
+(98, '12:11', 'asdasdas', 'Evaluasi Penawaran Sampul Satu'),
+(115, '12:12', 'tyhryr', 'Aanwijzing'),
+(118, '12:12', 'rtyrty', 'Pembukaan Penawaran'),
+(121, '12:11', 'rtyrtyrt', 'Evaluasi Penawaran'),
+(124, '12:12', 'rtyrt', 'Negosiasi dan Klarifikasi');
 
 -- --------------------------------------------------------
 
@@ -300,7 +330,79 @@ INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pe
 (52, 'Daftar Hadir Evaluasi Penawaran Sampul Satu', '2013-07-23', 'Jakarta', 2, 'Belum Selesai'),
 (53, 'Berita Acara Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 2, 'Belum Selesai'),
 (54, 'Lampiran Berita Acara Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 2, 'Belum Selesai'),
-(55, 'Daftar Hadir Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 2, 'Belum Selesai');
+(55, 'Daftar Hadir Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 2, 'Belum Selesai'),
+(56, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-15', 'Jakarta', 1, 'Belum Selesai'),
+(57, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-15', 'Jakarta', 1, 'Belum Selesai'),
+(58, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-15', 'Jakarta', 1, 'Belum Selesai'),
+(59, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 3, 'Belum Selesai'),
+(60, 'Nota Dinas Permintaan', '2013-07-31', 'Jakarta', 3, 'Selesai'),
+(61, 'TOR', '2013-07-31', 'Jakarta', 3, 'Selesai'),
+(62, 'RAB', '2013-07-31', 'Jakarta', 3, 'Selesai'),
+(63, 'Nota Dinas Perintah Pengadaan', '2013-07-15', 'Jakarta', 3, 'Belum Selesai'),
+(64, 'Pakta Integritas Awal Panitia', '2013-07-15', 'Jakarta', 3, 'Belum Selesai'),
+(65, 'RKS', '2013-07-15', 'Jakarta', 3, 'Belum Selesai'),
+(67, 'Pakta Integritas Penyedia', '1970-01-01', '-', 3, 'Belum Selesai'),
+(68, 'Surat Pengantar Penawaran Harga', '1970-01-01', 'Jakarta', 3, 'Belum Selesai'),
+(69, 'Surat Pernyataan Minat', '1970-01-01', '-', 3, 'Belum Selesai'),
+(70, 'Form Isian Kualifikasi', '1970-01-01', '-', 3, 'Belum Selesai'),
+(71, 'HPS', '2013-07-15', 'Jakarta', 3, 'Belum Selesai'),
+(72, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-15', 'Jakarta', 3, 'Belum Selesai'),
+(73, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-15', 'Jakarta', 3, 'Belum Selesai'),
+(74, 'Berita Acara Aanwijzing', '2013-07-16', 'Jakarta', 3, 'Belum Selesai'),
+(75, 'Lampiran Berita Acara Aanwijzing', '2013-07-16', 'Jakarta', 3, 'Belum Selesai'),
+(76, 'Daftar Hadir Aanwijzing', '2013-07-16', 'Jakarta', 3, 'Belum Selesai'),
+(77, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-08', 'Jakarta', 3, 'Belum Selesai'),
+(78, 'Lampiran Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-08', 'Jakarta', 3, 'Belum Selesai'),
+(79, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-08', 'Jakarta', 3, 'Belum Selesai'),
+(80, 'Berita Acara Evaluasi Penawaran Sampul Satu', '2013-07-17', 'Jakarta', 3, 'Belum Selesai'),
+(81, 'Lampiran Berita Acara Evaluasi Penawaran Sampul Satu', '2013-07-17', 'Jakarta', 3, 'Belum Selesai'),
+(82, 'Daftar Hadir Evaluasi Penawaran Sampul Satu', '2013-07-17', 'Jakarta', 3, 'Belum Selesai'),
+(83, 'Berita Acara Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 3, 'Belum Selesai'),
+(84, 'Lampiran Berita Acara Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 3, 'Belum Selesai'),
+(85, 'Daftar Hadir Pembukaan Penawaran Sampul Dua', '2013-07-02', 'Jakarta', 3, 'Belum Selesai'),
+(86, 'Berita Acara Evaluasi Penawaran Sampul Dua', '2013-07-03', 'Jakarta', 3, 'Belum Selesai'),
+(87, 'Lampiran Berita Acara Evaluasi Penawaran Sampul Dua', '2013-07-03', 'Jakarta', 3, 'Belum Selesai'),
+(88, 'Daftar Hadir Evaluasi Penawaran Sampul Dua', '2013-07-03', 'Jakarta', 3, 'Belum Selesai'),
+(89, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-15', 'Jakarta', 1, 'Belum Selesai'),
+(90, 'Berita Acara Aanwijzing', '2013-07-08', 'Jakarta', 1, 'Belum Selesai'),
+(91, 'Lampiran Berita Acara Aanwijzing', '2013-07-08', 'Jakarta', 1, 'Belum Selesai'),
+(92, 'Daftar Hadir Aanwijzing', '2013-07-08', 'Jakarta', 1, 'Belum Selesai'),
+(93, 'Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
+(94, 'Lampiran Berita Acara Pembukaan Penawaran Sampul Satu', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
+(95, 'Daftar Hadir Pembukaan Penawaran Sampul Satu', '2013-07-02', 'Jakarta', 1, 'Belum Selesai'),
+(96, 'Berita Acara Evaluasi Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(97, 'Lampiran Berita Acara Evaluasi Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(98, 'Daftar Hadir Evaluasi Penawaran Sampul Satu', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(99, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 4, 'Belum Selesai'),
+(100, 'Nota Dinas Permintaan', '2013-07-31', 'Jakarta', 4, 'Selesai'),
+(101, 'TOR', '2013-07-31', 'Jakarta', 4, 'Selesai'),
+(102, 'RAB', '2013-07-31', 'Jakarta', 4, 'Selesai'),
+(103, 'Nota Dinas Perintah Pengadaan', '2013-07-15', 'Jakarta', 4, 'Belum Selesai'),
+(104, 'Pakta Integritas Awal Panitia', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(105, 'RKS', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(107, 'Pakta Integritas Penyedia', '1970-01-01', '-', 4, 'Belum Selesai'),
+(108, 'Surat Pengantar Penawaran Harga', '1970-01-01', 'Jakarta', 4, 'Belum Selesai'),
+(109, 'Surat Pernyataan Minat', '1970-01-01', '-', 4, 'Belum Selesai'),
+(110, 'Form Isian Kualifikasi', '1970-01-01', '-', 4, 'Belum Selesai'),
+(111, 'HPS', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(112, 'Surat Undangan Permintaan Penawaran Harga', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(113, 'Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 4, 'Belum Selesai'),
+(114, 'Lampiran Berita Acara Aanwijzing', '2013-07-09', 'Jakarta', 4, 'Belum Selesai'),
+(115, 'Daftar Hadir Aanwijzing', '2013-07-09', 'Jakarta', 4, 'Belum Selesai'),
+(116, 'Berita Acara Pembukaan Penawaran', '2013-07-10', 'Jakarta', 4, 'Belum Selesai'),
+(117, 'Lampiran Berita Acara Pembukaan Penawaran', '2013-07-10', 'Jakarta', 4, 'Belum Selesai'),
+(118, 'Daftar Hadir Pembukaan Penawaran', '2013-07-10', 'Jakarta', 4, 'Belum Selesai'),
+(119, 'Berita Acara Evaluasi Penawaran', '2013-07-11', 'Jakarta', 4, 'Belum Selesai'),
+(120, 'Lampiran Berita Acara Evaluasi Penawaran', '2013-07-11', 'Jakarta', 4, 'Belum Selesai'),
+(121, 'Daftar Hadir Evaluasi Penawaran', '2013-07-11', 'Jakarta', 4, 'Belum Selesai'),
+(122, 'Berita Acara Negosiasi dan Klarifikasi', '2013-07-31', 'Jakarta', 4, 'Belum Selesai'),
+(123, 'Lampiran Berita Acara Negosiasi dan Klarifikasi', '2013-07-31', 'Jakarta', 4, 'Belum Selesai'),
+(124, 'Daftar Hadir Negosiasi dan Klarifikasi', '2013-07-31', 'Jakarta', 4, 'Belum Selesai'),
+(125, 'Nota Dinas Usulan Pemenang', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(126, 'Pakta Integritas Akhir Pejabat', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(127, 'Nota Dinas Penetapan Pemenang', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(128, 'Nota Dinas Pemberitahuan Pemenang', '2013-07-16', 'Jakarta', 4, 'Belum Selesai'),
+(129, 'Surat Penunjukan Pemenang', '2013-07-16', 'Jakarta', 4, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -370,7 +472,9 @@ CREATE TABLE IF NOT EXISTS `form_isian_kualifikasi` (
 
 INSERT INTO `form_isian_kualifikasi` (`id_dokumen`) VALUES
 (12),
-(41);
+(41),
+(70),
+(110);
 
 -- --------------------------------------------------------
 
@@ -391,7 +495,9 @@ CREATE TABLE IF NOT EXISTS `hps` (
 
 INSERT INTO `hps` (`id_dokumen`, `nomor`, `nilai_hps`) VALUES
 (13, '23123123', 1221312312),
-(42, '12312w3e', 12312);
+(42, '12312w3e', 12312),
+(71, '22222', 3123123),
+(111, '12312w3e', 12312);
 
 -- --------------------------------------------------------
 
@@ -447,7 +553,14 @@ INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_up
 (3, 4, '16:41:17', '2013-07-14', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
 (4, 31, '17:48:49', '2013-07-14', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
 (5, 32, '17:48:53', '2013-07-14', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(6, 33, '17:48:57', '2013-07-14', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah');
+(6, 33, '17:48:57', '2013-07-14', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
+(7, 60, '23:23:21', '2013-07-15', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
+(8, 61, '23:23:28', '2013-07-15', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
+(9, 62, '23:23:33', '2013-07-15', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
+(10, 100, '23:59:09', '2013-07-15', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
+(11, 100, '23:59:16', '2013-07-15', 'aidil.syaputra', 2, 'txt', 'list file hasil crud yg diubah'),
+(12, 101, '23:59:24', '2013-07-15', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
+(13, 102, '23:59:31', '2013-07-15', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah');
 
 -- --------------------------------------------------------
 
@@ -462,6 +575,13 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pemberitahuan_pemenang` (
   `batas_sanggahan` int(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota_dinas_pemberitahuan_pemenang`
+--
+
+INSERT INTO `nota_dinas_pemberitahuan_pemenang` (`id_dokumen`, `nomor`, `keterangan`, `batas_sanggahan`) VALUES
+(128, 'bjh', 'bjh', 12);
 
 -- --------------------------------------------------------
 
@@ -487,6 +607,13 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_penetapan_pemenang`
+--
+
+INSERT INTO `nota_dinas_penetapan_pemenang` (`id_dokumen`, `nomor`) VALUES
+(127, 'kjbh');
+
 -- --------------------------------------------------------
 
 --
@@ -511,7 +638,9 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 
 INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
 (5, '12123131ad', 'KDIVMUM', 'Irvan Aditya', 'asdasda', 12, 'Anggaran Investasi PLN Pusat 2012', 1993905000),
-(34, '1370/611/DIVMUM/2012', 'KDIVMUM', 'Irvan Aditya', 'asdasd', 12, 'asdas', 1993905000);
+(34, '1370/611/DIVMUM/2012', 'KDIVMUM', 'Irvan Aditya', 'asdasd', 12, 'asdas', 1993905000),
+(63, '12123131ad', 'KDIVMUM', 'Johannes Ridho', 'kghj', 12, 'Anggaran Investasi PLN Pusat 2012', 1111),
+(103, '12123131', 'KDIVMUM', 'Johannes Ridho', 'dfgdf', 12, 'Anggaran Investasi PLN Pusat 2012', 12);
 
 -- --------------------------------------------------------
 
@@ -533,7 +662,9 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 
 INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`, `nilai_biaya_rab`) VALUES
 (2, '11111111', 'asdasdas', 1000000000),
-(31, '11111111', 'asd', 1000000000);
+(31, '11111111', 'asd', 1000000000),
+(60, '11111111', 'mnvgm', 121),
+(100, '021/521/DIVSIM/2012-R', 'asdasd', 12312);
 
 -- --------------------------------------------------------
 
@@ -577,6 +708,13 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nota_dinas_usulan_pemenang`
+--
+
+INSERT INTO `nota_dinas_usulan_pemenang` (`id_dokumen`, `nomor`, `waktu_pelaksanaan`, `tempat_penyerahan`) VALUES
+(125, 'et', '2013-07-05', 'fdgdf');
+
 -- --------------------------------------------------------
 
 --
@@ -606,7 +744,9 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 
 INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`) VALUES
 (6),
-(35);
+(35),
+(64),
+(104);
 
 -- --------------------------------------------------------
 
@@ -618,6 +758,13 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_2` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pakta_integritas_panitia_2`
+--
+
+INSERT INTO `pakta_integritas_panitia_2` (`id_dokumen`) VALUES
+(126);
 
 -- --------------------------------------------------------
 
@@ -636,7 +783,9 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_penyedia` (
 
 INSERT INTO `pakta_integritas_penyedia` (`id_dokumen`) VALUES
 (9),
-(38);
+(38),
+(67),
+(107);
 
 -- --------------------------------------------------------
 
@@ -680,8 +829,8 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `id_pengadaan` bigint(255) NOT NULL,
   `alamat` varchar(256) NOT NULL,
   `npwp` varchar(256) NOT NULL,
-  `nilai` bigint(255) NOT NULL,
-  `biaya` varchar(256) NOT NULL,
+  `nilai` int(255) NOT NULL,
+  `biaya` int(255) NOT NULL,
   `undangan_prakualifikasi` varchar(256) NOT NULL,
   `pendaftaran_pelelangan_pq` varchar(256) NOT NULL,
   `pengambilan_lelang_pq` varchar(256) NOT NULL,
@@ -706,7 +855,7 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
   `tanggal_penawaran` varchar(256) NOT NULL,
   PRIMARY KEY (`id_penerima`),
   KEY `id_pengadaan` (`id_pengadaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -747,7 +896,9 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
 (1, 'asdasda', 'divman', 'Barang dan Jasa', '-', '2013-07-14', '0000-00-00', '25', 0, 4, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
-(2, 'asdasdfsa', 'divin', 'Barang dan Jasa', '-', '2013-07-14', '0000-00-00', '28', 0, 4, 'Pelelangan', 'Dua Sampul', 'Pasca Kualifikasi');
+(2, 'asdasdfsa', 'divin', 'Barang dan Jasa', '-', '2013-07-14', '0000-00-00', '28', 0, 4, 'Pelelangan', 'Dua Sampul', 'Pasca Kualifikasi'),
+(3, 'aaaaaaaa', 'divsi', 'Barang dan Jasa', '-', '2013-07-15', '0000-00-00', '29', 0, 2, 'Pemilihan Langsung', 'Dua Sampul', 'Pasca Kualifikasi'),
+(4, 'qqqqqqq', 'divtrans', 'Barang dan Jasa', '-', '2013-07-15', '0000-00-00', '37', 0, 2, 'Pemilihan Langsung', 'Satu Sampul', 'Pasca Kualifikasi');
 
 -- --------------------------------------------------------
 
@@ -778,7 +929,9 @@ CREATE TABLE IF NOT EXISTS `rab` (
 
 INSERT INTO `rab` (`id_dokumen`) VALUES
 (4),
-(33);
+(33),
+(62),
+(102);
 
 -- --------------------------------------------------------
 
@@ -792,7 +945,7 @@ CREATE TABLE IF NOT EXISTS `rincian_rks` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_rincian`),
   KEY `id_dokumen` (`id_dokumen`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=204 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=226 ;
 
 --
 -- Dumping data for table `rincian_rks`
@@ -820,7 +973,29 @@ INSERT INTO `rincian_rks` (`id_rincian`, `nama_rincian`, `id_dokumen`) VALUES
 (200, 'Lampiran 5', 36),
 (201, 'Lampiran 6', 36),
 (202, 'Lampiran 7', 36),
-(203, 'Lampiran ba', 36);
+(203, 'Lampiran ba', 36),
+(204, 'Cover', 65),
+(205, 'Daftar Isi', 65),
+(206, 'Isi', 65),
+(207, 'Lampiran 1', 65),
+(208, 'Lampiran 2', 65),
+(209, 'Lampiran 3', 65),
+(210, 'Lampiran 4', 65),
+(211, 'Lampiran 5', 65),
+(212, 'Lampiran 6', 65),
+(213, 'Lampiran 7', 65),
+(214, 'Lampiran ba', 65),
+(215, 'Cover', 105),
+(216, 'Daftar Isi', 105),
+(217, 'Isi', 105),
+(218, 'Lampiran 1', 105),
+(219, 'Lampiran 2', 105),
+(220, 'Lampiran 3', 105),
+(221, 'Lampiran 4', 105),
+(222, 'Lampiran 5', 105),
+(223, 'Lampiran 6', 105),
+(224, 'Lampiran 7', 105),
+(225, 'Lampiran ba', 105);
 
 -- --------------------------------------------------------
 
@@ -881,7 +1056,9 @@ CREATE TABLE IF NOT EXISTS `rks` (
 
 INSERT INTO `rks` (`id_dokumen`, `nomor`, `tipe_rks`, `tanggal_permintaan_penawaran`, `tanggal_penjelasan`, `waktu_penjelasan`, `tempat_penjelasan`, `tanggal_awal_pemasukan_penawaran1`, `tanggal_akhir_pemasukan_penawaran1`, `waktu_pemasukan_penawaran1`, `tempat_pemasukan_penawaran1`, `tanggal_pembukaan_penawaran1`, `waktu_pembukaan_penawaran1`, `tempat_pembukaan_penawaran1`, `tanggal_evaluasi_penawaran1`, `waktu_evaluasi_penawaran1`, `tempat_evaluasi_penawaran1`, `tanggal_awal_pemasukan_penawaran2`, `tanggal_akhir_pemasukan_penawaran2`, `waktu_pemasukan_penawaran2`, `tempat_pemasukan_penawaran2`, `tanggal_pembukaan_penawaran2`, `waktu_pembukaan_penawaran2`, `tempat_pembukaan_penawaran2`, `tanggal_evaluasi_penawaran2`, `waktu_evaluasi_penawaran2`, `tempat_evaluasi_penawaran2`, `tanggal_negosiasi`, `waktu_negosiasi`, `tempat_negosiasi`, `tanggal_usulan_pemenang`, `waktu_usulan_pemenang`, `tanggal_penetapan_pemenang`, `waktu_penetapan_pemenang`, `tanggal_pemberitahuan_pemenang`, `waktu_pemberitahuan_pemenang`, `tanggal_penunjukan_pemenang`, `waktu_penunjukan_pemenang`, `sistem_evaluasi_penawaran`, `jangka_waktu_penyerahan`, `tanggal_paling_lambat_penyerahan`, `jangka_waktu_berlaku_jaminan`, `lama_waktu_tambahan`) VALUES
 (7, '1231231', 1, '2013-07-30', '2013-07-08', '12:12:00', 'asdasda', '2013-07-09', '2013-07-09', '12:11:00', 'asdasdas', '2013-07-02', '12:12:00', 'asdasdas', '2013-07-10', '12:11:00', 'asdasdas', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-09', '12:11:00', 'asdasasda', '2013-07-02', '11:11:00', 'asdasdas', '2013-07-02', '12:12:00', 'asdasda', '2013-07-09', '12:12:00', '2013-07-31', '12:12:00', '2013-07-17', '12:12:00', '2013-07-10', '11:11:00', 'gugur', 12, '2013-07-30', 2, 12),
-(36, '123123', 1, '2013-07-30', '2013-07-02', '12:12:00', 'asdasdasdasd', '2013-07-03', '2013-07-31', '12:11:00', 'asdasdasda', '2013-07-23', '12:12:00', 'asdasdasd', '2013-07-23', '12:11:00', 'asdasd', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-02', '12:11:00', 'sadasdas', '2013-07-09', '11:11:00', 'asdasda', '2013-07-02', '12:12:00', 'asdasda', '2013-07-03', '12:12:00', '2013-07-09', '09:00:00', '2013-07-10', '12:12:00', '2013-07-23', '11:11:00', 'gugur', 12, '2013-07-31', 2, 12);
+(36, '123123', 1, '2013-07-30', '2013-07-02', '12:12:00', 'asdasdasdasd', '2013-07-03', '2013-07-31', '12:11:00', 'asdasdasda', '2013-07-23', '12:12:00', 'asdasdasd', '2013-07-23', '12:11:00', 'asdasd', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-02', '12:11:00', 'sadasdas', '2013-07-09', '11:11:00', 'asdasda', '2013-07-02', '12:12:00', 'asdasda', '2013-07-03', '12:12:00', '2013-07-09', '09:00:00', '2013-07-10', '12:12:00', '2013-07-23', '11:11:00', 'gugur', 12, '2013-07-31', 2, 12),
+(65, '33333333333333333333', 1, '2013-07-29', '2013-07-16', '12:12:00', 'jkh', '2013-07-30', '2013-07-31', '12:11:00', 'jkbh', '2013-07-08', '12:12:00', 'kjb', '2013-07-17', '12:11:00', 'ljhkl', '1970-01-01', '1970-01-01', '00:00:00', '-', '2013-07-02', '12:11:00', 'khjlk', '2013-07-03', '11:11:00', 'dyfjuh', '2013-07-09', '12:12:00', 'kjgfkjuy', '2013-07-16', '12:12:00', '2013-07-08', '12:12:00', '2013-07-03', '12:12:00', '2013-07-30', '11:11:00', 'gugur', 12, '2013-07-09', 1, 12),
+(105, '13123', 1, '2013-07-23', '2013-07-09', '12:12:00', 'tyhryr', '2013-07-10', '2013-07-03', '12:11:00', 'rtyrt', '2013-07-10', '12:12:00', 'rtyrty', '2013-07-11', '12:11:00', 'rtyrtyrt', '1970-01-01', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '1970-01-01', '00:00:00', '-', '2013-07-31', '12:12:00', 'rtyrt', '2013-07-03', '12:12:00', '2013-07-10', '12:12:00', '2013-07-03', '12:12:00', '2013-07-31', '11:11:00', 'gugur', 12, '2013-07-31', 2, 12);
 
 -- --------------------------------------------------------
 
@@ -900,7 +1077,9 @@ CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
 
 INSERT INTO `surat_pengantar_penawaran_harga` (`id_dokumen`) VALUES
 (10),
-(39);
+(39),
+(68),
+(108);
 
 -- --------------------------------------------------------
 
@@ -950,10 +1129,15 @@ CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
   `nomor_ski` varchar(32) NOT NULL,
   `tanggal_ski` date NOT NULL,
   `no_ski` varchar(32) NOT NULL,
-  `no_surat_penawaran` varchar(256) NOT NULL,
-  `tgl_surat_penawaran` date NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `surat_penunjukan_pemenang`
+--
+
+INSERT INTO `surat_penunjukan_pemenang` (`id_dokumen`, `nomor`, `lama_penyerahan`, `jaminan`, `nomor_ski`, `tanggal_ski`, `no_ski`) VALUES
+(129, '141414', 12, 0, '-', '0000-00-00', '-');
 
 -- --------------------------------------------------------
 
@@ -972,7 +1156,9 @@ CREATE TABLE IF NOT EXISTS `surat_pernyataan_minat` (
 
 INSERT INTO `surat_pernyataan_minat` (`id_dokumen`) VALUES
 (11),
-(40);
+(40),
+(69),
+(109);
 
 -- --------------------------------------------------------
 
@@ -1008,7 +1194,14 @@ CREATE TABLE IF NOT EXISTS `surat_undangan_permintaan_penawaran_harga` (
 --
 
 INSERT INTO `surat_undangan_permintaan_penawaran_harga` (`id_dokumen`, `nomor`, `waktu_kerja`, `tempat_penyerahan`) VALUES
-(14, '1231231231', 123, 'asdasda');
+(14, '1231231231', 123, 'asdasda'),
+(56, 'hg', 12, 'jhgkj'),
+(57, 'hg', 12, 'jhgkj'),
+(58, 'hg', 12, 'jhgkj'),
+(72, '3eq', 123, 'gkfh'),
+(73, '3eq', 123, 'gkfh'),
+(89, '23423', 123, 'adasda'),
+(112, 'rwerwesdgfes3w', 123, 'sdfsdf');
 
 -- --------------------------------------------------------
 
@@ -1061,7 +1254,9 @@ CREATE TABLE IF NOT EXISTS `tor` (
 
 INSERT INTO `tor` (`id_dokumen`) VALUES
 (3),
-(32);
+(32),
+(61),
+(101);
 
 -- --------------------------------------------------------
 
