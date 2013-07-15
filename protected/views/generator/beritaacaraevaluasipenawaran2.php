@@ -93,11 +93,11 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
+					'model' => $PP,					
 					'viewName' => 'formperusahaan_evaluasi_sampul_2',
 					'labelAdd' => '',
 					'labelDel' => '',
+					
 					
 					)); 
 				?>
