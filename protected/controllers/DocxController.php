@@ -1787,15 +1787,15 @@ class DocxController extends Controller
 			}
 			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic));
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
-			if($Peng->metode_penawaran="Dua Sampul") {
+			if($Peng->metode_penawaran=="Dua Sampul") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'SAMPUL');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Sampul');
 				$this->doccy->phpdocx->assign('#kalimat1#', 'dilanjutkan pembukaan sampul II (Penawaran Harga) dan Perusahaan yang Gugur pada sampul I (Syarat Administrasi dan Teknis), dokumen sampul II (Penawaran Harga) tidak dibuka dan dikembalikan kepada masing-masing Perusahaan.');
 				$this->renderDocx("Berita Acara Evaluasi Penawaran Sampul 1-".$Peng->nama_pengadaan.".docx", true);
-			} else if($Peng->metode_penawaran="Dua Tahap") {
+			} else if($Peng->metode_penawaran=="Dua Tahap") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'TAHAP');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Tahap');
-				$this->doccy->phpdocx->assign('#kalimat1#', 'selanjtnya mengirim dokumen penawaran tahap II (Penawaran Harga) dan Perusahaan yang Gugur pada sampul I (Syarat Administrasi dan Teknis) tidak dapat lanjut mengirim dokumen Penawaran Harga ( Sampul II).');
+				$this->doccy->phpdocx->assign('#kalimat1#', 'selanjutnya mengirim dokumen penawaran tahap II (Penawaran Harga) dan Perusahaan yang Gugur pada sampul I (Syarat Administrasi dan Teknis) tidak dapat lanjut mengirim dokumen Penawaran Harga ( Sampul II).');
 				$this->renderDocx("Berita Acara Evaluasi Penawaran Tahap 1-".$Peng->nama_pengadaan.".docx", true);
 			}
 		}
@@ -1843,11 +1843,11 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#listpesertasampul2#',$this->getPenyediaLulusEvalSampul2($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#listpesertasampul2kesimpulan#',$this->getPenyediaLulusKesimpulan($Peng->id_pengadaan,'evaluasi_penawaran_2'));
-			if($Peng->metode_penawaran="Dua Sampul") {
+			if($Peng->metode_penawaran=="Dua Sampul") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'SAMPUL');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Sampul');
 				$this->renderDocx("Berita Acara Evaluasi Penawaran Sampul 2-".$Peng->nama_pengadaan.".docx", true);
-			} else if($Peng->metode_penawaran="Dua Tahap") {
+			} else if($Peng->metode_penawaran=="Dua Tahap") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'TAHAP');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Tahap');
 				$this->renderDocx("Berita Acara Evaluasi Penawaran Tahap 2-".$Peng->nama_pengadaan.".docx", true);
@@ -2037,11 +2037,12 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#listpic#', $this->getListPanitiaAanwijzing($Peng->id_panitia));
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
-			if($Peng->metode_penawaran="Dua Sampul") {
+			
+			if($Peng->metode_penawaran=="Dua Sampul") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'SAMPUL');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Sampul');
 				$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 1-".$Peng->nama_pengadaan.".docx", true);
-			} else if($Peng->metode_penawaran="Dua Tahap") {
+			} else if($Peng->metode_penawaran=="Dua Tahap") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'TAHAP');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Tahap');
 				$this->renderDocx("Berita Acara Pembukaan Penawaran Tahap 1-".$Peng->nama_pengadaan.".docx", true);
@@ -2092,11 +2093,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#listpic#', $this->getListPanitiaAanwijzing($Peng->id_panitia));
 			$this->doccy->phpdocx->assign('#metode#', $metode);
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
-			if($Peng->metode_penawaran="Dua Sampul") {
+			if($Peng->metode_penawaran=="Dua Sampul") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'SAMPUL');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Sampul');
 				$this->renderDocx("Berita Acara Pembukaan Penawaran Sampul 2-".$Peng->nama_pengadaan.".docx", true);
-			} else if($Peng->metode_penawaran="Dua Tahap") {
+			} else if($Peng->metode_penawaran=="Dua Tahap") {
 				$this->doccy->phpdocx->assign('#sampul/tahapkapital#', 'TAHAP');
 				$this->doccy->phpdocx->assign('#sampul/tahap#', 'Tahap');
 				$this->renderDocx("Berita Acara Pembukaan Penawaran Tahap 2-".$Peng->nama_pengadaan.".docx", true);
