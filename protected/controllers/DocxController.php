@@ -820,14 +820,20 @@ class DocxController extends Controller
 			$metode = $Peng->metode_pengadaan;
 			$nama = $Peng->nama_pengadaan;			
 			$nomor = $NDUP->nomor;
-			$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama;
+			$Panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			if ($Panitia->jenis_panitia=="Panitia") {
+				$ketua = "Ketua ".$Panitia->nama_panitia;
+			} else {
+				$ketua = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Pejabat" and status_user = "Aktif"')->nama;
+			}
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$waktu = Tanggal::getTanggalLengkap($NDUP->waktu_pelaksanaan);
 			$tempat = $NDUP->tempat_penyerahan;
 			
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
-			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen)->nomor;
-			
+			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
+			$nomorndpp = $ndpp->nomor;
+			$penerima = $ndpp->dari;
 			$dokNDP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Permintaan"');
 			$ndp = NotaDinasPermintaan::model()->findByPk($dokNDP->id_dokumen)->nomor;
 
@@ -853,12 +859,13 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#dari#', $ketua);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#penerima#', $penerima);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);			
 			$this->doccy->phpdocx->assign('#waktupelaksanaan#', $waktu);
 			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
 			$this->doccy->phpdocx->assign('#suratkeputusandireksi#', Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia);			
 			$this->doccy->phpdocx->assign('#nondpermintaan#', $ndp);
-			$this->doccy->phpdocx->assign('#nondpp#', $ndpp);
+			$this->doccy->phpdocx->assign('#nondpp#', $nomorndpp);
 			
 			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;						
 			$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getListPanitiaNegoKlar($Peng->id_panitia));			
@@ -1610,10 +1617,8 @@ class DocxController extends Controller
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$nama = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
-			$sk = $panitia->SK_panitia;
 			
-			$skpanitia = "kami atas nama Panitia Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat yang ditunjuk berdasarkan Surat Keputusan Direktur Sumber Daya Manusia dan Umum PT PLN (Persero) No. :  ". Panitia::model()->findByPk($Peng->id_panitia)->SK_panitia . " sebagai berikut :" ;
-			$skpanitia2 = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
+			$skpanitia2 = "Saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
 			
 			$namapejabat= Anggota::model()->find('id_panitia = '.$Peng->id_panitia)->nama;
 			
@@ -1624,17 +1629,10 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#nokeputusandir#', $sk);
 			$this->doccy->phpdocx->assign('#metodepengadaan#', $metode);
-			$this->doccy->phpdocx->assign('#namapejabat#', $namapejabat);
-			
-			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Panitia'){
-				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia);
-				$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
-			}else{
-				$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);
-				$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
-			}
+			$this->doccy->phpdocx->assign('#namapejabat#', $namapejabat);			
+			$this->doccy->phpdocx->assign('#skpanitia#', $skpanitia2);
+			$this->doccy->phpdocx->assign('#tdtgnpic#', $this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
 			
 			$this->renderDocx("Pakta Integritas Akhir Pejabat-".$Peng->nama_pengadaan.".docx", true);
 		}
