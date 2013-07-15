@@ -120,25 +120,6 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionDetailpejabat()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$id = Yii::app()->getRequest()->getQuery('id');
-			$panitia = Panitia::model()->findByPk($id);
-			$pejabat = Anggota::model()->findByAttributes(array('id_panitia'=>$id));
-			if (isset($_POST['Anggota'])) {
-				$pejabat->attributes = $_POST['Anggota'];
-				$panitia->nama_panitia = $pejabat->nama;
-				if ($panitia->save(false) && $pejabat->save(false)) {
-					Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-				}
-			}
-			$this->render('detailpejabat', array(
-				'pejabat'=>$pejabat,
-			));
-		}
-	}
-
 	public function actionTambahpanitia()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -164,19 +145,40 @@ class AdminController extends Controller
 			$pejabat = new Anggota;
 			if (isset($_POST['Anggota'])) {
 				$pejabat->attributes = $_POST['Anggota'];
-				$panitia = new Panitia;
-				$panitia->nama_panitia = $pejabat->nama;
-				$panitia->SK_panitia = '-';
-				$panitia->tanggal_sk = '0000-00-00';
-				$panitia->status_panitia = 'Aktif';
-				$panitia->jenis_panitia = 'Pejabat';
-				if ($panitia->save(false)) {
-					$pejabat->password = sha1($pejabat->username);
-					$pejabat->id_panitia = $panitia->id_panitia;
-					$pejabat->jabatan = 'Pejabat';
-					$pejabat->status_user = 'Aktif';
-					if ($pejabat->save(false)) {
+				$person = $this->getRecordByUsername($pejabat->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$pejabat->nama = $person['nama'];
+					$pejabat->email = $person['email'];
+					$old = Anggota::model()->findByAttributes(array('username'=>$pejabat->username, 'jabatan'=>'Pejabat'));
+					if ($old != null) {
+						$old->nama = $pejabat->nama;
+						$old->email = $pejabat->email;
+						$old->status_user = 'Aktif';
+						$old->save(false);
+						$pan = Panitia::model()->findByPk($old->id_panitia);
+						$pan->nama_panitia = $pejabat->nama;
+						$pan->status_panitia = 'Aktif';
+						$pan->save(false);
 						$this->redirect(array('panitia'));
+					}
+					else {
+						$panitia = new Panitia;
+						$panitia->nama_panitia = $pejabat->nama;
+						$panitia->SK_panitia = '-';
+						$panitia->tanggal_sk = '0000-00-00';
+						$panitia->status_panitia = 'Aktif';
+						$panitia->jenis_panitia = 'Pejabat';
+						if ($panitia->save(false)) {
+							$pejabat->id_panitia = $panitia->id_panitia;
+							$pejabat->jabatan = 'Pejabat';
+							$pejabat->status_user = 'Aktif';
+							if ($pejabat->save(false)) {
+								$this->redirect(array('panitia'));
+							}
+						}
 					}
 				}
 			}
