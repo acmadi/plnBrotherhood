@@ -107,15 +107,17 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 
 		<div class="row">
 				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pembukaan_penawaran_2',
-					'labelAdd' => '',
-					'labelDel' => '',
+					if($Pengadaan->metode_penawaran == 'Dua Tahap'){
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,						
+						'viewName' => 'formperusahaan_pembukaan_penawaran_2',
+						'labelAdd' => '',
+						'labelDel' => '',						
+						)); 
+					}else if($Pengadaan->metode_penawaran == 'Dua Sampul'){
 					
-					)); 
+					}
 				?>
 		</div>
 		

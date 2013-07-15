@@ -4234,7 +4234,10 @@
 											$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 											$PP[$i]->alamat=$_POST['alamat'][$i];									
 											$PP[$i]->npwp=$_POST['npwp'][$i];												
+											$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];								
+											$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];					
 											$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];										
+											$PP[$i]->administrasi = $_POST['administrasi'][$i];										
 											$PP[$i]->save();
 										}
 									}
@@ -4245,15 +4248,12 @@
 										if(isset($_POST['perusahaan'][$i])){
 											$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 											$PP[$i]->alamat = $_POST['alamat'][$i];								
-											$PP[$i]->npwp = $_POST['npwp'][$i];
-											// $PP[$i]->nilai = 0;						
-											$PP[$i]->biaya = $_POST['biaya'][$i];		
-											
+											$PP[$i]->npwp = $_POST['npwp'][$i];											
+											$PP[$i]->biaya = $_POST['biaya'][$i];													
 											$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];
-											$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];
-																					
+											$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];																					
 											$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];														
-											
+											$PP[$i]->administrasi = $_POST['administrasi'][$i];																									
 											$PP[$i]->save();
 										}
 									}
@@ -4326,7 +4326,11 @@
 											$PP[$i]->alamat=$_POST['alamat'][$i];									
 											$PP[$i]->npwp=$_POST['npwp'][$i];		
 											
+											$PP[$i]->nomor_surat_penawaran = $_POST['nomor_surat_penawaran'][$i];								
+											$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];					
+											
 											$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];
+											$PP[$i]->administrasi = $_POST['administrasi'][$i];
 											
 											$PP[$i]->save();
 										}
@@ -4346,6 +4350,7 @@
 											$PP[$i]->tanggal_penawaran = $_POST['tanggal_penawaran'][$i];										
 											
 											$PP[$i]->evaluasi_penawaran_1 = $_POST['evaluasi_penawaran_1'][$i];
+											$PP[$i]->administrasi = $_POST['administrasi'][$i];
 											
 											$PP[$i]->save();
 										}
@@ -4688,6 +4693,7 @@
 						$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
 					} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 						$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
+						$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					}
 					
 					if ($Dok0==null) {
@@ -4701,12 +4707,7 @@
 						$Dokumen1->tanggal=Tanggal::getTanggalStrip($SUPP->tanggal_undangan);
 						$BAPP->waktu=Tanggal::getJamMenit($SUPP->waktu);
 						$BAPP->tempat=$SUPP->tempat;
-					}
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-					
-					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}									
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
@@ -4717,17 +4718,18 @@
 							$Dokumen3->tanggal=$Dokumen1->tanggal;
 							$DH->jam=$BAPP->waktu;
 							$DH->tempat_hadir=$BAPP->tempat;
-							if(isset($_POST['perusahaan'])){							
-								
-								for($i=0;$i<count($PP);$i++){
-									if(isset($_POST['perusahaan'][$i])){									
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																		
-										$PP[$i]->hadir_pembukaan_penawaran_2 = $_POST['hadir_pembukaan_penawaran_2'][$i];												
-										$PP[$i]->save();
-									}
-								}
-								
-							}//end isset perusahaan
+							
+							if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+								if(isset($_POST['perusahaan'])){																
+									for($i=0;$i<count($PP);$i++){
+										if(isset($_POST['perusahaan'][$i])){									
+											$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																		
+											$PP[$i]->hadir_pembukaan_penawaran_2 = $_POST['hadir_pembukaan_penawaran_2'][$i];												
+											$PP[$i]->save();
+										}
+									}									
+								}//end isset perusahaan
+							}
 							
 							if($Pengadaan->save(false)){
 								if($Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
@@ -4739,9 +4741,16 @@
 						}
 					}
 					
-					$this->render('pembukaanpenawaran2',array(
+					if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
+						$this->render('pembukaanpenawaran2',array(
 						'BAPP'=>$BAPP,'PP'=>$PP,'Dokumen1'=>$Dokumen1,
-					));
+						));
+					}else{
+						$this->render('pembukaanpenawaran2',array(
+						'BAPP'=>$BAPP,'Dokumen1'=>$Dokumen1,
+						));
+					}
+					
 				}
 			}
 		}
@@ -4840,15 +4849,15 @@
 					
 					if($Pengadaan->metode_penawaran=="Dua Sampul") {
 						$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
+						$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					} else if($Pengadaan->metode_penawaran=="Dua Tahap") {
 						$DokBAEP= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
+						$PP = PenerimaPengadaan::model()->findAll('(hadir_pembukaan_penawaran_2 = "1" or hadir_pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					}
 					$BAEP= BeritaAcaraEvaluasiPenawaran::model()->findByPk($DokBAEP->id_dokumen);
 					
 					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-					
-					$PP = PenerimaPengadaan::model()->findAll('(hadir_pembukaan_penawaran_2 = "1" or hadir_pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					//$this->performAjaxValidation($model);										
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
@@ -4915,14 +4924,12 @@
 					
 					if ($Pengadaan->metode_penawaran == 'Dua Sampul'){
 						$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Sampul Dua"');
+						$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_1 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					} else if ($Pengadaan->metode_penawaran == 'Dua Tahap'){
 						$Dok0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Pembukaan Penawaran Tahap Dua"');
+						$PP = PenerimaPengadaan::model()->findAll('(hadir_pembukaan_penawaran_2 = "1" or hadir_pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					}
 					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-
-					$PP = PenerimaPengadaan::model()->findAll('(pembukaan_penawaran_2 = "1" or pembukaan_penawaran_2 = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{

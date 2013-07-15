@@ -65,7 +65,7 @@ class PenerimaPengadaan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('perusahaan, id_pengadaan, alamat, npwp, nilai, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, administrasi, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'required'),
+			array('perusahaan, id_pengadaan', 'required'),
 			array('perusahaan', 'length', 'max'=>100),
 			array('id_pengadaan, nilai', 'length', 'max'=>255),
 			array('alamat, npwp, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, administrasi, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'length', 'max'=>256),
