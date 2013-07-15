@@ -165,7 +165,7 @@ class XlsxController extends Controller
 			$objPHPExcel = $objReader->load($templatePath . '15.a-Lam BA Evaluasi  1 Sampul.xlsx');
 				
 				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($id);	
-				$nomor = $BAEP->nomor;
+				// $nomor = $BAEP->nomor;
 			
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
 					$this->assign($objPHPExcel, "#hari#", $hari);
@@ -173,7 +173,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#bulan#", $bulan);
 					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#kalimatpanitia#", $kalimat_panitia);
-					$this->assign($objPHPExcel, "#nomor#", $nomor);
+					// $this->assign($objPHPExcel, "#nomor#", $nomor);
 					$this->assign($objPHPExcel, "#panitia#", $nama_panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			
