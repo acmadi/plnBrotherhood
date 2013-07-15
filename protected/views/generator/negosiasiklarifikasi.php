@@ -75,8 +75,11 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->textArea($BANK,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($BANK,'tempat'); ?>
 		</div>
+<<<<<<< HEAD
 	
 		
+=======
+>>>>>>> e5d6d55536a099b56735109cf4034fb8d7bbd00d
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BANK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
@@ -102,7 +105,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						}
 					?>
 				</li>
-				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Daftar Hadir Negosiasi dan Klarifikasi', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>

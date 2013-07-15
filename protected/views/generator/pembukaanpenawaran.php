@@ -160,13 +160,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<ul class="generatedoc">
 				<?php if($Pengadaan->metode_penawaran == 'Satu Sampul') { ?>
 					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
-					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
 					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Sampul Satu', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
-					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Satu', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
 					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Tahap Satu', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
-					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Satu', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } ?>
 			</ul>
 		</div>
