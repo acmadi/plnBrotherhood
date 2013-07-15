@@ -203,7 +203,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			header('Content-Disposition: attachment;filename="Lampiran Berita Acara Evaluasi Penawaran.xlsx"');
 		}
-		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Aanwijzing'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Sampul Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Tahap Satu') {
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Aanwijzing'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Sampul Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Tahap Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Sampul Dua'||$cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Tahap Dua') {
 			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
 			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
@@ -224,9 +224,15 @@ class XlsxController extends Controller
 					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Tahap Satu') {
 						$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'hadir_pembukaan_penawaran_1');
 						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Tahap Satu - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Sampul Dua') {
+						$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'hadir_pembukaan_penawaran_2');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Sampul Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Pembukaan Penawaran Tahap Dua') {
+						$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'hadir_pembukaan_penawaran_2');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
 		}
-		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Satu') {
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Dua'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Dua') {
 			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
 			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
@@ -244,6 +250,12 @@ class XlsxController extends Controller
 					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Satu') {
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
 						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Satu - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Dua') {
+						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Sampul Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Dua') {
+						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
 		}
 		else{

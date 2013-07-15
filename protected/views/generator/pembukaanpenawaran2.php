@@ -137,10 +137,10 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<ul class="generatedoc">
 				<?php if($Pengadaan->metode_penawaran == 'Dua Sampul') { ?>
 					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Sampul Dua', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
-					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Sampul Dua', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } else if($Pengadaan->metode_penawaran == 'Dua Tahap') { ?>
 					<li><?php echo CHtml::link('Lampiran Berita Acara Pembukaan Penawaran Tahap Dua', array('xlsx/download','id'=>$Dokumen2->id_dokumen)); ?></li>
-					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Dua', array('docx/download','id'=>$DH->id_dokumen)); ?></li>
+					<li><?php echo CHtml::link('Daftar Hadir Pembukaan Penawaran Tahap Dua', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 				<?php } ?>
 			</ul>
 		</div>
