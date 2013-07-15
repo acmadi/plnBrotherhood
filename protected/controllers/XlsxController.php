@@ -45,6 +45,7 @@ class XlsxController extends Controller
 				}
 				else if ($crincian->nama_rincian == 'Lampiran ba') {
 					$objPHPExcel = $objReader->load($templatePath . 'PL-B-Lamp_ba.xlsx');
+					$metode_pengadaan = $cpengadaan->metode_pengadaan;
 					$this->assign($objPHPExcel, "#nomor#", $crks->nomor);
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap0($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#tahun#", Tanggal::getTahun($cdokumen->tanggal));
@@ -164,7 +165,7 @@ class XlsxController extends Controller
 			$objPHPExcel = $objReader->load($templatePath . '15.a-Lam BA Evaluasi  1 Sampul.xlsx');
 				
 				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($id);	
-				$nomor = $BAEP->nomor;
+				// $nomor = $BAEP->nomor;
 			
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
 					$this->assign($objPHPExcel, "#hari#", $hari);
@@ -172,7 +173,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#bulan#", $bulan);
 					$this->assign($objPHPExcel, "#tahun#", $tahun);
 					$this->assign($objPHPExcel, "#kalimatpanitia#", $kalimat_panitia);
-					$this->assign($objPHPExcel, "#nomor#", $nomor);
+					// $this->assign($objPHPExcel, "#nomor#", $nomor);
 					$this->assign($objPHPExcel, "#panitia#", $nama_panitia);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));	
 			
@@ -257,6 +258,17 @@ class XlsxController extends Controller
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
 						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
+		}
+		else if ($cdokumen->nama_dokumen == 'Pengumuman kualifikasi') {
+			$PHPQ=pengumumanhasilprakualifikasi::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . '4b BA dan Hasil Kualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", $PHPQ->jam);
+					$this->assign($objPHPExcel, "#tempat#", $PHPQ->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $PHPQ->acara." ".$cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+					
 		}
 		else{
 			$objPHPExcel = $objReader->load($templatePath . 'test.xlsx');

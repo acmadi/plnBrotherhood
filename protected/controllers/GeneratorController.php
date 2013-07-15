@@ -823,9 +823,9 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					if ($Pengadaan->metode_pengadaan=='Pelelangan'){
-						$Pengadaan->status= "5";
+						$Pengadaan->status= "6";
 					} else {	
-						$Pengadaan->status= "4";
+						$Pengadaan->status= "5";
 					}
 					
 					$Dokumen0= new Dokumen;
@@ -983,7 +983,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status= "8";
+					$Pengadaan->status= "9";
 					
 					$Dokumen0= new Dokumen;
 					$criteria=new CDbcriteria;
@@ -1080,7 +1080,7 @@
 			else {
 				if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="6";
+					$Pengadaan->status="7";
 					
 					$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
 					$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
@@ -1175,7 +1175,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="7";
+					$Pengadaan->status="8";
 
 					$PP = array(new PenerimaPengadaan);	
 						
@@ -1322,7 +1322,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+					$Pengadaan->status="9";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1402,7 +1402,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+					$Pengadaan->status="9";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1482,7 +1482,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="9";
+					$Pengadaan->status="11";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1641,7 +1641,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="10";
+					$Pengadaan->status="13";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1815,7 +1815,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="11";
+					$Pengadaan->status="14";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -2018,7 +2018,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="12";
+					$Pengadaan->status="15";
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -2198,88 +2198,88 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 					
-					// $PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
-					// if(isset($_POST['perusahaan'])){
+					if(isset($_POST['perusahaan'])){
 													
-						// for($i=0;$i<count($PP);$i++){
-							// if(isset($_POST['perusahaan'][$i])){																																																
-								// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-								// $PP[$i]->alamat='-';									
-								// $PP[$i]->npwp='-';		
-								// $PP[$i]->nilai = 0;									
-								// $PP[$i]->biaya = '0';				
-								// $PP[$i]->nomor_surat_penawaran = '-';									
-								// $PP[$i]->tanggal_penawaran = '-';												
-								// $PP[$i]->undangan_prakualifikasi = '1';
-								// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-								// $PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-								// $PP[$i]->penyampaian_lelang = '-';
-								// $PP[$i]->evaluasi_pq = '-';
-								// $PP[$i]->penetapan_pq = '-';
-								// $PP[$i]->undangan_supph = '-';
-								// $PP[$i]->pendaftaran_pc = '-';
-								// $PP[$i]->pengambilan_dokumen = '-';									
-								// $PP[$i]->ba_aanwijzing = '-';
-								// $PP[$i]->pembukaan_penawaran_1 = '-';
-								// $PP[$i]->evaluasi_penawaran_1 = '-';
-								// $PP[$i]->pembukaan_penawaran_2 = '-';			
-								// $PP[$i]->evaluasi_penawaran_2 = '-';
-								// $PP[$i]->negosiasi_klarifikasi = '-';
-								// $PP[$i]->usulan_pemenang = '-';
-								// $PP[$i]->penetapan_pemenang	 = '-';								
+						for($i=0;$i<count($PP);$i++){
+							if(isset($_POST['perusahaan'][$i])){				
+								$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+								$PP[$i]->alamat='-';									
+								$PP[$i]->npwp='-';		
+								$PP[$i]->nilai = 0;									
+								$PP[$i]->biaya = '0';				
+								$PP[$i]->nomor_surat_penawaran = '-';									
+								$PP[$i]->tanggal_penawaran = '-';												
+								$PP[$i]->undangan_prakualifikasi = '1';
+								$PP[$i]->pendaftaran_pelelangan_pq = '1';	
+								$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
+								$PP[$i]->penyampaian_lelang = '-';
+								$PP[$i]->evaluasi_pq = '-';
+								$PP[$i]->penetapan_pq = '-';
+								$PP[$i]->undangan_supph = '-';
+								$PP[$i]->pendaftaran_pc = '-';
+								$PP[$i]->pengambilan_dokumen = '-';									
+								$PP[$i]->ba_aanwijzing = '-';
+								$PP[$i]->pembukaan_penawaran_1 = '-';
+								$PP[$i]->evaluasi_penawaran_1 = '-';
+								$PP[$i]->pembukaan_penawaran_2 = '-';			
+								$PP[$i]->evaluasi_penawaran_2 = '-';
+								$PP[$i]->negosiasi_klarifikasi = '-';
+								$PP[$i]->usulan_pemenang = '-';
+								$PP[$i]->penetapan_pemenang	 = '-';								
 								
-								// $PP[$i]->save();
-							// }
-						// }
+								$PP[$i]->save();
+							}
+						}
 
-						// $total = count($_POST['perusahaan']);
-						// if(count($PP)<$total){
-							// $PPkurang = $total - count($PP);
-							// for($j=0;$j<$PPkurang;$j++){
-								// $PPbaru = new PenerimaPengadaan;
-								// $PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-								// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-								// $PPbaru->alamat='-';									
-								// $PPbaru->npwp='-';		
-								// $PPbaru->nilai = 0;
-								// $PPbaru->biaya = '0';							
-								// $PPbaru->nomor_surat_penawaran = '-';
-								// $PPbaru->tanggal_penawaran = '-';														
-								// $PPbaru->undangan_prakualifikasi = '1';
-								// $PPbaru->pendaftaran_pelelangan_pq = '1';
-								// $PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-								// $PPbaru->penyampaian_lelang = '-';
-								// $PPbaru->evaluasi_pq = '-';
-								// $PPbaru->penetapan_pq = '-';
-								// $PPbaru->undangan_supph = '-';
-								// $PPbaru->pendaftaran_pc = '-';
-								// $PPbaru->pengambilan_dokumen = '-';
-								// $PPbaru->ba_aanwijzing = '-';
-								// $PPbaru->pembukaan_penawaran_1 = '-';
-								// $PPbaru->evaluasi_penawaran_1 = '-';
-								// $PPbaru->pembukaan_penawaran_2 = '-';
-								// $PPbaru->evaluasi_penawaran_2 = '-';
-								// $PPbaru->negosiasi_klarifikasi = '-';
-								// $PPbaru->usulan_pemenang = '-';
-								// $PPbaru->penetapan_pemenang = '-';
+						$total = count($_POST['perusahaan']);
+						if(count($PP)<$total){
+							$PPkurang = $total - count($PP);
+							for($j=0;$j<$PPkurang;$j++){
+								$PPbaru = new PenerimaPengadaan;
+								$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+								$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+								$PPbaru->alamat='-';									
+								$PPbaru->npwp='-';		
+								$PPbaru->nilai = 0;
+								$PPbaru->biaya = '0';							
+								$PPbaru->nomor_surat_penawaran = '-';
+								$PPbaru->tanggal_penawaran = '-';														
+								$PPbaru->undangan_prakualifikasi = '1';
+								$PPbaru->pendaftaran_pelelangan_pq = '1';
+								$PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
+								$PPbaru->penyampaian_lelang = '-';
+								$PPbaru->evaluasi_pq = '-';
+								$PPbaru->penetapan_pq = '-';
+								$PPbaru->undangan_supph = '-';
+								$PPbaru->pendaftaran_pc = '-';
+								$PPbaru->pengambilan_dokumen = '-';
+								$PPbaru->ba_aanwijzing = '-';
+								$PPbaru->pembukaan_penawaran_1 = '-';
+								$PPbaru->evaluasi_penawaran_1 = '-';
+								$PPbaru->pembukaan_penawaran_2 = '-';
+								$PPbaru->evaluasi_penawaran_2 = '-';
+								$PPbaru->negosiasi_klarifikasi = '-';
+								$PPbaru->usulan_pemenang = '-';
+								$PPbaru->penetapan_pemenang = '-';
 								
-								// $PPbaru->save();
-							// }
+								$PPbaru->save();
+							}
 							
-						// }
+						}
 						
 						
-						// if($Pengadaan->save(false)){	
-							// $this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
-						// }			
+						if($Pengadaan->save(false)){	
+							$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
+						}			
 						
-					// }
+					}
 						
 					$Pengadaan->save();
 					
 					$this->render('pengumumanhasilprakualifikasi',array(
-						// 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+						'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 					));
 				}
 			}
