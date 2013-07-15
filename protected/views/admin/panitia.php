@@ -17,8 +17,6 @@
 		<h3>Pejabat pengadaan</h3>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'dataProvider'=>$model->searchPejabat(),
-			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detailpejabat", array("id"=>"$model->id_panitia")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 			'columns'=>array(
 				array(
 					'name'=>'No',

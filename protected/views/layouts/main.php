@@ -21,6 +21,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/detailpengadaan.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/generator.css" />
 
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/protected/vendors/knockoutjs/knockout-2.3.0.js"></script>
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 

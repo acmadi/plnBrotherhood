@@ -111,7 +111,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 			'dataProvider'=>$model->searchBuatPanitia(),
 			 'filter'=>$model,
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/generator") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("generator/generator") . "' + '&id=' + $.fn.yiiGridView.getSelection(id);}",
 			"ajaxUpdate"=>false,			
 			'columns'=>array(
 				'nama_pengadaan',
