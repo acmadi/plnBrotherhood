@@ -47,15 +47,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</script>
 				</div>
 			<?php endif; ?>
-	<!---------------------
-			// <div class="form" >
+	
+			<div class="form" >
 
-			<?php //$form=$this->beginWidget('CActiveForm', array(
-			// 'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
-			// 'enableAjaxValidation'=>false,
-			// )); ?>
+			<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
+			'enableAjaxValidation'=>false,
+			)); ?>
 			
-			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
+			<h4><b> Nota Dinas Usulan Hasil Prakualifikasi </b></h4>
 	
 			<div class="row">
 				<?php 
@@ -74,9 +74,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div class="row buttons">
 				<?php //echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
-		--->
 			
-		<?php //$this->endWidget(); ?>
+		<?php $this->endWidget(); ?>
 		
 		<br/>
 		</div><!-- form -->
