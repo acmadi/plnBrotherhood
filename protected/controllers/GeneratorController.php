@@ -5633,12 +5633,26 @@
 						$BANK->waktu=Tanggal::getJamMenit($SUNK->waktu);
 					}
 					
+					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					
 					if(isset($_POST['BeritaAcaraNegosiasiKlarifikasi']))
 					{
 						$Dokumen1->attributes=$_POST['Dokumen'];
 						$BANK->attributes=$_POST['BeritaAcaraNegosiasiKlarifikasi'];
 						$valid=$Dokumen1->validate()&&$BANK->validate();
 						if($valid){
+							if(isset($_POST['perusahaan'])){
+								
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->hadir_klarifikasi_negosiasi = $_POST['hadir_klarifikasi_negosiasi'][$i];
+										$PP[$i]->save();
+									}
+								}
+								
+							}//end isset perusahaan	
+							
 							$DH->jam=$BANK->waktu;
 							$DH->tempat_hadir=$BANK->tempat;
 							$Dokumen2->tanggal=$Dokumen1->tanggal;
@@ -5654,7 +5668,7 @@
 						}
 					}
 					$this->render('negosiasiklarifikasi',array(
-						'BANK'=>$BANK,'Dokumen1'=>$Dokumen1,
+						'BANK'=>$BANK,'Dokumen1'=>$Dokumen1,'PP'=>$PP,
 					));
 				}
 			}
@@ -5679,10 +5693,7 @@
 					$BANK->waktu=Tanggal::getJamMenit($BANK->waktu);
 					$DH=DaftarHadir::model()->findByPk($Dokumen3->id_dokumen);
 					
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-
+					$PP = PenerimaPengadaan::model()->findAll('evaluasi_penawaran_2 = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					
 					if(isset($_POST['BeritaAcaraNegosiasiKlarifikasi']))
 					{
@@ -5690,6 +5701,19 @@
 						$BANK->attributes=$_POST['BeritaAcaraNegosiasiKlarifikasi'];
 						$valid=$Dokumen1->validate()&&$BANK->validate();
 						if($valid){
+						
+							if(isset($_POST['perusahaan'])){
+								
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->hadir_klarifikasi_negosiasi = $_POST['hadir_klarifikasi_negosiasi'][$i];
+										$PP[$i]->save();
+									}
+								}
+								
+							}//end isset perusahaan	
+							
 							$DH->jam=$BANK->waktu;
 							$DH->tempat_hadir=$BANK->tempat;
 							$Dokumen2->tanggal=$Dokumen1->tanggal;
@@ -5703,7 +5727,7 @@
 						}
 					}
 					$this->render('negosiasiklarifikasi',array(
-						'BANK'=>$BANK,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,'DH'=>$DH,
+						'BANK'=>$BANK,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,'DH'=>$DH,'PP'=>$PP,
 					));
 				}
 			}
