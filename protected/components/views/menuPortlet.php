@@ -25,7 +25,7 @@
 		
 		<?php if ($cpengadaan->jenis_kualifikasi=="Pra Kualifikasi") { ?>
 		
-			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2') { ?>
+			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
 				<li class='belum' ><?php echo 'Dokumen Kualifikasi'?></li>
 			<?php } else if($cpengadaan->status == '3') { ?>
 				<li id="2" class='sudah' ><?php echo CHtml::link('Dokumen Kualifikasi',array("generator/dokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
