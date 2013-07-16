@@ -640,7 +640,7 @@ class SiteController extends Controller
 			$Pengadaan->metode_penawaran='-';
 			$Pengadaan->jenis_kualifikasi='-';
 			if(Yii::app()->user->getState('role') == 'divisi') {
-				$Pengadaan->divisi_peminta=Yii::app()->user->name;
+				$Pengadaan->divisi_peminta=UserDivisi::model()->findByPk(Yii::app()->user->name)->divisi;
 			}
 			date_default_timezone_set("Asia/Jakarta");
 			$Pengadaan->tanggal_masuk=date('d-m-Y');

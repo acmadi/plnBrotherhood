@@ -363,12 +363,11 @@ class Pengadaan extends CActiveRecord
 			'*',
 		);
 		
-		$usern = Yii::app()->user->name;
+		$usern = UserDivisi::model()->findByPk(Yii::app()->user->name)->divisi;
 		
 		$criteria=new CDbCriteria;
 
-		$criteria->together=true;
-//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->together=true;               
 		$criteria->with = array("idPanitia");    
                 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
@@ -543,7 +542,7 @@ class Pengadaan extends CActiveRecord
 		);
 		
 		$criteria=new CDbCriteria;				
-		$usern = Yii::app()->user->name;
+		$usern = UserDivisi::model()->findByPk(Yii::app()->user->name)->divisi;
 		
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
