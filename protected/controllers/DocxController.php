@@ -951,7 +951,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#penerima#', $penerima);
 			$this->doccy->phpdocx->assign('#dari#', $dari);
 			$this->doccy->phpdocx->assign('#metode#', $metode);
-			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);			
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);	
+			
+			$this->doccy->phpdocx->assign('#listpenyedia#', $this->getPenyediaLulusX($Peng->id_pengadaan,'usulan_hasil_pq'));	
 			
 			$this->renderDocx("Nota Dinas Usulan Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
@@ -991,6 +993,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalusulan#', $tanggalusulan);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namapengirim);
+			$this->doccy->phpdocx->assign('#listpenyedia#', $this->getPenyediaLulusX($Peng->id_pengadaan,'penetapan_pq'));	
 			
 			$this->renderDocx("Nota Dinas Penetapan Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
