@@ -76,6 +76,19 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<?php echo $form->error($Dokumen0,'tanggal'); ?>
 				</div>
 				
+				<div class="row">
+				<?php 
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,					
+					'viewName' => 'formperusahaan_usulan_pq',
+					'labelAdd' => '',
+					'labelDel' => '',
+					
+					)); 
+				?>
+			</div>
+				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($NDUPN->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>

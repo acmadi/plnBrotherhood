@@ -12,8 +12,8 @@
             <td>
 				<?php echo CHtml::dropDownList('penetapan_pq[]',"string",
 					array(
-						"1"=>"Memasukkan Dokumen",
-						"0"=>"Tidak Memasukkan Dokumen",
+						"1"=>"Lulus",
+						"0"=>"Tidak Lulus",
 					),array('style'=>'width:230px'));
 				?>
             </td>
@@ -26,8 +26,8 @@
 				<td>
 					<?php echo CHtml::dropDownList('penetapan_pq[]',$model[$i]->penetapan_pq,
 						array(
-							"1"=>"Memasukkan Dokumen",
-							"0"=>"Tidak Memasukkan Dokumen",
+							"1"=>"Lulus",
+							"0"=>"Tidak Lulus",
 						),array('style'=>'width:230px'));
 					?>
 				</td>
