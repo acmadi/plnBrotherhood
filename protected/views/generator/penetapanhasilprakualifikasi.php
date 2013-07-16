@@ -48,36 +48,52 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 			<?php endif; ?>
 	
-			 <div class="form" >
+			<div class="form">
 
 			<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
-			'enableAjaxValidation'=>false,
-			 )); ?>
+				'id'=>'penetapan-hasil-prakualifikasi-form',
+				'enableAjaxValidation'=>false,
+			)); ?>
+
+				<h4><b> Nota Dinas Penetapan Hasil Prakualifikasi </b></h4>
+				<div class="row">
+					<?php echo $form->labelEx($NDPK,'nomor'); ?>
+					<?php echo $form->textField($NDPK,'nomor',array('size'=>56,'maxlength'=>100)); ?>
+					<?php echo $form->error($NDPK,'nomor'); ?>
+				</div>
+				
+				<div class="row">
+					<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Dokumen0,
+						'attribute'=>'tanggal',
+						'value'=>$Dokumen0->tanggal,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'yy-mm-dd',
+						),
+					));?>
+					<?php echo $form->error($Dokumen0,'tanggal'); ?>
+				</div>
+				
+				<div class="row buttons">
+					<?php echo CHtml::submitButton($NDPK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				</div>
+
+				<?php $this->endWidget(); ?>
+
+			</div><!-- form -->
 			
-			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
-	
-			<div class="row">
-				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,					
-					'viewName' => 'formperusahaan_penetapan_hasil_prakualifikasi',
-					'labelAdd' => '',
-					'labelDel' => 'Hapus Penyedia',					
-					)); 
-				?>
-			</div>
-			
-			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '14' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-			</div>
-		
-			
-		<?php $this->endWidget(); ?>
-		
-		<br/>
-		</div><!-- form -->
+			<?php if (!$NDPK->isNewRecord){ ?>
+				<br/>
+				<div style="border-top:1px solid lightblue">
+				<br/>
+					<h4><b> Daftar Dokumen </b></h4>
+					<ul class="generatedoc">
+						<li><?php echo CHtml::link('Nota Dinas Penetapan Hasil Prakualifikasi', array('docx/download','id'=>$NDPK->id_dokumen)); ?></li>
+					</ul>
+				</div>
+			<?php } ?>
 		
 	<?php	} ?>
 	</div>
