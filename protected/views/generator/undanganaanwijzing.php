@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
                     <?php
                         $this->widget('zii.widgets.CMenu', array(
 							'items'=>array(
-								array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/site/undanganaanwijzing':'/site/editundanganaanwijzing','id'=>$id)),
+								array('label'=>'Nota Dinas Undangan Aanwijzing', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Aanwijzing"') == null)?'/generator/undanganaanwijzing':'/generator/editundanganaanwijzing','id'=>$id)),
 								array('label'=>'Aanwijzing', 'url'=>array($Pengadaan->status=='20'?('/generator/aanwijzing'):('/generator/editaanwijzing'),'id'=>$id)),
 											array('label'=>'BA Aanwijzing', 'url'=>array($Pengadaan->status=='21'?'/generator/beritaacaraaanwijzing':($Pengadaan->status=='20'?'':'/generator/editberitaacaraaanwijzing'),'id'=>$id)),
 							),

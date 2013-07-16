@@ -369,7 +369,7 @@ class XlsxController extends Controller
 			}
 			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'II');
 			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,'Penyadia Barang/Jasa');
-			$penyedia = PenerimaPengadaan::model()->findAll('(' . $tahap . ' = "1" or ' . $tahap . ' = "0") and id_pengadaan = ' . $idPeng);
+			$penyedia = PenerimaPengadaan::model()->findAll('(' . $tahap . ' = "1") and id_pengadaan = ' . $idPeng);
 			$barisawal = $barisawal+1;
 			$i=1;
 			foreach($penyedia as $item) {
