@@ -1,21 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "divisi".
+ * This is the model class for table "user_divisi".
  *
- * The followings are the available columns in table 'divisi':
+ * The followings are the available columns in table 'user_divisi':
  * @property string $username
- * @property string $nama_divisi
- *
- * The followings are the available model relations:
- * @property Pengadaan[] $pengadaans
+ * @property string $nama
+ * @property string $divisi
  */
-class Divisi extends CActiveRecord
+class UserDivisi extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Divisi the static model class
+	 * @return UserDivisi the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +25,7 @@ class Divisi extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'divisi';
+		return 'user_divisi';
 	}
 
 	/**
@@ -38,12 +36,13 @@ class Divisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama_divisi', 'required'),
-			array('username', 'length', 'max'=>20),
-			array('nama_divisi', 'length', 'max'=>256),
+			array('username, nama, divisi', 'required'),
+			array('username', 'length', 'max'=>50),
+			array('nama', 'length', 'max'=>256),
+			array('divisi', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama_divisi', 'safe', 'on'=>'search'),
+			array('username, nama, divisi', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +54,6 @@ class Divisi extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'divisi_peminta'),
 		);
 	}
 
@@ -66,7 +64,8 @@ class Divisi extends CActiveRecord
 	{
 		return array(
 			'username' => 'Username',
-			'nama_divisi' => 'Nama Divisi',
+			'nama' => 'Nama',
+			'divisi' => 'Divisi',
 		);
 	}
 
@@ -82,7 +81,8 @@ class Divisi extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('username',$this->username,true);
-		$criteria->compare('nama_divisi',$this->nama_divisi,true);
+		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('divisi',$this->divisi,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

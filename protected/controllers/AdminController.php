@@ -307,10 +307,6 @@ class AdminController extends Controller
 			$divisi = new Divisi;
 			if (isset($_POST['Divisi'])) {
 				$divisi->attributes = $_POST['Divisi'];
-				$divisi->password = $divisi->username;
-				$divisi->oldpass = $divisi->password;
-				$divisi->newpass = $divisi->password;
-				$divisi->confirmpass = $divisi->password;
 				if ($divisi->save(false)) {
 					$this->redirect(array('divisi'));
 				}
@@ -337,7 +333,7 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionAdmin()
+	public function actionAkun()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
 			$query = Admin::model()->findAll();

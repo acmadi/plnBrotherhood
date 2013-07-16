@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 16, 2013 at 11:27 AM
+-- Generation Time: Jul 16, 2013 at 09:05 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -72,8 +72,9 @@ INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `email`, `id_paniti
 (5, 'sianggota', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'si anggota', 'asdasdasd', 3, 'Anggota', 'Aktif'),
 (6, 'sianggotajuga', '89e495e7941cf9e40e6980d14a16bf023ccd4c91', 'Ice Juice', 'ice@juice.com', 4, 'Anggota', 'Aktif'),
 (7, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 1, 'Pejabat', 'Aktif'),
-(8, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 6, 'Pejabat', 'Aktif'),
-(9, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 7, 'Pejabat', 'Aktif');
+(8, 'johannes.ridho', '759412786bc533369b22377bf83fb9056c5b25b2', 'Johannes Ridho', 'johan@gmail.com', 2, 'Pejabat', 'Aktif'),
+(9, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 6, 'Pejabat', 'Aktif'),
+(10, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 7, 'Pejabat', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -248,6 +249,7 @@ INSERT INTO `daftar_hadir` (`id_dokumen`, `jam`, `tempat_hadir`, `acara`) VALUES
 CREATE TABLE IF NOT EXISTS `divisi` (
   `username` varchar(20) NOT NULL,
   `nama_divisi` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -255,11 +257,11 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 -- Dumping data for table `divisi`
 --
 
-INSERT INTO `divisi` (`username`, `nama_divisi`) VALUES
-('divin', 'Divisi Internet'),
-('divman', 'Divisi Manajemen'),
-('divsi', 'Divisi Sistem Informasi'),
-('divtrans', 'Divisi Transportasi');
+INSERT INTO `divisi` (`username`, `nama_divisi`, `password`) VALUES
+('divin', 'Divisi Internet', '8c43d3b2add61b1cff1ff5373e548fe9808c31a6'),
+('divman', 'Divisi Manajemen', '35e5dd2a4a3d599fcdfe62ec64e40b9e70841806'),
+('divsi', 'Divisi Sistem Informasi', '2a553a3d07a93933784f7826119d9dcd05335ba4'),
+('divtrans', 'Divisi Transportasi', 'a085f26cf56aea0d3cc6688b9c5084aecba722df');
 
 -- --------------------------------------------------------
 
@@ -1416,26 +1418,6 @@ INSERT INTO `tor` (`id_dokumen`) VALUES
 (101),
 (142),
 (162);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_divisi`
---
-
-CREATE TABLE IF NOT EXISTS `user_divisi` (
-  `username` varchar(50) NOT NULL,
-  `nama` varchar(256) NOT NULL,
-  `divisi` varchar(20) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_divisi`
---
-
-INSERT INTO `user_divisi` (`username`, `nama`, `divisi`) VALUES
-('johannes.ridho', 'Johannes Ridho', 'divin');
 
 -- --------------------------------------------------------
 

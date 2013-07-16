@@ -35,8 +35,8 @@ class UserIdentity extends CUserIdentity
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
-		} else if (Divisi::model()->exists('username = "' . $this->username . '"')) {
-			$user = Divisi::model()->findByAttributes(array('username'=>$this->username));
+		} else if (UserDivisi::model()->exists('username = "' . $this->username . '"')) {
+			$user = UserDivisi::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
 				Yii::app()->user->setState('role', 'divisi');
 				$this->errorCode = self::ERROR_NONE;	
