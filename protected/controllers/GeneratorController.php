@@ -3258,7 +3258,7 @@
 					if(isset($_POST['BeritaAcaraPenjelasan']))
 					{
 						// $Dokumen0->attributes=$_POST['Dokumen'];
-						
+						$Dokumen1->attributes=$_POST['Dokumen'];
 						$BAP->attributes=$_POST['BeritaAcaraPenjelasan'];
 						$valid=$BAP->validate();					
 						if($valid){
@@ -4502,6 +4502,7 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$SUPP->attributes=$_POST['NotaDinasUndangan'];
+						$SUPP->tanggal_undangan=date('Y-m-d',strtotime($SUPP->tanggal_undangan));
 						$valid=$SUPP->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){
@@ -4733,6 +4734,7 @@
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
+						$Dokumen1->attributes=$_POST['Dokumen'];
 						$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 						$valid=$BAPP->validate();
 						if($valid){
@@ -4809,6 +4811,7 @@
 					
 					if(isset($_POST['BeritaAcaraPembukaanPenawaran']))
 					{
+						$Dokumen1->attributes=$_POST['Dokumen'];
 						$BAPP->attributes=$_POST['BeritaAcaraPembukaanPenawaran'];
 						$valid=$BAPP->validate();
 						if($valid){
@@ -6303,7 +6306,6 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$SPPM->attributes=$_POST['SuratPenunjukanPemenang'];
-						$SPPM->tgl_surat_penawaran=date('Y-m-d',strtotime($SPPM->tgl_surat_penawaran));
 						$valid=$SPPM->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){
@@ -6355,7 +6357,6 @@
 					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Penunjukan Pemenang"');
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					$SPPM=SuratPenunjukanPemenang::model()->findByPk($Dokumen0->id_dokumen);
-					$SPPM->tgl_surat_penawaran=Tanggal::getTanggalStrip($SPPM->tgl_surat_penawaran);
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -6364,7 +6365,6 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$SPPM->attributes=$_POST['SuratPenunjukanPemenang'];
-						$SPPM->tgl_surat_penawaran=date('Y-m-d',strtotime($SPPM->tgl_surat_penawaran));
 						$valid=$SPPM->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){

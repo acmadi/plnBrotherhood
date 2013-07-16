@@ -233,6 +233,19 @@ class XlsxController extends Controller
 						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
 		}
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Prakualifikasi') {
+			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir Prakualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", $DH->jam);
+					$this->assign($objPHPExcel, "#tempat#", $DH->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $DH->acara." ".$cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+			
+			header('Content-Disposition: attachment;filename="Daftar Hadir Prakualifikasi-'.$cpengadaan->nama_pengadaan.'.xlsx"');
+
+		}
 		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Satu'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Dua'||$cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Dua') {
 			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
 			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');
@@ -369,7 +382,7 @@ class XlsxController extends Controller
 			}
 			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('B'.$barisawal,'II');
 			$objPHPExcel->setActiveSheetIndexByName("Daftar Hadir")->setCellValue('C'.$barisawal,'Penyadia Barang/Jasa');
-			$penyedia = PenerimaPengadaan::model()->findAll('(' . $tahap . ' = "1" or ' . $tahap . ' = "0") and id_pengadaan = ' . $idPeng);
+			$penyedia = PenerimaPengadaan::model()->findAll('(' . $tahap . ' = "1") and id_pengadaan = ' . $idPeng);
 			$barisawal = $barisawal+1;
 			$i=1;
 			foreach($penyedia as $item) {
