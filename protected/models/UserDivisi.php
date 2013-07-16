@@ -7,6 +7,7 @@
  * @property string $username
  * @property string $nama
  * @property string $divisi
+ * @property string $password
  */
 class UserDivisi extends CActiveRecord
 {
@@ -36,13 +37,13 @@ class UserDivisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama, divisi', 'required'),
+			array('username, nama, divisi, password', 'required'),
 			array('username', 'length', 'max'=>50),
-			array('nama', 'length', 'max'=>256),
+			array('nama, password', 'length', 'max'=>256),
 			array('divisi', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama, divisi', 'safe', 'on'=>'search'),
+			array('username, nama, divisi, password', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,6 +67,7 @@ class UserDivisi extends CActiveRecord
 			'username' => 'Username',
 			'nama' => 'Nama',
 			'divisi' => 'Divisi',
+			'password' => 'Password',
 		);
 	}
 
@@ -83,6 +85,7 @@ class UserDivisi extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('nama',$this->nama,true);
 		$criteria->compare('divisi',$this->divisi,true);
+		$criteria->compare('password',$this->password,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

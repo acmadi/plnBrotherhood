@@ -85,13 +85,24 @@ class UserIdentity extends CUserIdentity
 		// 		}
 		// 		ldap_close($connection);
 		// 	}
-		// } else if (Divisi::model()->exists('username = "' . $this->username . '"')) {
-		// 	$user = Divisi::model()->findByAttributes(array('username'=>$this->username));
-		// 	if (sha1($this->password) == $user->password) {
-		// 		Yii::app()->user->setState('role', 'divisi');
-		// 		$this->errorCode = self::ERROR_NONE;	
-		// 	} else {
-		// 		$this->errorCode=self::ERROR_PASSWORD_INVALID;
+		// } else if (UserDivisi::model()->exists('username = "' . $this->username . '"')) {
+		// 	$options = Yii::app()->params['ldap'];
+		// 	$connection = ldap_connect($options['host']);
+		// 	ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+		// 	ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+		// 	if ($connection) {
+		// 		try {
+		// 			$bind = @ldap_bind($connection, $options['domain'] . '\\' . $this->username, $this->password);
+		// 			if (!$bind) {
+		// 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
+		// 			} else {
+		// 				Yii::app()->user->setState('role', 'divisi');
+		// 				$this->errorCode = self::ERROR_NONE;
+		// 			}
+		// 		} catch (Exception $e) {
+		// 			$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
+		// 		}
+		// 		ldap_close($connection);
 		// 	}
 		// } else if (Kdivmum::model()->exists('username = "' . $this->username . '"')) {
 		// 	$options = Yii::app()->params['ldap'];
