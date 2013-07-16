@@ -85,6 +85,18 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					<?php echo $form->error($SUPK,'perihal'); ?>
 				</div>
 				
+				<div class="row">
+					<?php 					
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,						
+						'viewName' => 'formperusahaan_undangan_prakualifikasi',
+						'labelAdd' => 'Tambah Penyedia',
+						'labelDel' => 'Hapus Penyedia',						
+						)); 					
+					?>
+				</div>
+				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($SUPK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
