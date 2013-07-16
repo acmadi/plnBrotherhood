@@ -921,10 +921,13 @@ class DocxController extends Controller
 			$Panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			if ($Panitia->jenis_panitia=="Panitia") {
 				$dari = "Ketua ".$Panitia->nama_panitia;
+				$panitiapejabat = Anggota::model()->find('id_panitia ='.$Peng->id_panitia.' and jabatan = "Ketua"')->nama;
+				$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
 			} else {
-				$dari = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Pejabat" and status_user = "Aktif"')->nama;
+				$dari = Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Pejabat" and status_user = "Aktif"')->nama;				
+				$this->doccy->phpdocx->assign('#panitia/pejabat#', $dari);
 			}
-			$panitiapejabat = Anggota::model()->find('id_panitia ='.$Peng->id_panitia.' and jabatan = "Ketua"')->nama;
+
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
@@ -940,8 +943,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#penerima#', $penerima);
 			$this->doccy->phpdocx->assign('#dari#', $dari);
 			$this->doccy->phpdocx->assign('#metode#', $metode);
-			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
-			$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);			
 			
 			$this->renderDocx("Nota Dinas Usulan Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
