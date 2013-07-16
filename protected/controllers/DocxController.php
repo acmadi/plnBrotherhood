@@ -1430,7 +1430,7 @@ class DocxController extends Controller
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
 			if($ndpp->dari=="MSDAF"){
-				$pengirim = "MANAJER SENIOR PENGADAAN ALAT DAN FASILITAS";
+				$pengirim = "MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT";
 				$namapengirim = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
 			} else {
 				$pengirim = "KEPALA DIVISI UMUM DAN MANAJEMEN";
@@ -2009,7 +2009,7 @@ class DocxController extends Controller
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
 			if($ndpp->dari=="MSDAF"){
-				$boss = "MANAJER SENIOR PENGADAAN ALAT DAN FASILITAS";
+				$boss = "MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT";
 				$namaboss = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
 			} else {
 				$boss = "KEPALA DIVISI UMUM DAN MANAJEMEN";

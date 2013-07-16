@@ -6,8 +6,6 @@
  * The followings are the available columns in table 'surat_undangan_permintaan_penawaran_harga':
  * @property string $id_dokumen
  * @property string $nomor
- * @property integer $waktu_kerja
- * @property string $tempat_penyerahan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -40,14 +38,12 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, waktu_kerja, tempat_penyerahan', 'required'),
-			array('waktu_kerja', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor', 'length', 'max'=>50),
-			array('tempat_penyerahan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, waktu_kerja, tempat_penyerahan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,8 +67,6 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'waktu_kerja' => 'Waktu Kerja',
-			'tempat_penyerahan' => 'Tempat Penyerahan',
 		);
 	}
 
@@ -89,8 +83,6 @@ class SuratUndanganPermintaanPenawaranHarga extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('waktu_kerja',$this->waktu_kerja);
-		$criteria->compare('tempat_penyerahan',$this->tempat_penyerahan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
