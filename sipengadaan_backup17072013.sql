@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 17, 2013 at 05:59 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jul 17, 2013 at 05:37 AM
+-- Server version: 5.5.16
+-- PHP Version: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -111,19 +111,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_pembukaan_penawaran` (
   `nomor` varchar(256) NOT NULL,
   `waktu` time NOT NULL,
   `tempat` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `berita_acara_penerimaan_pq`
---
-
-CREATE TABLE IF NOT EXISTS `berita_acara_penerimaan_pq` (
-  `nomor` varchar(256) NOT NULL,
-  `tanggal` date NOT NULL,
-  `id_dokumen` bigint(20) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -941,12 +928,6 @@ ALTER TABLE `berita_acara_negosiasi_klarifikasi`
 --
 ALTER TABLE `berita_acara_pembukaan_penawaran`
   ADD CONSTRAINT `berita_acara_pembukaan_penawaran_ibfk_3` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `berita_acara_penerimaan_pq`
---
-ALTER TABLE `berita_acara_penerimaan_pq`
-  ADD CONSTRAINT `berita_acara_penerimaan_pq_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `berita_acara_pengadaan_gagal`
