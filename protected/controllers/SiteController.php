@@ -529,7 +529,7 @@ class SiteController extends Controller
 			$Pengadaan->tanggal_selesai='-';
 			$Pengadaan->id_panitia=-1;
 			$Pengadaan->metode_pengadaan='-';
-			$Pengadaan->biaya='-';
+			$Pengadaan->biaya=0;
 			$Pengadaan->metode_penawaran='-';
 			$Pengadaan->jenis_kualifikasi='-';
 			if(Yii::app()->user->getState('role') == 'divisi') {

@@ -62,8 +62,7 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 				'name'=>'nama_pengadaan',				
 				'value'=>'$data->nama_pengadaan', 
 				'htmlOptions'=>array('width'=>400, 'style'=>'text-align:left;'),
-			),	
-
+			),
 			array(            // display using an expression
 				'name'=>'ndpermintaan',				
 				'value'=>'$data->notaDinasPermintaan->nomor', 

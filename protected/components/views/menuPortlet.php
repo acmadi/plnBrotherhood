@@ -3,6 +3,13 @@
 
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+	$DokNDP = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
+	$ndp = NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+	$DokHPS = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+	if($DokHPS!=null){
+		$hps = HPS::model()->findByPk($DokHPS->id_dokumen);
+	}
+	
 ?>
 
 <ul>
@@ -300,6 +307,14 @@
 							array(
 								'label'=>'Jenis kualifikasi',
 								'value'=>$cpengadaan->jenis_kualifikasi,
+							),
+							array(
+								'label'=>'Nilai RAB',
+								'value'=>$ndp->nilai_biaya_rab,
+							),
+							array(
+								'label'=>'Nilai HPS',
+								'value'=>($DokHPS!=null ? $hps->nilai_hps : '-'),
 							),
 							array(
 								'label'=>'Pagu anggaran',

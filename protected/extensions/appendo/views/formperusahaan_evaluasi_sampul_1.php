@@ -24,6 +24,7 @@
 			<td>
 				<?php echo CHtml::dropDownList('evaluasi_penawaran_1[]',"string",
 					array(
+						"-"=>"Tidak Mengikuti",
 						"1"=>"Lulus",
 						"0"=>"Tidak Lulus",
 					),array('style'=>'width:100px'));
@@ -51,6 +52,7 @@
 				<td>
 					<?php echo CHtml::dropDownList('evaluasi_penawaran_1[]',$model[$i]->evaluasi_penawaran_1,
 						array(
+							"-"=>"Tidak Mengikuti",
 							"1"=>"Lulus",
 							"0"=>"Tidak Lulus",
 						),array('style'=>'width:100px'));
