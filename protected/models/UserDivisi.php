@@ -91,4 +91,22 @@ class UserDivisi extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function searchUser($divisi)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('username',$this->username,true);
+		$criteria->compare('nama',$this->nama,true);
+		$criteria->compare('divisi',$this->divisi,true);
+		$criteria->compare('password',$this->password,true);
+		$criteria->addcondition('divisi = "' . $divisi . '"');
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }

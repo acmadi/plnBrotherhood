@@ -252,16 +252,24 @@ class AdminController extends Controller
 			$kdiv = new Kdivmum;
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
-				$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
-				if ($old != null) {
-					$old->status_user = 'Aktif';
-					$old->save(false);
+				$person = $this->getRecordByUsername($kdiv->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $kdiv->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
-				else {
-					$kdiv->status_user = 'Aktif';
-					$kdiv->save(false);
+				else{
+					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
+					if ($old != null) {
+						$old->status_user = 'Aktif';
+						$old->save(false);
+					}
+					else {
+						$kdiv->nama = $person['nama'];
+						$kdiv->email = $person['email'];
+						$kdiv->status_user = 'Aktif';
+						$kdiv->save(false);
+					}
+					$this->redirect(array('kdiv'));
 				}
-				$this->redirect(array('kdiv'));
 			}
 			$this->render('tambahkdiv', array(
 				'kdiv'=>$kdiv,
@@ -301,6 +309,24 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetaildivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$divisi = Divisi::model()->findByPk($id);
+			$model = new UserDivisi('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['UserDivisi'])){
+				$model->attributes = $_GET['UserDivisi'];
+			}
+			$this->render('detaildivisi', array(
+				'id'=>$id,
+				'divisi'=>$divisi,
+				'model'=>$model,
+			));
+		}
+	}
+
 	public function actionTambahdivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -333,11 +359,58 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionTambahuserdivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$divisi = Divisi::model()->findByPk($id);
+			$user = new UserDivisi;
+			if (isset($_POST['UserDivisi'])) {
+				$user->attributes = $_POST['UserDivisi'];
+				$person = $this->getRecordByUsername($user->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $user->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$user->nama = $person['nama'];
+					$user->divisi = $id;
+					if ($user->save(false)) {
+						$this->redirect(array('detaildivisi', 'id'=>$id));
+					}
+				}
+			}
+			$this->render('tambahuserdivisi', array(
+				'id'=>$id,
+				'divisi'=>$divisi,
+				'user'=>$user,
+			));
+		}
+	}
+
+	public function actionHapususerdivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$divisi = Divisi::model()->findByPk($id);
+			$user = UserDivisi::model();
+			if (isset($_POST['UserDivisi'])) {
+				foreach ($_POST['UserDivisi']['username'] as $item) {
+					$user->deleteByPk($item);
+				}
+				$this->redirect(array('detaildivisi', 'id'=>$id));
+			}
+			$this->render('hapususerdivisi', array(
+				'id'=>$id,
+				'divisi'=>$divisi,
+				'user'=>$user,
+			));
+		}
+	}
+
 	public function actionAkun()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$query = Admin::model()->findAll();
-			$admin = $query[0];
+			$admin = Admin::model()->findByPk(Yii::app()->user->name);
 			if (isset($_POST['Admin'])) {
 				$admin->attributes = $_POST['Admin'];
 				if ($admin->validate()) {
@@ -347,7 +420,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			$this->render('admin', array(
+			$this->render('akun', array(
 				'admin'=>$admin,
 			));
 		}

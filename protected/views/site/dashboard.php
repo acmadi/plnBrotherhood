@@ -171,7 +171,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                     'name'=>'ndpermintaan',				
                                     'value'=>'$data->notaDinasPermintaan->nomor',
                                     'filter'=>'',
-                                ),		
+                                ),						
 
 				array(            // display using an expression
                                     'name'=>'pic',	
