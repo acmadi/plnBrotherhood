@@ -1,23 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "berita_acara_penjelasan".
+ * This is the model class for table "berita_acara_penerimaan_pq".
  *
- * The followings are the available columns in table 'berita_acara_penjelasan':
- * @property string $id_dokumen
+ * The followings are the available columns in table 'berita_acara_penerimaan_pq':
  * @property string $nomor
- * @property string $waktu
- * @property string $tempat
+ * @property string $tanggal
+ * @property string $id_dokumen
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
  */
-class BeritaAcaraPenjelasan extends CActiveRecord
+class BeritaAcaraPenerimaanPq extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return BeritaAcaraPenjelasan the static model class
+	 * @return BeritaAcaraPenerimaanPq the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +28,7 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'berita_acara_penjelasan';
+		return 'berita_acara_penerimaan_pq';
 	}
 
 	/**
@@ -40,13 +39,12 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, waktu, tempat', 'required'),
-			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, tempat', 'length', 'max'=>256),
-			array('waktu', 'check'),
+			array('nomor, tanggal, id_dokumen', 'required'),
+			array('nomor', 'length', 'max'=>256),
+			array('id_dokumen', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, waktu, tempat', 'safe', 'on'=>'search'),
+			array('nomor, tanggal, id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,10 +66,9 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'waktu' => 'Waktu',
-			'tempat' => 'Tempat',
+			'tanggal' => 'Tanggal',
+			'id_dokumen' => 'Id Dokumen',
 		);
 	}
 
@@ -86,19 +83,12 @@ class BeritaAcaraPenjelasan extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('waktu',$this->waktu,true);
-		$criteria->compare('tempat',$this->tempat,true);
+		$criteria->compare('tanggal',$this->tanggal,true);
+		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	public function Check($attribute,$params){		
-		if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $this->attributes['waktu'])){
-			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
-		}
 	}
 }

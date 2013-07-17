@@ -71,10 +71,8 @@ class Pengadaan extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'required'),
-			array('id_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>32),
-			array('nama_pengadaan', 'length', 'max'=>100),
-			array('biaya', 'length', 'max'=>20),
-			array('id_panitia', 'length', 'max'=>11),
+			array('biaya, id_panitia,', 'numerical', 'integerOnly'=>true),
+			array('id_pengadaan,nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('progressgan,sisahari,statusgan,ndpermintaan,pic,id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'safe', 'on'=>'search'),
@@ -363,12 +361,11 @@ class Pengadaan extends CActiveRecord
 			'*',
 		);
 		
-		$usern = Yii::app()->user->name;
+		$usern = UserDivisi::model()->findByPk(Yii::app()->user->name)->divisi;
 		
 		$criteria=new CDbCriteria;
 
-		$criteria->together=true;
-//                $criteria->with = array("idPanitia","notaDinasPerintahPengadaan");                
+		$criteria->together=true;               
 		$criteria->with = array("idPanitia");    
                 
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
@@ -543,7 +540,7 @@ class Pengadaan extends CActiveRecord
 		);
 		
 		$criteria=new CDbCriteria;				
-		$usern = Yii::app()->user->name;
+		$usern = UserDivisi::model()->findByPk(Yii::app()->user->name)->divisi;
 		
 		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
 		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
@@ -844,19 +841,19 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '24' || $this->status == '25'){
 			return 'Evaluasi';
 		}
-		else if($this->status == '20'){
+		else if($this->status == '26' || $this->status == '27'){
 			return 'Penawaran 2';
 		}
-		else if($this->status == '21'){
+		else if($this->status == '28' || $this->status == '29'){
 			return 'Evaluasi 2';
 		}
-		else if($this->status == '22'){
+		else if($this->status == '30' || $this->status == '31'){
 			return 'Klarifikasi dan Negosiasi';
 		}
-		else if($this->status == '27' || $this->status == '23' || $this->status == '24' || $this->status == '25' || $this->status == '26'){
+		else if($this->status == '32' || $this->status == '33' || $this->status == '34' || $this->status == '35' || $this->status == '36'){
 			return 'Penentuan Pemenang';
 		}
-		else if($this->status == '28'){
+		else if($this->status == '37'){
 			return 'Kontrak';
 		}
 		else if($this->status == '99'){

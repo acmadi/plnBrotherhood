@@ -45,7 +45,7 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'required'),
 			array('lama_penyerahan, jaminan', 'numerical', 'integerOnly'=>true),
-			array('id_dokumen, nomor, nomor_ski, no_ski', 'length', 'max'=>32),
+			array('id_dokumen, nomor, nomor_ski, no_ski', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),

@@ -43,8 +43,7 @@ class NotaDinasPermintaan extends CActiveRecord
 			array('id_dokumen, nomor, perihal, nilai_biaya_rab', 'required'),
 			array('nilai_biaya_rab', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('perihal', 'length', 'max'=>256),
+			array('nomor, perihal', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, perihal, nilai_biaya_rab', 'safe', 'on'=>'search'),

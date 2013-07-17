@@ -43,8 +43,7 @@ class NotaDinasPemberitahuanPemenang extends CActiveRecord
 			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'required'),
 			array('batas_sanggahan', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('keterangan', 'length', 'max'=>256),
+			array('nomor, keterangan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, keterangan, batas_sanggahan', 'safe', 'on'=>'search'),

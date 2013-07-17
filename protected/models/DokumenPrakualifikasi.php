@@ -55,8 +55,7 @@ class DokumenPrakualifikasi extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
-			array('tujuan_pengadaan, tempat_pemasukan, tempat_evaluasi, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'length', 'max'=>256),
+			array('nomor, tujuan_pengadaan, tempat_pemasukan, tempat_evaluasi, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'safe', 'on'=>'search'),

@@ -41,7 +41,7 @@ class DokumenKontrak extends CActiveRecord
 		return array(
 			array('id_dokumen, Nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('Nomor', 'length', 'max'=>50),
+			array('Nomor', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, Nomor', 'safe', 'on'=>'search'),

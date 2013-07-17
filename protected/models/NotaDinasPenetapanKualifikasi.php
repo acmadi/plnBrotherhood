@@ -40,7 +40,7 @@ class NotaDinasPenetapanKualifikasi extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
+			array('nomor', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
