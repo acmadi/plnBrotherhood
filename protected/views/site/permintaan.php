@@ -21,21 +21,46 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 			array(            // display using an expression
 				'name'=>'nama_pengadaan',				
 				'value'=>'$data->nama_pengadaan', 
-				'htmlOptions'=>array('width'=>400, 'style'=>'text-align:left;'),
+				// 'htmlOptions'=>array('width'=>400, 'style'=>'text-align:left;'),
 			),	
 
 			array(            // display using an expression
 				'name'=>'ndpermintaan',				
 				'value'=>'$data->notaDinasPermintaan->nomor', 
 				'filter'=>'',
-				'htmlOptions'=>array('width'=>200, 'style'=>'text-align:left;'),
+				// 'htmlOptions'=>array('width'=>200, 'style'=>'text-align:left;'),
 			),	
 				
 			array(            // display using an expression
 				'name'=>'divisi_peminta',
 				'value'=>'$data->divisiPeminta->nama_divisi',
-				'htmlOptions'=>array('width'=>200, 'style'=>'text-align:center;'),
+				// 'htmlOptions'=>array('width'=>200, 'style'=>'text-align:center;'),
 			),
+			
+			array(            // display using an expression
+				'name'=>'Nilai RAB',				
+				'value'=>'RupiahMaker::convertInt($data->notaDinasPermintaan->nilai_biaya_rab)',
+				'filter'=>'',
+			),		
+			
+			array(            // display using an expression
+				'name'=>'Status Unggah Nota Dinas Permintaan',				
+				'value'=>'$data->dokumens[1]->status_upload',
+				'filter'=>'',
+			),		
+			
+			array(            // display using an expression
+				'name'=>'Status Unggah RAB',				
+				'value'=>'$data->dokumens[2]->status_upload',
+				'filter'=>'',
+			),		
+			
+			array(            // display using an expression
+				'name'=>'Status Unggah TOR',				
+				'value'=>'$data->dokumens[3]->status_upload',
+				'filter'=>'',
+			),		
+			
 		),
 		'pager'=>array(
 				'class'=>'CLinkPager',
@@ -61,15 +86,39 @@ $this->pageTitle=Yii::app()->name . ' | Permintaan';
 			array(            // display using an expression
 				'name'=>'nama_pengadaan',				
 				'value'=>'$data->nama_pengadaan', 
-				'htmlOptions'=>array('width'=>400, 'style'=>'text-align:left;'),
-			),	
-
+				
+			),
 			array(            // display using an expression
 				'name'=>'ndpermintaan',				
 				'value'=>'$data->notaDinasPermintaan->nomor', 
 				'filter'=>'',
-				'htmlOptions'=>array('width'=>200, 'style'=>'text-align:left;'),
+				// 'htmlOptions'=>array('width'=>200, 'style'=>'text-align:left;'),
 			),
+							
+			array(            // display using an expression
+				'name'=>'Nilai RAB',				
+				'value'=>'RupiahMaker::convertInt($data->notaDinasPermintaan->nilai_biaya_rab)',
+				'filter'=>'',
+			),		
+			
+			array(            // display using an expression
+				'name'=>'Status Unggah Nota Dinas Permintaan',				
+				'value'=>'$data->dokumens[1]->status_upload',
+				'filter'=>'',
+			),		
+			
+			array(            // display using an expression
+				'name'=>'Status Unggah RAB',				
+				'value'=>'$data->dokumens[2]->status_upload',
+				'filter'=>'',
+			),		
+			
+			array(            // display using an expression
+				'name'=>'Status Unggah TOR',				
+				'value'=>'$data->dokumens[3]->status_upload',
+				'filter'=>'',
+			),		
+			
 		),
 		'pager'=>array(
 				'class'=>'CLinkPager',

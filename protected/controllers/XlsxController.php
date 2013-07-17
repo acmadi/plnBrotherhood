@@ -83,7 +83,7 @@ class XlsxController extends Controller
 			$kalimat_panitia = "";
 		} else { 
 			$nama_panitia = $panitia->nama_panitia;
-			$kalimat_panitia = "yang dibentuk sesuai Surat Keputusan Direksi Nomor : ".$skpanitia." tanggal ".$panitia->tanggal_sk;
+			$kalimat_panitia = "yang dibentuk sesuai Surat Keputusan Direksi Nomor : ".$skpanitia." tanggal ".Tanggal::getTanggalLengkap($panitia->tanggal_sk);
 		}
 		$jenis = $cpengadaan->jenis_pengadaan;
 		$DokNDPP=Dokumen::model()->find('id_pengadaan = '.$cpengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
@@ -95,6 +95,9 @@ class XlsxController extends Controller
 			$pengesah = "KEPALA DIVISI UMUM DAN MANAJEMEN";
 			$nama_pengesah = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
 		}
+		
+		$dokpq=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
+		$DPK=DokumenPrakualifikasi::model()->findByPk($dokpq->id_dokumen);
 		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
@@ -267,19 +270,19 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
 					if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran') {
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
-						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran - '.$cpengadaan->nama_pengadaan.'.xlsx"');
 					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Satu') {
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
-						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Sampul Satu - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Sampul Satu - '.$cpengadaan->nama_pengadaan.'.xlsx"');
 					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Satu') {
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
-						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Satu - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Satu - '.$cpengadaan->nama_pengadaan.'.xlsx"');
 					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Sampul Dua') {
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
-						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Sampul Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Sampul Dua - '.$cpengadaan->nama_pengadaan.'.xlsx"');
 					} else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Penawaran Tahap Dua') {
 						$this->getDaftarHadirPanitia($cpengadaan->id_panitia, $objPHPExcel);
-						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Dua - '.$cpengadaan->nama_pengadaan.'.xlsx"');
 					}
 		}
 		else if ($cdokumen->nama_dokumen == 'Pengumuman kualifikasi') {
@@ -292,6 +295,38 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#acara#", $PHPQ->acara." ".$cpengadaan->nama_pengadaan);
 					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
 					
+		}
+		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Prakualifikasi') {
+			$BAEPK=BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'BA Evaluasi Prakualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tgllengkap#", Tanggal::getTanggalStrip($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggal($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#bulan#", Tanggal::getBulanA($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#tahun#", Tanggal::getTahun($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nobapq#", $BAEPK->nomor);
+					$this->assign($objPHPExcel, "#namapanitia#", $panitia->jenis_panitia);
+					$this->assign($objPHPExcel, "#KDIVMUM/MSDAF#", $NDPP->dari);
+					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
+					$this->assign($objPHPExcel, "#namapengadaan2#", $cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#metodepengadaan#", $cpengadaan->metode_pengadaan);
+					$this->assign($objPHPExcel, "#kalimatpanitia#", $kalimat_panitia);
+					$this->assign($objPHPExcel, "#nopq#", $DPK->nomor);
+					$this->assign($objPHPExcel, "#tglpq#", Tanggal::getTanggalLengkap($dokpq->tanggal));
+			header('Content-Disposition: attachment;filename="Berita Acara Evaluasi Dokumen Prakualifikasi - '.$cpengadaan->nama_pengadaan.'.xlsx"');
+		}
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Prakualifikasi') {
+			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir Prakualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", Tanggal::getJamMenit($DH->jam));
+					$this->assign($objPHPExcel, "#tempat#", $DH->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $DH->acara);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+			
+			header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Prakualifikasi-'.$cpengadaan->nama_pengadaan.'.xlsx"');
+
 		}
 		else{
 			$objPHPExcel = $objReader->load($templatePath . 'test.xlsx');

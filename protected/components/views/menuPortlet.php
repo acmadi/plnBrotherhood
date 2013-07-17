@@ -3,6 +3,17 @@
 
 	$id = Yii::app()->getRequest()->getQuery('id');
 	$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+	
+	$DokNDP = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Permintaan"');	
+	if($DokNDP!=null){
+		$ndp = NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+	}
+	
+	$DokHPS = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+	if($DokHPS!=null){
+		$hps = HPS::model()->findByPk($DokHPS->id_dokumen);
+	}
+	
 ?>
 
 <ul>
@@ -27,10 +38,8 @@
 		
 			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3') { ?>
 				<li class='belum' ><?php echo 'Dokumen Kualifikasi'?></li>
-			<?php } else if($cpengadaan->status == '3') { ?>
-				<li id="2" class='sudah' ><?php echo CHtml::link('Dokumen Kualifikasi',array("generator/dokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '4') { ?>
-				<li id="2" class='sudah' > <?php echo CHtml::link('Dokumen Kualifikasi',array("generator/editdokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li id="2" class='sudah' ><?php echo CHtml::link('Dokumen Kualifikasi',array("generator/dokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else { ?>
 				<li id="2" class='sudah' > <?php echo CHtml::link('Dokumen Kualifikasi',array("generator/editdokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } ?>
@@ -300,6 +309,14 @@
 							array(
 								'label'=>'Jenis kualifikasi',
 								'value'=>$cpengadaan->jenis_kualifikasi,
+							),
+							array(
+								'label'=>'Nilai RAB',
+								'value'=>$DokNDP!=null ? RupiahMaker::convertInt($ndp->nilai_biaya_rab) : '-', 
+							),
+							array(
+								'label'=>'Nilai HPS',
+								'value'=>$DokHPS!=null ? RupiahMaker::convertInt($hps->nilai_hps) : '-',
 							),
 							array(
 								'label'=>'Pagu anggaran',

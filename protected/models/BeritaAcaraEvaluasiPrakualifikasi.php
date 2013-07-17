@@ -1,20 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "user_divisi".
+ * This is the model class for table "berita_acara_evaluasi_prakualifikasi".
  *
- * The followings are the available columns in table 'user_divisi':
- * @property string $username
- * @property string $nama
- * @property string $divisi
- * @property string $password
+ * The followings are the available columns in table 'berita_acara_evaluasi_prakualifikasi':
+ * @property string $id_dokumen
+ * @property string $nomor
+ *
+ * The followings are the available model relations:
+ * @property Dokumen $idDokumen
  */
-class UserDivisi extends CActiveRecord
+class BeritaAcaraEvaluasiPrakualifikasi extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return UserDivisi the static model class
+	 * @return BeritaAcaraEvaluasiPrakualifikasi the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +27,7 @@ class UserDivisi extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user_divisi';
+		return 'berita_acara_evaluasi_prakualifikasi';
 	}
 
 	/**
@@ -37,13 +38,12 @@ class UserDivisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama, divisi, password', 'required'),
-			array('username', 'length', 'max'=>50),
-			array('nama, password', 'length', 'max'=>256),
-			array('divisi', 'length', 'max'=>20),
+			array('id_dokumen, nomor', 'required'),
+			array('id_dokumen', 'length', 'max'=>32),
+			array('nomor', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama, divisi, password', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,6 +55,7 @@ class UserDivisi extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
 		);
 	}
 
@@ -64,10 +65,8 @@ class UserDivisi extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username' => 'Username',
-			'nama' => 'Nama',
-			'divisi' => 'Divisi',
-			'password' => 'Password',
+			'id_dokumen' => 'Id Dokumen',
+			'nomor' => 'Nomor',
 		);
 	}
 
@@ -82,28 +81,8 @@ class UserDivisi extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('divisi',$this->divisi,true);
-		$criteria->compare('password',$this->password,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	public function searchUser($divisi)
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('divisi',$this->divisi,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->addcondition('divisi = "' . $divisi . '"');
+		$criteria->compare('id_dokumen',$this->id_dokumen,true);
+		$criteria->compare('nomor',$this->nomor,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -10,6 +10,8 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 		'id'=>'pengadaan-form',
 		'enableAjaxValidation'=>false,
 		)); ?>
+		
+		<?php echo $form->errorSummary($Pengadaan); ?>
 
 		
 		<h4><b> Pengadaan </b></h4>
