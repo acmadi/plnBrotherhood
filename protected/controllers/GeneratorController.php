@@ -1243,25 +1243,25 @@
 								$PP[$i]->biaya = 0;									
 								$PP[$i]->nomor_surat_penawaran = '-';									
 								$PP[$i]->tanggal_penawaran = '-';									
-								$PP[$i]->undangan_prakualifikasi = '1';
+								// $PP[$i]->undangan_prakualifikasi = '1';
 								$PP[$i]->pendaftaran_pelelangan_pq = '1';		
-								$PP[$i]->pengambilan_lelang_pq = '-';
-								$PP[$i]->penyampaian_lelang = '-';
-								$PP[$i]->evaluasi_pq = '-';
-								$PP[$i]->penetapan_pq = '-';
-								$PP[$i]->undangan_supph = '-';
-								$PP[$i]->pendaftaran_pc = '-';
-								$PP[$i]->pengambilan_dokumen = '-';									
-								$PP[$i]->ba_aanwijzing = '-';
-								$PP[$i]->hadir_pembukaan_penawaran_1 = '-';
-								$PP[$i]->pembukaan_penawaran_1 = '-';
-								$PP[$i]->evaluasi_penawaran_1 = '-';
-								$PP[$i]->hadir_pembukaan_penawaran_2 = '-';
-								$PP[$i]->pembukaan_penawaran_2 = '-';			
-								$PP[$i]->evaluasi_penawaran_2 = '-';
-								$PP[$i]->negosiasi_klarifikasi = '-';
-								$PP[$i]->usulan_pemenang = '-';
-								$PP[$i]->penetapan_pemenang	 = '-';								
+								// $PP[$i]->pengambilan_lelang_pq = '-';
+								// $PP[$i]->penyampaian_lelang = '-';
+								// $PP[$i]->evaluasi_pq = '-';
+								// $PP[$i]->penetapan_pq = '-';
+								// $PP[$i]->undangan_supph = '-';
+								// $PP[$i]->pendaftaran_pc = '-';
+								// $PP[$i]->pengambilan_dokumen = '-';									
+								// $PP[$i]->ba_aanwijzing = '-';
+								// $PP[$i]->hadir_pembukaan_penawaran_1 = '-';
+								// $PP[$i]->pembukaan_penawaran_1 = '-';
+								// $PP[$i]->evaluasi_penawaran_1 = '-';
+								// $PP[$i]->hadir_pembukaan_penawaran_2 = '-';
+								// $PP[$i]->pembukaan_penawaran_2 = '-';			
+								// $PP[$i]->evaluasi_penawaran_2 = '-';
+								// $PP[$i]->negosiasi_klarifikasi = '-';
+								// $PP[$i]->usulan_pemenang = '-';
+								// $PP[$i]->penetapan_pemenang	 = '-';								
 								
 								$PP[$i]->save();
 							}
@@ -1323,24 +1323,24 @@
 								$PPbaru->biaya = 0;							
 								$PPbaru->nomor_surat_penawaran = '-';
 								$PPbaru->tanggal_penawaran = '-';														
-								$PPbaru->undangan_prakualifikasi = '1';
+								// $PPbaru->undangan_prakualifikasi = '1';
 								$PPbaru->pendaftaran_pelelangan_pq = '1';		
-								$PPbaru->pengambilan_lelang_pq = '-';
-								$PPbaru->penyampaian_lelang = '-';
-								$PPbaru->evaluasi_pq = '-';
-								$PPbaru->penetapan_pq = '-';
-								$PPbaru->undangan_supph = '-';
-								$PPbaru->pendaftaran_pc = '-';
-								$PPbaru->pengambilan_dokumen = '-';
-								$PPbaru->pengambilan_dokumen = '-';
-								$PPbaru->ba_aanwijzing = '-';
-								$PPbaru->pembukaan_penawaran_1 = '-';
-								$PPbaru->evaluasi_penawaran_1 = '-';
-								$PPbaru->pembukaan_penawaran_2 = '-';
-								$PPbaru->evaluasi_penawaran_2 = '-';
-								$PPbaru->negosiasi_klarifikasi = '-';
-								$PPbaru->usulan_pemenang = '-';
-								$PPbaru->penetapan_pemenang = '-';
+								// $PPbaru->pengambilan_lelang_pq = '-';
+								// $PPbaru->penyampaian_lelang = '-';
+								// $PPbaru->evaluasi_pq = '-';
+								// $PPbaru->penetapan_pq = '-';
+								// $PPbaru->undangan_supph = '-';
+								// $PPbaru->pendaftaran_pc = '-';
+								// $PPbaru->pengambilan_dokumen = '-';
+								// $PPbaru->pengambilan_dokumen = '-';
+								// $PPbaru->ba_aanwijzing = '-';
+								// $PPbaru->pembukaan_penawaran_1 = '-';
+								// $PPbaru->evaluasi_penawaran_1 = '-';
+								// $PPbaru->pembukaan_penawaran_2 = '-';
+								// $PPbaru->evaluasi_penawaran_2 = '-';
+								// $PPbaru->negosiasi_klarifikasi = '-';
+								// $PPbaru->usulan_pemenang = '-';
+								// $PPbaru->penetapan_pemenang = '-';
 								
 								$PPbaru->save();
 							}
@@ -2433,25 +2433,25 @@
 								$PP[$i]->biaya = 0;									
 								$PP[$i]->nomor_surat_penawaran = '-';									
 								$PP[$i]->tanggal_penawaran = '-';									
-								$PP[$i]->undangan_prakualifikasi = '1';
-								$PP[$i]->pendaftaran_pelelangan_pq = '1';		
-								$PP[$i]->pengambilan_lelang_pq = '1';	
-								$PP[$i]->penyampaian_lelang = '1';	
-								$PP[$i]->evaluasi_pq = '1';	
-								$PP[$i]->penetapan_pq = '1';	
-								$PP[$i]->undangan_supph = '1';	
+								// $PP[$i]->undangan_prakualifikasi = '1';
+								// $PP[$i]->pendaftaran_pelelangan_pq = '1';		
+								// $PP[$i]->pengambilan_lelang_pq = '1';	
+								// $PP[$i]->penyampaian_lelang = '1';	
+								// $PP[$i]->evaluasi_pq = '1';	
+								// $PP[$i]->penetapan_pq = '1';	
+								// $PP[$i]->undangan_supph = '1';	
 								$PP[$i]->pendaftaran_pc = '1';	
-								$PP[$i]->pengambilan_dokumen = '-';									
-								$PP[$i]->ba_aanwijzing = '-';
-								$PP[$i]->hadir_pembukaan_penawaran_1 = '-';
-								$PP[$i]->pembukaan_penawaran_1 = '-';
-								$PP[$i]->evaluasi_penawaran_1 = '-';
-								$PP[$i]->hadir_pembukaan_penawaran_2 = '-';
-								$PP[$i]->pembukaan_penawaran_2 = '-';			
-								$PP[$i]->evaluasi_penawaran_2 = '-';
-								$PP[$i]->negosiasi_klarifikasi = '-';
-								$PP[$i]->usulan_pemenang = '-';
-								$PP[$i]->penetapan_pemenang	 = '-';								
+								// $PP[$i]->pengambilan_dokumen = '-';									
+								// $PP[$i]->ba_aanwijzing = '-';
+								// $PP[$i]->hadir_pembukaan_penawaran_1 = '-';
+								// $PP[$i]->pembukaan_penawaran_1 = '-';
+								// $PP[$i]->evaluasi_penawaran_1 = '-';
+								// $PP[$i]->hadir_pembukaan_penawaran_2 = '-';
+								// $PP[$i]->pembukaan_penawaran_2 = '-';			
+								// $PP[$i]->evaluasi_penawaran_2 = '-';
+								// $PP[$i]->negosiasi_klarifikasi = '-';
+								// $PP[$i]->usulan_pemenang = '-';
+								// $PP[$i]->penetapan_pemenang	 = '-';								
 								
 								$PP[$i]->save();
 							}
@@ -2513,26 +2513,26 @@
 								$PPbaru->biaya = 0;							
 								$PPbaru->nomor_surat_penawaran = '-';
 								$PPbaru->tanggal_penawaran = '-';														
-								$PPbaru->undangan_prakualifikasi = '1';
-								$PPbaru->pendaftaran_pelelangan_pq = '1';		
-								$PPbaru->pengambilan_lelang_pq = '1';	
-								$PPbaru->penyampaian_lelang = '1';	
-								$PPbaru->evaluasi_pq = '1';	
-								$PPbaru->penetapan_pq = '1';	
-								$PPbaru->undangan_supph = '1';	
+								// $PPbaru->undangan_prakualifikasi = '1';
+								// $PPbaru->pendaftaran_pelelangan_pq = '1';		
+								// $PPbaru->pengambilan_lelang_pq = '1';	
+								// $PPbaru->penyampaian_lelang = '1';	
+								// $PPbaru->evaluasi_pq = '1';	
+								// $PPbaru->penetapan_pq = '1';	
+								// $PPbaru->undangan_supph = '1';	
 								$PPbaru->pendaftaran_pc = '1';
-								$PPbaru->pengambilan_dokumen = '-';
-								$PPbaru->pengambilan_dokumen = '-';
-								$PPbaru->ba_aanwijzing = '-';
-								$PPbaru->hadir_pembukaan_penawaran_2 = '-';
-								$PPbaru->pembukaan_penawaran_1 = '-';
-								$PPbaru->evaluasi_penawaran_1 = '-';
-								$PPbaru->hadir_pembukaan_penawaran_2 = '-';
-								$PPbaru->pembukaan_penawaran_2 = '-';
-								$PPbaru->evaluasi_penawaran_2 = '-';
-								$PPbaru->negosiasi_klarifikasi = '-';
-								$PPbaru->usulan_pemenang = '-';
-								$PPbaru->penetapan_pemenang = '-';
+								// $PPbaru->pengambilan_dokumen = '-';
+								// $PPbaru->pengambilan_dokumen = '-';
+								// $PPbaru->ba_aanwijzing = '-';
+								// $PPbaru->hadir_pembukaan_penawaran_2 = '-';
+								// $PPbaru->pembukaan_penawaran_1 = '-';
+								// $PPbaru->evaluasi_penawaran_1 = '-';
+								// $PPbaru->hadir_pembukaan_penawaran_2 = '-';
+								// $PPbaru->pembukaan_penawaran_2 = '-';
+								// $PPbaru->evaluasi_penawaran_2 = '-';
+								// $PPbaru->negosiasi_klarifikasi = '-';
+								// $PPbaru->usulan_pemenang = '-';
+								// $PPbaru->penetapan_pemenang = '-';
 								
 								$PPbaru->save();
 							}
@@ -2614,23 +2614,23 @@
 										$PP[$i]->biaya = 0;									
 										$PP[$i]->nomor_surat_penawaran = '-';									
 										$PP[$i]->tanggal_penawaran = '-';									
-										$PP[$i]->undangan_prakualifikasi = '1';
-										$PP[$i]->pendaftaran_pelelangan_pq = '1';
-										$PP[$i]->pengambilan_lelang_pq = '1';
-										$PP[$i]->penyampaian_lelang = '1';
-										$PP[$i]->evaluasi_pq = '1';
-										$PP[$i]->penetapan_pq = '1';
+										// $PP[$i]->undangan_prakualifikasi = '1';
+										// $PP[$i]->pendaftaran_pelelangan_pq = '1';
+										// $PP[$i]->pengambilan_lelang_pq = '1';
+										// $PP[$i]->penyampaian_lelang = '1';
+										// $PP[$i]->evaluasi_pq = '1';
+										// $PP[$i]->penetapan_pq = '1';
 										$PP[$i]->undangan_supph ='1';		
-										$PP[$i]->pendaftaran_pc = '-';
-										$PP[$i]->pengambilan_dokumen = '-';									
-										$PP[$i]->ba_aanwijzing = '-';
-										$PP[$i]->pembukaan_penawaran_1 = '-';
-										$PP[$i]->evaluasi_penawaran_1 = '-';
-										$PP[$i]->pembukaan_penawaran_2 = '-';			
-										$PP[$i]->evaluasi_penawaran_2 = '-';
-										$PP[$i]->negosiasi_klarifikasi = '-';
-										$PP[$i]->usulan_pemenang = '-';
-										$PP[$i]->penetapan_pemenang	 = '-';								
+										// $PP[$i]->pendaftaran_pc = '-';
+										// $PP[$i]->pengambilan_dokumen = '-';									
+										// $PP[$i]->ba_aanwijzing = '-';
+										// $PP[$i]->pembukaan_penawaran_1 = '-';
+										// $PP[$i]->evaluasi_penawaran_1 = '-';
+										// $PP[$i]->pembukaan_penawaran_2 = '-';			
+										// $PP[$i]->evaluasi_penawaran_2 = '-';
+										// $PP[$i]->negosiasi_klarifikasi = '-';
+										// $PP[$i]->usulan_pemenang = '-';
+										// $PP[$i]->penetapan_pemenang	 = '-';								
 										
 										$PP[$i]->save();
 									}
@@ -2677,16 +2677,7 @@
 					
 					$SUPPP= SuratUndanganPermintaanPenawaranHarga::model()->findByPk($Dokumen0->id_dokumen);
 					
-					
-					// $PP = PenerimaPengadaan::model()->find('id_pengadaan = 2');
-					// $PP[0]->perusahaan = 'aaaapppppp';
-					// $PP[0]->save();
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-
-					$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					
+					$PP = PenerimaPengadaan::model()->findAll('undangan_supph = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);					
 					
 					if(isset($_POST['SuratUndanganPermintaanPenawaranHarga']))
 					{
@@ -2721,24 +2712,24 @@
 										$PPbaru->biaya = 0;							
 										$PPbaru->nomor_surat_penawaran = '-';
 										$PPbaru->tanggal_penawaran = '-';														
-										$PPbaru->undangan_prakualifikasi = '1';
-										$PPbaru->pendaftaran_pelelangan_pq = '1';
-										$PPbaru->pengambilan_lelang_pq = '1';		
-										$PPbaru->penyampaian_lelang = '1';
-										$PPbaru->evaluasi_pq = '1';
-										$PPbaru->penetapan_pq = '1';
+										// $PPbaru->undangan_prakualifikasi = '1';
+										// $PPbaru->pendaftaran_pelelangan_pq = '1';
+										// $PPbaru->pengambilan_lelang_pq = '1';		
+										// $PPbaru->penyampaian_lelang = '1';
+										// $PPbaru->evaluasi_pq = '1';
+										// $PPbaru->penetapan_pq = '1';
 										$PPbaru->undangan_supph = '1';
-										$PPbaru->pendaftaran_pc = '-';
-										$PPbaru->pengambilan_dokumen = '-';
-										$PPbaru->pengambilan_dokumen = '-';
-										$PPbaru->ba_aanwijzing = '-';
-										$PPbaru->pembukaan_penawaran_1 = '-';
-										$PPbaru->evaluasi_penawaran_1 = '-';
-										$PPbaru->pembukaan_penawaran_2 = '-';
-										$PPbaru->evaluasi_penawaran_2 = '-';
-										$PPbaru->negosiasi_klarifikasi = '-';
-										$PPbaru->usulan_pemenang = '-';
-										$PPbaru->penetapan_pemenang = '-';
+										// $PPbaru->pendaftaran_pc = '-';
+										// $PPbaru->pengambilan_dokumen = '-';
+										// $PPbaru->pengambilan_dokumen = '-';
+										// $PPbaru->ba_aanwijzing = '-';
+										// $PPbaru->pembukaan_penawaran_1 = '-';
+										// $PPbaru->evaluasi_penawaran_1 = '-';
+										// $PPbaru->pembukaan_penawaran_2 = '-';
+										// $PPbaru->evaluasi_penawaran_2 = '-';
+										// $PPbaru->negosiasi_klarifikasi = '-';
+										// $PPbaru->usulan_pemenang = '-';
+										// $PPbaru->penetapan_pemenang = '-';
 										
 										$PPbaru->save();
 									}
