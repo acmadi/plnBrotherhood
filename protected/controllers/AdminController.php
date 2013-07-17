@@ -263,6 +263,8 @@ class AdminController extends Controller
 						$old->save(false);
 					}
 					else {
+						$kdiv->nama = $person['nama'];
+						$kdiv->email = $person['email'];
 						$kdiv->status_user = 'Aktif';
 						$kdiv->save(false);
 					}
