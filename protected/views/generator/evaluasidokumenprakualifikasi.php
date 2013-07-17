@@ -22,8 +22,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='11'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
-							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='13'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='11'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
+							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
+							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='11'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='9'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
