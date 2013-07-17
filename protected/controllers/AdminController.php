@@ -254,7 +254,7 @@ class AdminController extends Controller
 				$kdiv->attributes = $_POST['Kdivmum'];
 				$person = $this->getRecordByUsername($kdiv->username);
 				if (empty($person)) {
-					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $kdiv->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
 				else{
 					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
