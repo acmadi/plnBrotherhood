@@ -16,6 +16,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.extensions.highcharts.*',
+		'application.extensions.yii-mail.*',
 		'application.vendors.phpexcel.*',
 	),
 
@@ -78,6 +79,14 @@ return array(
 					'class'=>'CWebLogRoute',
 				),
 				*/
+			),
+		),
+		'mail' => array(
+			'class' => 'application.extensions.yii-mail.YiiMail',
+			'transportType' => 'smtp',
+			'transportOptions' => array(
+				'host' => 'hub.pusat.corp.pln.co.id',
+				'port' => '25',
 			),
 		),
 	),
