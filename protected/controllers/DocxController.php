@@ -1592,6 +1592,9 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Dokumen Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
+		else if($Dok->nama_dokumen="Surat Pengumuman Hasil Kualifikasi"){
+			
+		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Prakualifikasi"){
 			
 			$SUPK=SuratUndanganPrakualifikasi::model()->findByPk($id);
