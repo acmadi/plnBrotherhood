@@ -53,7 +53,7 @@
 						array('label'=>'Panitia/Pejabat Pengadaan', 'url'=>array('/admin/panitia'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Pejabat Berwenang', 'url'=>array('/admin/kdiv'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Divisi', 'url'=>array('/admin/divisi'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						array('label'=>'Manajemen Administrator', 'url'=>array('/admin/admin'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
+						array('label'=>'Manajemen Akun', 'url'=>array('/admin/akun'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
 						array('label'=>(Yii::app()->user->getState('role') == 'admin') ? (Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (UserDivisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama))), 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),

@@ -301,6 +301,22 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetaildivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$divisi = new Divisi;
+			if (isset($_POST['Divisi'])) {
+				$divisi->attributes = $_POST['Divisi'];
+				if ($divisi->save(false)) {
+					$this->redirect(array('divisi'));
+				}
+			}
+			$this->render('detaildivisi', array(
+				'divisi'=>$divisi,
+			));
+		}
+	}
+
 	public function actionTambahdivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -333,25 +349,10 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionAdmin()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$model = new Admin('search');
-			$model->unsetAttributes();  // clear any default values
-			if(isset($_GET['Admin'])){
-				$model->attributes = $_GET['Admin'];
-			}
-			$this->render('admin', array(
-				'model'=>$model,
-			));
-		}
-	}
-
 	public function actionAkun()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$query = Admin::model()->findAll();
-			$admin = $query[0];
+			$admin = Admin::model()->findByPk(Yii::app()->user->name);
 			if (isset($_POST['Admin'])) {
 				$admin->attributes = $_POST['Admin'];
 				if ($admin->validate()) {
