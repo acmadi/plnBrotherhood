@@ -125,6 +125,16 @@ class XlsxController extends Controller
 			header('Content-Disposition: attachment;filename="HPS Jasa-'.$cpengadaan->nama_pengadaan.'.xlsx"');
 			}
 		}
+		else if ($cdokumen->nama_dokumen == 'Berita Acara Penerimaan Prakualifikasi') {
+		
+			$BAPPQ = BeritaAcaraPenerimaanPq::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'BA Penerimaan Prakualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tgldokprakualifikasi#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#nodokprakualifikasi#", $BAPPQ->nomor);
+			
+			header('Content-Disposition: attachment;filename="Berita Acara Penerimaan Prakualifikasi-'.$cpengadaan->nama_pengadaan.'.xlsx"');
+
+		}
 		else if($cdokumen->nama_dokumen == 'Lampiran Berita Acara Pembukaan Penawaran Sampul Satu') {
 			$objPHPExcel = $objReader->load($templatePath . '10.a-Lam BA PEMBUKAAN 1 Sampul.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", $tgllengkap);
