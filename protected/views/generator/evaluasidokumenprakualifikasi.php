@@ -22,8 +22,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='11'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
-							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='13'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='11'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
+							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
+							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='11'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='9'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
@@ -103,7 +103,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Nota Dinas Usulan Hasil Prakualifikasi', array('xlsx/download','id'=>$BAEPK->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Berita Acara Evaluasi Dokumen Prakualifikasi', array('xlsx/download','id'=>$BAEPK->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Daftar Hadir Evaluasi Dokumen Prakualifikasi', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 					</ul>
 				</div>
 			<?php } ?>
