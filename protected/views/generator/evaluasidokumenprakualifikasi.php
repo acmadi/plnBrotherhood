@@ -22,8 +22,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
-							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
-							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='8'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
+							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='11'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
+							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='13'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='11'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>
@@ -51,33 +51,63 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div class="form" >
 
 			<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
-			'enableAjaxValidation'=>false,
-			 )); ?>
+				'id'=>'usulan-hasil-prakualifikasi-form',
+				'enableAjaxValidation'=>false,
+			)); ?>
+
+				<h4><b> Nota Dinas Usulan Hasil Prakualifikasi </b></h4>
+				<div class="row">
+					<?php echo $form->labelEx($BAEPK,'nomor'); ?>
+					<?php echo $form->textField($BAEPK,'nomor',array('size'=>56,'maxlength'=>100)); ?>
+					<?php echo $form->error($BAEPK,'nomor'); ?>
+				</div>
 			
-			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
-	
-			<div class="row">
-				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,					
-					'viewName' => 'formperusahaan_evaluasi_dokumen_prakualifikasi',
-					'labelAdd' => '',
-					'labelDel' => 'Hapus Penyedia',					
-					)); 
-				?>
-			</div>
+				<div class="row">
+					<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+						'model'=>$Dokumen0,
+						'attribute'=>'tanggal',
+						'value'=>$Dokumen0->tanggal,
+						'htmlOptions'=>array('size'=>56),
+						'options'=>array(
+						'dateFormat'=>'yy-mm-dd',
+						),
+					));?>
+					<?php echo $form->error($Dokumen0,'tanggal'); ?>
+				</div>
 			
-			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '11' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-			</div>
-	
+				<div class="row">
+					<?php 
+						$this->widget('application.extensions.appendo.JAppendo',array(
+						'id' => 'idpenyedia',        
+						'model' => $PP,					
+						'viewName' => 'formperusahaan_evaluasi_dokumen_prakualifikasi',
+						'labelAdd' => '',
+						'labelDel' => '',
+				
+						)); 
+					?>
+				</div>
 			
-		<?php $this->endWidget(); ?>
-		
-		<br/>
-		</div><!-- form -->
+				<div class="row buttons">
+					<?php echo CHtml::submitButton($BAEPK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				</div>
+
+				<?php $this->endWidget(); ?>
+
+			</div><!-- form -->
+			
+			<?php if (!$BAEPK->isNewRecord){ ?>
+				<br/>
+				<div style="border-top:1px solid lightblue">
+				<br/>
+					<h4><b> Daftar Dokumen </b></h4>
+					<ul class="generatedoc">
+						<li><?php echo CHtml::link('Nota Dinas Usulan Hasil Prakualifikasi', array('docx/download','id'=>$BAEPK->id_dokumen)); ?></li>
+					</ul>
+				</div>
+			<?php } ?>
+			
 		
 	<?php	} ?>
 	</div>
