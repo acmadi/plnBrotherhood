@@ -19,13 +19,24 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		?>
 			
 			<div id="menuform">
+				
 				<?php
-				$this->widget('zii.widgets.CMenu', array(
-						'items'=>array(
-							array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
-							array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='8'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
-						),
-					));
+					if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
+						$this->widget('zii.widgets.CMenu', array(
+							'items'=>array(
+									array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran"') == null)?'/generator/suratundanganpembukaanpenawaran':'/generator/editsuratundanganpembukaanpenawaran','id'=>$id)),
+									array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
+									array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?'/generator/evaluasidokumenprakualifikasi':($Pengadaan->status=='8'?'':'/generator/editevaluasidokumenprakualifikasi'),'id'=>$id)),
+								),
+							));
+					} else {
+						$this->widget('zii.widgets.CMenu', array(
+								'items'=>array(
+									array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
+									array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='8'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
+								),
+							));
+					}
 				?>
 			</div>
 			<br/>
@@ -56,7 +67,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			 )); ?>
 			
 			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
-	
+			
+			<div class="row">
+				<?php echo $form->labelEx($BAPPQ,'nomor'); ?>
+				<?php echo $form->textField($BAPPQ,'nomor',array('size'=>56,'maxlength'=>50)); ?>
+				<?php echo $form->error($BAPPQ,'nomor'); ?>
+			</div>
+			
 			<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
@@ -80,6 +97,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		<br/>
 		</div><!-- form -->
 		
+			<?php if($Pengadaan->status!='23') { ?>
+			<br/>
+			<div style="border-top:1px solid lightblue">
+			<br/>
+				<h4><b> Daftar Dokumen </b></h4>
+				<ul class="generatedoc">
+						<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran', array('xlsx/download','id'=>$BAPPQ->id_dokumen)); ?></li>
+					<?php } ?>
+				</ul>
+			</div>		
 	<?php	} ?>
 	</div>
 </div>
