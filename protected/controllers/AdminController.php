@@ -333,6 +333,20 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionAdmin()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$model = new Admin('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Admin'])){
+				$model->attributes = $_GET['Admin'];
+			}
+			$this->render('admin', array(
+				'model'=>$model,
+			));
+		}
+	}
+
 	public function actionAkun()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -347,7 +361,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			$this->render('admin', array(
+			$this->render('akun', array(
 				'admin'=>$admin,
 			));
 		}
