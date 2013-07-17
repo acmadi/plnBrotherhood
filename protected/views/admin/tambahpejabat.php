@@ -14,7 +14,6 @@
 	<?php $this->endWidget(); ?>
 	</div>
 	<div id="maincontent">
-	
 		<?php if(Yii::app()->user->hasFlash('gagal')): ?>
 			<div class="flash-error">
 				<?php echo Yii::app()->user->getFlash('gagal'); ?>

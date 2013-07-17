@@ -12,6 +12,24 @@
 	<?php $this->endWidget(); ?>
 	</div>
 	<div id="maincontent">
+		<?php if(Yii::app()->user->hasFlash('gagal')): ?>
+			<div class="flash-error">
+				<?php echo Yii::app()->user->getFlash('gagal'); ?>
+				<script type="text/javascript">
+					setTimeout(function() {
+						$('.flash-error').animate({
+							height: '0px',
+							marginBottom: '0em',
+							padding: '0em',
+							opacity: '0.0'
+						}, 1000, function() {
+							$('.flash-error').hide();
+						});
+					}, 2000);
+				</script>
+			</div>
+		<?php endif; ?>
+
 		<div class="form">
 			<?php $form=$this->beginWidget('CActiveForm', array(
 				'id'=>'divisi-form',
@@ -22,18 +40,6 @@
 				<?php echo $form->labelEx($kdiv,'Nama pengguna'); ?> 
 				<?php echo $form->textField($kdiv,'username',array('size'=>56,'maxlength'=>20)); ?>
 				<?php echo $form->error($kdiv,'username'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($kdiv,'Nama'); ?> 
-				<?php echo $form->textField($kdiv,'nama',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($kdiv,'nama'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($kdiv,'E-mail'); ?> 
-				<?php echo $form->textField($kdiv,'email',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($kdiv,'email'); ?>
 			</div>
 
 			<div class="row">

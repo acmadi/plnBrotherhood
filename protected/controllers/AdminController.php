@@ -252,16 +252,22 @@ class AdminController extends Controller
 			$kdiv = new Kdivmum;
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
-				$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
-				if ($old != null) {
-					$old->status_user = 'Aktif';
-					$old->save(false);
+				$person = $this->getRecordByUsername($kdiv->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
-				else {
-					$kdiv->status_user = 'Aktif';
-					$kdiv->save(false);
+				else{
+					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
+					if ($old != null) {
+						$old->status_user = 'Aktif';
+						$old->save(false);
+					}
+					else {
+						$kdiv->status_user = 'Aktif';
+						$kdiv->save(false);
+					}
+					$this->redirect(array('kdiv'));
 				}
-				$this->redirect(array('kdiv'));
 			}
 			$this->render('tambahkdiv', array(
 				'kdiv'=>$kdiv,
