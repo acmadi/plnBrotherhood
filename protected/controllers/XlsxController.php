@@ -97,7 +97,7 @@ class XlsxController extends Controller
 		}
 		
 		$dokpq=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
-		$DP=DokumenPrakualifikasi::model()->findByPk($dokpq->id_dokumen);
+		$DPK=DokumenPrakualifikasi::model()->findByPk($dokpq->id_dokumen);
 		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
@@ -301,9 +301,22 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#namapengadaan2#", $cpengadaan->nama_pengadaan);
 					$this->assign($objPHPExcel, "#metodepengadaan#", $cpengadaan->metode_pengadaan);
 					$this->assign($objPHPExcel, "#kalimatpanitia#", $kalimat_panitia);
-					$this->assign($objPHPExcel, "#nopq#", $DP->nomor);
+					$this->assign($objPHPExcel, "#nopq#", $DPK->nomor);
 					$this->assign($objPHPExcel, "#tglpq#", Tanggal::getTanggalLengkap($dokpq->tanggal));
 			header('Content-Disposition: attachment;filename="Berita Acara Evaluasi Dokumen Prakualifikasi - '.$cpengadaan->nama_pengadaan.'.xlsx"');
+		}
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Evaluasi Prakualifikasi') {
+			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir Prakualifikasi.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", Tanggal::getJamMenit($DH->jam));
+					$this->assign($objPHPExcel, "#tempat#", $DH->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $DH->acara);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+			
+			header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Prakualifikasi-'.$cpengadaan->nama_pengadaan.'.xlsx"');
+
 		}
 		else{
 			$objPHPExcel = $objReader->load($templatePath . 'test.xlsx');

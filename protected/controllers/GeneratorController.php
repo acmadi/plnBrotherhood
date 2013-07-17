@@ -1692,6 +1692,9 @@
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					$Pengadaan->status="13";
 					
+					$DokDp= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
+					$DPK= DokumenPrakualifikasi::model()->findByPk($DokDp->id_dokumen);
+					
 					$Dokumen0= new Dokumen;
 					$criteria=new CDbcriteria;
 					$criteria->select='max(id_dokumen) AS maxId';
@@ -1704,9 +1707,24 @@
 					$Dokumen0->status_upload='Belum Selesai';
 					date_default_timezone_set("Asia/Jakarta");
 					$Dokumen0->tanggal=date('d-m-Y');
+					$Dokumen0->tanggal=$DPK->tanggal_evaluasi;
+					
+					$Dokumen1=new Dokumen;
+					$Dokumen1->id_dokumen=$somevariable+2;
+					$Dokumen1->nama_dokumen='Daftar Hadir Evaluasi Prakualifikasi';
+					$Dokumen1->tempat='Jakarta';
+					$Dokumen1->status_upload='Belum Selesai';
+					$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+					$Dokumen1->tanggal=$DPK->tanggal_evaluasi;
 					
 					$BAEPK= new BeritaAcaraEvaluasiPrakualifikasi;
 					$BAEPK->id_dokumen=$Dokumen0->id_dokumen;
+					
+					$DH= new DaftarHadir;
+					$DH->id_dokumen=$Dokumen1->id_dokumen;
+					$DH->acara='Evaluasi Prakualifikasi '.$Pengadaan->nama_pengadaan;
+					$DH->tempat_hadir=$DPK->tempat_evaluasi;
+					$DH->jam=$DPK->waktu_evaluasi;
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1792,8 +1810,8 @@
 						if($valid){
 							if($Pengadaan->save(false))
 							{	
-								if($Dokumen0->save(false)){
-									if($BAEPK->save(false)){
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+									if($BAEPK->save(false)&&$DH->save(false)){
 										$this->redirect(array('editevaluasidokumenprakualifikasi','id'=>$id));
 									}
 								}
@@ -1802,7 +1820,7 @@
 					}
 					
 					$this->render('evaluasidokumenprakualifikasi',array(
-						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0, // 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0,'DH'=>$DH, // 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 					));
 				}
 			}
@@ -1821,8 +1839,10 @@
 					
 					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Prakualifikasi"');
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Prakualifikasi"');
 					
 					$BAEPK= BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+					$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1891,8 +1911,8 @@
 						if($valid){
 							if($Pengadaan->save(false))
 							{	
-								if($Dokumen0->save(false)){
-									if($BAEPK->save(false)){
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+									if($BAEPK->save(false)&&$DH->save(false)){
 										$this->redirect(array('editevaluasidokumenprakualifikasi','id'=>$id));
 									}
 								}
@@ -1901,7 +1921,7 @@
 					}
 					
 					$this->render('evaluasidokumenprakualifikasi',array(
-						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0, // 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0,'DH'=>$DH, // 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
 					));
 				}
 			}
