@@ -43,8 +43,7 @@ class NotaDinasUndangan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, tanggal_undangan, waktu, tempat', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('tempat', 'length', 'max'=>100),
+			array('nomor, tempat', 'length', 'max'=>256),
 			array('waktu', 'check'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

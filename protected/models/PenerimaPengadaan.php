@@ -69,9 +69,8 @@ class PenerimaPengadaan extends CActiveRecord
 		return array(
 			array('perusahaan, id_pengadaan', 'required'),
 			array('nilai, biaya', 'numerical', 'integerOnly'=>true),
-			array('perusahaan', 'length', 'max'=>100),
 			array('id_pengadaan', 'length', 'max'=>255),
-			array('alamat, npwp, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, usulan_hasil_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, administrasi, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, hadir_klarifikasi_negosiasi, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'length', 'max'=>256),
+			array('perusahaan, alamat, npwp, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, usulan_hasil_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, administrasi, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, hadir_klarifikasi_negosiasi, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_penerima, perusahaan, id_pengadaan, alamat, npwp, nilai, biaya, undangan_prakualifikasi, pendaftaran_pelelangan_pq, pengambilan_lelang_pq, penyampaian_lelang, evaluasi_pq, usulan_hasil_pq, penetapan_pq, undangan_supph, pendaftaran_pc, pengambilan_dokumen, ba_aanwijzing, hadir_pembukaan_penawaran_1, pembukaan_penawaran_1, administrasi, evaluasi_penawaran_1, hadir_pembukaan_penawaran_2, pembukaan_penawaran_2, evaluasi_penawaran_2, hadir_klarifikasi_negosiasi, negosiasi_klarifikasi, usulan_pemenang, penetapan_pemenang, nomor_surat_penawaran, tanggal_penawaran', 'safe', 'on'=>'search'),

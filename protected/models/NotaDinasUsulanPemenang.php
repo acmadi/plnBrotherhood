@@ -42,8 +42,7 @@ class NotaDinasUsulanPemenang extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, waktu_pelaksanaan, tempat_penyerahan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('tempat_penyerahan', 'length', 'max'=>256),
+			array('nomor, tempat_penyerahan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, waktu_pelaksanaan, tempat_penyerahan', 'safe', 'on'=>'search'),

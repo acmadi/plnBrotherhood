@@ -43,8 +43,7 @@ class SuratUndanganPengambilanDokumenPengadaan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>50),
-			array('tempat_pengambilan', 'length', 'max'=>256),
+			array('nomor, tempat_pengambilan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, tanggal_pengambilan, waktu_pengambilan, tempat_pengambilan', 'safe', 'on'=>'search'),

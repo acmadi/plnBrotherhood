@@ -71,10 +71,8 @@ class Pengadaan extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'required'),
-			array('id_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>32),
-			array('nama_pengadaan', 'length', 'max'=>100),
-			array('biaya', 'length', 'max'=>20),
-			array('id_panitia', 'length', 'max'=>11),
+			array('biaya, id_panitia,', 'numerical', 'integerOnly'=>true),
+			array('id_pengadaan,nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('progressgan,sisahari,statusgan,ndpermintaan,pic,id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'safe', 'on'=>'search'),

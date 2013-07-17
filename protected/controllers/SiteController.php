@@ -585,11 +585,11 @@ class SiteController extends Controller
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
-				// $RAB->attributes=$_POST['RAB'];
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$Pengadaan->tanggal_masuk=date('Y-m-d',strtotime($Pengadaan->tanggal_masuk));
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
+					$NDP->perihal = $Pengadaan->nama_pengadaan;
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$valid&&$NDP->validate();
@@ -627,26 +627,24 @@ class SiteController extends Controller
 			
 			$Pengadaan->tanggal_masuk=Tanggal::getTanggalStrip($Pengadaan->tanggal_masuk);
 			$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-			// $TOR = Tor::model()->findByPk($Dokumen1->id_dokumen);
-			// $RAB = Rab::model()->findByPk($Dokumen2->id_dokumen);	
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
-				// $RAB->attributes=$_POST['RAB'];
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$Pengadaan->tanggal_masuk=date('Y-m-d',strtotime($Pengadaan->tanggal_masuk));
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
+					$NDP->perihal = $Pengadaan->nama_pengadaan;
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$valid&&$NDP->validate();
 					if($valid){
 						if($Pengadaan->save(false)) {
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
-								if($NDP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
+								if($NDP->save(false)){
 									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
 								}
 							}
@@ -812,6 +810,9 @@ class SiteController extends Controller
 			$Pengadaan = Pengadaan::model()->findByPk($id);
 			$Pengadaan->status='0';
 			
+			$DokNDP= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
 			$criteria->select='max(id_dokumen) AS maxId';
@@ -827,9 +828,12 @@ class SiteController extends Controller
 			
 			$NDPP= new NotaDinasPerintahPengadaan;
 			$NDPP->id_dokumen=$Dokumen0->id_dokumen;
-			
-			$DokNDP= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
-			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			$NDPP->pagu_anggaran = $NDP->nilai_biaya_rab;
+			if($NDP->nilai_biaya_rab>500000000) {
+				$NDPP->perihal='Penunjukan Panitia '.$Pengadaan->nama_pengadaan;
+			} else {
+				$NDPP->perihal='Penunjukan Panitia '.$Pengadaan->nama_pengadaan;
+			}
 			
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
