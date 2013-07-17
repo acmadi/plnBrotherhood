@@ -372,6 +372,7 @@ class AdminController extends Controller
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $user->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
 				else {
+					$user->nama = $person['nama'];
 					$user->divisi = $id;
 					if ($user->save(false)) {
 						$this->redirect(array('detaildivisi', 'id'=>$id));
