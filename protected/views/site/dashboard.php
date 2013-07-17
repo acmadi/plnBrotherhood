@@ -171,13 +171,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
                                     'name'=>'ndpermintaan',				
                                     'value'=>'$data->notaDinasPermintaan->nomor',
                                     'filter'=>'',
-                                ),		
-								
-				array(            // display using an expression
-					'name'=>'Nilai RAB',				
-					'value'=>'RupiahMaker::convertInt($data->notaDinasPermintaan->nilai_biaya_rab)',
-					'filter'=>'',
-				),		
+                                ),						
 
 				array(            // display using an expression
                                     'name'=>'pic',	

@@ -102,13 +102,14 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 							array(
 								'label'=>'PIC',
 								'value'=>$cpengadaan->idPanitia->nama_panitia,
-							),
+							),							
+							
 						),
 					));
 				}
 			?>
-		</div>
-
+		</div>	
+		
 		<br /><br /><br /><br />
 		
 	</div>
@@ -226,8 +227,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 		<?php
 			$this->widget('zii.widgets.grid.CGridView', array(
 				'id'=>'list-dokumen-grid',
-				'dataProvider'=>$dataProvider,
-				"ajaxUpdate"=>"false",
+				'dataProvider'=>$dataProvider,				
 				'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 				'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl(($cpengadaan->status == 'Selesai' ? "download/download" : "site/detaildokumen"), array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 				'columns'=>array(
