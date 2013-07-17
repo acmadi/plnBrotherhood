@@ -15,7 +15,7 @@
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'dataProvider'=>$model->search(),
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detaildivisi", array("id"=>"$model->id_panitia")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detaildivisi", array("id"=>"$model->username")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 			'columns'=>array(
 				array(
 					'name'=>'No',

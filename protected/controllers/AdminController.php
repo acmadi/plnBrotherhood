@@ -304,15 +304,17 @@ class AdminController extends Controller
 	public function actionDetaildivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$divisi = new Divisi;
-			if (isset($_POST['Divisi'])) {
-				$divisi->attributes = $_POST['Divisi'];
-				if ($divisi->save(false)) {
-					$this->redirect(array('divisi'));
-				}
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$divisi = Divisi::model()->findByPk($id);
+			$model = new UserDivisi('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['UserDivisi'])){
+				$model->attributes = $_GET['UserDivisi'];
 			}
 			$this->render('detaildivisi', array(
+				'id'=>$id,
 				'divisi'=>$divisi,
+				'model'=>$model,
 			));
 		}
 	}
@@ -345,6 +347,53 @@ class AdminController extends Controller
 			}
 			$this->render('hapusdivisi', array(
 				'divisi'=>$divisi,
+			));
+		}
+	}
+
+	public function actionTambahuserdivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$divisi = Divisi::model()->findByPk($id);
+			$user = new UserDivisi;
+			if (isset($_POST['UserDivisi'])) {
+				$user->attributes = $_POST['UserDivisi'];
+				$person = $this->getRecordByUsername($user->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $user->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$user->divisi = $id;
+					if ($user->save(false)) {
+						$this->redirect(array('detaildivisi', 'id'=>$id));
+					}
+				}
+			}
+			$this->render('tambahuserdivisi', array(
+				'id'=>$id,
+				'divisi'=>$divisi,
+				'user'=>$user,
+			));
+		}
+	}
+
+	public function actionHapususerdivisi()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$divisi = Divisi::model()->findByPk($id);
+			$user = UserDivisi::model();
+			if (isset($_POST['UserDivisi'])) {
+				foreach ($_POST['UserDivisi']['username'] as $item) {
+					$user->deleteByPk($item);
+				}
+				$this->redirect(array('detaildivisi', 'id'=>$id));
+			}
+			$this->render('hapususerdivisi', array(
+				'id'=>$id,
+				'divisi'=>$divisi,
+				'user'=>$user,
 			));
 		}
 	}
