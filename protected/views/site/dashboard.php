@@ -5,28 +5,7 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		
 ?>
 
-<h2 style="margin-left:30px">Selamat datang, <b>
-	<?php
-		switch (Yii::app()->user->getState('role')) {
-			case 'admin' : {
-				echo Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama;
-				break;
-			}
-			case 'anggota' : {
-				echo Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama;
-				break;
-			}
-			case 'divisi' : {
-				echo Divisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama_divisi;
-				break;
-			}
-			case 'kdivmum' : {
-				echo Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama;
-				break;
-			}
-		}
-	?>
-</b>!</h2>
+<?php if (Yii::app()->user->getState('role') == 'admin') echo '<h2 style="margin-left:30px">Selamat datang, <b>Administrator</b>!</h2>'; ?>
 
 <?php if(Yii::app()->user->getState('role') == 'kdivmum'){		//kadiv
 	

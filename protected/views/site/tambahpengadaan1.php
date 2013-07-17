@@ -73,14 +73,8 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($NDP,'perihal'); ?>
-			<?php echo $form->textArea($NDP,'perihal',array('cols'=>43,'rows'=>2, 'maxlength'=>100)); ?>
-			<?php echo $form->error($NDP,'perihal'); ?>
-		</div>
-		
-		<div class="row">
 			<?php echo $form->labelEx($NDP,'nilai_biaya_rab'); ?>
-			<?php echo $form->textField($NDP,'nilai_biaya_rab',array('size'=>60,'maxlength'=>50)); ?>
+			<?php echo $form->textField($NDP,'nilai_biaya_rab',array('size'=>60,'maxlength'=>200)); ?>
 			<?php echo $form->error($NDP,'nilai_biaya_rab'); ?>
 		</div>
 		

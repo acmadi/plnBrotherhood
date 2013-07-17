@@ -44,9 +44,7 @@ class Panitia extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nama_panitia, SK_panitia, tanggal_sk, status_panitia, jenis_panitia', 'required'),
-			array('nama_panitia, SK_panitia', 'length', 'max'=>50),
-			array('status_panitia', 'length', 'max'=>32),
-			array('jenis_panitia', 'length', 'max'=>20),
+			array('nama_panitia, SK_panitia, status_panitia, jenis_panitia', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_panitia, nama_panitia, SK_panitia, tanggal_sk, status_panitia, jenis_panitia', 'safe', 'on'=>'search'),

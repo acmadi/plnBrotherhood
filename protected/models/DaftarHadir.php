@@ -43,8 +43,7 @@ class DaftarHadir extends CActiveRecord
 			array('id_dokumen, jam, tempat_hadir, acara', 'required','message'=>'{attribute} tidak boleh kosong'),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('jam', 'length', 'max'=>10),
-			array('tempat_hadir', 'length', 'max'=>50),
-			array('acara', 'length', 'max'=>100),
+			array('tempat_hadir, acara', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, jam, tempat_hadir, acara', 'safe', 'on'=>'search'),

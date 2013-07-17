@@ -89,7 +89,7 @@ class XlsxController extends Controller
 		$DokNDPP=Dokumen::model()->find('id_pengadaan = '.$cpengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($DokNDPP->id_dokumen);
 		if($NDPP->dari=="MSDAF"){
-			$pengesah = "MANAJER SENIOR PENGADAAN ALAT DAN FASILITAS";
+			$pengesah = "MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT";
 			$nama_pengesah = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
 		} else {
 			$pengesah = "KEPALA DIVISI UMUM DAN MANAJEMEN";

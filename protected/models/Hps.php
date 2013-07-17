@@ -42,7 +42,7 @@ class Hps extends CActiveRecord
 			array('id_dokumen, nomor, nilai_hps', 'required'),
 			array('nilai_hps', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>20),
-			array('nomor', 'length', 'max'=>50),
+			array('nomor', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, nilai_hps', 'safe', 'on'=>'search'),

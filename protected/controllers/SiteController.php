@@ -513,113 +513,6 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 	
-	// public function actionTambahpengadaan()
-	// {	
-	// 	$user = Yii::app()->user->name;
-	// 	if (Yii::app()->user->getState('role') == 'kdivmum') {
-			
-	// 		$Pengadaan=new Pengadaan;
-	// 		$Pengadaan->status="0";
-	// 		$criteria=new CDbcriteria;
-	// 		$criteria->select='max(id_pengadaan) AS maxId';
-	// 		$row = $Pengadaan->model()->find($criteria);
-	// 		$somevariable = $row['maxId'];
-	// 		$Pengadaan->id_pengadaan=$somevariable+1;
-	// 		$Pengadaan->nama_penyedia='-';
-	// 		$Pengadaan->tanggal_selesai='-';
-	// 		$Pengadaan->biaya='-';
-	// 		$Pengadaan->metode_penawaran='-';
-	// 		$Pengadaan->jenis_kualifikasi='-';
-			
-	// 		$Dokumen0= new Dokumen;
-	// 		$criteria=new CDbcriteria;
-	// 		$criteria->select='max(id_dokumen) AS maxId';
-	// 		$row = $Dokumen0->model()->find($criteria);
-	// 		$somevariable = $row['maxId'];
-	// 		$Dokumen0->id_dokumen=$somevariable+2;
-	// 		$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-	// 		$Dokumen0->nama_dokumen='Nota Dinas Permintaan';
-	// 		$Dokumen0->tempat='Jakarta';
-	// 		$Dokumen0->status_upload='Belum Selesai';
-			
-	// 		$Dokumen1= new Dokumen;
-	// 		$Dokumen1->id_dokumen=$somevariable+5;
-	// 		$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-	// 		$Dokumen1->nama_dokumen='Nota Dinas Perintah Pengadaan';
-	// 		$Dokumen1->tempat='Jakarta';
-	// 		$Dokumen1->status_upload='Belum Selesai';
-						
-	// 		$Dokumen2= new Dokumen;
-	// 		$Dokumen2->id_dokumen=$somevariable+3;
-	// 		$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
-	// 		$Dokumen2->nama_dokumen='TOR';
-	// 		$Dokumen2->tempat='Jakarta';
-	// 		$Dokumen2->status_upload='Belum Selesai';
-			
-	// 		$Dokumen3= new Dokumen;
-	// 		$Dokumen3->id_dokumen=$somevariable+4;
-	// 		$Dokumen3->id_pengadaan=$Pengadaan->id_pengadaan;
-	// 		$Dokumen3->nama_dokumen='RAB';
-	// 		$Dokumen3->tempat='Jakarta';
-	// 		$Dokumen3->status_upload='Belum Selesai';
-			
-	// 		$NDP= new NotaDinasPermintaan;
-	// 		$NDP->id_dokumen=$Dokumen0->id_dokumen;
-			
-	// 		$NDPP= new NotaDinasPerintahPengadaan;
-	// 		$NDPP->id_dokumen=$Dokumen1->id_dokumen;
-			
-	// 		$TOR= new Tor;
-	// 		$TOR->id_dokumen=$Dokumen2->id_dokumen;
-			
-	// 		$RAB= new Rab;
-	// 		$RAB->id_dokumen=$Dokumen3->id_dokumen;
-
-	// 		// Uncomment the following line if AJAX validation is needed
-	// 		// $this->performAjaxValidation($model);
-	// 		if(isset($_POST['Pengadaan']))
-	// 		{
-	// 			$Pengadaan->attributes=$_POST['Pengadaan'];
-	// 			$NDP->attributes=$_POST['NotaDinasPermintaan'];
-	// 			$NDPP->attributes=$_POST['NotaDinasPerintahPengadaan'];
-	// 			$Dokumen0->attributes=$_POST['Dokumen'];
-	// 			$valid=$Pengadaan->validate()&&$Dokumen0->validate();
-				
-	// 			if($valid){
-	// 				$Divisi=Divisi::model()->findByPk($Pengadaan->divisi_peminta);
-	// 				$Divisi->jumlah_berlangsung=$Divisi->jumlah_berlangsung+1;
-	// 				$Dokumen1->tanggal=$Pengadaan->tanggal_masuk;
-	// 				$Dokumen2->tanggal=$Dokumen0->tanggal;
-	// 				$Dokumen3->tanggal=$Dokumen0->tanggal;
-	// 				$Panitia=Panitia::model()->findByPk($Pengadaan->id_panitia);
-	// 				$NDPP->kepada=(Anggota::model()->find('id_panitia='.$Panitia->id_panitia. ' and jabatan = "Ketua"')->nama);
-	// 				$valid=$valid&&$NDP->validate();
-	// 				if($valid){
-	// 					$valid=$valid&&$NDPP->validate();
-	// 					if($valid){
-	// 						if($Pengadaan->save(false)&&$Divisi->save(false)) {
-	// 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)&&$DokumenL->save(false)){
-	// 								if($NDP->save(false)&&$NDPP->save(false)&&$TOR->save(false)&&$RAB->save(false)){										
-	// 									if(isset($_POST['simpan'])){
-	// 										$this->redirect(array('dashboard'));
-	// 									}
-	// 									if(isset($_POST['simpanbuat'])){
-	// 										$this->redirect(array('docx/download', 'id'=>$NDPP->id_dokumen));											
-	// 									}
-	// 								}
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-
-	// 		$this->render('tambahpengadaan',array(
-	// 			'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,
-	// 		));
-	// 	}
-	// }
-	
 	public function actionTambahpengadaan1()
 	{	
 		$user = Yii::app()->user->name;
@@ -640,7 +533,7 @@ class SiteController extends Controller
 			$Pengadaan->metode_penawaran='-';
 			$Pengadaan->jenis_kualifikasi='-';
 			if(Yii::app()->user->getState('role') == 'divisi') {
-				$Pengadaan->divisi_peminta=Yii::app()->user->name;
+				$Pengadaan->divisi_peminta=UserDivisi::model()->findByPk(Yii::app()->user->name)->divisi;
 			}
 			date_default_timezone_set("Asia/Jakarta");
 			$Pengadaan->tanggal_masuk=date('d-m-Y');
@@ -692,11 +585,11 @@ class SiteController extends Controller
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
-				// $RAB->attributes=$_POST['RAB'];
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$Pengadaan->tanggal_masuk=date('Y-m-d',strtotime($Pengadaan->tanggal_masuk));
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
+					$NDP->perihal = $Pengadaan->nama_pengadaan;
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$valid&&$NDP->validate();
@@ -734,26 +627,24 @@ class SiteController extends Controller
 			
 			$Pengadaan->tanggal_masuk=Tanggal::getTanggalStrip($Pengadaan->tanggal_masuk);
 			$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-			// $TOR = Tor::model()->findByPk($Dokumen1->id_dokumen);
-			// $RAB = Rab::model()->findByPk($Dokumen2->id_dokumen);	
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 			if(isset($_POST['Pengadaan']))
 			{
 				$Pengadaan->attributes=$_POST['Pengadaan'];
 				$NDP->attributes=$_POST['NotaDinasPermintaan'];
-				// $RAB->attributes=$_POST['RAB'];
 				$Dokumen0->attributes=$_POST['Dokumen'];
 				$Pengadaan->tanggal_masuk=date('Y-m-d',strtotime($Pengadaan->tanggal_masuk));
 				$valid=$Pengadaan->validate()&&$Dokumen0->validate();
 				if($valid){
+					$NDP->perihal = $Pengadaan->nama_pengadaan;
 					$Dokumen1->tanggal=$Dokumen0->tanggal;
 					$Dokumen2->tanggal=$Dokumen0->tanggal;
 					$valid=$valid&&$NDP->validate();
 					if($valid){
 						if($Pengadaan->save(false)) {
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
-								if($NDP->save(false)/*&&$TOR->save(false)&&$RAB->save(false)*/){
+								if($NDP->save(false)){
 									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
 								}
 							}
@@ -919,6 +810,9 @@ class SiteController extends Controller
 			$Pengadaan = Pengadaan::model()->findByPk($id);
 			$Pengadaan->status='0';
 			
+			$DokNDP= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
+			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			
 			$Dokumen0= new Dokumen;
 			$criteria=new CDbcriteria;
 			$criteria->select='max(id_dokumen) AS maxId';
@@ -934,9 +828,12 @@ class SiteController extends Controller
 			
 			$NDPP= new NotaDinasPerintahPengadaan;
 			$NDPP->id_dokumen=$Dokumen0->id_dokumen;
-			
-			$DokNDP= Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Nota Dinas Permintaan"');
-			$NDP= NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+			$NDPP->pagu_anggaran = $NDP->nilai_biaya_rab;
+			if($NDP->nilai_biaya_rab>500000000) {
+				$NDPP->perihal='Penunjukan Panitia '.$Pengadaan->nama_pengadaan;
+			} else {
+				$NDPP->perihal='Penunjukan Panitia '.$Pengadaan->nama_pengadaan;
+			}
 			
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);

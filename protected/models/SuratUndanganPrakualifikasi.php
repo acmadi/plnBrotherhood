@@ -41,8 +41,7 @@ class SuratUndanganPrakualifikasi extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, perihal', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
-			array('perihal', 'length', 'max'=>256),
+			array('nomor, perihal', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, perihal', 'safe', 'on'=>'search'),

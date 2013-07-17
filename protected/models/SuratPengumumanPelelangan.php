@@ -42,8 +42,7 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		return array(
 			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor', 'length', 'max'=>100),
-			array('syarat_mengikuti_lelang', 'length', 'max'=>256),
+			array('nomor, syarat_mengikuti_lelang', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'safe', 'on'=>'search'),
