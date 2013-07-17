@@ -1352,42 +1352,35 @@ class DocxController extends Controller
 			
 			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
-			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
-			
-			$dokhps=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "HPS"');
-			$hps=Hps::model()->findByPk($dokhps->id_dokumen);	
-			
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);
 			$nomor = $SUPH->nomor;
-			$tanggal = " " . Tanggal::getTanggalLengkap($Dok->tanggal);
-			$waktukerja = $SUPH->waktu_kerja;
-			$tempat = $SUPH->tempat_penyerahan;
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$nama = $Peng->nama_pengadaan;
-			$tanggalpenawaran = Tanggal::getTanggalLengkap($rks->tanggal_akhir_pemasukan_penawaran1);
-			$waktupenawaran = Tanggal::getJamMenit($rks->waktu_pemasukan_penawaran1);
 			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
 			$dari= $NDPP->dari;
 						
-			if($dari=='KDIVMUM'){
-				$namakadiv = kdivmum::model()->find('jabatan = "KDIVMUM" and status_user = "Aktif"')->nama;
-			}else if($dari=='MSDAF'){
-				$namakadiv = kdivmum::model()->find('jabatan = "MSDAF" and status_user = "Aktif"')->nama;
-			}
 			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
+			if($dari=='KDIVMUM'){
+				$namakadiv = kdivmum::model()->find('jabatan = "KDIVMUM" and status_user = "Aktif"')->nama;
+				$this->doccy->phpdocx->assign('#tembusan#', 'MSDAF');
+				$this->doccy->phpdocx->assign('#pengirim#', 'KEPALA DIVISI UMUM DAN MANAJEMEN');
+			}else if($dari=='MSDAF'){
+				$namakadiv = kdivmum::model()->find('jabatan = "MSDAF" and status_user = "Aktif"')->nama;
+				$this->doccy->phpdocx->assign('#tembusan#', 'KDIVMUM');
+				$this->doccy->phpdocx->assign('#pengirim#', 'MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT');
+			}
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
-			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#tanggalpenawaran#', $tanggalpenawaran);
-			$this->doccy->phpdocx->assign('#waktupenawaran#', $waktupenawaran);
-			$this->doccy->phpdocx->assign('#waktupengerjaan#', $waktukerja);
-			$this->doccy->phpdocx->assign('#tempatpenyerahan#', $tempat);						
-			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namakadiv);
-			$this->doccy->phpdocx->assign('#penerima#', $this->getPenyediaLulusX($Peng->id_pengadaan,'undangan_supph'));
+			$this->doccy->phpdocx->assign('#norks#', $rks->nomor);
+			$this->doccy->phpdocx->assign('#tglrks#', Tanggal::getTanggalLengkap($dokrks->tanggal));
+			$this->doccy->phpdocx->assign('#namapengirim#', $namakadiv);
+			$this->doccy->phpdocx->assign('#penerima#', $this->getPenyediaLulusXDanAlamat($Peng->id_pengadaan,'undangan_supph'));
 			
 			$this->renderDocx("Surat Undangan Permintaan Penawaran Harga-".$Peng->nama_pengadaan.".docx", true);
 		}
@@ -1453,7 +1446,7 @@ class DocxController extends Controller
 				$supph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
 				$nosupph = $supph->nomor;
 				$tglsupph = Tanggal::getTanggalLengkap($doksupph->tanggal);
-				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Tunjuk).docx');
+				$this->doccy->newFile('15 Surat Penunjukan Penyedia.docx');
 				$this->doccy->phpdocx->assign('#nosupph#', $nosupph);
 				$this->doccy->phpdocx->assign('#tglsupph#', $tglsupph);	
 			}
@@ -1508,7 +1501,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($dokSPP->tanggal));
 			$this->doccy->phpdocx->assign('#pengirim#',$pengirim);
 			$this->doccy->phpdocx->assign('#namapengirim#',$namapengirim);
-			$this->renderDocx("Surat Penunjukan Pemenang-".$Peng->nama_pengadaan.".docx", true);
+			if ($metode == "Penunjukan Langsung"){
+				$this->renderDocx("Surat Penunjukan Penyedia-".$Peng->nama_pengadaan.".docx", true);
+			} else {
+				$this->renderDocx("Surat Penunjukan Pemenang-".$Peng->nama_pengadaan.".docx", true);
+			}
 		}
 		else if ($Dok->nama_dokumen == "Dokumen Prakualifikasi"){
 			
@@ -2483,6 +2480,22 @@ class DocxController extends Controller
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
 				$stringpenyedia .= $arraypenyedia[$i]->perusahaan . '<w:br/>';
+			}
+		}
+		
+		return $stringpenyedia;
+	}
+	
+	function getPenyediaLulusXDanAlamat($idpeng,$tahap){
+		$arraypenyedia = PenerimaPengadaan::model()->findAll($tahap . ' = "1" and id_pengadaan = ' . $idpeng);
+		$stringpenyedia = "";
+				
+		if($arraypenyedia == null){
+			$stringpenyedia = '-';
+		}else{		
+			for($i=0;$i<count($arraypenyedia);$i++){
+				$stringpenyedia .= $arraypenyedia[$i]->perusahaan .'<w:br/>';
+				$stringpenyedia .= $arraypenyedia[$i]->alamat .'<w:br/>';
 			}
 		}
 		
