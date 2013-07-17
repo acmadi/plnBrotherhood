@@ -55,7 +55,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				'enableAjaxValidation'=>false,
 			)); ?>
 
-				<h4><b> Nota Dinas Usulan Hasil Prakualifikasi </b></h4>
+				<h4><b> Berita Acara Evaluasi Dokumen Prakualifikasi </b></h4>
 				<div class="row">
 					<?php echo $form->labelEx($BAEPK,'nomor'); ?>
 					<?php echo $form->textField($BAEPK,'nomor',array('size'=>56,'maxlength'=>100)); ?>
@@ -103,7 +103,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Nota Dinas Usulan Hasil Prakualifikasi', array('docx/download','id'=>$BAEPK->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Nota Dinas Usulan Hasil Prakualifikasi', array('xlsx/download','id'=>$BAEPK->id_dokumen)); ?></li>
 					</ul>
 				</div>
 			<?php } ?>

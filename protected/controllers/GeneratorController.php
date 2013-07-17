@@ -25,28 +25,28 @@
 						$this->redirect(array('generator/dokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="5"){
-						$this->redirect(array('generator/suratpengumumanpelelanganprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/suratundanganprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="6"){
-						$this->redirect(array('generator/pendaftaranpelelanganprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/suratpengumumanpelelanganprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="7"){
-						$this->redirect(array('generator/pengambilandokumenprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/pendaftaranpelelanganprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="8"){
-						$this->redirect(array('generator/penyampaiandokumenprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/pengambilandokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="9"){
-						$this->redirect(array('generator/evaluasidokumenprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/penyampaiandokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="10"){
-						$this->redirect(array('generator/usulanhasilprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/penyampaiandokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="11"){
-						$this->redirect(array('generator/penetapanhasilprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/evaluasidokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="12"){
-						$this->redirect(array('generator/pengumumanhasilprakualifikasi','id'=>$id));
+						$this->redirect(array('generator/evaluasidokumenprakualifikasi','id'=>$id));
 					}
 					if(Pengadaan::model()->findByPk($id)->status=="13"){
 						$this->redirect(array('generator/usulanhasilprakualifikasi','id'=>$id));
