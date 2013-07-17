@@ -21,22 +21,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<div id="menuform">
 				
 				<?php
-					if(Panitia::model()->findByPk(Pengadaan::model()->findByPk($id)->id_panitia)->jenis_panitia=="Panitia") {
-						$this->widget('zii.widgets.CMenu', array(
+					$this->widget('zii.widgets.CMenu', array(
 							'items'=>array(
-									array('label'=>'Undangan', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Undangan Pembukaan Penawaran"') == null)?'/generator/suratundanganpembukaanpenawaran':'/generator/editsuratundanganpembukaanpenawaran','id'=>$id)),
-									array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
-									array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?'/generator/evaluasidokumenprakualifikasi':($Pengadaan->status=='8'?'':'/generator/editevaluasidokumenprakualifikasi'),'id'=>$id)),
-								),
-							));
-					} else {
-						$this->widget('zii.widgets.CMenu', array(
-								'items'=>array(
-									array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
-									array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='8'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
-								),
-							));
-					}
+								array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/penyampaiandokumenprakualifikasi'):('/generator/editpenyampaiandokumenprakualifikasi'),'id'=>$id)),
+								array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='8'?'':('/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
+							),
+						));
 				?>
 			</div>
 			<br/>
@@ -67,7 +57,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			 )); ?>
 			
 			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
-			
 			<div class="row">
 				<?php echo $form->labelEx($BAPPQ,'nomor'); ?>
 				<?php echo $form->textField($BAPPQ,'nomor',array('size'=>56,'maxlength'=>50)); ?>
@@ -75,23 +64,36 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			</div>
 			
 			<div class="row">
+				<?php echo $form->labelEx($Dokumen0,'tanggal'); ?>
+				<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$Dokumen0,
+					'attribute'=>'tanggal',
+					'value'=>$Dokumen0->tanggal,
+					'htmlOptions'=>array('size'=>56),
+					'options'=>array(
+					'dateFormat'=>'yy-mm-dd',
+					),
+				));?>
+				<?php echo $form->error($Dokumen0,'tanggal'); ?>
+			</div>
+			
+			<div class="row">
 				<?php 
-					$this->widget('application.extensions.appendo.JAppendo',array(
-					'id' => 'idpenyedia',        
-					'model' => $PP,					
-					'viewName' => 'formperusahaan_penyampaian_dokumen_prakualifikasi',
-					'labelAdd' => '',
-					'labelDel' => 'Hapus Penyedia',
+					// $this->widget('application.extensions.appendo.JAppendo',array(
+					// 'id' => 'idpenyedia',        
+					// 'model' => $PP,					
+					// 'viewName' => 'formperusahaan_penyampaian_dokumen_prakualifikasi',
+					// 'labelAdd' => '',
+					// 'labelDel' => 'Hapus Penyedia',
 					
-					)); 
+					// )); 
 				?>
 			</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-			</div>
-		
-			
+					<?php echo CHtml::submitButton($BAPPQ->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				</div>
+				
 		<?php $this->endWidget(); ?>
 		
 		<br/>
@@ -103,7 +105,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<br/>
 				<h4><b> Daftar Dokumen </b></h4>
 				<ul class="generatedoc">
-						<li><?php echo CHtml::link('Berita Acara Pembukaan Penawaran', array('xlsx/download','id'=>$BAPPQ->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Berita Acara Penerimaan Prakualifikasi', array('xlsx/download','id'=>$BAPPQ->id_dokumen)); ?></li>
 					<?php } ?>
 				</ul>
 			</div>		

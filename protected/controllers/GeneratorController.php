@@ -1534,11 +1534,8 @@
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					$Pengadaan->status="11";
 					
-					if($Pengadaan->metode_pengadaan == 'Pelelangan'){
-						$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}else{
-						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}
+					$DokDp= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
+					$DPK= DokumenPrakualifikasi::model()->findByPk($DokDp->id_dokumen);
 					
 					$Dokumen0= new Dokumen;
 					$criteria=new CDbcriteria;
@@ -1546,16 +1543,30 @@
 					$row = $Dokumen0->model()->find($criteria);
 					$somevariable = $row['maxId'];
 					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->nama_dokumen='berita_acara_penerimaan_prakualifikasi';
+					$Dokumen0->nama_dokumen='Berita Acara Penerimaan Prakualifikasi';
 					$Dokumen0->tempat='Jakarta';
 					$Dokumen0->status_upload='Belum Selesai';
 					$Dokumen0->id_pengadaan=$id;
 					date_default_timezone_set("Asia/Jakarta");
 					$Dokumen0->tanggal=date('d-m-Y');
 					
+					// $Dokumen1=new Dokumen;
+					// $Dokumen1->id_dokumen=$somevariable+2;
+					// $Dokumen1->nama_dokumen='Daftar Hadir Penerimaan Prakualifikasi';
+					// $Dokumen1->tempat='Jakarta';
+					// $Dokumen1->status_upload='Belum Selesai';
+					// $Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+					// $Dokumen1->tanggal=$DPK->tanggal_evaluasi;
+					
 					$BAPPQ= new BeritaAcaraPenerimaanPq;
 					$BAPPQ->id_dokumen=$Dokumen0->id_dokumen;
 					$BAPPQ->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+					
+					// $DH= new DaftarHadir;
+					// $DH->id_dokumen=$Dokumen1->id_dokumen;
+					// $DH->acara='Evaluasi Prakualifikasi '.$Pengadaan->nama_pengadaan;
+					// $DH->tempat_hadir=$DPK->tempat_evaluasi;
+					// $DH->jam=$DPK->waktu_evaluasi;
 					
 					// if(isset($_POST['perusahaan'])){
 													
@@ -1630,7 +1641,7 @@
 					}
 					
 					$this->render('penyampaiandokumenprakualifikasi',array(
-						'Pengadaan'=>$Pengadaan,'PP'=>$PP,'BAPPQ'=>$BAPPQ,
+						'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,//'DH'=>$DH,'PP'=>$PP,
 					));
 				}
 			}
@@ -1647,6 +1658,12 @@
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					
+					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Penerimaan Prakualifikasi"');
+					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+					//$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Penerimaan Prakualifikasi"');
+					
+					$BAPPQ= BeritaAcaraPenerimaanPq::model()->findByPk($Dokumen0->id_dokumen);
+					//$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
 					
 					// if($Pengadaan->metode_pengadaan == 'Pelelangan'){
 						// $PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
@@ -1723,8 +1740,8 @@
 					}
 					
 				}
-				$this->render('editpenyampaiandokumenprakualifikasi',array(
-					'Pengadaan'=>$Pengadaan,//'BAPPQ'=>$BAPPQ,'PP'=>$PP,
+				$this->render('penyampaiandokumenprakualifikasi',array(
+					'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,//'DH'=>$DH'PP'=>$PP,
 				));
 			}
 		}
