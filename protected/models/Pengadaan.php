@@ -844,19 +844,19 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '24' || $this->status == '25'){
 			return 'Evaluasi';
 		}
-		else if($this->status == '20'){
+		else if($this->status == '26' || $this->status == '27'){
 			return 'Penawaran 2';
 		}
-		else if($this->status == '21'){
+		else if($this->status == '28' || $this->status == '29'){
 			return 'Evaluasi 2';
 		}
-		else if($this->status == '22'){
+		else if($this->status == '30' || $this->status == '31'){
 			return 'Klarifikasi dan Negosiasi';
 		}
-		else if($this->status == '27' || $this->status == '23' || $this->status == '24' || $this->status == '25' || $this->status == '26'){
+		else if($this->status == '32' || $this->status == '33' || $this->status == '34' || $this->status == '35' || $this->status == '36'){
 			return 'Penentuan Pemenang';
 		}
-		else if($this->status == '28'){
+		else if($this->status == '37'){
 			return 'Kontrak';
 		}
 		else if($this->status == '99'){
