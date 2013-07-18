@@ -5,7 +5,6 @@
  *
  * The followings are the available columns in table 'berita_acara_penerimaan_pq':
  * @property string $nomor
- * @property string $tanggal
  * @property string $id_dokumen
  *
  * The followings are the available model relations:
@@ -39,12 +38,12 @@ class BeritaAcaraPenerimaanPq extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nomor, tanggal, id_dokumen', 'required'),
+			array('nomor, id_dokumen', 'required'),
 			array('nomor', 'length', 'max'=>256),
 			array('id_dokumen', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('nomor, tanggal, id_dokumen', 'safe', 'on'=>'search'),
+			array('nomor, id_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +66,6 @@ class BeritaAcaraPenerimaanPq extends CActiveRecord
 	{
 		return array(
 			'nomor' => 'Nomor',
-			'tanggal' => 'Tanggal',
 			'id_dokumen' => 'Id Dokumen',
 		);
 	}
@@ -84,7 +82,6 @@ class BeritaAcaraPenerimaanPq extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('tanggal',$this->tanggal,true);
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 
 		return new CActiveDataProvider($this, array(
