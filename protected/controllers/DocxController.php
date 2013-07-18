@@ -1391,7 +1391,7 @@ class DocxController extends Controller
 			
 		$this->doccy->newFile('5d Form Isian Kualifikasi.docx');
 			
-		$this->doccy->phpdocx->assign('#nama pengadaan#', $nama);
+		$this->doccy->phpdocx->assign('#namapengadaankapital#', $nama);
 		$this->doccy->phpdocx->assign('#tahun#', $tahun);
 		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -1802,8 +1802,6 @@ class DocxController extends Controller
 		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
-			$this->doccy->phpdocx->assign('#2#', '.............................................');
-			$this->doccy->phpdocx->assign('#3#', '.............................................');
 			$this->renderDocx("Pakta Integritas Penyedia-".$Peng->nama_pengadaan.".docx", true);
 		}
 //	=====================================Berita Acara=====================================

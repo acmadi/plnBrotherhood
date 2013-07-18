@@ -44,7 +44,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 							),
 							array(
 								'label'=>'Perihal',
-								'value'=>$cpengadaan->notaDinasPerintahPengadaan->perihal,
+								'value'=>$cpengadaan->notaDinasPermintaan->perihal,
 							),
 							array(
 								'label'=>'Jenis pengadaan',
