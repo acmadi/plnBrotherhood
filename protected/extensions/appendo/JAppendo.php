@@ -122,7 +122,7 @@ class JAppendo extends CWidget
              : $baseUrl.'/css/jquery.appendo.css';
              
         // $plugin = (YII_DEBUG)?'/js/jquery.appendo.js':'/js/jquery.appendo.min.js';
-		$plugin = $this->labelAdd=='Tambah Penyedia' ? (YII_DEBUG)?'/js/jquery.appendo.js':'/js/jquery.appendo.min.js' : '';
+		$plugin = $this->labelAdd=='Tambah Penyedia' || $this->labelAdd=='Tambah Anggota' ? (YII_DEBUG)?'/js/jquery.appendo.js':'/js/jquery.appendo.min.js' : '';
       	
   		$this->cs = Yii::app()->getClientScript();
 		$this->cs->registerCoreScript('jquery')
