@@ -624,7 +624,7 @@ class SiteController extends Controller
 			if($NDP->nilai_biaya_rab>500000000) {
 				$NDPP->perihal='Penunjukan Panitia '.$Pengadaan->nama_pengadaan;
 			} else {
-				$NDPP->perihal='Penunjukan Panitia '.$Pengadaan->nama_pengadaan;
+				$NDPP->perihal='Penunjukan Pejabat '.$Pengadaan->nama_pengadaan;
 			}
 			
 			// Uncomment the following line if AJAX validation is needed
