@@ -1589,38 +1589,41 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Dokumen Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
-		else if($Dok->nama_dokumen="Surat Pengumuman Hasil Kualifikasi"){
+		else if($Dok->nama_dokumen=="Surat Pengumuman Hasil Kualifikasi"){
 			
 			$SPHK = PengumumanHasilPrakualifikasi::model()->find('id_dokumen='.$Dok->id_dokumen);
-			// $DokLelang = Dokumen::model()->find('id_pengadaan=' . $Dok->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan"');
-			// $SPP = SuratPengumumanPelelangan::model()->find('id_dokumen='.$DokLelang->id_dokumen);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$tanggalLelang = Tanggal::getTanggalLengkap($DokLelang->tanggal);
-			$listpeserta = '';
+			$listpeserta = getPenyediaX($Peng->id_pengadaan,"evaluasi_pq");
 			$penyedia = '';
-			$panitiapejabat = '';
-			$namaketua = '';
-			$nomor = '';
-			
-			if(Panitia::model()->find('id_panitia='.$Peng->id_panitia)->jenis_panitia=='Panitia'){
-			
+			if($Peng->metode_pengadaan=="Pelelangan"){
+				$DokLelang = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan"');
+				$tanggalpengumuman = Tanggal::getTanggalLengkap($DokLelang->tanggal);
+				$nopengumuman = SuratPengumumanPelelangan::model()->find('id_dokumen='.$DokLelang->id_dokumen)->nomor;
 			} else {
-			
+				$DokUndangan = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Undangan Prakualifikasi"');
+				$tanggalpengumuman = Tanggal::getTanggalLengkap($DokUndangan->tanggal);
+				$nopengumuman = SuratUndanganPrakualifikasi::model()->find('id_dokumen='.$DokUndangan->id_dokumen)->nomor;
+			}
+			if(Panitia::model()->find('id_panitia='.$Peng->id_panitia)->jenis_panitia=='Panitia'){
+				$panitiapejabat = "Ketua Panitia";
+				$namaketua = Anggota::model()->find('id_panitia=' . $Peng->id_panitia . ' and jabatan="Ketua"')->nama;
+			} else {
+				$panitiapejabat = "Pejabat";
+				$namaketua = Anggota::model()->find('id_panitia=' . $Peng->id_panitia)->nama_panitia;
 			}
 			$this->doccy->newFile('4e Pengumuman Hasil Prakualifikasi.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			
 			$this->doccy->phpdocx->assign('#nomor#', $SPHK->nomor);			
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);						
-			$this->doccy->phpdocx->assign('#nopengumuman#', $nomor);			
-			$this->doccy->phpdocx->assign('#tglpengumuman#', $nomor);						
-			$this->doccy->phpdocx->assign('#listpeserta#', $nomor);			
+			$this->doccy->phpdocx->assign('#nopengumuman#', $nopengumuman);			
+			$this->doccy->phpdocx->assign('#tglpengumuman#', $tanggalpengumuman);						
+			$this->doccy->phpdocx->assign('#listpeserta#', $listpeserta);			
 			$this->doccy->phpdocx->assign('#penyedia#', $nomor);			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_pengadaan);
-			$this->doccy->phpdocx->assign('#panitiapejabat2#', $nomor);			
-			$this->doccy->phpdocx->assign('#namaketua#', $nomor);
+			$this->doccy->phpdocx->assign('#panitiapejabat#', $panitiapejabat);			
+			$this->doccy->phpdocx->assign('#namaketua#', $namaketua);
 			
 			$this->renderDocx("Surat Pengumuman Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
@@ -1888,12 +1891,14 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
 			$this->doccy->phpdocx->assign('#panitia/pejabat#', $jenispicgan);
 			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaLulusEval1Sampul($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#listpesertakesimpulan#',$this->getPenyediaLulusKesimpulan($Peng->id_pengadaan,'evaluasi_penawaran_1'));
+			$this->doccy->phpdocx->assign('#listpesertakesimpulan#',$this->getPenyediaLulusKesimpulan($Peng->id_pengadaan,'evaluasi_penawaran_2'));
 			
 			$this->doccy->phpdocx->assign('#listperusahaan#',$this->getPenyediaXMasukPenawaran1($Peng->id_pengadaan));			
-			$this->doccy->phpdocx->assign('#listperusahaanlulus#',$this->getPenyediaLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
-			$this->doccy->phpdocx->assign('#listperusahaantidaklulus#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));			
-			$this->doccy->phpdocx->assign('#jmlpesertalulus#', $this->getJmlPenyediaLulus($Peng->id_pengadaan,'evaluasi_penawaran_1'));	
+			$this->doccy->phpdocx->assign('#listperusahaanlulus#',$this->getPenyediaLulusX($Peng->id_pengadaan,'evaluasi_penawaran_2'));
+			$this->doccy->phpdocx->assign('#listperusahaantidaklulusadministrasi#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'administrasi'));			
+			$this->doccy->phpdocx->assign('#listperusahaantidaklulusteknik#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));			
+			$this->doccy->phpdocx->assign('#listperusahaantidaklulusbiaya#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'evaluasi_penawaran_2'));			
+			$this->doccy->phpdocx->assign('#jmlpesertalulus#', $this->getJmlPenyediaLulus($Peng->id_pengadaan,'evaluasi_penawaran_2'));	
 			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $this->getJmlPenyediaMasukPenawaran1($Peng->id_pengadaan));	
 						
 			if($jenispicgan == 'Pejabat'){
@@ -1940,7 +1945,8 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#listperusahaan#',$this->getPenyediaXMasukPenawaran1($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
-			$this->doccy->phpdocx->assign('#listperusahaantdklulus#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
+			$this->doccy->phpdocx->assign('#listperusahaantdklulusadministrasi#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'administrasi'));
+			$this->doccy->phpdocx->assign('#listperusahaantdklulusteknik#',$this->getPenyediaTdkLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1'));
 			$this->doccy->phpdocx->assign('#jmlpesertalulus#', $this->getJmlPenyediaLulus($Peng->id_pengadaan,'evaluasi_penawaran_1'));	
 			$this->doccy->phpdocx->assign('#jumlahperusahaan#', $this->getJmlPenyediaMasukPenawaran1($Peng->id_pengadaan));	
 			

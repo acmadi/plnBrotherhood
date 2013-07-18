@@ -1550,28 +1550,27 @@
 					date_default_timezone_set("Asia/Jakarta");
 					$Dokumen0->tanggal=date('d-m-Y');
 					
-					// $Dokumen1=new Dokumen;
-					// $Dokumen1->id_dokumen=$somevariable+2;
-					// $Dokumen1->nama_dokumen='Daftar Hadir Penerimaan Prakualifikasi';
-					// $Dokumen1->tempat='Jakarta';
-					// $Dokumen1->status_upload='Belum Selesai';
-					// $Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-					// $Dokumen1->tanggal=$DPK->tanggal_evaluasi;
+					$Dokumen1=new Dokumen;
+					$Dokumen1->id_dokumen=$somevariable+2;
+					$Dokumen1->nama_dokumen='Daftar Hadir Penerimaan Prakualifikasi';
+					$Dokumen1->tempat='Jakarta';
+					$Dokumen1->status_upload='Belum Selesai';
+					$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+					$Dokumen1->tanggal=$DPK->tanggal_pemasukan2;
 					
 					$BAPPQ= new BeritaAcaraPenerimaanPq;
 					$BAPPQ->id_dokumen=$Dokumen0->id_dokumen;
-					$BAPPQ->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					
-					// $DH= new DaftarHadir;
-					// $DH->id_dokumen=$Dokumen1->id_dokumen;
-					// $DH->acara='Evaluasi Prakualifikasi '.$Pengadaan->nama_pengadaan;
-					// $DH->tempat_hadir=$DPK->tempat_evaluasi;
-					// $DH->jam=$DPK->waktu_evaluasi;
+					$DH= new DaftarHadir;
+					$DH->id_dokumen=$Dokumen1->id_dokumen;
+					$DH->acara='Penerimaan Prakualifikasi '.$Pengadaan->nama_pengadaan;
+					$DH->tempat_hadir=$DPK->tempat_pemasukan;
+					$DH->jam=$DPK->waktu_pemasukan2;
 					
 					// if(isset($_POST['perusahaan'])){
 													
 						// for($i=0;$i<count($PP);$i++){
-							// if(isset($_POST['perusahaan'][$i])){																																																
+							// if(isset($_POST['perusahaan'][$i])){			
 								// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
 								// $PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
 								// $PP[$i]->save();
@@ -1631,8 +1630,8 @@
 						if($valid){
 							if($Pengadaan->save(false))
 							{	
-								if($Dokumen0->save(false)){
-									if($BAPPQ->save(false)){
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+									if($BAPPQ->save(false)&&$DH->save(false)){
 										$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));
 									}
 								}
@@ -1641,7 +1640,7 @@
 					}
 					
 					$this->render('penyampaiandokumenprakualifikasi',array(
-						'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,//'DH'=>$DH,'PP'=>$PP,
+						'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,//'PP'=>$PP,
 					));
 				}
 			}
@@ -1660,10 +1659,10 @@
 					
 					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Penerimaan Prakualifikasi"');
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-					//$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Penerimaan Prakualifikasi"');
+					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Penerimaan Prakualifikasi"');
 					
 					$BAPPQ= BeritaAcaraPenerimaanPq::model()->findByPk($Dokumen0->id_dokumen);
-					//$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
+					$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
 					
 					// if($Pengadaan->metode_pengadaan == 'Pelelangan'){
 						// $PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
@@ -1730,8 +1729,8 @@
 						if($valid){
 							if($Pengadaan->save(false))
 							{	
-								if($Dokumen0->save(false)){
-									if($BAPPQ->save(false)){
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+									if($BAPPQ->save(false)&&$DH->save(false)){
 										$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));
 									}
 								}
@@ -1741,7 +1740,7 @@
 					
 				}
 				$this->render('penyampaiandokumenprakualifikasi',array(
-					'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,//'DH'=>$DH'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,//'PP'=>$PP,
 				));
 			}
 		}
@@ -2146,9 +2145,9 @@
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					if($Pengadaan->metode_pengadaan=="Pelelangan") {
-						$Pengadaan->status="16";
+						$Pengadaan->status="19";
 					} else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung") {
-						$Pengadaan->status="17";
+						$Pengadaan->status="20";
 					}
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
