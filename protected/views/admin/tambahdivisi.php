@@ -26,7 +26,7 @@
 
 			<div class="row">
 				<?php echo $form->labelEx($divisi,'Kepanjangan'); ?> 
-				<?php echo $form->textField($divisi,'nama_divisi',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($divisi,'nama_divisi',array('size'=>56,'maxlength'=>256)); ?>
 				<?php echo $form->error($divisi,'nama_divisi'); ?>
 			</div>
 

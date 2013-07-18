@@ -58,13 +58,13 @@
 
 			<div class="row">
 				<?php echo $form->labelEx($panitia,'Nama panitia'); ?> 
-				<?php echo $form->textField($panitia,'nama_panitia',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($panitia,'nama_panitia',array('size'=>56,'maxlength'=>256)); ?>
 				<?php echo $form->error($panitia,'nama_panitia'); ?>
 			</div>
 
 			<div class="row">
 				<?php echo $form->labelEx($panitia,'Nomor SK panitia'); ?> 
-				<?php echo $form->textField($panitia,'SK_panitia',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($panitia,'SK_panitia',array('size'=>56,'maxlength'=>256)); ?>
 				<?php echo $form->error($panitia,'SK_panitia'); ?>
 			</div>
 				

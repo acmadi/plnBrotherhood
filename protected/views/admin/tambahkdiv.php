@@ -38,7 +38,7 @@
 
 			<div class="row">
 				<?php echo $form->labelEx($kdiv,'Nama pengguna'); ?> 
-				<?php echo $form->textField($kdiv,'username',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($kdiv,'username',array('size'=>56,'maxlength'=>256)); ?>
 				<?php echo $form->error($kdiv,'username'); ?>
 			</div>
 

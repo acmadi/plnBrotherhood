@@ -40,7 +40,7 @@
 
 			<div class="row">
 				<?php echo $form->labelEx($pejabat,'Nama pengguna'); ?> 
-				<?php echo $form->textField($pejabat,'username',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($pejabat,'username',array('size'=>56,'maxlength'=>256)); ?>
 				<?php echo $form->error($pejabat,'username'); ?>
 			</div>
 
