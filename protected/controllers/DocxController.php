@@ -1593,16 +1593,17 @@ class DocxController extends Controller
 			
 			$SPHK = PengumumanHasilPrakualifikasi::model()->find('id_dokumen='.$Dok->id_dokumen);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$listpeserta = getPenyediaX($Peng->id_pengadaan,"evaluasi_pq");
-			$penyedia = '';
+			$penyedia = $this->getPenyediaX($Peng->id_pengadaan,"penetapan_pq");
 			if($Peng->metode_pengadaan=="Pelelangan"){
 				$DokLelang = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan"');
 				$tanggalpengumuman = Tanggal::getTanggalLengkap($DokLelang->tanggal);
 				$nopengumuman = SuratPengumumanPelelangan::model()->find('id_dokumen='.$DokLelang->id_dokumen)->nomor;
+				$listpeserta = $this->getPenyediaX($Peng->id_pengadaan,"pendaftaran_pelelangan_pq");
 			} else {
 				$DokUndangan = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Undangan Prakualifikasi"');
 				$tanggalpengumuman = Tanggal::getTanggalLengkap($DokUndangan->tanggal);
 				$nopengumuman = SuratUndanganPrakualifikasi::model()->find('id_dokumen='.$DokUndangan->id_dokumen)->nomor;
+				$listpeserta = $this->getPenyediaX($Peng->id_pengadaan,"undangan_prakualifikasi");
 			}
 			if(Panitia::model()->find('id_panitia='.$Peng->id_panitia)->jenis_panitia=='Panitia'){
 				$panitiapejabat = "Ketua Panitia";
@@ -1620,7 +1621,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#nopengumuman#', $nopengumuman);			
 			$this->doccy->phpdocx->assign('#tglpengumuman#', $tanggalpengumuman);						
 			$this->doccy->phpdocx->assign('#listpeserta#', $listpeserta);			
-			$this->doccy->phpdocx->assign('#penyedia#', $nomor);			
+			$this->doccy->phpdocx->assign('#penyedia#', $penyedia);			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_pengadaan);
 			$this->doccy->phpdocx->assign('#panitiapejabat#', $panitiapejabat);			
 			$this->doccy->phpdocx->assign('#namaketua#', $namaketua);
