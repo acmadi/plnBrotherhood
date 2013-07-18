@@ -3,27 +3,17 @@
 $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 ?>
 <h1 align="center" >Kontrol Anggaran</h1>
-<p>
-	Pagu Total :  <?php echo $pagutotal; ?>
-	RAB Total :  <?php echo $rabtotal; ?> 
-	HPS Total :  <?php echo $hpstotal; ?>
-	Kontrak Total :  <?php echo $kontraktotal; ?>
-	Penghematan Total :  <?php echo $penghematantotal; ?>
-	Pesren Total :  <?php echo $persenpenghematantotal; ?> 
-</p>
 <?php
 	$this->widget('zii.widgets.CDetailView', array(
 						'id'=>'viewdetail',
-						'data'=>$datatotal,
+						'data'=>$anggarantotal,
 						'attributes'=>array(
 							'total_pagu_anggaran',
-							array( 'label'=>'Total Pagu Anggaran', 'value'=>'$data["total_pagu_anggaran"]',),
-							array( 'label'=>'Total Nama Divisi', 'value'=>'$data["total_nilai_rab"]',),
-							array( 'label'=>'Total Nilai HPS', 'value'=>'$data["nilai_hps"]',),
-							array( 'label'=>'Total Nilai Kontrak', 'value'=>'$data["total_nilai_hps"]',),
-							array( 'label'=>'Total Penghematan', 'value'=>'$data["total_penghematan"]',),
-							array( 'label'=>'Persen', 'value'=>'$data["persen"]',),
-							
+							'total_nilai_rab',
+							'total_nilai_hps',
+							'total_nilai_kontrak',
+							'total_penghematan',
+							'persentase',
 						),
 					));
  
@@ -39,7 +29,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 			array( 'name'=>'Nilai HPS', 'value'=>'$data["nilai_hps"]',),
 			array( 'name'=>'Nilai Kontrak', 'value'=>'$data["nilai_kontrak"]',),
 			array( 'name'=>'Penghematan', 'value'=>'$data["penghematan"]',),
-			array( 'name'=>'Persen', 'value'=>'$data["persen"]',),
+			array( 'name'=>'Persentase', 'value'=>'$data["persentase"]',),
 			),
 		'pager'=>array(
 			'class'=>'CLinkPager',
