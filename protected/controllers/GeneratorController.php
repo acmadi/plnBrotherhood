@@ -1560,7 +1560,6 @@
 					
 					$BAPPQ= new BeritaAcaraPenerimaanPq;
 					$BAPPQ->id_dokumen=$Dokumen0->id_dokumen;
-					$BAPPQ->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					
 					// $DH= new DaftarHadir;
 					// $DH->id_dokumen=$Dokumen1->id_dokumen;
@@ -1659,7 +1658,6 @@
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					
 					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Penerimaan Prakualifikasi"');
-					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					//$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Penerimaan Prakualifikasi"');
 					
 					$BAPPQ= BeritaAcaraPenerimaanPq::model()->findByPk($Dokumen0->id_dokumen);
