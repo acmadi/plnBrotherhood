@@ -97,7 +97,9 @@ class XlsxController extends Controller
 		}
 		
 		$dokpq=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
-		$DPK=DokumenPrakualifikasi::model()->findByPk($dokpq->id_dokumen);
+		if($dokpq!=null){
+			$DPK=DokumenPrakualifikasi::model()->findByPk($dokpq->id_dokumen);
+		}
 		
 		$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
 		$objPHPExcel = new PHPExcel;
