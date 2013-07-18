@@ -98,14 +98,14 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		
 		<br/>
 		</div><!-- form -->
-		
-			<?php if($Pengadaan->status!='23') { ?>
-			<br/>
+		<?php if (!$BAPPQ->isNewRecord){ ?>
+		<br/>
 			<div style="border-top:1px solid lightblue">
 			<br/>
 				<h4><b> Daftar Dokumen </b></h4>
 				<ul class="generatedoc">
 						<li><?php echo CHtml::link('Berita Acara Penerimaan Prakualifikasi', array('xlsx/download','id'=>$BAPPQ->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Daftar Hadir Penerimaan Dokumen Prakualifikasi', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 					<?php } ?>
 				</ul>
 			</div>		
