@@ -1589,11 +1589,11 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Dokumen Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
-		else if($Dok->nama_dokumen="Surat Pengumuman Hasil Kualifikasi"){
+		else if($Dok->nama_dokumen=="Surat Pengumuman Hasil Kualifikasi"){
 			
 			$SPHK = PengumumanHasilPrakualifikasi::model()->find('id_dokumen='.$Dok->id_dokumen);
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
-			$listpeserta = '';
+			$listpeserta = getPenyediaX($Peng->id_pengadaan,"evaluasi_pq");
 			$penyedia = ;
 			if($Peng->metode_pengadaan=="Pelelangan"){
 				$DokLelang = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan"');
@@ -1619,7 +1619,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);						
 			$this->doccy->phpdocx->assign('#nopengumuman#', $nopengumuman);			
 			$this->doccy->phpdocx->assign('#tglpengumuman#', $tanggalpengumuman);						
-			$this->doccy->phpdocx->assign('#listpeserta#', $nomor);			
+			$this->doccy->phpdocx->assign('#listpeserta#', $listpeserta);			
 			$this->doccy->phpdocx->assign('#penyedia#', $nomor);			
 			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_pengadaan);
 			$this->doccy->phpdocx->assign('#panitiapejabat#', $panitiapejabat);			
