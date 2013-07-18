@@ -2170,7 +2170,8 @@
 					$Pengumuman->id_dokumen=$newDokumen->id_dokumen;
 					
 					if(isset($_POST['PengumumanHasilPrakualifikasi'])){
-						$Pengumuman->attributes=$_POST['PengumumanHasilPrakualifikasi'];
+					$Pengumuman->attributes=$_POST['PengumumanHasilPrakualifikasi'];						
+					$newDokumen->attributes=$_POST['Dokumen'];
 						$valid=$Pengumuman->validate();
 						if($valid){
 							if($Pengadaan->save(false)){
@@ -2201,15 +2202,18 @@
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					$tempDokumen=Dokumen::model()->find('id_pengadaan='.$id.' and nama_dokumen="Surat Pengumuman Hasil Kualifikasi"');
-					$Pengumuman = PengumumanHasilPrakualifikasi::model()->find('id_dokumen=18');
+					$Pengumuman = PengumumanHasilPrakualifikasi::model()->find('id_dokumen='.$tempDokumen->id_dokumen);
 					
 					if(isset($_POST['PengumumanHasilPrakualifikasi'])){
 					$Pengumuman->attributes=$_POST['PengumumanHasilPrakualifikasi'];
+					$tempDokumen->attributes=$_POST['Dokumen'];
 					$valid=$Pengumuman->validate();
 					if($valid){
 						if($Pengadaan->save(false)){
-							if($Pengumuman->save(false)){
-								$this->redirect(array('editpengumumanhasilprakualifikasi','id'=>$id));
+							if($tempDokumen->save(false)){
+								if($Pengumuman->save(false)){
+									$this->redirect(array('editpengumumanhasilprakualifikasi','id'=>$id));
+								}
 							}
 						}
 					}

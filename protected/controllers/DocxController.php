@@ -1591,6 +1591,38 @@ class DocxController extends Controller
 		}
 		else if($Dok->nama_dokumen="Surat Pengumuman Hasil Kualifikasi"){
 			
+			$SPHK = PengumumanHasilPrakualifikasi::model()->find('id_dokumen='.$Dok->id_dokumen);
+			// $DokLelang = Dokumen::model()->find('id_pengadaan=' . $Dok->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan"');
+			// $SPP = SuratPengumumanPelelangan::model()->find('id_dokumen='.$DokLelang->id_dokumen);
+			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$tanggalLelang = Tanggal::getTanggalLengkap($DokLelang->tanggal);
+			$listpeserta = '';
+			$penyedia = '';
+			$panitiapejabat = '';
+			$namaketua = '';
+			$nomor = '';
+			
+			if(Panitia::model()->find('id_panitia='.$Peng->id_panitia)->jenis_panitia=='Panitia'){
+			
+			} else {
+			
+			}
+			$this->doccy->newFile('4e Pengumuman Hasil Prakualifikasi.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomor#', $SPHK->nomor);			
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);						
+			$this->doccy->phpdocx->assign('#nopengumuman#', $nomor);			
+			$this->doccy->phpdocx->assign('#tglpengumuman#', $nomor);						
+			$this->doccy->phpdocx->assign('#listpeserta#', $nomor);			
+			$this->doccy->phpdocx->assign('#penyedia#', $nomor);			
+			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_pengadaan);
+			$this->doccy->phpdocx->assign('#panitiapejabat2#', $nomor);			
+			$this->doccy->phpdocx->assign('#namaketua#', $nomor);
+			
+			$this->renderDocx("Surat Pengumuman Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Prakualifikasi"){
 			

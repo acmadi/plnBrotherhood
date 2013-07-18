@@ -82,9 +82,15 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		
 		<br/>
 		</div><!-- form -->	
-		
-		<li><?php // echo CHtml::link('Hasil Prakualifikasi', array('xlsx/download','id'=>$PHPQ->id_dokumen)); ?></li>
-		
+		<?php if(!$Pengumuman->isNewRecord){?>
+		<div style="border-top:1px solid lightblue">
+		<br/>
+				<h4><b>Daftar Dokumen</b></h4>
+				<ul class="generatedoc">
+					<li><?php echo CHtml::link('Surat Pengumuman Hasil Prakualifikasi',array('docx/download','id'=>$newDokumen->id_dokumen))?></li>
+				</ul>
+		</div>
+		<?php } ?>
 	<?php	} ?>
 	</div>
 </div>
