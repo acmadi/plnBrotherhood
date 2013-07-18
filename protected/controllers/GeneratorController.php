@@ -2146,22 +2146,46 @@
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					if($Pengadaan->metode_pengadaan=="Pelelangan") {
-						$Pengadaan->status="16";
+						$Pengadaan->status="19";
 					} else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung") {
-						$Pengadaan->status="17";
+						$Pengadaan->status="20";
 					}
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 					
-					$id_dokumen=Dokumen::model()->findAll('id_pengadaan=' . $id .' and nama_dokumen="Surat Pengumuman Hasil Kualifikasi"');
-					$Pengumuman = PengumumanHasilPrakualifikasi::model()->findAll('id_dokumen=' . $id_dokumen .'');
+					$newDokumen = new Dokumen;
+					$criteria=new CDbcriteria;
+					$criteria->select='max(id_dokumen) AS maxId';
+					$row = $newDokumen->model()->find($criteria);
+					$somevariable = $row['maxId'];					
+					$newDokumen->id_dokumen=$somevariable+1;
+					$newDokumen->nama_dokumen='Surat Pengumuman Hasil Kualifikasi';
+					date_default_timezone_set('Asia/Jakarta');
+					$newDokumen->tanggal=date('Y-m-d');
+					$newDokumen->tempat='Jakarta';
+					$newDokumen->id_pengadaan=$id;
+					$newDokumen->status_upload='Belum Selesai';
 					
+					$Pengumuman = new PengumumanHasilPrakualifikasi;
+					$Pengumuman->id_dokumen=$newDokumen->id_dokumen;
 					
-						
-					$Pengadaan->save();
+					if(isset($_POST['PengumumanHasilPrakualifikasi'])){
+					$Pengumuman->attributes=$_POST['PengumumanHasilPrakualifikasi'];						
+					$newDokumen->attributes=$_POST['Dokumen'];
+						$valid=$Pengumuman->validate();
+						if($valid){
+							if($Pengadaan->save(false)){
+								if($newDokumen->save(false)){
+									if($Pengumuman->save(false)){
+										$this->redirect(array('editpengumumanhasilprakualifikasi','id'=>$id));
+									}
+								}
+							}
+						}
+					}
 					
 					$this->render('pengumumanhasilprakualifikasi',array(
-						'Pengadaan'=>$Pengadaan,'Pengumuman'=>$Pengumuman,
+						'Pengadaan'=>$Pengadaan,'Pengumuman'=>$Pengumuman, 'newDokumen'=>$newDokumen,
 					));
 				}
 			}
@@ -2177,90 +2201,26 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
+					$tempDokumen=Dokumen::model()->find('id_pengadaan='.$id.' and nama_dokumen="Surat Pengumuman Hasil Kualifikasi"');
+					$Pengumuman = PengumumanHasilPrakualifikasi::model()->find('id_dokumen='.$tempDokumen->id_dokumen);
 					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
+					if(isset($_POST['PengumumanHasilPrakualifikasi'])){
+					$Pengumuman->attributes=$_POST['PengumumanHasilPrakualifikasi'];
+					$tempDokumen->attributes=$_POST['Dokumen'];
+					$valid=$Pengumuman->validate();
+					if($valid){
+						if($Pengadaan->save(false)){
+							if($tempDokumen->save(false)){
+								if($Pengumuman->save(false)){
+									$this->redirect(array('editpengumumanhasilprakualifikasi','id'=>$id));
+								}
+							}
+						}
+					}
+				}
 					
-					// $PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					
-					// if(isset($_POST['perusahaan'])){
-													
-						// for($i=0;$i<count($PP);$i++){
-							// if(isset($_POST['perusahaan'][$i])){																																																
-								// $PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-								// $PP[$i]->alamat='-';									
-								// $PP[$i]->npwp='-';		
-								// $PP[$i]->nilai = 0;									
-								// $PP[$i]->biaya = 0;				
-								// $PP[$i]->nomor_surat_penawaran = '-';									
-								// $PP[$i]->tanggal_penawaran = '-';												
-								// $PP[$i]->undangan_prakualifikasi = '1';
-								// $PP[$i]->pendaftaran_pelelangan_pq = '1';	
-								// $PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-								// $PP[$i]->penyampaian_lelang = '-';
-								// $PP[$i]->evaluasi_pq = '-';
-								// $PP[$i]->penetapan_pq = '-';
-								// $PP[$i]->undangan_supph = '-';
-								// $PP[$i]->pendaftaran_pc = '-';
-								// $PP[$i]->pengambilan_dokumen = '-';									
-								// $PP[$i]->ba_aanwijzing = '-';
-								// $PP[$i]->pembukaan_penawaran_1 = '-';
-								// $PP[$i]->evaluasi_penawaran_1 = '-';
-								// $PP[$i]->pembukaan_penawaran_2 = '-';			
-								// $PP[$i]->evaluasi_penawaran_2 = '-';
-								// $PP[$i]->negosiasi_klarifikasi = '-';
-								// $PP[$i]->usulan_pemenang = '-';
-								// $PP[$i]->penetapan_pemenang	 = '-';								
-								
-								// $PP[$i]->save();
-							// }
-						// }
-						
-						// $total = count($_POST['perusahaan']);
-						// if(count($PP)<$total){
-							// $PPkurang = $total - count($PP);
-							// for($j=0;$j<$PPkurang;$j++){
-								// $PPbaru = new PenerimaPengadaan;
-								// $PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-								// $PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-								// $PPbaru->alamat='-';									
-								// $PPbaru->npwp='-';		
-								// $PPbaru->nilai = 0;
-								// $PPbaru->biaya = 0;							
-								// $PPbaru->nomor_surat_penawaran = '-';
-								// $PPbaru->tanggal_penawaran = '-';														
-								// $PPbaru->undangan_prakualifikasi = '1';
-								// $PPbaru->pendaftaran_pelelangan_pq = '1';
-								// $PPbaru->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i+$j];		
-								// $PPbaru->penyampaian_lelang = '-';
-								// $PPbaru->evaluasi_pq = '-';
-								// $PPbaru->penetapan_pq = '-';
-								// $PPbaru->undangan_supph = '-';
-								// $PPbaru->pendaftaran_pc = '-';
-								// $PPbaru->pengambilan_dokumen = '-';
-								// $PPbaru->ba_aanwijzing = '-';
-								// $PPbaru->pembukaan_penawaran_1 = '-';
-								// $PPbaru->evaluasi_penawaran_1 = '-';
-								// $PPbaru->pembukaan_penawaran_2 = '-';
-								// $PPbaru->evaluasi_penawaran_2 = '-';
-								// $PPbaru->negosiasi_klarifikasi = '-';
-								// $PPbaru->usulan_pemenang = '-';
-								// $PPbaru->penetapan_pemenang = '-';
-								
-								// $PPbaru->save();
-							// }
-							
-						// }
-						
-						
-						// if($Pengadaan->save(false)){	
-							// $this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));					
-						// }			
-						
-					// }
-						
 					$this->render('pengumumanhasilprakualifikasi',array(
-						// 'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+						'Pengadaan'=>$Pengadaan,'Pengumuman'=>$Pengumuman,'newDokumen'=>$tempDokumen,
 					));
 				}
 			}
