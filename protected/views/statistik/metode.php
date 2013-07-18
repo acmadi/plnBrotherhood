@@ -7,9 +7,9 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan per Divisi';
 <div id="sidebar">
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
-		<li class="onprogress"><?php echo CHtml::link('Pengadaan per divisi', array('statistik/divisi', 'chart'=>'1')) ?></li>
+		<li><?php echo CHtml::link('Pengadaan per divisi', array('statistik/divisi', 'chart'=>'1')) ?></li>
 		<li><?php echo CHtml::link('Pengadaan per PIC', array('statistik/pic', 'chart'=>'1')) ?></li>
-		<li><?php echo CHtml::link('Pengadaan per metode pengadaan', array('statistik/metode', 'chart'=>'1')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Pengadaan per metode pengadaan', array('statistik/metode', 'chart'=>'1')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 </div>
@@ -33,14 +33,14 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan per Divisi';
 					'formatter'=>'js:function() {return this.percentage +" %";}',
 				),
 				'title'=>array('text'=>$chart == '1' ? 'Pengadaan yang sedang berlangsung' : ($chart == '2' ? 'Pengadaan yang sudah selesai' : ($chart == '3' ? 'Pengadaan yang gagal' : 'Pengadaan total'))),
-				'subtitle'=>array('text'=>'per divisi'),
+				'subtitle'=>array('text'=>'per metode pengadaan'),
 				'plotOptions'=>array(
 					'pie'=>array(
 						'dataLabels'=>array(
 							'formatter'=>'js:function() {return "<b>" + this.point.name + "</b><br />  " + this.y;}',
 						),
 						'events'=>array(
-							'click'=>'js:function(event) {window.location="' . Yii::app()->createUrl('statistik/divisi') . '&chart=' . $chart . '&detail=' . '" + event.point.name;}',
+							'click'=>'js:function(event) {window.location="' . Yii::app()->createUrl('statistik/metode') . '&chart=' . $chart . '&detail=' . '" + event.point.name;}',
 						),
 					),
 				),
@@ -58,9 +58,9 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan per Divisi';
 		if (isset($detail)) {
 			echo '<br />';
 			echo '<br />';
-			echo '<h3>' . Divisi::model()->findByPk($detail)->nama_divisi . '</h3>';
+			echo '<h3>' . $detail . '</h3>';
 			$this->widget('zii.widgets.grid.CGridView', array(
-				'dataProvider'=>Pengadaan::model()->searchStatistikDivisi($detail, $chart),
+				'dataProvider'=>Pengadaan::model()->searchStatistikMetodePengadaan($detail, $chart),
 				"ajaxUpdate"=>"false",
 				'columns'=>array(
 					array(
