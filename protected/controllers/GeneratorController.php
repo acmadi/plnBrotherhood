@@ -2146,9 +2146,9 @@
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
 					if($Pengadaan->metode_pengadaan=="Pelelangan") {
-						$Pengadaan->status="16";
+						$Pengadaan->status="19";
 					} else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung") {
-						$Pengadaan->status="17";
+						$Pengadaan->status="20";
 					}
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
