@@ -75,25 +75,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				));?>
 				<?php echo $form->error($Dokumen0,'tanggal'); ?>
 			</div>
-
-			<div class="row">
-				<?php //echo $form->labelEx($SUPPP,'lingkup_kerja'); ?>
-				<?php //echo $form->textArea($SUPPP,'lingkup_kerja',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php //echo $form->error($SUPPP,'lingkup_kerja'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($SUPPP,'waktu penyelesaian pekerjaan (dalam satuan hari)'); ?>
-				<?php echo $form->textField($SUPPP,'waktu_kerja',array('size'=>56,'maxlength'=>20)); ?>
-				<?php echo $form->error($SUPPP,'waktu_kerja'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($SUPPP,'tempat_penyerahan_pekerjaan'); ?>
-				<?php echo $form->textArea($SUPPP,'tempat_penyerahan',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
-				<?php echo $form->error($SUPPP,'tempat_penyerahan'); ?>
-			</div>
-
 			
 			<div class="row">
 				<?php 

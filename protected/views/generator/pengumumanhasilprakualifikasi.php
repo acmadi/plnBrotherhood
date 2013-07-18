@@ -46,42 +46,51 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</script>
 				</div>
 			<?php endif; ?>
-	<!---------------------
-			// <div class="form" >
-
-			<?php //$form=$this->beginWidget('CActiveForm', array(
-			// 'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
-			// 'enableAjaxValidation'=>false,
-			// )); ?>
-			
-			<h4><b> Berita Acara Penyampaian Dokumen Prakualifikasi </b></h4>
-	
-			<div class="row">
-				<?php 
-					// $this->widget('application.extensions.appendo.JAppendo',array(
-					// 'id' => 'idpenyedia',        
-					// 'model' => $PP,
-					// 'model2' => $PP2,
-					// 'viewName' => 'formperusahaan_pengambilan_dokumen_prakualifikasi',
-					// 'labelAdd' => '',
-					// 'labelDel' => 'Hapus Penyedia',
-					
-					// )); 
+			<h4><b>Surat Pengumuman Hasil Prakualifikasi</b></h4>
+			<div class="form">
+			<?php
+				$form=$this->beginWidget('CActiveForm', array(
+					'id'=>'pengumuman-hasil-prakualifikasi-form',
+					'enableAjaxValidation'=>'false',
+				));
 				?>
+				<div class="row">
+				<?php
+					echo $form->labelEx($Pengumuman, 'nomor');?>
+					<?php
+					echo $form->textField($Pengumuman, 'nomor',array('size'=>56,'maxlength'=>50));
+					echo $form->error($Pengumuman,'nomor');					
+				?>				
+				</div>
+				<div class="row">
+					<?php echo $form->labelEx($newDokumen,'tanggal'); ?>
+					<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+							'model'=>$newDokumen,
+							'attribute'=>'tanggal',
+							'value'=>$newDokumen->tanggal,
+							'htmlOptions'=>array('size'=>56),
+							'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+							),
+					));?>
+					<?php echo $form->error($newDokumen,'tanggal'); ?>
 			</div>
-			
-			<div class="row buttons">
-				<?php //echo CHtml::submitButton($Pengadaan->status == '8' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
-			</div>
-		--->
-			
-		<?php //$this->endWidget(); ?>
+				<div class="row buttons">
+					<?php echo CHtml::submitButton($Pengumuman->isNewRecord?'Simpan':'Perbarui',array('class'=>'sidafbutton')); ?>
+				</div>
+				<?php $this->endWidget();?>
 		
 		<br/>
-		</div><!-- form -->
-		
-		<li><?php echo CHtml::link('Hasil Prakualifikasi', array('xlsx/download','id'=>$PHPQ->id_dokumen)); ?></li>
-		
+		</div><!-- form -->	
+		<?php if(!$Pengumuman->isNewRecord){?>
+		<div style="border-top:1px solid lightblue">
+		<br/>
+				<h4><b>Daftar Dokumen</b></h4>
+				<ul class="generatedoc">
+					<li><?php echo CHtml::link('Surat Pengumuman Hasil Prakualifikasi',array('docx/download','id'=>$newDokumen->id_dokumen))?></li>
+				</ul>
+		</div>
+		<?php } ?>
 	<?php	} ?>
 	</div>
 </div>
