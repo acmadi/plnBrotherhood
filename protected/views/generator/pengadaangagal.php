@@ -12,6 +12,7 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 	</div>
 
 	<div id="maincontent">
+		<br/>
 		<h3>
 			<b> <?php echo $cpengadaan->nama_pengadaan; ?> </b> telah digagalkan. <br/> <br/>
 			Silahkan masuk ke menu <b> Batalkan Pengadaan </b> untuk membuat dan mengunduh Nota Dinas Pengadaan Gagal.
