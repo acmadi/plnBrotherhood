@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2013 at 11:35 AM
+-- Generation Time: Jul 19, 2013 at 12:40 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -425,6 +425,18 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_kualifikasi` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_penetapan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
+  PRIMARY KEY (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nota_dinas_pengadaan_gagal_panitia`
+--
+
+CREATE TABLE IF NOT EXISTS `nota_dinas_pengadaan_gagal_panitia` (
+  `id_dokumen` bigint(255) NOT NULL,
+  `nomor` varchar(100) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1091,6 +1103,12 @@ ALTER TABLE `nota_dinas_penetapan_kualifikasi`
 --
 ALTER TABLE `nota_dinas_penetapan_pemenang`
   ADD CONSTRAINT `nota_dinas_penetapan_pemenang_ibfk_4` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nota_dinas_pengadaan_gagal_panitia`
+--
+ALTER TABLE `nota_dinas_pengadaan_gagal_panitia`
+  ADD CONSTRAINT `nota_dinas_pengadaan_gagal_panitia_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nota_dinas_perintah_pengadaan`
