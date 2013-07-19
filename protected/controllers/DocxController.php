@@ -151,12 +151,21 @@ class DocxController extends Controller
 					$this->renderDocx("RKS-PL-B-Isi-".$Peng->nama_pengadaan.".docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 1") {
-					$nomor_rks = $RKS->nomor;
 					
+					$nomor_rks = $RKS->nomor;
+					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+					$nama_pengadaan = $Peng->nama_pengadaan;
+										
 					$this->doccy->newFile('Lamp 1.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					$this->doccy->phpdocx->assign('#tanggalrks#', $tanggal_rks);
+					$this->doccy->phpdocx->assign('#namapengadaan#', $nama_pengadaan);
+					$this->doccy->phpdocx->assign('#jangkawaktupenawaran#', '..............');
+					$this->doccy->phpdocx->assign('#jangkawaktupenyerahan#', '..............');
+					$this->doccy->phpdocx->assign('#terbilangpenawaran#', '..............');
+					$this->doccy->phpdocx->assign('#terbilangpenyerahan#', '..............');
 					$this->renderDocx("Lamp 1.docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 4") {
