@@ -17,7 +17,7 @@ class AnggaranController extends Controller
 				$rab=0;
 				$hps=0;
 				$kontrak=0;
-				$semuapengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$item->username.'"');
+				$semuapengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$item->username.'" and status = "100"');
 				foreach ($semuapengadaan as $pengadaan){
 					$paguanggaran=$paguanggaran+NotaDinasPerintahPengadaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')->id_dokumen)->pagu_anggaran;
 					$rab=$rab+NotaDinasPermintaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Permintaan"')->id_dokumen)->nilai_biaya_rab;
@@ -113,7 +113,7 @@ class AnggaranController extends Controller
 			$rabtotal=0;
 			$hpstotal=0;
 			$kontraktotal=0;
-			$pengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$id.'"');
+			$pengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$id.'" and status = "100"');
 			$i=0;
 			foreach($pengadaan as $item) {
 				$paguanggaran=NotaDinasPerintahPengadaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$item->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')->id_dokumen)->pagu_anggaran;

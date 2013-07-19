@@ -147,12 +147,21 @@ class DocxController extends Controller
 					$this->renderDocx("RKS-PL-B-Isi-".$Peng->nama_pengadaan.".docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 1") {
-					$nomor_rks = $RKS->nomor;
 					
+					$nomor_rks = $RKS->nomor;
+					$tanggal_rks = Tanggal::getTanggalLengkap($DokRKS->tanggal);
+					$nama_pengadaan = $Peng->nama_pengadaan;
+										
 					$this->doccy->newFile('Lamp 1.docx');
 					$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 					$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 					$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
+					$this->doccy->phpdocx->assign('#tanggalrks#', $tanggal_rks);
+					$this->doccy->phpdocx->assign('#namapengadaan#', $nama_pengadaan);
+					$this->doccy->phpdocx->assign('#jangkawaktupenawaran#', '..............');
+					$this->doccy->phpdocx->assign('#jangkawaktupenyerahan#', '..............');
+					$this->doccy->phpdocx->assign('#terbilangpenawaran#', '..............');
+					$this->doccy->phpdocx->assign('#terbilangpenyerahan#', '..............');
 					$this->renderDocx("Lamp 1.docx", true);
 				
 				} else if ($Rincian->nama_rincian=="Lampiran 4") {
@@ -1624,8 +1633,13 @@ class DocxController extends Controller
 			
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$panitiapejabat = strtoupper($panitia->jenis_panitia);
-			$namaketua = strtoupper(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama);
-				
+					
+			if($panitia->jenis_panitia == 'Panitia'){
+				$namaketua = strtoupper(Anggota::model()->find('id_panitia='.$Peng->id_panitia. ' and jabatan = "Ketua"')->nama);			
+			}else{
+				$namaketua = strtoupper($panitia->nama_panitia);
+			}
+			
 			$this->doccy->newFile('4a Surat Undangan Prakualifikasi.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -1642,6 +1656,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktupemasukan2#', $waktupemasukan2);
 			$this->doccy->phpdocx->assign('#tempatpemasukan#', $tempatpemasukan);
 			$this->doccy->phpdocx->assign('#namaketua#', $namaketua);
+			$this->doccy->phpdocx->assign('#penyedia#', $this->getPenyediaLulusXDanAlamat($Peng->id_pengadaan,'undangan_prakualifikasi'));		
 			
 			$this->renderDocx("Surat Undangan Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
