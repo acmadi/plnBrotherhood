@@ -31,18 +31,12 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><img src="<?php echo Yii::app()->request->baseUrl; ?>/assets/pics/logo.png" /></div>
+		<div id="logo" <?php if (Yii::app()->user->isGuest) echo 'style="width:100%;"' ?>><div <?php if (Yii::app()->user->isGuest) echo 'style="width:400px; position:absolute; left:50%; margin-left:-190px;"' ?>><img <?php if (Yii::app()->user->isGuest) echo 'style="width:400px";' ?> src="<?php echo Yii::app()->request->baseUrl; ?>/assets/pics/logo.png" /></div></div>
 	</div><!-- header -->
 	
 	<div id="mainmenu">
 		<?php
-			if (Yii::app()->user->isGuest) {
-				$this->widget('zii.widgets.CMenu', array(
-					'items'=>array(
-						array('label'=>'Masuk', 'url'=>array('/site/login')),
-					),
-				));
-			} else {
+			if (!Yii::app()->user->isGuest) {
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
 						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>Yii::app()->user->getState('role') != 'admin'),
