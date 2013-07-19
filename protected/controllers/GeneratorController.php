@@ -2139,7 +2139,7 @@
 			}
 		}
 	
-		public function actionPengumumanHasilPrakualifikasi()
+				public function actionPengumumanHasilPrakualifikasi()
 		{	
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
