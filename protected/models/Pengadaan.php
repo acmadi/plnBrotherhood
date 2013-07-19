@@ -165,16 +165,11 @@ class Pengadaan extends CActiveRecord
 			'pic'=>array(
 			  'asc'=>'idPanitia.nama_panitia',
 			  'desc'=>'idPanitia.nama_panitia desc',
-			),
-//                        'ndpermintaan'=>array(
-//			  'asc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan',
-//			  'desc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan desc',
-//			),
-                                       
-			'sisahari'=>array(
-			  'asc'=>'status+status',
-			  'desc'=>'sisahari desc',
-			),
+			),                           
+			// 'sisahari'=>array(
+			  // 'asc'=>'status+status',
+			  // 'desc'=>'sisahari desc',
+			// ),
 			'*',
 		);
 		
@@ -241,15 +236,11 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'idPanitia.nama_panitia',
 			  'desc'=>'idPanitia.nama_panitia desc',
 			),
-//                        'ndpermintaan'=>array(
-//			  'asc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan',
-//			  'desc'=>'notaDinasPerintahPengadaan.nota_dinas_permintaan desc',
-//			),
                                        
-			'sisahari'=>array(
-			  'asc'=>'status+status',
-			  'desc'=>'sisahari desc',
-			),
+			// 'sisahari'=>array(
+			  // 'asc'=>'status+status',
+			  // 'desc'=>'sisahari desc',
+			// ),
 			'*',
 		);
 		
@@ -433,8 +424,8 @@ class Pengadaan extends CActiveRecord
 		
 		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
 
-		$criteria->addcondition("status='100'");	
-		$criteria->addcondition("status='99'");	
+		$criteria->addcondition("status='100' or status ='99'");	
+		// $criteria->addcondition("status='99'");	
 
 		// $criteria->order = 'nama_pengadaan';
 		
@@ -467,10 +458,10 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'divisi_peminta',
 			  'desc'=>'divisi_peminta desc',
 			),
-			'sisahari'=>array(
-			  'asc'=>'Pengadaan.sisaHari()',
-			  'desc'=>'sisahari desc',
-			),
+			// 'sisahari'=>array(
+			  // 'asc'=>'Pengadaan.sisaHari()',
+			  // 'desc'=>'sisahari desc',
+			// ),
 			'*',
 		);
 		
@@ -532,10 +523,10 @@ class Pengadaan extends CActiveRecord
 			  'asc'=>'ABS(status)',
 			  'desc'=>'ABS(status) desc',
 			),  
-			'sisahari'=>array(
-			  'asc'=>'Pengadaan.sisaHari()',
-			  'desc'=>'sisahari desc',
-			),
+			// 'sisahari'=>array(
+			  // 'asc'=>'Pengadaan.sisaHari()',
+			  // 'desc'=>'sisahari desc',
+			// ),
 			'*',
 		);
 		

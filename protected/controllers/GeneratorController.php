@@ -1791,7 +1791,12 @@
 					$DH->tempat_hadir=$DPK->tempat_evaluasi;
 					$DH->jam=$DPK->waktu_evaluasi;
 					
-					$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					if($Pengadaan->metode_pengadaan == 'Pelelangan'){
+						$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}else{
+						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
+					
 				
 
 					if(isset($_POST['BeritaAcaraEvaluasiPrakualifikasi']))
