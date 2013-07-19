@@ -357,7 +357,7 @@
 		<br />
 		<br />
 		
-		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/pengadaangagal","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/notadinaslaporanpengadaangagal","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 	
 	<?php } ?>
 </ul>
