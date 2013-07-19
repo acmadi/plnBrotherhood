@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Hapus Pejabat Berwenang';
+	$this->pageTitle=Yii::app()->name . ' | Pejabat Berwenang';
 ?>
 
 <div id="pagecontent">
@@ -7,9 +7,9 @@
 	<?php $this->beginWidget('zii.widgets.CPortlet'); ?>
 	<ul>
 		<li><?php echo CHtml::link('Tambah pejabat berwenang', array('admin/tambahkdiv')) ?></li>
-		<li class="onprogress"><?php echo CHtml::link('Hapus pejabat berwenang', array('admin/hapuskdiv')) ?></li>
+		<li><?php echo CHtml::link('Hapus pejabat berwenang', array('admin/hapuskdiv')) ?></li>
 		<li><?php echo CHtml::link('Tambah jenis jabatan', array('admin/tambahjabatan')) ?></li>
-		<li><?php echo CHtml::link('Hapus jenis jabatan', array('admin/hapusjabatan')) ?></li>
+		<li class="onprogress"><?php echo CHtml::link('Hapus jenis jabatan', array('admin/hapusjabatan')) ?></li>
 	</ul>
 	<?php $this->endWidget(); ?>
 	</div>
@@ -21,8 +21,8 @@
 			)); ?>
 
 			<div class="row">
-				<?php echo $form->checkBoxList($kdiv, 'username', CHtml::listData($kdiv->findAll(), 'username', 'nama')); ?>
-				<?php echo $form->error($kdiv,'username'); ?>
+				<?php echo $form->checkBoxList($jabatan, 'id_jabatan', CHtml::listData($jabatan->findAll(), 'id_jabatan', 'jabatan')); ?>
+				<?php echo $form->error($jabatan,'id_jabatan'); ?>
 			</div>
 
 			<div class="row buttons">

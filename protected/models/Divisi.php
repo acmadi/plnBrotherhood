@@ -9,6 +9,7 @@
  *
  * The followings are the available model relations:
  * @property Pengadaan[] $pengadaans
+ * @property UserDivisi[] $userDivisis
  */
 class Divisi extends CActiveRecord
 {
@@ -56,6 +57,7 @@ class Divisi extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'pengadaans' => array(self::HAS_MANY, 'Pengadaan', 'divisi_peminta'),
+			'userDivisis' => array(self::HAS_MANY, 'UserDivisi', 'divisi'),
 		);
 	}
 

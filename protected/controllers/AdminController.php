@@ -235,13 +235,19 @@ class AdminController extends Controller
 	public function actionKdiv()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$model = new Kdivmum('search');
-			$model->unsetAttributes();  // clear any default values
+			$modelJabatan = new Jabatan('search');
+			$modelJabatan->unsetAttributes();  // clear any default values
+			if(isset($_GET['Jabatan'])){
+				$modelJabatan->attributes = $_GET['Jabatan'];
+			}
+			$modelKdiv = new Kdivmum('search');
+			$modelKdiv->unsetAttributes();  // clear any default values
 			if(isset($_GET['Kdivmum'])){
-				$model->attributes = $_GET['Kdivmum'];
+				$modelKdiv->attributes = $_GET['Kdivmum'];
 			}
 			$this->render('kdiv', array(
-				'model'=>$model,
+				'modelJabatan'=>$modelJabatan,
+				'modelKdiv'=>$modelKdiv,
 			));
 		}
 	}
@@ -257,7 +263,7 @@ class AdminController extends Controller
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $kdiv->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
 				else{
-					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'jabatan'=>$kdiv->jabatan));
+					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'id_jabatan'=>$kdiv->id_jabatan));
 					if ($old != null) {
 						$old->status_user = 'Aktif';
 						$old->save(false);
@@ -291,6 +297,49 @@ class AdminController extends Controller
 			}
 			$this->render('hapuskdiv', array(
 				'kdiv'=>$kdiv,
+			));
+		}
+	}
+
+	public function actionTambahjabatan()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$jabatan = new Jabatan;
+			if (isset($_POST['Jabatan'])) {
+				$jabatan->attributes = $_POST['Jabatan'];
+				$old = Jabatan::model()->findByPk($jabatan->id_jabatan);
+				if ($old != null) {
+					$old->status = 'Aktif';
+					$old->save(false);
+				}
+				else {
+					$jabatan->status = 'Aktif';
+					if ($jabatan->validate()) {
+						$jabatan->save(false);
+					}
+				}
+				$this->redirect(array('kdiv'));
+			}
+			$this->render('tambahjabatan', array(
+				'jabatan'=>$jabatan,
+			));
+		}
+	}
+
+	public function actionHapusjabatan()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$jabatan = Jabatan::model();
+			if (isset($_POST['Jabatan'])) {
+				foreach ($_POST['Jabatan']['id_jabatan'] as $item) {
+					$jabatan = Jabatan::model()->findByPk($item);
+					$jabatan->status = 'Tidak Aktif';
+					$jabatan->save(false);
+				}
+				$this->redirect(array('kdiv'));
+			}
+			$this->render('hapusjabatan', array(
+				'jabatan'=>$jabatan,
 			));
 		}
 	}

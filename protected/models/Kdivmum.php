@@ -8,8 +8,11 @@
  * @property string $password
  * @property string $nama
  * @property string $email
- * @property string $jabatan
+ * @property integer $id_jabatan
  * @property string $status_user
+ *
+ * The followings are the available model relations:
+ * @property Jabatan $idJabatan
  */
 class Kdivmum extends CActiveRecord
 {
@@ -39,14 +42,15 @@ class Kdivmum extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, nama, email, jabatan, status_user', 'required'),
+			array('username, password, nama, email, id_jabatan, status_user', 'required'),
+			array('id_jabatan', 'numerical', 'integerOnly'=>true),
 			array('username', 'length', 'max'=>20),
 			array('password, nama', 'length', 'max'=>256),
-			array('email, jabatan', 'length', 'max'=>32),
+			array('email', 'length', 'max'=>32),
 			array('status_user', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, password, nama, email, jabatan, status_user', 'safe', 'on'=>'search'),
+			array('username, password, nama, email, id_jabatan, status_user', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +62,7 @@ class Kdivmum extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idJabatan' => array(self::BELONGS_TO, 'Jabatan', 'id_jabatan'),
 		);
 	}
 
@@ -71,7 +76,7 @@ class Kdivmum extends CActiveRecord
 			'password' => 'Password',
 			'nama' => 'Nama',
 			'email' => 'Email',
-			'jabatan' => 'Jabatan',
+			'id_jabatan' => 'Id Jabatan',
 			'status_user' => 'Status User',
 		);
 	}
@@ -91,7 +96,7 @@ class Kdivmum extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('nama',$this->nama,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('jabatan',$this->jabatan,true);
+		$criteria->compare('id_jabatan',$this->id_jabatan);
 		$criteria->compare('status_user',$this->status_user,true);
 
 		return new CActiveDataProvider($this, array(
@@ -110,7 +115,7 @@ class Kdivmum extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('nama',$this->nama,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('jabatan',$this->jabatan,true);
+		$criteria->compare('id_jabatan',$this->id_jabatan,true);
 		$criteria->compare('status_user',$this->status_user,true);
 		$criteria->addcondition('status_user = "Aktif"');
 
