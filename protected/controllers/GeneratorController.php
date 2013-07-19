@@ -120,6 +120,9 @@
 					if(Pengadaan::model()->findByPk($id)->status=="36"){
 						$this->redirect(array('generator/suratpenunjukanpemenang','id'=>$id));
 					}
+					if(Pengadaan::model()->findByPk($id)->status=="98"){
+						$this->redirect(array('generator/pengadaangagal','id'=>$id));
+					}
 					else{
 						$this->redirect(array('generator/checkpoint2','id'=>$id));
 					}
@@ -6215,6 +6218,18 @@
 			else {
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					$this->render('checkpoint2');
+				}
+			}
+		}
+		
+		public function actionPengadaangagal()
+		{	
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				if (Yii::app()->user->getState('role') == 'anggota') {
+					$this->render('pengadaangagal');
 				}
 			}
 		}
