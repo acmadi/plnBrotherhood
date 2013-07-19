@@ -37,6 +37,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 			<?php echo $form->error($Pengadaan,'jenis_pengadaan'); ?>
 		</div>
 
+		<?php if(Yii::app()->user->getState('role') != 'divisi'){?>
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'tanggal_masuk'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -50,7 +51,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 			));?>
 			<?php echo $form->error($Pengadaan,'tanggal_masuk'); ?>
 		</div>
-		
+		<?php } ?>
 		<br/>
 		<h4><b> Nota Dinas Permintaan </b></h4>
 		
@@ -60,6 +61,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 			<?php echo $form->error($NDP,'nomor'); ?>
 		</div>
 		
+
 		<div class="row">
 			<?php echo $form->labelEx($Dokumen0,'tanggal surat'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
