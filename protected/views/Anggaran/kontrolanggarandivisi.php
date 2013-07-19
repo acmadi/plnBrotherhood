@@ -4,17 +4,15 @@ $id = Yii::app()->getRequest()->getQuery('id');
 $divisi = Divisi::model()->findByPk($id);
 $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran '.$divisi->nama_divisi;
 ?>
-<h1 align="center" >Kontrol Anggaran <?php echo $divisi->nama_divisi;?></h1>
-<!--
-<p>
-	Pagu Total :  <?php //echo $pagutotal; ?>
-	RAB Total :  <?php //echo $rabtotal; ?> 
-	HPS Total :  <?php //echo $hpstotal; ?>
-	Kontrak Total :  <?php //echo $kontraktotal; ?>
-	Penghematan Total :  <?php //echo $penghematantotal; ?>
-	Pesren Total :  <?php //echo $persenpenghematantotal; ?> 
-</p>
---->
+<h1 align="center" >Kontrol Anggaran <?php echo $divisi->nama_divisi;?> <?php echo $tahun;?></h1>
+<div style="width=100%;"><div style="position:absolute; left:100%; margin-left:-350px;">
+	<?php echo CHtml::beginForm();?>
+		<?php echo CHtml::label('Tahun Anggaran','tahun'); ?>
+		<?php echo CHtml::textField('tahun');?>
+		<?php echo CHtml::submitButton('OK',array("class"=>'sidafbutton')); ?>
+	<?php echo CHtml::endForm();?>
+</div></div>
+<br/><br/>
 <?php
 	$this->widget('zii.widgets.CDetailView', array(
 						'id'=>'viewdetail',

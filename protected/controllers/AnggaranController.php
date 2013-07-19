@@ -5,6 +5,11 @@ class AnggaranController extends Controller
 	public function actionKontrolanggaran()
 	{
 		if (Yii::app()->user->getState('role') == 'kdivmum') {
+			if(isset($_POST['tahun'])) {				
+				$tahun = $_POST['tahun'];
+			} else {
+				$tahun = date('Y');
+			}
 			$anggaran = array();
 			$divisi = Divisi::model()->findAll();
 			$pagutotal=0;
@@ -17,7 +22,7 @@ class AnggaranController extends Controller
 				$rab=0;
 				$hps=0;
 				$kontrak=0;
-				$semuapengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$item->username.'" and status = "100"');
+				$semuapengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$item->username.'" and year(tanggal_masuk) = '.$tahun.' and status = "100"');
 				foreach ($semuapengadaan as $pengadaan){
 					$paguanggaran=$paguanggaran+NotaDinasPerintahPengadaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')->id_dokumen)->pagu_anggaran;
 					$rab=$rab+NotaDinasPermintaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Permintaan"')->id_dokumen)->nilai_biaya_rab;
@@ -98,7 +103,7 @@ class AnggaranController extends Controller
 				),
 				'keyField'=>'username',
 			));
-			$this->render('kontrolanggaran', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,
+			$this->render('kontrolanggaran', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
 			));
 		}
 	}
@@ -106,14 +111,14 @@ class AnggaranController extends Controller
 	public function actionKontrolanggarandivisi()
 	{
 		$id = Yii::app()->getRequest()->getQuery('id');
-		
+		$tahun = Yii::app()->getRequest()->getQuery('tahun');
 		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			$anggaran = array();
 			$pagutotal=0;
 			$rabtotal=0;
 			$hpstotal=0;
 			$kontraktotal=0;
-			$pengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$id.'" and status = "100"');
+			$pengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$id.'" and year(tanggal_masuk) = '.$tahun.' and status = "100"');
 			$i=0;
 			foreach($pengadaan as $item) {
 				$paguanggaran=NotaDinasPerintahPengadaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$item->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')->id_dokumen)->pagu_anggaran;
@@ -194,7 +199,7 @@ class AnggaranController extends Controller
 				),
 				'keyField'=>'id_pengadaan',
 			));
-			$this->render('kontrolanggarandivisi', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,
+			$this->render('kontrolanggarandivisi', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
 			));
 		}
 	}

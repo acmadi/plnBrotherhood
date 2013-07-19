@@ -88,7 +88,7 @@ class XlsxController extends Controller
 		$jenis = $cpengadaan->jenis_pengadaan;
 		$DokNDPP=Dokumen::model()->find('id_pengadaan = '.$cpengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($DokNDPP->id_dokumen);
-		$pengesah = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
+		$pengesah = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjangan);
 		$nama_pengesah = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 		
 		$dokpq=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
