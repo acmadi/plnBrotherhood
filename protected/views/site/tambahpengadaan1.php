@@ -32,7 +32,7 @@ $this->pageTitle=Yii::app()->name . ' | Tambah Pengadaan';
 		<div class="row">
 			<?php echo $form->labelEx($Pengadaan,'jenis_pengadaan'); ?>
 			<?php echo $form->radioButtonList($Pengadaan,'jenis_pengadaan',
-						array('Barang dan Jasa'=>'Barang dan Jasa','Jasa Konsultasi'=>'Jasa Konsultasi'),
+						array('Barang dan Jasa'=>'Barang dan Jasa','Jasa Konsultasi'=>'Jasa Konsultasi','Jasa'=>'Jasa','Barang'=>'Barang','Jasa Konstruksi'=>'Jasa Konstruksi','Jasa Lainnya'=>'Jasa Lainnya'),
 						array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 			<?php echo $form->error($Pengadaan,'jenis_pengadaan'); ?>
 		</div>
