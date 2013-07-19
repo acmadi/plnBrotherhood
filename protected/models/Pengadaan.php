@@ -424,8 +424,8 @@ class Pengadaan extends CActiveRecord
 		
 		$criteria->compare('idPanitia.nama_panitia',$this->pic,true);
 
-		$criteria->addcondition("status='100'");	
-		$criteria->addcondition("status='99'");	
+		$criteria->addcondition("status='100' or status ='99'");	
+		// $criteria->addcondition("status='99'");	
 
 		// $criteria->order = 'nama_pengadaan';
 		
