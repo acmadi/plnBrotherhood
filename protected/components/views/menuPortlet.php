@@ -20,6 +20,8 @@
 	<?php if(Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')){ ?>
 		<?php if($cpengadaan->status == '0') { ?>
 				<li id="0" class='sudah' ><?php echo CHtml::link('Penentuan Metode',array("generator/penentuanmetode","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else if($cpengadaan->status == '98') { ?>
+			<li class='belum'><?php echo 'Penentuan Metode' ?></li>
 		<?php } else { ?>
 			<li id="0" class='sudah' > <?php echo CHtml::link('Penentuan Metode',array("generator/editpenentuanmetode","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		<?php } ?>
@@ -355,7 +357,7 @@
 		<br />
 		<br />
 		
-		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/checkpoint2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/pengadaangagal","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 	
 	<?php } ?>
 </ul>
