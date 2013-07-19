@@ -1610,7 +1610,7 @@ class DocxController extends Controller
 				$namaketua = Anggota::model()->find('id_panitia=' . $Peng->id_panitia . ' and jabatan="Ketua"')->nama;
 			} else {
 				$panitiapejabat = "Pejabat";
-				$namaketua = Anggota::model()->find('id_panitia=' . $Peng->id_panitia)->nama_panitia;
+				$namaketua = Anggota::model()->find('id_panitia=' . $Peng->id_panitia)->nama;
 			}
 			$this->doccy->newFile('4e Pengumuman Hasil Prakualifikasi.docx');
 			
