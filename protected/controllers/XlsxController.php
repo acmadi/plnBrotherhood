@@ -88,13 +88,8 @@ class XlsxController extends Controller
 		$jenis = $cpengadaan->jenis_pengadaan;
 		$DokNDPP=Dokumen::model()->find('id_pengadaan = '.$cpengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($DokNDPP->id_dokumen);
-		if($NDPP->dari=="MSDAF"){
-			$pengesah = "MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT";
-			$nama_pengesah = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
-		} else {
-			$pengesah = "KEPALA DIVISI UMUM DAN MANAJEMEN";
-			$nama_pengesah = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
-		}
+		$pengesah = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
+		$nama_pengesah = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 		
 		$dokpq=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
 		if($dokpq!=null){
@@ -308,7 +303,7 @@ class XlsxController extends Controller
 					$this->assign($objPHPExcel, "#tahun#", Tanggal::getTahun($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#nobapq#", $BAEPK->nomor);
 					$this->assign($objPHPExcel, "#namapanitia#", $panitia->jenis_panitia);
-					$this->assign($objPHPExcel, "#KDIVMUM/MSDAF#", $NDPP->dari);
+					$this->assign($objPHPExcel, "#KDIVMUM/MSDAF#", Jabatan::model()->findByPk($NDPP->dari)->jabatan);
 					$this->assign($objPHPExcel, "#namapengadaan#", strtoupper($cpengadaan->nama_pengadaan));
 					$this->assign($objPHPExcel, "#namapengadaan2#", $cpengadaan->nama_pengadaan);
 					$this->assign($objPHPExcel, "#metodepengadaan#", $cpengadaan->metode_pengadaan);

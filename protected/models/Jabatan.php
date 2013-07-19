@@ -1,23 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "user_divisi".
+ * This is the model class for table "jabatan".
  *
- * The followings are the available columns in table 'user_divisi':
- * @property string $username
- * @property string $nama
- * @property string $divisi
- * @property string $password
+ * The followings are the available columns in table 'jabatan':
+ * @property integer $id_jabatan
+ * @property string $jabatan
+ * @property string $kepanjangan
+ * @property string $status
  *
  * The followings are the available model relations:
- * @property Divisi $divisi0
+ * @property Kdivmum[] $kdivmums
  */
-class UserDivisi extends CActiveRecord
+class Jabatan extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return UserDivisi the static model class
+	 * @return Jabatan the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +29,7 @@ class UserDivisi extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user_divisi';
+		return 'jabatan';
 	}
 
 	/**
@@ -40,13 +40,12 @@ class UserDivisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama, divisi, password', 'required'),
-			array('username', 'length', 'max'=>50),
-			array('nama, password', 'length', 'max'=>256),
-			array('divisi', 'length', 'max'=>20),
+			array('jabatan, kepanjangan, status', 'required'),
+			array('jabatan, status', 'length', 'max'=>50),
+			array('kepanjangan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama, divisi, password', 'safe', 'on'=>'search'),
+			array('id_jabatan, jabatan, kepanjangan, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,7 +57,7 @@ class UserDivisi extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'divisi0' => array(self::BELONGS_TO, 'Divisi', 'divisi'),
+			'kdivmums' => array(self::HAS_MANY, 'Kdivmum', 'id_jabatan'),
 		);
 	}
 
@@ -68,10 +67,10 @@ class UserDivisi extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username' => 'Username',
-			'nama' => 'Nama',
-			'divisi' => 'Divisi',
-			'password' => 'Password',
+			'id_jabatan' => 'Id Jabatan',
+			'jabatan' => 'Jabatan',
+			'kepanjangan' => 'Kepanjangan',
+			'status' => 'Status',
 		);
 	}
 
@@ -86,28 +85,28 @@ class UserDivisi extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('divisi',$this->divisi,true);
-		$criteria->compare('password',$this->password,true);
+		$criteria->compare('id_jabatan',$this->id_jabatan);
+		$criteria->compare('jabatan',$this->jabatan,true);
+		$criteria->compare('kepanjangan',$this->kepanjangan,true);
+		$criteria->compare('status',$this->status,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 
-	public function searchUser($divisi)
+	public function searchJabatan()
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('nama',$this->nama,true);
-		$criteria->compare('divisi',$this->divisi,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->addcondition('divisi = "' . $divisi . '"');
+		$criteria->compare('id_jabatan',$this->id_jabatan);
+		$criteria->compare('jabatan',$this->jabatan,true);
+		$criteria->compare('kepanjangan',$this->kepanjangan,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->addcondition('status = "Aktif"');
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

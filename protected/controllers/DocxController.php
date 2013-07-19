@@ -89,12 +89,8 @@ class DocxController extends Controller
 					$terbilang_lama_berlaku_jaminan = RupiahMaker::terbilangMaker($lama_berlaku_jaminan);
 					$lama_waktu_tambahan = $RKS->lama_waktu_tambahan;
 					$terbilang_lama_waktu_tambahan = RupiahMaker::terbilangMaker($lama_waktu_tambahan);
-					$pengesah = $NDPP->dari;
-					if ($pengesah == "MSDAF") {
-						$nama_pengesah =Kdivmum::model()->find('jabatan = "MSDAF"')->username;
-					} else {
-						$nama_pengesah = Kdivmum::model()->find('jabatan = "KDIVMUM"')->username;
-					}
+					$pengesah = Jabatan::model()->findByPk($NDPP->dari);
+					$nama_pengesah =Kdivmum::model()->find('id_jabatan = '.$pengesah->id_jabatan.' and status_user = "Aktif"')->nama;
 					if($Panitia->jenis_panitia=="Pejabat") {
 						$nama_pembuat = Anggota::model()->find('id_panitia = '.$Panitia->id_panitia)->username;
 					} else {
@@ -266,12 +262,8 @@ class DocxController extends Controller
 					$terbilang_lama_berlaku_jaminan = RupiahMaker::terbilangMaker($lama_berlaku_jaminan);
 					$lama_waktu_tambahan = $RKS->lama_waktu_tambahan;
 					$terbilang_lama_waktu_tambahan = RupiahMaker::terbilangMaker($lama_waktu_tambahan);
-					$pengesah = $NDPP->dari;
-					if ($pengesah == "MSDAF") {
-						$nama_pengesah = Kdivmum::model()->find('jabatan = "MSDAF"')->nama;
-					} else {
-						$nama_pengesah = Kdivmum::model()->find('jabatan = "KDIVMUM"')->nama;
-					}
+					$pengesah = Jabatan::model()->findByPk($NDPP->dari)->jabatan;
+					$nama_pengesah = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 					if($Panitia->jenis_panitia=="Pejabat") {
 						$nama_pembuat = Anggota::model()->find('id_panitia = '.$Panitia->id_panitia)->nama;
 					} else {
@@ -425,12 +417,8 @@ class DocxController extends Controller
 					$terbilang_lama_berlaku_jaminan = RupiahMaker::terbilangMaker($lama_berlaku_jaminan);
 					$lama_waktu_tambahan = $RKS->lama_waktu_tambahan;
 					$terbilang_lama_waktu_tambahan = RupiahMaker::terbilangMaker($lama_waktu_tambahan);
-					$pengesah = $NDPP->dari;
-					if ($pengesah == "MSDAF") {
-						$nama_pengesah = Kdivmum::model()->find('jabatan = "MSDAF"')->nama;
-					} else {
-						$nama_pengesah = Kdivmum::model()->find('jabatan = "KDIVMUM"')->nama;
-					}
+					$pengesah = Jabatan::model()->findByPk($NDPP->dari);
+					$nama_pengesah =Kdivmum::model()->find('id_jabatan = '.$pengesah->id_jabatan.' and status_user = "AKtif"')->nama;
 					if($Panitia->jenis_panitia=="Pejabat") {
 						$nama_pembuat = Anggota::model()->find('id_panitia = '.$Panitia->id_panitia)->nama;
 					} else {
@@ -670,13 +658,8 @@ class DocxController extends Controller
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($id);
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$nomor = $NDPP->nomor;
-			$dari = $NDPP->dari;
-			if($dari == "MSDAF"){
-				$tes = Kdivmum::model()->find('jabatan = "MSDAF" and status_user = "Aktif"');
-			} else {
-				$tes = Kdivmum::model()->find('jabatan = "KDIVMUM" and status_user = "Aktif"');
-			}
-			$namapengirim= $tes->nama;
+			$dari = Jabatan::model()->findByPk($NDPP->dari)->jabatan;
+			$namapengirim = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 			$kepada = $NDPP->kepada;
 			$perihal = $NDPP->perihal;
 			$anggaran = RupiahMaker::convertInt($NDPP->pagu_anggaran);
@@ -699,8 +682,7 @@ class DocxController extends Controller
 				$sekretaris = "- Sekretaris Panitia";
 			}
 			$this->doccy->newFile('1 nd-perintahpengadaan.docx');
-			if ($dari == "KDIVMUM"){$tembusan = "MSDAF";}
-			else {$tembusan = "KDIVMUM";}
+			$tembusan = $this->getTembusan($NDPP->dari);
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -767,7 +749,8 @@ class DocxController extends Controller
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-			$namapengirim = Kdivmum::model()->find('jabatan = "'.$ndpp->dari.'" and status_user = "Aktif"')->nama;
+			$pengirim = Jabatan::model()->findByPk($NDPP->dari);
+			$namapengirim =Kdivmum::model()->find('id_jabatan = '.$pengirim->id_jabatan.' and status_user = "Aktif"')->nama;
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
 				$pejabatketuapanitia = "Pejabat";
 			}else{
@@ -781,7 +764,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#pejabat/ketuapanitia#', $ndpp->kepada);
-			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#', $ndpp->dari);
+			$this->doccy->phpdocx->assign('#KDIVMUM/MSDAF#', $pengirim);
 			$this->doccy->phpdocx->assign('#namaKDIVMUM/MSDAF#', $namapengirim);
 			$this->doccy->phpdocx->assign('#KetuaPanitia/Pejabat#', $pejabatketuapanitia);
 			$this->doccy->phpdocx->assign('#nousulan#', $ndup->nomor);
@@ -814,7 +797,7 @@ class DocxController extends Controller
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
 			$nomorndpp = $ndpp->nomor;
-			$penerima = $ndpp->dari;
+			$penerima = Jabatan::model()->findByPk($ndpp->dari);
 			$dokNDP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Permintaan"');
 			$ndp = NotaDinasPermintaan::model()->findByPk($dokNDP->id_dokumen)->nomor;
 
@@ -948,7 +931,7 @@ class DocxController extends Controller
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
-			$penerima = $ndpp->dari;
+			$penerima = Jabatan::model()->findByPk($ndpp->dari)->jabatan;
 			$namapengadaan = $Peng->nama_pengadaan;
 			$metode = $Peng->metode_pengadaan;
 			
@@ -982,7 +965,7 @@ class DocxController extends Controller
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
 			$namapengirim = Kdivmum::model()->find('jabatan = "'.$ndpp->dari.'" and status_user = "Aktif"')->nama;
 			$pejabatketuapanitia = $ndpp->kepada;
-			$dari = $ndpp->dari;
+			$dari = Jabatan::model()->findByPk($ndpp->dari)->jabatan;
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
 				$pejabatpanitia = "Pejabat";
 			}else{
@@ -1367,7 +1350,7 @@ class DocxController extends Controller
 			$nama = $Peng->nama_pengadaan;
 			$dokNDPP=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);	
-			$dari= $NDPP->dari;
+			$dari= Jabatan::model()->findByPk($NDPP->dari)->jabatan;
 						
 			$this->doccy->newFile('6 Surat Undangan Penawaran Harga.docx');
 			
@@ -1431,14 +1414,8 @@ class DocxController extends Controller
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-			if($ndpp->dari=="MSDAF"){
-				$pengirim = "MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT";
-				$namapengirim = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
-			} else {
-				$pengirim = "KEPALA DIVISI UMUM DAN MANAJEMEN";
-				$namapengirim = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
-			}
-			
+			$pengirim = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
+			$namapengirim = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 			$biayaa = RupiahMaker::convertInt($biaya);
 			$biayaterbilang = RupiahMaker::TerbilangMaker($biaya);
 			$jaminan = $SPP->jaminan;
@@ -2060,13 +2037,8 @@ class DocxController extends Controller
 			
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
-			if($ndpp->dari=="MSDAF"){
-				$boss = "MANAJER SENIOR PENGADAAN DAN PENGELOLAAN SARANA FASILITAS KANTOR PUSAT";
-				$namaboss = Kdivmum::model()->find('jabatan = "MSDAF"  and status_user = "Aktif"')->nama;
-			} else {
-				$boss = "KEPALA DIVISI UMUM DAN MANAJEMEN";
-				$namaboss = Kdivmum::model()->find('jabatan = "KDIVMUM"  and status_user = "Aktif"')->nama;
-			}
+			$boss = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
+			$namaboss = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 			
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
@@ -2773,6 +2745,14 @@ class DocxController extends Controller
 		return ($biaya/$hps)*100;
 	}
 	
+	function getTembusan ($id){
+		$list = '';
+		$berwenang = Jabatan::model()->findAll('id_jabatan != '.$id.' and status = "Aktif"');
+		foreach ($berwenang as $item) {
+			$list .= '- '.$item->jabatan. '<w:br/>';
+		}
+		return $list;
+	}
 	
 	
 }

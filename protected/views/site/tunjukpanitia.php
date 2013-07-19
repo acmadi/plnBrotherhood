@@ -37,8 +37,7 @@
 		
 		<div class="row">
 			<?php echo $form->labelEx($NDPP,'dari'); ?>
-			<?php echo $form->dropDownList($NDPP,'dari',
-			  array('KDIVMUM'=>'KDIVMUM','MSDAF'=>'MSDAF'),
+			<?php echo $form->dropDownList($NDPP,'dari',CHtml::listData(Jabatan::model()->findAllByAttributes(array('status'=>'Aktif')), 'id_jabatan', 'jabatan'),
 					array('empty'=>"-----Pilih Pengirim Nota Dinas------")); ?>
 			<?php echo $form->error($NDPP,'dari'); ?>
 		</div>
