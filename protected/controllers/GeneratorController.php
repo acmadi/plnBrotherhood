@@ -2818,8 +2818,7 @@
 								}
 							}
 						}
-					}
-					
+					}					
 					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
 						if($Pengadaan->metode_pengadaan=="Pelelangan"){
 							$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
@@ -2836,7 +2835,7 @@
 						}
 					} else {
 						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
-						$SPHK=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
+						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
 						$this->render('undanganaanwijzing',array(
 							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SPHK'=>$SPHK,
 						));
@@ -2880,17 +2879,25 @@
 							}						
 						}
 					}
-					if($Pengadaan->metode_pengadaan=="Pelelangan"){
-						$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
-						$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
+					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
+						if($Pengadaan->metode_pengadaan=="Pelelangan"){
+							$DokPengumuman=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+							$SUPDP=SuratPengumumanPelelangan::model()->findByPk($DokPengumuman->id_dokumen);
+							$this->render('undanganaanwijzing',array(
+								'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPDP'=>$SUPDP,
+							));
+						} else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
+							$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+							$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
+							$this->render('undanganaanwijzing',array(
+								'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
+							));
+						}
+					} else {
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
 						$this->render('undanganaanwijzing',array(
-							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPDP'=>$SUPDP,
-						));
-					} else if ($Pengadaan->metode_pengadaan=="Penunjukan Langsung"||$Pengadaan->metode_pengadaan=="Pemilihan Langsung"){
-						$DokPermintaan=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
-						$SUPPPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($DokPermintaan->id_dokumen);
-						$this->render('undanganaanwijzing',array(
-							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SUPPPH'=>$SUPPPH,
+							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SPHK'=>$SPHK,
 						));
 					}
 				}
@@ -3128,6 +3135,11 @@
 							));
 						}
 					} else {
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
+						$this->render('beritaacaraaanwijzing',array(
+							'BAP'=>$BAP,'SPHK'=>$SPHK,
+						));
 					}
 				}
 			}
@@ -3180,6 +3192,11 @@
 							));
 						}
 					} else {
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
+						$this->render('beritaacaraaanwijzing',array(
+							'BAP'=>$BAP,'SPHK'=>$SPHK,
+						));
 					}
 				}
 			}
