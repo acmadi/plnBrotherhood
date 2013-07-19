@@ -1853,7 +1853,11 @@
 					$BAEPK= BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
 					$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
 					
-					$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					if($Pengadaan->metode_pengadaan == 'Pelelangan'){
+						$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}else{
+						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
 					
 					if(isset($_POST['BeritaAcaraEvaluasiPrakualifikasi']))
 					{
@@ -2053,25 +2057,22 @@
 						if($valid){
 							if($Pengadaan->save(false))
 							{	
+								if(isset($_POST['perusahaan'])){
+															
+									for($i=0;$i<count($PP);$i++){
+										if(isset($_POST['perusahaan'][$i])){																																																
+											$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																																
+											$PP[$i]->penetapan_pq =  $_POST['penetapan_pq'][$i];	
+											$PP[$i]->save();
+										}
+									}								
+								}
 								if($Dokumen0->save(false)){
 									if($NDPK->save(false)){
 										$this->redirect(array('editpenetapanhasilprakualifikasi','id'=>$id));
 									}
 								}
-							}						
-							
-							if(isset($_POST['perusahaan'])){
-															
-								for($i=0;$i<count($PP);$i++){
-									if(isset($_POST['perusahaan'][$i])){																																																
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																																
-										$PP[$i]->penetapan_pq =  $_POST['penetapan_pq'][$i];	
-										$PP[$i]->save();
-									}
-								}								
-							}
-
-							
+							}													
 						}
 					}
 					
@@ -2839,7 +2840,7 @@
 							));
 						}
 					} else {
-						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Kualifikasi"');
 						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
 						$this->render('undanganaanwijzing',array(
 							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SPHK'=>$SPHK,
@@ -2899,7 +2900,7 @@
 							));
 						}
 					} else {
-						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Kualifikasi"');
 						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
 						$this->render('undanganaanwijzing',array(
 							'SUP'=>$SUP,'Dokumen0'=>$Dokumen0,'SPHK'=>$SPHK,
@@ -3140,7 +3141,7 @@
 							));
 						}
 					} else {
-						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Kualifikasi"');
 						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
 						$this->render('beritaacaraaanwijzing',array(
 							'BAP'=>$BAP,'SPHK'=>$SPHK,
@@ -3197,7 +3198,7 @@
 							));
 						}
 					} else {
-						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Prakualifikasi"');
+						$DokSPHK=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Hasil Kualifikasi"');
 						$SPHK=PengumumanHasilPrakualifikasi::model()->findByPk($DokSPHK->id_dokumen);
 						$this->render('beritaacaraaanwijzing',array(
 							'BAP'=>$BAP,'SPHK'=>$SPHK,
