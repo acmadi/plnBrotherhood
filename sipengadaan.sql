@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2013 at 12:40 PM
+-- Generation Time: Jul 21, 2013 at 05:04 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -281,9 +281,6 @@ CREATE TABLE IF NOT EXISTS `dokumen_prakualifikasi` (
   `tanggal_penetapan` date NOT NULL,
   `waktu_penetapan` time NOT NULL,
   `tempat_penetapan` varchar(256) NOT NULL,
-  `bidang_usaha` varchar(256) NOT NULL,
-  `sub_bidang_usaha` varchar(256) NOT NULL,
-  `kualifikasi_perusahaan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -524,8 +521,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_undangan` (
 CREATE TABLE IF NOT EXISTS `nota_dinas_usulan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
-  `waktu_pelaksanaan` date NOT NULL,
-  `tempat_penyerahan` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -749,6 +744,16 @@ CREATE TABLE IF NOT EXISTS `rks` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
   `tipe_rks` int(10) NOT NULL,
+  `bidang_usaha` varchar(256) NOT NULL,
+  `sub_bidang_usaha` varchar(256) NOT NULL,
+  `kualifikasi` varchar(256) NOT NULL,
+  `klarifikasi` varchar(256) NOT NULL,
+  `tanggal_pendaftaran` date NOT NULL,
+  `tanggal_pengambilan_dokumen1` date NOT NULL,
+  `tanggal_pengambilan_dokumen2` date NOT NULL,
+  `waktu_pengambilan_dokumen1` time NOT NULL,
+  `waktu_pengambilan_dokumen2` time NOT NULL,
+  `tempat_pengambilan_dokumen` varchar(256) NOT NULL,
   `tanggal_permintaan_penawaran` date NOT NULL,
   `tanggal_penjelasan` date NOT NULL,
   `waktu_penjelasan` time NOT NULL,
@@ -786,9 +791,10 @@ CREATE TABLE IF NOT EXISTS `rks` (
   `waktu_penunjukan_pemenang` time NOT NULL,
   `sistem_evaluasi_penawaran` varchar(256) NOT NULL,
   `jangka_waktu_penyerahan` int(100) NOT NULL,
-  `tanggal_paling_lambat_penyerahan` date NOT NULL,
+  `tempat_penyerahan` varchar(256) NOT NULL,
+  `lama_pelaksanaan` int(255) NOT NULL,
   `jangka_waktu_berlaku_jaminan` int(100) NOT NULL,
-  `lama_waktu_tambahan` int(100) NOT NULL,
+  `biaya_jaminan_pelaksanaan` int(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -812,7 +818,7 @@ CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
 CREATE TABLE IF NOT EXISTS `surat_pengumuman_pelelangan` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
-  `syarat_mengikuti_lelang` varchar(256) NOT NULL,
+  `harga_dokumen` int(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -839,8 +845,6 @@ CREATE TABLE IF NOT EXISTS `surat_pengumuman_pemenang` (
 CREATE TABLE IF NOT EXISTS `surat_penunjukan_pemenang` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
-  `lama_penyerahan` int(32) NOT NULL,
-  `jaminan` int(255) NOT NULL,
   `nomor_ski` varchar(256) NOT NULL,
   `tanggal_ski` date NOT NULL,
   `no_ski` varchar(256) NOT NULL,
