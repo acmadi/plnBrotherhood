@@ -79,14 +79,14 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			
 			<div class="row">
 				<?php 
-					// $this->widget('application.extensions.appendo.JAppendo',array(
-					// 'id' => 'idpenyedia',        
-					// 'model' => $PP,					
-					// 'viewName' => 'formperusahaan_penyampaian_dokumen_prakualifikasi',
-					// 'labelAdd' => '',
-					// 'labelDel' => 'Hapus Penyedia',
+					$this->widget('application.extensions.appendo.JAppendo',array(
+					'id' => 'idpenyedia',        
+					'model' => $PP,					
+					'viewName' => 'formperusahaan_penyampaian_dokumen_prakualifikasi',
+					'labelAdd' => '',
+					'labelDel' => 'Hapus Penyedia',
 					
-					// )); 
+					)); 
 				?>
 			</div>
 			
