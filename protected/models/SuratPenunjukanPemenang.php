@@ -6,8 +6,6 @@
  * The followings are the available columns in table 'surat_penunjukan_pemenang':
  * @property string $id_dokumen
  * @property string $nomor
- * @property integer $lama_penyerahan
- * @property integer $jaminan
  * @property string $nomor_ski
  * @property string $tanggal_ski
  * @property string $no_ski
@@ -43,12 +41,12 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'required'),
-			array('lama_penyerahan, jaminan', 'numerical', 'integerOnly'=>true),
-			array('id_dokumen, nomor, nomor_ski, no_ski', 'length', 'max'=>256),
+			array('id_dokumen, nomor, nomor_ski, tanggal_ski, no_ski', 'required'),
+			array('id_dokumen', 'length', 'max'=>32),
+			array('nomor, nomor_ski, no_ski', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, lama_penyerahan, jaminan, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, nomor_ski, tanggal_ski, no_ski', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,8 +70,6 @@ class SuratPenunjukanPemenang extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'lama_penyerahan' => 'Lama Penyerahan',
-			'jaminan' => 'Jaminan',
 			'nomor_ski' => 'Nomor Ski',
 			'tanggal_ski' => 'Tanggal Ski',
 			'no_ski' => 'No Ski',
@@ -93,8 +89,6 @@ class SuratPenunjukanPemenang extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('lama_penyerahan',$this->lama_penyerahan);
-		$criteria->compare('jaminan',$this->jaminan);
 		$criteria->compare('nomor_ski',$this->nomor_ski,true);
 		$criteria->compare('tanggal_ski',$this->tanggal_ski,true);
 		$criteria->compare('no_ski',$this->no_ski,true);

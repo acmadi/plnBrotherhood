@@ -20,8 +20,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/generator/editsuratpengumumanpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='6'?'/generator/pendaftaranpelelanganprakualifikasi':'/generator/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
-							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/generator/pengambilandokumenprakualifikasi'):($Pengadaan->status=='6'?'':('/generator/editpengambilandokumenprakualifikasi')),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='7'?'/generator/pendaftaranpelelanganprakualifikasi':'/generator/editpendaftaranpelelanganprakualifikasi','id'=>$id)),
+							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/pengambilandokumenprakualifikasi'):($Pengadaan->status=='7'?'':('/generator/editpengambilandokumenprakualifikasi')),'id'=>$id)),
 						),
 					));
 				?>

@@ -18,9 +18,6 @@
  * @property string $tanggal_penetapan
  * @property string $waktu_penetapan
  * @property string $tempat_penetapan
- * @property string $bidang_usaha
- * @property string $sub_bidang_usaha
- * @property string $kualifikasi_perusahaan
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -53,12 +50,12 @@ class DokumenPrakualifikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'required'),
+			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan', 'required'),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, tujuan_pengadaan, tempat_pemasukan, tempat_evaluasi, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'length', 'max'=>256),
+			array('nomor, tujuan_pengadaan, tempat_pemasukan, tempat_evaluasi, tempat_penetapan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan, bidang_usaha, sub_bidang_usaha, kualifikasi_perusahaan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -94,9 +91,6 @@ class DokumenPrakualifikasi extends CActiveRecord
 			'tanggal_penetapan' => 'Tanggal Penetapan',
 			'waktu_penetapan' => 'Waktu Penetapan',
 			'tempat_penetapan' => 'Tempat Penetapan',
-			'bidang_usaha' => 'Bidang Usaha',
-			'sub_bidang_usaha' => 'Sub Bidang Usaha',
-			'kualifikasi_perusahaan' => 'Kualifikasi Perusahaan',
 		);
 	}
 
@@ -125,9 +119,6 @@ class DokumenPrakualifikasi extends CActiveRecord
 		$criteria->compare('tanggal_penetapan',$this->tanggal_penetapan,true);
 		$criteria->compare('waktu_penetapan',$this->waktu_penetapan,true);
 		$criteria->compare('tempat_penetapan',$this->tempat_penetapan,true);
-		$criteria->compare('bidang_usaha',$this->bidang_usaha,true);
-		$criteria->compare('sub_bidang_usaha',$this->sub_bidang_usaha,true);
-		$criteria->compare('kualifikasi_perusahaan',$this->kualifikasi_perusahaan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

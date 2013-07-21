@@ -88,7 +88,7 @@ class XlsxController extends Controller
 		$jenis = $cpengadaan->jenis_pengadaan;
 		$DokNDPP=Dokumen::model()->find('id_pengadaan = '.$cpengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 		$NDPP=NotaDinasPerintahPengadaan::model()->findByPk($DokNDPP->id_dokumen);
-		$pengesah = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
+		$pengesah = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjangan);
 		$nama_pengesah = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 		
 		$dokpq=Dokumen::model()->find('id_pengadaan = '. $cdokumen->id_pengadaan . ' and nama_dokumen = "Dokumen Prakualifikasi"');
@@ -242,6 +242,18 @@ class XlsxController extends Controller
 						$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'hadir_pembukaan_penawaran_2');
 						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
+		}
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Negosiasi dan Klarifikasi') {
+			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", $DH->jam);
+					$this->assign($objPHPExcel, "#tempat#", $DH->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $DH->acara." ".$cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+					$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'hadir_klarifikasi_negosiasi');
+					header('Content-Disposition: attachment;filename="Daftar Hadir Negosiasi dan Klarifikasi - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 		}
 		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Penerimaan Prakualifikasi') {
 			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);

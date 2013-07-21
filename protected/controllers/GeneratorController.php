@@ -1301,7 +1301,7 @@
 					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 						
 					if($PP == null){
-						$this->redirect(array('pendaftaranpelelangan','id'=>$id));		
+						$this->redirect(array('pendaftaranpelelanganprakualifikasi','id'=>$id));		
 					}
 					
 					if(isset($_POST['perusahaan'])){
@@ -2417,7 +2417,7 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 					
-					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 						
 					if($PP == null){
 						$this->redirect(array('pendaftaranpelelangan','id'=>$id));		
@@ -6230,6 +6230,105 @@
 			else {
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					$this->render('pengadaangagal');
+				}
+			}
+		}
+		
+		public function actionNotadinaslaporanpengadaangagal()
+		{	
+			$id = Yii::app()->getRequest()->getQuery('id');
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				if (Yii::app()->user->getState('role') == 'anggota') {
+				
+					$Pengadaan=Pengadaan::model()->findByPk($id);
+					$Pengadaan->status ='98';
+					
+					$Dokumen0= new Dokumen;
+					$criteria=new CDbcriteria;
+					$criteria->select='max(id_dokumen) AS maxId';
+					$row = $Dokumen0->model()->find($criteria);
+					$somevariable = $row['maxId'];
+					$Dokumen0->id_dokumen=$somevariable+1;
+					$Dokumen0->nama_dokumen='Nota Dinas Laporan Pengadaan Gagal';
+					$Dokumen0->tempat='Jakarta';
+					$Dokumen0->status_upload='Belum Selesai';
+					$Dokumen0->id_pengadaan=$id;
+					date_default_timezone_set("Asia/Jakarta");
+					$Dokumen0->tanggal=date('d-m-Y');
+					
+					$NDPGP= new NotaDinasPengadaanGagalPanitia;
+					$NDPGP->id_dokumen=$Dokumen0->id_dokumen;
+					
+					//Uncomment the following line if AJAX validation is needed
+					//$this->performAjaxValidation($model);
+
+					if(isset($_POST['NotaDinasPengadaanGagalPanitia']))
+					{
+						$Dokumen0->attributes=$_POST['Dokumen'];
+						$NDPGP->attributes=$_POST['NotaDinasPengadaanGagalPanitia'];
+						$valid=$NDPGP->validate();
+						$valid=$valid&&$Dokumen0->validate();
+						if($valid){
+							if($Pengadaan->save(false))
+							{	
+								if($Dokumen0->save(false)){
+									if($NDPGP->save(false)){
+										$this->redirect(array('editnotadinaslaporanpengadaangagal','id'=>$id));
+									}
+								}
+							}
+						}
+					}
+
+					$this->render('notadinaslaporanpengadaangagal',array(
+						'NDPGP'=>$NDPGP,'Dokumen0'=>$Dokumen0,
+					));
+
+				}
+			}
+		}
+		
+		public function actionEditNotadinaslaporanpengadaangagal()
+		{	
+			$id = Yii::app()->getRequest()->getQuery('id');
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				if (Yii::app()->user->getState('role') == 'anggota') {
+				
+					$Pengadaan=Pengadaan::model()->findByPk($id);
+					
+					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Nota Dinas Laporan Pengadaan Gagal"');
+					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+					$NDPGP=NotaDinasPengadaanGagalPanitia::model()->findByPk($Dokumen0->id_dokumen);
+					
+					
+					if(isset($_POST['NotaDinasPengadaanGagalPanitia']))
+					{
+						$Dokumen0->attributes=$_POST['Dokumen'];
+						$NDPGP->attributes=$_POST['NotaDinasPengadaanGagalPanitia'];
+						$valid=$NDPGP->validate();
+						$valid=$valid&&$Dokumen0->validate();
+						if($valid){
+							if($Pengadaan->save(false))
+							{	
+								if($Dokumen0->save(false)){
+									if($NDPGP->save(false)){
+										$this->redirect(array('editnotadinaslaporanpengadaangagal','id'=>$id));
+									}
+								}
+							}
+						}
+					}
+
+					$this->render('notadinaslaporanpengadaangagal',array(
+						'NDPGP'=>$NDPGP,'Dokumen0'=>$Dokumen0,
+					));
+
 				}
 			}
 		}

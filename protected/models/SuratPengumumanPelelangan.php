@@ -6,8 +6,7 @@
  * The followings are the available columns in table 'surat_pengumuman_pelelangan':
  * @property string $id_dokumen
  * @property string $nomor
- * @property string $cara_pendaftaran
- * @property string $syarat_mengikuti_lelang
+ * @property integer $harga_dokumen
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
@@ -40,12 +39,13 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'required'),
+			array('id_dokumen, nomor, harga_dokumen', 'required'),
+			array('harga_dokumen', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, syarat_mengikuti_lelang', 'length', 'max'=>256),
+			array('nomor', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, syarat_mengikuti_lelang', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, harga_dokumen', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,7 +69,7 @@ class SuratPengumumanPelelangan extends CActiveRecord
 		return array(
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
-			'syarat_mengikuti_lelang' => 'Syarat Mengikuti Lelang',
+			'harga_dokumen' => 'Harga Dokumen',
 		);
 	}
 
@@ -86,7 +86,7 @@ class SuratPengumumanPelelangan extends CActiveRecord
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
-		$criteria->compare('syarat_mengikuti_lelang',$this->syarat_mengikuti_lelang,true);
+		$criteria->compare('harga_dokumen',$this->harga_dokumen);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

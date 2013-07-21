@@ -90,7 +90,7 @@
 			</div>
 		<?php } ?>
 
-		<?php if ($Pengadaan->jenis_pengadaan=="Barang dan Jasa") { ?>
+		<?php if ($Pengadaan->jenis_pengadaan!="Jasa Konsultasi") { ?>
 			<div class="row">
 				<?php echo $form->labelEx($Pengadaan,'metode_pengadaan'); ?>
 				<?php echo $form->dropDownList($Pengadaan,'metode_pengadaan',

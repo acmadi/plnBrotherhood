@@ -2,12 +2,21 @@
 /* @var $this SiteController */
 $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 ?>
-<h1 align="center" >Kontrol Anggaran</h1>
+<h1 align="center" >Kontrol Anggaran <?php echo $tahun; ?></h1>
+<div style="width=100%;"><div style="position:absolute; left:100%; margin-left:-520px;">
+	<?php echo CHtml::beginForm();?>
+		<?php echo CHtml::label('Tahun Anggaran','tahun'); ?>
+		<?php echo CHtml::textField('tahun');?>
+		<?php echo CHtml::submitButton('OK',array("class"=>'sidafbutton')); ?>
+	<?php echo CHtml::endForm();?>
+</div></div>
+<br/><br/>
 <?php
 	$this->widget('zii.widgets.CDetailView', array(
 						'id'=>'viewdetail',
 						'data'=>$anggarantotal,
 						'attributes'=>array(
+							'jumlah_kontrak',
 							'total_pagu_anggaran',
 							'total_nilai_rab',
 							'total_nilai_hps',
@@ -21,7 +30,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 	array( 'id'=>'anggaran-grid',
 		 'dataProvider'=>$dataanggaran,
 		 'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-		 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("anggaran/kontrolanggarandivisi", array("id"=>'')) . "'+ $.fn.yiiGridView.getSelection(id);}",
+		 'selectionChanged'=>'js:function(id) {window.location="' . Yii::app()->createUrl('anggaran/kontrolanggarandivisi') . '&id="+$.fn.yiiGridView.getSelection(id)+"'. '&tahun=' .$tahun. '";}',
 		 'columns'=>array(
 			array( 'name'=>'Nama Divisi', 'value'=>'$data["nama_divisi"]',),
 			array( 'name'=>'Pagu Anggaran', 'value'=>'$data["pagu_anggaran"]',),
