@@ -23,8 +23,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array($Dokumen0->isNewRecord?('/generator/suratpengumumanpelelanganprakualifikasi'):('/generator/editsuratpengumumanpelelanganprakualifikasi'),'id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='6'?('/generator/pendaftaranpelelanganprakualifikasi'):($Pengadaan->status=='5'?'':('/generator/editpendaftaranpelelanganprakualifikasi')),'id'=>$id)),
-							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='7'?('/generator/pengambilandokumenprakualifikasi'):($Pengadaan->status=='6'?'':($Pengadaan->status=='5'?'':('/generator/editpengambilandokumenprakualifikasi'))),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status=='7'?('/generator/pendaftaranpelelanganprakualifikasi'):($Pengadaan->status=='6'?'':('/generator/editpendaftaranpelelanganprakualifikasi')),'id'=>$id)),
+							array('label'=>'Pengambilan Dokumen', 'url'=>array($Pengadaan->status=='8'?('/generator/pengambilandokumenprakualifikasi'):($Pengadaan->status=='7'?'':($Pengadaan->status=='6'?'':('/generator/editpengambilandokumenprakualifikasi'))),'id'=>$id)),
 						),
 					));
 				?>

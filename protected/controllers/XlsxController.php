@@ -243,6 +243,18 @@ class XlsxController extends Controller
 						header('Content-Disposition: attachment;filename="Daftar Hadir Pembukaan Penawaran Tahap Dua - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
 					}
 		}
+		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Negosiasi dan Klarifikasi') {
+			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
+			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir.xlsx');
+					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
+					$this->assign($objPHPExcel, "#waktu#", $DH->jam);
+					$this->assign($objPHPExcel, "#tempat#", $DH->tempat_hadir);
+					$this->assign($objPHPExcel, "#acara#", $DH->acara." ".$cpengadaan->nama_pengadaan);
+					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
+					$this->getDaftarHadir($cpengadaan->id_panitia, $cdokumen->id_pengadaan, $objPHPExcel, 'hadir_klarifikasi_negosiasi');
+					header('Content-Disposition: attachment;filename="Daftar Hadir Negosiasi dan Klarifikasi - "'.$cpengadaan->nama_pengadaan.'".xlsx"');
+		}
 		else if ($cdokumen->nama_dokumen == 'Daftar Hadir Penerimaan Prakualifikasi') {
 			$DH=DaftarHadir::model()->findByPk($cdokumen->id_dokumen);
 			$objPHPExcel = $objReader->load($templatePath . 'Daftar Hadir Prakualifikasi.xlsx');

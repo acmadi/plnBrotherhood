@@ -3,7 +3,7 @@
 $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 ?>
 <h1 align="center" >Kontrol Anggaran <?php echo $tahun; ?></h1>
-<div style="width=100%;"><div style="position:absolute; left:100%; margin-left:-350px;">
+<div style="width=100%;"><div style="position:absolute; left:100%; margin-left:-520px;">
 	<?php echo CHtml::beginForm();?>
 		<?php echo CHtml::label('Tahun Anggaran','tahun'); ?>
 		<?php echo CHtml::textField('tahun');?>
@@ -16,6 +16,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 						'id'=>'viewdetail',
 						'data'=>$anggarantotal,
 						'attributes'=>array(
+							'jumlah_kontrak',
 							'total_pagu_anggaran',
 							'total_nilai_rab',
 							'total_nilai_hps',

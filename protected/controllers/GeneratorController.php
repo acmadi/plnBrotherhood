@@ -1301,7 +1301,7 @@
 					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 						
 					if($PP == null){
-						$this->redirect(array('pendaftaranpelelangan','id'=>$id));		
+						$this->redirect(array('pendaftaranpelelanganprakualifikasi','id'=>$id));		
 					}
 					
 					if(isset($_POST['perusahaan'])){
@@ -2417,7 +2417,7 @@
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 					
-					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 						
 					if($PP == null){
 						$this->redirect(array('pendaftaranpelelangan','id'=>$id));		

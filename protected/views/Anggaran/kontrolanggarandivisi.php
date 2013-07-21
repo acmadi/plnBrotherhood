@@ -5,7 +5,7 @@ $divisi = Divisi::model()->findByPk($id);
 $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran '.$divisi->nama_divisi;
 ?>
 <h1 align="center" >Kontrol Anggaran <?php echo $divisi->nama_divisi;?> <?php echo $tahun;?></h1>
-<div style="width=100%;"><div style="position:absolute; left:100%; margin-left:-350px;">
+<div style="width=100%;"><div style="position:absolute; left:100%; margin-left:-525px;">
 	<?php echo CHtml::beginForm();?>
 		<?php echo CHtml::label('Tahun Anggaran','tahun'); ?>
 		<?php echo CHtml::textField('tahun');?>
@@ -18,6 +18,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran '.$divisi->nama_divisi;
 						'id'=>'viewdetail',
 						'data'=>$anggarantotal,
 						'attributes'=>array(
+							'jumlah_kontrak_divisi',
 							'total_pagu_anggaran_divisi',
 							'total_nilai_rab_divisi',
 							'total_nilai_hps_divisi',

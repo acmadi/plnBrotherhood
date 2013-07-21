@@ -749,8 +749,8 @@ class DocxController extends Controller
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-			$pengirim = Jabatan::model()->findByPk($NDPP->dari);
-			$namapengirim =Kdivmum::model()->find('id_jabatan = '.$pengirim->id_jabatan.' and status_user = "Aktif"')->nama;
+			$pengirim = Jabatan::model()->findByPk($ndpp->dari)->jabatan;
+			$namapengirim =Kdivmum::model()->find('id_jabatan = '.$ndpp->dari.' and status_user = "Aktif"')->nama;
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
 				$pejabatketuapanitia = "Pejabat";
 			}else{
@@ -797,7 +797,7 @@ class DocxController extends Controller
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
 			$nomorndpp = $ndpp->nomor;
-			$penerima = Jabatan::model()->findByPk($ndpp->dari);
+			$penerima = Jabatan::model()->findByPk($ndpp->dari)->jabatan;
 			$dokNDP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Permintaan"');
 			$ndp = NotaDinasPermintaan::model()->findByPk($dokNDP->id_dokumen)->nomor;
 
@@ -1414,8 +1414,8 @@ class DocxController extends Controller
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-			$pengirim = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
-			$namapengirim = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
+			$pengirim = strtoupper(Jabatan::model()->findByPk($ndpp->dari)->kepanjangan);
+			$namapengirim = Kdivmum::model()->find('id_jabatan = '.$ndpp->dari.' and status_user = "Aktif"')->nama;
 			$biayaa = RupiahMaker::convertInt($biaya);
 			$biayaterbilang = RupiahMaker::TerbilangMaker($biaya);
 			$jaminan = $SPP->jaminan;
@@ -1455,17 +1455,21 @@ class DocxController extends Controller
 				$nomorski = $SPP->nomor_ski;
 				$tglski = Tanggal::getTanggalLengkap($SPP->tanggal_ski);
 				
-				// $dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
-				// $spp = SuratPengumumanPelelangan::model()->findByPk($dokspp->id_dokumen);
-				// $nospp = $spp->nomor;
-				// $tglspp = Tanggal::getTanggalLengkap($dokspp->tanggal);
+				$dokpengumuman=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+				$pengumuman = SuratPengumumanPelelangan::model()->findByPk($dokpengumuman->id_dokumen);
+				$dokspp = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
+				$spp = SuratPengumumanPemenang::model()->findByPk($dokspp->id_dokumen);
 			
 				$this->doccy->newFile('15 Surat Penunjukan Pemenang (Lelang).docx');
-				$this->doccy->phpdocx->assign('#nospp#', '');
-				$this->doccy->phpdocx->assign('#tglspp#', '');
+				$this->doccy->phpdocx->assign('#nopengumuman#', $pengumuman->nomor);
+				$this->doccy->phpdocx->assign('#tglpengumuman#', Tanggal::getTanggalLengkap( $dokpengumuman->tanggal));
+				$this->doccy->phpdocx->assign('#nospp#', $spp->nomor);
+				$this->doccy->phpdocx->assign('#tglspp#', Tanggal::getTanggalLengkap($dokspp->tanggal));
 				$this->doccy->phpdocx->assign('#noski#', $noski);
 				$this->doccy->phpdocx->assign('#tglski#', $tglski);
 				$this->doccy->phpdocx->assign('#nomorski#', $nomorski);
+				$this->doccy->phpdocx->assign('#biayajaminan#', RupiahMaker::convertInt($jaminan));
+				$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
 			}
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -1473,15 +1477,12 @@ class DocxController extends Controller
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
 			$this->doccy->phpdocx->assign('#penyedia#', $penyedia);
-			$this->doccy->phpdocx->assign('#perihal#', $nama);
 			$this->doccy->phpdocx->assign('#alamatpenyedia#', $alamatpenyedia);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
 			$this->doccy->phpdocx->assign('#biaya#', $biayaa);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
 			$this->doccy->phpdocx->assign('#lamapengerjaan#', $lama);
 			$this->doccy->phpdocx->assign('#lamaterbilang#', $lamaterbilang);
-			$this->doccy->phpdocx->assign('#biayajaminan#', $jaminan);
-			$this->doccy->phpdocx->assign('#jaminanterbilang#', $jaminanterbilang);
 			$this->doccy->phpdocx->assign('#nopenawaran#', $nosuratpenawaran);
 			$this->doccy->phpdocx->assign('#tglpenawaran#', Tanggal::getTanggalLengkap($tglsuratpenawaran));
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($dokSPP->tanggal));
@@ -2037,8 +2038,8 @@ class DocxController extends Controller
 			
 			$dokNDPP = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokNDPP->id_dokumen);
-			$boss = strtoupper(Jabatan::model()->findByPk($NDPP->dari)->kepanjagan);
-			$namaboss = Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
+			$boss = strtoupper(Jabatan::model()->findByPk($ndpp->dari)->kepanjangan);
+			$namaboss = Kdivmum::model()->find('id_jabatan = '.$ndpp->dari.' and status_user = "Aktif"')->nama;
 			
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
 			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
@@ -2050,16 +2051,19 @@ class DocxController extends Controller
 			$skpanitia2 = "saya ". Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia ." sebagai Pejabat Pengadaan Barang/Jasa PT PLN (Persero) Kantor Pusat";
 			
 			if($Peng->metode_pengadaan == 'Pelelangan'){
+				$dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+				$spp = SuratPengumumanPelelangan::model()->findByPk($dokspp->id_dokumen);
+				$nospp = $spp->nomor;
 				$this->doccy->newFile('12c Berita Acara Klarifikasi.docx');
 			
 				$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 				$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+				$this->doccy->phpdocx->assign('#nospp#', $nospp);
 				
 			}else{
 				$dokspph=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
 				$spph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($dokspph->id_dokumen);
 				$nospph = $spph->nomor;
-				$nosk = $panitia->SK_panitia;
 
 				$this->doccy->newFile('12 Berita Acara Klarifikasi dan Negosiasi.docx');
 				
@@ -2270,9 +2274,9 @@ class DocxController extends Controller
 			$spp = SuratPengumumanPemenang::model()->findByPk($id);				
 			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;				
 			
-			// $doksupph = Dokumen::model()->find('id_pengadaan = /"'. $Dok->id_pengadaan . '/" and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
-			// $supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
-			
+			$dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pemenang"');
+			$spp = SuratPengumumanPemenang::model()->findByPk($dokspp->id_dokumen);
+				
 			$this->doccy->newFile('14a Pengumuman Pemenang.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -2280,8 +2284,8 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#nomor#', $spp->nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
-			// $this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
-			// $this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
+			$this->doccy->phpdocx->assign('#nospp#', $spp->nomor);
+			$this->doccy->phpdocx->assign('#tglspp#', Tanggal::getTanggalLengkap($dokspp->tanggal));
 			$this->doccy->phpdocx->assign('#penyedia#', $PP->perusahaan);
 			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($PP->biaya));
 			$this->doccy->phpdocx->assign('#keterangan#', $spp->keterangan);
@@ -2598,8 +2602,8 @@ class DocxController extends Controller
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
 				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  .
-									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
-									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->biaya,$hps->nilai_hps) .'% HPS <w:br/>'
+									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ' rupiah)' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
+									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ' rupiah)' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->biaya,$hps->nilai_hps) .'% HPS <w:br/>'
 									;
 			}
 		}		
@@ -2618,8 +2622,8 @@ class DocxController extends Controller
 		}else{		
 			for($i=0;$i<count($arraypenyedia);$i++){
 				$stringpenyedia .= 	'PT. ' . $arraypenyedia[$i]->perusahaan . '<w:br/>'  .
-									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
-									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ')' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->biaya,$hps->nilai_hps) .'% HPS <w:br/>'
+									'a. Harga yang ditawarkan sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ' rupiah)' . ' sesuai data yang ada didalam server PT PLN (Persero) / e-proc PLN.' . '<w:br/>' . 
+									'b. Harga penawaran sebesar ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '(' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ' rupiah)' . ' lebih rendah dari ' . $this->persenMaker($arraypenyedia[$i]->biaya,$hps->nilai_hps) .'% HPS <w:br/>'
 									;
 			}
 		}		
@@ -2639,7 +2643,7 @@ class DocxController extends Controller
 									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
 									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
 									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '<w:br/>' .
-									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/> <w:br/>'
+									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ' rupiah, sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/> <w:br/>'
 									;
 			}
 		}		
@@ -2658,7 +2662,7 @@ class DocxController extends Controller
 									'Alamat			 	: ' . $arraypenyedia[$i]->alamat . '<w:br/>' . 
 									'NPWP			 	: ' . $arraypenyedia[$i]->npwp . '<w:br/>' .
 									'Nilai Penawaran 	: ' . RupiahMaker::convertInt($arraypenyedia[$i]->biaya) . '<w:br/>' .
-									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ', sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
+									'Terbilang 			: ' . RupiahMaker::TerbilangMaker($arraypenyedia[$i]->biaya) . ' rupiah, sudah termasuk pajak sesuai dengan ketentuan yang berlaku. <w:br/>'
 									;
 			}
 		}		

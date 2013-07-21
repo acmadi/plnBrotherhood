@@ -23,7 +23,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
 							array('label'=>'Pengumuman Pelelangan', 'url'=>array('/generator/editsuratpengumumanpelelangan','id'=>$id)),
-							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status == '15' ?('/generator/pendaftaranpelelangan'):('/generator/editpendaftaranpelelangan'),'id'=>$id)),
+							array('label'=>'Pendaftaran Pelelangan', 'url'=>array($Pengadaan->status == '18' ?('/generator/pendaftaranpelelangan'):('/generator/editpendaftaranpelelangan'),'id'=>$id)),
 						),
 					));
 				?>

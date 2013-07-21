@@ -12,6 +12,7 @@ class AnggaranController extends Controller
 			}
 			$anggaran = array();
 			$divisi = Divisi::model()->findAll();
+			$jumlahkontrak=0;
 			$pagutotal=0;
 			$rabtotal=0;
 			$hpstotal=0;
@@ -28,32 +29,20 @@ class AnggaranController extends Controller
 					$rab=$rab+NotaDinasPermintaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Permintaan"')->id_dokumen)->nilai_biaya_rab;
 					$hps=$hps+Hps::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "HPS"')->id_dokumen)->nilai_hps;
 					$kontrak=$kontrak+$pengadaan->biaya;
+					$jumlahkontrak++;
 				}
 				$pagutotal=$pagutotal+$paguanggaran;
 				$rabtotal=$rabtotal+$rab;
 				$hpstotal=$hpstotal+$hps;
 				$kontraktotal=$kontraktotal+$kontrak;
-				if($rab!=0 && $paguanggaran !=0) {
+				if($kontrak!=0) {
 					$rab=RupiahMaker::convertIntTanpaRp($rab);
 					$paguanggaran=RupiahMaker::convertIntTanpaRp($paguanggaran);
-					if($hps!=0){
-						$hps=RupiahMaker::convertIntTanpaRp($hps);
-						if($kontrak!=0){
-							$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
-							$penghematan=$paguanggaran-$kontrak;
-							$persenpenghematan=$penghematan*100/$paguanggaran;
-							$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
-						} else {
-							$kontrak='-';
-							$penghematan='-';
-							$persenpenghematan='-';
-						}
-					} else {
-						$hps='-';
-						$kontrak='-';
-						$penghematan='-';
-						$persenpenghematan='-';
-					}
+					$hps=RupiahMaker::convertIntTanpaRp($hps);
+					$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
+					$penghematan=$paguanggaran-$kontrak;
+					$persenpenghematan=$penghematan*100/$paguanggaran;
+					$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
 				} else {
 					$rab='-';
 					$paguanggaran='-';
@@ -65,27 +54,14 @@ class AnggaranController extends Controller
 				$anggaran[$i]= array('username'=>$item->username,'nama_divisi'=>$item->nama_divisi,'pagu_anggaran'=>$paguanggaran,'nilai_rab'=>$rab,'nilai_hps'=>$hps,'nilai_kontrak'=>$kontrak,'penghematan'=>$penghematan,'persentase'=>$persenpenghematan);
 				$i++;
 			}
-			if($rabtotal!=0 && $pagutotal!=0) {
+			if($kontraktotal!=0) {
 				$rabtotal=RupiahMaker::convertInt($rabtotal);
 				$pagutotal=RupiahMaker::convertInt($pagutotal);
-				if($hpstotal!=0){
-					$hpstotal=RupiahMaker::convertInt($hpstotal);
-					if($kontraktotal!=0){
-						$kontraktotal=RupiahMaker::convertInt($kontraktotal);
-						$penghematantotal=$pagutotal-$kontraktotal;
-						$persenpenghematantotal=$penghematantotal*100/$pagutotal;
-						$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
-					} else {
-						$kontraktotal='-';
-						$penghematantotal='-';
-						$persenpenghematantotal='-';
-					}
-				} else {
-					$hpstotal='-';
-					$kontraktotal='-';
-					$penghematantotal='-';
-					$persenpenghematantotal='-';
-				}
+				$hpstotal=RupiahMaker::convertInt($hpstotal);
+				$kontraktotal=RupiahMaker::convertInt($kontraktotal);
+				$penghematantotal=$pagutotal-$kontraktotal;
+				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
+				$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
 			} else {
 				$pagutotal='-';
 				$rabtotal='-';
@@ -94,7 +70,7 @@ class AnggaranController extends Controller
 				$penghematantotal='-';
 				$persenpenghematantotal='-';
 			}
-			$anggarantotal = array('total_pagu_anggaran'=>$pagutotal,'total_nilai_rab'=>$rabtotal,'total_nilai_hps'=>$hpstotal,'total_nilai_kontrak'=>$kontraktotal,'total_penghematan'=>$penghematantotal,'persentase'=>$persenpenghematantotal);
+			$anggarantotal = array('jumlah_kontrak'=>$jumlahkontrak,'total_pagu_anggaran'=>$pagutotal,'total_nilai_rab'=>$rabtotal,'total_nilai_hps'=>$hpstotal,'total_nilai_kontrak'=>$kontraktotal,'total_penghematan'=>$penghematantotal,'persentase'=>$persenpenghematantotal);
 			$dataanggaran = new CArrayDataProvider($anggaran,array(
 				'sort'=>array(
 					'attributes'=>array(
@@ -114,6 +90,7 @@ class AnggaranController extends Controller
 		$tahun = Yii::app()->getRequest()->getQuery('tahun');
 		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			$anggaran = array();
+			$jumlahkontrak=0;
 			$pagutotal=0;
 			$rabtotal=0;
 			$hpstotal=0;
@@ -129,27 +106,15 @@ class AnggaranController extends Controller
 				$rabtotal=$rabtotal+$rab;
 				$hpstotal=$hpstotal+$hps;
 				$kontraktotal=$kontraktotal+$kontrak;
-				if($rab!=0 && $paguanggaran !=0) {
+				$jumlahkontrak++;
+				if($kontrak!=0) {
 					$rab=RupiahMaker::convertIntTanpaRp($rab);
 					$paguanggaran=RupiahMaker::convertIntTanpaRp($paguanggaran);
-					if($hps!=0){
-						$hps=RupiahMaker::convertIntTanpaRp($hps);
-						if($kontrak!=0){
-							$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
-							$penghematan=$paguanggaran-$kontrak;
-							$persenpenghematan=$penghematan*100/$paguanggaran;
-							$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
-						} else {
-							$kontrak='-';
-							$penghematan='-';
-							$persenpenghematan='-';
-						}
-					} else {
-						$hps='-';
-						$kontrak='-';
-						$penghematan='-';
-						$persenpenghematan='-';
-					}
+					$hps=RupiahMaker::convertIntTanpaRp($hps);
+					$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
+					$penghematan=$paguanggaran-$kontrak;
+					$persenpenghematan=$penghematan*100/$paguanggaran;
+					$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
 				} else {
 					$rab='-';
 					$paguanggaran='-';
@@ -161,27 +126,14 @@ class AnggaranController extends Controller
 				$anggaran[$i]= array('id_pengadaan'=>$item->id_pengadaan,'nama_pengadaan'=>$item->nama_pengadaan,'pagu_anggaran'=>$paguanggaran,'nilai_rab'=>$rab,'nilai_hps'=>$hps,'nilai_kontrak'=>$kontrak,'penghematan'=>$penghematan,'persentase'=>$persenpenghematan);
 				$i++;
 			}
-			if($rabtotal!=0 && $pagutotal!=0) {
+			if($kontraktotal!=0) {
 				$rabtotal=RupiahMaker::convertInt($rabtotal);
 				$pagutotal=RupiahMaker::convertInt($pagutotal);
-				if($hpstotal!=0){
-					$hpstotal=RupiahMaker::convertInt($hpstotal);
-					if($kontraktotal!=0){
-						$kontraktotal=RupiahMaker::convertInt($kontraktotal);
-						$penghematantotal=$pagutotal-$kontraktotal;
-						$persenpenghematantotal=$penghematantotal*100/$pagutotal;
-						$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
-					} else {
-						$kontraktotal='-';
-						$penghematantotal='-';
-						$persenpenghematantotal='-';
-					}
-				} else {
-					$hpstotal='-';
-					$kontraktotal='-';
-					$penghematantotal='-';
-					$persenpenghematantotal='-';
-				}
+				$hpstotal=RupiahMaker::convertInt($hpstotal);
+				$kontraktotal=RupiahMaker::convertInt($kontraktotal);
+				$penghematantotal=$pagutotal-$kontraktotal;
+				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
+				$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
 			} else {
 				$pagutotal='-';
 				$rabtotal='-';
@@ -190,7 +142,7 @@ class AnggaranController extends Controller
 				$penghematantotal='-';
 				$persenpenghematantotal='-';
 			}
-			$anggarantotal = array('total_pagu_anggaran_divisi'=>$pagutotal,'total_nilai_rab_divisi'=>$rabtotal,'total_nilai_hps_divisi'=>$hpstotal,'total_nilai_kontrak_divisi'=>$kontraktotal,'total_penghematan_divisi'=>$penghematantotal,'persentase'=>$persenpenghematantotal);
+			$anggarantotal = array('jumlah_kontrak_divisi'=>$jumlahkontrak,'total_pagu_anggaran_divisi'=>$pagutotal,'total_nilai_rab_divisi'=>$rabtotal,'total_nilai_hps_divisi'=>$hpstotal,'total_nilai_kontrak_divisi'=>$kontraktotal,'total_penghematan_divisi'=>$penghematantotal,'persentase'=>$persenpenghematantotal);
 			$dataanggaran = new CArrayDataProvider($anggaran,array(
 				'sort'=>array(
 					'attributes'=>array(
