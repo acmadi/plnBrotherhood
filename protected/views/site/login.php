@@ -48,7 +48,7 @@ $this->pageTitle=Yii::app()->name . ' | Masuk';
 		</div> -->
 
 		<div class="row buttons" style="float:right;">
-			<?php echo CHtml::submitButton('Masuk', array('style'=>'background:none; margin-right:5px;')); ?>
+			<?php echo CHtml::submitButton('Masuk', array('style'=>'background:lightblue; margin-right:5px;')); ?>
 		</div>
 	</div>
 </div>
