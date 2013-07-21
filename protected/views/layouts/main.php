@@ -26,7 +26,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body>
+<body style="background:url(<?php echo Yii::app()->request->baseUrl . '/assets/pics/bg.png'; ?>); background-size:100% auto;">
 
 <div class="container" id="page">
 
