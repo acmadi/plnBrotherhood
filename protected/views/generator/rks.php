@@ -103,7 +103,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'kualifikasi'); ?>
 						<?php echo $form->radioButtonList($Rks,'kualifikasi',
-								array(1=>'K-1',2=>'M',3=>'B'),
+								array('K-1'=>'K-1','M'=>'M','B'=>'B'),
 								array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 						<?php echo $form->error($Rks,'kualifikasi'); ?>
 					</div>
@@ -111,14 +111,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'klasifikasi'); ?>
 						<?php echo $form->radioButtonList($Rks,'klasifikasi',
-								array(1=>'Pemasokan Barang/Jasa Lainnya',2=>'Jasa Pemborong Non Kontruksi',3=>'Jasa Konsultasi Non Kontruksi'),
+								array('Pemasokan Barang/Jasa Lainnya'=>'Pemasokan Barang/Jasa Lainnya','Jasa Pemborong Non Kontruksi'=>'Jasa Pemborong Non Kontruksi','Jasa Konsultasi Non Kontruksi'=>'Jasa Konsultasi Non Kontruksi'),
 								array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 						<?php echo $form->error($Rks,'klasifikasi'); ?>
 					</div>
 					
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'sistem_evaluasi_penawaran'); ?>
-						<?php echo $form->textField($Rks,'sistem_evaluasi_penawaran',array('size'=>56,'maxlength'=>20)); ?>
+						<?php echo $form->radioButtonList($Rks,'sistem_evaluasi_penawaran',
+								array('Sistem Gugur'=>'Sistem Gugur','Sistem Nilai'=>'Sistem Nilai'),
+								array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 						<?php echo $form->error($Rks,'sistem_evaluasi_penawaran'); ?>
 					</div>
 					
