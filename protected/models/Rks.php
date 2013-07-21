@@ -10,7 +10,7 @@
  * @property string $bidang_usaha
  * @property string $sub_bidang_usaha
  * @property string $kualifikasi
- * @property string $klarifikasi
+ * @property string $klasifikasi
  * @property string $tanggal_pendaftaran
  * @property string $tanggal_pengambilan_dokumen1
  * @property string $tanggal_pengambilan_dokumen2
@@ -91,10 +91,10 @@ class Rks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tipe_rks, bidang_usaha, sub_bidang_usaha, kualifikasi, klarifikasi, tanggal_pendaftaran, tanggal_pengambilan_dokumen1, tanggal_pengambilan_dokumen2, waktu_pengambilan_dokumen1, waktu_pengambilan_dokumen2, tempat_pengambilan_dokumen, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tempat_penyerahan, lama_pelaksanaan, jangka_waktu_berlaku_jaminan, biaya_jaminan_pelaksanaan', 'required'),
+			array('id_dokumen, nomor, tipe_rks, bidang_usaha, sub_bidang_usaha, kualifikasi, klasifikasi, tanggal_pendaftaran, tanggal_pengambilan_dokumen1, tanggal_pengambilan_dokumen2, waktu_pengambilan_dokumen1, waktu_pengambilan_dokumen2, tempat_pengambilan_dokumen, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tempat_penyerahan, lama_pelaksanaan, jangka_waktu_berlaku_jaminan, biaya_jaminan_pelaksanaan', 'required'),
 			array('tipe_rks, jangka_waktu_penyerahan, lama_pelaksanaan, jangka_waktu_berlaku_jaminan, biaya_jaminan_pelaksanaan', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('nomor, bidang_usaha, sub_bidang_usaha, kualifikasi, klarifikasi, tempat_pengambilan_dokumen, tempat_penjelasan, tempat_pemasukan_penawaran1, tempat_pembukaan_penawaran1, tempat_evaluasi_penawaran1, tempat_pemasukan_penawaran2, tempat_pembukaan_penawaran2, tempat_evaluasi_penawaran2, tempat_negosiasi, sistem_evaluasi_penawaran, tempat_penyerahan', 'length', 'max'=>256),
+			array('nomor, bidang_usaha, sub_bidang_usaha, kualifikasi, klasifikasi, tempat_pengambilan_dokumen, tempat_penjelasan, tempat_pemasukan_penawaran1, tempat_pembukaan_penawaran1, tempat_evaluasi_penawaran1, tempat_pemasukan_penawaran2, tempat_pembukaan_penawaran2, tempat_evaluasi_penawaran2, tempat_negosiasi, sistem_evaluasi_penawaran, tempat_penyerahan', 'length', 'max'=>256),
 			array('waktu_penjelasan','check1'),
 			array('waktu_pemasukan_penawaran1','check2'),
 			array('waktu_pembukaan_penawaran1','check3'),
@@ -111,7 +111,7 @@ class Rks extends CActiveRecord
 			array('waktu_pengambilan_dokumen2','check14'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tipe_rks, bidang_usaha, sub_bidang_usaha, kualifikasi, klarifikasi, tanggal_pendaftaran, tanggal_pengambilan_dokumen1, tanggal_pengambilan_dokumen2, waktu_pengambilan_dokumen1, waktu_pengambilan_dokumen2, tempat_pengambilan_dokumen, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tempat_penyerahan, lama_pelaksanaan, jangka_waktu_berlaku_jaminan, biaya_jaminan_pelaksanaan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tipe_rks, bidang_usaha, sub_bidang_usaha, kualifikasi, klasifikasi, tanggal_pendaftaran, tanggal_pengambilan_dokumen1, tanggal_pengambilan_dokumen2, waktu_pengambilan_dokumen1, waktu_pengambilan_dokumen2, tempat_pengambilan_dokumen, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tempat_penyerahan, lama_pelaksanaan, jangka_waktu_berlaku_jaminan, biaya_jaminan_pelaksanaan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -140,7 +140,7 @@ class Rks extends CActiveRecord
 			'bidang_usaha' => 'Bidang Usaha',
 			'sub_bidang_usaha' => 'Sub Bidang Usaha',
 			'kualifikasi' => 'Kualifikasi',
-			'klarifikasi' => 'Klarifikasi',
+			'klasifikasi' => 'Klasifikasi',
 			'tanggal_pendaftaran' => 'Tanggal Pendaftaran',
 			'tanggal_pengambilan_dokumen1' => 'Tanggal Pengambilan Dokumen1',
 			'tanggal_pengambilan_dokumen2' => 'Tanggal Pengambilan Dokumen2',
@@ -208,7 +208,7 @@ class Rks extends CActiveRecord
 		$criteria->compare('bidang_usaha',$this->bidang_usaha,true);
 		$criteria->compare('sub_bidang_usaha',$this->sub_bidang_usaha,true);
 		$criteria->compare('kualifikasi',$this->kualifikasi,true);
-		$criteria->compare('klarifikasi',$this->klarifikasi,true);
+		$criteria->compare('klasifikasi',$this->klasifikasi,true);
 		$criteria->compare('tanggal_pendaftaran',$this->tanggal_pendaftaran,true);
 		$criteria->compare('tanggal_pengambilan_dokumen1',$this->tanggal_pengambilan_dokumen1,true);
 		$criteria->compare('tanggal_pengambilan_dokumen2',$this->tanggal_pengambilan_dokumen2,true);
@@ -334,13 +334,13 @@ class Rks extends CActiveRecord
 		}
 	}
 	
-	public function Check11($attribute,$params){		
+	public function Check13($attribute,$params){		
 		if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $this->attributes['waktu_pengambilan_dokumen1'])){
 			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
 		}
 	}
 	
-	public function Check12($attribute,$params){		
+	public function Check14($attribute,$params){		
 		if(!preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $this->attributes['waktu_pengambilan_dokumen2'])){
 			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
 		}

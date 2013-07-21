@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2013 at 05:04 PM
+-- Generation Time: Jul 21, 2013 at 06:22 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -226,15 +226,11 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
 
 INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
 (1, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'Nota Dinas Permintaan', '2013-07-03', 'Jakarta', 1, 'Selesai'),
-(3, 'TOR', '2013-07-03', 'Jakarta', 1, 'Selesai'),
-(4, 'RAB', '2013-07-03', 'Jakarta', 1, 'Selesai'),
-(6, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 2, 'Belum Selesai'),
-(7, 'Nota Dinas Permintaan', '2013-07-23', 'Jakarta', 2, 'Selesai'),
-(8, 'TOR', '2013-07-23', 'Jakarta', 2, 'Selesai'),
-(9, 'RAB', '2013-07-23', 'Jakarta', 2, 'Selesai'),
-(11, 'Nota Dinas Perintah Pengadaan', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
-(12, 'Pakta Integritas Awal Panitia', '2013-07-19', 'Jakarta', 2, 'Belum Selesai');
+(2, 'Nota Dinas Permintaan', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(3, 'TOR', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(4, 'RAB', '2013-07-10', 'Jakarta', 1, 'Belum Selesai'),
+(5, 'Nota Dinas Perintah Pengadaan', '2013-07-21', 'Jakarta', 1, 'Belum Selesai'),
+(6, 'Pakta Integritas Awal Panitia', '2013-07-21', 'Jakarta', 1, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -375,18 +371,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `link_dokumen`
---
-
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`, `nama_file`) VALUES
-(1, 2, '09:02:05', '2013-07-17', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(2, 3, '09:02:11', '2013-07-17', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(3, 4, '09:02:17', '2013-07-17', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(4, 7, '14:10:25', '2013-07-19', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(5, 8, '14:10:29', '2013-07-19', 'aidil.syaputra', 1, 'xlsx', 'Daftar Hadir Prakualifikasi-Pengadaan Apa Aja'),
-(6, 9, '14:10:33', '2013-07-19', 'aidil.syaputra', 1, 'xlsx', 'Daftar Hadir Prakualifikasi-Pengadaan Apa Aja');
-
 -- --------------------------------------------------------
 
 --
@@ -460,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
 --
 
 INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(11, '020/610/DIVMUM/2013', 1, 'Irvan Aditya', 'Penunjukan Panitia xxxx', 90, 'asd', 12345654321);
+(5, '035/DVMUM/2013', 1, 'Gilang Laksana', 'Penunjukan Panitia sasasasas', 90, 'Kas PLN', 55555555550);
 
 -- --------------------------------------------------------
 
@@ -481,8 +465,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
 --
 
 INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`, `nilai_biaya_rab`) VALUES
-(2, '073/DIVTRANS/2013', 'Pengadaan Apa Aja', 12400000000),
-(7, '021/610/DIVSIM/2013', 'xxxx', 12345654321);
+(2, '073/DIVTRANS/2013', 'sasasasas', 55555555550);
 
 -- --------------------------------------------------------
 
@@ -552,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
 --
 
 INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`) VALUES
-(12);
+(6);
 
 -- --------------------------------------------------------
 
@@ -686,8 +669,7 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
 --
 
 INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Apa Aja', 'divtrans', 'Barang dan Jasa', '-', '2013-07-17', '0000-00-00', '0', 0, 3, 'Penunjukan Langsung', '-', '-'),
-(2, 'xxxx', 'divman', 'Barang dan Jasa', '-', '2013-07-19', '0000-00-00', '1', 0, 4, 'Penunjukan Langsung', 'Satu Sampul', 'Pasca Kualifikasi');
+(1, 'sasasasas', 'divsi', 'Barang dan Jasa', '-', '2013-07-21', '0000-00-00', '1', 0, 3, 'Pelelangan', 'Satu Sampul', 'Pasca Kualifikasi');
 
 -- --------------------------------------------------------
 
@@ -717,8 +699,7 @@ CREATE TABLE IF NOT EXISTS `rab` (
 --
 
 INSERT INTO `rab` (`id_dokumen`) VALUES
-(4),
-(9);
+(4);
 
 -- --------------------------------------------------------
 
@@ -747,7 +728,7 @@ CREATE TABLE IF NOT EXISTS `rks` (
   `bidang_usaha` varchar(256) NOT NULL,
   `sub_bidang_usaha` varchar(256) NOT NULL,
   `kualifikasi` varchar(256) NOT NULL,
-  `klarifikasi` varchar(256) NOT NULL,
+  `klasifikasi` varchar(256) NOT NULL,
   `tanggal_pendaftaran` date NOT NULL,
   `tanggal_pengambilan_dokumen1` date NOT NULL,
   `tanggal_pengambilan_dokumen2` date NOT NULL,
@@ -939,8 +920,7 @@ CREATE TABLE IF NOT EXISTS `tor` (
 --
 
 INSERT INTO `tor` (`id_dokumen`) VALUES
-(3),
-(8);
+(3);
 
 -- --------------------------------------------------------
 
