@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 22, 2013 at 06:58 AM
+-- Generation Time: Jul 22, 2013 at 09:18 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -166,18 +166,6 @@ CREATE TABLE IF NOT EXISTS `berita_acara_penerimaan_pq` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `berita_acara_pengadaan_gagal`
---
-
-CREATE TABLE IF NOT EXISTS `berita_acara_pengadaan_gagal` (
-  `id_dokumen` bigint(32) NOT NULL,
-  `nomor` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `berita_acara_penjelasan`
 --
 
@@ -279,6 +267,11 @@ CREATE TABLE IF NOT EXISTS `dokumen_prakualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
   `tujuan_pengadaan` varchar(256) NOT NULL,
+  `tanggal_pengambilan1` date NOT NULL,
+  `tanggal_pengambilan2` date NOT NULL,
+  `waktu_pengambilan1` time NOT NULL,
+  `waktu_pengambilan2` time NOT NULL,
+  `tempat_pengambilan` varchar(256) NOT NULL,
   `tanggal_pemasukan1` date NOT NULL,
   `tanggal_pemasukan2` date NOT NULL,
   `waktu_pemasukan1` time NOT NULL,
@@ -774,17 +767,6 @@ CREATE TABLE IF NOT EXISTS `rks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `surat_pengantar_penawaran_harga`
---
-
-CREATE TABLE IF NOT EXISTS `surat_pengantar_penawaran_harga` (
-  `id_dokumen` bigint(32) NOT NULL,
-  PRIMARY KEY (`id_dokumen`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `surat_pengumuman_pelelangan`
 --
 
@@ -990,12 +972,6 @@ ALTER TABLE `berita_acara_penerimaan_pq`
   ADD CONSTRAINT `berita_acara_penerimaan_pq_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `berita_acara_pengadaan_gagal`
---
-ALTER TABLE `berita_acara_pengadaan_gagal`
-  ADD CONSTRAINT `berita_acara_pengadaan_gagal_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `berita_acara_penjelasan`
 --
 ALTER TABLE `berita_acara_penjelasan`
@@ -1169,12 +1145,6 @@ ALTER TABLE `rincian_rks`
 --
 ALTER TABLE `rks`
   ADD CONSTRAINT `rks_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `surat_pengantar_penawaran_harga`
---
-ALTER TABLE `surat_pengantar_penawaran_harga`
-  ADD CONSTRAINT `surat_pengantar_penawaran_harga_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `surat_pengumuman_pelelangan`

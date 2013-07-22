@@ -20,7 +20,7 @@
 
 			<div class="row">
 				<?php echo $form->labelEx($divisi,'Nama divisi'); ?> 
-				<?php echo $form->textField($divisi,'username',array('size'=>56,'maxlength'=>20)); ?>
+				<?php echo $form->textField($divisi,'username',array('size'=>56,'maxlength'=>50)); ?>
 				<?php echo $form->error($divisi,'username'); ?>
 			</div>
 

@@ -57,7 +57,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'value'=>$Dokumen0->tanggal,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($Dokumen0,'tanggal'); ?>
@@ -70,6 +70,46 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row">
+			<?php echo $form->labelEx($DPK,'tanggal Pengambilan Dokumen Kualifikasi'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$DPK,
+					'attribute'=>'tanggal_pengambilan1',
+					'value'=>$DPK->tanggal_pengambilan1,
+					'htmlOptions'=>array('size'=>23),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($DPK,'tanggal_pengambilan1'); ?>
+			s/d
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$DPK,
+					'attribute'=>'tanggal_pengambilan2',
+					'value'=>$DPK->tanggal_pengambilan2,
+					'htmlOptions'=>array('size'=>23),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($DPK,'tanggal_pengambilan2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($DPK,'waktu Pengambilan Dokumen Kualifikasi (Format HH:MM)'); ?> 
+			<?php echo $form->textField($DPK,'waktu_pengambilan1',array('size'=>23,'maxlength'=>20)); ?>
+			<?php echo $form->error($DPK,'waktu_pengambilan1'); ?>
+			s/d
+			<?php echo $form->textField($DPK,'waktu_pengambilan2',array('size'=>23,'maxlength'=>20)); ?>
+			<?php echo $form->error($DPK,'waktu_pengambilan2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($DPK,'tempat Pengambilan Dokumen Kualifikasi'); ?>
+			<?php echo $form->textArea($DPK,'tempat_pengambilan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
+			<?php echo $form->error($DPK,'tempat_pengambilan'); ?>
+		</div>
+		
+		<div class="row">
 			<?php echo $form->labelEx($DPK,'tanggal Pemasukan Dokumen Kualifikasi'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$DPK,
@@ -77,7 +117,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'value'=>$DPK->tanggal_pemasukan1,
 					'htmlOptions'=>array('size'=>23),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($DPK,'tanggal_pemasukan1'); ?>
@@ -88,7 +128,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'value'=>$DPK->tanggal_pemasukan2,
 					'htmlOptions'=>array('size'=>23),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($DPK,'tanggal_pemasukan2'); ?>
@@ -117,7 +157,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'value'=>$DPK->tanggal_evaluasi,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($DPK,'tanggal_evaluasi'); ?>
@@ -143,7 +183,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'value'=>$DPK->tanggal_penetapan,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($DPK,'tanggal_penetapan'); ?>
@@ -179,9 +219,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 			<ul class="generatedoc">
 				<li><?php echo CHtml::link('Dokumen Prakualifikasi', array('docx/download','id'=>$DPK->id_dokumen)); ?></li>
 				<li><?php echo CHtml::link('Pakta Integritas Penyedia', array('docx/download','id'=>$X1->id_dokumen)); ?></li>
-				<li><?php echo CHtml::link('Surat Pengantar Penawaran Harga', array('docx/download','id'=>$X2->id_dokumen)); ?></li>
-				<li><?php echo CHtml::link('Surat Pernyataan Minat', array('docx/download','id'=>$X3->id_dokumen)); ?></li>
-				<li><?php echo CHtml::link('Form Isian Kualifikasi', array('docx/download','id'=>$X4->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Surat Pernyataan Minat', array('docx/download','id'=>$X2->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Form Isian Kualifikasi', array('docx/download','id'=>$X3->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	<?php } ?>
