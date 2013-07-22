@@ -186,7 +186,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 									'value'=>$Rks->tanggal_pengambilan_dokumen1,
 									'htmlOptions'=>array('size'=>23),
 									'options'=>array(
-									'dateFormat'=>'yy-mm-dd',
+									'dateFormat'=>'dd-mm-yy',
 									),
 							));?>
 							<?php echo $form->error($Rks,'tanggal_pengambilan_dokumen1'); ?>
@@ -197,7 +197,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 									'value'=>$Rks->tanggal_pengambilan_dokumen2,
 									'htmlOptions'=>array('size'=>23),
 									'options'=>array(
-									'dateFormat'=>'yy-mm-dd',
+									'dateFormat'=>'dd-mm-yy',
 									),
 							));?>
 							<?php echo $form->error($Rks,'tanggal_pengambilan_dokumen2'); ?>

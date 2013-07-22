@@ -62,9 +62,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'model' => $PP,
 					// 'model2' => $PP2,
 					'viewName' => 'formperusahaan_pendaftaran_pelelangan_prakualifikasi',
-					'labelAdd' => 'Tambah Penyadia',
-					'labelDel' => 'Hapus Penyedia',
-					
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',					
 					)); 
 				?>
 		</div>
