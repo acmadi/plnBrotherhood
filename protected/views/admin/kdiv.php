@@ -30,6 +30,13 @@
 				),
 				'kepanjangan',
 			),
+			'pager'=>array(
+					'class'=>'CLinkPager',
+					'header'=>'',
+					'nextPageLabel'=>"Selanjutnya",
+					'prevPageLabel'=>'Sebelumnya',
+			),
+			'summaryText'=>'',
 		));
 		?>
 		<br /><br />
@@ -50,6 +57,13 @@
 					'value'=>'$data->idJabatan->jabatan',
 				),
 			),
+			'pager'=>array(
+					'class'=>'CLinkPager',
+					'header'=>'',
+					'nextPageLabel'=>"Selanjutnya",
+					'prevPageLabel'=>'Sebelumnya',
+			),
+			'summaryText'=>'',
 		));
 		?>
 	</div>

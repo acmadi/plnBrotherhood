@@ -27,6 +27,13 @@
 					'value'=>'$data->nama_panitia',
 				),
 			),
+			'pager'=>array(
+					'class'=>'CLinkPager',
+					'header'=>'',
+					'nextPageLabel'=>"Selanjutnya",
+					'prevPageLabel'=>'Sebelumnya',
+			),
+			'summaryText'=>'',
 		));
 		?>
 		<br /><br />
@@ -47,6 +54,13 @@
 					'value'=>'Tanggal::getTanggalStrip($data->tanggal_sk)',
 				),
 			),
+			'pager'=>array(
+					'class'=>'CLinkPager',
+					'header'=>'',
+					'nextPageLabel'=>"Selanjutnya",
+					'prevPageLabel'=>'Sebelumnya',
+			),
+			'summaryText'=>'',
 		));
 		?>
 	</div>
