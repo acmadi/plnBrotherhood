@@ -256,7 +256,7 @@
 						$RKS->tempat_pemasukan_penawaran2='-';
 					}
 					
-					if($Pengadaan->metode_pengadaan="Pelelangan"){
+					if($Pengadaan->metode_pengadaan=="Pelelangan"){
 						$RKS->tanggal_permintaan_penawaran='00-00-0000';
 					} else {
 						$RKS->tanggal_pendaftaran='00-00-0000';
