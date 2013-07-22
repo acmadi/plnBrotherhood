@@ -538,25 +538,38 @@ class DocxController extends Controller
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Laporan Pengadaan Gagal"){
 			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
-			$RKS=Rks::model()->findByPk($dokrks->id_dokumen);
+			if ($dokrks!=null){
+				$RKS=Rks::model()->findByPk($dokrks->id_dokumen);
+				$tglawalpengumuman=Tanggal::getTanggalLengkap($RKS->tanggal_pengambilan_dokumen1);
+				$tglakhirpengumuman=Tanggal::getTanggalLengkap($RKS->tanggal_pengambilan_dokumen2);
+			}
 			
 			if ($Peng->metode_pengadaan == "Pelelangan"){
 				$this->doccy->newFile('Nota Dinas Pengadaan Lelang Gagal Panitia.docx');
-				
-				$tglawalpengumuman=Tanggal::getTanggalLengkap($RKS->tanggal_pengambilan_dokumen1);
-				$tglakhirpengumuman=Tanggal::getTanggalLengkap($RKS->tanggal_pengambilan_dokumen2);
 				if ($Peng->jenis_kualifikasi == "Pra Kualifikasi"){
 					$doksppp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pelelangan Prakualifikasi"');
-					$SPPP=SuratPengumumanPelelangan::model()->findByPk($doksppp->id_dokumen);
-					$nopengumuman=$SPPP->nomor;
-					$tglpengumuman=$doksppp->tanggal;
-					$jumlahpesertadaftar=$this->getPenyediaLulusX($Peng->id_pengadaan,'pendaftaran_pelelangan_pq');
+					if ($doksppp!=null){
+						$SPPP=SuratPengumumanPelelangan::model()->findByPk($doksppp->id_dokumen);
+						$nopengumuman=$SPPP->nomor;
+						$tglpengumuman=$doksppp->tanggal;
+						$jumlahpesertadaftar=$this->getPenyediaLulusX($Peng->id_pengadaan,'pendaftaran_pelelangan_pq');
+					} else {
+						$nopengumuman="-- TIDAK ADA --";
+						$tglpengumuman="-- TIDAK ADA --";
+						$jumlahpesertadaftar="-- TIDAK ADA --";
+					}
 				} else {
 					$dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
-					$SPP=SuratPengumumanPelelangan::model()->findByPk($dokspp->id_dokumen);
-					$nopengumuman=$SPP->nomor;
-					$tglpengumuman=$dokspp->tanggal;
-					$jumlahpesertadaftar=$this->getPenyediaLulusX($Peng->id_pengadaan,'pendaftaran_pc');
+					if ($dokspp!=null){
+						$SPP=SuratPengumumanPelelangan::model()->findByPk($dokspp->id_dokumen);
+						$nopengumuman=$SPP->nomor;
+						$tglpengumuman=$dokspp->tanggal;
+						$jumlahpesertadaftar=$this->getPenyediaLulusX($Peng->id_pengadaan,'pendaftaran_pc');
+					} else {
+						$nopengumuman="-- TIDAK ADA --";
+						$tglpengumuman="-- TIDAK ADA --";
+						$jumlahpesertadaftar="-- TIDAK ADA --";
+					}
 				}
 			} else {
 				$this->doccy->newFile('Nota Dinas Pengadaan Gagal Panitia.docx');
@@ -575,17 +588,17 @@ class DocxController extends Controller
 				$tglaanwijzing=$RKS->tanggal_penjelasan;
 				$jumlahpesertaaanwijzing=$this->getPenyediaLulusX($Peng->id_pengadaan,'ba_aanwijzing');
 			} else {
-				$nobaaanwijzing="-";
-				$tglbaaanwijzing="-";
-				$tglaanwijzing="-";
-				$jumlahpesertaaanwijzing="-";
+				$nobaaanwijzing="-- TIDAK ADA --";
+				$tglbaaanwijzing="-- TIDAK ADA --";
+				$tglaanwijzing="-- TIDAK ADA --";
+				$jumlahpesertaaanwijzing="-- TIDAK ADA --";
 			}
 			
 			if ($Peng->metode_penawaran == "Satu Sampul"){
 				$dokbapp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"');
 			} else if ($Peng->metode_penawaran == "Dua Sampul"){
 				$dokbapp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Sampul Satu"');
-			} else if ($Peng->metode_penawaran == "Dua Tahap"){
+			} else {
 				$dokbapp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Tahap Satu"');
 			}
 			if ($dokbapp!=null){
@@ -597,19 +610,19 @@ class DocxController extends Controller
 				$tglpembukaandokumen=Tanggal::getTanggalLengkap($RKS->tanggal_pembukaan_penawaran1);
 				$waktupembukaandokumen=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
 			} else {
-				$tglpemasukandokumen="-";
-				$waktupemasukandokumen="-";
-				$nobapembukaandokumen="-";
-				$tglbapembukaandokumen="-";
-				$tglpembukaandokumen="-";
-				$waktupembukaandokumen="-";
+				$tglpemasukandokumen="-- TIDAK ADA --";
+				$waktupemasukandokumen="-- TIDAK ADA --";
+				$nobapembukaandokumen="-- TIDAK ADA --";
+				$tglbapembukaandokumen="-- TIDAK ADA --";
+				$tglpembukaandokumen="-- TIDAK ADA --";
+				$waktupembukaandokumen="-- TIDAK ADA --";
 			}
 			
 			if ($Peng->metode_penawaran == "Satu Sampul"){
 				$dokbaep=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran"');
 			} else if ($Peng->metode_penawaran == "Dua Sampul"){
 				$dokbaep=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
-			} else if ($Peng->metode_penawaran == "Dua Tahap"){
+			} else {
 				$dokbaep=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
 			}
 			if ($dokbapp!=null){
@@ -619,15 +632,19 @@ class DocxController extends Controller
 				$tglevaluasi=Tanggal::getTanggalLengkap($RKS->tanggal_evaluasi_penawaran1);
 				$jumlahpesertaevaluasi=$this->getPenyediaLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1');
 			} else {
-				$nobapembukaandokumen="-";
-				$tglbapembukaandokumen="-";
-				$tglpembukaandokumen="-";
-				$jumlahpesertaevaluasi="-";
+				$nobapembukaandokumen="-- TIDAK ADA --";
+				$tglbapembukaandokumen="-- TIDAK ADA --";
+				$tglpembukaandokumen="-- TIDAK ADA --";
+				$jumlahpesertaevaluasi="-- TIDAK ADA --";
 			}
 			
 			$dokndpp = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$NDPP = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-			$kepada = $NDPP->dari;
+			if ($NDPP->dari == "1"){
+				$kepada = "KDIVMUM";
+			} else {
+				$kepada = "MSDAF";
+			}
 			$ketuapanitiapejabat = $NDPP->kepada;
 			$tahun = Tanggal::getTahun($Dok->tanggal);
 			$divisipeminta = $Peng->divisi_peminta;
