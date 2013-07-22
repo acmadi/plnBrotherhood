@@ -40,7 +40,7 @@
 		),
 		array(
 			'name'=>'Nama Pengguna',
-			'value'=>'$data->fbsql_username(link_identifier)',
+			'value'=>'$data->username',
 		),
 		'nama',
 		array(
@@ -55,6 +55,13 @@
 			),
 		),
 	),
+	'pager'=>array(
+			'class'=>'CLinkPager',
+			'header'=>'',
+			'nextPageLabel'=>"Selanjutnya",
+			'prevPageLabel'=>'Sebelumnya',
+	),
+	'summaryText'=>'',
 ));
 ?>
 

@@ -30,5 +30,12 @@
 			),
 		),
 	),
+	'pager'=>array(
+			'class'=>'CLinkPager',
+			'header'=>'',
+			'nextPageLabel'=>"Selanjutnya",
+			'prevPageLabel'=>'Sebelumnya',
+	),
+	'summaryText'=>'',
 ));
 ?>
