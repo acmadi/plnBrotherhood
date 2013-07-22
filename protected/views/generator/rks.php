@@ -59,7 +59,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				
 				<?php echo CHtml::errorSummary($Rks);?>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<?php if ($Rks->isNewRecord){ ?>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'jenis rks'); ?>
@@ -161,7 +161,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<h4><b> Penjadwalan </b></h4>
 				
 				<?php if ($Pengadaan->metode_pengadaan=="Pelelangan") { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pendaftaran'); ?>
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -177,7 +177,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						</div>
 					</div>
 					<br/>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'Tanggal Pengambilan Dokumen'); ?>
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -218,7 +218,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 				<?php } else { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_permintaan_penawaran'); ?>
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -236,7 +236,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<br/>
 				<?php } ?>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_penjelasan'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -265,7 +265,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php if ($Pengadaan->metode_penawaran=="Satu Sampul" || $Pengadaan->metode_penawaran=="Dua Sampul") { 
 							echo $form->labelEx($Rks,'tanggal_pemasukan_penawaran'); 
@@ -317,7 +317,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
 							echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran'); 
@@ -364,7 +364,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
 							echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran'); 
@@ -411,7 +411,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 				
 				<?php if ($Pengadaan->metode_penawaran=="Dua Sampul") { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">		
+					<div class='kelompokform'>		
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran sampul 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -440,7 +440,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran sampul 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -470,7 +470,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<br/>
 					
 				<?php }	else if ($Pengadaan->metode_penawaran=="Dua Tahap") { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pemasukan_penawaran tahap 2'); ?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -510,7 +510,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran tahap 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -539,7 +539,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 					
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran tahap 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -569,7 +569,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<br/>
 				<?php } ?>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_negosiasi'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -598,7 +598,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_usulan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -621,7 +621,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_penetapan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -644,7 +644,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_pemberitahuan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -667,7 +667,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_penunjukan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
