@@ -963,7 +963,7 @@ class DocxController extends Controller
 			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
 			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
-			$namapengirim = Kdivmum::model()->find('jabatan = "'.$ndpp->dari.'" and status_user = "Aktif"')->nama;
+			$namapengirim = Kdivmum::model()->find('id_jabatan = "'.$ndpp->dari.'" and status_user = "Aktif"')->nama;
 			$pejabatketuapanitia = $ndpp->kepada;
 			$dari = Jabatan::model()->findByPk($ndpp->dari)->jabatan;
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
