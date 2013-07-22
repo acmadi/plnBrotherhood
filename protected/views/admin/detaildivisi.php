@@ -40,7 +40,7 @@
 		),
 		array(
 			'name'=>'Nama Pengguna',
-			'value'=>'$data->fbsql_username(link_identifier)',
+			'value'=>'$data->username',
 		),
 		'nama',
 		array(
