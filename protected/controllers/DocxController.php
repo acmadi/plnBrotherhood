@@ -537,8 +537,40 @@ class DocxController extends Controller
 			$this->renderDocx("Nota Dinas Penetapan Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Laporan Pengadaan Gagal"){
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			if ($dokrks!=null){
+				$RKS=Rks::model()->findByPk($dokrks->id_dokumen);
+				$tglawalpengumuman=Tanggal::getTanggalLengkap($RKS->tanggal_pengambilan_dokumen1);
+				$tglakhirpengumuman=Tanggal::getTanggalLengkap($RKS->tanggal_pengambilan_dokumen2);
+			}
+			
 			if ($Peng->metode_pengadaan == "Pelelangan"){
 				$this->doccy->newFile('Nota Dinas Pengadaan Lelang Gagal Panitia.docx');
+				if ($Peng->jenis_kualifikasi == "Pra Kualifikasi"){
+					$doksppp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pelelangan Prakualifikasi"');
+					if ($doksppp!=null){
+						$SPPP=SuratPengumumanPelelangan::model()->findByPk($doksppp->id_dokumen);
+						$nopengumuman=$SPPP->nomor;
+						$tglpengumuman=$doksppp->tanggal;
+						$jumlahpesertadaftar=$this->getPenyediaLulusX($Peng->id_pengadaan,'pendaftaran_pelelangan_pq');
+					} else {
+						$nopengumuman="-- TIDAK ADA --";
+						$tglpengumuman="-- TIDAK ADA --";
+						$jumlahpesertadaftar="-- TIDAK ADA --";
+					}
+				} else {
+					$dokspp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Pelelangan"');
+					if ($dokspp!=null){
+						$SPP=SuratPengumumanPelelangan::model()->findByPk($dokspp->id_dokumen);
+						$nopengumuman=$SPP->nomor;
+						$tglpengumuman=$dokspp->tanggal;
+						$jumlahpesertadaftar=$this->getPenyediaLulusX($Peng->id_pengadaan,'pendaftaran_pc');
+					} else {
+						$nopengumuman="-- TIDAK ADA --";
+						$tglpengumuman="-- TIDAK ADA --";
+						$jumlahpesertadaftar="-- TIDAK ADA --";
+					}
+				}
 			} else {
 				$this->doccy->newFile('Nota Dinas Pengadaan Gagal Panitia.docx');
 			}
@@ -546,12 +578,114 @@ class DocxController extends Controller
 			$NDPGP=NotaDinasPengadaanGagalPanitia::model()->findByPk($Dok->id_dokumen);
 			$nomornotadinas=$NDPGP->nomor;
 			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$namapengadaan = $Peng->nama_pengadaan;
+			
+			$dokbap=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Aanwijzing"');
+			if ($dokbap!=null){
+				$BAP=BeritaAcaraPenjelasan::model()->findByPk($dokbap->id_dokumen);
+				$nobaaanwijzing=$BAP->nomor;
+				$tglbaaanwijzing=Tanggal::getTanggalLengkap($dokbap->tanggal);
+				$tglaanwijzing=$RKS->tanggal_penjelasan;
+				$jumlahpesertaaanwijzing=$this->getPenyediaLulusX($Peng->id_pengadaan,'ba_aanwijzing');
+			} else {
+				$nobaaanwijzing="-- TIDAK ADA --";
+				$tglbaaanwijzing="-- TIDAK ADA --";
+				$tglaanwijzing="-- TIDAK ADA --";
+				$jumlahpesertaaanwijzing="-- TIDAK ADA --";
+			}
+			
+			if ($Peng->metode_penawaran == "Satu Sampul"){
+				$dokbapp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran"');
+			} else if ($Peng->metode_penawaran == "Dua Sampul"){
+				$dokbapp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Sampul Satu"');
+			} else {
+				$dokbapp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Pembukaan Penawaran Tahap Satu"');
+			}
+			if ($dokbapp!=null){
+				$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($dokbapp->id_dokumen);
+				$tglpemasukandokumen=Tanggal::getTanggalLengkap($RKS->tanggal_akhir_pemasukan_penawaran1);
+				$waktupemasukandokumen=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran1);
+				$nobapembukaandokumen=$BAPP->nomor;
+				$tglbapembukaandokumen=Tanggal::getTanggalLengkap($dokbapp->tanggal);
+				$tglpembukaandokumen=Tanggal::getTanggalLengkap($RKS->tanggal_pembukaan_penawaran1);
+				$waktupembukaandokumen=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
+			} else {
+				$tglpemasukandokumen="-- TIDAK ADA --";
+				$waktupemasukandokumen="-- TIDAK ADA --";
+				$nobapembukaandokumen="-- TIDAK ADA --";
+				$tglbapembukaandokumen="-- TIDAK ADA --";
+				$tglpembukaandokumen="-- TIDAK ADA --";
+				$waktupembukaandokumen="-- TIDAK ADA --";
+			}
+			
+			if ($Peng->metode_penawaran == "Satu Sampul"){
+				$dokbaep=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran"');
+			} else if ($Peng->metode_penawaran == "Dua Sampul"){
+				$dokbaep=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Sampul Satu"');
+			} else {
+				$dokbaep=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Berita Acara Evaluasi Penawaran Tahap Satu"');
+			}
+			if ($dokbapp!=null){
+				$BAEP=BeritaAcaraEvaluasiPenawaran::model()->findByPk($dokbaep->id_dokumen);
+				$nobaevaluasi=$BAEP->nomor;
+				$tglbaevaluasi=Tanggal::getTanggalLengkap($dokbaep->tanggal);
+				$tglevaluasi=Tanggal::getTanggalLengkap($RKS->tanggal_evaluasi_penawaran1);
+				$jumlahpesertaevaluasi=$this->getPenyediaLulusX($Peng->id_pengadaan,'evaluasi_penawaran_1');
+			} else {
+				$nobapembukaandokumen="-- TIDAK ADA --";
+				$tglbapembukaandokumen="-- TIDAK ADA --";
+				$tglpembukaandokumen="-- TIDAK ADA --";
+				$jumlahpesertaevaluasi="-- TIDAK ADA --";
+			}
+			
+			$dokndpp = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$NDPP = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
+			if ($NDPP->dari == "1"){
+				$kepada = "KDIVMUM";
+			} else {
+				$kepada = "MSDAF";
+			}
+			$ketuapanitiapejabat = $NDPP->kepada;
+			$tahun = Tanggal::getTahun($Dok->tanggal);
+			$divisipeminta = $Peng->divisi_peminta;
+			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
+				$panitiapejabat = "Pejabat Pengadaan Barang/Jasa";
+			}else{
+				$panitiapejabat = "Panitia Pengadaan Barang/Jasa";
+			}
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#nomornotadinas#', $nomornotadinas);
 			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggalsurat);
+			$this->doccy->phpdocx->assign('#kepada#', $kepada);
+			$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#tglawalpengumuman#', $tglawalpengumuman);
+			$this->doccy->phpdocx->assign('#tglakhirpengumuman#', $tglakhirpengumuman);
+			$this->doccy->phpdocx->assign('#nopengumuman#', $nopengumuman);
+			$this->doccy->phpdocx->assign('#tglpengumuman#', $tglpengumuman);
+			$this->doccy->phpdocx->assign('#tglawalpendaftaran#', '.............');
+			$this->doccy->phpdocx->assign('#tglakhirpendaftaran#', '.............');
+			$this->doccy->phpdocx->assign('#jumlahpesertadaftar#', $jumlahpesertadaftar);
+			$this->doccy->phpdocx->assign('#tglaanwijzing#', $tglaanwijzing);
+			$this->doccy->phpdocx->assign('#jumlahpesertaaanwijzing#', $jumlahpesertaaanwijzing);
+			$this->doccy->phpdocx->assign('#nobaaanwijzing#', $nobaaanwijzing);
+			$this->doccy->phpdocx->assign('#tglbaaanwijzing#', $tglbaaanwijzing);
+			$this->doccy->phpdocx->assign('#tglpemasukandokumen#', $tglpemasukandokumen);
+			$this->doccy->phpdocx->assign('#waktupemasukandokumen#', $waktupemasukandokumen);
+			$this->doccy->phpdocx->assign('#tglpembukaandokumen#', $tglpembukaandokumen);
+			$this->doccy->phpdocx->assign('#waktupembukaandokumen#', $waktupembukaandokumen);
+			$this->doccy->phpdocx->assign('#nobapembukaandokumen#', $nobapembukaandokumen);
+			$this->doccy->phpdocx->assign('#tglbapembukaandokumen#', $tglbapembukaandokumen);
+			$this->doccy->phpdocx->assign('#tglevaluasi#', $tglevaluasi);
+			$this->doccy->phpdocx->assign('#nobaevaluasi#', $nobaevaluasi);
+			$this->doccy->phpdocx->assign('#tglbaevaluasi#', $tglbaevaluasi);
+			$this->doccy->phpdocx->assign('#jumlahpesertaevaluasi#', $jumlahpesertaevaluasi);
+			$this->doccy->phpdocx->assign('#tahun#', $tahun);
+			$this->doccy->phpdocx->assign('#divisipeminta#', $divisipeminta);
+			$this->doccy->phpdocx->assign('#Ketuapanitia/Pejabat#', $ketuapanitiapejabat);
 			
 			$this->renderDocx("Nota Dinas Laporan Pengadaan Gagal-".$Peng->nama_pengadaan.".docx", true);
 		}
