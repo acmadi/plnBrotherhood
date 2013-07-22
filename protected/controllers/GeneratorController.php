@@ -1504,7 +1504,7 @@
 					}
 					
 					$this->render('penyampaiandokumenprakualifikasi',array(
-						'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,//'PP'=>$PP,
+						'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
 					));
 				}
 			}
@@ -1561,7 +1561,7 @@
 					
 				}
 				$this->render('penyampaiandokumenprakualifikasi',array(
-					'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,//'PP'=>$PP,
+					'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
 				));
 			}
 		}
