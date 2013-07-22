@@ -1350,15 +1350,6 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#6#', $perihal);
 			$this->renderDocx("Surat Pemberitahuan Pengadaan.docx", true);
 		}*/
-		else if ($Dok->nama_dokumen == "Surat Pengantar Penawaran Harga"){
-		
-		$this->doccy->newFile('5c Surat Pengantar Penawaran Harga.docx');
-			
-		$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
-		$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-		
-		$this->renderDocx("Surat Pengantar Penawaran Harga-".$Peng->nama_pengadaan.".docx", true);
-		}
 		else if ($Dok->nama_dokumen == "Surat Undangan Permintaan Penawaran Harga"){
 			
 			$SUPH=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($id);
