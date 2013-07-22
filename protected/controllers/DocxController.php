@@ -1582,7 +1582,7 @@ class DocxController extends Controller
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$penyedia = $this->getPenyediaX($Peng->id_pengadaan,"penetapan_pq");
 			if($Peng->metode_pengadaan=="Pelelangan"){
-				$DokLelang = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan"');
+				$DokLelang = Dokumen::model()->find('id_pengadaan=' . $Peng->id_pengadaan . ' and nama_dokumen="Surat Pengumuman Pelelangan Prakualifikasi"');
 				$tanggalpengumuman = Tanggal::getTanggalLengkap($DokLelang->tanggal);
 				$nopengumuman = SuratPengumumanPelelangan::model()->find('id_dokumen='.$DokLelang->id_dokumen)->nomor;
 				$listpeserta = $this->getPenyediaX($Peng->id_pengadaan,"pendaftaran_pelelangan_pq");
