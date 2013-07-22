@@ -259,6 +259,7 @@
 					if($Pengadaan->metode_pengadaan="Pelelangan"){
 						$RKS->tanggal_permintaan_penawaran='00-00-0000';
 					} else {
+						$RKS->tanggal_pendaftaran='00-00-0000';
 						$RKS->tanggal_pengambilan_dokumen1='00-00-0000';
 						$RKS->tanggal_pengambilan_dokumen2='00-00-0000';
 						$RKS->waktu_pengambilan_dokumen1='00:00';
@@ -318,6 +319,7 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$RKS->attributes=$_POST['Rks'];
+						$RKS->tanggal_pendaftaran=date('Y-m-d', strtotime($RKS->tanggal_pendaftaran));
 						$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
 						$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
 						$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
@@ -335,7 +337,6 @@
 						$RKS->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penetapan_pemenang));
 						$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
 						$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
-						$RKS->tanggal_paling_lambat_penyerahan=date('Y-m-d', strtotime($RKS->tanggal_paling_lambat_penyerahan));
 						$valid=$RKS->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){
@@ -619,6 +620,8 @@
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					
 					$RKS= Rks::model()->findByPk($Dokumen0->id_dokumen);
+					$RKS->waktu_pengambilan_dokumen1=Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen1);
+					$RKS->waktu_pengambilan_dokumen2=Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen2);
 					$RKS->waktu_penjelasan=Tanggal::getJamMenit($RKS->waktu_penjelasan);
 					$RKS->waktu_pemasukan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran1);
 					$RKS->waktu_pembukaan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
@@ -631,6 +634,9 @@
 					$RKS->waktu_penetapan_pemenang=Tanggal::getJamMenit($RKS->waktu_penetapan_pemenang);
 					$RKS->waktu_pemberitahuan_pemenang=Tanggal::getJamMenit($RKS->waktu_pemberitahuan_pemenang);
 					$RKS->waktu_penunjukan_pemenang=Tanggal::getJamMenit($RKS->waktu_penunjukan_pemenang);
+					$RKS->tanggal_pendaftaran=Tanggal::getTanggalStrip($RKS->tanggal_pendaftaran);
+					$RKS->tanggal_pengambilan_dokumen1=Tanggal::getTanggalStrip($RKS->tanggal_pengambilan_dokumen1);
+					$RKS->tanggal_pengambilan_dokumen2=Tanggal::getTanggalStrip($RKS->tanggal_pengambilan_dokumen2);
 					$RKS->tanggal_permintaan_penawaran=Tanggal::getTanggalStrip($RKS->tanggal_permintaan_penawaran);
 					$RKS->tanggal_awal_pemasukan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_awal_pemasukan_penawaran1);
 					$RKS->tanggal_akhir_pemasukan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_akhir_pemasukan_penawaran1);
@@ -646,7 +652,6 @@
 					$RKS->tanggal_penetapan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penetapan_pemenang);
 					$RKS->tanggal_pemberitahuan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_pemberitahuan_pemenang);
 					$RKS->tanggal_penunjukan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penunjukan_pemenang);
-					$RKS->tanggal_paling_lambat_penyerahan=Tanggal::getTanggalStrip($RKS->tanggal_paling_lambat_penyerahan);
 					
 					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
 						
@@ -668,6 +673,9 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$RKS->attributes=$_POST['Rks'];
+						$RKS->tanggal_pendaftaran=date('Y-m-d', strtotime($RKS->tanggal_pendaftaran));
+						$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
+						$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
 						$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
 						$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
 						$RKS->tanggal_awal_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran1));
@@ -683,7 +691,6 @@
 						$RKS->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penetapan_pemenang));
 						$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
 						$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
-						$RKS->tanggal_paling_lambat_penyerahan=date('Y-m-d', strtotime($RKS->tanggal_paling_lambat_penyerahan));
 						$valid=$RKS->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){		
@@ -5361,7 +5368,6 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$NDUP->attributes=$_POST['NotaDinasUsulanPemenang'];
-						$NDUP->waktu_pelaksanaan=date('Y-m-d',strtotime($NDUP->waktu_pelaksanaan));
 						$valid=$NDUP->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){
@@ -5421,7 +5427,6 @@
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					
 					$NDUP=NotaDinasUsulanPemenang::model()->findByPk($Dokumen0->id_dokumen);
-					$NDUP->waktu_pelaksanaan=Tanggal::getTanggalStrip($NDUP->waktu_pelaksanaan);
 					$PIP2=PaktaIntegritasPanitia2::model()->findByPk($Dokumen1->id_dokumen);
 					
 					//Uncomment the following line if AJAX validation is needed
@@ -5844,7 +5849,7 @@
 					if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung' || $Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
 						$SPPM->jaminan='0';
 						$SPPM->nomor_ski='-';
-						$SPPM->tanggal_ski='-';
+						$SPPM->tanggal_ski='00-00-0000';
 						$SPPM->no_ski='-';
 					}
 					
@@ -5855,6 +5860,7 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$SPPM->attributes=$_POST['SuratPenunjukanPemenang'];
+						$SPPM->tanggal_ski=date('Y-m-d',strtotime($SPPM->tanggal_ski));
 						$valid=$SPPM->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){
@@ -5906,6 +5912,7 @@
 					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Penunjukan Pemenang"');
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					$SPPM=SuratPenunjukanPemenang::model()->findByPk($Dokumen0->id_dokumen);
+					$SPPM->tanggal_ski=Tanggal::getTanggalStrip($SPPM->tanggal_ski);
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -5914,6 +5921,7 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$SPPM->attributes=$_POST['SuratPenunjukanPemenang'];
+						$SPPM->tanggal_ski=date('Y-m-d',strtotime($SPPM->tanggal_ski));
 						$valid=$SPPM->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){

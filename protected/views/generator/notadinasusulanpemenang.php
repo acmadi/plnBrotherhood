@@ -92,26 +92,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($NDUP,'tanggal Pelaksanaan'); ?>
-			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-					'model'=>$NDUP,
-					'attribute'=>'waktu_pelaksanaan',
-					'value'=>$NDUP->waktu_pelaksanaan,
-					'htmlOptions'=>array('size'=>56),
-					'options'=>array(
-					'dateFormat'=>'dd-mm-yy',
-					),
-			));?>
-			<?php echo $form->error($NDUP,'waktu_pelaksanaan'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($NDUP,'tempat Penyerahan'); ?>
-			<?php echo $form->textArea($NDUP,'tempat_penyerahan',array('cols'=>43,'rows'=>3, 'maxlength'=>20)); ?>
-			<?php echo $form->error($NDUP,'tempat_penyerahan'); ?>
-		</div>
-
-		<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'idpenyedia',        

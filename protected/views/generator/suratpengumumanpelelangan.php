@@ -78,9 +78,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			</div>
 
 			<div class="row">
-				<?php echo $form->labelEx($SPP,'syarat_mengikuti_lelang'); ?>
-				<?php echo $form->textArea($SPP,'syarat_mengikuti_lelang',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
-				<?php echo $form->error($SPP,'syarat_mengikuti_lelang'); ?>
+				<?php echo $form->labelEx($SPP,'harga_dokumen'); ?>
+				<?php echo $form->textField($SPP,'harga_dokumen',array('size'=>56,'maxlength'=>100)); ?>
+				<?php echo $form->error($SPP,'harga_dokumen'); ?>
 			</div>
 			
 			<div class="row buttons">

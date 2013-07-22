@@ -57,6 +57,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			
 				<h4><b> RKS </b></h4>
 				
+				<?php echo CHtml::errorSummary($Rks);?>
+				
 				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
 					<?php if ($Rks->isNewRecord){ ?>
 						<div class="row">

@@ -119,7 +119,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 					'value'=>$SPPM->tanggal_ski,
 					'htmlOptions'=>array('size'=>56),
 					'options'=>array(
-					'dateFormat'=>'yy-mm-dd',
+					'dateFormat'=>'dd-mm-yy',
 					),
 			));?>
 			<?php echo $form->error($SPPM,'tanggal'); ?>
@@ -131,19 +131,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 				<?php echo $form->error($SPPM,'no_ski'); ?>
 			</div>
 			
-			<div class="row">
-				<?php echo $form->labelEx($SPPM,'Jaminan Pelaksanaan'); ?>
-				<?php echo $form->textField($SPPM,'jaminan',array('size'=>56,'maxlength'=>255)); ?>
-				<?php echo $form->error($SPPM,'jaminan'); ?>
-			</div>
-			
 		<?php } ?>
-		
-		<div class="row">
-			<?php echo $form->labelEx($SPPM,'batas waktu penyerahan (dalam satuan hari)'); ?>
-			<?php echo $form->textField($SPPM,'lama_penyerahan',array('size'=>56,'maxlength'=>100)); ?>
-			<?php echo $form->error($SPPM,'lama_penyerahan'); ?>
-		</div>
 
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($SPPM->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
