@@ -989,6 +989,25 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Nota Dinas Penetapan Hasil Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
 		}
+		else if ($Dok->nama_dokumen == "Nota Dinas Laporan Pengadaan Gagal"){
+			if ($Peng->metode_pengadaan == "Pelelangan"){
+				$this->doccy->newFile('Nota Dinas Pengadaan Lelang Gagal Panitia.docx');
+			} else {
+				$this->doccy->newFile('Nota Dinas Pengadaan Gagal Panitia.docx');
+			}
+			
+			$NDPGP=NotaDinasPengadaanGagalPanitia::model()->findByPk($Dok->id_dokumen);
+			$nomornotadinas=$NDPGP->nomor;
+			$tanggalsurat = Tanggal::getTanggalLengkap($Dok->tanggal);
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomornotadinas#', $nomornotadinas);
+			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggalsurat);
+			
+			$this->renderDocx("Nota Dinas Laporan Pengadaan Gagal-".$Peng->nama_pengadaan.".docx", true);
+		}
 //	=================================================================Surat-Surat=================================================================
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			

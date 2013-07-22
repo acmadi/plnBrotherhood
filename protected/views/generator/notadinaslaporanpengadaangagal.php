@@ -9,6 +9,9 @@ $cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#18').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">

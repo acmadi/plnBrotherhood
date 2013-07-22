@@ -395,20 +395,13 @@ class AdminController extends Controller
 	public function actionHapusdivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$divisi = Divisi::model();
-			if (isset($_POST['Divisi'])) {
-				foreach ($_POST['Divisi']['username'] as $item) {
-					$divisi->deleteByPk($item);
-				}
-				$this->redirect(array('divisi'));
-			}
-			$this->render('hapusdivisi', array(
-				'divisi'=>$divisi,
-			));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			UserDivisi::model()->deleteAllByAttributes(array('divisi'=>$id));
+			Divisi::model()->deleteByPk($id);
 		}
 	}
 
-	public function actionTambahuserdivisi()
+	public function actionTambahanggotadivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
 			$id = Yii::app()->getRequest()->getQuery('id');
@@ -428,7 +421,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			$this->render('tambahuserdivisi', array(
+			$this->render('tambahanggotadivisi', array(
 				'id'=>$id,
 				'divisi'=>$divisi,
 				'user'=>$user,
@@ -436,23 +429,12 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionHapususerdivisi()
+	public function actionHapusanggotadivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$id = Yii::app()->getRequest()->getQuery('id');
-			$divisi = Divisi::model()->findByPk($id);
 			$user = UserDivisi::model();
-			if (isset($_POST['UserDivisi'])) {
-				foreach ($_POST['UserDivisi']['username'] as $item) {
-					$user->deleteByPk($item);
-				}
-				$this->redirect(array('detaildivisi', 'id'=>$id));
-			}
-			$this->render('hapususerdivisi', array(
-				'id'=>$id,
-				'divisi'=>$divisi,
-				'user'=>$user,
-			));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$user->deleteByPk($id);
 		}
 	}
 
