@@ -457,6 +457,33 @@ class AdminController extends Controller
 		}
 	}
 	
+	public function actionAutocomplete()
+	{
+		$autocompletedata = array();
+		if (isset($_GET['term'])) {
+			$ldap = Yii::app()->params['ldap'];
+			$conn = ldap_connect($ldap['host']);
+			if ($conn) {
+				ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
+				ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+				if (ldap_bind($conn, $ldap['bind_rdn'], $ldap['bind_pwd'])) {
+					$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=' . $_GET['term'] . '*)');
+					$data = ldap_get_entries($conn, $result);
+					if ($data != null) {
+						foreach ($data as $item) {
+							if ($item['samaccountname'][0] != null) {
+								array_push($autocompletedata, $item['samaccountname'][0]);
+							}
+						}
+					}
+				}
+				ldap_close($conn);
+			}
+		}
+		echo CJSON::encode($autocompletedata);
+		Yii::app()->end();
+	}
+	
 	private function getRecordByUsername($username) {
 		$ldap = Yii::app()->params['ldap'];
 		$conn = ldap_connect($ldap['host']);

@@ -29,7 +29,16 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($user,'Nama pengguna'); ?> 
-		<?php echo $form->textField($user,'username',array('size'=>56,'maxlength'=>256)); ?>
+		<?//php echo $form->textField($user,'username',array('size'=>56,'maxlength'=>256)); ?>
+		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+			'name'=>'username',
+			'value'=>$user->username,
+			'sourceUrl'=>array('admin/autocomplete'),
+			'options'=>array(
+				'minLength'=>'2',
+			),
+		));
+		?>
 		<?php echo $form->error($user,'username'); ?>
 	</div>
 
