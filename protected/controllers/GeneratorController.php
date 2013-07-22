@@ -256,6 +256,16 @@
 						$RKS->tempat_pemasukan_penawaran2='-';
 					}
 					
+					if($Pengadaan->metode_pengadaan="Pelelangan"){
+						$RKS->tanggal_permintaan_penawaran='00-00-0000';
+					} else {
+						$RKS->tanggal_pengambilan_dokumen1='00-00-0000';
+						$RKS->tanggal_pengambilan_dokumen2='00-00-0000';
+						$RKS->waktu_pengambilan_dokumen1='00:00';
+						$RKS->waktu_pengambilan_dokumen2='00:00';
+						$RKS->tempat_pengambilan_dokumen='-';
+					}
+					
 					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
 						$DokumenX1= new Dokumen;
 						$DokumenX1->id_dokumen=$somevariable+3;
@@ -308,6 +318,8 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$RKS->attributes=$_POST['Rks'];
+						$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
+						$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
 						$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
 						$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
 						$RKS->tanggal_awal_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran1));
