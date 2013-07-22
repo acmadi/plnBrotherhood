@@ -21,8 +21,25 @@
 					'name'=>'No',
 					'value'=>'$this->grid->dataProvider->pagination->currentPage * 10 + $row + 1',
 				),
-				'username',
-				'nama_divisi',
+				array(
+					'name'=>'Divisi',
+					'value'=>'$data->username',
+				),
+				array(
+					'name'=>'Kepanjangan',
+					'value'=>'$data->nama_divisi',
+				),
+				array(
+					'class'=>'CButtonColumn',
+					'template'=>'{delete}',
+					'deleteButtonLabel'=>'Hapus',
+					'deleteConfirmation'=>'Hapus divisi?',
+					'buttons'=>array(
+						'delete'=>array(
+							'url'=>'Yii::app()->createUrl("admin/hapusdivisi", array("id"=>$data->username))',
+						),
+					),
+				),
 			),
 		));
 		?>
