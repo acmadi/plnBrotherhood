@@ -885,7 +885,7 @@
 					$X2->id_dokumen=$Dokumen2->id_dokumen;
 					
 					$X3= new FormIsianKualifikasi;
-					$X3->id_dokumen=$Dokumen2->id_dokumen;
+					$X3->id_dokumen=$Dokumen3->id_dokumen;
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -894,6 +894,8 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$DPK->attributes=$_POST['DokumenPrakualifikasi'];
+						$DPK->tanggal_pengambilan1=date('Y-m-d',strtotime($DPK->tanggal_pengambilan1));
+						$DPK->tanggal_pengambilan2=date('Y-m-d',strtotime($DPK->tanggal_pengambilan2));
 						$DPK->tanggal_pemasukan1=date('Y-m-d',strtotime($DPK->tanggal_pemasukan1));
 						$DPK->tanggal_pemasukan2=date('Y-m-d',strtotime($DPK->tanggal_pemasukan2));
 						$DPK->tanggal_evaluasi=date('Y-m-d',strtotime($DPK->tanggal_evaluasi));
@@ -936,10 +938,14 @@
 					$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
 					
 					$DPK= DokumenPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+					$DPK->tanggal_pengambilan1=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan1);
+					$DPK->tanggal_pengambilan2=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan2);
 					$DPK->tanggal_pemasukan1=Tanggal::getTanggalStrip($DPK->tanggal_pemasukan1);
 					$DPK->tanggal_pemasukan2=Tanggal::getTanggalStrip($DPK->tanggal_pemasukan2);
 					$DPK->tanggal_evaluasi=Tanggal::getTanggalStrip($DPK->tanggal_evaluasi);
 					$DPK->tanggal_penetapan=Tanggal::getTanggalStrip($DPK->tanggal_penetapan);
+					$DPK->waktu_pengambilan1=Tanggal::getJamMenit($DPK->waktu_pengambilan1);
+					$DPK->waktu_pengambilan2=Tanggal::getJamMenit($DPK->waktu_pengambilan2);
 					$DPK->waktu_pemasukan1=Tanggal::getJamMenit($DPK->waktu_pemasukan1);
 					$DPK->waktu_pemasukan2=Tanggal::getJamMenit($DPK->waktu_pemasukan2);
 					$DPK->waktu_evaluasi=Tanggal::getJamMenit($DPK->waktu_evaluasi);
@@ -956,6 +962,8 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$DPK->attributes=$_POST['DokumenPrakualifikasi'];
+						$DPK->tanggal_pengambilan1=date('Y-m-d',strtotime($DPK->tanggal_pengambilan1));
+						$DPK->tanggal_pengambilan2=date('Y-m-d',strtotime($DPK->tanggal_pengambilan2));
 						$DPK->tanggal_pemasukan1=date('Y-m-d',strtotime($DPK->tanggal_pemasukan1));
 						$DPK->tanggal_pemasukan2=date('Y-m-d',strtotime($DPK->tanggal_pemasukan2));
 						$DPK->tanggal_evaluasi=date('Y-m-d',strtotime($DPK->tanggal_evaluasi));

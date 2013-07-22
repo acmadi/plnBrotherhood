@@ -1756,12 +1756,13 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#kualifikasi#', $RKS->kualifikasi);
 			$this->doccy->phpdocx->assign('#klasifikasi#', $RKS->klasifikasi);
 			$this->doccy->phpdocx->assign('#hargadokumen#', RupiahMaker::convertInt($SPP->harga_dokumen));
-			$this->doccy->phpdocx->assign('#haripengambilan1#', '........................');
-			$this->doccy->phpdocx->assign('#haripengambilan2#', '........................');
-			$this->doccy->phpdocx->assign('#tanggalpengambilan1#', '........................');
-			$this->doccy->phpdocx->assign('#tanggalpengambilan2#', '........................');
-			$this->doccy->phpdocx->assign('#waktupengambilan1#', '........................');
-			$this->doccy->phpdocx->assign('#waktupengambilan2#', '........................');
+			$this->doccy->phpdocx->assign('#haripengambilan1#', Tanggal::getHari($PQ->tanggal_pengambilan1));
+			$this->doccy->phpdocx->assign('#haripengambilan2#', Tanggal::getHari($PQ->tanggal_pengambilan2));
+			$this->doccy->phpdocx->assign('#tanggalpengambilan1#', Tanggal::getTanggalLengkap($PQ->tanggal_pengambilan1));
+			$this->doccy->phpdocx->assign('#tanggalpengambilan2#', Tanggal::getTanggalLengkap($PQ->tanggal_pengambilan2));
+			$this->doccy->phpdocx->assign('#waktupengambilan1#', Tanggal::getJamMenit($PQ->waktu_pengambilan1));
+			$this->doccy->phpdocx->assign('#waktupengambilan2#', Tanggal::getJamMenit($PQ->waktu_pengambilan2));
+			$this->doccy->phpdocx->assign('#tempatpengambilan#', $PQ->tempat_pengambilan);
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
 			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);
 			
