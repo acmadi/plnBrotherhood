@@ -395,14 +395,13 @@ class AdminController extends Controller
 	public function actionHapusdivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$divisi = Divisi::model();
 			$id = Yii::app()->getRequest()->getQuery('id');
-			$users = $divisi->deleteAllByAttributes(array('divisi'=>$id));
-			$divisi->deleteByPk($id);
+			UserDivisi::model()->deleteAllByAttributes(array('divisi'=>$id));
+			Divisi::model()->deleteByPk($id);
 		}
 	}
 
-	public function actionTambahuanggotadivisi()
+	public function actionTambahanggotadivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
 			$id = Yii::app()->getRequest()->getQuery('id');
