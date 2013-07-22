@@ -77,11 +77,11 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				));?>
 				<?php echo $form->error($Dokumen0,'tanggal'); ?>
 			</div>
-
+			
 			<div class="row">
-				<?php echo $form->labelEx($SPPP,'syarat_mengikuti_lelang'); ?>
-				<?php echo $form->textArea($SPPP,'syarat_mengikuti_lelang',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
-				<?php echo $form->error($SPPP,'syarat_mengikuti_lelang'); ?>
+				<?php echo $form->labelEx($SPPP,'harga_dokumen'); ?>
+				<?php echo $form->textField($SPPP,'harga_dokumen',array('size'=>56,'maxlength'=>100)); ?>
+				<?php echo $form->error($SPPP,'harga_dokumen'); ?>
 			</div>
 			
 			<div class="row buttons">

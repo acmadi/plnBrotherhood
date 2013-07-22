@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2013 at 05:04 PM
+-- Generation Time: Jul 22, 2013 at 06:58 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `id_panitia` (`id_panitia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `anggota`
@@ -70,7 +70,32 @@ INSERT INTO `anggota` (`id`, `username`, `password`, `nama`, `email`, `id_paniti
 (3, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 3, 'Sekretaris', 'Aktif'),
 (4, 'hanif.eridaputra', '021403bf9cfa12e30443d58dc6b43d7569e4ea63', 'Hanif Eridaputra', 'he.23292@gmail.com', 1, 'Pejabat', 'Aktif'),
 (5, 'irvan.aditya', 'b3a95a69acb08ada4fcd8d31a84ce8e8b3174e62', 'Irvan Aditya', 'irvan@gmail.com', 6, 'Pejabat', 'Aktif'),
-(6, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 7, 'Pejabat', 'Aktif');
+(6, 'gilang.laksana', 'e239aca6e941135937208eb840dc38108d86be3b', 'Gilang Laksana', 'gilang@gmail.com', 7, 'Pejabat', 'Aktif'),
+(7, 'ika.novitasari', '', 'Ika Novitasari', 'ika.novitasari@pln.co.id', 8, 'Pejabat', 'Aktif'),
+(8, 'daswar', '', 'Samie Daswar', 'daswar@pln.co.id', 9, 'Pejabat', 'Aktif'),
+(9, 'harinugroho2', '', 'Hari Nugroho', 'harinugroho2@pln.co.id', 10, 'Pejabat', 'Aktif'),
+(10, 'WARNO', '', 'WARNO', 'warno@pln.co.id', 11, 'Pejabat', 'Aktif'),
+(11, 'suryadani', '', 'Suryadani', 'suryadani@pln.co.id', 12, 'Pejabat', 'Aktif'),
+(12, 'yusuf.supriyadi', '', 'Yusuf Supriyadi', 'yusuf.supriyadi@pln.co.id', 13, 'Pejabat', 'Aktif'),
+(13, 'yudhi.juliardiyanto', '', 'Yudhi Juliardiyanto N', 'yudhi.juliardiyanto@pln.co.id', 14, 'Pejabat', 'Aktif'),
+(14, 'sarwoaji.wicaksono', '', 'Sarwoaji Wicaksono', 'sarwoaji.wicaksono@pln.co.id', 15, 'Pejabat', 'Aktif'),
+(15, 'Klarisa', '', 'Klarisa', 'Klarisa@pln.co.id', 16, 'Pejabat', 'Aktif'),
+(16, 'arief.pramana', '', 'Mochamad Arief Pramana', 'arief.pramana@pln.co.id', 17, 'Pejabat', 'Aktif'),
+(17, 'wijoyo.batara', '', 'Wijoyo Batara Frans Simanjuntak', 'wijoyo.batara@pln.co.id', 18, 'Pejabat', 'Aktif'),
+(18, 'harinugroho2', '', 'Hari Nugroho', 'harinugroho2@pln.co.id', 19, 'Ketua', 'Aktif'),
+(19, 'WARNO', '', 'WARNO', 'warno@pln.co.id', 19, 'Sekretaris', 'Aktif'),
+(20, 'nineung.pratiwi', '', 'Nineung Pratiwi', 'nineung.pratiwi@pln.co.id', 19, 'Anggota', 'Aktif'),
+(21, 'yusuf.supriyadi', '', 'Yusuf Supriyadi', 'yusuf.supriyadi@pln.co.id', 19, 'Anggota', 'Aktif'),
+(22, 'sarwoaji.wicaksono', '', 'Sarwoaji Wicaksono', 'sarwoaji.wicaksono@pln.co.id', 19, 'Anggota', 'Aktif'),
+(23, 'suryadani', '', 'Suryadani', 'suryadani@pln.co.id', 20, 'Ketua', 'Aktif'),
+(24, 'wijoyo.batara', '', 'Wijoyo Batara Frans Simanjuntak', 'wijoyo.batara@pln.co.id', 20, 'Sekretaris', 'Aktif'),
+(25, 'marson', '', 'Marson Polmer Ompusunggu', 'marson@pln.co.id', 20, 'Anggota', 'Aktif'),
+(26, 'yudhi.juliardiyanto', '', 'Yudhi Juliardiyanto N', 'yudhi.juliardiyanto@pln.co.id', 20, 'Anggota', 'Aktif'),
+(27, 'wisnu.yulianto', '', 'Wisnu Yulianto', 'wisnu.yulianto@pln.co.id', 21, 'Ketua', 'Aktif'),
+(28, 'ika.novitasari', '', 'Ika Novitasari', 'ika.novitasari@pln.co.id', 21, 'Sekretaris', 'Aktif'),
+(29, 'habib.hamidy', '', 'Habib Hamidy', 'habib.hamidy@pln.co.id', 21, 'Anggota', 'Aktif'),
+(30, 'fitriana.kurniasari', '', 'Fitriana Kurniasari', 'fitriana.kurniasari@pln.co.id', 21, 'Anggota', 'Aktif'),
+(31, 'susanti.lukman', '', 'Susanti Lukman', 'susanti.lukman@pln.co.id', 21, 'Anggota', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -220,22 +245,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'Nota Dinas Permintaan', '2013-07-03', 'Jakarta', 1, 'Selesai'),
-(3, 'TOR', '2013-07-03', 'Jakarta', 1, 'Selesai'),
-(4, 'RAB', '2013-07-03', 'Jakarta', 1, 'Selesai'),
-(6, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 2, 'Belum Selesai'),
-(7, 'Nota Dinas Permintaan', '2013-07-23', 'Jakarta', 2, 'Selesai'),
-(8, 'TOR', '2013-07-23', 'Jakarta', 2, 'Selesai'),
-(9, 'RAB', '2013-07-23', 'Jakarta', 2, 'Selesai'),
-(11, 'Nota Dinas Perintah Pengadaan', '2013-07-19', 'Jakarta', 2, 'Belum Selesai'),
-(12, 'Pakta Integritas Awal Panitia', '2013-07-19', 'Jakarta', 2, 'Belum Selesai');
-
 -- --------------------------------------------------------
 
 --
@@ -375,18 +384,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `link_dokumen`
---
-
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`, `nama_file`) VALUES
-(1, 2, '09:02:05', '2013-07-17', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(2, 3, '09:02:11', '2013-07-17', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(3, 4, '09:02:17', '2013-07-17', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(4, 7, '14:10:25', '2013-07-19', 'aidil.syaputra', 1, 'txt', 'list file hasil crud yg diubah'),
-(5, 8, '14:10:29', '2013-07-19', 'aidil.syaputra', 1, 'xlsx', 'Daftar Hadir Prakualifikasi-Pengadaan Apa Aja'),
-(6, 9, '14:10:33', '2013-07-19', 'aidil.syaputra', 1, 'xlsx', 'Daftar Hadir Prakualifikasi-Pengadaan Apa Aja');
-
 -- --------------------------------------------------------
 
 --
@@ -455,13 +452,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nota_dinas_perintah_pengadaan`
---
-
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(11, '020/610/DIVMUM/2013', 1, 'Irvan Aditya', 'Penunjukan Panitia xxxx', 90, 'asd', 12345654321);
-
 -- --------------------------------------------------------
 
 --
@@ -475,14 +465,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   `nilai_biaya_rab` bigint(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `nota_dinas_permintaan`
---
-
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`, `nilai_biaya_rab`) VALUES
-(2, '073/DIVTRANS/2013', 'Pengadaan Apa Aja', 12400000000),
-(7, '021/610/DIVSIM/2013', 'xxxx', 12345654321);
 
 -- --------------------------------------------------------
 
@@ -547,13 +529,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pakta_integritas_panitia_1`
---
-
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`) VALUES
-(12);
-
 -- --------------------------------------------------------
 
 --
@@ -590,7 +565,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
   `status_panitia` varchar(256) NOT NULL,
   `jenis_panitia` varchar(256) NOT NULL,
   PRIMARY KEY (`id_panitia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `panitia`
@@ -604,7 +579,21 @@ INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tanggal_sk`,
 (4, 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
 (5, 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
 (6, 'Irvan Aditya', '-', '0000-00-00', 'Aktif', 'Pejabat'),
-(7, 'Gilang Laksana', '-', '0000-00-00', 'Aktif', 'Pejabat');
+(7, 'Gilang Laksana', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(8, 'Ika Novitasari', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(9, 'Samie Daswar', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(10, 'Hari Nugroho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(11, 'WARNO', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(12, 'Suryadani', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(13, 'Yusuf Supriyadi', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(14, 'Yudhi Juliardiyanto N', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(15, 'Sarwoaji Wicaksono', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(16, 'Klarisa', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(17, 'Mochamad Arief Pramana', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(18, 'Wijoyo Batara Frans Simanjuntak', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(19, 'Panitia - A Pengadaan Barang/Jasa PT. PLN (Persero) Kantor Pusat Tahun Anggaran 2013', '377.K/DIR/2013', '2013-04-30', 'Aktif', 'Panitia'),
+(20, 'Panitia - B Pengadaan Barang/Jasa PT. PLN (Persero) Kantor Pusat tahun anggaran 2013', '001-3.K/DIR/2013', '2013-01-02', 'Aktif', 'Panitia'),
+(21, 'Panitia - C Pengadaan Barang/Jasa PT. PLN (Persero) Kantor Pusat tahun anggaran 2013', '001-4.K/DIR/2013', '2013-01-02', 'Aktif', 'Panitia');
 
 -- --------------------------------------------------------
 
@@ -681,14 +670,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengadaan`
---
-
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan Apa Aja', 'divtrans', 'Barang dan Jasa', '-', '2013-07-17', '0000-00-00', '0', 0, 3, 'Penunjukan Langsung', '-', '-'),
-(2, 'xxxx', 'divman', 'Barang dan Jasa', '-', '2013-07-19', '0000-00-00', '1', 0, 4, 'Penunjukan Langsung', 'Satu Sampul', 'Pasca Kualifikasi');
-
 -- --------------------------------------------------------
 
 --
@@ -711,14 +692,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rab`
---
-
-INSERT INTO `rab` (`id_dokumen`) VALUES
-(4),
-(9);
 
 -- --------------------------------------------------------
 
@@ -747,7 +720,7 @@ CREATE TABLE IF NOT EXISTS `rks` (
   `bidang_usaha` varchar(256) NOT NULL,
   `sub_bidang_usaha` varchar(256) NOT NULL,
   `kualifikasi` varchar(256) NOT NULL,
-  `klarifikasi` varchar(256) NOT NULL,
+  `klasifikasi` varchar(256) NOT NULL,
   `tanggal_pendaftaran` date NOT NULL,
   `tanggal_pengambilan_dokumen1` date NOT NULL,
   `tanggal_pengambilan_dokumen2` date NOT NULL,
@@ -933,14 +906,6 @@ CREATE TABLE IF NOT EXISTS `tor` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tor`
---
-
-INSERT INTO `tor` (`id_dokumen`) VALUES
-(3),
-(8);
 
 -- --------------------------------------------------------
 

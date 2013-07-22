@@ -160,27 +160,6 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 			<?php echo $form->textArea($DPK,'tempat_penetapan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
 			<?php echo $form->error($DPK,'tempat_penetapan'); ?>
 		</div>
-		
-		<br/>
-		<h5><b> Syarat-syarat Penyedia </b></h5>
-		
-		<div class="row">
-			<?php echo $form->labelEx($DPK,'bidang_usaha'); ?>
-			<?php echo $form->textField($DPK,'bidang_usaha',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($DPK,'bidang_usaha'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($DPK,'sub_bidang_usaha'); ?>
-			<?php echo $form->textField($DPK,'sub_bidang_usaha',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($DPK,'sub_bidang_usaha'); ?>
-		</div>
-		
-		<div class="row">
-			<?php echo $form->labelEx($DPK,'kualifikasi_perusahaan'); ?>
-			<?php echo $form->textField($DPK,'kualifikasi_perusahaan',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($DPK,'kualifikasi_perusahaan'); ?>
-		</div>
 
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($DPK->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
