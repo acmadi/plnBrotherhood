@@ -70,6 +70,46 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row">
+			<?php echo $form->labelEx($DPK,'tanggal Pengambilan Dokumen Kualifikasi'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$DPK,
+					'attribute'=>'tanggal_pengambilan1',
+					'value'=>$DPK->tanggal_pengambilan1,
+					'htmlOptions'=>array('size'=>23),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($DPK,'tanggal_pengambilan1'); ?>
+			s/d
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					'model'=>$DPK,
+					'attribute'=>'tanggal_pengambilan2',
+					'value'=>$DPK->tanggal_pengambilan2,
+					'htmlOptions'=>array('size'=>23),
+					'options'=>array(
+					'dateFormat'=>'dd-mm-yy',
+					),
+			));?>
+			<?php echo $form->error($DPK,'tanggal_pengambilan2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($DPK,'waktu Pengambilan Dokumen Kualifikasi (Format HH:MM)'); ?> 
+			<?php echo $form->textField($DPK,'waktu_pengambilan1',array('size'=>23,'maxlength'=>20)); ?>
+			<?php echo $form->error($DPK,'waktu_pengambilan1'); ?>
+			s/d
+			<?php echo $form->textField($DPK,'waktu_pengambilan2',array('size'=>23,'maxlength'=>20)); ?>
+			<?php echo $form->error($DPK,'waktu_pengambilan2'); ?>
+		</div>
+		
+		<div class="row">
+			<?php echo $form->labelEx($DPK,'tempat Pengambilan Dokumen Kualifikasi'); ?>
+			<?php echo $form->textArea($DPK,'tempat_pengambilan',array('cols'=>43,'rows'=>3, 'maxlength'=>256)); ?>
+			<?php echo $form->error($DPK,'tempat_pengambilan'); ?>
+		</div>
+		
+		<div class="row">
 			<?php echo $form->labelEx($DPK,'tanggal Pemasukan Dokumen Kualifikasi'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
 					'model'=>$DPK,
