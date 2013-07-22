@@ -278,39 +278,28 @@
 						
 						$DokumenX2= new Dokumen;
 						$DokumenX2->id_dokumen=$somevariable+4;
-						$DokumenX2->nama_dokumen='Surat Pengantar Penawaran Harga';
+						$DokumenX2->nama_dokumen='Surat Pernyataan Minat';
 						$DokumenX2->tanggal='-';
-						$DokumenX2->tempat='Jakarta';
+						$DokumenX2->tempat='-';
 						$DokumenX2->status_upload='Belum Selesai';
 						$DokumenX2->id_pengadaan=$id;
 						
 						$DokumenX3= new Dokumen;
 						$DokumenX3->id_dokumen=$somevariable+5;
-						$DokumenX3->nama_dokumen='Surat Pernyataan Minat';
+						$DokumenX3->nama_dokumen='Form Isian Kualifikasi';
 						$DokumenX3->tanggal='-';
 						$DokumenX3->tempat='-';
 						$DokumenX3->status_upload='Belum Selesai';
 						$DokumenX3->id_pengadaan=$id;
 						
-						$DokumenX4= new Dokumen;
-						$DokumenX4->id_dokumen=$somevariable+6;
-						$DokumenX4->nama_dokumen='Form Isian Kualifikasi';
-						$DokumenX4->tanggal='-';
-						$DokumenX4->tempat='-';
-						$DokumenX4->status_upload='Belum Selesai';
-						$DokumenX4->id_pengadaan=$id;
-						
 						$X1= new PaktaIntegritasPenyedia;
 						$X1->id_dokumen=$DokumenX1->id_dokumen;
 						
-						$X2= new SuratPengantarPenawaranHarga;
+						$X2= new SuratPernyataanMinat;
 						$X2->id_dokumen=$DokumenX2->id_dokumen;
 						
-						$X3= new SuratPernyataanMinat;
+						$X3= new FormIsianKualifikasi;
 						$X3->id_dokumen=$DokumenX3->id_dokumen;
-						
-						$X4= new FormIsianKualifikasi;
-						$X4->id_dokumen=$DokumenX4->id_dokumen;
 					}
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -521,11 +510,9 @@
 											$DokumenX1->save(false);
 											$DokumenX2->save(false);
 											$DokumenX3->save(false);
-											$DokumenX4->save(false);
 											$X1->save(false);
 											$X2->save(false);
 											$X3->save(false);
-											$X4->save(false);
 										}
 										$Cover->save(false);
 										// if($Pengadaan->metode_pengadaan=="Penunjukan Langsung"){
@@ -873,7 +860,7 @@
 					$Dokumen1->id_pengadaan=$id;
 					
 					$Dokumen2= new Dokumen;
-					$Dokumen2->id_dokumen=$somevariable+4;
+					$Dokumen2->id_dokumen=$somevariable+3;
 					$Dokumen2->nama_dokumen='Surat Pernyataan Minat';
 					$Dokumen2->tanggal='-';
 					$Dokumen2->tempat='-';
@@ -881,7 +868,7 @@
 					$Dokumen2->id_pengadaan=$id;
 					
 					$Dokumen3= new Dokumen;
-					$Dokumen3->id_dokumen=$somevariable+5;
+					$Dokumen3->id_dokumen=$somevariable+4;
 					$Dokumen3->nama_dokumen='Form Isian Kualifikasi';
 					$Dokumen3->tanggal='-';
 					$Dokumen3->tempat='-';
@@ -895,10 +882,10 @@
 					$X1->id_dokumen=$Dokumen1->id_dokumen;
 					
 					$X2= new SuratPernyataanMinat;
-					$X2->id_dokumen=$Dokumen3->id_dokumen;
+					$X2->id_dokumen=$Dokumen2->id_dokumen;
 					
 					$X3= new FormIsianKualifikasi;
-					$X3->id_dokumen=$Dokumen4->id_dokumen;
+					$X3->id_dokumen=$Dokumen2->id_dokumen;
 					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
@@ -1210,6 +1197,7 @@
 					$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
 					
 					$Dokumen0=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan Prakualifikasi"');
+					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 					$SPPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
 					
 					if(isset($_POST['SuratPengumumanPelelangan']))
@@ -1469,7 +1457,7 @@
 					
 					$DH= new DaftarHadir;
 					$DH->id_dokumen=$Dokumen1->id_dokumen;
-					$DH->acara='Penerimaan Prakualifikasi '.$Pengadaan->nama_pengadaan;
+					$DH->acara='Penerimaan Prakualifikasi';
 					$DH->tempat_hadir=$DPK->tempat_pemasukan;
 					$DH->jam=$DPK->waktu_pemasukan2;
 											
