@@ -6,6 +6,32 @@ $Pengadaan= Pengadaan::model()->findByPk($id);
 $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
+
+<script type="text/javascript">
+	function send(){	 		
+		$("#Rks_tanggal_penunjukan_pemenang").attr('value',tambahtgl(1));	   
+	}
+	
+	function tambahtgl(n){				
+		var a=$("#Dokumen_tanggal").val();
+		var tanggal= new Date(a.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+		var hari = tanggal.getDate();
+		tanggal.setDate(hari + n);	
+				
+		// alert(tanggal);
+		if(tanggal.getDay()==6){
+			hari = tanggal.getDate();
+			tanggal.setDate(hari + 2);	
+		}else if(tanggal.getDay()==0){
+			hari = tanggal.getDate();
+			tanggal.setDate(hari + 1);	
+		}
+		// alert(tanggal);
+		return tanggal.getDate() + '-' + (tanggal.getMonth()+1) + '-' + tanggal.getFullYear();
+	}
+	
+</script>
+
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
@@ -72,7 +98,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'nomor'); ?>
-						<?php echo $form->textField($Rks,'nomor',array('size'=>56,'maxlength'=>50)); ?>
+						<?php echo $form->textField($Rks,'nomor',array('size'=>56,'maxlength'=>255)); ?>
 						<?php echo $form->error($Rks,'nomor'); ?>
 					</div>
 					
@@ -103,10 +129,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					
 					<div class="row">
-						<?php echo $form->labelEx($Rks,'kualifikasi'); ?>
-						<?php echo $form->radioButtonList($Rks,'kualifikasi',
-								array('K-1'=>'K-1','M'=>'M','B'=>'B'),
-								array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+						<?php echo $form->labelEx($Rks,'kualifikasi'); ?>						
+						<?php echo $form->textField($Rks,'kualifikasi',array('size'=>56,'maxlength'=>256)); ?>								
 						<?php echo $form->error($Rks,'kualifikasi'); ?>
 					</div>
 					
@@ -127,7 +151,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					
 					<div class="row">
-						<?php echo $form->labelEx($Rks,'jangka_waktu_penyerahan (dalam satuan bulan)'); ?>
+						<?php echo $form->labelEx($Rks,'jangka_waktu_penyerahan (dalam satuan hari)'); ?>
 						<?php echo $form->textField($Rks,'jangka_waktu_penyerahan',array('size'=>56,'maxlength'=>20)); ?>
 						<?php echo $form->error($Rks,'jangka_waktu_penyerahan'); ?>
 					</div>
@@ -151,7 +175,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					
 					<div class="row">
-						<?php echo $form->labelEx($Rks,'jangka_waktu_berlaku_jaminan (dalam satuan bulan)'); ?>
+						<?php echo $form->labelEx($Rks,'jangka_waktu_berlaku_jaminan (dalam satuan hari)'); ?>
 						<?php echo $form->textField($Rks,'jangka_waktu_berlaku_jaminan',array('size'=>56,'maxlength'=>20)); ?>
 						<?php echo $form->error($Rks,'jangka_waktu_berlaku_jaminan'); ?>
 					</div>
@@ -682,22 +706,26 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<?php echo $form->error($Rks,'tanggal_penunjukan_pemenang'); ?>
 					</div>
 					
-					<div class="row">
+					<div class="row" >
 						<?php echo $form->labelEx($Rks,'waktu_penunjukan_pemenang (Format HH:MM)'); ?>
 						<?php echo $form->textField($Rks,'waktu_penunjukan_pemenang',array('size'=>56,'maxlength'=>20)); ?>
 						<?php echo $form->error($Rks,'waktu_penunjukan_pemenang'); ?>
 					</div>
 				</div>
 				<br/>
+								
+				<div id='hpistatus'></div>
 				
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($Rks->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
-
+				
 				<?php $this->endWidget(); ?>
-
+				
 			</div><!-- form -->
-			
+
+			 <?php echo CHtml::Button('SUBMIT',array('onclick'=>'send();')); ?> 
+			 
 			<?php if (!$Rks->isNewRecord){ ?>
 				</br>
 				<div style="border-top:1px solid lightblue">
