@@ -127,7 +127,7 @@ class XlsxController extends Controller
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Penerimaan Prakualifikasi') {
 		
 			$BAPPQ = BeritaAcaraPenerimaanPq::model()->findByPk($cdokumen->id_dokumen);
-			$objPHPExcel = $objReader->load($templatePath . 'BA Penerimaan Prakualifikasi.xlsx');
+			$objPHPExcel = $objReader->load($templatePath . '4b Lamp Penerimaan Prakualifikasi.xlsx');
 					$this->assign($objPHPExcel, "#tgldokprakualifikasi#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#nodokprakualifikasi#", $BAPPQ->nomor);
 			
@@ -309,7 +309,7 @@ class XlsxController extends Controller
 		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Prakualifikasi') {
 			$BAEPK=BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($cdokumen->id_dokumen);
-			$objPHPExcel = $objReader->load($templatePath . 'BA Evaluasi Prakualifikasi.xlsx');
+			$objPHPExcel = $objReader->load($templatePath . '4b Lamp BA Evaluasi Prakualifikasi.xlsx');
 					$this->assign($objPHPExcel, "#tgllengkap#", Tanggal::getTanggalStrip($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
 					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggal($cdokumen->tanggal));
