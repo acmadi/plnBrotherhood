@@ -1384,8 +1384,12 @@
 					$DH->tempat_hadir=$DPK->tempat_pemasukan;
 					$DH->jam=$DPK->waktu_pemasukan2;
 											
-					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);					
-						
+					if($Pengadaan->metode_pengadaan == "Pelelangan"){
+						$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
+					else {
+						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
 					if(isset($_POST['BeritaAcaraPenerimaanPq']))
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
@@ -1438,9 +1442,13 @@
 					
 					$BAPPQ= BeritaAcaraPenerimaanPq::model()->findByPk($Dokumen0->id_dokumen);
 					$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
-									
-					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);					
-									
+					
+					if($Pengadaan->metode_pengadaan == "Pelelangan"){
+						$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
+					else {
+						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
 					if(isset($_POST['BeritaAcaraPenerimaanPq']))
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
