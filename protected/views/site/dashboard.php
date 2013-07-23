@@ -5,8 +5,6 @@ $this->pageTitle=Yii::app()->name . ' | Beranda';
 		
 ?>
 
-<?php if (Yii::app()->user->getState('role') == 'admin') echo '<h2 style="margin-left:30px">Selamat datang, <b>Administrator</b>!</h2>'; ?>
-
 <?php if(Yii::app()->user->getState('role') == 'kdivmum'){		//kadiv
 	
 ?>

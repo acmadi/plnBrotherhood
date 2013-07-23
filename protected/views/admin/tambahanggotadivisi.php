@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Tambah Pengguna Divisi';
+	$this->pageTitle=Yii::app()->name . ' | Tambah Anggota ' . $divisi->nama_divisi;
 ?>
 
 <?php if(Yii::app()->user->hasFlash('gagal')): ?>
@@ -21,31 +21,44 @@
 <?php endif; ?>
 
 <h2><?php echo $divisi->nama_divisi; ?></h2>
-<div class="form">
-	<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'divisi-form',
-		'enableAjaxValidation'=>false,
-	)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($user,'Nama pengguna'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-			'name'=>'username',
-			'value'=>$user->username,
-			'sourceUrl'=>array('admin/autocomplete'),
-			'options'=>array(
-				'minLength'=>'2',
-			),
-		));
-		?>
-		<?php echo $form->error($user,'username'); ?>
+<div class="kelompokform">
+	<div class="form">
+		<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'divisi-form',
+			'enableAjaxValidation'=>false,
+		)); ?>
+
+		<div class="row">
+			<?php echo $form->labelEx($user,'Nama pengguna'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				'name'=>'UserDivisi[username]',
+				'value'=>$user->username,
+				'sourceUrl'=>array('admin/autocomplete'),
+				'options'=>array(
+					'minLength'=>'2',
+				),
+				'htmlOptions'=>array(
+					'size'=>56,
+					'maxlength'=>256,
+				),
+			));
+			?>
+			<?php echo $form->error($user,'username'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($user,'Nama'); ?> 
+			<?php echo $form->textField($user,'nama',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($user,'nama'); ?>
+		</div>
+
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
+		</div>
+
+		<?php $this->endWidget(); ?>
 	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
-	</div>
-
-	<?php $this->endWidget(); ?>
 </div>
 <br />
 

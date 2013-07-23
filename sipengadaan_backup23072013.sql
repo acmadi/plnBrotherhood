@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 23, 2013 at 09:43 AM
+-- Generation Time: Jul 22, 2013 at 09:18 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(20) NOT NULL,
+  `nama` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -35,9 +37,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`username`) VALUES
-('aidil.syaputra'),
-('irvan.aditya');
+INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
+('admin', 'Administrator', 'd033e22ae348aeb5660fc2140aec35850c4da997');
 
 -- --------------------------------------------------------
 
@@ -209,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 INSERT INTO `divisi` (`username`, `nama_divisi`) VALUES
 ('divin', 'Divisi Internet'),
 ('divman', 'Divisi Manajemen'),
-('DIVSIM', 'Divisi Sistem Informasi'),
+('divsi', 'Divisi Sistem Informasi'),
 ('divtrans', 'Divisi Transportasi');
 
 -- --------------------------------------------------------
@@ -231,18 +232,6 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
   KEY `id_pengadaan` (`id_pengadaan`),
   KEY `status_upload` (`status_upload`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id_dokumen`, `nama_dokumen`, `tanggal`, `tempat`, `id_pengadaan`, `status_upload`) VALUES
-(1, 'Dokumen Lain-lain', '1970-01-01', 'Jakarta', 1, 'Belum Selesai'),
-(2, 'Nota Dinas Permintaan', '2013-07-12', 'Jakarta', 1, 'Selesai'),
-(3, 'TOR', '2013-07-12', 'Jakarta', 1, 'Selesai'),
-(4, 'RAB', '2013-07-12', 'Jakarta', 1, 'Selesai'),
-(5, 'Nota Dinas Perintah Pengadaan', '2013-07-15', 'Jakarta', 1, 'Belum Selesai'),
-(6, 'Pakta Integritas Awal Panitia', '2013-07-23', 'Jakarta', 1, 'Belum Selesai');
 
 -- --------------------------------------------------------
 
@@ -388,15 +377,6 @@ CREATE TABLE IF NOT EXISTS `link_dokumen` (
   KEY `pengunggah` (`pengunggah`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `link_dokumen`
---
-
-INSERT INTO `link_dokumen` (`id_link`, `id_dokumen`, `waktu_upload`, `tanggal_upload`, `pengunggah`, `nomor_link`, `format_dokumen`, `nama_file`) VALUES
-(1, 2, '12:16:12', '2013-07-23', 'aidil.syaputra', 1, 'docx', '1.SAMPUL TOR'),
-(2, 3, '12:16:15', '2013-07-23', 'aidil.syaputra', 1, 'docx', '2.TOR PEKERJAAN WIFI PLN PUSAT'),
-(3, 4, '12:16:18', '2013-07-23', 'aidil.syaputra', 1, 'docx', '3.DATA PENEMPATAN INSTALLASI WIFI');
-
 -- --------------------------------------------------------
 
 --
@@ -465,13 +445,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_perintah_pengadaan` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `nota_dinas_perintah_pengadaan`
---
-
-INSERT INTO `nota_dinas_perintah_pengadaan` (`id_dokumen`, `nomor`, `dari`, `kepada`, `perihal`, `targetSPK_kontrak`, `sumber_dana`, `pagu_anggaran`) VALUES
-(5, '1521/611/MSDAF/2013', 2, 'Samie Daswar', 'Penunjukan Pejabat Pengadaan ATS Network Forensik Dan Manajemen Infrastruktur ', 30, 'APLN-2013/AO/ POS-53 Pengelolaan Data', 296635900);
-
 -- --------------------------------------------------------
 
 --
@@ -485,13 +458,6 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_permintaan` (
   `nilai_biaya_rab` bigint(255) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `nota_dinas_permintaan`
---
-
-INSERT INTO `nota_dinas_permintaan` (`id_dokumen`, `nomor`, `perihal`, `nilai_biaya_rab`) VALUES
-(2, '035/521/KDIVSIM/2013-R', 'Pengadaan ATS Network Forensik Dan Manajemen Infrastruktur ', 296635900);
 
 -- --------------------------------------------------------
 
@@ -556,13 +522,6 @@ CREATE TABLE IF NOT EXISTS `pakta_integritas_panitia_1` (
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pakta_integritas_panitia_1`
---
-
-INSERT INTO `pakta_integritas_panitia_1` (`id_dokumen`) VALUES
-(6);
-
 -- --------------------------------------------------------
 
 --
@@ -608,6 +567,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tanggal_sk`, `status_panitia`, `jenis_panitia`) VALUES
 (-1, 'Belum ada PIC', '-', '0000-00-00', '-', '-'),
 (1, 'Hanif Eridaputra', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(2, 'Johannes Ridho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
 (3, 'Panitia-A', '024/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
 (4, 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
 (5, 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
@@ -703,13 +663,6 @@ CREATE TABLE IF NOT EXISTS `pengadaan` (
   KEY `divisi_peminta` (`divisi_peminta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pengadaan`
---
-
-INSERT INTO `pengadaan` (`id_pengadaan`, `nama_pengadaan`, `divisi_peminta`, `jenis_pengadaan`, `nama_penyedia`, `tanggal_masuk`, `tanggal_selesai`, `status`, `biaya`, `id_panitia`, `metode_pengadaan`, `metode_penawaran`, `jenis_kualifikasi`) VALUES
-(1, 'Pengadaan ATS Network Forensik Dan Manajemen Infrastruktur ', 'DIVSIM', 'Jasa', '-', '2013-07-12', '0000-00-00', '1', 0, 9, 'Penunjukan Langsung', 'Satu Sampul', 'Pasca Kualifikasi');
-
 -- --------------------------------------------------------
 
 --
@@ -732,13 +685,6 @@ CREATE TABLE IF NOT EXISTS `rab` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rab`
---
-
-INSERT INTO `rab` (`id_dokumen`) VALUES
-(4);
 
 -- --------------------------------------------------------
 
@@ -942,13 +888,6 @@ CREATE TABLE IF NOT EXISTS `tor` (
   `id_dokumen` bigint(32) NOT NULL,
   PRIMARY KEY (`id_dokumen`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tor`
---
-
-INSERT INTO `tor` (`id_dokumen`) VALUES
-(3);
 
 -- --------------------------------------------------------
 

@@ -1,6 +1,24 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Tambah Pejabat Berwenang';
+	$this->pageTitle=Yii::app()->name . ' | Detil ' . $person->nama;
 ?>
+
+<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+	<div class="flash-success">
+		<?php echo Yii::app()->user->getFlash('sukses'); ?>
+		<script type="text/javascript">
+			setTimeout(function() {
+				$('.flash-success').animate({
+					height: '0px',
+					marginBottom: '0em',
+					padding: '0em',
+					opacity: '0.0'
+				}, 1000, function() {
+					$('.flash-success').hide();
+				});
+			}, 2000);
+		</script>
+	</div>
+<?php endif; ?>
 
 <?php if(Yii::app()->user->hasFlash('gagal')): ?>
 	<div class="flash-error">
@@ -28,10 +46,10 @@
 		)); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($kdiv,'Nama pengguna'); ?>
+			<?php echo $form->labelEx($person,'Nama pengguna'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-				'name'=>'Kdivmum[username]',
-				'value'=>$kdiv->username,
+				'name'=>'Anggota[username]',
+				'value'=>$person->username,
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
@@ -42,29 +60,23 @@
 				),
 			));
 			?>
-			<?php echo $form->error($kdiv,'username'); ?>
+			<?php echo $form->error($person,'username'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($kdiv,'Nama'); ?> 
-			<?php echo $form->textField($kdiv,'nama',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($kdiv,'nama'); ?>
+			<?php echo $form->labelEx($person,'Nama'); ?> 
+			<?php echo $form->textField($person,'nama',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($person,'nama'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($kdiv,'E-mail'); ?> 
-			<?php echo $form->textField($kdiv,'email',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($kdiv,'email'); ?>
-		</div>
-
-		<div class="row">
-			<?php echo $form->labelEx($kdiv,'Jabatan'); ?> 
-			<?php echo $form->dropDownList($kdiv,'id_jabatan',CHtml::listData(Jabatan::model()->findAllByAttributes(array('status'=>'Aktif')),'id_jabatan','jabatan'), array('empty'=>'-----Pilih Jabatan------')); ?>
-			<?php echo $form->error($kdiv,'id_jabatan'); ?>
+			<?php echo $form->labelEx($person,'E-mail'); ?> 
+			<?php echo $form->textField($person,'email',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($person,'email'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>
