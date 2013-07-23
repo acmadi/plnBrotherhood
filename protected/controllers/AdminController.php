@@ -233,7 +233,7 @@ class AdminController extends Controller
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $anggota->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
 				else {
-					$old = Anggota::model()->findByAttributes(array('username'=>$anggota->username, 'id_panitia'=>$anggota->id_panitia));
+					$old = Anggota::model()->findByAttributes(array('username'=>$anggota->username, 'id_panitia'=>$id));
 					if ($old != null) {
 						$old->nama = $anggota->nama;
 						$old->email = $anggota->email;
