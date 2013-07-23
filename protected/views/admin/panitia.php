@@ -24,7 +24,7 @@
 			'deleteConfirmation'=>'Hapus panitia pengadaan?',
 			'buttons'=>array(
 				'delete'=>array(
-					// 'url'=>'Yii::app()->createUrl("admin/hapusdivisi", array("id"=>$data->username))',
+					'url'=>'Yii::app()->createUrl("admin/hapuspanitia", array("id"=>$data->id_panitia))',
 				),
 			),
 		),

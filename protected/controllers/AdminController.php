@@ -200,23 +200,15 @@ class AdminController extends Controller
 	public function actionHapuspanitia()
 	{
 		if (Yii::app()->user->getState('asAdmin')) {
-			$panitia = Panitia::model();
-			if (isset($_POST['Panitia'])) {
-				foreach ($_POST['Panitia']['id_panitia'] as $item) {
-					$cpanitia = $panitia->findByPk($item);
-					$cpanitia->status_panitia = 'Tidak Aktif';
-					$cpanitia->save(false);
-					$anggotas = Anggota::model()->findAllByAttributes(array('id_panitia'=>$item));
-					foreach ($anggotas as $anggota) {
-						$anggota->status_user = 'Tidak Aktif';
-						$anggota->save(false);
-					}
-				}
-				$this->redirect(array('panitia'));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$panitia = Panitia::model()->findByPk($id);
+			$anggotas = Anggota::model()->findAllByAttributes(array('id_panitia'=>$id));
+			foreach ($anggotas as $anggota) {
+				$anggota->status_user = 'Tidak Aktif';
+				$anggota->save(false);
 			}
-			$this->render('hapuspanitia', array(
-				'panitia'=>$panitia,
-			));
+			$panitia->status_panitia = 'Tidak Aktif';
+			$panitia->save(false);
 		}
 	}
 
