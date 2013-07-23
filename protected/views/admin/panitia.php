@@ -38,3 +38,5 @@
 	'summaryText'=>'',
 ));
 ?>
+
+<div><?php echo CHtml::button('Tambah panitia pengadaan', array('submit'=>array('admin/tambahpanitia'), 'class'=>'sidafbutton'));  ?></div>

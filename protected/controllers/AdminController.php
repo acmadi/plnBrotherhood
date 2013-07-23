@@ -166,101 +166,14 @@ class AdminController extends Controller
 		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$panitia = Panitia::model()->findByPk($id);
-			$panitia->tanggal_sk = Tanggal::getTanggalStrip($panitia->tanggal_sk);
-			if (isset($_POST['Panitia']) && isset($_POST['username'])) {
-				$success = true;
-				$panitia->attributes = $_POST['Panitia'];
-				$panitia->tanggal_sk = date('Y-m-d', strtotime($panitia->tanggal_sk));
-				$n = count($_POST['username']);
-				for ($i=0; $i < $n; $i++) {
-					if (isset($_POST['id'])) {
-						if ($_POST['status'][$i] == 'Tidak Aktif') {
-							$current = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i], 'id_panitia'=>$id, 'jabatan'=>$_POST['jabatan'][$i]));
-							if ($current != null) {
-								$current->status_user = 'Tidak Aktif';
-								$current->save(false);
-							}
-							else {
-								$ang = $this->getRecordByUsername($_POST['username'][0]);
-								if (empty($ang)) {
-									$success = false;
-									$gagal = $_POST['username'][$i];
-								}
-								else {
-									$new = new Anggota;
-									$new->username = $_POST['username'][$i];
-									$new->nama = $ang['nama'];
-									$new->email = $ang['email'];
-									$new->id_panitia = $id;
-									$new->jabatan = $_POST['jabatan'][$i];
-									$new->status_user = 'Tidak Aktif';
-									$new->save(false);
-								}
-							}
-						}
-						else {
-							if ($_POST['id'][$i] != -1) {
-								$current = Anggota::model()->findByPk($_POST['id'][$i]);
-								$current->status_user = 'Tidak Aktif';
-								$current->save(false);
-							}
-							$old = Anggota::model()->findByAttributes(array('username'=>$_POST['username'][$i], 'id_panitia'=>$id));
-							if ($old != null) {
-								$old->jabatan = $_POST['jabatan'][$i];
-								$old->status_user = 'Aktif';
-								$old->save(false);
-							}
-							else {
-								$ang = $this->getRecordByUsername($_POST['username'][$i]);
-								if (empty($ang)) {
-									$success = false;
-									$gagal = $_POST['username'][$i];
-								}
-								else {
-									$new = new Anggota;
-									$new->username = $_POST['username'][$i];
-									$new->nama = $ang['nama'];
-									$new->email = $ang['email'];
-									$new->id_panitia = $id;
-									$new->jabatan = $_POST['jabatan'][$i];
-									$new->status_user = 'Aktif';
-									$new->save(false);
-								}
-							}
-						}
-					}
-					else {
-						$ang = $this->getRecordByUsername($_POST['username'][$i]);
-						if (empty($ang)) {
-							$success = false;
-							$gagal = $_POST['username'][$i];
-						}
-						else {
-							$new = new Anggota;
-							$new->username = $_POST['username'][$i];
-							$new->nama = $ang['nama'];
-							$new->email = $ang['email'];
-							$new->id_panitia = $id;
-							$new->jabatan = $_POST['jabatan'][$i];
-							$new->status_user = 'Aktif';
-							$new->save(false);
-						}
-					}
-				}
-				if ($success) {
-					if ($panitia->save(false)) {
-						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-					}
-				}
-				else {
-					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $gagal . '" tidak terdaftar dalam basis data pegawai.');
-				}
+			$model = new Anggota('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Anggota'])){
+				$model->attributes = $_GET['Anggota'];
 			}
-			$anggota = Anggota::model()->findAll('id_panitia = ' . $id . ' and status_user = "Aktif"');
 			$this->render('detailpanitia', array(
-				'id'=>$id,
 				'panitia'=>$panitia,
-				'anggota'=>$anggota,
+				'model'=>$model,
 			));
 		}
 	}
@@ -302,6 +215,43 @@ class AdminController extends Controller
 				$this->redirect(array('panitia'));
 			}
 			$this->render('hapuspanitia', array(
+				'panitia'=>$panitia,
+			));
+		}
+	}
+
+	public function actionTambahanggotapanitia()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$panitia = Panitia::model()->findByPk($id);
+			$anggota = new Anggota;
+			if (isset($_POST['Anggota'])) {
+				$anggota->attributes = $_POST['Anggota'];
+				$person = $this->getRecordByUsername($user->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $anggota->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$old = Anggota::model()->findByAttributes(array('username'=>$anggota->username, 'id_panitia'=>$anggota->id_panitia));
+					if ($old != null) {
+						$old->nama = $anggota->nama;
+						$old->email = $anggota->email;
+						$old->jabatan = $anggota->jabatan;
+						$old->status_user = 'Aktif';
+						if ($old->save(false)) {
+							$this->redirect(array('detailpanitia', 'id'=>$id));
+						}
+					}
+					$anggota->id_panitia = $id;
+					$anggota->status_user = 'Aktif';
+					if ($anggota->save(false)) {
+						$this->redirect(array('detailpanitia', 'id'=>$id));
+					}
+				}
+			}
+			$this->render('tambahanggotapanitia', array(
+				'anggota'=>$anggota,
 				'panitia'=>$panitia,
 			));
 		}
@@ -540,7 +490,6 @@ class AdminController extends Controller
 				}
 			}
 			$this->render('tambahanggotadivisi', array(
-				'id'=>$id,
 				'divisi'=>$divisi,
 				'user'=>$user,
 			));
