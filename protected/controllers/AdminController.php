@@ -521,25 +521,6 @@ class AdminController extends Controller
 			$user->deleteByPk($id);
 		}
 	}
-
-	public function actionAkun()
-	{
-		if (Yii::app()->user->getState('asAdmin')) {
-			$admin = Admin::model()->findByPk(Yii::app()->user->name);
-			if (isset($_POST['Admin'])) {
-				$admin->attributes = $_POST['Admin'];
-				if ($admin->validate()) {
-					if ($admin->save(false)) {
-						Yii::app()->user->name = $admin->username;
-						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-					}
-				}
-			}
-			$this->render('akun', array(
-				'admin'=>$admin,
-			));
-		}
-	}
 	
 	public function actionAutocomplete()
 	{
