@@ -21,10 +21,11 @@
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
 			'deleteButtonLabel'=>'Hapus',
-			'deleteConfirmation'=>'Hapus divisi?',
+			'deleteConfirmation'=>'Hapus jenis jabatan?',
+			'afterDelete'=>'function(){$.fn.yiiGridView.update("kdiv");}',
 			'buttons'=>array(
 				'delete'=>array(
-					'url'=>'Yii::app()->createUrl("admin/hapusjabatan", array("id"=>$data->jabatan))',
+					'url'=>'Yii::app()->createUrl("admin/hapusjabatan", array("id"=>$data->id_jabatan))',
 				),
 			),
 		),
@@ -43,6 +44,7 @@
 
 <h3>Pejabat yang berwenang</h3>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'kdiv',
 	'dataProvider'=>$modelKdiv->searchKdiv(),
 	'htmlOptions'=>array('style'=>'cursor: pointer;'),			
 	'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detailkdiv", array("id"=>"$modelKdiv->username")) . "'+ $.fn.yiiGridView.getSelection(id);}",
@@ -61,7 +63,7 @@
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
 			'deleteButtonLabel'=>'Hapus',
-			'deleteConfirmation'=>'Hapus divisi?',
+			'deleteConfirmation'=>'Hapus pejabat berwenang?',
 			'buttons'=>array(
 				'delete'=>array(
 					'url'=>'Yii::app()->createUrl("admin/hapuskdiv", array("id"=>$data->username))',

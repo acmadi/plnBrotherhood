@@ -4,6 +4,24 @@
 
 <h2><?php echo $divisi->nama_divisi ?></h2>
 
+<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+	<div class="flash-success">
+		<?php echo Yii::app()->user->getFlash('sukses'); ?>
+		<script type="text/javascript">
+			setTimeout(function() {
+				$('.flash-success').animate({
+					height: '0px',
+					marginBottom: '0em',
+					padding: '0em',
+					opacity: '0.0'
+				}, 1000, function() {
+					$('.flash-success').hide();
+				});
+			}, 2000);
+		</script>
+	</div>
+<?php endif; ?>
+
 <div class="kelompokform">
 	<div class="form">
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -49,7 +67,7 @@
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
 			'deleteButtonLabel'=>'Hapus',
-			'deleteConfirmation'=>'Hapus divisi?',
+			'deleteConfirmation'=>'Hapus anggota divisi?',
 			'buttons'=>array(
 				'delete'=>array(
 					'url'=>'Yii::app()->createUrl("admin/hapusanggotadivisi", array("id"=>$data->username))',

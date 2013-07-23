@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>
