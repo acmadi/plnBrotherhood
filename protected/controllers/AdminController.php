@@ -549,6 +549,16 @@ class AdminController extends Controller
 		Yii::app()->end();
 	}
 	
+	public function actionUserdetail()
+	{
+		if (Yii::app()->request->isAjaxRequest) {
+			$username = Yii::app()->request->getParam('username');
+			$detail = $this->getRecordByUsername($username);
+			echo CJSON::encode($detail);
+			Yii::app()->end();
+		}
+	}
+	
 	private function getRecordByUsername($username) {
 		$ldap = Yii::app()->params['ldap'];
 		$conn = ldap_connect($ldap['host']);

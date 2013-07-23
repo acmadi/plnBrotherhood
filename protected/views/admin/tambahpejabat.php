@@ -35,6 +35,18 @@
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
+					'select'=>'js:function(event, ui) {
+						$.ajax({
+							type: "post",
+							dataType: "json",
+							url: "' . Yii::app()->createUrl('admin/userdetail') . '",
+							data: {username: ui.item.label},
+							success: function(data) {
+								$("#Anggota_nama").val(data.nama);
+								$("#Anggota_email").val(data.email);
+							},
+						});
+					}',
 				),
 				'htmlOptions'=>array(
 					'size'=>56,
