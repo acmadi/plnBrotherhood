@@ -51,6 +51,13 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
 
+		if (Admin::model()->exists('username = "' . $this->username . '"')) {
+			$isAdmin = true;
+			if ($role == 'none') {
+				$asAdmin = true;
+			}
+		}
+
 		// kode server
 		
 		// if (Anggota::model()->exists('username = "' . $this->username . '"')) {
@@ -114,12 +121,29 @@ class UserIdentity extends CUserIdentity
 		// 	$this->errorCode = self::ERROR_USERNAME_INVALID;
 		// }
 
-		if (Admin::model()->exists('username = "' . $this->username . '"')) {
-			$isAdmin = true;
-			if ($role == 'none') {
-				$asAdmin = true;
-			}
-		}
+		// if (Admin::model()->exists('username = "' . $this->username . '"')) {
+		// 	$isAdmin = true;
+		// 	if ($role == 'none') {
+		// 		$options = Yii::app()->params['ldap'];
+		// 		$connection = ldap_connect($options['host']);
+		// 		ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+		// 		ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+		// 		if ($connection) {
+		// 			try {
+		// 				$bind = @ldap_bind($connection, $options['domain'] . '\\' . $this->username, $this->password);
+		// 				if (!$bind) {
+		// 					$this->errorCode = self::ERROR_PASSWORD_INVALID;
+		// 				} else {
+		// 					$asAdmin = true;
+		// 					$this->errorCode = self::ERROR_NONE;
+		// 				}
+		// 			} catch (Exception $e) {
+		// 				$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
+		// 			}
+		// 			ldap_close($connection);
+		// 		}
+		// 	}
+		// }
 
 		Yii::app()->user->setState('role', $role);
 		Yii::app()->user->setState('isAdmin', $isAdmin);
