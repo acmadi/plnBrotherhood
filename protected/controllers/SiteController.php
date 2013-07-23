@@ -30,16 +30,21 @@ class SiteController extends Controller
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
-		else {		
-			$model=new Pengadaan('search');
-			$model->unsetAttributes();  // clear any default values
-			if(isset($_GET['Pengadaan'])){
-				$model->attributes=$_GET['Pengadaan'];                                       
-			}	
-                        
-			$this->render('dashboard',array(
-				'model'=>$model,
-			));
+		else {
+			if (Yii::app()->user->getState('asAdmin')) {
+				$this->redirect(array('admin/dashboard'));
+			}
+			else {
+				$model=new Pengadaan('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Pengadaan'])){
+					$model->attributes=$_GET['Pengadaan'];                                       
+				}	
+		                    
+				$this->render('dashboard',array(
+					'model'=>$model,
+				));
+			}
 		}
 	}
 	
