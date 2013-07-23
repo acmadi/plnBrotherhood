@@ -32,7 +32,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($anggota,'Nama pengguna'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-				'name'=>'UserDivisi[username]',
+				'name'=>'Anggota[username]',
 				'value'=>$anggota->username,
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(

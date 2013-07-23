@@ -257,6 +257,16 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionHapusanggotapanitia()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$anggota = Anggota::model()->findByPk($id);
+			$anggota->status_user = 'Tidak Aktif';
+			$anggota->save(false);
+		}
+	}
+
 	public function actionKdiv()
 	{
 		if (Yii::app()->user->getState('asAdmin')) {

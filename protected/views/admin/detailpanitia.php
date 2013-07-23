@@ -100,7 +100,7 @@
 			'deleteConfirmation'=>'Hapus anggota panitia pengadaan?',
 			'buttons'=>array(
 				'delete'=>array(
-					// 'url'=>'Yii::app()->createUrl("admin/hapusanggotadivisi", array("id"=>$data->username))',
+					'url'=>'Yii::app()->createUrl("admin/hapusanggotapanitia", array("id"=>$data->id))',
 				),
 			),
 		),
