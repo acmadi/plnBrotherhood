@@ -228,7 +228,7 @@ class AdminController extends Controller
 			$anggota = new Anggota;
 			if (isset($_POST['Anggota'])) {
 				$anggota->attributes = $_POST['Anggota'];
-				$person = $this->getRecordByUsername($user->username);
+				$person = $this->getRecordByUsername($anggota->username);
 				if (empty($person)) {
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $anggota->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
