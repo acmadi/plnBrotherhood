@@ -252,6 +252,21 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetailkdiv()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$kdiv = Kdivmum::model()->findByPk($id);
+			if (isset($_POST['Kdivmum'])) {
+				$kdiv->attributes = $_POST['Kdivmum'];
+				$kdiv->save(false);
+			}
+			$this->render('detailkdiv', array(
+				'kdiv'=>$kdiv,
+			));
+		}
+	}
+
 	public function actionTambahkdiv()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -277,7 +292,7 @@ class AdminController extends Controller
 					$this->redirect(array('kdiv'));
 				}
 			}
-			$this->render('tambahkdiv', array(
+			$this->render('detailkdiv', array(
 				'kdiv'=>$kdiv,
 			));
 		}
@@ -301,6 +316,21 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetailjabatan()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$jabatan = Jabatan::model()->findByPk($id);
+			if (isset($_POST['Jabatan'])) {
+				$jabatan->attributes = $_POST['Jabatan'];
+				$jabatan->save(false);
+			}
+			$this->render('detailjabatan', array(
+				'jabatan'=>$jabatan,
+			));
+		}
+	}
+
 	public function actionTambahjabatan()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -320,7 +350,7 @@ class AdminController extends Controller
 				}
 				$this->redirect(array('kdiv'));
 			}
-			$this->render('tambahjabatan', array(
+			$this->render('detailjabatan', array(
 				'jabatan'=>$jabatan,
 			));
 		}

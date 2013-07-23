@@ -39,3 +39,5 @@
 	'summaryText'=>'',
 ));
 ?>
+
+<div><?php echo CHtml::button('Tambah divisi', array('submit'=>array('admin/tambahdivisi'), 'class'=>'sidafbutton'));  ?></div>
