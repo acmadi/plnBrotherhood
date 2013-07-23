@@ -6,9 +6,10 @@
  * The followings are the available columns in table 'user_kontrak':
  * @property string $id_user_kontrak
  * @property string $username
+ * @property integer $wewenang
  *
  * The followings are the available model relations:
- * @property User $username0
+ * @property DokumenKontrak[] $dokumenKontraks
  */
 class UserKontrak extends CActiveRecord
 {
@@ -38,11 +39,12 @@ class UserKontrak extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'required'),
+			array('username, wewenang', 'required'),
+			array('wewenang', 'numerical', 'integerOnly'=>true),
 			array('username', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_user_kontrak, username', 'safe', 'on'=>'search'),
+			array('id_user_kontrak, username, wewenang', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,7 +56,7 @@ class UserKontrak extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'username0' => array(self::BELONGS_TO, 'User', 'username'),
+			'dokumenKontraks' => array(self::HAS_MANY, 'DokumenKontrak', 'username'),
 		);
 	}
 
@@ -66,6 +68,7 @@ class UserKontrak extends CActiveRecord
 		return array(
 			'id_user_kontrak' => 'Id User Kontrak',
 			'username' => 'Username',
+			'wewenang' => 'Wewenang',
 		);
 	}
 
@@ -82,6 +85,7 @@ class UserKontrak extends CActiveRecord
 
 		$criteria->compare('id_user_kontrak',$this->id_user_kontrak,true);
 		$criteria->compare('username',$this->username,true);
+		$criteria->compare('wewenang',$this->wewenang);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
