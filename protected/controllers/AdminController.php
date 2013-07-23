@@ -48,7 +48,6 @@ class AdminController extends Controller
 				}
 				else {
 					$panitia = Panitia::model()->findByPk($id);
-					$panitia->nama_panitia = $person->nama;
 					if ($person->save(false) && $panitia->save(false)) {
 						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
 					}
@@ -71,8 +70,6 @@ class AdminController extends Controller
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
 				else {
-					$pejabat->nama = $person['nama'];
-					$pejabat->email = $person['email'];
 					$old = Anggota::model()->findByAttributes(array('username'=>$pejabat->username, 'jabatan'=>'Pejabat'));
 					if ($old != null) {
 						$old->nama = $pejabat->nama;
@@ -317,8 +314,24 @@ class AdminController extends Controller
 			$kdiv = Kdivmum::model()->findByPk($id);
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
-				$kdiv->save(false);
-				$this->redirect(array('kdiv'));
+				$person = $this->getRecordByUsername($kdiv->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $kdiv->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'id_jabatan'=>$kdiv->id_jabatan));
+					if ($old != null) {
+						$old->nama = $kdiv->nama;
+						$old->email = $kdiv->email;
+						$old->status_user = 'Aktif';
+						$old->save(false);
+					}
+					else {
+						$kdiv->status_user = 'Aktif';
+						$kdiv->save(false);
+					}
+					$this->redirect(array('kdiv'));
+				}
 			}
 			$this->render('detailkdiv', array(
 				'kdiv'=>$kdiv,
@@ -339,12 +352,12 @@ class AdminController extends Controller
 				else{
 					$old = Kdivmum::model()->findByAttributes(array('username'=>$kdiv->username, 'id_jabatan'=>$kdiv->id_jabatan));
 					if ($old != null) {
+						$old->nama = $kdiv->nama;
+						$old->email = $kdiv->email;
 						$old->status_user = 'Aktif';
 						$old->save(false);
 					}
 					else {
-						$kdiv->nama = $person['nama'];
-						$kdiv->email = $person['email'];
 						$kdiv->status_user = 'Aktif';
 						$kdiv->save(false);
 					}
@@ -498,7 +511,6 @@ class AdminController extends Controller
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $user->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
 				else {
-					$user->nama = $person['nama'];
 					$user->divisi = $id;
 					if ($user->save(false)) {
 						$this->redirect(array('detaildivisi', 'id'=>$id));
