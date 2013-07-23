@@ -5,11 +5,13 @@
  *
  * The followings are the available columns in table 'dokumen_kontrak':
  * @property string $id_dokumen
- * @property string $Nomor
+ * @property string $nomor
+ * @property string $tanggal_selesai
+ * @property integer $nilai_kontrak
+ * @property string $nama_direktur
  *
  * The followings are the available model relations:
  * @property Dokumen $idDokumen
- * @property Termin[] $termins
  */
 class DokumenKontrak extends CActiveRecord
 {
@@ -39,12 +41,14 @@ class DokumenKontrak extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, Nomor', 'required'),
+			array('id_dokumen, nomor, tanggal_selesai, nilai_kontrak', 'required'),
+			array('nilai_kontrak', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
-			array('Nomor', 'length', 'max'=>256),
+			array('nomor', 'length', 'max'=>256),
+			array('nama_direktur', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, Nomor', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tanggal_selesai, nilai_kontrak, nama_direktur', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +61,6 @@ class DokumenKontrak extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
-			'termins' => array(self::HAS_MANY, 'Termin', 'id_dokumen'),
 		);
 	}
 
@@ -68,7 +71,10 @@ class DokumenKontrak extends CActiveRecord
 	{
 		return array(
 			'id_dokumen' => 'Id Dokumen',
-			'Nomor' => 'Nomor',
+			'nomor' => 'Nomor',
+			'tanggal_selesai' => 'Tanggal Selesai',
+			'nilai_kontrak' => 'Nilai Kontrak',
+			'nama_direktur' => 'Nama Direktur',
 		);
 	}
 
@@ -84,7 +90,10 @@ class DokumenKontrak extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
-		$criteria->compare('Nomor',$this->Nomor,true);
+		$criteria->compare('nomor',$this->nomor,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('nilai_kontrak',$this->nilai_kontrak);
+		$criteria->compare('nama_direktur',$this->nama_direktur,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
