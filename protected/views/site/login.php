@@ -24,7 +24,7 @@ $this->pageTitle=Yii::app()->name . ' | Masuk';
 	),
 )); ?>
 
-<div style="width:100%; height:400px;">
+<div style="width:100%; height:470px;">
 	<div style="border:2px solid lightgrey; background-color:#DDEEEE; width:340px; padding:10px 20px 10px 20px; position:absolute; top:270px; left:50%; margin-left:-172px;">
 		<div class="row">
 			<?php echo $form->labelEx($model,'nama pengguna'); ?>
