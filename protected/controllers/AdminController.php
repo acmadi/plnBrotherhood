@@ -106,7 +106,7 @@ class AdminController extends Controller
 							$pan->nama_panitia = $pejabat->nama;
 							$pan->status_panitia = 'Aktif';
 							if ($pan->save(false)) {
-								$this->redirect(array('panitia'));
+								$this->redirect(array('pejabat'));
 							}
 						}
 					}
@@ -122,7 +122,7 @@ class AdminController extends Controller
 							$pejabat->jabatan = 'Pejabat';
 							$pejabat->status_user = 'Aktif';
 							if ($pejabat->save(false)) {
-								$this->redirect(array('panitia'));
+								$this->redirect(array('pejabat'));
 							}
 						}
 					}

@@ -20,6 +20,10 @@
 			'value'=>'$data->nama_panitia',
 		),
 		array(
+			'name'=>'E-mail',
+			'value'=>'$data->email',
+		),
+		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
 			'deleteButtonLabel'=>'Hapus',
