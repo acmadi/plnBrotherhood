@@ -20,8 +20,8 @@
 			'value'=>'$data->nama_panitia',
 		),
 		array(
-			'name'=>'E-mail',
-			'value'=>'$data->email',
+			'name'=>'Email',
+			'value'=>'$data->anggotas[0]->email',
 		),
 		array(
 			'class'=>'CButtonColumn',
