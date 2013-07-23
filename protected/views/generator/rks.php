@@ -59,7 +59,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				
 				<?php echo CHtml::errorSummary($Rks);?>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<?php if ($Rks->isNewRecord){ ?>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'jenis rks'); ?>
@@ -161,7 +161,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<h4><b> Penjadwalan </b></h4>
 				
 				<?php if ($Pengadaan->metode_pengadaan=="Pelelangan") { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pendaftaran'); ?>
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -177,7 +177,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						</div>
 					</div>
 					<br/>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'Tanggal Pengambilan Dokumen'); ?>
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -186,7 +186,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 									'value'=>$Rks->tanggal_pengambilan_dokumen1,
 									'htmlOptions'=>array('size'=>23),
 									'options'=>array(
-									'dateFormat'=>'yy-mm-dd',
+									'dateFormat'=>'dd-mm-yy',
 									),
 							));?>
 							<?php echo $form->error($Rks,'tanggal_pengambilan_dokumen1'); ?>
@@ -197,7 +197,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 									'value'=>$Rks->tanggal_pengambilan_dokumen2,
 									'htmlOptions'=>array('size'=>23),
 									'options'=>array(
-									'dateFormat'=>'yy-mm-dd',
+									'dateFormat'=>'dd-mm-yy',
 									),
 							));?>
 							<?php echo $form->error($Rks,'tanggal_pengambilan_dokumen2'); ?>
@@ -218,7 +218,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 				<?php } else { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_permintaan_penawaran'); ?>
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -236,7 +236,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<br/>
 				<?php } ?>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_penjelasan'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -265,7 +265,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php if ($Pengadaan->metode_penawaran=="Satu Sampul" || $Pengadaan->metode_penawaran=="Dua Sampul") { 
 							echo $form->labelEx($Rks,'tanggal_pemasukan_penawaran'); 
@@ -317,7 +317,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
 							echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran'); 
@@ -364,7 +364,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php if ($Pengadaan->metode_penawaran=="Satu Sampul") {
 							echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran'); 
@@ -411,7 +411,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 				
 				<?php if ($Pengadaan->metode_penawaran=="Dua Sampul") { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">		
+					<div class='kelompokform'>		
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran sampul 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -440,7 +440,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran sampul 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -470,7 +470,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<br/>
 					
 				<?php }	else if ($Pengadaan->metode_penawaran=="Dua Tahap") { ?>
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pemasukan_penawaran tahap 2'); ?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -510,7 +510,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_pembukaan_penawaran tahap 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -539,7 +539,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</div>
 					<br/>
 					
-					<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+					<div class='kelompokform'>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'tanggal_evaluasi_penawaran tahap 2');?> 
 							<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -569,7 +569,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					<br/>
 				<?php } ?>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_negosiasi'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -598,7 +598,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_usulan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -621,7 +621,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_penetapan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -644,7 +644,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_pemberitahuan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -667,7 +667,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				</div>
 				<br/>
 				
-				<div style="border:2px solid lightblue; padding:10px; background-color:lightgrey">
+				<div class='kelompokform'>
 					<div class="row">
 						<?php echo $form->labelEx($Rks,'tanggal_penunjukan_pemenang'); ?>
 						<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
@@ -710,36 +710,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<li><?php echo CHtml::link('RKS - Daftar Isi', array('docx/downloadrks','id'=>$DaftarIsi->id_rincian)); ?></li>
 						<?php $Isi=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Isi"');?>
 						<li><?php echo CHtml::link('RKS - Isi', array('docx/downloadrks','id'=>$Isi->id_rincian)); ?></li>
-						<?php if ($Rks->tipe_rks==3) {
-							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
-							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
-							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
-							$Lamp4=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 4"');
-							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
-							?>
-							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 2', array('xlsx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 3', array('docx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
-						<?php } else if  ($Rks->tipe_rks==2) {
-							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
-							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
-							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
-							$Lamp4=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 4"');
-							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
-							$Lamp6=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 6"');
-							$Lampba=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran ba"');
-						?>
-							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 2', array('xlsx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 3', array('xlsx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 5', array('xlsx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran 6', array('docx/downloadrks','id'=>$Lamp6->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran ba', array('xlsx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
-						
-						<?php } else {						
+						<?php 			
 							$Lamp1=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 1"');
 							$Lamp2=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 2"');
 							$Lamp3=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 3"');
@@ -747,22 +718,20 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 							$Lamp5=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 5"');
 							$Lamp6=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 6"');
 							$Lamp7=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 7"');
-							$Lampba=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran ba"');
+							$Lamp8=RincianRks::model()->find('id_dokumen = '. $Rks->id_dokumen. ' and nama_rincian = "Lampiran 8"');
 						?>
-							<li><?php echo CHtml::link('RKS - Lampiran 1', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
+							<li><?php echo CHtml::link('RKS - Lampiran 1 (Surat Pengantar Penawaran Harga)', array('docx/downloadrks','id'=>$Lamp1->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 2', array('xlsx/downloadrks','id'=>$Lamp2->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 3', array('xlsx/downloadrks','id'=>$Lamp3->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 4', array('docx/downloadrks','id'=>$Lamp4->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 5', array('docx/downloadrks','id'=>$Lamp5->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 6', array('xlsx/downloadrks','id'=>$Lamp6->id_rincian)); ?></li>
 							<li><?php echo CHtml::link('RKS - Lampiran 7', array('docx/downloadrks','id'=>$Lamp7->id_rincian)); ?></li>
-							<li><?php echo CHtml::link('RKS - Lampiran ba', array('xlsx/downloadrks','id'=>$Lampba->id_rincian)); ?></li>
-						<?php } ?>
+							<li><?php echo CHtml::link('RKS - Lampiran 8', array('xlsx/downloadrks','id'=>$Lamp8->id_rincian)); ?></li>
 						<?php if ($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") { ?>
 							<li><?php echo CHtml::link('Pakta Integritas Penyedia', array('docx/download','id'=>$X1->id_dokumen)); ?></li>
-							<li><?php echo CHtml::link('Surat Pengantar Penawaran Harga', array('docx/download','id'=>$X2->id_dokumen)); ?></li>
-							<li><?php echo CHtml::link('Surat Pernyataan Minat', array('docx/download','id'=>$X3->id_dokumen)); ?></li>
-							<li><?php echo CHtml::link('Form Isian Kualifikasi', array('docx/download','id'=>$X4->id_dokumen)); ?></li>
+							<li><?php echo CHtml::link('Surat Pernyataan Minat', array('docx/download','id'=>$X2->id_dokumen)); ?></li>
+							<li><?php echo CHtml::link('Form Isian Kualifikasi', array('docx/download','id'=>$X3->id_dokumen)); ?></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -774,3 +743,4 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 </div>
 
 <div><?php echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton'));  ?></div>
+

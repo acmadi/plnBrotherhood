@@ -252,6 +252,21 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetailkdiv()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$kdiv = Kdivmum::model()->findByPk($id);
+			if (isset($_POST['Kdivmum'])) {
+				$kdiv->attributes = $_POST['Kdivmum'];
+				$kdiv->save(false);
+			}
+			$this->render('detailkdiv', array(
+				'kdiv'=>$kdiv,
+			));
+		}
+	}
+
 	public function actionTambahkdiv()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -277,7 +292,7 @@ class AdminController extends Controller
 					$this->redirect(array('kdiv'));
 				}
 			}
-			$this->render('tambahkdiv', array(
+			$this->render('detailkdiv', array(
 				'kdiv'=>$kdiv,
 			));
 		}
@@ -301,6 +316,21 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetailjabatan()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$jabatan = Jabatan::model()->findByPk($id);
+			if (isset($_POST['Jabatan'])) {
+				$jabatan->attributes = $_POST['Jabatan'];
+				$jabatan->save(false);
+			}
+			$this->render('detailjabatan', array(
+				'jabatan'=>$jabatan,
+			));
+		}
+	}
+
 	public function actionTambahjabatan()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -320,7 +350,7 @@ class AdminController extends Controller
 				}
 				$this->redirect(array('kdiv'));
 			}
-			$this->render('tambahjabatan', array(
+			$this->render('detailjabatan', array(
 				'jabatan'=>$jabatan,
 			));
 		}
@@ -395,20 +425,13 @@ class AdminController extends Controller
 	public function actionHapusdivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$divisi = Divisi::model();
-			if (isset($_POST['Divisi'])) {
-				foreach ($_POST['Divisi']['username'] as $item) {
-					$divisi->deleteByPk($item);
-				}
-				$this->redirect(array('divisi'));
-			}
-			$this->render('hapusdivisi', array(
-				'divisi'=>$divisi,
-			));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			UserDivisi::model()->deleteAllByAttributes(array('divisi'=>$id));
+			Divisi::model()->deleteByPk($id);
 		}
 	}
 
-	public function actionTambahuserdivisi()
+	public function actionTambahanggotadivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
 			$id = Yii::app()->getRequest()->getQuery('id');
@@ -428,7 +451,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			$this->render('tambahuserdivisi', array(
+			$this->render('tambahanggotadivisi', array(
 				'id'=>$id,
 				'divisi'=>$divisi,
 				'user'=>$user,
@@ -436,23 +459,12 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionHapususerdivisi()
+	public function actionHapusanggotadivisi()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$id = Yii::app()->getRequest()->getQuery('id');
-			$divisi = Divisi::model()->findByPk($id);
 			$user = UserDivisi::model();
-			if (isset($_POST['UserDivisi'])) {
-				foreach ($_POST['UserDivisi']['username'] as $item) {
-					$user->deleteByPk($item);
-				}
-				$this->redirect(array('detaildivisi', 'id'=>$id));
-			}
-			$this->render('hapususerdivisi', array(
-				'id'=>$id,
-				'divisi'=>$divisi,
-				'user'=>$user,
-			));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$user->deleteByPk($id);
 		}
 	}
 
@@ -473,6 +485,33 @@ class AdminController extends Controller
 				'admin'=>$admin,
 			));
 		}
+	}
+	
+	public function actionAutocomplete()
+	{
+		$autocompletedata = array();
+		if (isset($_GET['term'])) {
+			$ldap = Yii::app()->params['ldap'];
+			$conn = ldap_connect($ldap['host']);
+			if ($conn) {
+				ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
+				ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+				if (ldap_bind($conn, $ldap['bind_rdn'], $ldap['bind_pwd'])) {
+					$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=' . $_GET['term'] . '*)');
+					$data = ldap_get_entries($conn, $result);
+					if ($data != null) {
+						foreach ($data as $item) {
+							if ($item['samaccountname'][0] != null) {
+								array_push($autocompletedata, $item['samaccountname'][0]);
+							}
+						}
+					}
+				}
+				ldap_close($conn);
+			}
+		}
+		echo CJSON::encode($autocompletedata);
+		Yii::app()->end();
 	}
 	
 	private function getRecordByUsername($username) {

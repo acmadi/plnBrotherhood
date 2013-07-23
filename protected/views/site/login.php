@@ -24,17 +24,17 @@ $this->pageTitle=Yii::app()->name . ' | Masuk';
 	),
 )); ?>
 
-<div style="width:100%; height:400px;">
+<div style="width:100%; height:470px;">
 	<div style="border:2px solid lightgrey; background-color:#DDEEEE; width:340px; padding:10px 20px 10px 20px; position:absolute; top:270px; left:50%; margin-left:-172px;">
 		<div class="row">
 			<?php echo $form->labelEx($model,'nama pengguna'); ?>
-			<?php echo $form->textField($model,'nama_pengguna',array('size'=>50)); ?>
+			<?php echo $form->textField($model,'nama_pengguna',array('size'=>50, 'style'=>'width:330px;')); ?>
 			<?php echo $form->error($model,'nama_pengguna'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($model,'kata sandi'); ?>
-			<?php echo $form->passwordField($model,'kata_sandi',array('size'=>50)); ?>
+			<?php echo $form->passwordField($model,'kata_sandi',array('size'=>50, 'style'=>'width:330px;')); ?>
 			<?php echo $form->error($model,'kata_sandi'); ?>
 			<!-- <p class="hint">
 				Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.

@@ -123,3 +123,9 @@ li
 {
 	color:#000000;
 }
+
+.kelompokform{
+	border:3px solid lightgrey; 
+	padding:10px; 
+	background-color:#F7F7F7;
+}

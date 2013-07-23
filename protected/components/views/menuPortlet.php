@@ -356,8 +356,11 @@
 
 		<br />
 		<br />
-		
-		<li class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/notadinaslaporanpengadaangagal","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php if($cpengadaan->status == '98') { ?>
+			<li id="18" class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/editnotadinaslaporanpengadaangagal","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } else { ?>
+			<li id="18" class='sudah' style="border-top:1px solid black;"><?php echo CHtml::link('Batalkan Pengadaan',array("generator/notadinaslaporanpengadaangagal","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<?php } ?>
 	
 	<?php } ?>
 </ul>

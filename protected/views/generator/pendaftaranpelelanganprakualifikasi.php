@@ -8,6 +8,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#4').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
@@ -62,9 +65,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					'model' => $PP,
 					// 'model2' => $PP2,
 					'viewName' => 'formperusahaan_pendaftaran_pelelangan_prakualifikasi',
-					'labelAdd' => 'Tambah Penyadia',
-					'labelDel' => 'Hapus Penyedia',
-					
+					'labelAdd' => 'Tambah Penyedia',
+					'labelDel' => 'Hapus Penyedia',					
 					)); 
 				?>
 		</div>
