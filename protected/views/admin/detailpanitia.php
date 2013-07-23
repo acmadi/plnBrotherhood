@@ -82,6 +82,8 @@
 <h4>Anggota</h4>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->searchAnggota($panitia->id_panitia),
+	'htmlOptions'=>array('style'=>'cursor: pointer;'),			
+	'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detailanggotapanitia", array("id"=>"$model->id_panitia")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
 		array(
 			'name'=>'No',

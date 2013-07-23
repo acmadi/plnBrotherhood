@@ -220,6 +220,41 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionDetailanggotapanitia()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$anggota = Anggota::model()->findByPk($id);
+			if (isset($_POST['Anggota'])) {
+				$anggota->attributes = $_POST['Anggota'];
+				$ang = $this->getRecordByUsername($anggota->username);
+				if (empty($ang)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $anggota->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$old = Anggota::model()->findByAttributes(array('username'=>$anggota->username, 'id_panitia'=>$anggota->id_panitia));
+					if ($old != null) {
+						$old->nama = $anggota->nama;
+						$old->email = $anggota->email;
+						$old->jabatan = $anggota->jabatan;
+						$old->status_user = 'Aktif';
+						if ($old->save(false)) {
+							Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+						}
+					}
+					else {
+						if ($anggota->save(false)) {
+							Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+						}
+					}
+				}
+			}
+			$this->render('detailanggotapanitia', array(
+				'anggota'=>$anggota,
+			));
+		}
+	}
+
 	public function actionTambahanggotapanitia()
 	{
 		if (Yii::app()->user->getState('asAdmin')) {
