@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Pejabat Berwenang';
+	$this->pageTitle=Yii::app()->name . ' | Tambah Jenis Jabatan';
 ?>
 <div class="kelompokform">
 	<div class="form">

@@ -2,6 +2,45 @@
 
 class AdminController extends Controller
 {
+	public function actionPejabat()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$model = new Panitia('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Panitia'])){
+				$model->attributes = $_GET['Panitia'];
+			}
+			$this->render('pejabat', array(
+				'model'=>$model,
+			));
+		}
+	}
+
+	public function actionDetailpejabat()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$person = Anggota::model()->findByAttributes(array('id_panitia'=>$id));
+			if (isset($_POST['Anggota'])) {
+				$person->attributes = $_POST['Anggota'];
+				$ang = $this->getRecordByUsername($person->username);
+				if (empty($ang)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $person->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$panitia = Panitia::model()->findByPk($id);
+					$panitia->nama_panitia = $person->nama;
+					if ($person->save(false) && $panitia->save(false)) {
+						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+					}
+				}
+			}
+			$this->render('detailpejabat', array(
+				'person'=>$person,
+			));
+		}
+	}
+
 	public function actionPanitia()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -260,6 +299,7 @@ class AdminController extends Controller
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
 				$kdiv->save(false);
+				$this->redirect(array('kdiv'));
 			}
 			$this->render('detailkdiv', array(
 				'kdiv'=>$kdiv,
@@ -292,7 +332,7 @@ class AdminController extends Controller
 					$this->redirect(array('kdiv'));
 				}
 			}
-			$this->render('detailkdiv', array(
+			$this->render('tambahkdiv', array(
 				'kdiv'=>$kdiv,
 			));
 		}
@@ -301,18 +341,10 @@ class AdminController extends Controller
 	public function actionHapuskdiv()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$kdiv = Kdivmum::model();
-			if (isset($_POST['Kdivmum'])) {
-				foreach ($_POST['Kdivmum']['username'] as $item) {
-					$ckdiv = $kdiv->findByPk($item);
-					$ckdiv->status_user = 'Tidak Aktif';
-					$ckdiv->save(false);
-				}
-				$this->redirect(array('kdiv'));
-			}
-			$this->render('hapuskdiv', array(
-				'kdiv'=>$kdiv,
-			));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$kdiv = Kdivmum::model()->findByPk($id);
+			$kdiv->status_user = 'Tidak Aktif';
+			$kdiv->save(false);
 		}
 	}
 
@@ -350,7 +382,7 @@ class AdminController extends Controller
 				}
 				$this->redirect(array('kdiv'));
 			}
-			$this->render('detailjabatan', array(
+			$this->render('tambahjabatan', array(
 				'jabatan'=>$jabatan,
 			));
 		}
@@ -359,18 +391,15 @@ class AdminController extends Controller
 	public function actionHapusjabatan()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
-			$jabatan = Jabatan::model();
-			if (isset($_POST['Jabatan'])) {
-				foreach ($_POST['Jabatan']['id_jabatan'] as $item) {
-					$jabatan = Jabatan::model()->findByPk($item);
-					$jabatan->status = 'Tidak Aktif';
-					$jabatan->save(false);
-				}
-				$this->redirect(array('kdiv'));
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$kdivs = Kdivmum::model()->findAllByAttributes(array('id_jabatan'=>$id));
+			foreach ($kdivs as $kdiv) {
+				$kdiv->status_user = 'Tidak Aktif';
+				$kdiv->save(false);
 			}
-			$this->render('hapusjabatan', array(
-				'jabatan'=>$jabatan,
-			));
+			$jabatan = Jabatan::model()->findByPk($id);
+			$jabatan->status = 'Tidak Aktif';
+			$jabatan->save(false);
 		}
 	}
 
@@ -397,6 +426,12 @@ class AdminController extends Controller
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['UserDivisi'])){
 				$model->attributes = $_GET['UserDivisi'];
+			}
+			if (isset($_POST['Divisi'])) {
+				$divisi->attributes = $_POST['Divisi'];
+				if ($divisi->save(false)) {
+					Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+				}
 			}
 			$this->render('detaildivisi', array(
 				'id'=>$id,
