@@ -223,6 +223,9 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 	<?php } ?>
 <div>
 <?php if(Yii::app()->user->getState('role') == 'kdivmum'){ ?>
+	<div style="width:55%;margin:auto">
+		Pengadaan ini telah diusulkan digagalkan oleh Panitia/Pejabat Pengadaan Barang/Jasa. Tekan tombol Gagalkan Pengadaan di bawah untuk menggagalkan pengadaan.
+	</div>
 	<div style="width:75%; margin:auto;">
 		<?php
 			$this->widget('zii.widgets.grid.CGridView', array(
@@ -256,9 +259,14 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 </div>
 
 <?php 
-	if($cpengadaan->status=="Selesai"){
+	if($cpengadaan->status==100 || $cpengadaan->status==99){
 		echo CHtml::button('Kembali', array('submit'=>array('site/history'), 'class'=>'sidafbutton')); 
 	} else {
 		echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton')); 
+	}
+	if(Yii::app()->user->getState('role') == 'kdivmum'){
+		if($cpengadaan->status==98){
+			echo CHtml::button('Gagalkan Pengadaan',array('submit'=> array('detailpengadaan','id'=>$cpengadaan->id_pengadaan), 'class'=>'sidafbutton'));
+		}
 	}
 ?>
