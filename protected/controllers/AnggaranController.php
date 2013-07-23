@@ -23,7 +23,7 @@ class AnggaranController extends Controller
 				$rab=0;
 				$hps=0;
 				$kontrak=0;
-				$semuapengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$item->username.'" and year(tanggal_masuk) = '.$tahun.' and status = "100"');
+				$semuapengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$item->id_divisi.'" and year(tanggal_masuk) = '.$tahun.' and status = "100"');
 				foreach ($semuapengadaan as $pengadaan){
 					$paguanggaran=$paguanggaran+NotaDinasPerintahPengadaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')->id_dokumen)->pagu_anggaran;
 					$rab=$rab+NotaDinasPermintaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$pengadaan->id_pengadaan.' and nama_dokumen = "Nota Dinas Permintaan"')->id_dokumen)->nilai_biaya_rab;
@@ -51,7 +51,7 @@ class AnggaranController extends Controller
 					$penghematan='-';
 					$persenpenghematan='-';
 				}
-				$anggaran[$i]= array('username'=>$item->username,'nama_divisi'=>$item->nama_divisi,'pagu_anggaran'=>$paguanggaran,'nilai_rab'=>$rab,'nilai_hps'=>$hps,'nilai_kontrak'=>$kontrak,'penghematan'=>$penghematan,'persentase'=>$persenpenghematan);
+				$anggaran[$i]= array('id_divisi'=>$item->id_divisi,'nama_divisi'=>$item->nama_divisi,'pagu_anggaran'=>$paguanggaran,'nilai_rab'=>$rab,'nilai_hps'=>$hps,'nilai_kontrak'=>$kontrak,'penghematan'=>$penghematan,'persentase'=>$persenpenghematan);
 				$i++;
 			}
 			if($kontraktotal!=0) {
@@ -74,10 +74,10 @@ class AnggaranController extends Controller
 			$dataanggaran = new CArrayDataProvider($anggaran,array(
 				'sort'=>array(
 					'attributes'=>array(
-						'username','nama_divisi','pagu_anggaran','nilai_rab','nilai_hps','nilai_kontrak','penghematan','persentase',
+						'id_divisi','nama_divisi','pagu_anggaran','nilai_rab','nilai_hps','nilai_kontrak','penghematan','persentase',
 					)
 				),
-				'keyField'=>'username',
+				'keyField'=>'id_divisi',
 			));
 			$this->render('kontrolanggaran', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
 			));

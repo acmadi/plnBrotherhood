@@ -40,10 +40,11 @@ class DocxController extends Controller
 			$this->renderDocx("RKS-Cover-".$Peng->nama_pengadaan.".docx", true);	
 		} else if ($Rincian->nama_rincian=="Daftar Isi") {
 //----------------------------Daftar Isi
-			$this->doccy->newFile('PL-B-Daftar_Isi.docx');
+			$this->doccy->newFile('RKS Daftar Isi.docx');
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
-			$this->renderDocx("RKS-Daftar_Isi-".$Peng->nama_pengadaan.".docx", true);
+			$metode_pengadaan = $Peng->metode_pengadaan;
+			$this->renderDocx("RKS-Daftar Isi-".$Peng->nama_pengadaan.".docx", true);
 		} else if ($Rincian->nama_rincian=="Isi") {
 //-----------------------------Isi
 			$nama_pengadaan = $Peng->nama_pengadaan;
@@ -663,7 +664,7 @@ class DocxController extends Controller
 			}
 			$ketuapanitiapejabat = $NDPP->kepada;
 			$tahun = Tanggal::getTahun($Dok->tanggal);
-			$divisipeminta = $Peng->divisi_peminta;
+			$divisipeminta = Divisi::model()->findByPk($Peng->divisi_peminta)->nama_divisi;
 			if(Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia == 'Pejabat'){
 				$panitiapejabat = "Pejabat Pengadaan Barang/Jasa";
 			}else{
