@@ -7,6 +7,8 @@
  * @property string $id_dokumen
  * @property string $nomor
  * @property string $tujuan_pengadaan
+ * @property integer $kurun_waktu_pengalaman
+ * @property integer $npt
  * @property string $tanggal_pengambilan1
  * @property string $tanggal_pengambilan2
  * @property string $waktu_pengambilan1
@@ -55,12 +57,13 @@ class DokumenPrakualifikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pengambilan1, tanggal_pengambilan2, waktu_pengambilan1, waktu_pengambilan2, tempat_pengambilan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan', 'required'),
+			array('id_dokumen, nomor, tujuan_pengadaan, kurun_waktu_pengalaman, npt, tanggal_pengambilan1, tanggal_pengambilan2, waktu_pengambilan1, waktu_pengambilan2, tempat_pengambilan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan', 'required'),
+			array('kurun_waktu_pengalaman, npt', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('nomor, tujuan_pengadaan, tempat_pengambilan, tempat_pemasukan, tempat_evaluasi, tempat_penetapan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, nomor, tujuan_pengadaan, tanggal_pengambilan1, tanggal_pengambilan2, waktu_pengambilan1, waktu_pengambilan2, tempat_pengambilan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan', 'safe', 'on'=>'search'),
+			array('id_dokumen, nomor, tujuan_pengadaan, kurun_waktu_pengalaman, npt, tanggal_pengambilan1, tanggal_pengambilan2, waktu_pengambilan1, waktu_pengambilan2, tempat_pengambilan, tanggal_pemasukan1, tanggal_pemasukan2, waktu_pemasukan1, waktu_pemasukan2, tempat_pemasukan, tanggal_evaluasi, waktu_evaluasi, tempat_evaluasi, tanggal_penetapan, waktu_penetapan, tempat_penetapan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,6 +88,8 @@ class DokumenPrakualifikasi extends CActiveRecord
 			'id_dokumen' => 'Id Dokumen',
 			'nomor' => 'Nomor',
 			'tujuan_pengadaan' => 'Tujuan Pengadaan',
+			'kurun_waktu_pengalaman' => 'Kurun Waktu Pengalaman',
+			'npt' => 'Npt',
 			'tanggal_pengambilan1' => 'Tanggal Pengambilan1',
 			'tanggal_pengambilan2' => 'Tanggal Pengambilan2',
 			'waktu_pengambilan1' => 'Waktu Pengambilan1',
@@ -118,6 +123,8 @@ class DokumenPrakualifikasi extends CActiveRecord
 		$criteria->compare('id_dokumen',$this->id_dokumen,true);
 		$criteria->compare('nomor',$this->nomor,true);
 		$criteria->compare('tujuan_pengadaan',$this->tujuan_pengadaan,true);
+		$criteria->compare('kurun_waktu_pengalaman',$this->kurun_waktu_pengalaman);
+		$criteria->compare('npt',$this->npt);
 		$criteria->compare('tanggal_pengambilan1',$this->tanggal_pengambilan1,true);
 		$criteria->compare('tanggal_pengambilan2',$this->tanggal_pengambilan2,true);
 		$criteria->compare('waktu_pengambilan1',$this->waktu_pengambilan1,true);

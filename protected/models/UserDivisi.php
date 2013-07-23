@@ -95,7 +95,7 @@ class UserDivisi extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
+	
 	public function searchUser($divisi)
 	{
 		// Warning: Please modify the following code to remove attributes that

@@ -19,21 +19,10 @@
  * @property string $jenis_kualifikasi
  *
  * The followings are the available model relations:
- * @property BeritaAcaraEvaluasiPenawaran[] $beritaAcaraEvaluasiPenawarans
- * @property BeritaAcaraNegosiasiKlarifikasi[] $beritaAcaraNegosiasiKlarifikasis
- * @property BeritaAcaraPembukaanPenawaran[] $beritaAcaraPembukaanPenawarans
- * @property BeritaAcaraPenjelasan[] $beritaAcaraPenjelasans
  * @property Dokumen[] $dokumens
- * @property NotaDinasPemberitahuanPemenang[] $notaDinasPemberitahuanPemenangs
- * @property NotaDinasPenetapanPemenang[] $notaDinasPenetapanPemenangs
- * @property NotaDinasPenetapanPemenang[] $notaDinasPenetapanPemenangs1
- * @property NotaDinasUsulanPemenang[] $notaDinasUsulanPemenangs
- * @property PaktaIntegritasPanitia1[] $paktaIntegritasPanitia1s
+ * @property PenerimaPengadaan[] $penerimaPengadaans
  * @property Divisi $divisiPeminta
  * @property Panitia $idPanitia
- * @property SuratPemberitahuanPengadaan[] $suratPemberitahuanPengadaans
- * @property SuratUndanganPembukaanPenawaran[] $suratUndanganPembukaanPenawarans
- * @property SuratUndanganPenjelasan[] $suratUndanganPenjelasans
  */
 class Pengadaan extends CActiveRecord
 {
@@ -42,13 +31,13 @@ class Pengadaan extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Pengadaan the static model class
 	 */
-    
-        public $sisahari;
-        public $pic;
-        public $ndpermintaan;
-        public $statusgan;
-        public $progressgan;
-    
+	 
+	public $sisahari;
+	public $pic;
+	public $ndpermintaan;
+	public $statusgan;
+	public $progressgan;
+		
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -71,8 +60,11 @@ class Pengadaan extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'required'),
-			array('biaya, id_panitia,', 'numerical', 'integerOnly'=>true),
-			array('id_pengadaan,nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>256),
+			array('id_pengadaan', 'length', 'max'=>32),
+			array('nama_pengadaan, jenis_pengadaan, nama_penyedia, status, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'length', 'max'=>256),
+			array('divisi_peminta', 'length', 'max'=>20),
+			array('biaya', 'length', 'max'=>255),
+			array('id_panitia', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('progressgan,sisahari,statusgan,ndpermintaan,pic,id_pengadaan, nama_pengadaan, divisi_peminta, jenis_pengadaan, nama_penyedia, tanggal_masuk, tanggal_selesai, status, biaya, id_panitia, metode_pengadaan, metode_penawaran, jenis_kualifikasi', 'safe', 'on'=>'search'),
@@ -87,23 +79,12 @@ class Pengadaan extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'beritaAcaraEvaluasiPenawarans' => array(self::HAS_MANY, 'BeritaAcaraEvaluasiPenawaran', 'id_panitia'),
-			'beritaAcaraNegosiasiKlarifikasis' => array(self::HAS_MANY, 'BeritaAcaraNegosiasiKlarifikasi', 'id_panitia'),
-			'beritaAcaraPembukaanPenawarans' => array(self::HAS_MANY, 'BeritaAcaraPembukaanPenawaran', 'id_panitia'),
-			'beritaAcaraPenjelasans' => array(self::HAS_MANY, 'BeritaAcaraPenjelasan', 'id_panitia'),
 			'dokumens' => array(self::HAS_MANY, 'Dokumen', 'id_pengadaan'),
-			'notaDinasPerintahPengadaan' => array(self::HAS_ONE, 'NotaDinasPerintahPengadaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
-			'notaDinasPermintaan' => array(self::HAS_ONE, 'NotaDinasPermintaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
-			'notaDinasPemberitahuanPemenangs' => array(self::HAS_MANY, 'NotaDinasPemberitahuanPemenang', 'nama_penyedia'),
-			'notaDinasPenetapanPemenangs' => array(self::HAS_MANY, 'NotaDinasPenetapanPemenang', 'nama_penyedia'),
-			'notaDinasPenetapanPemenangs1' => array(self::HAS_MANY, 'NotaDinasPenetapanPemenang', 'kepada'),
-			'notaDinasUsulanPemenangs' => array(self::HAS_MANY, 'NotaDinasUsulanPemenang', 'nama_penyedia'),
-			'paktaIntegritasPanitia1s' => array(self::HAS_MANY, 'PaktaIntegritasPanitia1', 'id_panitia'),
+			'penerimaPengadaans' => array(self::HAS_MANY, 'PenerimaPengadaan', 'id_pengadaan'),
 			'divisiPeminta' => array(self::BELONGS_TO, 'Divisi', 'divisi_peminta'),
 			'idPanitia' => array(self::BELONGS_TO, 'Panitia', 'id_panitia'),
-			'suratPemberitahuanPengadaans' => array(self::HAS_MANY, 'SuratPemberitahuanPengadaan', 'id_panitia'),
-			'suratUndanganPembukaanPenawarans' => array(self::HAS_MANY, 'SuratUndanganPembukaanPenawaran', 'id_panitia'),
-			'suratUndanganPenjelasans' => array(self::HAS_MANY, 'SuratUndanganPenjelasan', 'id_panitia'),
+			'notaDinasPerintahPengadaan' => array(self::HAS_ONE, 'NotaDinasPerintahPengadaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
+			'notaDinasPermintaan' => array(self::HAS_ONE, 'NotaDinasPermintaan', array('id_dokumen'=>'id_dokumen'), 'through'=>'dokumens'),
 		);
 	}
 
@@ -139,6 +120,32 @@ class Pengadaan extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
+	public function search()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id_pengadaan',$this->id_pengadaan,true);
+		$criteria->compare('nama_pengadaan',$this->nama_pengadaan,true);
+		$criteria->compare('divisi_peminta',$this->divisi_peminta,true);
+		$criteria->compare('jenis_pengadaan',$this->jenis_pengadaan,true);
+		$criteria->compare('nama_penyedia',$this->nama_penyedia,true);
+		$criteria->compare('tanggal_masuk',$this->tanggal_masuk,true);
+		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('biaya',$this->biaya,true);
+		$criteria->compare('id_panitia',$this->id_panitia,true);
+		$criteria->compare('metode_pengadaan',$this->metode_pengadaan,true);
+		$criteria->compare('metode_penawaran',$this->metode_penawaran,true);
+		$criteria->compare('jenis_kualifikasi',$this->jenis_kualifikasi,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+	
 	public function searchDashboard()
 	{
 		// Warning: Please modify the following code to remove attributes that
