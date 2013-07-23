@@ -42,7 +42,7 @@ class AdminController extends Controller
 			$pejabat = Anggota::model()->findByAttributes(array('id_panitia'=>$id));
 			if (isset($_POST['Anggota'])) {
 				$pejabat->attributes = $_POST['Anggota'];
-				$ang = $this->getRecordByUsername($person->username);
+				$ang = $this->getRecordByUsername($pejabat->username);
 				if (empty($ang)) {
 					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $person->username . '" tidak terdaftar dalam basis data pegawai.');
 				}
