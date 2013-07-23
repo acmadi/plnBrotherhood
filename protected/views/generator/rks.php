@@ -9,24 +9,20 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 
 <script type="text/javascript">
 	function send(){	 		
-		$("#Rks_tanggal_penunjukan_pemenang").attr('value',tambahtgl(1));	   
+		var a=$("#Dokumen_tanggal").val();
+		var tanggalRks= new Date(a.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+		$("#Rks_tanggal_penunjukan_pemenang").attr('value',tambahtgl(tanggalRks,1));	   
 	}
 	
-	function tambahtgl(n){				
-		var a=$("#Dokumen_tanggal").val();
-		var tanggal= new Date(a.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+	function tambahtgl(tanggal,n){						
 		var hari = tanggal.getDate();
 		tanggal.setDate(hari + n);	
-				
+		
 		// alert(tanggal);
-		if(tanggal.getDay()==6){
-			hari = tanggal.getDate();
-			tanggal.setDate(hari + 2);	
-		}else if(tanggal.getDay()==0){
-			hari = tanggal.getDate();
-			tanggal.setDate(hari + 1);	
+		if(tanggal.getDay()==6 || tanggal.getDay()==0){
+			tambahtgl(tanggal,1);
 		}
-		// alert(tanggal);
+		
 		return tanggal.getDate() + '-' + (tanggal.getMonth()+1) + '-' + tanggal.getFullYear();
 	}
 	
