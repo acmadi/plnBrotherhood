@@ -39,19 +39,20 @@
 			if (!Yii::app()->user->isGuest) {
 				$this->widget('zii.widgets.CMenu', array(
 					'items'=>array(
-						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>Yii::app()->user->getState('role') != 'admin'),
-						array('label'=>'Permintaan', 'url'=>array('/site/permintaan'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum' || Yii::app()->user->getState('role') == 'divisi'),
-						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"') || Yii::app()->user->getState('role') == 'kdivmum'),
-						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>Yii::app()->user->getState('role') != 'admin'),
-						array('label'=>'Statistik', 'url'=>array('/statistik'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum'),
-						array('label'=>'Kontrol Anggaran', 'url'=>array('/anggaran/kontrolanggaran'), 'visible'=>Yii::app()->user->getState('role') == 'kdivmum'),
-						array('label'=>'Panitia/Pejabat Pengadaan', 'url'=>array('/admin/panitia'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						array('label'=>'Pejabat Berwenang', 'url'=>array('/admin/kdiv'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						array('label'=>'Divisi', 'url'=>array('/admin/divisi'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						array('label'=>'Jadwal Hari Libur', 'url'=>array('admin/libur'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
-						array('label'=>'Manajemen Akun', 'url'=>array('/admin/akun'), 'visible'=>Yii::app()->user->getState('role') == 'admin'),
+						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>!Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Permintaan', 'url'=>array('/site/permintaan'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (Yii::app()->user->getState('role') == 'kdivmum' || Yii::app()->user->getState('role') == 'divisi')),
+						array('label'=>'Kontrak', 'url'=>array('/site/kontrak'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"') || Yii::app()->user->getState('role') == 'kdivmum')),
+						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>!Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Statistik', 'url'=>array('/statistik'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (Yii::app()->user->getState('role') == 'kdivmum')),
+						array('label'=>'Kontrol Anggaran', 'url'=>array('/anggaran/kontrolanggaran'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (Yii::app()->user->getState('role') == 'kdivmum')),
+						array('label'=>'Pejabat Pengadaan', 'url'=>array('/admin/pejabat'), 'visible'=>Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Panitia Pengadaan', 'url'=>array('/admin/panitia'), 'visible'=>Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Pejabat Berwenang', 'url'=>array('/admin/kdiv'), 'visible'=>Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Divisi', 'url'=>array('/admin/divisi'), 'visible'=>Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Jadwal Hari Libur', 'url'=>array('admin/libur'), 'visible'=>Yii::app()->user->getState('asAdmin')),
+						array('label'=>'Administrator', 'url'=>array('/admin/dashboard'), 'visible'=>Yii::app()->user->getState('isAdmin')),
 						array('label'=>'Keluar', 'url'=>array('/site/logout')),
-						array('label'=>(Yii::app()->user->getState('role') == 'admin') ? (Admin::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (UserDivisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama))), 'itemOptions'=>array('style'=>'color:white;float:right'))
+						array('label'=>(Yii::app()->user->getState('role') == 'anggota') ? (Anggota::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : ((Yii::app()->user->getState('role') == 'divisi') ? (UserDivisi::model()->find('username = "' . Yii::app()->user->name . '"')->nama) : (Kdivmum::model()->find('username = "' . Yii::app()->user->name . '"')->nama)), 'itemOptions'=>array('style'=>'color:white;float:right'))
 					),
 				));
 			}

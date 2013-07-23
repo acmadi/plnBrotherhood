@@ -30,16 +30,21 @@ class SiteController extends Controller
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
-		else {		
-			$model=new Pengadaan('search');
-			$model->unsetAttributes();  // clear any default values
-			if(isset($_GET['Pengadaan'])){
-				$model->attributes=$_GET['Pengadaan'];                                       
-			}	
-                        
-			$this->render('dashboard',array(
-				'model'=>$model,
-			));
+		else {
+			if (Yii::app()->user->getState('asAdmin')) {
+				$this->redirect(array('admin/dashboard'));
+			}
+			else {
+				$model=new Pengadaan('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Pengadaan'])){
+					$model->attributes=$_GET['Pengadaan'];                                       
+				}	
+		                    
+				$this->render('dashboard',array(
+					'model'=>$model,
+				));
+			}
 		}
 	}
 	
@@ -115,10 +120,18 @@ class SiteController extends Controller
 			$this->redirect(array('site/login'));
 		}
 		else {
+			$Pengadaan=Pengadaan::model()->findByPk($id);
+			$Pengadaan->status ='99';
+			
 			$model=new Dokumen('search');
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['Dokumen'])){
 				$model->attributes=$_GET['Dokumen'];
+			}
+			if(isset($_POST['Pengadaan'])){
+				if($Pengadaan->save(false)){
+					$this->redirect(array('detailpengadaan','id'=>$id));
+				}
 			}
 			$this->render('detailpengadaan', array(
 				'model'=>$model,
@@ -436,7 +449,7 @@ class SiteController extends Controller
 						if($Pengadaan->save(false)) {
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($NDP->save(false)){
-									Mail::send(Kdivmum::model()->findByAttributes(array('jabatan'=>'KDIVMUM', 'status_user'=>'Aktif'))->email, 'Permintaan Pengadaan', 'Permintaan ' . $Pengadaan->nama_pengadaan);
+									//Mail::send(Kdivmum::model()->findByAttributes(array('jabatan'=>'KDIVMUM', 'status_user'=>'Aktif'))->email, 'Permintaan Pengadaan', 'Permintaan ' . $Pengadaan->nama_pengadaan);
 									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
 								}
 							}

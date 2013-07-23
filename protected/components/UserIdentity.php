@@ -17,37 +17,33 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		// kode lokal
+		$role = 'none';
+		$isAdmin = false;
+		$asAdmin = false;
 
-		if (Admin::model()->exists('username = "' . $this->username . '"')) {
-			$user = Admin::model()->findByAttributes(array('username'=>$this->username));
-			if (sha1($this->password) == $user->password) {
-				Yii::app()->user->setState('role', 'admin');
-				$this->errorCode = self::ERROR_NONE;	
-			} else {
-				$this->errorCode=self::ERROR_PASSWORD_INVALID;
-			}
-		} else if (Anggota::model()->exists('username = "' . $this->username . '" and status_user = "Aktif"')) {
+		// kode lokal
+		
+		if (Anggota::model()->exists('username = "' . $this->username . '" and status_user = "Aktif"')) {
 			$user = Anggota::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
-				Yii::app()->user->setState('role', 'anggota');
-				$this->errorCode = self::ERROR_NONE;	
+				$role = 'anggota';
+				$this->errorCode = self::ERROR_NONE;
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
 		} else if (UserDivisi::model()->exists('username = "' . $this->username . '"')) {
 			$user = UserDivisi::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
-				Yii::app()->user->setState('role', 'divisi');
-				$this->errorCode = self::ERROR_NONE;	
+				$role = 'divisi';
+				$this->errorCode = self::ERROR_NONE;
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
 		} else if (Kdivmum::model()->exists('username = "' . $this->username . '" and status_user = "Aktif"')) {
 			$user = Kdivmum::model()->findByAttributes(array('username'=>$this->username));
 			if (sha1($this->password) == $user->password) {
-				Yii::app()->user->setState('role', 'kdivmum');
-				$this->errorCode = self::ERROR_NONE;	
+				$role = 'kdivmum';
+				$this->errorCode = self::ERROR_NONE;
 			} else {
 				$this->errorCode=self::ERROR_PASSWORD_INVALID;
 			}
@@ -55,18 +51,16 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
 
+		if (Admin::model()->exists('username = "' . $this->username . '"')) {
+			$isAdmin = true;
+			if ($role == 'none') {
+				$asAdmin = true;
+			}
+		}
 
 		// kode server
-
-		// if (Admin::model()->exists('username = "' . $this->username . '"')) {
-		// 	$user = Admin::model()->findByAttributes(array('username'=>$this->username));
-		// 	if (sha1($this->password) == $user->password) {
-		// 		Yii::app()->user->setState('role', 'admin');
-		// 		$this->errorCode = self::ERROR_NONE;	
-		// 	} else {
-		// 		$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		// 	}
-		// } else if (Anggota::model()->exists('username = "' . $this->username . '"')) {
+		
+		// if (Anggota::model()->exists('username = "' . $this->username . '"')) {
 		// 	$options = Yii::app()->params['ldap'];
 		// 	$connection = ldap_connect($options['host']);
 		// 	ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -77,7 +71,7 @@ class UserIdentity extends CUserIdentity
 		// 			if (!$bind) {
 		// 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		// 			} else {
-		// 				Yii::app()->user->setState('role', 'anggota');
+		// 				$role = 'anggota';
 		// 				$this->errorCode = self::ERROR_NONE;
 		// 			}
 		// 		} catch (Exception $e) {
@@ -96,7 +90,7 @@ class UserIdentity extends CUserIdentity
 		// 			if (!$bind) {
 		// 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		// 			} else {
-		// 				Yii::app()->user->setState('role', 'divisi');
+		// 				$role = 'divisi';
 		// 				$this->errorCode = self::ERROR_NONE;
 		// 			}
 		// 		} catch (Exception $e) {
@@ -115,7 +109,7 @@ class UserIdentity extends CUserIdentity
 		// 			if (!$bind) {
 		// 				$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		// 			} else {
-		// 				Yii::app()->user->setState('role', 'kdivmum');
+		// 				$role = 'kdivmum';
 		// 				$this->errorCode = self::ERROR_NONE;
 		// 			}
 		// 		} catch (Exception $e) {
@@ -126,6 +120,34 @@ class UserIdentity extends CUserIdentity
 		// } else {
 		// 	$this->errorCode = self::ERROR_USERNAME_INVALID;
 		// }
+
+		// if (Admin::model()->exists('username = "' . $this->username . '"')) {
+		// 	$isAdmin = true;
+		// 	if ($role == 'none') {
+		// 		$options = Yii::app()->params['ldap'];
+		// 		$connection = ldap_connect($options['host']);
+		// 		ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+		// 		ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+		// 		if ($connection) {
+		// 			try {
+		// 				$bind = @ldap_bind($connection, $options['domain'] . '\\' . $this->username, $this->password);
+		// 				if (!$bind) {
+		// 					$this->errorCode = self::ERROR_PASSWORD_INVALID;
+		// 				} else {
+		// 					$asAdmin = true;
+		// 					$this->errorCode = self::ERROR_NONE;
+		// 				}
+		// 			} catch (Exception $e) {
+		// 				$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
+		// 			}
+		// 			ldap_close($connection);
+		// 		}
+		// 	}
+		// }
+
+		Yii::app()->user->setState('role', $role);
+		Yii::app()->user->setState('isAdmin', $isAdmin);
+		Yii::app()->user->setState('asAdmin', $asAdmin);
 
 		return !$this->errorCode;
 	}

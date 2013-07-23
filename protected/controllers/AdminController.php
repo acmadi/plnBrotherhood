@@ -2,9 +2,137 @@
 
 class AdminController extends Controller
 {
+	public function actionDashboard()
+	{
+		if (Yii::app()->user->getState('isAdmin')) {
+			$this->render('dashboard');
+		}
+	}
+
+	public function actionSwitch()
+	{
+		$id = Yii::app()->getRequest()->getQuery('id');
+		if ($id == '1') {
+			Yii::app()->user->setState('asAdmin', true);
+		}
+		else if ($id == '0') {
+			Yii::app()->user->setState('asAdmin', false);
+		}
+		$this->redirect(array('dashboard'));
+	}
+
+	public function actionPejabat()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$model = new Panitia('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Panitia'])){
+				$model->attributes = $_GET['Panitia'];
+			}
+			$this->render('pejabat', array(
+				'model'=>$model,
+			));
+		}
+	}
+
+	public function actionDetailpejabat()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$person = Anggota::model()->findByAttributes(array('id_panitia'=>$id));
+			if (isset($_POST['Anggota'])) {
+				$person->attributes = $_POST['Anggota'];
+				$ang = $this->getRecordByUsername($person->username);
+				if (empty($ang)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $person->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$panitia = Panitia::model()->findByPk($id);
+					$panitia->nama_panitia = $person->nama;
+					if ($person->save(false) && $panitia->save(false)) {
+						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+					}
+				}
+			}
+			$this->render('detailpejabat', array(
+				'person'=>$person,
+			));
+		}
+	}
+
+	public function actionTambahpejabat()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$pejabat = new Anggota;
+			if (isset($_POST['Anggota'])) {
+				$pejabat->attributes = $_POST['Anggota'];
+				$person = $this->getRecordByUsername($pejabat->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$pejabat->nama = $person['nama'];
+					$pejabat->email = $person['email'];
+					$old = Anggota::model()->findByAttributes(array('username'=>$pejabat->username, 'jabatan'=>'Pejabat'));
+					if ($old != null) {
+						$old->nama = $pejabat->nama;
+						$old->email = $pejabat->email;
+						$old->status_user = 'Aktif';
+						$old->save(false);
+						$pan = Panitia::model()->findByPk($old->id_panitia);
+						$pan->nama_panitia = $pejabat->nama;
+						$pan->status_panitia = 'Aktif';
+						$pan->save(false);
+						$this->redirect(array('panitia'));
+					}
+					else {
+						$panitia = new Panitia;
+						$panitia->nama_panitia = $pejabat->nama;
+						$panitia->SK_panitia = '-';
+						$panitia->tanggal_sk = '0000-00-00';
+						$panitia->status_panitia = 'Aktif';
+						$panitia->jenis_panitia = 'Pejabat';
+						if ($panitia->save(false)) {
+							$pejabat->id_panitia = $panitia->id_panitia;
+							$pejabat->jabatan = 'Pejabat';
+							$pejabat->status_user = 'Aktif';
+							if ($pejabat->save(false)) {
+								$this->redirect(array('panitia'));
+							}
+						}
+					}
+				}
+			}
+			$this->render('tambahpejabat', array(
+				'pejabat'=>$pejabat,
+			));
+		}
+	}
+
+	public function actionHapuspejabat()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$pejabat = Panitia::model();
+			if (isset($_POST['Panitia'])) {
+				foreach ($_POST['Panitia']['id_panitia'] as $item) {
+					$cpejabat = $pejabat->findByPk($item);
+					$cpejabat->status_panitia = 'Tidak Aktif';
+					$cpejabat->save(false);
+					$person = Anggota::model()->findByAttributes(array('id_panitia'=>$item));
+					$person->status_user = 'Tidak Aktif';
+					$person->save(false);
+				}
+				$this->redirect(array('panitia'));
+			}
+			$this->render('hapuspejabat', array(
+				'pejabat'=>$pejabat,
+			));
+		}
+	}
+
 	public function actionPanitia()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$model = new Panitia('search');
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['Panitia'])){
@@ -18,7 +146,7 @@ class AdminController extends Controller
 
 	public function actionDetailpanitia()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$panitia = Panitia::model()->findByPk($id);
 			$panitia->tanggal_sk = Tanggal::getTanggalStrip($panitia->tanggal_sk);
@@ -122,7 +250,7 @@ class AdminController extends Controller
 
 	public function actionTambahpanitia()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$panitia = new Panitia;
 			if (isset($_POST['Panitia'])) {
 				$panitia->attributes = $_POST['Panitia'];
@@ -139,58 +267,9 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionTambahpejabat()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$pejabat = new Anggota;
-			if (isset($_POST['Anggota'])) {
-				$pejabat->attributes = $_POST['Anggota'];
-				$person = $this->getRecordByUsername($pejabat->username);
-				if (empty($person)) {
-					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
-				}
-				else {
-					$pejabat->nama = $person['nama'];
-					$pejabat->email = $person['email'];
-					$old = Anggota::model()->findByAttributes(array('username'=>$pejabat->username, 'jabatan'=>'Pejabat'));
-					if ($old != null) {
-						$old->nama = $pejabat->nama;
-						$old->email = $pejabat->email;
-						$old->status_user = 'Aktif';
-						$old->save(false);
-						$pan = Panitia::model()->findByPk($old->id_panitia);
-						$pan->nama_panitia = $pejabat->nama;
-						$pan->status_panitia = 'Aktif';
-						$pan->save(false);
-						$this->redirect(array('panitia'));
-					}
-					else {
-						$panitia = new Panitia;
-						$panitia->nama_panitia = $pejabat->nama;
-						$panitia->SK_panitia = '-';
-						$panitia->tanggal_sk = '0000-00-00';
-						$panitia->status_panitia = 'Aktif';
-						$panitia->jenis_panitia = 'Pejabat';
-						if ($panitia->save(false)) {
-							$pejabat->id_panitia = $panitia->id_panitia;
-							$pejabat->jabatan = 'Pejabat';
-							$pejabat->status_user = 'Aktif';
-							if ($pejabat->save(false)) {
-								$this->redirect(array('panitia'));
-							}
-						}
-					}
-				}
-			}
-			$this->render('tambahpejabat', array(
-				'pejabat'=>$pejabat,
-			));
-		}
-	}
-
 	public function actionHapuspanitia()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$panitia = Panitia::model();
 			if (isset($_POST['Panitia'])) {
 				foreach ($_POST['Panitia']['id_panitia'] as $item) {
@@ -211,30 +290,9 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionHapuspejabat()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$pejabat = Panitia::model();
-			if (isset($_POST['Panitia'])) {
-				foreach ($_POST['Panitia']['id_panitia'] as $item) {
-					$cpejabat = $pejabat->findByPk($item);
-					$cpejabat->status_panitia = 'Tidak Aktif';
-					$cpejabat->save(false);
-					$person = Anggota::model()->findByAttributes(array('id_panitia'=>$item));
-					$person->status_user = 'Tidak Aktif';
-					$person->save(false);
-				}
-				$this->redirect(array('panitia'));
-			}
-			$this->render('hapuspejabat', array(
-				'pejabat'=>$pejabat,
-			));
-		}
-	}
-
 	public function actionKdiv()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$modelJabatan = new Jabatan('search');
 			$modelJabatan->unsetAttributes();  // clear any default values
 			if(isset($_GET['Jabatan'])){
@@ -254,12 +312,13 @@ class AdminController extends Controller
 
 	public function actionDetailkdiv()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$kdiv = Kdivmum::model()->findByPk($id);
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
 				$kdiv->save(false);
+				$this->redirect(array('kdiv'));
 			}
 			$this->render('detailkdiv', array(
 				'kdiv'=>$kdiv,
@@ -269,7 +328,7 @@ class AdminController extends Controller
 
 	public function actionTambahkdiv()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$kdiv = new Kdivmum;
 			if (isset($_POST['Kdivmum'])) {
 				$kdiv->attributes = $_POST['Kdivmum'];
@@ -292,7 +351,7 @@ class AdminController extends Controller
 					$this->redirect(array('kdiv'));
 				}
 			}
-			$this->render('detailkdiv', array(
+			$this->render('tambahkdiv', array(
 				'kdiv'=>$kdiv,
 			));
 		}
@@ -300,25 +359,17 @@ class AdminController extends Controller
 
 	public function actionHapuskdiv()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$kdiv = Kdivmum::model();
-			if (isset($_POST['Kdivmum'])) {
-				foreach ($_POST['Kdivmum']['username'] as $item) {
-					$ckdiv = $kdiv->findByPk($item);
-					$ckdiv->status_user = 'Tidak Aktif';
-					$ckdiv->save(false);
-				}
-				$this->redirect(array('kdiv'));
-			}
-			$this->render('hapuskdiv', array(
-				'kdiv'=>$kdiv,
-			));
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$kdiv = Kdivmum::model()->findByPk($id);
+			$kdiv->status_user = 'Tidak Aktif';
+			$kdiv->save(false);
 		}
 	}
 
 	public function actionDetailjabatan()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$jabatan = Jabatan::model()->findByPk($id);
 			if (isset($_POST['Jabatan'])) {
@@ -333,7 +384,7 @@ class AdminController extends Controller
 
 	public function actionTambahjabatan()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$jabatan = new Jabatan;
 			if (isset($_POST['Jabatan'])) {
 				$jabatan->attributes = $_POST['Jabatan'];
@@ -350,7 +401,7 @@ class AdminController extends Controller
 				}
 				$this->redirect(array('kdiv'));
 			}
-			$this->render('detailjabatan', array(
+			$this->render('tambahjabatan', array(
 				'jabatan'=>$jabatan,
 			));
 		}
@@ -358,25 +409,22 @@ class AdminController extends Controller
 
 	public function actionHapusjabatan()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$jabatan = Jabatan::model();
-			if (isset($_POST['Jabatan'])) {
-				foreach ($_POST['Jabatan']['id_jabatan'] as $item) {
-					$jabatan = Jabatan::model()->findByPk($item);
-					$jabatan->status = 'Tidak Aktif';
-					$jabatan->save(false);
-				}
-				$this->redirect(array('kdiv'));
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			$kdivs = Kdivmum::model()->findAllByAttributes(array('id_jabatan'=>$id));
+			foreach ($kdivs as $kdiv) {
+				$kdiv->status_user = 'Tidak Aktif';
+				$kdiv->save(false);
 			}
-			$this->render('hapusjabatan', array(
-				'jabatan'=>$jabatan,
-			));
+			$jabatan = Jabatan::model()->findByPk($id);
+			$jabatan->status = 'Tidak Aktif';
+			$jabatan->save(false);
 		}
 	}
 
 	public function actionDivisi()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$model = new Divisi('search');
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['Divisi'])){
@@ -390,13 +438,19 @@ class AdminController extends Controller
 
 	public function actionDetaildivisi()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$divisi = Divisi::model()->findByPk($id);
 			$model = new UserDivisi('search');
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['UserDivisi'])){
 				$model->attributes = $_GET['UserDivisi'];
+			}
+			if (isset($_POST['Divisi'])) {
+				$divisi->attributes = $_POST['Divisi'];
+				if ($divisi->save(false)) {
+					Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+				}
 			}
 			$this->render('detaildivisi', array(
 				'id'=>$id,
@@ -408,7 +462,7 @@ class AdminController extends Controller
 
 	public function actionTambahdivisi()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$divisi = new Divisi;
 			if (isset($_POST['Divisi'])) {
 				$divisi->attributes = $_POST['Divisi'];
@@ -424,7 +478,7 @@ class AdminController extends Controller
 
 	public function actionHapusdivisi()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			UserDivisi::model()->deleteAllByAttributes(array('divisi'=>$id));
 			Divisi::model()->deleteByPk($id);
@@ -433,7 +487,7 @@ class AdminController extends Controller
 
 	public function actionTambahanggotadivisi()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$divisi = Divisi::model()->findByPk($id);
 			$user = new UserDivisi;
@@ -461,29 +515,10 @@ class AdminController extends Controller
 
 	public function actionHapusanggotadivisi()
 	{
-		if (Yii::app()->user->getState('role') == 'admin') {
+		if (Yii::app()->user->getState('asAdmin')) {
 			$user = UserDivisi::model();
 			$id = Yii::app()->getRequest()->getQuery('id');
 			$user->deleteByPk($id);
-		}
-	}
-
-	public function actionAkun()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$admin = Admin::model()->findByPk(Yii::app()->user->name);
-			if (isset($_POST['Admin'])) {
-				$admin->attributes = $_POST['Admin'];
-				if ($admin->validate()) {
-					if ($admin->save(false)) {
-						Yii::app()->user->name = $admin->username;
-						Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-					}
-				}
-			}
-			$this->render('akun', array(
-				'admin'=>$admin,
-			));
 		}
 	}
 	

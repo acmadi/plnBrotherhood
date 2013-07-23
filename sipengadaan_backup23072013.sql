@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 23, 2013 at 04:39 PM
+-- Generation Time: Jul 22, 2013 at 09:18 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(20) NOT NULL,
+  `nama` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -35,9 +37,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`username`) VALUES
-('aidil.syaputra'),
-('irvan.aditya');
+INSERT INTO `admin` (`username`, `nama`, `password`) VALUES
+('admin', 'Administrator', 'd033e22ae348aeb5660fc2140aec35850c4da997');
 
 -- --------------------------------------------------------
 
@@ -197,18 +198,20 @@ CREATE TABLE IF NOT EXISTS `daftar_hadir` (
 --
 
 CREATE TABLE IF NOT EXISTS `divisi` (
-  `id_divisi` bigint(20) NOT NULL AUTO_INCREMENT,
-  `nama_singkat` varchar(256) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `nama_divisi` varchar(256) NOT NULL,
-  PRIMARY KEY (`id_divisi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `divisi`
 --
 
-INSERT INTO `divisi` (`id_divisi`, `nama_singkat`, `nama_divisi`) VALUES
-(1, 'DIVSIM', 'Divisi Sisitem dan Informasi');
+INSERT INTO `divisi` (`username`, `nama_divisi`) VALUES
+('divin', 'Divisi Internet'),
+('divman', 'Divisi Manajemen'),
+('divsi', 'Divisi Sistem Informasi'),
+('divtrans', 'Divisi Transportasi');
 
 -- --------------------------------------------------------
 
@@ -238,17 +241,9 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
 
 CREATE TABLE IF NOT EXISTS `dokumen_kontrak` (
   `id_dokumen` bigint(32) NOT NULL,
-  `username` varchar(256) NOT NULL,
   `Nomor` varchar(256) NOT NULL,
-  `tanggal_mulai` date NOT NULL,
-  `tanggal_selesai` date NOT NULL,
-  `jangaka_waktu` int(11) NOT NULL,
-  `nilai_kontrak` bigint(20) NOT NULL,
-  `lokasi_file` varchar(256) NOT NULL,
-  `no_rek` varchar(256) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
-  UNIQUE KEY `Nomor` (`Nomor`),
-  KEY `username` (`username`)
+  UNIQUE KEY `Nomor` (`Nomor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -272,8 +267,6 @@ CREATE TABLE IF NOT EXISTS `dokumen_prakualifikasi` (
   `id_dokumen` bigint(32) NOT NULL,
   `nomor` varchar(256) NOT NULL,
   `tujuan_pengadaan` varchar(256) NOT NULL,
-  `kurun_waktu_pengalaman` int(255) NOT NULL,
-  `npt` int(255) NOT NULL,
   `tanggal_pengambilan1` date NOT NULL,
   `tanggal_pengambilan2` date NOT NULL,
   `waktu_pengambilan1` time NOT NULL,
@@ -574,6 +567,7 @@ CREATE TABLE IF NOT EXISTS `panitia` (
 INSERT INTO `panitia` (`id_panitia`, `nama_panitia`, `SK_panitia`, `tanggal_sk`, `status_panitia`, `jenis_panitia`) VALUES
 (-1, 'Belum ada PIC', '-', '0000-00-00', '-', '-'),
 (1, 'Hanif Eridaputra', '-', '0000-00-00', 'Aktif', 'Pejabat'),
+(2, 'Johannes Ridho', '-', '0000-00-00', 'Aktif', 'Pejabat'),
 (3, 'Panitia-A', '024/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
 (4, 'Panitia-B', '025/SK/PLN', '2013-07-01', 'Aktif', 'Panitia'),
 (5, 'Panitia-C', '026/SK/PLN', '2012-07-09', 'Tidak Aktif', 'Panitia'),
@@ -645,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `penerima_pengadaan` (
 CREATE TABLE IF NOT EXISTS `pengadaan` (
   `id_pengadaan` bigint(32) NOT NULL,
   `nama_pengadaan` varchar(256) NOT NULL,
-  `divisi_peminta` bigint(20) NOT NULL,
+  `divisi_peminta` varchar(256) NOT NULL,
   `jenis_pengadaan` varchar(256) NOT NULL,
   `nama_penyedia` varchar(256) NOT NULL,
   `tanggal_masuk` date NOT NULL,
@@ -904,7 +898,7 @@ CREATE TABLE IF NOT EXISTS `tor` (
 CREATE TABLE IF NOT EXISTS `user_divisi` (
   `username` varchar(50) NOT NULL,
   `nama` varchar(256) NOT NULL,
-  `divisi` bigint(20) NOT NULL,
+  `divisi` varchar(20) NOT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`username`),
   KEY `divisi` (`divisi`)
@@ -915,7 +909,7 @@ CREATE TABLE IF NOT EXISTS `user_divisi` (
 --
 
 INSERT INTO `user_divisi` (`username`, `nama`, `divisi`, `password`) VALUES
-('johannes.ridho', 'Johannes Ridho', 1, '759412786bc533369b22377bf83fb9056c5b25b2');
+('johannes.ridho', 'Johannes Ridho', 'divin', '759412786bc533369b22377bf83fb9056c5b25b2');
 
 -- --------------------------------------------------------
 
@@ -926,7 +920,6 @@ INSERT INTO `user_divisi` (`username`, `nama`, `divisi`, `password`) VALUES
 CREATE TABLE IF NOT EXISTS `user_kontrak` (
   `id_user_kontrak` bigint(32) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `wewenang` int(11) NOT NULL,
   PRIMARY KEY (`id_user_kontrak`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -935,8 +928,8 @@ CREATE TABLE IF NOT EXISTS `user_kontrak` (
 -- Dumping data for table `user_kontrak`
 --
 
-INSERT INTO `user_kontrak` (`id_user_kontrak`, `username`, `wewenang`) VALUES
-(1, 'aidilsyaputra', 0);
+INSERT INTO `user_kontrak` (`id_user_kontrak`, `username`) VALUES
+(1, 'aidilsyaputra');
 
 --
 -- Constraints for dumped tables
@@ -1000,7 +993,6 @@ ALTER TABLE `dokumen`
 -- Constraints for table `dokumen_kontrak`
 --
 ALTER TABLE `dokumen_kontrak`
-  ADD CONSTRAINT `dokumen_kontrak_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user_kontrak` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `dokumen_kontrak_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1127,8 +1119,8 @@ ALTER TABLE `penerima_pengadaan`
 -- Constraints for table `pengadaan`
 --
 ALTER TABLE `pengadaan`
-  ADD CONSTRAINT `pengadaan_ibfk_2` FOREIGN KEY (`divisi_peminta`) REFERENCES `divisi` (`id_divisi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pengadaan_ibfk_1` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pengadaan_ibfk_1` FOREIGN KEY (`id_panitia`) REFERENCES `panitia` (`id_panitia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pengadaan_ibfk_2` FOREIGN KEY (`divisi_peminta`) REFERENCES `divisi` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pengumuman_hasil_prakualifikasi`
@@ -1206,7 +1198,7 @@ ALTER TABLE `tor`
 -- Constraints for table `user_divisi`
 --
 ALTER TABLE `user_divisi`
-  ADD CONSTRAINT `user_divisi_ibfk_1` FOREIGN KEY (`divisi`) REFERENCES `divisi` (`id_divisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_divisi_ibfk_1` FOREIGN KEY (`divisi`) REFERENCES `divisi` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -4,7 +4,8 @@
  * This is the model class for table "divisi".
  *
  * The followings are the available columns in table 'divisi':
- * @property string $username
+ * @property string $id_divisi
+ * @property string $nama_singkat
  * @property string $nama_divisi
  *
  * The followings are the available model relations:
@@ -39,12 +40,11 @@ class Divisi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, nama_divisi', 'required'),
-			array('username', 'length', 'max'=>20),
-			array('nama_divisi', 'length', 'max'=>256),
+			array('nama_singkat, nama_divisi', 'required'),
+			array('nama_singkat, nama_divisi', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username, nama_divisi', 'safe', 'on'=>'search'),
+			array('id_divisi, nama_singkat, nama_divisi', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +67,8 @@ class Divisi extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username' => 'Username',
+			'id_divisi' => 'Id Divisi',
+			'nama_singkat' => 'Nama Singkat',
 			'nama_divisi' => 'Nama Divisi',
 		);
 	}
@@ -83,7 +84,8 @@ class Divisi extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('username',$this->username,true);
+		$criteria->compare('id_divisi',$this->id_divisi,true);
+		$criteria->compare('nama_singkat',$this->nama_singkat,true);
 		$criteria->compare('nama_divisi',$this->nama_divisi,true);
 
 		return new CActiveDataProvider($this, array(
