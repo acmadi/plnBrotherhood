@@ -41,6 +41,76 @@ class AdminController extends Controller
 		}
 	}
 
+	public function actionTambahpejabat()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$pejabat = new Anggota;
+			if (isset($_POST['Anggota'])) {
+				$pejabat->attributes = $_POST['Anggota'];
+				$person = $this->getRecordByUsername($pejabat->username);
+				if (empty($person)) {
+					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
+				}
+				else {
+					$pejabat->nama = $person['nama'];
+					$pejabat->email = $person['email'];
+					$old = Anggota::model()->findByAttributes(array('username'=>$pejabat->username, 'jabatan'=>'Pejabat'));
+					if ($old != null) {
+						$old->nama = $pejabat->nama;
+						$old->email = $pejabat->email;
+						$old->status_user = 'Aktif';
+						$old->save(false);
+						$pan = Panitia::model()->findByPk($old->id_panitia);
+						$pan->nama_panitia = $pejabat->nama;
+						$pan->status_panitia = 'Aktif';
+						$pan->save(false);
+						$this->redirect(array('panitia'));
+					}
+					else {
+						$panitia = new Panitia;
+						$panitia->nama_panitia = $pejabat->nama;
+						$panitia->SK_panitia = '-';
+						$panitia->tanggal_sk = '0000-00-00';
+						$panitia->status_panitia = 'Aktif';
+						$panitia->jenis_panitia = 'Pejabat';
+						if ($panitia->save(false)) {
+							$pejabat->id_panitia = $panitia->id_panitia;
+							$pejabat->jabatan = 'Pejabat';
+							$pejabat->status_user = 'Aktif';
+							if ($pejabat->save(false)) {
+								$this->redirect(array('panitia'));
+							}
+						}
+					}
+				}
+			}
+			$this->render('tambahpejabat', array(
+				'pejabat'=>$pejabat,
+			));
+		}
+	}
+
+	public function actionHapuspejabat()
+	{
+		if (Yii::app()->user->getState('role') == 'admin') {
+			$pejabat = Panitia::model();
+			if (isset($_POST['Panitia'])) {
+				foreach ($_POST['Panitia']['id_panitia'] as $item) {
+					$cpejabat = $pejabat->findByPk($item);
+					$cpejabat->status_panitia = 'Tidak Aktif';
+					$cpejabat->save(false);
+					$person = Anggota::model()->findByAttributes(array('id_panitia'=>$item));
+					$person->status_user = 'Tidak Aktif';
+					$person->save(false);
+				}
+				$this->redirect(array('panitia'));
+			}
+			$this->render('hapuspejabat', array(
+				'pejabat'=>$pejabat,
+			));
+		}
+	}
+
 	public function actionPanitia()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -178,55 +248,6 @@ class AdminController extends Controller
 		}
 	}
 
-	public function actionTambahpejabat()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$pejabat = new Anggota;
-			if (isset($_POST['Anggota'])) {
-				$pejabat->attributes = $_POST['Anggota'];
-				$person = $this->getRecordByUsername($pejabat->username);
-				if (empty($person)) {
-					Yii::app()->user->setFlash('gagal','Nama pengguna "' . $pejabat->username . '" tidak terdaftar dalam basis data pegawai.');
-				}
-				else {
-					$pejabat->nama = $person['nama'];
-					$pejabat->email = $person['email'];
-					$old = Anggota::model()->findByAttributes(array('username'=>$pejabat->username, 'jabatan'=>'Pejabat'));
-					if ($old != null) {
-						$old->nama = $pejabat->nama;
-						$old->email = $pejabat->email;
-						$old->status_user = 'Aktif';
-						$old->save(false);
-						$pan = Panitia::model()->findByPk($old->id_panitia);
-						$pan->nama_panitia = $pejabat->nama;
-						$pan->status_panitia = 'Aktif';
-						$pan->save(false);
-						$this->redirect(array('panitia'));
-					}
-					else {
-						$panitia = new Panitia;
-						$panitia->nama_panitia = $pejabat->nama;
-						$panitia->SK_panitia = '-';
-						$panitia->tanggal_sk = '0000-00-00';
-						$panitia->status_panitia = 'Aktif';
-						$panitia->jenis_panitia = 'Pejabat';
-						if ($panitia->save(false)) {
-							$pejabat->id_panitia = $panitia->id_panitia;
-							$pejabat->jabatan = 'Pejabat';
-							$pejabat->status_user = 'Aktif';
-							if ($pejabat->save(false)) {
-								$this->redirect(array('panitia'));
-							}
-						}
-					}
-				}
-			}
-			$this->render('tambahpejabat', array(
-				'pejabat'=>$pejabat,
-			));
-		}
-	}
-
 	public function actionHapuspanitia()
 	{
 		if (Yii::app()->user->getState('role') == 'admin') {
@@ -246,27 +267,6 @@ class AdminController extends Controller
 			}
 			$this->render('hapuspanitia', array(
 				'panitia'=>$panitia,
-			));
-		}
-	}
-
-	public function actionHapuspejabat()
-	{
-		if (Yii::app()->user->getState('role') == 'admin') {
-			$pejabat = Panitia::model();
-			if (isset($_POST['Panitia'])) {
-				foreach ($_POST['Panitia']['id_panitia'] as $item) {
-					$cpejabat = $pejabat->findByPk($item);
-					$cpejabat->status_panitia = 'Tidak Aktif';
-					$cpejabat->save(false);
-					$person = Anggota::model()->findByAttributes(array('id_panitia'=>$item));
-					$person->status_user = 'Tidak Aktif';
-					$person->save(false);
-				}
-				$this->redirect(array('panitia'));
-			}
-			$this->render('hapuspejabat', array(
-				'pejabat'=>$pejabat,
 			));
 		}
 	}

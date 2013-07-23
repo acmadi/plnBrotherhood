@@ -40,3 +40,5 @@
 	'summaryText'=>'',
 ));
 ?>
+
+<div><?php echo CHtml::button('Tambah pejabat pengadaan', array('submit'=>array('admin/tambahpejabat'), 'class'=>'sidafbutton'));  ?></div>
