@@ -532,7 +532,7 @@ class AdminController extends Controller
 				ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 				ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 				if (ldap_bind($conn, $ldap['bind_rdn'], $ldap['bind_pwd'])) {
-					$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=' . $_GET['term'] . '*)');
+					$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=*' . $_GET['term'] . '*)');
 					$data = ldap_get_entries($conn, $result);
 					if ($data != null) {
 						foreach ($data as $item) {
@@ -556,7 +556,7 @@ class AdminController extends Controller
 			ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 			ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 			if (ldap_bind($conn, $ldap['bind_rdn'], $ldap['bind_pwd'])) {
-				$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=*' . $username . '*)');
+				$result = ldap_search($conn, $ldap['base_dn'], '(samaccountname=' . $username . ')');
 				$data = ldap_get_entries($conn, $result);
 				if ($data != null) {
 					if ($username == $data[0]['samaccountname'][0]) {
