@@ -31,8 +31,8 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($divisi,'Nama divisi'); ?> 
-			<?php echo $form->textField($divisi,'username',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($divisi,'username'); ?>
+			<?php echo $form->textField($divisi,'nama_singkat',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($divisi,'nama_singkat'); ?>
 		</div>
 
 		<div class="row">
@@ -52,7 +52,7 @@
 
 <h4>Anggota</h4>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'dataProvider'=>$model->searchUser($divisi->username),
+	'dataProvider'=>$model->searchUser($divisi->id_divisi),
 	'columns'=>array(
 		array(
 			'name'=>'No',

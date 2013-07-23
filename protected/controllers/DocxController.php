@@ -1928,6 +1928,71 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Berita Acara Pembukaan Penawaran-".$Peng->nama_pengadaan.".docx", true);
 		}
+		else if ($Dok->nama_dokumen == "Berita Acara Evaluasi Prakualifikasi"){
+			
+			$BAEP=BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($id);	
+			$nomor = $BAEP->nomor;
+			$nama = $Peng->nama_pengadaan;
+			$tanggall = Tanggal::getTanggalLengkap($Dok->tanggal);
+			$tanggal = RupiahMaker::TerbilangMaker(Tanggal::getTanggal($Dok->tanggal));
+			$bulan = Tanggal::getBulanA($Dok->tanggal);
+			$tahun = RupiahMaker::TerbilangMaker(Tanggal::getTahun($Dok->tanggal));
+			$hari = Tanggal::getHari($tanggal);
+			$dokrks=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "RKS"');
+			$rks=Rks::model()->findByPk($dokrks->id_dokumen);	
+			$norks = $rks->nomor;
+			$tanggalrks = Tanggal::getTanggalLengkap($dokrks->tanggal);
+			$metode = $Peng->metode_pengadaan;
+			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
+			$namapanitia=$panitia->nama_panitia;
+			
+			$namapic = $this->getListPanitiaAanwijzing($Peng->id_panitia);
+			$jenispic = Panitia::model()->findByPk($Peng->id_panitia)->jenis_panitia;						
+			$jenispic2 = Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia;
+			
+			$this->doccy->newFile('4b BA Evaluasi Prakualifikasi.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomorba#', $nomor);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $nama);
+			$this->doccy->phpdocx->assign('#namapengadaankapital#', strtoupper($nama));
+			$this->doccy->phpdocx->assign('#hari#', $hari);
+			$this->doccy->phpdocx->assign('#tgllengkap#', $tanggall);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
+			$this->doccy->phpdocx->assign('#bulan#', $bulan);
+			$this->doccy->phpdocx->assign('#tahun#', $tahun);
+			
+			$this->doccy->phpdocx->assign('#jumlahmasuk#', $this->getJmlPenyediaMasukPenawaran1($Peng->id_pengadaan));			
+			
+			$this->doccy->phpdocx->assign('#listpeserta#',$this->getPenyediaXMasukPenawaran1($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertalulus#',$this->getPenyediaXHadirPenawaran1($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertaluluskoma#',$this->getPenyediaXSahPenawaran1($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#listpesertatdklulus#',$this->getPenyediaXTdkSahPenawaran1($Peng->id_pengadaan));
+			$this->doccy->phpdocx->assign('#tdtgnpeserta#',$this->getTTPenyediaX($Peng->id_pengadaan,"pembukaan_penawaran_1"));	
+			
+			if($jenispic == 'Pejabat'){
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', $jenispic);
+			}else{
+				$this->doccy->phpdocx->assign('#pejabatataupanitia#', Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia);
+			}
+			$this->doccy->phpdocx->assign('#pejabatataupanitia2#', strtoupper($jenispic));
+			$this->doccy->phpdocx->assign('#listpic#', $this->getListPanitiaAanwijzing($Peng->id_panitia));
+			$this->doccy->phpdocx->assign('#jumlahperusahaanmengambil#', '');
+			$this->doccy->phpdocx->assign('#listperusahaanmengambil#', '');
+			$this->doccy->phpdocx->assign('#jumlahperusahaanmemasukan#', '');
+			$this->doccy->phpdocx->assign('#listperusahaanmemasukan#', '');
+			$this->doccy->phpdocx->assign('#jumlahperusahaantidakmemasukan#', '');
+			$this->doccy->phpdocx->assign('#listperusahaantidakmemasukan#', '');
+			$this->doccy->phpdocx->assign('#memenuhi#', '');
+			$this->doccy->phpdocx->assign('#listmemenuhi#', '');
+			$this->doccy->phpdocx->assign('#tidakmemenuhi#', '');
+			$this->doccy->phpdocx->assign('#listtidakmemenuhi#', '');
+			$this->doccy->phpdocx->assign('#tdtgnpic#',$this->getTTPanitiaPembukaanSampul1($Peng->id_panitia));
+			
+			$this->renderDocx("Berita Acara Pembukaan Penawaran-".$Peng->nama_pengadaan.".docx", true);
+		}
 		else if ($Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Sampul Satu" || $Dok->nama_dokumen == "Berita Acara Pembukaan Penawaran Tahap Satu"){
 			
 			$BAPP=BeritaAcaraPembukaanPenawaran::model()->findByPk($id);	

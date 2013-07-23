@@ -203,28 +203,6 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionKontrak()
-	{
-		// renders the view file 'protected/views/site/history.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		if (Yii::app()->user->isGuest) {
-			$this->redirect(array('site/login'));
-		}
-		else {
-			if (Yii::app()->user->getState('role') == 'kdivmum' || UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-				$model=new Pengadaan('search');
-				$model->unsetAttributes();  // clear any default values
-				if(isset($_GET['Pengadaan'])){
-					$model->attributes=$_GET['Pengadaan'];                                       
-				}	
-				
-				$this->render('kontrak',array(
-					'model'=>$model,
-				));
-				
-			}
-		}
-	}
 
 	private function in_multiarray($needle, $haystack) {
 		if(in_array($needle, $haystack)) {

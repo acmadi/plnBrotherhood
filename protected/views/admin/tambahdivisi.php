@@ -11,8 +11,8 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($divisi,'Nama divisi'); ?> 
-			<?php echo $form->textField($divisi,'username',array('size'=>56,'maxlength'=>50)); ?>
-			<?php echo $form->error($divisi,'username'); ?>
+			<?php echo $form->textField($divisi,'nama_singkat',array('size'=>56,'maxlength'=>50)); ?>
+			<?php echo $form->error($divisi,'nama_singkat'); ?>
 		</div>
 
 		<div class="row">

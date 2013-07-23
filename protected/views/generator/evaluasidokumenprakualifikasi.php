@@ -103,7 +103,8 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<br/>
 					<h4><b> Daftar Dokumen </b></h4>
 					<ul class="generatedoc">
-						<li><?php echo CHtml::link('Berita Acara Evaluasi Dokumen Prakualifikasi', array('xlsx/download','id'=>$BAEPK->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Lampiran Berita Acara Evaluasi Dokumen Prakualifikasi', array('xlsx/download','id'=>$BAEPK->id_dokumen)); ?></li>
+						<li><?php echo CHtml::link('Berita Acara Evaluasi Dokumen Prakualifikasi', array('docx/download','id'=>$BAEPK->id_dokumen)); ?></li>
 						<li><?php echo CHtml::link('Daftar Hadir Evaluasi Dokumen Prakualifikasi', array('xlsx/download','id'=>$DH->id_dokumen)); ?></li>
 					</ul>
 				</div>
