@@ -4,7 +4,7 @@
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
 	'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-	'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detaildivisi", array("id"=>"$model->username")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+	'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detaildivisi", array("id"=>"$model->id_divisi")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
 		array(
 			'name'=>'No',
@@ -12,7 +12,7 @@
 		),
 		array(
 			'name'=>'Divisi',
-			'value'=>'$data->username',
+			'value'=>'$data->nama_singkat',
 		),
 		array(
 			'name'=>'Kepanjangan',
@@ -25,7 +25,7 @@
 			'deleteConfirmation'=>'Hapus divisi?',
 			'buttons'=>array(
 				'delete'=>array(
-					'url'=>'Yii::app()->createUrl("admin/hapusdivisi", array("id"=>$data->username))',
+					'url'=>'Yii::app()->createUrl("admin/hapusdivisi", array("id"=>$data->id_divisi))',
 				),
 			),
 		),
