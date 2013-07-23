@@ -436,7 +436,7 @@ class SiteController extends Controller
 						if($Pengadaan->save(false)) {
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 								if($NDP->save(false)){
-									Mail::send(Kdivmum::model()->findByAttributes(array('jabatan'=>'KDIVMUM', 'status_user'=>'Aktif'))->email, 'Permintaan Pengadaan', 'Permintaan ' . $Pengadaan->nama_pengadaan);
+									//Mail::send(Kdivmum::model()->findByAttributes(array('jabatan'=>'KDIVMUM', 'status_user'=>'Aktif'))->email, 'Permintaan Pengadaan', 'Permintaan ' . $Pengadaan->nama_pengadaan);
 									$this->redirect(array('tambahpengadaan2','id'=>$Pengadaan->id_pengadaan));
 								}
 							}
