@@ -259,6 +259,7 @@
 					if($Pengadaan->metode_pengadaan=="Pelelangan"){
 						$RKS->tanggal_permintaan_penawaran='00-00-0000';
 					} else {
+						$RKS->tipe_rks=0;
 						$RKS->tanggal_pendaftaran='00-00-0000';
 						$RKS->tanggal_pengambilan_dokumen1='00-00-0000';
 						$RKS->tanggal_pengambilan_dokumen2='00-00-0000';
@@ -5660,7 +5661,7 @@
 						$SPPM->no_ski='-';
 					}
 					
-					$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
+					$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 					$Pengadaan->biaya=$PP->biaya;
 					$Pengadaan->nama_penyedia = $PP->id_penerima;
 					

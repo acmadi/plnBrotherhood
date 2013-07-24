@@ -577,6 +577,20 @@ class AdminController extends Controller
 			$user->deleteByPk($id);
 		}
 	}
+
+	public function actionLibur()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$model = new Libur('search');
+			$model->unsetAttributes();  // clear any default values
+			if(isset($_GET['Libur'])){
+				$model->attributes = $_GET['Libur'];
+			}
+			$this->render('libur', array(
+				'model'=>$model,
+			));
+		}
+	}
 	
 	public function actionAutocomplete()
 	{
