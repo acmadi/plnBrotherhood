@@ -596,7 +596,7 @@
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$HPS->attributes=$_POST['Hps'];
-						if($HPS->nilai_hps>0){
+						if($HPS->nilai_hps>0 && $Pengadaan->status=="3"){
 							if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
 								$Pengadaan->status="4";
 							} else {
@@ -4994,8 +4994,11 @@
 								
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];
 										$PP[$i]->negosiasi_klarifikasi = $_POST['negosiasi_klarifikasi'][$i];
+										if ($Pengadaan->metode_pengadaan!="Pelelangan"){			
+											$PP[$i]->biaya=$_POST['biaya'][$i];
+										}
 										$PP[$i]->save();
 									}
 								}
@@ -5075,8 +5078,11 @@
 								
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];
 										$PP[$i]->negosiasi_klarifikasi = $_POST['negosiasi_klarifikasi'][$i];
+										if ($Pengadaan->metode_pengadaan!="Pelelangan"){			
+											$PP[$i]->biaya=$_POST['biaya'][$i];
+										}
 										$PP[$i]->save();
 									}
 								}

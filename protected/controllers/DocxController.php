@@ -91,9 +91,11 @@ class DocxController extends Controller
 			$nama_pengesah =Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
 			if($Panitia->jenis_panitia=="Panitia"){
 				$kalimat= 'Panitia adalah '.$Panitia->nama_panitia.' Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, sesuai dengan surat tugas DIRSDM No : '.$Panitia->SK_panitia.' tanggal : '.Tanggal::getTanggalLengkap($Panitia->tanggal_sk).' yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
+				$kalimat2= 'Adalah '.$Panitia->nama_panitia.' Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, sesuai dengan surat tugas DIRSDM No : '.$Panitia->SK_panitia.' tanggal : '.Tanggal::getTanggalLengkap($Panitia->tanggal_sk).' yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
 				$listpanitia=$this->getListPanitia($Panitia->id_panitia);
 			} else {
-				$kalimat= 'Pejabat adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang ditunjuk oleh '. Jabatan::model()->findByPk($NDPP->dari)->jabatan.'.';
+				$kalimat= 'Pejabat adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
+				$kalimat= 'Adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
 				$listpanitia=$Panitia->nama_panitia;
 			}
 			$DokNDP = Dokumen::model()->find('id_pengadaan = '. $Peng->id_pengadaan. ' and nama_dokumen = "Nota Dinas Permintaan"');
@@ -111,6 +113,11 @@ class DocxController extends Controller
 					$this->doccy->newFile('RKS PM di bawah 500.docx');
 				}
 			} else if ($metode_pengadaan=="Pelelangan"){
+				if($RKS->tipe_rks==1) {
+					$this->doccy->newFile('RKS Pelelangan Format 1.docx');
+				} else if($RKS->tipe_rks==2){
+					$this->doccy->newFile('RKS Pelelangan Format 1.docx');
+				}
 			}
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
@@ -118,6 +125,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToHeader('#tanggal rks#', $tanggal_rks);
 			$this->doccy->phpdocx->assign('#nomor rks#', $nomor_rks);
 			$this->doccy->phpdocx->assign('#nama pengadaan#', $nama_pengadaan);
+			$this->doccy->phpdocx->assign('#nama pengadaan kapital#', strtoupper($nama_pengadaan));
 			$this->doccy->phpdocx->assign('#tempat surat#', $tempatsurat);
 			$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
 			$this->doccy->phpdocx->assign('#tanggal penjelasan#', $tanggal_penjelasan);
@@ -141,6 +149,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#waktu penetapan#', $waktu_penetapan);
 			$this->doccy->phpdocx->assign('#pengguna#', Divisi::model()->findByPk($Peng->divisi_peminta)->nama_divisi);
 			$this->doccy->phpdocx->assign('#kalimatpanitia/pejabat#', $kalimat);
+			$this->doccy->phpdocx->assign('#kalimat penjelasan panitia#', $kalimat2);
 			$this->doccy->phpdocx->assign('#jenis panitia#', $jenis_panitia);
 			$this->doccy->phpdocx->assign('#jenis panitia kapital#', $jenis_panitia_kapital);
 			$this->doccy->phpdocx->assign('#sumber dana#', $sumber_dana);
