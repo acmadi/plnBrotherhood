@@ -37,3 +37,6 @@
 	'summaryText'=>'',
 ));
 ?>
+
+<?php echo CHtml::button('Tambah hari libur', array('submit'=>array('admin/tambahlibur'), 'class'=>'sidafbutton'));  ?>
+<?php echo CHtml::button('Unggah daftar hari libur', array('submit'=>array('admin/uploadlibur'), 'class'=>'sidafbutton'));  ?>

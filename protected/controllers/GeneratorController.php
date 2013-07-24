@@ -584,7 +584,7 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}			
-			else if (Pengadaan::model()->findByPk($id)->status > '2' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+			else if (Pengadaan::model()->findByPk($id)->status > '2' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {
 				$Pengadaan=Pengadaan::model()->findByPk($id);
 				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
 				$RKS= Rks::model()->findByPk($Dok->id_dokumen);
@@ -593,12 +593,12 @@
 				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				
 				$HPS= Hps::model()->findByPk($Dokumen0->id_dokumen);
-				
+								
 				if(isset($_POST['Hps']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$HPS->attributes=$_POST['Hps'];
-					if($HPS->nilai_hps>0){
+					if($HPS->nilai_hps>0 && $Pengadaan->status=="3"){
 						if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
 							$Pengadaan->status="4";
 						} else {
@@ -609,7 +609,8 @@
 							}
 						}
 					}
-					$valid=$HPS->validate();;
+				}
+					$valid=$HPS->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){						
 						if($Pengadaan->save(false))
@@ -622,8 +623,7 @@
 							}
 						}
 					}
-				}
-
+				
 				$this->render('hps',array(
 					'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS
 				));
@@ -4993,8 +4993,11 @@
 								
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];
 										$PP[$i]->negosiasi_klarifikasi = $_POST['negosiasi_klarifikasi'][$i];
+										if ($Pengadaan->metode_pengadaan!="Pelelangan"){			
+											$PP[$i]->biaya=$_POST['biaya'][$i];
+										}
 										$PP[$i]->save();
 									}
 								}
@@ -5074,8 +5077,11 @@
 								
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];
 										$PP[$i]->negosiasi_klarifikasi = $_POST['negosiasi_klarifikasi'][$i];
+										if ($Pengadaan->metode_pengadaan!="Pelelangan"){			
+											$PP[$i]->biaya=$_POST['biaya'][$i];
+										}
 										$PP[$i]->save();
 									}
 								}

@@ -20,6 +20,7 @@ class UserIdentity extends CUserIdentity
 		$role = 'none';
 		$isAdmin = false;
 		$asAdmin = false;
+		$isFullKontrak = false;
 
 		// kode lokal
 		
@@ -144,10 +145,14 @@ class UserIdentity extends CUserIdentity
 		// 		}
 		// 	}
 		// }
-
+		if(UserKontrak::model()->exists('username = "' . $this->username . '" and wewenang=1')){
+			$isFullKontrak = true;
+		} 
+		
 		Yii::app()->user->setState('role', $role);
 		Yii::app()->user->setState('isAdmin', $isAdmin);
 		Yii::app()->user->setState('asAdmin', $asAdmin);
+		Yii::app()->user->setState('isFullKontrak', $isFullKontrak);
 
 		return !$this->errorCode;
 	}

@@ -276,7 +276,7 @@ class Pengadaan extends CActiveRecord
 //                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
 		// $criteria->compare('sisahari',$this->sisaHari(),true);
-		$criteria->addcondition("status='28'");		
+		$criteria->addcondition("status='37'");		
  
 		// $criteria->order = 'ABS(status)';
 		
