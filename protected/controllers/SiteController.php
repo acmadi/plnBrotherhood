@@ -714,4 +714,15 @@ class SiteController extends Controller
 			));
 		}
 	}
+	
+	public function actionTerlarang(){
+		if (Yii::app()->user->isGuest) {
+			$this->redirect(array('site/login'));
+		}
+		else {				
+			$this->render('terlarang');		
+		}
+	}
+		
+		
 }

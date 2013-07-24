@@ -73,14 +73,13 @@ $this->pageTitle=Yii::app()->name . ' | Kontrak';
 	}//end kadiv
 	
 	else if(UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')){
-		
 		$this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'pengadaan-grid',
 			'dataProvider'=>$model->searchKontrak(),
 			'filter'=>$model,
-			"ajaxUpdate"=>false,	            
+			"ajaxUpdate"=>false,
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("kontrak/suratkontrak", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 			'columns'=>array(
 	//			array(
 	//				'name'=>'No',
