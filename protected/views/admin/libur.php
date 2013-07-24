@@ -20,10 +20,10 @@
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
 			'deleteButtonLabel'=>'Hapus',
-			'deleteConfirmation'=>'Hapus administrator?',
+			'deleteConfirmation'=>'Hapus hari libur?',
 			'buttons'=>array(
 				'delete'=>array(
-					'url'=>'Yii::app()->createUrl("admin/hapustanggal", array("id"=>$data->tanggal))',
+					'url'=>'Yii::app()->createUrl("admin/hapuslibur", array("id"=>$data->tanggal))',
 				),
 			),
 		),
