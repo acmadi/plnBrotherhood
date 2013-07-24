@@ -9,14 +9,14 @@
  * @property string $Nomor
  * @property string $tanggal_mulai
  * @property string $tanggal_selesai
- * @property integer $jangaka_waktu
+ * @property integer $jangka_waktu
  * @property string $nilai_kontrak
  * @property string $lokasi_file
  * @property string $no_rek
  *
  * The followings are the available model relations:
- * @property UserKontrak $username0
  * @property Dokumen $idDokumen
+ * @property UserKontrak $username0
  */
 class DokumenKontrak extends CActiveRecord
 {
@@ -46,14 +46,14 @@ class DokumenKontrak extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_dokumen, username, Nomor, tanggal_mulai, tanggal_selesai, jangaka_waktu, nilai_kontrak, lokasi_file, no_rek', 'required'),
-			array('jangaka_waktu', 'numerical', 'integerOnly'=>true),
+			array('id_dokumen, username, Nomor, tanggal_mulai, tanggal_selesai, jangka_waktu, nilai_kontrak, lokasi_file, no_rek', 'required'),
+			array('jangka_waktu', 'numerical', 'integerOnly'=>true),
 			array('id_dokumen', 'length', 'max'=>32),
 			array('username, Nomor, lokasi_file, no_rek', 'length', 'max'=>256),
 			array('nilai_kontrak', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_dokumen, username, Nomor, tanggal_mulai, tanggal_selesai, jangaka_waktu, nilai_kontrak, lokasi_file, no_rek', 'safe', 'on'=>'search'),
+			array('id_dokumen, username, Nomor, tanggal_mulai, tanggal_selesai, jangka_waktu, nilai_kontrak, lokasi_file, no_rek', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,8 +65,8 @@ class DokumenKontrak extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'username0' => array(self::BELONGS_TO, 'UserKontrak', 'username'),
 			'idDokumen' => array(self::BELONGS_TO, 'Dokumen', 'id_dokumen'),
+			'username0' => array(self::BELONGS_TO, 'UserKontrak', 'username'),
 		);
 	}
 
@@ -81,7 +81,7 @@ class DokumenKontrak extends CActiveRecord
 			'Nomor' => 'Nomor',
 			'tanggal_mulai' => 'Tanggal Mulai',
 			'tanggal_selesai' => 'Tanggal Selesai',
-			'jangaka_waktu' => 'Jangaka Waktu',
+			'jangka_waktu' => 'Jangka Waktu',
 			'nilai_kontrak' => 'Nilai Kontrak',
 			'lokasi_file' => 'Lokasi File',
 			'no_rek' => 'No Rek',
@@ -104,7 +104,7 @@ class DokumenKontrak extends CActiveRecord
 		$criteria->compare('Nomor',$this->Nomor,true);
 		$criteria->compare('tanggal_mulai',$this->tanggal_mulai,true);
 		$criteria->compare('tanggal_selesai',$this->tanggal_selesai,true);
-		$criteria->compare('jangaka_waktu',$this->jangaka_waktu);
+		$criteria->compare('jangka_waktu',$this->jangka_waktu);
 		$criteria->compare('nilai_kontrak',$this->nilai_kontrak,true);
 		$criteria->compare('lokasi_file',$this->lokasi_file,true);
 		$criteria->compare('no_rek',$this->no_rek,true);
