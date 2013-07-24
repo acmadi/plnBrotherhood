@@ -127,7 +127,7 @@ class DocxController extends Controller
 				if($RKS->tipe_rks==1) {
 					$this->doccy->newFile('RKS Pelelangan Format 1.docx');
 				} else if($RKS->tipe_rks==2){
-					$this->doccy->newFile('RKS Pelelangan Format 1.docx');
+					$this->doccy->newFile('RKS Pelelangan Format 2.docx');
 				}
 			}
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
@@ -140,6 +140,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tempat surat#', $tempatsurat);
 			$this->doccy->phpdocx->assign('#tanggal rks#', $tanggal_rks);
 			$this->doccy->phpdocx->assign('#tanggal permintaan#', $tanggal_permintaan);
+			$this->doccy->phpdocx->assign('#tanggal pendaftaran#', $tanggal_pendaftaran);
 			$this->doccy->phpdocx->assign('#tanggal pengambilan1#', $tanggal_pengambilan_dokumen1);
 			$this->doccy->phpdocx->assign('#hari tanggal pengambilan1#', $hari_tanggal_pengambilan_dokumen1);
 			$this->doccy->phpdocx->assign('#tanggal pengambilan2#', $tanggal_pengambilan_dokumen2);

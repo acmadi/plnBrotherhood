@@ -609,7 +609,6 @@
 							}
 						}
 					}
-				}
 					$valid=$HPS->validate();
 					$valid=$valid&&$Dokumen0->validate();
 					if($valid){						
@@ -623,6 +622,7 @@
 							}
 						}
 					}
+				}
 				
 				$this->render('hps',array(
 					'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS
