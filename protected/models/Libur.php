@@ -1,17 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "admin".
+ * This is the model class for table "libur".
  *
- * The followings are the available columns in table 'admin':
- * @property string $username
+ * The followings are the available columns in table 'libur':
+ * @property string $tanggal
+ * @property string $keterangan
  */
-class Admin extends CActiveRecord
+class Libur extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Admin the static model class
+	 * @return Libur the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -23,7 +24,7 @@ class Admin extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'admin';
+		return 'libur';
 	}
 
 	/**
@@ -34,11 +35,11 @@ class Admin extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'required'),
-			array('username', 'length', 'max'=>20),
+			array('tanggal, keterangan', 'required'),
+			array('keterangan', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('username', 'safe', 'on'=>'search'),
+			array('tanggal, keterangan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +60,8 @@ class Admin extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username' => 'Username',
+			'tanggal' => 'Tanggal',
+			'keterangan' => 'Keterangan',
 		);
 	}
 
@@ -74,22 +76,8 @@ class Admin extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('username',$this->username,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	public function searchAdmin($cname)
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('username',$this->username,true);
-		$criteria->addcondition('username != "' . $cname . '"');
+		$criteria->compare('tanggal',$this->tanggal,true);
+		$criteria->compare('keterangan',$this->keterangan,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

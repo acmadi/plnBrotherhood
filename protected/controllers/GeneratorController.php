@@ -5660,6 +5660,10 @@
 						$SPPM->no_ski='-';
 					}
 					
+					$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
+					$Pengadaan->biaya=$PP->biaya;
+					$Pengadaan->nama_penyedia = $PP->id_penerima;
+					
 					//Uncomment the following line if AJAX validation is needed
 					//$this->performAjaxValidation($model);
 
