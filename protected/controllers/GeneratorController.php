@@ -2282,7 +2282,11 @@
 			}			
 			else if (Pengadaan::model()->findByPk($id)->status > '19' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
 				$Pengadaan=Pengadaan::model()->findByPk($id);				
-				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);				
+				if($Pengadaan->jenis_kualifikasi=='Pasca Kualifikasi'){
+					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pc = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}else{
+					$PP = PenerimaPengadaan::model()->findAll('penetapan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}				
 				if(isset($_POST['perusahaan'])){
 												
 					for($i=0;$i<count($PP);$i++){
