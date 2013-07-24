@@ -135,48 +135,50 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status='1';
-					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-					$Dokumen0->nama_dokumen='Pakta Integritas Awal Panitia';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
-					
-					$PAP1= new PaktaIntegritasPanitia1;
-					$PAP1->id_dokumen=$Dokumen0->id_dokumen;
-					
-					if(isset($_POST['Pengadaan']))
-					{
-						$Pengadaan->attributes=$_POST['Pengadaan'];
-						$valid=$Pengadaan->validate();
-						if($valid){		
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($PAP1->save(false)){
-										$this->redirect(array('editpenentuanmetode','id'=>$id));
-									}
+			else if (Pengadaan::model()->findByPk($id)->status == '0' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status='1';
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='Pakta Integritas Awal Panitia';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$PAP1= new PaktaIntegritasPanitia1;
+				$PAP1->id_dokumen=$Dokumen0->id_dokumen;
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					$Pengadaan->attributes=$_POST['Pengadaan'];
+					$valid=$Pengadaan->validate();
+					if($valid){		
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($PAP1->save(false)){
+									$this->redirect(array('editpenentuanmetode','id'=>$id));
 								}
 							}
 						}
 					}
-
-					$this->render('penentuanmetode',array(
-						'Pengadaan'=>$Pengadaan,'PAP1'=>$PAP1,
-					));
 				}
+
+				$this->render('penentuanmetode',array(
+					'Pengadaan'=>$Pengadaan,'PAP1'=>$PAP1,
+				));
 			}
+			else {
+				$this->redirect(array('site/terlarang'));
+			}
+			
 		}
 		
 		public function actionEditPenentuanMetode(){
@@ -184,29 +186,31 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					
-					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Awal Panitia"');
-					$PAP1=PaktaIntegritasPanitia1::model()->findByPk($Dokumen0->id_dokumen);
-					
-					if(isset($_POST['Pengadaan']))
-					{
-						$Pengadaan->attributes=$_POST['Pengadaan'];
-						$valid=$Pengadaan->validate();
-						if($valid){		
-							if($Pengadaan->save(false))
-							{	
-								$this->redirect(array('editpenentuanmetode','id'=>$id));
-							}
+
+			else if (Pengadaan::model()->findByPk($id)->status > '0' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Awal Panitia"');
+				$PAP1=PaktaIntegritasPanitia1::model()->findByPk($Dokumen0->id_dokumen);
+				
+				if(isset($_POST['Pengadaan']))
+				{
+					$Pengadaan->attributes=$_POST['Pengadaan'];
+					$valid=$Pengadaan->validate();
+					if($valid){		
+						if($Pengadaan->save(false))
+						{	
+							$this->redirect(array('editpenentuanmetode','id'=>$id));
 						}
 					}
-
-					$this->render('penentuanmetode',array(
-						'Pengadaan'=>$Pengadaan,'PAP1'=>$PAP1,
-					));
 				}
+
+				$this->render('penentuanmetode',array(
+					'Pengadaan'=>$Pengadaan,'PAP1'=>$PAP1,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 	
@@ -216,188 +220,189 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
+			else if (Pengadaan::model()->findByPk($id)->status == '1' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status ='2';
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='RKS';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$RKS= new Rks;
+				$RKS->id_dokumen=$Dokumen0->id_dokumen;
+				
+				if ($Pengadaan->metode_penawaran=="Satu Sampul"){
+					$RKS->tanggal_awal_pemasukan_penawaran2='00-00-0000';
+					$RKS->tanggal_akhir_pemasukan_penawaran2='00-00-0000';
+					$RKS->waktu_pemasukan_penawaran2='00:00';
+					$RKS->tempat_pemasukan_penawaran2='-';
+					$RKS->tanggal_pembukaan_penawaran2='00-00-0000';
+					$RKS->waktu_pembukaan_penawaran2='00:00';
+					$RKS->tempat_pembukaan_penawaran2='-';
+					$RKS->tanggal_evaluasi_penawaran2='00-00-0000';
+					$RKS->waktu_evaluasi_penawaran2='00:00';
+					$RKS->tempat_evaluasi_penawaran2='-';
+				} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
+					$RKS->tanggal_awal_pemasukan_penawaran2='00-00-0000';
+					$RKS->tanggal_akhir_pemasukan_penawaran2='00-00-0000';
+					$RKS->waktu_pemasukan_penawaran2='00:00';
+					$RKS->tempat_pemasukan_penawaran2='-';
+				}
+				
+				if($Pengadaan->metode_pengadaan=="Pelelangan"){
+					$RKS->tanggal_permintaan_penawaran='00-00-0000';
+				} else {
+					$RKS->tipe_rks=0;
+					$RKS->tanggal_pendaftaran='00-00-0000';
+					$RKS->tanggal_pengambilan_dokumen1='00-00-0000';
+					$RKS->tanggal_pengambilan_dokumen2='00-00-0000';
+					$RKS->waktu_pengambilan_dokumen1='00:00';
+					$RKS->waktu_pengambilan_dokumen2='00:00';
+					$RKS->tempat_pengambilan_dokumen='-';
+				}
+				
+				$DaftarIsi= new RincianRks;
+				$DaftarIsi->id_dokumen=$RKS->id_dokumen;
+				$DaftarIsi->nama_rincian="Daftar Isi";
+				$Isi= new RincianRks;
+				$Isi->id_dokumen=$RKS->id_dokumen;
+				$Isi->nama_rincian="Isi";
+				$Lamp1= new RincianRks;
+				$Lamp1->id_dokumen=$RKS->id_dokumen;
+				$Lamp1->nama_rincian="Lampiran 1";
+				$Lamp2= new RincianRks;
+				$Lamp2->id_dokumen=$RKS->id_dokumen;
+				$Lamp2->nama_rincian="Lampiran 2";
+				$Lamp3= new RincianRks;
+				$Lamp3->id_dokumen=$RKS->id_dokumen;
+				$Lamp3->nama_rincian="Lampiran 3";
+				$Lamp4= new RincianRks;
+				$Lamp4->id_dokumen=$RKS->id_dokumen;
+				$Lamp4->nama_rincian="Lampiran 4";
+				$Lamp5= new RincianRks;
+				$Lamp5->id_dokumen=$RKS->id_dokumen;
+				$Lamp5->nama_rincian="Lampiran 5";
+				$Lamp6= new RincianRks;
+				$Lamp6->id_dokumen=$RKS->id_dokumen;
+				$Lamp6->nama_rincian="Lampiran 6";
+				$Lamp7= new RincianRks;
+				$Lamp7->id_dokumen=$RKS->id_dokumen;
+				$Lamp7->nama_rincian="Lampiran 7";;
+				$Lamp8= new RincianRks;
+				$Lamp8->id_dokumen=$RKS->id_dokumen;
+				$Lamp8->nama_rincian="Lampiran 8";
+				
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
+					$DokumenX1= new Dokumen;
+					$DokumenX1->id_dokumen=$somevariable+3;
+					$DokumenX1->nama_dokumen='Pakta Integritas Penyedia';
+					$DokumenX1->status_upload='Belum Selesai';
+					$DokumenX1->tanggal='-';
+					$DokumenX1->tempat='-';
+					$DokumenX1->id_pengadaan=$id;
 					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status ='2';
+					$DokumenX2= new Dokumen;
+					$DokumenX2->id_dokumen=$somevariable+4;
+					$DokumenX2->nama_dokumen='Surat Pernyataan Minat';
+					$DokumenX2->tanggal='-';
+					$DokumenX2->tempat='-';
+					$DokumenX2->status_upload='Belum Selesai';
+					$DokumenX2->id_pengadaan=$id;
 					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-					$Dokumen0->nama_dokumen='RKS';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
+					$DokumenX3= new Dokumen;
+					$DokumenX3->id_dokumen=$somevariable+5;
+					$DokumenX3->nama_dokumen='Form Isian Kualifikasi';
+					$DokumenX3->tanggal='-';
+					$DokumenX3->tempat='-';
+					$DokumenX3->status_upload='Belum Selesai';
+					$DokumenX3->id_pengadaan=$id;
 					
-					$RKS= new Rks;
-					$RKS->id_dokumen=$Dokumen0->id_dokumen;
+					$X1= new PaktaIntegritasPenyedia;
+					$X1->id_dokumen=$DokumenX1->id_dokumen;
 					
-					if ($Pengadaan->metode_penawaran=="Satu Sampul"){
-						$RKS->tanggal_awal_pemasukan_penawaran2='00-00-0000';
-						$RKS->tanggal_akhir_pemasukan_penawaran2='00-00-0000';
-						$RKS->waktu_pemasukan_penawaran2='00:00';
-						$RKS->tempat_pemasukan_penawaran2='-';
-						$RKS->tanggal_pembukaan_penawaran2='00-00-0000';
-						$RKS->waktu_pembukaan_penawaran2='00:00';
-						$RKS->tempat_pembukaan_penawaran2='-';
-						$RKS->tanggal_evaluasi_penawaran2='00-00-0000';
-						$RKS->waktu_evaluasi_penawaran2='00:00';
-						$RKS->tempat_evaluasi_penawaran2='-';
-					} else if ($Pengadaan->metode_penawaran=="Dua Sampul"){
-						$RKS->tanggal_awal_pemasukan_penawaran2='00-00-0000';
-						$RKS->tanggal_akhir_pemasukan_penawaran2='00-00-0000';
-						$RKS->waktu_pemasukan_penawaran2='00:00';
-						$RKS->tempat_pemasukan_penawaran2='-';
-					}
+					$X2= new SuratPernyataanMinat;
+					$X2->id_dokumen=$DokumenX2->id_dokumen;
 					
-					if($Pengadaan->metode_pengadaan=="Pelelangan"){
-						$RKS->tanggal_permintaan_penawaran='00-00-0000';
-					} else {
-						$RKS->tipe_rks=0;
-						$RKS->tanggal_pendaftaran='00-00-0000';
-						$RKS->tanggal_pengambilan_dokumen1='00-00-0000';
-						$RKS->tanggal_pengambilan_dokumen2='00-00-0000';
-						$RKS->waktu_pengambilan_dokumen1='00:00';
-						$RKS->waktu_pengambilan_dokumen2='00:00';
-						$RKS->tempat_pengambilan_dokumen='-';
-					}
-					
-					$DaftarIsi= new RincianRks;
-					$DaftarIsi->id_dokumen=$RKS->id_dokumen;
-					$DaftarIsi->nama_rincian="Daftar Isi";
-					$Isi= new RincianRks;
-					$Isi->id_dokumen=$RKS->id_dokumen;
-					$Isi->nama_rincian="Isi";
-					$Lamp1= new RincianRks;
-					$Lamp1->id_dokumen=$RKS->id_dokumen;
-					$Lamp1->nama_rincian="Lampiran 1";
-					$Lamp2= new RincianRks;
-					$Lamp2->id_dokumen=$RKS->id_dokumen;
-					$Lamp2->nama_rincian="Lampiran 2";
-					$Lamp3= new RincianRks;
-					$Lamp3->id_dokumen=$RKS->id_dokumen;
-					$Lamp3->nama_rincian="Lampiran 3";
-					$Lamp4= new RincianRks;
-					$Lamp4->id_dokumen=$RKS->id_dokumen;
-					$Lamp4->nama_rincian="Lampiran 4";
-					$Lamp5= new RincianRks;
-					$Lamp5->id_dokumen=$RKS->id_dokumen;
-					$Lamp5->nama_rincian="Lampiran 5";
-					$Lamp6= new RincianRks;
-					$Lamp6->id_dokumen=$RKS->id_dokumen;
-					$Lamp6->nama_rincian="Lampiran 6";
-					$Lamp7= new RincianRks;
-					$Lamp7->id_dokumen=$RKS->id_dokumen;
-					$Lamp7->nama_rincian="Lampiran 7";;
-					$Lamp8= new RincianRks;
-					$Lamp8->id_dokumen=$RKS->id_dokumen;
-					$Lamp8->nama_rincian="Lampiran 8";
-					
-					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
-						$DokumenX1= new Dokumen;
-						$DokumenX1->id_dokumen=$somevariable+3;
-						$DokumenX1->nama_dokumen='Pakta Integritas Penyedia';
-						$DokumenX1->status_upload='Belum Selesai';
-						$DokumenX1->tanggal='-';
-						$DokumenX1->tempat='-';
-						$DokumenX1->id_pengadaan=$id;
-						
-						$DokumenX2= new Dokumen;
-						$DokumenX2->id_dokumen=$somevariable+4;
-						$DokumenX2->nama_dokumen='Surat Pernyataan Minat';
-						$DokumenX2->tanggal='-';
-						$DokumenX2->tempat='-';
-						$DokumenX2->status_upload='Belum Selesai';
-						$DokumenX2->id_pengadaan=$id;
-						
-						$DokumenX3= new Dokumen;
-						$DokumenX3->id_dokumen=$somevariable+5;
-						$DokumenX3->nama_dokumen='Form Isian Kualifikasi';
-						$DokumenX3->tanggal='-';
-						$DokumenX3->tempat='-';
-						$DokumenX3->status_upload='Belum Selesai';
-						$DokumenX3->id_pengadaan=$id;
-						
-						$X1= new PaktaIntegritasPenyedia;
-						$X1->id_dokumen=$DokumenX1->id_dokumen;
-						
-						$X2= new SuratPernyataanMinat;
-						$X2->id_dokumen=$DokumenX2->id_dokumen;
-						
-						$X3= new FormIsianKualifikasi;
-						$X3->id_dokumen=$DokumenX3->id_dokumen;
-					}
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
+					$X3= new FormIsianKualifikasi;
+					$X3->id_dokumen=$DokumenX3->id_dokumen;
+				}
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
 
-					if(isset($_POST['Rks']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$RKS->attributes=$_POST['Rks'];
-						$RKS->tanggal_pendaftaran=date('Y-m-d', strtotime($RKS->tanggal_pendaftaran));
-						$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
-						$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
-						$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
-						$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
-						$RKS->tanggal_awal_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran1));
-						$RKS->tanggal_akhir_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran1));
-						$RKS->tanggal_pembukaan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran1));
-						$RKS->tanggal_evaluasi_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran1));
-						$RKS->tanggal_awal_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran2));
-						$RKS->tanggal_akhir_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran2));
-						$RKS->tanggal_pembukaan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran2));
-						$RKS->tanggal_evaluasi_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran2));
-						$RKS->tanggal_negosiasi=date('Y-m-d', strtotime($RKS->tanggal_negosiasi));
-						$RKS->tanggal_usulan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_usulan_pemenang));
-						$RKS->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penetapan_pemenang));
-						$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
-						$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
-						$valid=$RKS->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){
-							$Cover = new RincianRks;
-							$Cover->id_dokumen=$RKS->id_dokumen;
-							$Cover->nama_rincian="Cover";
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($RKS->save(false)){
-										if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
-											$DokumenX1->save(false);
-											$DokumenX2->save(false);
-											$DokumenX3->save(false);
-											$X1->save(false);
-											$X2->save(false);
-											$X3->save(false);
-										}
-										$Cover->save(false);
-										$DaftarIsi->save(false);
-										$Isi->save(false);										
-										$Lamp1->save(false);
-										$Lamp2->save(false);
-										$Lamp3->save(false);
-										$Lamp4->save(false);
-										$Lamp5->save(false);
-										$Lamp6->save(false);
-										$Lamp7->save(false);
-										$Lamp8->save(false);
-										$this->redirect(array('editrks','id'=>$id));
+				if(isset($_POST['Rks']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$RKS->attributes=$_POST['Rks'];
+					$RKS->tanggal_pendaftaran=date('Y-m-d', strtotime($RKS->tanggal_pendaftaran));
+					$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
+					$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
+					$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
+					$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
+					$RKS->tanggal_awal_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran1));
+					$RKS->tanggal_akhir_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran1));
+					$RKS->tanggal_pembukaan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran1));
+					$RKS->tanggal_evaluasi_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran1));
+					$RKS->tanggal_awal_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran2));
+					$RKS->tanggal_akhir_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran2));
+					$RKS->tanggal_pembukaan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran2));
+					$RKS->tanggal_evaluasi_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran2));
+					$RKS->tanggal_negosiasi=date('Y-m-d', strtotime($RKS->tanggal_negosiasi));
+					$RKS->tanggal_usulan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_usulan_pemenang));
+					$RKS->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penetapan_pemenang));
+					$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
+					$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
+					$valid=$RKS->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						$Cover = new RincianRks;
+						$Cover->id_dokumen=$RKS->id_dokumen;
+						$Cover->nama_rincian="Cover";
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($RKS->save(false)){
+									if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
+										$DokumenX1->save(false);
+										$DokumenX2->save(false);
+										$DokumenX3->save(false);
+										$X1->save(false);
+										$X2->save(false);
+										$X3->save(false);
 									}
+									$Cover->save(false);
+									$DaftarIsi->save(false);
+									$Isi->save(false);										
+									$Lamp1->save(false);
+									$Lamp2->save(false);
+									$Lamp3->save(false);
+									$Lamp4->save(false);
+									$Lamp5->save(false);
+									$Lamp6->save(false);
+									$Lamp7->save(false);
+									$Lamp8->save(false);
+									$this->redirect(array('editrks','id'=>$id));
 								}
 							}
 						}
 					}
-					$this->render('rks',array(
-						'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,
-					));
 				}
+				$this->render('rks',array(
+					'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,
+				));
 			}
+			else {
+				$this->redirect(array('site/terlarang'));
+			}
+			
 		}
 		
 		public function actionEditRks()
@@ -406,109 +411,110 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
+			else if (Pengadaan::model()->findByPk($id)->status > '1' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+				
+				$RKS= Rks::model()->findByPk($Dokumen0->id_dokumen);
+				$RKS->waktu_pengambilan_dokumen1=Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen1);
+				$RKS->waktu_pengambilan_dokumen2=Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen2);
+				$RKS->waktu_penjelasan=Tanggal::getJamMenit($RKS->waktu_penjelasan);
+				$RKS->waktu_pemasukan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran1);
+				$RKS->waktu_pembukaan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
+				$RKS->waktu_evaluasi_penawaran1=Tanggal::getJamMenit($RKS->waktu_evaluasi_penawaran1);
+				$RKS->waktu_pemasukan_penawaran2=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran2);
+				$RKS->waktu_pembukaan_penawaran2=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran2);
+				$RKS->waktu_evaluasi_penawaran2=Tanggal::getJamMenit($RKS->waktu_evaluasi_penawaran2);
+				$RKS->waktu_negosiasi=Tanggal::getJamMenit($RKS->waktu_negosiasi);
+				$RKS->waktu_usulan_pemenang=Tanggal::getJamMenit($RKS->waktu_usulan_pemenang);
+				$RKS->waktu_penetapan_pemenang=Tanggal::getJamMenit($RKS->waktu_penetapan_pemenang);
+				$RKS->waktu_pemberitahuan_pemenang=Tanggal::getJamMenit($RKS->waktu_pemberitahuan_pemenang);
+				$RKS->waktu_penunjukan_pemenang=Tanggal::getJamMenit($RKS->waktu_penunjukan_pemenang);
+				$RKS->tanggal_pendaftaran=Tanggal::getTanggalStrip($RKS->tanggal_pendaftaran);
+				$RKS->tanggal_pengambilan_dokumen1=Tanggal::getTanggalStrip($RKS->tanggal_pengambilan_dokumen1);
+				$RKS->tanggal_pengambilan_dokumen2=Tanggal::getTanggalStrip($RKS->tanggal_pengambilan_dokumen2);
+				$RKS->tanggal_permintaan_penawaran=Tanggal::getTanggalStrip($RKS->tanggal_permintaan_penawaran);
+				$RKS->tanggal_awal_pemasukan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_awal_pemasukan_penawaran1);
+				$RKS->tanggal_akhir_pemasukan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_akhir_pemasukan_penawaran1);
+				$RKS->tanggal_pembukaan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_pembukaan_penawaran1);
+				$RKS->tanggal_evaluasi_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_evaluasi_penawaran1);
+				$RKS->tanggal_awal_pemasukan_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_awal_pemasukan_penawaran2);
+				$RKS->tanggal_akhir_pemasukan_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_akhir_pemasukan_penawaran2);
+				$RKS->tanggal_pembukaan_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_pembukaan_penawaran2);
+				$RKS->tanggal_evaluasi_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_evaluasi_penawaran2);
+				$RKS->tanggal_penjelasan=Tanggal::getTanggalStrip($RKS->tanggal_penjelasan);
+				$RKS->tanggal_negosiasi=Tanggal::getTanggalStrip($RKS->tanggal_negosiasi);
+				$RKS->tanggal_usulan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_usulan_pemenang);
+				$RKS->tanggal_penetapan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penetapan_pemenang);
+				$RKS->tanggal_pemberitahuan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_pemberitahuan_pemenang);
+				$RKS->tanggal_penunjukan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penunjukan_pemenang);
+				
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
 					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
+					$DokumenX1= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Pakta Integritas Penyedia"');
+					$DokumenX2= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Surat Pernyataan Minat"');
+					$DokumenX3= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Form Isian Kualifikasi"');
 					
-					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
-					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-					
-					$RKS= Rks::model()->findByPk($Dokumen0->id_dokumen);
-					$RKS->waktu_pengambilan_dokumen1=Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen1);
-					$RKS->waktu_pengambilan_dokumen2=Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen2);
-					$RKS->waktu_penjelasan=Tanggal::getJamMenit($RKS->waktu_penjelasan);
-					$RKS->waktu_pemasukan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran1);
-					$RKS->waktu_pembukaan_penawaran1=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran1);
-					$RKS->waktu_evaluasi_penawaran1=Tanggal::getJamMenit($RKS->waktu_evaluasi_penawaran1);
-					$RKS->waktu_pemasukan_penawaran2=Tanggal::getJamMenit($RKS->waktu_pemasukan_penawaran2);
-					$RKS->waktu_pembukaan_penawaran2=Tanggal::getJamMenit($RKS->waktu_pembukaan_penawaran2);
-					$RKS->waktu_evaluasi_penawaran2=Tanggal::getJamMenit($RKS->waktu_evaluasi_penawaran2);
-					$RKS->waktu_negosiasi=Tanggal::getJamMenit($RKS->waktu_negosiasi);
-					$RKS->waktu_usulan_pemenang=Tanggal::getJamMenit($RKS->waktu_usulan_pemenang);
-					$RKS->waktu_penetapan_pemenang=Tanggal::getJamMenit($RKS->waktu_penetapan_pemenang);
-					$RKS->waktu_pemberitahuan_pemenang=Tanggal::getJamMenit($RKS->waktu_pemberitahuan_pemenang);
-					$RKS->waktu_penunjukan_pemenang=Tanggal::getJamMenit($RKS->waktu_penunjukan_pemenang);
-					$RKS->tanggal_pendaftaran=Tanggal::getTanggalStrip($RKS->tanggal_pendaftaran);
-					$RKS->tanggal_pengambilan_dokumen1=Tanggal::getTanggalStrip($RKS->tanggal_pengambilan_dokumen1);
-					$RKS->tanggal_pengambilan_dokumen2=Tanggal::getTanggalStrip($RKS->tanggal_pengambilan_dokumen2);
-					$RKS->tanggal_permintaan_penawaran=Tanggal::getTanggalStrip($RKS->tanggal_permintaan_penawaran);
-					$RKS->tanggal_awal_pemasukan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_awal_pemasukan_penawaran1);
-					$RKS->tanggal_akhir_pemasukan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_akhir_pemasukan_penawaran1);
-					$RKS->tanggal_pembukaan_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_pembukaan_penawaran1);
-					$RKS->tanggal_evaluasi_penawaran1=Tanggal::getTanggalStrip($RKS->tanggal_evaluasi_penawaran1);
-					$RKS->tanggal_awal_pemasukan_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_awal_pemasukan_penawaran2);
-					$RKS->tanggal_akhir_pemasukan_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_akhir_pemasukan_penawaran2);
-					$RKS->tanggal_pembukaan_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_pembukaan_penawaran2);
-					$RKS->tanggal_evaluasi_penawaran2=Tanggal::getTanggalStrip($RKS->tanggal_evaluasi_penawaran2);
-					$RKS->tanggal_penjelasan=Tanggal::getTanggalStrip($RKS->tanggal_penjelasan);
-					$RKS->tanggal_negosiasi=Tanggal::getTanggalStrip($RKS->tanggal_negosiasi);
-					$RKS->tanggal_usulan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_usulan_pemenang);
-					$RKS->tanggal_penetapan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penetapan_pemenang);
-					$RKS->tanggal_pemberitahuan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_pemberitahuan_pemenang);
-					$RKS->tanggal_penunjukan_pemenang=Tanggal::getTanggalStrip($RKS->tanggal_penunjukan_pemenang);
-					
-					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi") {
-						
-						$DokumenX1= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Pakta Integritas Penyedia"');
-						$DokumenX2= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Surat Pernyataan Minat"');
-						$DokumenX3= Dokumen::model()->find('id_pengadaan = '.$id.' and nama_dokumen = "Form Isian Kualifikasi"');
-						
-						$X1= PaktaIntegritasPenyedia::model()->findByPk($DokumenX1->id_dokumen);
-						$X2= SuratPernyataanMinat::model()->findByPk($DokumenX2->id_dokumen);
-						$X3= FormIsianKualifikasi::model()->findByPk($DokumenX3->id_dokumen);
-					}
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
+					$X1= PaktaIntegritasPenyedia::model()->findByPk($DokumenX1->id_dokumen);
+					$X2= SuratPernyataanMinat::model()->findByPk($DokumenX2->id_dokumen);
+					$X3= FormIsianKualifikasi::model()->findByPk($DokumenX3->id_dokumen);
+				}
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
 
-					if(isset($_POST['Rks']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$RKS->attributes=$_POST['Rks'];
-						$RKS->tanggal_pendaftaran=date('Y-m-d', strtotime($RKS->tanggal_pendaftaran));
-						$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
-						$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
-						$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
-						$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
-						$RKS->tanggal_awal_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran1));
-						$RKS->tanggal_akhir_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran1));
-						$RKS->tanggal_pembukaan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran1));
-						$RKS->tanggal_evaluasi_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran1));
-						$RKS->tanggal_awal_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran2));
-						$RKS->tanggal_akhir_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran2));
-						$RKS->tanggal_pembukaan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran2));
-						$RKS->tanggal_evaluasi_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran2));
-						$RKS->tanggal_negosiasi=date('Y-m-d', strtotime($RKS->tanggal_negosiasi));
-						$RKS->tanggal_usulan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_usulan_pemenang));
-						$RKS->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penetapan_pemenang));
-						$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
-						$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
-						$valid=$RKS->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){		
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($RKS->save(false)){
-										$this->redirect(array('editrks','id'=>$id));
-									}
+				if(isset($_POST['Rks']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$RKS->attributes=$_POST['Rks'];
+					$RKS->tanggal_pendaftaran=date('Y-m-d', strtotime($RKS->tanggal_pendaftaran));
+					$RKS->tanggal_pengambilan_dokumen1=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen1));
+					$RKS->tanggal_pengambilan_dokumen2=date('Y-m-d', strtotime($RKS->tanggal_pengambilan_dokumen2));
+					$RKS->tanggal_permintaan_penawaran=date('Y-m-d', strtotime($RKS->tanggal_permintaan_penawaran));
+					$RKS->tanggal_penjelasan=date('Y-m-d', strtotime($RKS->tanggal_penjelasan));
+					$RKS->tanggal_awal_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran1));
+					$RKS->tanggal_akhir_pemasukan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran1));
+					$RKS->tanggal_pembukaan_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran1));
+					$RKS->tanggal_evaluasi_penawaran1=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran1));
+					$RKS->tanggal_awal_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_awal_pemasukan_penawaran2));
+					$RKS->tanggal_akhir_pemasukan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_akhir_pemasukan_penawaran2));
+					$RKS->tanggal_pembukaan_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_pembukaan_penawaran2));
+					$RKS->tanggal_evaluasi_penawaran2=date('Y-m-d', strtotime($RKS->tanggal_evaluasi_penawaran2));
+					$RKS->tanggal_negosiasi=date('Y-m-d', strtotime($RKS->tanggal_negosiasi));
+					$RKS->tanggal_usulan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_usulan_pemenang));
+					$RKS->tanggal_penetapan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penetapan_pemenang));
+					$RKS->tanggal_pemberitahuan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_pemberitahuan_pemenang));
+					$RKS->tanggal_penunjukan_pemenang=date('Y-m-d', strtotime($RKS->tanggal_penunjukan_pemenang));
+					$valid=$RKS->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){		
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($RKS->save(false)){
+									$this->redirect(array('editrks','id'=>$id));
 								}
 							}
 						}
 					}
+				}
 
-					if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
-						$this->render('rks',array(
-							'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,
-						));
-					} else {
-						$this->render('rks',array(
-							'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,
-						));
-					}
+				if($Pengadaan->jenis_kualifikasi=="Pasca Kualifikasi"){
+					$this->render('rks',array(
+						'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,
+					));
+				} else {
+					$this->render('rks',array(
+						'Rks'=>$RKS,'Dokumen0'=>$Dokumen0,
+					));
 				}
 			}
+			else {
+				$this->redirect(array('site/terlarang'));
+			}
+		
 		}
 		
 		public function actionHps()
@@ -517,57 +523,58 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status='3';
-					
-					$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
-					$RKS= Rks::model()->findByPk($Dok->id_dokumen);
-					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
-					$Dokumen0->nama_dokumen='HPS';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
-					
-					$HPS= new Hps;
-					$HPS->id_dokumen=$Dokumen0->id_dokumen;
-					$HPS->nilai_hps=0;
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
+			else if (Pengadaan::model()->findByPk($id)->status == '2' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status='3';
+				
+				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS= Rks::model()->findByPk($Dok->id_dokumen);
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen0->nama_dokumen='HPS';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$HPS= new Hps;
+				$HPS->id_dokumen=$Dokumen0->id_dokumen;
+				$HPS->nilai_hps=0;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
 
-					if(isset($_POST['Hps']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$HPS->attributes=$_POST['Hps'];
-						$valid=$HPS->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($HPS->save(false)){
-										$this->redirect(array('edithps','id'=>$id));
-									}
+				if(isset($_POST['Hps']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$HPS->attributes=$_POST['Hps'];
+					$valid=$HPS->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($HPS->save(false)){
+									$this->redirect(array('edithps','id'=>$id));
 								}
-							}						
-						}
+							}
+						}						
 					}
-
-					$this->render('hps',array(
-						'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS,
-					));
 				}
+
+				$this->render('hps',array(
+					'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -576,56 +583,53 @@
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
-			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
-					$RKS= Rks::model()->findByPk($Dok->id_dokumen);
-					
-					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "HPS"');
-					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-					
-					$HPS= Hps::model()->findByPk($Dokumen0->id_dokumen);
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-
-					if(isset($_POST['Hps']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$HPS->attributes=$_POST['Hps'];
-						if($HPS->nilai_hps>0 && $Pengadaan->status=="3"){
-							if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
-								$Pengadaan->status="4";
-							} else {
-								if($Pengadaan->metode_pengadaan=='Pelelangan'){
-									$Pengadaan->status= "17";
-								} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
-									$Pengadaan->status= "16";
-								}
+			}			
+			else if (Pengadaan::model()->findByPk($id)->status > '2' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Dok= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "RKS"');
+				$RKS= Rks::model()->findByPk($Dok->id_dokumen);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "HPS"');
+				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+				
+				$HPS= Hps::model()->findByPk($Dokumen0->id_dokumen);
+								
+				if(isset($_POST['Hps']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$HPS->attributes=$_POST['Hps'];
+					if($HPS->nilai_hps>0 && $Pengadaan->status=="3"){
+						if($Pengadaan->jenis_kualifikasi=="Pra Kualifikasi") {
+							$Pengadaan->status="4";
+						} else {
+							if($Pengadaan->metode_pengadaan=='Pelelangan'){
+								$Pengadaan->status= "17";
+							} else if ($Pengadaan->metode_pengadaan=='Penunjukan Langsung'||$Pengadaan->metode_pengadaan=='Pemilihan Langsung') {
+								$Pengadaan->status= "16";
 							}
 						}
-						$valid=$HPS->validate();;
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){						
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($HPS->save(false)){
-										Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
-										$this->redirect(array('edithps','id'=>$id));
-									}
+					}
+				}
+					$valid=$HPS->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){						
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($HPS->save(false)){
+									Yii::app()->user->setFlash('sukses','Data Telah Disimpan');
+									$this->redirect(array('edithps','id'=>$id));
 								}
 							}
 						}
 					}
-
-					$this->render('hps',array(
-						'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS
-					));
-				}
+				
+				$this->render('hps',array(
+					'Hps'=>$HPS,'Dokumen0'=>$Dokumen0,'Rks'=>$RKS
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 	
@@ -635,95 +639,96 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					if ($Pengadaan->metode_pengadaan=='Pelelangan'){
-						$Pengadaan->status= "6";
-					} else {	
-						$Pengadaan->status= "5";
-					}
-					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->nama_dokumen='Dokumen Prakualifikasi';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					$Dokumen0->id_pengadaan=$id;
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
-					
-					$Dokumen1= new Dokumen;
-					$Dokumen1->id_dokumen=$somevariable+2;
-					$Dokumen1->nama_dokumen='Pakta Integritas Penyedia';
-					$Dokumen1->status_upload='Belum Selesai';
-					$Dokumen1->tanggal='-';
-					$Dokumen1->tempat='-';
-					$Dokumen1->id_pengadaan=$id;
-					
-					$Dokumen2= new Dokumen;
-					$Dokumen2->id_dokumen=$somevariable+3;
-					$Dokumen2->nama_dokumen='Surat Pernyataan Minat';
-					$Dokumen2->tanggal='-';
-					$Dokumen2->tempat='-';
-					$Dokumen2->status_upload='Belum Selesai';
-					$Dokumen2->id_pengadaan=$id;
-					
-					$Dokumen3= new Dokumen;
-					$Dokumen3->id_dokumen=$somevariable+4;
-					$Dokumen3->nama_dokumen='Form Isian Kualifikasi';
-					$Dokumen3->tanggal='-';
-					$Dokumen3->tempat='-';
-					$Dokumen3->status_upload='Belum Selesai';
-					$Dokumen3->id_pengadaan=$id;
-					
-					$DPK= new DokumenPrakualifikasi;
-					$DPK->id_dokumen=$Dokumen0->id_dokumen;
-					
-					$X1= new PaktaIntegritasPenyedia;
-					$X1->id_dokumen=$Dokumen1->id_dokumen;
-					
-					$X2= new SuratPernyataanMinat;
-					$X2->id_dokumen=$Dokumen2->id_dokumen;
-					
-					$X3= new FormIsianKualifikasi;
-					$X3->id_dokumen=$Dokumen3->id_dokumen;
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-					
-					if(isset($_POST['DokumenPrakualifikasi']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$DPK->attributes=$_POST['DokumenPrakualifikasi'];
-						$DPK->tanggal_pengambilan1=date('Y-m-d',strtotime($DPK->tanggal_pengambilan1));
-						$DPK->tanggal_pengambilan2=date('Y-m-d',strtotime($DPK->tanggal_pengambilan2));
-						$DPK->tanggal_pemasukan1=date('Y-m-d',strtotime($DPK->tanggal_pemasukan1));
-						$DPK->tanggal_pemasukan2=date('Y-m-d',strtotime($DPK->tanggal_pemasukan2));
-						$DPK->tanggal_evaluasi=date('Y-m-d',strtotime($DPK->tanggal_evaluasi));
-						$DPK->tanggal_penetapan=date('Y-m-d',strtotime($DPK->tanggal_penetapan));
-						$valid=$DPK->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-									if($DPK->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
-										$this->redirect(array('editdokumenprakualifikasi','id'=>$Dokumen0->id_pengadaan));
-									}
+			else if (Pengadaan::model()->findByPk($id)->status == '4' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				if ($Pengadaan->metode_pengadaan=='Pelelangan'){
+					$Pengadaan->status= "6";
+				} else {	
+					$Pengadaan->status= "5";
+				}
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Dokumen Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$Dokumen1= new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Pakta Integritas Penyedia';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->tanggal='-';
+				$Dokumen1->tempat='-';
+				$Dokumen1->id_pengadaan=$id;
+				
+				$Dokumen2= new Dokumen;
+				$Dokumen2->id_dokumen=$somevariable+3;
+				$Dokumen2->nama_dokumen='Surat Pernyataan Minat';
+				$Dokumen2->tanggal='-';
+				$Dokumen2->tempat='-';
+				$Dokumen2->status_upload='Belum Selesai';
+				$Dokumen2->id_pengadaan=$id;
+				
+				$Dokumen3= new Dokumen;
+				$Dokumen3->id_dokumen=$somevariable+4;
+				$Dokumen3->nama_dokumen='Form Isian Kualifikasi';
+				$Dokumen3->tanggal='-';
+				$Dokumen3->tempat='-';
+				$Dokumen3->status_upload='Belum Selesai';
+				$Dokumen3->id_pengadaan=$id;
+				
+				$DPK= new DokumenPrakualifikasi;
+				$DPK->id_dokumen=$Dokumen0->id_dokumen;
+				
+				$X1= new PaktaIntegritasPenyedia;
+				$X1->id_dokumen=$Dokumen1->id_dokumen;
+				
+				$X2= new SuratPernyataanMinat;
+				$X2->id_dokumen=$Dokumen2->id_dokumen;
+				
+				$X3= new FormIsianKualifikasi;
+				$X3->id_dokumen=$Dokumen3->id_dokumen;
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+				
+				if(isset($_POST['DokumenPrakualifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$DPK->attributes=$_POST['DokumenPrakualifikasi'];
+					$DPK->tanggal_pengambilan1=date('Y-m-d',strtotime($DPK->tanggal_pengambilan1));
+					$DPK->tanggal_pengambilan2=date('Y-m-d',strtotime($DPK->tanggal_pengambilan2));
+					$DPK->tanggal_pemasukan1=date('Y-m-d',strtotime($DPK->tanggal_pemasukan1));
+					$DPK->tanggal_pemasukan2=date('Y-m-d',strtotime($DPK->tanggal_pemasukan2));
+					$DPK->tanggal_evaluasi=date('Y-m-d',strtotime($DPK->tanggal_evaluasi));
+					$DPK->tanggal_penetapan=date('Y-m-d',strtotime($DPK->tanggal_penetapan));
+					$valid=$DPK->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($DPK->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
+									$this->redirect(array('editdokumenprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
-
-					$this->render('dokumenprakualifikasi',array(
-						'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,
-					));
 				}
+
+				$this->render('dokumenprakualifikasi',array(
+					'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,
+				));
+			}	
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -733,66 +738,66 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
+			else if (Pengadaan::model()->findByPk($id)->status > '4' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
 				
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					
-					$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
-					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
-					$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
-					$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
-					
-					$DPK= DokumenPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
-					$DPK->tanggal_pengambilan1=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan1);
-					$DPK->tanggal_pengambilan2=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan2);
-					$DPK->tanggal_pemasukan1=Tanggal::getTanggalStrip($DPK->tanggal_pemasukan1);
-					$DPK->tanggal_pemasukan2=Tanggal::getTanggalStrip($DPK->tanggal_pemasukan2);
-					$DPK->tanggal_evaluasi=Tanggal::getTanggalStrip($DPK->tanggal_evaluasi);
-					$DPK->tanggal_penetapan=Tanggal::getTanggalStrip($DPK->tanggal_penetapan);
-					$DPK->waktu_pengambilan1=Tanggal::getJamMenit($DPK->waktu_pengambilan1);
-					$DPK->waktu_pengambilan2=Tanggal::getJamMenit($DPK->waktu_pengambilan2);
-					$DPK->waktu_pemasukan1=Tanggal::getJamMenit($DPK->waktu_pemasukan1);
-					$DPK->waktu_pemasukan2=Tanggal::getJamMenit($DPK->waktu_pemasukan2);
-					$DPK->waktu_evaluasi=Tanggal::getJamMenit($DPK->waktu_evaluasi);
-					$DPK->waktu_penetapan=Tanggal::getJamMenit($DPK->waktu_penetapan);
-					
-					$X1= PaktaIntegritasPenyedia::model()->findByPk($Dokumen1->id_dokumen);
-					$X2= SuratPernyataanMinat::model()->findByPk($Dokumen2->id_dokumen);
-					$X3= FormIsianKualifikasi::model()->findByPk($Dokumen3->id_dokumen);
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
+				$Dokumen0=Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
+				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
+				$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
+				$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
+				
+				$DPK= DokumenPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+				$DPK->tanggal_pengambilan1=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan1);
+				$DPK->tanggal_pengambilan2=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan2);
+				$DPK->tanggal_pemasukan1=Tanggal::getTanggalStrip($DPK->tanggal_pemasukan1);
+				$DPK->tanggal_pemasukan2=Tanggal::getTanggalStrip($DPK->tanggal_pemasukan2);
+				$DPK->tanggal_evaluasi=Tanggal::getTanggalStrip($DPK->tanggal_evaluasi);
+				$DPK->tanggal_penetapan=Tanggal::getTanggalStrip($DPK->tanggal_penetapan);
+				$DPK->waktu_pengambilan1=Tanggal::getJamMenit($DPK->waktu_pengambilan1);
+				$DPK->waktu_pengambilan2=Tanggal::getJamMenit($DPK->waktu_pengambilan2);
+				$DPK->waktu_pemasukan1=Tanggal::getJamMenit($DPK->waktu_pemasukan1);
+				$DPK->waktu_pemasukan2=Tanggal::getJamMenit($DPK->waktu_pemasukan2);
+				$DPK->waktu_evaluasi=Tanggal::getJamMenit($DPK->waktu_evaluasi);
+				$DPK->waktu_penetapan=Tanggal::getJamMenit($DPK->waktu_penetapan);
+				
+				$X1= PaktaIntegritasPenyedia::model()->findByPk($Dokumen1->id_dokumen);
+				$X2= SuratPernyataanMinat::model()->findByPk($Dokumen2->id_dokumen);
+				$X3= FormIsianKualifikasi::model()->findByPk($Dokumen3->id_dokumen);
+				
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
 
-					if(isset($_POST['DokumenPrakualifikasi']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$DPK->attributes=$_POST['DokumenPrakualifikasi'];
-						$DPK->tanggal_pengambilan1=date('Y-m-d',strtotime($DPK->tanggal_pengambilan1));
-						$DPK->tanggal_pengambilan2=date('Y-m-d',strtotime($DPK->tanggal_pengambilan2));
-						$DPK->tanggal_pemasukan1=date('Y-m-d',strtotime($DPK->tanggal_pemasukan1));
-						$DPK->tanggal_pemasukan2=date('Y-m-d',strtotime($DPK->tanggal_pemasukan2));
-						$DPK->tanggal_evaluasi=date('Y-m-d',strtotime($DPK->tanggal_evaluasi));
-						$DPK->tanggal_penetapan=date('Y-m-d',strtotime($DPK->tanggal_penetapan));
-						$valid=$DPK->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
-									if($DPK->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
-										$this->redirect(array('editdokumenprakualifikasi','id'=>$Dokumen0->id_pengadaan));
-									}
+				if(isset($_POST['DokumenPrakualifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$DPK->attributes=$_POST['DokumenPrakualifikasi'];
+					$DPK->tanggal_pengambilan1=date('Y-m-d',strtotime($DPK->tanggal_pengambilan1));
+					$DPK->tanggal_pengambilan2=date('Y-m-d',strtotime($DPK->tanggal_pengambilan2));
+					$DPK->tanggal_pemasukan1=date('Y-m-d',strtotime($DPK->tanggal_pemasukan1));
+					$DPK->tanggal_pemasukan2=date('Y-m-d',strtotime($DPK->tanggal_pemasukan2));
+					$DPK->tanggal_evaluasi=date('Y-m-d',strtotime($DPK->tanggal_evaluasi));
+					$DPK->tanggal_penetapan=date('Y-m-d',strtotime($DPK->tanggal_penetapan));
+					$valid=$DPK->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)&&$Dokumen3->save(false)){
+								if($DPK->save(false)&&$X1->save(false)&&$X2->save(false)&&$X3->save(false)){
+									$this->redirect(array('editdokumenprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
-
-					$this->render('dokumenprakualifikasi',array(
-						'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,
-					));
-
 				}
+
+				$this->render('dokumenprakualifikasi',array(
+					'DPK'=>$DPK,'Dokumen0'=>$Dokumen0,'X1'=>$X1,'X2'=>$X2,'X3'=>$X3,
+				));
+
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 	
@@ -801,73 +806,73 @@
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
-			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
+			}			
+			else if (Pengadaan::model()->findByPk($id)->status == '5' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {								
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status= "9";
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Undangan Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				
+				$SUPK= new SuratUndanganPrakualifikasi;
+				$SUPK->id_dokumen=$Dokumen0->id_dokumen;
+				$SUPK->perihal= 'Undangan Prakualifikasi '.$Pengadaan->nama_pengadaan;
+				
+				$PP = array(new PenerimaPengadaan);	
+				
+				if(isset($_POST['SuratUndanganPrakualifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPK->validate();
+					if($valid){
 					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status= "9";
-					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->nama_dokumen='Surat Undangan Prakualifikasi';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					$Dokumen0->id_pengadaan=$id;
-					
-					$SUPK= new SuratUndanganPrakualifikasi;
-					$SUPK->id_dokumen=$Dokumen0->id_dokumen;
-					$SUPK->perihal= 'Undangan Prakualifikasi '.$Pengadaan->nama_pengadaan;
-					
-					$PP = array(new PenerimaPengadaan);	
-					
-					if(isset($_POST['SuratUndanganPrakualifikasi']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
-						$valid=$Dokumen0->validate();
-						$valid=$valid&&$SUPK->validate();
-						if($valid){
-						
-							if(isset($_POST['perusahaan'])){
-								$total = count($_POST['perusahaan']);
-								
-								for($i=0;$i<$total;$i++){
-									if(isset($_POST['perusahaan'][$i])){
-										$PP[$i] = new PenerimaPengadaan;									
-										$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;									
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-										$PP[$i]->alamat=$_POST['alamat'][$i];									
-										$PP[$i]->npwp='-';		
-										$PP[$i]->nilai = 0;									
-										$PP[$i]->biaya = 0;									
-										$PP[$i]->nomor_surat_penawaran = '-';									
-										$PP[$i]->tanggal_penawaran = '-';									
-										$PP[$i]->undangan_prakualifikasi = '1';
-										$PP[$i]->save();
-									}
+						if(isset($_POST['perusahaan'])){
+							$total = count($_POST['perusahaan']);
+							
+							for($i=0;$i<$total;$i++){
+								if(isset($_POST['perusahaan'][$i])){
+									$PP[$i] = new PenerimaPengadaan;									
+									$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;									
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat=$_POST['alamat'][$i];									
+									$PP[$i]->npwp='-';		
+									$PP[$i]->nilai = 0;									
+									$PP[$i]->biaya = 0;									
+									$PP[$i]->nomor_surat_penawaran = '-';									
+									$PP[$i]->tanggal_penawaran = '-';									
+									$PP[$i]->undangan_prakualifikasi = '1';
+									$PP[$i]->save();
 								}
-																	
 							}
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($SUPK->save(false)){
-										$this->redirect(array('editsuratundanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
-									}
+																
+						}
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPK->save(false)){
+									$this->redirect(array('editsuratundanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
-
-					$this->render('suratundanganprakualifikasi',array(
-						'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,'PP'=>$PP,
-					));
 				}
+
+				$this->render('suratundanganprakualifikasi',array(
+					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,'PP'=>$PP,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -877,70 +882,70 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					
-					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
-					
-					$SUPK= SuratUndanganPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
-					
-					$PP = PenerimaPengadaan::model()->findAll('(undangan_prakualifikasi = "1" or undangan_prakualifikasi = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					
-					if(isset($_POST['SuratUndanganPrakualifikasi']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
-						$valid=$Dokumen0->validate();
-						$valid=$valid&&$SUPK->validate();
-						if($valid){
-							if(isset($_POST['perusahaan'])){
+			else if (Pengadaan::model()->findByPk($id)->status > '5' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {					
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Undangan Prakualifikasi"');
+				
+				$SUPK= SuratUndanganPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+				
+				$PP = PenerimaPengadaan::model()->findAll('(undangan_prakualifikasi = "1" or undangan_prakualifikasi = "0") and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['SuratUndanganPrakualifikasi']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SUPK->attributes=$_POST['SuratUndanganPrakualifikasi'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SUPK->validate();
+					if($valid){
+						if(isset($_POST['perusahaan'])){
 
-								for($i=0;$i<count($PP);$i++){
-									if(isset($_POST['perusahaan'][$i])){																																																
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-										$PP[$i]->alamat=$_POST['alamat'][$i];										
-										$PP[$i]->save();
-									}
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){																																																
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->alamat=$_POST['alamat'][$i];										
+									$PP[$i]->save();
+								}
+							}
+							
+							$total = count($_POST['perusahaan']);
+							if(count($PP)<$total){
+								$PPkurang = $total - count($PP);
+								for($j=0;$j<$PPkurang;$j++){
+									$PPbaru = new PenerimaPengadaan;
+									$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+									$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+									$PPbaru->alamat=$_POST['alamat'][$j+$i];									
+									$PPbaru->npwp='-';		
+									$PPbaru->nilai = 0;
+									$PPbaru->biaya = 0;							
+									$PPbaru->nomor_surat_penawaran = '-';
+									$PPbaru->tanggal_penawaran = '-';														
+									$PPbaru->undangan_prakualifikasi = '1';
+									$PPbaru->save();
 								}
 								
-								$total = count($_POST['perusahaan']);
-								if(count($PP)<$total){
-									$PPkurang = $total - count($PP);
-									for($j=0;$j<$PPkurang;$j++){
-										$PPbaru = new PenerimaPengadaan;
-										$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-										$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-										$PPbaru->alamat=$_POST['alamat'][$j+$i];									
-										$PPbaru->npwp='-';		
-										$PPbaru->nilai = 0;
-										$PPbaru->biaya = 0;							
-										$PPbaru->nomor_surat_penawaran = '-';
-										$PPbaru->tanggal_penawaran = '-';														
-										$PPbaru->undangan_prakualifikasi = '1';
-										$PPbaru->save();
-									}
-									
-								}
-							
 							}
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($SUPK->save(false)){
-										$this->redirect(array('editsuratundanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
-									}
+						
+						}
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SUPK->save(false)){
+									$this->redirect(array('editsuratundanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
-
-					$this->render('suratundanganprakualifikasi',array(
-						'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,'PP'=>$PP,
-					));
 				}
+
+				$this->render('suratundanganprakualifikasi',array(
+					'Dokumen0'=>$Dokumen0,'SUPK'=>$SUPK,'PP'=>$PP,
+				));
 			}
+			else {
+				$this->redirect(array('site/terlarang'));
+			}			
 		}
 	
 		public function actionSuratpengumumanpelelanganprakualifikasi()
@@ -949,51 +954,52 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="7";
-					
-					$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
-					$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
-					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->nama_dokumen='Surat Pengumuman Pelelangan Prakualifikasi';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					$Dokumen0->id_pengadaan=$id;
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
-					
-					$SPPP= new SuratPengumumanPelelangan;
-					$SPPP->id_dokumen=$Dokumen0->id_dokumen;
-					
-					if(isset($_POST['SuratPengumumanPelelangan']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$SPPP->attributes=$_POST['SuratPengumumanPelelangan'];
-						$valid=$Dokumen0->validate();
-						$valid=$valid&&$SPPP->validate();
-						if($valid){
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($SPPP->save(false)){
-										$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
-									}
+			else if (Pengadaan::model()->findByPk($id)->status == '6' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="7";
+				
+				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Surat Pengumuman Pelelangan Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$SPPP= new SuratPengumumanPelelangan;
+				$SPPP->id_dokumen=$Dokumen0->id_dokumen;
+				
+				if(isset($_POST['SuratPengumumanPelelangan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SPPP->attributes=$_POST['SuratPengumumanPelelangan'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SPPP->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SPPP->save(false)){
+									$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
-					$this->render('suratpengumumanpelelanganprakualifikasi',array(
-						'SPPP'=>$SPPP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,
-					));
 				}
+				$this->render('suratpengumumanpelelanganprakualifikasi',array(
+					'SPPP'=>$SPPP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -1003,38 +1009,39 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Anggota::model()->exists('username = "' . Yii::app()->user->name . '"')) {
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					
-					$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
-					$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
-					
-					$Dokumen0=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan Prakualifikasi"');
-					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-					$SPPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
-					
-					if(isset($_POST['SuratPengumumanPelelangan']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$SPPP->attributes=$_POST['SuratPengumumanPelelangan'];
-						$valid=$Dokumen0->validate();
-						$valid=$valid&&$SPPP->validate();
-						if($valid){
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)){
-									if($SPPP->save(false)){
-										$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
-									}
+			else if (Pengadaan::model()->findByPk($id)->status > '6' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {					
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				
+				$DokHPS=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+				$HPS=Hps::model()->findByPk($DokHPS->id_dokumen);
+				
+				$Dokumen0=Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Pengumuman Pelelangan Prakualifikasi"');
+				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
+				$SPPP=SuratPengumumanPelelangan::model()->findByPk($Dokumen0->id_dokumen);
+				
+				if(isset($_POST['SuratPengumumanPelelangan']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$SPPP->attributes=$_POST['SuratPengumumanPelelangan'];
+					$valid=$Dokumen0->validate();
+					$valid=$valid&&$SPPP->validate();
+					if($valid){
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)){
+								if($SPPP->save(false)){
+									$this->redirect(array('editsuratpengumumanpelelanganprakualifikasi','id'=>$Dokumen0->id_pengadaan));
 								}
 							}
 						}
 					}
-					$this->render('suratpengumumanpelelanganprakualifikasi',array(
-						'SPPP'=>$SPPP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,
-					));
 				}
+				$this->render('suratpengumumanpelelanganprakualifikasi',array(
+					'SPPP'=>$SPPP,'Dokumen0'=>$Dokumen0,'HPS'=>$HPS,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 	
@@ -1044,44 +1051,44 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="8";
+			else if (Pengadaan::model()->findByPk($id)->status == '7' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="8";
 
-					$PP = array(new PenerimaPengadaan);	
-						
-					if(isset($_POST['perusahaan'])){
-						$total = count($_POST['perusahaan']);
-						
-						for($i=0;$i<$total;$i++){
-							if(isset($_POST['perusahaan'][$i])){
-								$PP[$i] = new PenerimaPengadaan;									
-								$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;									
-								$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-								$PP[$i]->alamat='-';									
-								$PP[$i]->npwp='-';		
-								$PP[$i]->nilai = 0;									
-								$PP[$i]->biaya = 0;									
-								$PP[$i]->nomor_surat_penawaran = '-';									
-								$PP[$i]->tanggal_penawaran = '-';																	
-								$PP[$i]->pendaftaran_pelelangan_pq = '1';		
-								$PP[$i]->save();
-							}
-						}
-							
-						if($Pengadaan->save(false))
-						{						
-							$this->redirect(array('editpendaftaranpelelanganprakualifikasi','id'=>$id));					
+				$PP = array(new PenerimaPengadaan);	
+					
+				if(isset($_POST['perusahaan'])){
+					$total = count($_POST['perusahaan']);
+					
+					for($i=0;$i<$total;$i++){
+						if(isset($_POST['perusahaan'][$i])){
+							$PP[$i] = new PenerimaPengadaan;									
+							$PP[$i]->id_pengadaan = $Pengadaan->id_pengadaan;									
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							$PP[$i]->alamat='-';									
+							$PP[$i]->npwp='-';		
+							$PP[$i]->nilai = 0;									
+							$PP[$i]->biaya = 0;									
+							$PP[$i]->nomor_surat_penawaran = '-';									
+							$PP[$i]->tanggal_penawaran = '-';																	
+							$PP[$i]->pendaftaran_pelelangan_pq = '1';		
+							$PP[$i]->save();
 						}
 					}
-
-
-					$this->render('pendaftaranpelelanganprakualifikasi',array(
-						'PP'=>$PP,
-					));
+						
+					if($Pengadaan->save(false))
+					{						
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi','id'=>$id));					
+					}
 				}
+
+
+				$this->render('pendaftaranpelelanganprakualifikasi',array(
+					'PP'=>$PP,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -1090,61 +1097,59 @@
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
+			}			
+			else if (Pengadaan::model()->findByPk($id)->status > '7' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {						
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+								
+				//Uncomment the following line if AJAX validation is needed
+				//$this->performAjaxValidation($model);
+				
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					
+				if($PP == null){
+					$this->redirect(array('pendaftaranpelelanganprakualifikasi','id'=>$id));		
+				}
+				
+				if(isset($_POST['perusahaan'])){
+												
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							$PP[$i]->save();
+						}
+					}
+					
+					$total = count($_POST['perusahaan']);
+					if(count($PP)<$total){
+						$PPkurang = $total - count($PP);
+						for($j=0;$j<$PPkurang;$j++){
+							$PPbaru = new PenerimaPengadaan;
+							$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
+							$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
+							$PPbaru->alamat='-';									
+							$PPbaru->npwp='-';		
+							$PPbaru->nilai = 0;
+							$PPbaru->biaya = 0;							
+							$PPbaru->nomor_surat_penawaran = '-';
+							$PPbaru->tanggal_penawaran = '-';																						
+							$PPbaru->pendaftaran_pelelangan_pq = '1';		
+							$PPbaru->save();
+						}
+						
+					}
+					
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpendaftaranpelelanganprakualifikasi','id'=>$id));					
+					}			
+					
+				}
+					
+				$this->render('pendaftaranpelelanganprakualifikasi',array(
+					'PP'=>$PP,
+				));
 			}
 			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-									
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-					
-					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-						
-					if($PP == null){
-						$this->redirect(array('pendaftaranpelelanganprakualifikasi','id'=>$id));		
-					}
-					
-					if(isset($_POST['perusahaan'])){
-													
-						for($i=0;$i<count($PP);$i++){
-							if(isset($_POST['perusahaan'][$i])){																																																
-								$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-								$PP[$i]->save();
-							}
-						}
-						
-						$total = count($_POST['perusahaan']);
-						if(count($PP)<$total){
-							$PPkurang = $total - count($PP);
-							for($j=0;$j<$PPkurang;$j++){
-								$PPbaru = new PenerimaPengadaan;
-								$PPbaru->id_pengadaan = $Pengadaan->id_pengadaan;							
-								$PPbaru->perusahaan=$_POST['perusahaan'][$j+$i];	
-								$PPbaru->alamat='-';									
-								$PPbaru->npwp='-';		
-								$PPbaru->nilai = 0;
-								$PPbaru->biaya = 0;							
-								$PPbaru->nomor_surat_penawaran = '-';
-								$PPbaru->tanggal_penawaran = '-';																						
-								$PPbaru->pendaftaran_pelelangan_pq = '1';		
-								$PPbaru->save();
-							}
-							
-						}
-						
-						
-						if($Pengadaan->save(false)){	
-							$this->redirect(array('editpendaftaranpelelanganprakualifikasi','id'=>$id));					
-						}			
-						
-					}
-						
-						
-					$this->render('pendaftaranpelelanganprakualifikasi',array(
-						'PP'=>$PP,
-					));
-				}
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 	
@@ -1154,38 +1159,35 @@
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
-			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
+			else if (Pengadaan::model()->findByPk($id)->status == '8' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="9";
 					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="9";
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['perusahaan'])){
+												
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
+							$PP[$i]->save();
+						}
+					}											
 					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
+					}			
 					
-					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					
-					if(isset($_POST['perusahaan'])){
-													
-						for($i=0;$i<count($PP);$i++){
-							if(isset($_POST['perusahaan'][$i])){																																																
-								$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-								$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-								$PP[$i]->save();
-							}
-						}											
-						
-						if($Pengadaan->save(false)){	
-							$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
-						}			
-						
-					}
-						
-						
-					$this->render('pengambilandokumenprakualifikasi',array(
-						'Pengadaan'=>$Pengadaan,'PP'=>$PP,
-					));
 				}
+					
+					
+				$this->render('pengambilandokumenprakualifikasi',array(
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -1194,39 +1196,35 @@
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
+			}			
+			else if (Pengadaan::model()->findByPk($id)->status > '8' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {						
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="9";
+				
+				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				
+				if(isset($_POST['perusahaan'])){
+												
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){																																																
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
+							$PP[$i]->save();
+						}
+					}												
+					
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
+					}			
+					
+				}
+										
+				$this->render('pengambilandokumenprakualifikasi',array(
+					'Pengadaan'=>$Pengadaan,'PP'=>$PP,
+				));
 			}
 			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="9";
-					
-					//Uncomment the following line if AJAX validation is needed
-					//$this->performAjaxValidation($model);
-					
-					$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					
-					if(isset($_POST['perusahaan'])){
-													
-						for($i=0;$i<count($PP);$i++){
-							if(isset($_POST['perusahaan'][$i])){																																																
-								$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-								$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
-								$PP[$i]->save();
-							}
-						}												
-						
-						if($Pengadaan->save(false)){	
-							$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
-						}			
-						
-					}
-						
-						
-					$this->render('pengambilandokumenprakualifikasi',array(
-						'Pengadaan'=>$Pengadaan,'PP'=>$PP,
-					));
-				}
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 	
@@ -1235,84 +1233,85 @@
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
+			}			
+			if (Yii::app()->user->getState('role') == 'anggota') {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="11";
+				
+				$DokDp= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
+				$DPK= DokumenPrakualifikasi::model()->findByPk($DokDp->id_dokumen);
+				
+				$Dokumen0= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $Dokumen0->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$Dokumen0->id_dokumen=$somevariable+1;
+				$Dokumen0->nama_dokumen='Berita Acara Penerimaan Prakualifikasi';
+				$Dokumen0->tempat='Jakarta';
+				$Dokumen0->status_upload='Belum Selesai';
+				$Dokumen0->id_pengadaan=$id;
+				date_default_timezone_set("Asia/Jakarta");
+				$Dokumen0->tanggal=date('d-m-Y');
+				
+				$Dokumen1=new Dokumen;
+				$Dokumen1->id_dokumen=$somevariable+2;
+				$Dokumen1->nama_dokumen='Daftar Hadir Penerimaan Prakualifikasi';
+				$Dokumen1->tempat='Jakarta';
+				$Dokumen1->status_upload='Belum Selesai';
+				$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+				$Dokumen1->tanggal=$DPK->tanggal_pemasukan2;
+				
+				$BAPPQ= new BeritaAcaraPenerimaanPq;
+				$BAPPQ->id_dokumen=$Dokumen0->id_dokumen;
+				
+				$DH= new DaftarHadir;
+				$DH->id_dokumen=$Dokumen1->id_dokumen;
+				$DH->acara='Penerimaan Prakualifikasi';
+				$DH->tempat_hadir=$DPK->tempat_pemasukan;
+				$DH->jam=$DPK->waktu_pemasukan2;
+										
+				if($Pengadaan->metode_pengadaan == "Pelelangan"){
+					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
+				else {
+					$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
+				if(isset($_POST['BeritaAcaraPenerimaanPq']))
+				{
+					$Dokumen0->attributes=$_POST['Dokumen'];
+					$BAPPQ->attributes=$_POST['BeritaAcaraPenerimaanPq'];
+					$valid=$BAPPQ->validate();
+					$valid=$valid&&$Dokumen0->validate();
+					if($valid){						
+						if(isset($_POST['perusahaan'])){													
+							for($i=0;$i<count($PP);$i++){
+								if(isset($_POST['perusahaan'][$i])){			
+									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+									$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
+									$PP[$i]->save();
+								}
+							}							
+						}
+					
+						if($Pengadaan->save(false))
+						{	
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($BAPPQ->save(false)&&$DH->save(false)){
+									$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));
+								}
+							}
+						}						
+					}
+				}
+				
+				$this->render('penyampaiandokumenprakualifikasi',array(
+					'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
+				));
 			}
 			else {
-				if (Yii::app()->user->getState('role') == 'anggota') {
-					
-					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="11";
-					
-					$DokDp= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
-					$DPK= DokumenPrakualifikasi::model()->findByPk($DokDp->id_dokumen);
-					
-					$Dokumen0= new Dokumen;
-					$criteria=new CDbcriteria;
-					$criteria->select='max(id_dokumen) AS maxId';
-					$row = $Dokumen0->model()->find($criteria);
-					$somevariable = $row['maxId'];
-					$Dokumen0->id_dokumen=$somevariable+1;
-					$Dokumen0->nama_dokumen='Berita Acara Penerimaan Prakualifikasi';
-					$Dokumen0->tempat='Jakarta';
-					$Dokumen0->status_upload='Belum Selesai';
-					$Dokumen0->id_pengadaan=$id;
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
-					
-					$Dokumen1=new Dokumen;
-					$Dokumen1->id_dokumen=$somevariable+2;
-					$Dokumen1->nama_dokumen='Daftar Hadir Penerimaan Prakualifikasi';
-					$Dokumen1->tempat='Jakarta';
-					$Dokumen1->status_upload='Belum Selesai';
-					$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-					$Dokumen1->tanggal=$DPK->tanggal_pemasukan2;
-					
-					$BAPPQ= new BeritaAcaraPenerimaanPq;
-					$BAPPQ->id_dokumen=$Dokumen0->id_dokumen;
-					
-					$DH= new DaftarHadir;
-					$DH->id_dokumen=$Dokumen1->id_dokumen;
-					$DH->acara='Penerimaan Prakualifikasi';
-					$DH->tempat_hadir=$DPK->tempat_pemasukan;
-					$DH->jam=$DPK->waktu_pemasukan2;
-											
-					if($Pengadaan->metode_pengadaan == "Pelelangan"){
-						$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}
-					else {
-						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}
-					if(isset($_POST['BeritaAcaraPenerimaanPq']))
-					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
-						$BAPPQ->attributes=$_POST['BeritaAcaraPenerimaanPq'];
-						$valid=$BAPPQ->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){						
-							if(isset($_POST['perusahaan'])){													
-								for($i=0;$i<count($PP);$i++){
-									if(isset($_POST['perusahaan'][$i])){			
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-										$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
-										$PP[$i]->save();
-									}
-								}							
-							}
-						
-							if($Pengadaan->save(false))
-							{	
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-									if($BAPPQ->save(false)&&$DH->save(false)){
-										$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));
-									}
-								}
-							}						
-						}
-					}
-					
-					$this->render('penyampaiandokumenprakualifikasi',array(
-						'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
-					));
-				}
+				$this->redirect(array('site/terlarang'));
 			}
 		}
 		
@@ -1368,11 +1367,11 @@
 							}						
 						}
 					}
-					
-				}
-				$this->render('penyampaiandokumenprakualifikasi',array(
-					'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
-				));
+						
+					$this->render('penyampaiandokumenprakualifikasi',array(
+						'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
+					));
+				}			
 			}
 		}
 	
@@ -6005,6 +6004,7 @@
 	            	'model'=>$model,
 	            ));		
 	        }
-        }
+        } 
+				
 	}
 ?>
