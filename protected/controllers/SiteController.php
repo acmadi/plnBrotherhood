@@ -392,6 +392,8 @@ class SiteController extends Controller
 			$this->render('tambahpengadaan1',array(
 				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'Dokumen0'=>$Dokumen0,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -441,6 +443,8 @@ class SiteController extends Controller
 			$this->render('tambahpengadaan1',array(
 				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'Dokumen0'=>$Dokumen0,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -499,6 +503,8 @@ class SiteController extends Controller
 			);
 
 			$this->render('tambahpengadaan2',array('modelDok'=>$modelDok));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -548,6 +554,8 @@ class SiteController extends Controller
 				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
 			));
 
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -583,6 +591,8 @@ class SiteController extends Controller
 				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
 			));
 
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -651,6 +661,8 @@ class SiteController extends Controller
 			$this->render('tunjukpanitia',array(
 				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'NDP'=>$NDP,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -696,6 +708,8 @@ class SiteController extends Controller
 			$this->render('tunjukpanitia',array(
 				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'NDP'=>$NDP,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 
