@@ -20,13 +20,17 @@
 			'value'=>'$data->nama_panitia',
 		),
 		array(
+			'name'=>'Email',
+			'value'=>'$data->anggotas[0]->email',
+		),
+		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
 			'deleteButtonLabel'=>'Hapus',
 			'deleteConfirmation'=>'Hapus pejabat pengadaan?',
 			'buttons'=>array(
 				'delete'=>array(
-					// 'url'=>'Yii::app()->createUrl("admin/hapusdivisi", array("id"=>$data->username))',
+					'url'=>'Yii::app()->createUrl("admin/hapuspejabat", array("id"=>$data->id_panitia))',
 				),
 			),
 		),

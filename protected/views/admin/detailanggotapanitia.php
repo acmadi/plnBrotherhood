@@ -1,6 +1,24 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Tambah Pejabat Pengadaan';
+	$this->pageTitle=Yii::app()->name . ' | Detil ' . $anggota->nama;
 ?>
+
+<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+	<div class="flash-success">
+		<?php echo Yii::app()->user->getFlash('sukses'); ?>
+		<script type="text/javascript">
+			setTimeout(function() {
+				$('.flash-success').animate({
+					height: '0px',
+					marginBottom: '0em',
+					padding: '0em',
+					opacity: '0.0'
+				}, 1000, function() {
+					$('.flash-success').hide();
+				});
+			}, 2000);
+		</script>
+	</div>
+<?php endif; ?>
 
 <?php if(Yii::app()->user->hasFlash('gagal')): ?>
 	<div class="flash-error">
@@ -28,10 +46,10 @@
 		)); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($pejabat,'Nama pengguna'); ?>
+			<?php echo $form->labelEx($anggota,'Nama pengguna'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 				'name'=>'Anggota[username]',
-				'value'=>$pejabat->username,
+				'value'=>$anggota->username,
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
@@ -54,27 +72,27 @@
 				),
 			));
 			?>
-			<?php echo $form->error($pejabat,'username'); ?>
+			<?php echo $form->error($anggota,'username'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($pejabat,'Nama'); ?> 
-			<?php echo $form->textField($pejabat,'nama',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($pejabat,'nama'); ?>
+			<?php echo $form->labelEx($anggota,'Nama'); ?> 
+			<?php echo $form->textField($anggota,'nama',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($anggota,'nama'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($pejabat,'E-mail'); ?> 
-			<?php echo $form->textField($pejabat,'email',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($pejabat,'email'); ?>
+			<?php echo $form->labelEx($anggota,'E-mail'); ?> 
+			<?php echo $form->textField($anggota,'email',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($anggota,'email'); ?>
 		</div>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Simpan',array('class'=>'sidafbutton')); ?>
+			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>
 
 		<?php $this->endWidget(); ?>
 	</div>
 </div>
 
-<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/pejabat'), 'class'=>'sidafbutton'));  ?></div>
+<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/detailpanitia', 'id'=>$anggota->id_panitia), 'class'=>'sidafbutton'));  ?></div>

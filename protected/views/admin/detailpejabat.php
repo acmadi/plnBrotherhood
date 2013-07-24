@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Detil ' . $person->nama;
+	$this->pageTitle=Yii::app()->name . ' | Detil ' . $pejabat->nama;
 ?>
 
 <?php if(Yii::app()->user->hasFlash('sukses')): ?>
@@ -46,13 +46,25 @@
 		)); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($person,'Nama pengguna'); ?>
+			<?php echo $form->labelEx($pejabat,'Nama pengguna'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 				'name'=>'Anggota[username]',
-				'value'=>$person->username,
+				'value'=>$pejabat->username,
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
+					'select'=>'js:function(event, ui) {
+						$.ajax({
+							type: "post",
+							dataType: "json",
+							url: "' . Yii::app()->createUrl('admin/userdetail') . '",
+							data: {username: ui.item.label},
+							success: function(data) {
+								$("#Anggota_nama").val(data.nama);
+								$("#Anggota_email").val(data.email);
+							},
+						});
+					}',
 				),
 				'htmlOptions'=>array(
 					'size'=>56,
@@ -60,19 +72,19 @@
 				),
 			));
 			?>
-			<?php echo $form->error($person,'username'); ?>
+			<?php echo $form->error($pejabat,'username'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($person,'Nama'); ?> 
-			<?php echo $form->textField($person,'nama',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($person,'nama'); ?>
+			<?php echo $form->labelEx($pejabat,'Nama'); ?> 
+			<?php echo $form->textField($pejabat,'nama',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($pejabat,'nama'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($person,'E-mail'); ?> 
-			<?php echo $form->textField($person,'email',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($person,'email'); ?>
+			<?php echo $form->labelEx($pejabat,'E-mail'); ?> 
+			<?php echo $form->textField($pejabat,'email',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($pejabat,'email'); ?>
 		</div>
 
 		<div class="row buttons">
@@ -83,4 +95,4 @@
 	</div>
 </div>
 
-<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/kdiv'), 'class'=>'sidafbutton'));  ?></div>
+<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/pejabat'), 'class'=>'sidafbutton'));  ?></div>

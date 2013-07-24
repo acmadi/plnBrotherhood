@@ -37,6 +37,17 @@
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
+					'select'=>'js:function(event, ui) {
+						$.ajax({
+							type: "post",
+							dataType: "json",
+							url: "' . Yii::app()->createUrl('admin/userdetail') . '",
+							data: {username: ui.item.label},
+							success: function(data) {
+								$("#UserDivisi_nama").val(data.nama);
+							},
+						});
+					}',
 				),
 				'htmlOptions'=>array(
 					'size'=>56,
@@ -62,4 +73,4 @@
 </div>
 <br />
 
-<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/detaildivisi', 'id'=>$id), 'class'=>'sidafbutton'));  ?></div>
+<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/detaildivisi', 'id'=>$divisi->id_divisi), 'class'=>'sidafbutton'));  ?></div>

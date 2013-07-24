@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Tambah Pejabat Pengadaan';
+	$this->pageTitle=Yii::app()->name . ' | Tambah Anggota ' . $panitia->nama_panitia;
 ?>
 
 <?php if(Yii::app()->user->hasFlash('gagal')): ?>
@@ -20,6 +20,8 @@
 	</div>
 <?php endif; ?>
 
+<h2><?php echo $panitia->nama_panitia; ?></h2>
+
 <div class="kelompokform">
 	<div class="form">
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -28,10 +30,10 @@
 		)); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($pejabat,'Nama pengguna'); ?>
+			<?php echo $form->labelEx($anggota,'Nama pengguna'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 				'name'=>'Anggota[username]',
-				'value'=>$pejabat->username,
+				'value'=>$anggota->username,
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
@@ -54,19 +56,25 @@
 				),
 			));
 			?>
-			<?php echo $form->error($pejabat,'username'); ?>
+			<?php echo $form->error($anggota,'username'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($pejabat,'Nama'); ?> 
-			<?php echo $form->textField($pejabat,'nama',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($pejabat,'nama'); ?>
+			<?php echo $form->labelEx($anggota,'Nama'); ?> 
+			<?php echo $form->textField($anggota,'nama',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($anggota,'nama'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($pejabat,'E-mail'); ?> 
-			<?php echo $form->textField($pejabat,'email',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($pejabat,'email'); ?>
+			<?php echo $form->labelEx($anggota,'E-mail'); ?> 
+			<?php echo $form->textField($anggota,'email',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($anggota,'email'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($anggota,'Jabatan'); ?> 
+			<?php echo $form->dropDownList($anggota,'jabatan', array('Ketua'=>'Ketua', 'Sekretaris'=>'Sekretaris', 'Anggota'=>'Anggota'), array('empty'=>'-----Pilih Jabatan------')); ?>
+			<?php echo $form->error($anggota,'jabatan'); ?>
 		</div>
 
 		<div class="row buttons">
@@ -76,5 +84,6 @@
 		<?php $this->endWidget(); ?>
 	</div>
 </div>
+<br />
 
-<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/pejabat'), 'class'=>'sidafbutton'));  ?></div>
+<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/detailpanitia', 'id'=>$panitia->id_panitia), 'class'=>'sidafbutton'));  ?></div>

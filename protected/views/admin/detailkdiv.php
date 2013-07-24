@@ -2,6 +2,24 @@
 	$this->pageTitle=Yii::app()->name . ' | Detil ' . $kdiv->nama;
 ?>
 
+<?php if(Yii::app()->user->hasFlash('sukses')): ?>
+	<div class="flash-success">
+		<?php echo Yii::app()->user->getFlash('sukses'); ?>
+		<script type="text/javascript">
+			setTimeout(function() {
+				$('.flash-success').animate({
+					height: '0px',
+					marginBottom: '0em',
+					padding: '0em',
+					opacity: '0.0'
+				}, 1000, function() {
+					$('.flash-success').hide();
+				});
+			}, 2000);
+		</script>
+	</div>
+<?php endif; ?>
+
 <?php if(Yii::app()->user->hasFlash('gagal')): ?>
 	<div class="flash-error">
 		<?php echo Yii::app()->user->getFlash('gagal'); ?>

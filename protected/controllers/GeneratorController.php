@@ -5655,7 +5655,6 @@
 					$SPPM= new SuratPenunjukanPemenang;
 					$SPPM->id_dokumen=$Dokumen0->id_dokumen;
 					if ($Pengadaan->metode_pengadaan == 'Penunjukan Langsung' || $Pengadaan->metode_pengadaan == 'Pemilihan Langsung'){
-						$SPPM->jaminan='0';
 						$SPPM->nomor_ski='-';
 						$SPPM->tanggal_ski='00-00-0000';
 						$SPPM->no_ski='-';
