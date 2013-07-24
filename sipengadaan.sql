@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2013 at 12:10 PM
+-- Generation Time: Jul 24, 2013 at 01:02 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 --
 
 INSERT INTO `divisi` (`id_divisi`, `nama_singkat`, `nama_divisi`) VALUES
-(1, 'DIVSIM', 'Divisi Sisitem dan Informasi');
+(1, 'DIVSIM', 'Divisi Sistem dan Informasi');
 
 -- --------------------------------------------------------
 
@@ -444,6 +444,9 @@ CREATE TABLE IF NOT EXISTS `libur` (
 -- Dumping data for table `libur`
 --
 
+INSERT INTO `libur` (`tanggal`, `keterangan`) VALUES
+('2013-01-01', 'Tahun Baru 2013'),
+('2013-12-25', 'Hari Natal');
 
 -- --------------------------------------------------------
 
