@@ -9,8 +9,17 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 
 <script type="text/javascript">
 	function send(){	 		
-		var a=$("#Dokumen_tanggal").val();
-		var tanggalRks= new Date(a.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+		var a=$("#Dokumen_tanggal").val();		
+		if(a == ''){
+			alert('Tanggal RKS belum diisi');
+			tanggalRks = '';
+		}else{		
+			var tanggalRks= new Date(a.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+			if(tanggalRks == 'Invalid Date'){
+				alert('Tanggal RKS salah');
+				tanggalRks = '';
+			}
+		}
 		var waktuDefault = '09:00';
 		var tempatDefault = 'PT PLN (Persero) Kantor Pusat, Gedung Utama Lantai 2, Jl. Trunojoyo Blok M I/ 135, Kebayoran Baru Jakarta 12160';
 			   
@@ -72,16 +81,20 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 	}
 	
 	function tambahtgl(tanggal,n){						
-		var hari = tanggal.getDate();
-		var tanggal2 = new Date(tanggal);
-		tanggal2.setDate(hari + n);	
-		
-		// alert(tanggal2);
-		if(tanggal2.getDay()==6 || tanggal2.getDay()==0){
-			tambahtgl(tanggal2,1);
+		if(tanggal == ''){			
+			return '';
+		}else{		
+			var hari = tanggal.getDate();
+			var tanggal2 = new Date(tanggal);
+			tanggal2.setDate(hari + n);	
+			
+			// alert(tanggal2);
+			if(tanggal2.getDay()==6 || tanggal2.getDay()==0){
+				tambahtgl(tanggal2,1);
+			}
+			
+			return tanggal2.getDate() + '-' + (tanggal2.getMonth()+1) + '-' + tanggal2.getFullYear();
 		}
-		
-		return tanggal2.getDate() + '-' + (tanggal2.getMonth()+1) + '-' + tanggal2.getFullYear();
 	}
 	
 </script>
