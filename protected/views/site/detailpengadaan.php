@@ -109,11 +109,8 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 				}
 			?>
 		</div>	
-		
-		<br /><br /><br /><br />
-		
 	</div>
-<?php } else{?>
+<?php } else if(Yii::app()->user->getState('role') == 'kdivmum') {?>
 	<div id="detailpengadaan">
 		<h1 style="text-align:center;"><?php echo $cpengadaan->nama_pengadaan; ?></h1>
 		<div style="width:136px; margin:auto;">
@@ -204,11 +201,6 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 		<br /><br /><br /><br />
 		
 	</div>
-<?php }?>	
-
-
-
-
 	<?php if ($cpengadaan->status==-1) { ?>
 		<div style="width:55%;margin:auto">
 			<?php if ($DokNDP->status_upload=="Selesai"&&$DokTOR->status_upload=="Selesai"&&$DokRAB->status_upload=="Selesai") {
@@ -220,14 +212,21 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 				echo CHtml::button('Ubah Pengadaan', array('submit'=>array('site/edittambahpengadaan1','id'=>$id), "class"=>'sidafbutton'));
 			?>
 		</div>
-	<?php } ?>
-<div>
-<?php if(Yii::app()->user->getState('role') == 'kdivmum'){ ?>
-	<?php if ($cpengadaan->status==98){ ?>
+	<?php } else if ($cpengadaan->status==98){ ?>
 		<div style="width:55%;margin:auto">
 			Pengadaan ini telah diusulkan digagalkan oleh Panitia/Pejabat Pengadaan Barang/Jasa. Tekan tombol Batalkan Pengadaan di bawah untuk menggagalkan pengadaan.
 		</div>
-		<?php } ?>
+		<div class="form">			
+			<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'batalkanpengadaan',
+			'enableAjaxValidation'=>false,			)); ?>			
+				<div class="row buttons">
+					<?php echo CHtml::submitButton('Batalkan Pengadaan',array('class'=>'sidafbutton')); ?>
+				</div>
+			<?php $this->endWidget(); ?>
+		</div>
+	<?php } ?>
+	
 	<div style="width:75%; margin:auto;">
 		<?php
 			$this->widget('zii.widgets.grid.CGridView', array(
@@ -257,8 +256,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 			));
 		?>
 	</div>
-<?php } ?>
-</div>
+<?php }
 
 <?php 
 	if($cpengadaan->status==100 || $cpengadaan->status==99){
@@ -267,21 +265,3 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 		echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton')); 
 	}
 ?>
-<?php if(Yii::app()->user->getState('role') == 'kdivmum'){ ?>
-		<?php if($cpengadaan->status==98){ ?>
-				<div class="form">
-					
-					<?php $form=$this->beginWidget('CActiveForm', array(
-					'id'=>'batalkanpengadaan',
-					'enableAjaxValidation'=>false,
-					)); ?>
-					
-					<div class="row buttons">
-						<?php echo CHtml::submitButton('Batalkan Pengadaan',array('class'=>'sidafbutton')); ?>
-					</div>
-					
-					<?php $this->endWidget(); ?>
-					
-				</div>
-		<?php } ?>
-<?php } ?>

@@ -119,16 +119,16 @@ class SiteController extends Controller
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
-		else {
+		else if (Yii::app()->user->getState('role') == 'kdivmum'||Yii::app()->user->getState('role') == 'divisi') {
+			$id= Yii::app()->getRequest()->getQuery('id');
 			$Pengadaan=Pengadaan::model()->findByPk($id);
-			$Pengadaan->status ='99';
-			
 			$model=new Dokumen('search');
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['Dokumen'])){
 				$model->attributes=$_GET['Dokumen'];
 			}
 			if(isset($_POST['Pengadaan'])){
+				$Pengadaan->status ='99';
 				if($Pengadaan->save(false)){
 					$this->redirect(array('detailpengadaan','id'=>$id));
 				}
@@ -136,6 +136,8 @@ class SiteController extends Controller
 			$this->render('detailpengadaan', array(
 				'model'=>$model,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 

@@ -106,7 +106,7 @@ class DocxController extends Controller
 				$listpanitia=$this->getListPanitia($Panitia->id_panitia);
 			} else {
 				$kalimat= 'Pejabat adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
-				$kalimat= 'Adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
+				$kalimat2= 'Adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang diangkat oleh Pemberi Tugas untuk melaksanakan pengadaan Barang/Jasa.';
 				$listpanitia=$Panitia->nama_panitia;
 			}
 			$DokNDP = Dokumen::model()->find('id_pengadaan = '. $Peng->id_pengadaan. ' and nama_dokumen = "Nota Dinas Permintaan"');
@@ -1258,17 +1258,15 @@ class DocxController extends Controller
 			$tanggal = Tanggal::getTanggalLengkap($Dok->tanggal);
 			$tahun = Tanggal::getTahun($tanggal);
 			$namapengadaan = $Peng->nama_pengadaan;
-			$namapengadaan1 = strtoupper($Peng->nama_pengadaan);
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			if($panitia->jenis_panitia=="Panitia"){
-				$kalimat= 'Panitia adalah '.$panitia->nama_panitia.' Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, sesuai dengan surat tugas DIRSDM No : '.$panitia->SK_panitia.' tanggal : '.Tanggal::getTanggalLengkap($panitia->tanggal_sk).'.';
+				$kalimat= 'Panitia adalah '.$panitia->nama_panitia.' Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, sesuai dengan surat tugas DIRSDM No : '.$panitia->SK_panitia.' tanggal : '.Tanggal::getTanggalLengkap($panitia->tanggal_sk).' yang diangkat oleh '.Jabatan::model()->findByPk($NDPP->dari)->jabatan.' untuk melaksanakan pengadaan Barang/Jasa.';
 				$listpanitia=$this->getListPanitia($panitia->id_panitia);
 			} else {
-				$kalimat= 'Pejabat adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang ditunjuk oleh '. Jabatan::model()->findByPk($NDPP->dari)->jabatan.'.';
+				$kalimat= 'Pejabat adalah Pejabat Pengadaan Barang/Jasa Kantor Pusat, Divisi Umum dan Manajemen Kantor Pusat, yang diangkat oleh '.Jabatan::model()->findByPk($NDPP->dari)->jabatan.' untuk melaksanakan pengadaan Barang/Jasa.';
 				$listpanitia=$panitia->nama_panitia;
 			}
-			$panitiapejabat = $panitia->jenis_panitia;
-			$panitia2 = strtoupper($panitia->jenis_panitia);
+			$jenispanitia = $panitia->jenis_panitia;
 			$tujuanpengadaan = $DPK->tujuan_pengadaan;
 			$sumberdana = $NDPP->sumber_dana;
 			$biaya = RupiahMaker::convertInt($NDPP->pagu_anggaran);
@@ -1292,23 +1290,25 @@ class DocxController extends Controller
 			$bidangusaha = $RKS->bidang_usaha;
 			$subbidangusaha = $RKS->sub_bidang_usaha;
 			$kualifikasiperusahaan = $RKS->kualifikasi;
+			$kurunwaktu = $DPK->kurun_waktu_pengalaman;
+			$kurunwaktuterbilang = RupiahMaker::terbilangMaker($DPK->kurun_waktu_pengalaman);
 			
 			$penyetuju = Jabatan::model()->findByPk($NDPP->dari)->jabatan;
 			$namapenyetuju = kdivmum::model()->find('id_jabatan = '.$NDPP->dari)->nama;
 				
-			$this->doccy->newFile('4 Dok Prakualifikasi.docx');
+			$this->doccy->newFile('4 Dok Prakualifikasi Format 2.docx');
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 		
 			$this->doccy->phpdocx->assign('#nomor#', $nomor);
-			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);
+			$this->doccy->phpdocx->assign('#tanggal#', $tanggal);
 			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
-			$this->doccy->phpdocx->assign('#namapengadaan1#', $namapengadaan1);
+			$this->doccy->phpdocx->assign('#namapengadaankapital#', strtoupper($namapengadaan));
 			$this->doccy->phpdocx->assign('#tahun#', $tahun);
 			$this->doccy->phpdocx->assign('#tujuanpengadaan#', $tujuanpengadaan);
 			$this->doccy->phpdocx->assign('#kalimatpanitia/pejabat#', $kalimat);
-			$this->doccy->phpdocx->assign('#panitia/pejabat#', $panitiapejabat);
+			$this->doccy->phpdocx->assign('#jenis panitia#', $jenispanitia);
 			$this->doccy->phpdocx->assign('#sumberdana#', $sumberdana);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
@@ -1326,7 +1326,9 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#bidangusaha#', $bidangusaha);
 			$this->doccy->phpdocx->assign('#subbidangusaha#', $subbidangusaha);
 			$this->doccy->phpdocx->assign('#kualifikasiperusahaan#', $kualifikasiperusahaan);
-			$this->doccy->phpdocx->assign('#panitia#', $panitia2);
+			$this->doccy->phpdocx->assign('#kurunwaktu#', $kurunwaktu);
+			$this->doccy->phpdocx->assign('#kurunwaktuterbilang#', $kurunwaktuterbilang);
+			$this->doccy->phpdocx->assign('#jenis panitia kapital#', strtoupper($jenispanitia));
 			$this->doccy->phpdocx->assign('#penyetuju#', $penyetuju);
 			$this->doccy->phpdocx->assign('#namapenyetuju#', $namapenyetuju);
 			$this->doccy->phpdocx->assign('#listpanitia#', $listpanitia);		
