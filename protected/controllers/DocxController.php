@@ -1486,6 +1486,25 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tempat#', $tempat);
 			$this->doccy->phpdocx->assign('#tanggalsurat#', $tanggal);			
 			$this->renderDocx("Surat Pengumuman Pelelangan Prakualifikasi-".$Peng->nama_pengadaan.".docx", true);
+		} else if($Dok->nama_dokumen == "Surat Kontrak"){
+		$this->doccy->newFile('17 Surat Kontrak.docx');
+			$dummy = "";
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#namapengadaan#', $Peng->nama_p
+			engadaan);
+			$this->doccy->phpdocx->assign('#namapemenang#', $dummy);
+			$this->doccy->phpdocx->assign('#nomorkontrak#', $dummy);
+			$this->doccy->phpdocx->assign('#hari#', $dummy);
+			$this->doccy->phpdocx->assign('#tanggal#', $dummy);
+			$this->doccy->phpdocx->assign('#bulan#', $dummy);
+			$this->doccy->phpdocx->assign('#tahun#', $dummy);
+			$this->doccy->phpdocx->assign('#namakdivms#', $dummy);
+			$this->doccy->phpdocx->assign('#alamatpemenang#', $dummy);
+			$this->doccy->phpdocx->assign('#notapenetapanpemenang#', $dummy);
+			$this->renderDocx("Surat Kontrak -".$Peng->nama_pengadaan.".docx", true);
 		}
 //	=====================================Pakta Integritas=====================================
 		else if ($Dok->nama_dokumen == "Pakta Integritas Awal Panitia"){
