@@ -30,7 +30,7 @@
 				'dataProvider'=>$dataProvider,
 				"ajaxUpdate"=>"false",
 				'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-				'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("generator/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+				'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detaildokumen", array("id"=>"$model->id_dokumen")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 				'columns'=>array(
 					array(
 						'name'=>'No',

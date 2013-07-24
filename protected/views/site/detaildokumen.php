@@ -21,10 +21,10 @@
 <h2><?php echo $pengadaan->nama_pengadaan; ?> : <?php echo $cdokumen->nama_dokumen?></h2>
 <?php
 	if($pengadaan->status!='100'||$pengadaan->status!='99'){
-		if((Yii::app()->user->getState('role') == 'kdivmum')&&(($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan'))){
+		if((Yii::app()->user->getState('role') == 'kdivmum')&&(($cdokumen->nama_dokumen=='Nota Dinas Perintah Pengadaan')&&($cdokumen->nama_dokumen!='Dokumen Lain-lain'))){
 			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton')); 
 			echo '<br/>';
-		} else if ((Yii::app()->user->getState('role') == 'anggota'&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')))){
+		} else if ((Yii::app()->user->getState('role') == 'anggota'&&(($cdokumen->nama_dokumen!='Nota Dinas Permintaan')&&($cdokumen->nama_dokumen!='TOR')&&($cdokumen->nama_dokumen!='RAB')&&($cdokumen->nama_dokumen!='Nota Dinas Perintah Pengadaan')&&($cdokumen->nama_dokumen!='Dokumen Lain-lain')))){
 			echo CHtml::button('Buat Dokumen', array('submit'=>array('docx/download','id'=>$id),'class'=>'sidafbutton'));
 			echo '<br/>';
 		}
