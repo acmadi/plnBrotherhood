@@ -86,7 +86,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'jenis rks'); ?>
 							<?php echo $form->radioButtonList($Rks,'tipe_rks',
-								array(1=>'Barang',2=>'Barang dan Jasa',3=>'Jasa'),
+								array(1=>'Format 1',2=>'Format 2'),
 								array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
 							<?php echo $form->error($Rks,'tipe_rks'); ?>
 						</div>
@@ -128,6 +128,12 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 						<?php echo $form->labelEx($Rks,'kualifikasi'); ?>						
 						<?php echo $form->textField($Rks,'kualifikasi',array('size'=>56,'maxlength'=>256)); ?>								
 						<?php echo $form->error($Rks,'kualifikasi'); ?>
+					</div>
+					
+					<div class="row">
+						<?php echo $form->labelEx($Rks,'klasifikasi'); ?>						
+						<?php echo $form->textField($Rks,'klasifikasi',array('size'=>56,'maxlength'=>256)); ?>								
+						<?php echo $form->error($Rks,'klasifikasi'); ?>
 					</div>
 					
 					<div class="row">

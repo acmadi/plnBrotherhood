@@ -12,7 +12,7 @@
 					'htmlOptions'=>array('enctype'=>'multipart/form-data'),	
 					));
 		?>
-					<div class="rows">
+					<div class="kelompokform"><div class="rows">
 		<?php
 						echo $form->labelEx($modelDok[$i],$modelDok[$i]->nama_dokumen);
 						echo '<br>';
@@ -24,7 +24,7 @@
 							echo ' <span style="color:green">Dokumen telah diunggah</span>';
 						}
 		?>
-					</div> <br/>
+					</div></div> <br/>
 		<?php
 					$this->endWidget();
 				}
