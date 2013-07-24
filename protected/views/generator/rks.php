@@ -14,31 +14,30 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		var waktuDefault = '09:00';
 		var tempatDefault = 'PT PLN (Persero) Kantor Pusat, Gedung Utama Lantai 2, Jl. Trunojoyo Blok M I/ 135, Kebayoran Baru Jakarta 12160';
 			   
-		$("#Rks_tanggal_pendaftaran").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_pendaftaran").val(tambahtgl(tanggalRks,4));
 		
 		$("#Rks_tanggal_pengambilan_dokumen1").val(tambahtgl(tanggalRks,1));		
-		$("#Rks_tanggal_pengambilan_dokumen2").val(tambahtgl(tanggalRks,1));
-		
+		$("#Rks_tanggal_pengambilan_dokumen2").val(tambahtgl(tanggalRks,1));		
 		$("#Rks_waktu_pengambilan_dokumen1").val(waktuDefault);
 		$("#Rks_waktu_pengambilan_dokumen2").val(waktuDefault);
 		$("#Rks_tempat_pengambilan_dokumen").val(tempatDefault);
 		
-		$("#Rks_tanggal_permintaan_penawaran").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_permintaan_penawaran").val(tambahtgl(tanggalRks,5));
 		
-		$("#Rks_tanggal_penjelasan").attr('value',tambahtgl(tanggalRks,1));	   
+		$("#Rks_tanggal_penjelasan").attr('value',tambahtgl(tanggalRks,4));	   
 		$("#Rks_waktu_penjelasan").attr('value',waktuDefault);	  
 		$("#Rks_tempat_penjelasan").attr('value',tempatDefault);
 		
-		$("#Rks_tanggal_awal_pemasukan_penawaran1").attr('value',tambahtgl(tanggalRks,1));	   
-		$("#Rks_tanggal_akhir_pemasukan_penawaran1").attr('value',tambahtgl(tanggalRks,1));	   
+		$("#Rks_tanggal_awal_pemasukan_penawaran1").attr('value',tambahtgl(tanggalRks,5));	   
+		$("#Rks_tanggal_akhir_pemasukan_penawaran1").attr('value',tambahtgl(tanggalRks,13));	   
 		$("#Rks_waktu_pemasukan_penawaran1").attr('value',waktuDefault);	  
 		$("#Rks_tempat_pemasukan_penawaran1").attr('value',tempatDefault);
 		
-		$("#Rks_tanggal_pembukaan_penawaran1").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_pembukaan_penawaran1").val(tambahtgl(tanggalRks,13));
 		$("#Rks_waktu_pembukaan_penawaran1").val(waktuDefault);	  
 		$("#Rks_tempat_pembukaan_penawaran1").val(tempatDefault);
 		
-		$("#Rks_tanggal_evaluasi_penawaran1").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_evaluasi_penawaran1").val(tambahtgl(tanggalRks,17));
 		$("#Rks_waktu_evaluasi_penawaran1").val(waktuDefault);	  
 		$("#Rks_tempat_evaluasi_penawaran1").val(tempatDefault);
 		
@@ -55,20 +54,20 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		$("#Rks_waktu_pemasukan_penawaran2").attr('value',waktuDefault);	  
 		$("#Rks_tempat_pemasukan_penawaran2").attr('value',tempatDefault);
 		
-		$("#Rks_tanggal_negosiasi").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_negosiasi").val(tambahtgl(tanggalRks,20));
 		$("#Rks_waktu_negosiasi").val(waktuDefault);	  
 		$("#Rks_tempat_negosiasi").val(tempatDefault);
 		
-		$("#Rks_tanggal_usulan_pemenang").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_usulan_pemenang").val(tambahtgl(tanggalRks,21));
 		$("#Rks_waktu_usulan_pemenang").val(waktuDefault);	  		
 		
-		$("#Rks_tanggal_penetapan_pemenang").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_penetapan_pemenang").val(tambahtgl(tanggalRks,22));
 		$("#Rks_waktu_penetapan_pemenang").val(waktuDefault);	  	
 		
-		$("#Rks_tanggal_pemberitahuan_pemenang").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_pemberitahuan_pemenang").val(tambahtgl(tanggalRks,22));
 		$("#Rks_waktu_pemberitahuan_pemenang").val(waktuDefault);	  		
 		
-		$("#Rks_tanggal_penunjukan_pemenang").val(tambahtgl(tanggalRks,1));
+		$("#Rks_tanggal_penunjukan_pemenang").val(tambahtgl(tanggalRks,28));
 		$("#Rks_waktu_penunjukan_pemenang").val(waktuDefault);	
 	}
 	
