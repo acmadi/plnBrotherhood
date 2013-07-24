@@ -278,8 +278,8 @@
 		
 		<br/> 
 		<br/>
-		<li class='unggah'><?php echo CHtml::link('Unggah Dokumen',array("generator/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
-		<li class='lihat'><?php echo CHtml::link('Lihat Dokumen',array("generator/dokumengenerator","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li id="19" class='unggah'><?php echo CHtml::link('Unggah Dokumen',array("generator/uploader","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+		<li id="20" class='lihat'><?php echo CHtml::link('Lihat Dokumen',array("generator/dokumengenerator","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 		
 		<br />
 

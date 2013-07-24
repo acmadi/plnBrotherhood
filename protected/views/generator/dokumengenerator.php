@@ -13,6 +13,9 @@
 <div id="pagecontent">
 	<div id="sidebar">
 		<?php if((!Yii::app()->user->isGuest)&&(Yii::app()->user->getState('role') == 'anggota')) $this->widget('MenuPortlet'); ?>
+		<script type="text/javascript">
+			$('#20').attr('class','onprogress');
+		</script>
 	</div>
 
 	<div id="maincontent">
