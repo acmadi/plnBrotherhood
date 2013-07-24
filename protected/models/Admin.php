@@ -80,4 +80,19 @@ class Admin extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function searchAdmin($cname)
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('username',$this->username,true);
+		$criteria->addcondition('username != "' . $cname . '"');
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }

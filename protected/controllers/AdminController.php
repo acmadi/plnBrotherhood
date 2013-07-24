@@ -5,7 +5,43 @@ class AdminController extends Controller
 	public function actionDashboard()
 	{
 		if (Yii::app()->user->getState('isAdmin')) {
-			$this->render('dashboard');
+			if (Yii::app()->user->getState('asAdmin')) {
+				$model = new Admin('search');
+				$model->unsetAttributes();  // clear any default values
+				if(isset($_GET['Admin'])){
+					$model->attributes = $_GET['Admin'];
+				}
+				$this->render('dashboard', array(
+					'model'=>$model,
+				));
+			}
+			else {
+				$this->render('dashboard');
+			}
+		}
+	}
+
+	public function actionTambahadmin()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$admin = new Admin;
+			if (isset($_POST['Admin'])) {
+				$admin->attributes = $_POST['Admin'];
+				if ($admin->save(false)) {
+					$this->redirect(array('dashboard'));
+				}
+			}
+			$this->render('tambahadmin', array(
+				'admin'=>$admin,
+			));
+		}
+	}
+	
+	public function actionHapusadmin()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			Admin::model()->deleteByPk($id);
 		}
 	}
 
