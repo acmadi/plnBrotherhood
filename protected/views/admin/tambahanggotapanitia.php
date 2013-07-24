@@ -1,5 +1,5 @@
 <?php
-	$this->pageTitle=Yii::app()->name . ' | Tambah Anggota ' . $divisi->nama_divisi;
+	$this->pageTitle=Yii::app()->name . ' | Tambah Anggota ' . $panitia->nama_panitia;
 ?>
 
 <?php if(Yii::app()->user->hasFlash('gagal')): ?>
@@ -20,7 +20,7 @@
 	</div>
 <?php endif; ?>
 
-<h2><?php echo $divisi->nama_divisi; ?></h2>
+<h2><?php echo $panitia->nama_panitia; ?></h2>
 
 <div class="kelompokform">
 	<div class="form">
@@ -30,10 +30,10 @@
 		)); ?>
 
 		<div class="row">
-			<?php echo $form->labelEx($user,'Nama pengguna'); ?>
+			<?php echo $form->labelEx($anggota,'Nama pengguna'); ?>
 			<?php $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-				'name'=>'UserDivisi[username]',
-				'value'=>$user->username,
+				'name'=>'Anggota[username]',
+				'value'=>$anggota->username,
 				'sourceUrl'=>array('admin/autocomplete'),
 				'options'=>array(
 					'minLength'=>'2',
@@ -44,7 +44,8 @@
 							url: "' . Yii::app()->createUrl('admin/userdetail') . '",
 							data: {username: ui.item.label},
 							success: function(data) {
-								$("#UserDivisi_nama").val(data.nama);
+								$("#Anggota_nama").val(data.nama);
+								$("#Anggota_email").val(data.email);
 							},
 						});
 					}',
@@ -55,13 +56,25 @@
 				),
 			));
 			?>
-			<?php echo $form->error($user,'username'); ?>
+			<?php echo $form->error($anggota,'username'); ?>
 		</div>
 
 		<div class="row">
-			<?php echo $form->labelEx($user,'Nama'); ?> 
-			<?php echo $form->textField($user,'nama',array('size'=>56,'maxlength'=>256)); ?>
-			<?php echo $form->error($user,'nama'); ?>
+			<?php echo $form->labelEx($anggota,'Nama'); ?> 
+			<?php echo $form->textField($anggota,'nama',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($anggota,'nama'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($anggota,'E-mail'); ?> 
+			<?php echo $form->textField($anggota,'email',array('size'=>56,'maxlength'=>256)); ?>
+			<?php echo $form->error($anggota,'email'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($anggota,'Jabatan'); ?> 
+			<?php echo $form->dropDownList($anggota,'jabatan', array('Ketua'=>'Ketua', 'Sekretaris'=>'Sekretaris', 'Anggota'=>'Anggota'), array('empty'=>'-----Pilih Jabatan------')); ?>
+			<?php echo $form->error($anggota,'jabatan'); ?>
 		</div>
 
 		<div class="row buttons">
@@ -73,4 +86,4 @@
 </div>
 <br />
 
-<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/detaildivisi', 'id'=>$divisi->id_divisi), 'class'=>'sidafbutton'));  ?></div>
+<div><?php echo CHtml::button('Kembali', array('submit'=>array('admin/detailpanitia', 'id'=>$panitia->id_panitia), 'class'=>'sidafbutton'));  ?></div>

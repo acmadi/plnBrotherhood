@@ -110,7 +110,7 @@ class Anggota extends CActiveRecord
 		));
 	}
 
-	public function searchAnggota()
+	public function searchAnggota($idp)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -125,6 +125,7 @@ class Anggota extends CActiveRecord
 		$criteria->compare('id_panitia',$this->id_panitia,true);
 		$criteria->compare('jabatan',$this->jabatan,true);
 		$criteria->compare('status_user',$this->status_user,true);
+		$criteria->addcondition('id_panitia = "' . $idp . '"');
 		$criteria->addcondition('status_user = "Aktif"');
 
 		return new CActiveDataProvider($this, array(

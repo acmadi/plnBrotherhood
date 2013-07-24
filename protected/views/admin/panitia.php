@@ -24,7 +24,7 @@
 			'deleteConfirmation'=>'Hapus panitia pengadaan?',
 			'buttons'=>array(
 				'delete'=>array(
-					// 'url'=>'Yii::app()->createUrl("admin/hapusdivisi", array("id"=>$data->username))',
+					'url'=>'Yii::app()->createUrl("admin/hapuspanitia", array("id"=>$data->id_panitia))',
 				),
 			),
 		),
@@ -38,3 +38,5 @@
 	'summaryText'=>'',
 ));
 ?>
+
+<div><?php echo CHtml::button('Tambah panitia pengadaan', array('submit'=>array('admin/tambahpanitia'), 'class'=>'sidafbutton'));  ?></div>
