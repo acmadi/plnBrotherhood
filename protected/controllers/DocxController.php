@@ -420,16 +420,15 @@ class DocxController extends Controller
 			$supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);			
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$dokpenetapan=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Penetapan Pemenang"');
-			$penetapan = NotaDinasPenetapanPemenang::model()->findByPk($dokpenetapan->id_dokumen);
+			$penetapan = NotaDinasPenetapanPemenang::model()->findByPk($dokpenetapan->id_dokumen);			
 			$dokndpp=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
-			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);
+			$ndpp = NotaDinasPerintahPengadaan::model()->findByPk($dokndpp->id_dokumen);		
 			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#nomor#', $ndbp->nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
-			$this->doccy->phpdocx->assign('#listpenyedia#', $this->getPenyediaXMasukPenawaran1($Peng->id_pengadaan));
 			$this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
 			$this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
 			$this->doccy->phpdocx->assign('#nondpenetapan#', $penetapan->nomor);
@@ -452,8 +451,11 @@ class DocxController extends Controller
 				$this->doccy->phpdocx->assign('#namaketua#', Panitia::model()->findByPk($Peng->id_panitia)->nama_panitia);
 				$this->doccy->phpdocx->assign('#kalimat#', '');
 			}
-			
-			$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaX($Peng->id_pengadaan,'pengambilan_dokumen'));
+			if($Peng->jenis_kualifikasi=="Pasca Kualifikasi"){
+				$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaX($Peng->id_pengadaan,'undangan_supph'));
+			} else {
+				$this->doccy->phpdocx->assign('#listpeserta#', $this->getPenyediaX($Peng->id_pengadaan,'undangan_prakualifikasi'));
+			}
 			$this->renderDocx("Nota Dinas Pemberitahuan Pemenang-".$Peng->nama_pengadaan.".docx", true);
 		}
 		else if ($Dok->nama_dokumen == "Nota Dinas Permintaan TOR/RAB"){
