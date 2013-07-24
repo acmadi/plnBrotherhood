@@ -223,9 +223,11 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 	<?php } ?>
 <div>
 <?php if(Yii::app()->user->getState('role') == 'kdivmum'){ ?>
-	<div style="width:55%;margin:auto">
-		Pengadaan ini telah diusulkan digagalkan oleh Panitia/Pejabat Pengadaan Barang/Jasa. Tekan tombol Gagalkan Pengadaan di bawah untuk menggagalkan pengadaan.
-	</div>
+	<?php if ($cpengadaan->status==98){ ?>
+		<div style="width:55%;margin:auto">
+			Pengadaan ini telah diusulkan digagalkan oleh Panitia/Pejabat Pengadaan Barang/Jasa. Tekan tombol Batalkan Pengadaan di bawah untuk menggagalkan pengadaan.
+		</div>
+		<?php } ?>
 	<div style="width:75%; margin:auto;">
 		<?php
 			$this->widget('zii.widgets.grid.CGridView', array(
@@ -264,9 +266,22 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 	} else {
 		echo CHtml::button('Kembali', array('submit'=>array('site/dashboard'), 'class'=>'sidafbutton')); 
 	}
-	if(Yii::app()->user->getState('role') == 'kdivmum'){
-		if($cpengadaan->status==98){
-			echo CHtml::button('Gagalkan Pengadaan',array('submit'=> array('detailpengadaan','id'=>$cpengadaan->id_pengadaan), 'class'=>'sidafbutton'));
-		}
-	}
 ?>
+<?php if(Yii::app()->user->getState('role') == 'kdivmum'){ ?>
+		<?php if($cpengadaan->status==98){ ?>
+				<div class="form">
+					
+					<?php $form=$this->beginWidget('CActiveForm', array(
+					'id'=>'batalkanpengadaan',
+					'enableAjaxValidation'=>false,
+					)); ?>
+					
+					<div class="row buttons">
+						<?php echo CHtml::submitButton('Batalkan Pengadaan',array('class'=>'sidafbutton')); ?>
+					</div>
+					
+					<?php $this->endWidget(); ?>
+					
+				</div>
+		<?php } ?>
+<?php } ?>
