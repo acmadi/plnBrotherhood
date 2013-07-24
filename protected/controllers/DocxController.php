@@ -417,8 +417,12 @@ class DocxController extends Controller
 			
 			$ndbp=NotaDinasPemberitahuanPemenang::model()->findByPk($Dok->id_dokumen);		
 			$doksupph = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
-			$supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
-			
+			// $supph = SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
+			$DokNDPP = Dokumen::model()->find('id_pengadaan = '. $Peng->id_pengadaan. ' and nama_dokumen = "Nota Dinas Perintah Pengadaan"');
+			$NDPP = NotaDinasPerintahPengadaan::model()->findByPk($DokNDPP->id_dokumen);
+			$pemberiTugas = Jabatan::model()->findByPk($NDPP->dari)->jabatan;
+			$nama_pemberiTugas =Kdivmum::model()->find('id_jabatan = '.$NDPP->dari.' and status_user = "Aktif"')->nama;
+			$namapengadaan = $Peng->nama_pengadaan;
 			$Panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			if($Panitia->jenis_panitia=="Panitia"){
 				$kal="Ketua";
@@ -428,14 +432,21 @@ class DocxController extends Controller
 				$nama = $Panitia->nama_panitia;
 			}
 			
+			$listPanitiaTanpaKetua = $this->getListPanitiaAanwijzing($Peng->id_panitia);				
+			
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			
 			$this->doccy->phpdocx->assign('#nomor#', $ndbp->nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
 			$this->doccy->phpdocx->assign('#listpenyedia#', $this->getPenyediaXMasukPenawaran1($Peng->id_pengadaan));
-			$this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
-			$this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
+			$this->doccy->phpdocx->assign('#listperusahaan#', $PP->perusahaan);
+			$this->doccy->phpdocx->assign('#listapanitia#', $listPanitiaTanpaKetua);
+			$this->doccy->phpdocx->assign('#namapengadaan#', $namapengadaan);
+			$this->doccy->phpdocx->assign('#PemberiTugas#', $pemberiTugas);
+			$this->doccy->phpdocx->assign('#NamaPemberiTugas#', $nama_pemberiTugas);
+			// $this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
+			// $this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
 			$this->doccy->phpdocx->assign('#penyedia#', $PP->perusahaan);
 			$this->doccy->phpdocx->assign('#biaya#', RupiahMaker::convertInt($PP->biaya));
 			$this->doccy->phpdocx->assign('#keterangan#', $ndbp->keterangan);
