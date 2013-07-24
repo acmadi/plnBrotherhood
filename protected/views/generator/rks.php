@@ -82,7 +82,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<?php echo CHtml::errorSummary($Rks);?>
 				
 				<div class='kelompokform'>
-					<?php if ($Rks->isNewRecord){ ?>
+					<?php if ($Pengadaan->metode_pengadaan=="Pelelangan"){ ?>
 						<div class="row">
 							<?php echo $form->labelEx($Rks,'jenis rks'); ?>
 							<?php echo $form->radioButtonList($Rks,'tipe_rks',
