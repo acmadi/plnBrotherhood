@@ -591,6 +591,83 @@ class AdminController extends Controller
 			));
 		}
 	}
+
+	public function actionTambahlibur()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$libur = new Libur;
+			if (isset($_POST['Libur'])) {
+				$libur->attributes = $_POST['Libur'];
+				$libur->tanggal = date('Y-m-d', strtotime($libur->tanggal));
+				$old = Libur::model()->findByPk($libur->tanggal);
+				if ($old != null) {
+					$old->keterangan = $libur->keterangan;
+					if ($old->save(false)) {
+						$this->redirect(array('libur'));
+					}
+				}
+				if ($libur->save(false)) {
+					$this->redirect(array('libur'));
+				}
+			}
+			$this->render('tambahlibur', array(
+				'libur'=>$libur,
+			));
+		}
+	}
+
+	public function actionHapuslibur()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$id = Yii::app()->getRequest()->getQuery('id');
+			Libur::model()->deleteByPk($id);
+		}
+	}
+
+	public function actionDownloadlibur()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			$liburs = Libur::model()->findAll();
+			$templatePath = $_SERVER["DOCUMENT_ROOT"] . Yii::app()->request->baseUrl . '/templates/';
+			$objPHPExcel = new PHPExcel;
+			$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+			$objPHPExcel = $objReader->load($templatePath . 'libur.xlsx');
+			$row = 3;
+			foreach ($liburs as $libur) {
+				$objPHPExcel->getActiveSheet()->setCellValue('B' . $row, Tanggal::getTanggalStrip($libur->tanggal));
+				$objPHPExcel->getActiveSheet()->setCellValue('C' . $row, $libur->keterangan);
+				$row++;
+			}
+			header('Content-Disposition: attachment;filename="Daftar Hari Libur.xlsx"');
+			header('Content-Type: application/vnd.ms-excel');
+			header('Cache-Control: max-age=0');
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+			$objWriter->save('php://output');
+		}
+	}
+
+	public function actionUploadlibur()
+	{
+		if (Yii::app()->user->getState('asAdmin')) {
+			if (isset($_FILES['libur'])) {
+				Libur::model()->deleteAll();
+				$objPHPExcel = new PHPExcel;
+				$objReader = PHPExcel_IOFactory::createReader('Excel2007');
+				$objPHPExcel = $objReader->load(CUploadedFile::getInstanceByName('libur')->tempName);
+				$row = 3;
+				while ($objPHPExcel->getActiveSheet()->getCell('B' . $row)->getValue() != '') {
+					$libur = new Libur;
+					$libur->tanggal = date('Y-m-d', strtotime($objPHPExcel->getActiveSheet()->getCell('B' . $row)->getValue()));
+					$libur->keterangan = $objPHPExcel->getActiveSheet()->getCell('C' . $row)->getValue();
+					$libur->save(false);
+					$row++;
+				}
+				$this->redirect(array('libur'));
+			}
+			$libur = new Libur;
+			$this->render('uploadlibur');
+		}
+	}
 	
 	public function actionAutocomplete()
 	{

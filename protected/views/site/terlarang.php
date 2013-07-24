@@ -1,6 +1,4 @@
 <?php
-/* @var $this SiteController */
-/* @var $error array */
 
 $this->pageTitle=Yii::app()->name . ' - Error';
 // $this->breadcrumbs=array(
@@ -8,5 +6,5 @@ $this->pageTitle=Yii::app()->name . ' - Error';
 // );
 ?>
 
-<h2>Anda tidak diotorisasi untuk melakukan action ini.</h2>
+<h2>Anda tidak diotorisasi untuk melakukan aksi ini.</h2>
 
