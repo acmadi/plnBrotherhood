@@ -44,6 +44,7 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
 			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
 			$metode_pengadaan = $Peng->metode_pengadaan;
+			$this->doccy->phpdocx->assign('#metode pengadaan#', $metode_pengadaan);
 			$this->renderDocx("RKS-Daftar Isi-".$Peng->nama_pengadaan.".docx", true);
 		} else if ($Rincian->nama_rincian=="Isi") {
 //-----------------------------Isi
