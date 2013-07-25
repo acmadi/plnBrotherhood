@@ -7,6 +7,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
+	<div id="sidebar">	
+		<?php if(!Yii::app()->user->isGuest) $this->widget('KontrakPortlet'); ?>
+	</div>
 
 	<div id="maincontent">
 	
