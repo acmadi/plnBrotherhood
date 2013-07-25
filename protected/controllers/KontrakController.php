@@ -49,19 +49,20 @@
 				$suratkontrak->id_dokumen = $newDokumenKontrak->id_dokumen;
 				$suratkontrak->username = Yii::app()->user->name;
 				$suratkontrak->tanggal_mulai = date('d-m-Y');
+				$suratkontrak->tanggal_selesai = date('d-m-Y');
+				$suratkontrak->jenis_kontrak = "Barang dan Jasa";
 				
 				if(isset($_POST['DokumenKontrak'])){
 				$suratkontrak->attributes=$_POST['DokumenKontrak'];
 				$valid=$suratkontrak->validate();
 				$valid=$valid&&$newDokumenKontrak->validate();
 				if($valid){
-					if($Pengadaan->save(false)){
 						if($newDokumenKontrak->save(false)){
 							if($suratkontrak->save(false)){
-								$this->redirect(array('editsuratkontrak', 'id'=>$id, 'suratkontrak'=>$suratkontrak));											
+								$this->redirect(array('kontrak/editsuratkontrak', 'id'=>$id, 'suratkontrak'=>$suratkontrak));
 							}
 						}
-					}
+					
 				}
 				}
 				$this->render('suratkontrak',array('id'=>$id, 'suratkontrak'=>$suratkontrak));				
@@ -89,7 +90,7 @@
 				$this->render('suratkontrak',array('id'=>$id, 'suratkontrak'=>$suratkontrak,'dokumenkontrak'=>$DokumenKontrak));	
 		}
 		
-		public function actionNotadinaspengawas(){
+		public function actionNotadinaspengawasan(){
 			$id = Yii::app()->getRequest()->getQuery("id");
 			if(Yii::app()->user->isGuest){
 				$this->redirect(array('site/login'));				
@@ -122,7 +123,7 @@
 					if($Pengadaan->save(false)){
 						if($newDokumen->save(false)){
 							if($notadinaspengawasan->save(false)){
-								$this->redirect(array('editnotadinaspengawasa', 'id'=>$id, 'notadinaspengawasan'=>$notadinaspengawasan));											
+								$this->redirect(array('editnotadinaspengawasan', 'id'=>$id, 'notadinaspengawasan'=>$notadinaspengawasan));											
 							}
 						}
 					}
@@ -131,6 +132,8 @@
 				$this->render('notadinaspengawasan',array('id'=>$id, 'notadinaspengawasan'=>$notadinaspengawasan));				
 			}
 		}
+		
+		public function actionEditnotadinaspengawasan(){}
 		
 	}
 ?>
