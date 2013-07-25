@@ -89,5 +89,7 @@
 				$this->render('suratkontrak',array('id'=>$id, 'suratkontrak'=>$suratkontrak,'dokumenkontrak'=>$DokumenKontrak));	
 		}
 		
+		public function actionNotadinaspengawas(){}
+		
 	}
 ?>
