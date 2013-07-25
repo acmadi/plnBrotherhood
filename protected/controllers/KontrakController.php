@@ -157,13 +157,15 @@
 				$this->render('notadinaspengawasan',array('id'=>$id, 'notadinaspengawasan'=>$notadinaspengawasan));	
 		}
 		
-				public function actionDetailkontrak() {
+	public function actionDetailkontrak() {
 			if (Yii::app()->user->isGuest) {
 				$this->redirect(array('site/login'));
 			}
 			else {
+				$id = Yii::app()->getRequest()->getQuery("id");
+				$DokumenKontrak = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Kontrak"');
 				$suratkontrak = DokumenKontrak::model()->findByPk($DokumenKontrak->id_dokumen);
-				
+				echo $DokumenKontrak->id_dokumen;
 				$model=new DokumenKontrak('search');
 				$model->unsetAttributes();  
 				if(isset($_GET['DokumenKontrak'])){
@@ -175,7 +177,7 @@
 					}
 				}
 				$this->render('detailkontrak', array(
-					'model'=>$model,
+					'suratkontrak'=>$suratkontrak,
 				));
 			}
 		

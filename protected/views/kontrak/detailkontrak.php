@@ -1,8 +1,7 @@
 <?php
 /* @var $this KontrakController */
 $id = Yii::app()->getRequest()->getQuery('id');
-$DokumenKontrak = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Kontrak"');
-$suratkontrak = DokumenKontrak::model()->findByPk($DokumenKontrak->id_dokumen);
+
 
 $this->pageTitle=Yii::app()->name . ' | ' . $suratkontrak->idDokumen->nama_dokumen;
 $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
