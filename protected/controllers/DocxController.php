@@ -748,6 +748,17 @@ class DocxController extends Controller
 			
 			$this->renderDocx("Nota Dinas Laporan Pengadaan Gagal-".$Peng->nama_pengadaan.".docx", true);
 		}
+		else if($Dok->nama_dokumen="Nota Dinas Pengawasan"){
+			$this->doccy->newFile('18 nota dinas pengawasan.docx');
+			
+			$this->doccy->phpdocx->assignToHeader("#HEADER1#",""); // basic field mapping to header
+			$this->doccy->phpdocx->assignToFooter("#FOOTER1#",""); // basic field mapping to footer
+			
+			$this->doccy->phpdocx->assign('#nomornotadinas#', $nomornotadinas);
+			
+			
+			$this->renderDocx("Nota Dinas Direksi dan Pengawasan-".$Peng->nama_pengadaan.".docx", true);
+		}
 //	=================================================================Surat-Surat=================================================================
 		else if ($Dok->nama_dokumen == "Surat Undangan Pengambilan Dokumen Pengadaan"){
 			
