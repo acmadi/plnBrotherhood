@@ -46,95 +46,94 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				'enableAjaxValidation'=>false,
 			)); ?>
 			
-				<h4><b> Surat Kontrak </b></h4>
+				<h4><b> Nota Dinas Direksi dan Pengawasan </b></h4>
 				
-				<?php echo CHtml::errorSummary($suratkontrak);?>
+				<?php echo CHtml::errorSummary($notadinaspengawasan);?>
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'nomor');
-					echo $form->textField($suratkontrak, 'Nomor');
-					echo $form->error($suratkontrak, 'nomor');
+					echo $form->labelEx($notadinaspengawasan, 'nomor');
+					echo $form->textField($notadinaspengawasan, 'nomor');
+					echo $form->error($notadinaspengawasan, 'nomor');
 				?>
 				</div>
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'Tanggal Mulai');
-					$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-							'model'=>$suratkontrak,
-							'attribute'=>'tanggal_mulai',
-							'value'=>$suratkontrak->tanggal_mulai,
-							'htmlOptions'=>array('size'=>56),
-							'options'=>array(
-							'dateFormat'=>'dd-mm-yy',
-							),
-						));
-					echo $form->error($suratkontrak, 'tanggal_mulai');
+					echo $form->labelEx($notadinaspengawasan, 'Nama Direksi');
+					echo $form->textField($notadinaspengawasan, 'nama_direksi');
+					echo $form->error($notadinaspengawasan, 'nama_direksi');
 				?>
 				</div>
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'Tanggal Selesai');
-					$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-							'model'=>$suratkontrak,
-							'attribute'=>'tanggal_selesai',
-							'value'=>$suratkontrak->tanggal_selesai,
-							'htmlOptions'=>array('size'=>56),
-							'options'=>array(
-							'dateFormat'=>'dd-mm-yy',
-							),
-						));
-					echo $form->error($suratkontrak, 'tanggal_selesai');
+					echo $form->labelEx($notadinaspengawasan, 'NIP direksi');
+					echo $form->textField($notadinaspengawasan, 'nip_direksi');
+					echo $form->error($notadinaspengawasan, 'nip_direksi');
 				?>
 				</div>
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'Jangka Waktu (dalam satuan hari)');
-					echo $form->textField($suratkontrak, 'jangka_waktu');
-					echo $form->error($suratkontrak, 'jangka_waktu');
+					echo $form->labelEx($notadinaspengawasan, 'Jabatan Direksi');
+					echo $form->textField($notadinaspengawasan, 'jabatan_direksi');
+					echo $form->error($notadinaspengawasan, 'jabatan_direksi');
 				?>
 				</div>
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'Nilai Kontrak');
-					echo $form->textField($suratkontrak, 'nilai_kontrak');
-					echo $form->error($suratkontrak, 'nilai_kontrak');
+					echo $form->labelEx($notadinaspengawasan, 'Email Direksi');
+					echo $form->textField($notadinaspengawasan, 'email_direksi');
+					echo $form->error($notadinaspengawasan, 'email_direksi');
 				?>
 				</div>
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'Lokasi File');
-					echo $form->textField($suratkontrak, 'lokasi_file');
-					echo $form->error($suratkontrak, 'lokasi_file');
+					echo $form->labelEx($notadinaspengawasan, 'Nama Pengawas');
+					echo $form->textField($notadinaspengawasan, 'nama_pengawas');
+					echo $form->error($notadinaspengawasan, 'nama_pengawas');
 				?>
 				</div>
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($suratkontrak, 'Nomor Rekening');
-					echo $form->textField($suratkontrak, 'no_rek');
-					echo $form->error($suratkontrak, 'no_rek');
+					echo $form->labelEx($notadinaspengawasan, 'NIP pengawas');
+					echo $form->textField($notadinaspengawasan, 'nip_pengawas');
+					echo $form->error($notadinaspengawasan, 'nip_pengawas');
+				?>
+				</div>
+				<div class="row">
+				<?php
+					echo $form->labelEx($notadinaspengawasan, 'Jabatan Pengawas');
+					echo $form->textField($notadinaspengawasan, 'jabatan_pengawas');
+					echo $form->error($notadinaspengawasan, 'jabatan_pengawas');
+				?>
+				</div>
+				
+				<div class="row">
+				<?php
+					echo $form->labelEx($notadinaspengawasan, 'Email Pengawas');
+					echo $form->textField($notadinaspengawasan, 'email_pengawas');
+					echo $form->error($notadinaspengawasan, 'email_pengawas');
 				?>
 				</div>
 
 				<div class="row buttons">
-					<?php echo CHtml::submitButton($suratkontrak->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+					<?php echo CHtml::submitButton($notadinaspengawasan->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
 
 				<?php $this->endWidget() ?>
 			</div>
 				
-				<?php if (!$suratkontrak->isNewRecord){ ?>	
+				<?php if (!$notadinaspengawasan->isNewRecord){ ?>	
 			<br/>
 			<div style="border-top:1px solid lightblue">
 			<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">				
-				<li><?php echo CHtml::link('Surat Kontrak', array('docx/download','id'=>$suratkontrak->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Nota Dinas ireksi dan Pengawasan', array('docx/download','id'=>$notadinaspengawasan->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	
