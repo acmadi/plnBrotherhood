@@ -745,7 +745,7 @@
 				$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Pakta Integritas Penyedia"');
 				$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Surat Pernyataan Minat"');
 				$Dokumen3= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Form Isian Kualifikasi"');
-				
+				$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
 				$DPK= DokumenPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
 				$DPK->tanggal_pengambilan1=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan1);
 				$DPK->tanggal_pengambilan2=Tanggal::getTanggalStrip($DPK->tanggal_pengambilan2);
@@ -1199,8 +1199,6 @@
 			}			
 			else if (Pengadaan::model()->findByPk($id)->status > '8' && Pengadaan::model()->findByPk($id)->status < '99' && Anggota::model()->exists('username = "' . Yii::app()->user->name . '" and id_panitia = "' . Pengadaan::model()->findByPk($id)->id_panitia . '"')) {						
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="9";
-				
 				$PP = PenerimaPengadaan::model()->findAll('pendaftaran_pelelangan_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
 				
 				if(isset($_POST['perusahaan'])){
@@ -1211,12 +1209,8 @@
 							$PP[$i]->pengambilan_lelang_pq = $_POST['pengambilan_lelang_pq'][$i];	
 							$PP[$i]->save();
 						}
-					}												
-					
-					if($Pengadaan->save(false)){	
-						$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
-					}			
-					
+					}	
+					$this->redirect(array('editpengambilandokumenprakualifikasi','id'=>$id));					
 				}
 										
 				$this->render('pengambilandokumenprakualifikasi',array(
@@ -1228,7 +1222,7 @@
 			}
 		}
 	
-		public function actionPenyampaianDokumenPrakualifikasi()
+		public function actionPenyampaianDokumenPrakualifikasiBagian1()
 		{	
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
@@ -1237,7 +1231,7 @@
 			if (Yii::app()->user->getState('role') == 'anggota') {
 				
 				$Pengadaan=Pengadaan::model()->findByPk($id);
-				$Pengadaan->status="11";
+				$Pengadaan->status="10";
 				
 				$DokDp= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
 				$DPK= DokumenPrakualifikasi::model()->findByPk($DokDp->id_dokumen);
@@ -1270,44 +1264,28 @@
 				$DH->id_dokumen=$Dokumen1->id_dokumen;
 				$DH->acara='Penerimaan Prakualifikasi';
 				$DH->tempat_hadir=$DPK->tempat_pemasukan;
-				$DH->jam=$DPK->waktu_pemasukan2;
-										
-				if($Pengadaan->metode_pengadaan == "Pelelangan"){
-					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-				}
-				else {
-					$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-				}
+				$DH->jam=Tanggal::getJamMenit($DPK->waktu_pemasukan2);
+				
 				if(isset($_POST['BeritaAcaraPenerimaanPq']))
 				{
 					$Dokumen0->attributes=$_POST['Dokumen'];
 					$BAPPQ->attributes=$_POST['BeritaAcaraPenerimaanPq'];
 					$valid=$BAPPQ->validate();
 					$valid=$valid&&$Dokumen0->validate();
-					if($valid){						
-						if(isset($_POST['perusahaan'])){													
-							for($i=0;$i<count($PP);$i++){
-								if(isset($_POST['perusahaan'][$i])){			
-									$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-									$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
-									$PP[$i]->save();
-								}
-							}							
-						}
-					
+					if($valid){											
 						if($Pengadaan->save(false))
 						{	
 							if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 								if($BAPPQ->save(false)&&$DH->save(false)){
-									$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));
+									$this->redirect(array('editpenyampaiandokumenprakualifikasibagian1','id'=>$id));
 								}
 							}
 						}						
 					}
 				}
 				
-				$this->render('penyampaiandokumenprakualifikasi',array(
-					'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
+				$this->render('penyampaiandokumenprakualifikasibagian1',array(
+					'Dokumen0'=>$Dokumen0,'Pengadaan'=>$Pengadaan,'BAPPQ'=>$BAPPQ,'DH'=>$DH,
 				));
 			}
 			else {
@@ -1315,7 +1293,7 @@
 			}
 		}
 		
-		public function actionEditPenyampaianDokumenPrakualifikasi()
+		public function actionEditPenyampaianDokumenPrakualifikasiBagian1()
 		{	
 			$id = Yii::app()->getRequest()->getQuery('id');
 			if (Yii::app()->user->isGuest) {
@@ -1333,48 +1311,105 @@
 					$BAPPQ= BeritaAcaraPenerimaanPq::model()->findByPk($Dokumen0->id_dokumen);
 					$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
 					
-					if($Pengadaan->metode_pengadaan == "Pelelangan"){
-						$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}
-					else {
-						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}
 					if(isset($_POST['BeritaAcaraPenerimaanPq']))
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
 						$BAPPQ->attributes=$_POST['BeritaAcaraPenerimaanPq'];
 						$valid=$BAPPQ->validate();
 						$valid=$valid&&$Dokumen0->validate();
-						if($valid){
-						
-							if(isset($_POST['perusahaan'])){												
-								for($i=0;$i<count($PP);$i++){
-									if(isset($_POST['perusahaan'][$i])){																																																
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
-										$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
-										$PP[$i]->save();
-									}
-								}
-							}
-					
+						if($valid){					
 							if($Pengadaan->save(false))
 							{	
 								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
 									if($BAPPQ->save(false)&&$DH->save(false)){
-										$this->redirect(array('editpenyampaiandokumenprakualifikasi','id'=>$id));
+										$this->redirect(array('editpenyampaiandokumenprakualifikasibagian1','id'=>$id));
 									}
 								}
 							}						
 						}
 					}
 						
-					$this->render('penyampaiandokumenprakualifikasi',array(
-						'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,'PP'=>$PP,
+					$this->render('penyampaiandokumenprakualifikasibagian1',array(
+						'Pengadaan'=>$Pengadaan,'Dokumen0'=>$Dokumen0,'BAPPQ'=>$BAPPQ,'DH'=>$DH,
 					));
 				}			
 			}
 		}
-	
+		
+		public function actionPenyampaianDokumenPrakualifikasiBagian2()
+		{	
+			$id = Yii::app()->getRequest()->getQuery('id');
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}			
+			if (Yii::app()->user->getState('role') == 'anggota') {
+				
+				$Pengadaan=Pengadaan::model()->findByPk($id);
+				$Pengadaan->status="11";
+										
+				if($Pengadaan->metode_pengadaan == "Pelelangan"){
+					$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
+				else {
+					$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+				}
+							
+				if(isset($_POST['perusahaan'])){	
+					for($i=0;$i<count($PP);$i++){
+						if(isset($_POST['perusahaan'][$i])){			
+							$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+							$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
+							$PP[$i]->save();
+						}
+					}
+					if($Pengadaan->save(false)){	
+						$this->redirect(array('editpenyampaiandokumenprakualifikasibagian2','id'=>$id));					
+					}	
+				}
+				
+				$this->render('penyampaiandokumenprakualifikasibagian2',array('PP'=>$PP,
+				));
+			}
+			else {
+				$this->redirect(array('site/terlarang'));
+			}
+		}
+		
+		public function actionEditPenyampaianDokumenPrakualifikasiBagian2()
+		{	
+			$id = Yii::app()->getRequest()->getQuery('id');
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				if (Yii::app()->user->getState('role') == 'anggota') {
+					
+					$Pengadaan=Pengadaan::model()->findByPk($id);
+					
+					if($Pengadaan->metode_pengadaan == "Pelelangan"){
+						$PP = PenerimaPengadaan::model()->findAll('pengambilan_lelang_pq = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
+					else {
+						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
+					
+					if(isset($_POST['perusahaan'])){	
+					for($i=0;$i<count($PP);$i++){
+							if(isset($_POST['perusahaan'][$i])){			
+								$PP[$i]->perusahaan=$_POST['perusahaan'][$i];									
+								$PP[$i]->penyampaian_lelang = $_POST['penyampaian_lelang'][$i];
+								$PP[$i]->save();
+							}
+						}	
+						$this->redirect(array('editpenyampaiandokumenprakualifikasibagian2','id'=>$id));						
+					}
+						
+					$this->render('penyampaiandokumenprakualifikasibagian2',array('PP'=>$PP,
+					));
+				}			
+			}
+		}
+		
 		public function actionEvaluasiDokumenPrakualifikasi()
 		{	
 			$id = Yii::app()->getRequest()->getQuery('id');
@@ -1385,7 +1420,7 @@
 				if (Yii::app()->user->getState('role') == 'anggota') {
 					
 					$Pengadaan=Pengadaan::model()->findByPk($id);
-					$Pengadaan->status="13";
+					$Pengadaan->status="12";
 					
 					$DokDp= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Dokumen Prakualifikasi"');
 					$DPK= DokumenPrakualifikasi::model()->findByPk($DokDp->id_dokumen);
@@ -1400,35 +1435,32 @@
 					$Dokumen0->nama_dokumen='Berita Acara Evaluasi Prakualifikasi';
 					$Dokumen0->tempat='Jakarta';
 					$Dokumen0->status_upload='Belum Selesai';
-					date_default_timezone_set("Asia/Jakarta");
-					$Dokumen0->tanggal=date('d-m-Y');
-					$Dokumen0->tanggal=$DPK->tanggal_evaluasi;
+					$Dokumen0->tanggal=Tanggal::getTanggalStrip($DPK->tanggal_evaluasi);
 					
 					$Dokumen1=new Dokumen;
 					$Dokumen1->id_dokumen=$somevariable+2;
-					$Dokumen1->nama_dokumen='Daftar Hadir Evaluasi Prakualifikasi';
+					$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
+					$Dokumen1->nama_dokumen='Lampiran Berita Acara Evaluasi Prakualifikasi';
 					$Dokumen1->tempat='Jakarta';
 					$Dokumen1->status_upload='Belum Selesai';
-					$Dokumen1->id_pengadaan=$Pengadaan->id_pengadaan;
-					$Dokumen1->tanggal=$DPK->tanggal_evaluasi;
+					
+					$Dokumen2=new Dokumen;
+					$Dokumen2->id_dokumen=$somevariable+3;
+					$Dokumen2->nama_dokumen='Daftar Hadir Evaluasi Prakualifikasi';
+					$Dokumen2->tempat='Jakarta';
+					$Dokumen2->status_upload='Belum Selesai';
+					$Dokumen2->id_pengadaan=$Pengadaan->id_pengadaan;
 					
 					$BAEPK= new BeritaAcaraEvaluasiPrakualifikasi;
 					$BAEPK->id_dokumen=$Dokumen0->id_dokumen;
+					$BAEPK->nomor='-';
+					$BAEPK->waktu=Tanggal::getJamMenit($DPK->waktu_evaluasi);
+					$BAEPK->tempat=$DPK->tempat_evaluasi;
 					
 					$DH= new DaftarHadir;
-					$DH->id_dokumen=$Dokumen1->id_dokumen;
-					$DH->acara='Evaluasi Prakualifikasi '.$Pengadaan->nama_pengadaan;
-					$DH->tempat_hadir=$DPK->tempat_evaluasi;
-					$DH->jam=$DPK->waktu_evaluasi;
-					
-					if($Pengadaan->metode_pengadaan == 'Pelelangan'){
-						$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}else{
-						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
-					}
-					
-				
-
+					$DH->id_dokumen=$Dokumen2->id_dokumen;
+					$DH->acara='Evaluasi Prakualifikasi';
+	
 					if(isset($_POST['BeritaAcaraEvaluasiPrakualifikasi']))
 					{
 						$Dokumen0->attributes=$_POST['Dokumen'];
@@ -1436,20 +1468,13 @@
 						$valid=$BAEPK->validate();
 						$valid=$valid&&$Dokumen0->validate();
 						if($valid){
-						
-							if(isset($_POST['perusahaan'])){
-															
-								for($i=0;$i<count($PP);$i++){
-									if(isset($_POST['perusahaan'][$i])){																																																
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																																		
-										$PP[$i]->evaluasi_pq = $_POST['evaluasi_pq'][$i];	
-										$PP[$i]->save();
-									}
-								}								
-							}
+							$Dokumen1->tanggal=$Dokumen0->tanggal;
+							$Dokumen2->tanggal=$Dokumen0->tanggal;
+							$DH->tempat_hadir=$BAEPK->tempat;
+							$DH->jam=$BAEPK->waktu;
 							if($Pengadaan->save(false))
 							{	
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
+								if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
 									if($BAEPK->save(false)&&$DH->save(false)){
 										$this->redirect(array('editevaluasidokumenprakualifikasi','id'=>$id));
 									}
@@ -1459,7 +1484,7 @@
 					}
 					
 					$this->render('evaluasidokumenprakualifikasi',array(
-						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0,'DH'=>$DH, 'PP'=>$PP,
+						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0,'DH'=>$DH,
 					));
 				}
 			}
@@ -1478,10 +1503,53 @@
 					
 					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Prakualifikasi"');
 					$Dokumen0->tanggal=Tanggal::getTanggalStrip($Dokumen0->tanggal);
-					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Prakualifikasi"');
+					$Dokumen1= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Prakualifikasi"');
+					$Dokumen2= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Daftar Hadir Evaluasi Prakualifikasi"');
 					
 					$BAEPK= BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
-					$DH=DaftarHadir::model()->findByPk($Dokumen1->id_dokumen);
+					$DH=DaftarHadir::model()->findByPk($Dokumen2->id_dokumen);
+		
+					
+					if(isset($_POST['BeritaAcaraEvaluasiPrakualifikasi']))
+					{
+						$Dokumen0->attributes=$_POST['Dokumen'];
+						$BAEPK->attributes=$_POST['BeritaAcaraEvaluasiPrakualifikasi'];
+						$valid=$BAEPK->validate();
+						$valid=$valid&&$Dokumen0->validate();
+						if($valid){
+							$Dokumen1->tanggal=$Dokumen0->tanggal;
+							$Dokumen2->tanggal=$Dokumen0->tanggal;
+							$DH->tempat_hadir=$BAEPK->tempat;
+							$DH->jam=$BAEPK->waktu;
+							if($Dokumen0->save(false)&&$Dokumen1->save(false)&&$Dokumen2->save(false)){
+								if($BAEPK->save(false)&&$DH->save(false)){
+									$this->redirect(array('editevaluasidokumenprakualifikasi','id'=>$id));
+								}
+							}					
+						}
+					}
+					
+					$this->render('evaluasidokumenprakualifikasi',array(
+						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0,'Dokumen1'=>$Dokumen1,'DH'=>$DH,
+					));
+				}
+			}
+		}
+		
+		public function actionBeritaAcaraEvaluasiDokumenPrakualifikasi()
+		{	
+			$id = Yii::app()->getRequest()->getQuery('id');
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				if (Yii::app()->user->getState('role') == 'anggota') {
+					
+					$Pengadaan=Pengadaan::model()->findByPk($id);
+					$Pengadaan->status="13";
+					
+					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Prakualifikasi"');
+					$BAEPK= BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
 					
 					if($Pengadaan->metode_pengadaan == 'Pelelangan'){
 						$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
@@ -1491,36 +1559,76 @@
 					
 					if(isset($_POST['BeritaAcaraEvaluasiPrakualifikasi']))
 					{
-						$Dokumen0->attributes=$_POST['Dokumen'];
 						$BAEPK->attributes=$_POST['BeritaAcaraEvaluasiPrakualifikasi'];
 						$valid=$BAEPK->validate();
-						$valid=$valid&&$Dokumen0->validate();
-						if($valid){
-							if(isset($_POST['perusahaan'])){
-															
+						if($valid){						
+							if(isset($_POST['perusahaan'])){															
 								for($i=0;$i<count($PP);$i++){
 									if(isset($_POST['perusahaan'][$i])){																																																
-										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];															
-										$PP[$i]->evaluasi_pq = $_POST['evaluasi_pq'][$i];															
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																																		
+										$PP[$i]->evaluasi_pq = $_POST['evaluasi_pq'][$i];	
 										$PP[$i]->save();
 									}
-								}
-								
+								}								
 							}
-							
 							if($Pengadaan->save(false))
 							{	
-								if($Dokumen0->save(false)&&$Dokumen1->save(false)){
-									if($BAEPK->save(false)&&$DH->save(false)){
-										$this->redirect(array('editevaluasidokumenprakualifikasi','id'=>$id));
-									}
+								if($BAEPK->save(false)){
+									$this->redirect(array('editberitaacaraevaluasidokumenprakualifikasi','id'=>$id));
 								}
 							}						
 						}
 					}
 					
-					$this->render('evaluasidokumenprakualifikasi',array(
-						'BAEPK'=>$BAEPK,'Dokumen0'=>$Dokumen0,'DH'=>$DH,'PP'=>$PP,
+					$this->render('beritaacaraevaluasidokumenprakualifikasi',array(
+						'BAEPK'=>$BAEPK,'PP'=>$PP,
+					));
+				}
+			}
+		}
+		
+		public function actionEditBeritaAcaraEvaluasiDokumenPrakualifikasi()
+		{	
+			$id = Yii::app()->getRequest()->getQuery('id');
+			if (Yii::app()->user->isGuest) {
+				$this->redirect(array('site/login'));
+			}
+			else {
+				if (Yii::app()->user->getState('role') == 'anggota') {
+					
+					$Pengadaan=Pengadaan::model()->findByPk($id);
+					
+					$Dokumen0= Dokumen::model()->find(('id_pengadaan='.$Pengadaan->id_pengadaan).' and nama_dokumen= "Berita Acara Evaluasi Prakualifikasi"');
+					$BAEPK= BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($Dokumen0->id_dokumen);
+					
+					if($Pengadaan->metode_pengadaan == 'Pelelangan'){
+						$PP = PenerimaPengadaan::model()->findAll('penyampaian_lelang = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}else{
+						$PP = PenerimaPengadaan::model()->findAll('undangan_prakualifikasi = "1" and id_pengadaan = ' . $Pengadaan->id_pengadaan);
+					}
+					
+					if(isset($_POST['BeritaAcaraEvaluasiPrakualifikasi']))
+					{
+						$BAEPK->attributes=$_POST['BeritaAcaraEvaluasiPrakualifikasi'];
+						$valid=$BAEPK->validate();
+						if($valid){						
+							if(isset($_POST['perusahaan'])){															
+								for($i=0;$i<count($PP);$i++){
+									if(isset($_POST['perusahaan'][$i])){																																																
+										$PP[$i]->perusahaan=$_POST['perusahaan'][$i];																																		
+										$PP[$i]->evaluasi_pq = $_POST['evaluasi_pq'][$i];	
+										$PP[$i]->save();
+									}
+								}								
+							}
+							if($BAEPK->save(false)){
+								$this->redirect(array('editberitaacaraevaluasidokumenprakualifikasi','id'=>$id));
+							}					
+						}
+					}
+					
+					$this->render('beritaacaraevaluasidokumenprakualifikasi',array(
+						'BAEPK'=>$BAEPK,'PP'=>$PP,
 					));
 				}
 			}

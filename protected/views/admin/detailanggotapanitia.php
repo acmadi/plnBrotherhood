@@ -87,6 +87,12 @@
 			<?php echo $form->error($anggota,'email'); ?>
 		</div>
 
+		<div class="row">
+			<?php echo $form->labelEx($anggota,'Jabatan'); ?> 
+			<?php echo $form->dropDownList($anggota,'jabatan', array('Ketua'=>'Ketua', 'Sekretaris'=>'Sekretaris', 'Anggota'=>'Anggota'), array('empty'=>'-----Pilih Jabatan------')); ?>
+			<?php echo $form->error($anggota,'jabatan'); ?>
+		</div>
+
 		<div class="row buttons">
 			<?php echo CHtml::submitButton('Perbarui',array('class'=>'sidafbutton')); ?>
 		</div>

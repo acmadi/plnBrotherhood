@@ -9,7 +9,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 	<div id="sidebar">
 		<?php if(!Yii::app()->user->isGuest) $this->widget('MenuPortlet'); ?>
 		<script type="text/javascript">
-			$('#10').attr('class','onprogress');
+			$('#5').attr('class','onprogress');
 		</script>
 	</div>
 
@@ -19,12 +19,16 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 		?>
 			
 			<div id="menuform">
+				
 				<?php
-				$this->widget('zii.widgets.CMenu', array(
-						'items'=>array(							
-							array('label'=>'Pengambilan Dokumen Pengadaan', 'url'=>array($Pengadaan->status == '19' ?('/generator/pengambilandokumen'):('/generator/editpengambilandokumen'),'id'=>$id)),
-						),
-					));
+					$this->widget('zii.widgets.CMenu', array(
+							'items'=>array(
+								array('label'=>'Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='9'?('/generator/penyampaiandokumenprakualifikasibagian1'):('/generator/editpenyampaiandokumenprakualifikasibagian1'),'id'=>$id)),
+								array('label'=>'BA Penyampaian Dokumen', 'url'=>array($Pengadaan->status=='10'?('/generator/penyampaiandokumenprakualifikasibagian2'):($Pengadaan->status=='9'?'':('/generator/editpenyampaiandokumenprakualifikasibagian2')),'id'=>$id)),
+								array('label'=>'Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='11'?('/generator/evaluasidokumenprakualifikasi'):($Pengadaan->status=='10'?'':($Pengadaan->status=='9'?'':'/generator/editevaluasidokumenprakualifikasi')),'id'=>$id)),
+								array('label'=>'BA Evaluasi Dokumen', 'url'=>array($Pengadaan->status=='12'?('/generator/beritaacaraevaluasidokumenprakualifikasi'):($Pengadaan->status=='11'?'':($Pengadaan->status=='10'?'':($Pengadaan->status=='9'?'':'/generator/editberitaacaraevaluasidokumenprakualifikasi'))),'id'=>$id)),
+							),
+						));
 				?>
 			</div>
 			<br/>
@@ -46,39 +50,36 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					</script>
 				</div>
 			<?php endif; ?>
-			
-			<div class="form" >
+	
+			 <div class="form" >
 
 			<?php $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'surat-undangan-pengambilan-dokumen-pengadaan-form',
 			'enableAjaxValidation'=>false,
-			)); ?>
+			 )); ?>
 			
-			<h4><b> Penyedia yang Mengambil Dokumen Pengadaan: </b></h4>
-	
+			<h4><b> Penyedia Yang Memasukan Dokumen Prakualifikasi </b></h4>			
 			<div class="row">
 				<?php 
 					$this->widget('application.extensions.appendo.JAppendo',array(
 					'id' => 'idpenyedia',        
-					'model' => $PP,
-					// 'model2' => $PP2,
-					'viewName' => 'formperusahaan_pengambilan_dokumen',
+					'model' => $PP,					
+					'viewName' => 'formperusahaan_penyampaian_dokumen_prakualifikasi',
 					'labelAdd' => '',
-					'labelDel' => '',
+					'labelDel' => 'Hapus Penyedia',
 					
 					)); 
 				?>
 			</div>
 			
 			<div class="row buttons">
-				<?php echo CHtml::submitButton($Pengadaan->status == '14' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
+				<?php echo CHtml::submitButton($Pengadaan->status == '10' ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 			</div>
-			
+				
 		<?php $this->endWidget(); ?>
 		
 		<br/>
-		</div><!-- form -->
-		
+		</div><!-- form -->	
 	<?php	} ?>
 	</div>
 </div>

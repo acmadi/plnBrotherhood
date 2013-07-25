@@ -71,9 +71,9 @@
 			<?php if($cpengadaan->status == '0'||$cpengadaan->status == '1'||$cpengadaan->status == '2'||$cpengadaan->status == '3'||$cpengadaan->status == '4'||$cpengadaan->status == '5'||$cpengadaan->status == '6'||$cpengadaan->status == '7'||$cpengadaan->status == '8'||$cpengadaan->status == '98') { ?>
 				<li class='belum' ><?php echo 'Penyampaian dan Evaluasi Kualifikasi'?></li>
 			<?php } else if($cpengadaan->status == '9') { ?>
-				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasibagian1","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '10') { ?>
-				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
+				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/penyampaiandokumenprakualifikasibagian2","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '11') { ?>
 				<li id="5" class='sudah' ><?php echo CHtml::link('Penyampaian dan Evaluasi Kualifikasi',array("generator/evaluasidokumenprakualifikasi","id"=>"$cpengadaan->id_pengadaan")); ?></li>
 			<?php } else if($cpengadaan->status == '12') { ?>

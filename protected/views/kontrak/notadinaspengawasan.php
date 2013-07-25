@@ -59,10 +59,10 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					echo $form->error($notadinaspengawasan, 'nomor');
 				?>
 				</div>
-				
+				<div class="kelompokform">
 				<div class="row">
 				<?php
-					echo $form->labelEx($notadinaspengawasan, 'Nama Direksi');
+					echo $form->labelEx($notadinaspengawasan, 'Nama Direksi Pekerjaan');
 					echo $form->textField($notadinaspengawasan, 'nama_direksi');
 					echo $form->error($notadinaspengawasan, 'nama_direksi');
 				?>
@@ -70,7 +70,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($notadinaspengawasan, 'NIP direksi');
+					echo $form->labelEx($notadinaspengawasan, 'NIP Direksi Pekerjaan');
 					echo $form->textField($notadinaspengawasan, 'nip_direksi');
 					echo $form->error($notadinaspengawasan, 'nip_direksi');
 				?>
@@ -78,7 +78,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($notadinaspengawasan, 'Jabatan Direksi');
+					echo $form->labelEx($notadinaspengawasan, 'Jabatan Direksi Pekerjaan');
 					echo $form->textField($notadinaspengawasan, 'jabatan_direksi');
 					echo $form->error($notadinaspengawasan, 'jabatan_direksi');
 				?>
@@ -86,12 +86,14 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				
 				<div class="row">
 				<?php
-					echo $form->labelEx($notadinaspengawasan, 'Email Direksi');
+					echo $form->labelEx($notadinaspengawasan, 'Email Direksi Pekerjaan');
 					echo $form->textField($notadinaspengawasan, 'email_direksi');
 					echo $form->error($notadinaspengawasan, 'email_direksi');
 				?>
 				</div>
-				
+				</div>
+				<br/>
+				<div class="kelompokform">
 				<div class="row">
 				<?php
 					echo $form->labelEx($notadinaspengawasan, 'Nama Pengawas');
@@ -122,7 +124,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 					echo $form->error($notadinaspengawasan, 'email_pengawas');
 				?>
 				</div>
-
+				</div>
 				<div class="row buttons">
 					<?php echo CHtml::submitButton($notadinaspengawasan->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
 				</div>
