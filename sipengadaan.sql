@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 24, 2013 at 12:10 PM
+-- Generation Time: Jul 25, 2013 at 10:04 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `divisi` (
 --
 
 INSERT INTO `divisi` (`id_divisi`, `nama_singkat`, `nama_divisi`) VALUES
-(1, 'DIVSIM', 'Divisi Sisitem dan Informasi');
+(1, 'DIVSIM', 'Divisi Sistem dan Informasi');
 
 -- --------------------------------------------------------
 
@@ -278,15 +278,16 @@ CREATE TABLE IF NOT EXISTS `dokumen` (
 CREATE TABLE IF NOT EXISTS `dokumen_kontrak` (
   `id_dokumen` bigint(32) NOT NULL,
   `username` varchar(256) NOT NULL,
-  `Nomor` varchar(256) NOT NULL,
+  `nomor` varchar(256) NOT NULL,
   `tanggal_mulai` date NOT NULL,
   `tanggal_selesai` date NOT NULL,
   `jangka_waktu` int(255) NOT NULL,
   `nilai_kontrak` bigint(20) NOT NULL,
   `lokasi_file` varchar(256) NOT NULL,
   `no_rek` varchar(256) NOT NULL,
+  `jenis_kontrak` varchar(128) NOT NULL,
   PRIMARY KEY (`id_dokumen`),
-  UNIQUE KEY `Nomor` (`Nomor`),
+  UNIQUE KEY `Nomor` (`nomor`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -444,6 +445,9 @@ CREATE TABLE IF NOT EXISTS `libur` (
 -- Dumping data for table `libur`
 --
 
+INSERT INTO `libur` (`tanggal`, `keterangan`) VALUES
+('2013-01-01', 'Tahun Baru 2013'),
+('2013-12-25', 'Hari Natal');
 
 -- --------------------------------------------------------
 
@@ -537,6 +541,31 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pengadaan_gagal_panitia` (
 
 --
 -- Dumping data for table `nota_dinas_pengadaan_gagal_panitia`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nota_dinas_pengawasan`
+--
+
+CREATE TABLE IF NOT EXISTS `nota_dinas_pengawasan` (
+  `id_dokumen` bigint(32) NOT NULL,
+  `nomor` varchar(255) NOT NULL,
+  `nama_direksi` varchar(255) NOT NULL,
+  `nip_direksi` varchar(255) NOT NULL,
+  `jabatan_direksi` varchar(255) NOT NULL,
+  `email_direksi` varchar(255) NOT NULL,
+  `nama_pengawas` varchar(255) NOT NULL,
+  `nip_pengawas` varchar(255) NOT NULL,
+  `jabatan_pengawas` varchar(255) NOT NULL,
+  `email_pengawas` varchar(255) NOT NULL,
+  KEY `id_dokumen` (`id_dokumen`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nota_dinas_pengawasan`
 --
 
 
@@ -1280,6 +1309,12 @@ ALTER TABLE `nota_dinas_penetapan_pemenang`
 --
 ALTER TABLE `nota_dinas_pengadaan_gagal_panitia`
   ADD CONSTRAINT `nota_dinas_pengadaan_gagal_panitia_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nota_dinas_pengawasan`
+--
+ALTER TABLE `nota_dinas_pengawasan`
+  ADD CONSTRAINT `nota_dinas_pengawasan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nota_dinas_perintah_pengadaan`

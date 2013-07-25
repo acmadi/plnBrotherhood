@@ -7,8 +7,6 @@
 <?php if (Yii::app()->user->getState('asAdmin')) { ?>
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'dataProvider'=>$model->searchAdmin(Yii::app()->user->name),
-		// 'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-		// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("admin/detailpanitia", array("id"=>"$model->id_panitia")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			array(
 				'name'=>'No',

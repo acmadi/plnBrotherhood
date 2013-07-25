@@ -82,6 +82,9 @@ class AnggaranController extends Controller
 			$this->render('kontrolanggaran', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
 			));
 		}
+		else {
+			$this->redirect(array('site/terlarang'));
+		}
 	}
 	
 	public function actionKontrolanggarandivisi()
@@ -153,6 +156,9 @@ class AnggaranController extends Controller
 			));
 			$this->render('kontrolanggarandivisi', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
 			));
+		}
+		else {
+			$this->redirect(array('site/terlarang'));
 		}
 	}
 }
