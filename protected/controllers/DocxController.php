@@ -445,9 +445,16 @@ class DocxController extends Controller
 			
 			$PP = PenerimaPengadaan::model()->find('penetapan_pemenang = "1"  and id_pengadaan = ' . $Peng->id_pengadaan);
 			
-			$ndbp=NotaDinasPemberitahuanPemenang::model()->findByPk($Dok->id_dokumen);		
-			$doksupph = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
-			$supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);			
+			$ndbp=NotaDinasPemberitahuanPemenang::model()->findByPk($Dok->id_dokumen);
+			if ($Peng->jenis_kualifikasi == "Pasca Kualifikasi") {
+				$doksupph = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Undangan Permintaan Penawaran Harga"');
+				$supph=SuratUndanganPermintaanPenawaranHarga::model()->findByPk($doksupph->id_dokumen);
+				$kalimatundaganpqatauspph= 'Sehubungan dengan Surat Permintaan Penawaran Harga No. '.$supph->nomor.' tanggal '.Tanggal::getTanggalLengkap($doksupph->tanggal).',';
+			} else {
+				$doksupk = Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Surat Pengumuman Hasil Kualifikasi"');
+				$supk=PengumumanHasilPrakualifikasi::model()->findByPk($doksupk->id_dokumen);
+				$kalimatundaganpqatauspph= 'Sehubungan dengan Surat Pengumuman Hasil Kualifikasi No. '.$supk->nomor.' tanggal '.Tanggal::getTanggalLengkap($doksupk->tanggal).',';
+			}
 			$panitia = Panitia::model()->findByPk($Peng->id_panitia);
 			$dokpenetapan=Dokumen::model()->find('id_pengadaan = '. $Dok->id_pengadaan . ' and nama_dokumen = "Nota Dinas Penetapan Pemenang"');
 			$penetapan = NotaDinasPenetapanPemenang::model()->findByPk($dokpenetapan->id_dokumen);			
@@ -459,8 +466,7 @@ class DocxController extends Controller
 			
 			$this->doccy->phpdocx->assign('#nomor#', $ndbp->nomor);
 			$this->doccy->phpdocx->assign('#tanggal#', Tanggal::getTanggalLengkap($Dok->tanggal));
-			$this->doccy->phpdocx->assign('#nosupph#', $supph->nomor);
-			$this->doccy->phpdocx->assign('#tglsupph#', Tanggal::getTanggalLengkap($doksupph->tanggal));
+			$this->doccy->phpdocx->assign('#kalimatundaganpqatauspph#', $kalimatundaganpqatauspph);
 			$this->doccy->phpdocx->assign('#nondpenetapan#', $penetapan->nomor);
 			$this->doccy->phpdocx->assign('#tglpenetapan#', Tanggal::getTanggalLengkap($dokpenetapan->tanggal));
 			$this->doccy->phpdocx->assign('#penyedia#', $PP->perusahaan);

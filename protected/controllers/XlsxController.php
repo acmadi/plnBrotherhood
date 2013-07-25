@@ -296,17 +296,6 @@ class XlsxController extends Controller
 						header('Content-Disposition: attachment;filename="Daftar Hadir Evaluasi Penawaran Tahap Dua - '.$cpengadaan->nama_pengadaan.'.xlsx"');
 					}
 		}
-		else if ($cdokumen->nama_dokumen == 'Pengumuman kualifikasi') {
-			$PHPQ=pengumumanhasilprakualifikasi::model()->findByPk($cdokumen->id_dokumen);
-			$objPHPExcel = $objReader->load($templatePath . '4b BA dan Hasil Kualifikasi.xlsx');
-					$this->assign($objPHPExcel, "#tanggal#", Tanggal::getTanggalLengkap($cdokumen->tanggal));
-					$this->assign($objPHPExcel, "#hari#", Tanggal::getHari($cdokumen->tanggal));
-					$this->assign($objPHPExcel, "#waktu#", $PHPQ->jam);
-					$this->assign($objPHPExcel, "#tempat#", $PHPQ->tempat_hadir);
-					$this->assign($objPHPExcel, "#acara#", $PHPQ->acara." ".$cpengadaan->nama_pengadaan);
-					$this->assign($objPHPExcel, "#namapengadaan#", $cpengadaan->nama_pengadaan);
-					
-		}
 		else if ($cdokumen->nama_dokumen == 'Berita Acara Evaluasi Prakualifikasi') {
 			$BAEPK=BeritaAcaraEvaluasiPrakualifikasi::model()->findByPk($cdokumen->id_dokumen);
 			$objPHPExcel = $objReader->load($templatePath . '4b Lamp BA Evaluasi Prakualifikasi.xlsx');
@@ -351,20 +340,6 @@ class XlsxController extends Controller
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 		$objWriter->save('php://output');
 	}
-
-	// function getListPanitiaTanpaKetua($idPan){
-		// if(Panitia::model()->findByPk($idPan)->jenis_panitia == "Pejabat"){
-			// $list = "";
-		// }else{
-			// $list = "1. " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Sekretaris"')->username)->nama;
-			// $n = (Panitia::model()->findByPk($idPan)->jumlah_anggota)-2;
-			// for ( $i=1;$i<=$n;$i++){
-				// $list .= '<w:br/>';
-				// $list .= $i+1 . ". " . User::model()->findByPk(Anggota::model()->find('id_panitia = ' . $idPan . ' and jabatan = "Anggota' . $i . '"')->username)->nama;				
-			// }
-		// }
-		// return  $list;
-	// }
 
 	function getListPanitiaTandaTangan($idPan, $namasheet, $kolomawal, $barisawal, $objPHPExcel){
 		$Pan = Panitia::model()->findByPk($idPan);
