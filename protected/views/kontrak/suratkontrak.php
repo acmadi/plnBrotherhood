@@ -7,7 +7,10 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
-
+	<div id="sidebar">	
+		<?php if(!Yii::app()->user->isGuest) $this->widget('KontrakPortlet'); ?>
+	</div>
+		
 	<div id="maincontent">
 	
 		<div id="menuform">
@@ -52,7 +55,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 				<div class="row">
 				<?php
 					echo $form->labelEx($suratkontrak, 'nomor');
-					echo $form->textField($suratkontrak, 'Nomor');
+					echo $form->textField($suratkontrak, 'nomor');
 					echo $form->error($suratkontrak, 'nomor');
 				?>
 				</div>

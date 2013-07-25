@@ -27,6 +27,7 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan per Divisi';
 		?>
 	</div>
 	<br />
+	<h4>Jumlah pengadaan: <?php echo $total; ?></h4>
 	<?php $this->widget('HighchartsWidget', array(
 			'options'=>array(
 				'tooltip'=>array(

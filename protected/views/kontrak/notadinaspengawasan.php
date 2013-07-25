@@ -7,6 +7,9 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 ?>
 
 <div id="pagecontent">
+	<div id="sidebar">	
+		<?php if(!Yii::app()->user->isGuest) $this->widget('KontrakPortlet'); ?>
+	</div>
 
 	<div id="maincontent">
 	
@@ -133,7 +136,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<br/>
 			<h4><b> Daftar Dokumen </b></h4>
 			<ul class="generatedoc">				
-				<li><?php echo CHtml::link('Nota Dinas ireksi dan Pengawasan', array('docx/download','id'=>$notadinaspengawasan->id_dokumen)); ?></li>
+				<li><?php echo CHtml::link('Nota Dinas Direksi dan Pengawasan', array('docx/download','id'=>$notadinaspengawasan->id_dokumen)); ?></li>
 			</ul>
 		</div>
 	

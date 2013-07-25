@@ -276,7 +276,7 @@ class Pengadaan extends CActiveRecord
 //                $criteria->compare($this->sisahari(),$this->sisahari,true);
 				
 		// $criteria->compare('sisahari',$this->sisaHari(),true);
-		$criteria->addcondition("status='37'");		
+		$criteria->addcondition("status='37' || status='38' || status='39'");		
  
 		// $criteria->order = 'ABS(status)';
 		
@@ -850,7 +850,7 @@ class Pengadaan extends CActiveRecord
 		else if($this->status == '32' || $this->status == '33' || $this->status == '34' || $this->status == '35' || $this->status == '36'){
 			return 'Penentuan Pemenang';
 		}
-		else if($this->status == '37'){
+		else if($this->status == '37' || $this->status == '38' || $this->status == '39'){
 			return 'Kontrak';
 		}
 		else if($this->status == '99'){
