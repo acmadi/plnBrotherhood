@@ -18,6 +18,7 @@ class AnggaranController extends Controller
 			$hpstotal=0;
 			$kontraktotal=0;
 			$i=0;
+			$chartdata = array();
 			foreach ($divisi as $item) {
 				$paguanggaran=0;
 				$rab=0;
@@ -31,16 +32,23 @@ class AnggaranController extends Controller
 					$kontrak=$kontrak+$pengadaan->biaya;
 					$jumlahkontrak++;
 				}
+				$penghematan=$paguanggaran-$kontrak;
 				$pagutotal=$pagutotal+$paguanggaran;
 				$rabtotal=$rabtotal+$rab;
 				$hpstotal=$hpstotal+$hps;
 				$kontraktotal=$kontraktotal+$kontrak;
+				$penghematantotal=$pagutotal-$kontraktotal;
+				$data=array();
+				array_push($data,$paguanggaran);
+				array_push($data,$rab);
+				array_push($data,$hps);
+				array_push($data,$kontrak);
+				array_push($data,$penghematan);
 				if($kontrak!=0) {
 					$rab=RupiahMaker::convertIntTanpaRp($rab);
 					$paguanggaran=RupiahMaker::convertIntTanpaRp($paguanggaran);
 					$hps=RupiahMaker::convertIntTanpaRp($hps);
 					$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
-					$penghematan=$paguanggaran-$kontrak;
 					$persenpenghematan=$penghematan*100/$paguanggaran;
 					$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
 				} else {
@@ -53,13 +61,13 @@ class AnggaranController extends Controller
 				}
 				$anggaran[$i]= array('id_divisi'=>$item->id_divisi,'nama_divisi'=>$item->nama_divisi,'pagu_anggaran'=>$paguanggaran,'nilai_rab'=>$rab,'nilai_hps'=>$hps,'nilai_kontrak'=>$kontrak,'penghematan'=>$penghematan,'persentase'=>$persenpenghematan);
 				$i++;
+				array_push($chartdata, array('name'=>array($item->nama_singkat), 'data'=>$data));
 			}
 			if($kontraktotal!=0) {
 				$rabtotal=RupiahMaker::convertInt($rabtotal);
 				$pagutotal=RupiahMaker::convertInt($pagutotal);
 				$hpstotal=RupiahMaker::convertInt($hpstotal);
 				$kontraktotal=RupiahMaker::convertInt($kontraktotal);
-				$penghematantotal=$pagutotal-$kontraktotal;
 				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
 				$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
 			} else {
@@ -79,7 +87,7 @@ class AnggaranController extends Controller
 				),
 				'keyField'=>'id_divisi',
 			));
-			$this->render('kontrolanggaran', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
+			$this->render('kontrolanggaran', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun, 'chartdata'=>$chartdata,
 			));
 		}
 		else {

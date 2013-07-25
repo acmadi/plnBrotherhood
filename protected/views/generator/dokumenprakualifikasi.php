@@ -70,7 +70,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$cpengadaan->nama_pengadaan;
 		</div>
 		
 		<div class="row">
-			<?php echo $form->labelEx($DPK,'kurun_waktu_pengalaman'); ?>
+			<?php echo $form->labelEx($DPK,'kurun_waktu_pengalaman (dalam satuan tahun)'); ?>
 			<?php echo $form->textField($DPK,'kurun_waktu_pengalaman',array('size'=>56,'maxlength'=>256)); ?>
 			<?php echo $form->error($DPK,'kurun_waktu_pengalaman'); ?>
 		</div>

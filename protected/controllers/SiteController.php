@@ -119,16 +119,16 @@ class SiteController extends Controller
 		if (Yii::app()->user->isGuest) {
 			$this->redirect(array('site/login'));
 		}
-		else {
+		else if (Yii::app()->user->getState('role') == 'kdivmum'||Yii::app()->user->getState('role') == 'divisi') {
+			$id= Yii::app()->getRequest()->getQuery('id');
 			$Pengadaan=Pengadaan::model()->findByPk($id);
-			$Pengadaan->status ='99';
-			
 			$model=new Dokumen('search');
 			$model->unsetAttributes();  // clear any default values
 			if(isset($_GET['Dokumen'])){
 				$model->attributes=$_GET['Dokumen'];
 			}
 			if(isset($_POST['Pengadaan'])){
+				$Pengadaan->status ='99';
 				if($Pengadaan->save(false)){
 					$this->redirect(array('detailpengadaan','id'=>$id));
 				}
@@ -136,6 +136,8 @@ class SiteController extends Controller
 			$this->render('detailpengadaan', array(
 				'model'=>$model,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 
@@ -198,21 +200,6 @@ class SiteController extends Controller
 			}
 			$this->render('detaildokumen');
 		}
-	}
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
-
-	private function in_multiarray($needle, $haystack) {
-		if(in_array($needle, $haystack)) {
-			return true;
-		}
-		foreach($haystack as $element) {
-			if(is_array($element) && $this->in_multiarray($needle, $element))
-				return true;
-			}
-		return false;
 	}
 
 	/**
@@ -390,6 +377,8 @@ class SiteController extends Controller
 			$this->render('tambahpengadaan1',array(
 				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'Dokumen0'=>$Dokumen0,'Dokumen1'=>$Dokumen1,'Dokumen2'=>$Dokumen2,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -439,6 +428,8 @@ class SiteController extends Controller
 			$this->render('tambahpengadaan1',array(
 				'Pengadaan'=>$Pengadaan,'NDP'=>$NDP,'Dokumen0'=>$Dokumen0,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -497,6 +488,8 @@ class SiteController extends Controller
 			);
 
 			$this->render('tambahpengadaan2',array('modelDok'=>$modelDok));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -546,6 +539,8 @@ class SiteController extends Controller
 				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
 			));
 
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -581,6 +576,8 @@ class SiteController extends Controller
 				'NDPTR'=>$NDPTR,'Dokumen0'=>$Dokumen0,
 			));
 
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -649,6 +646,8 @@ class SiteController extends Controller
 			$this->render('tunjukpanitia',array(
 				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'NDP'=>$NDP,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 	
@@ -694,6 +693,8 @@ class SiteController extends Controller
 			$this->render('tunjukpanitia',array(
 				'Pengadaan'=>$Pengadaan,'NDPP'=>$NDPP,'Dokumen0'=>$Dokumen0,'NDP'=>$NDP,
 			));
+		} else {
+			$this->redirect(array('terlarang'));
 		}
 	}
 
