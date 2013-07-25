@@ -95,6 +95,7 @@
 		),
 		'nama',
 		'email',
+		'jabatan',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{delete}',
