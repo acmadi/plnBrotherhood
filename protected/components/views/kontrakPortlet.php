@@ -2,7 +2,16 @@
 /* @var $this SiteController */
 
 	$id = Yii::app()->getRequest()->getQuery('id');
-	$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');	
+	$cpengadaan = Pengadaan::model()->find('id_pengadaan = "' . $id . '"');
+		$DokNDP = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Permintaan"');	
+	if($DokNDP!=null){
+		$ndp = NotaDinasPermintaan::model()->findByPk($DokNDP->id_dokumen);
+	}
+	
+	$DokHPS = Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "HPS"');
+	if($DokHPS!=null){
+		$hps = HPS::model()->findByPk($DokHPS->id_dokumen);
+	}
 ?>
 
 <ul>
