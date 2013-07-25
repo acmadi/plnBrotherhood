@@ -201,21 +201,6 @@ class SiteController extends Controller
 			$this->render('detaildokumen');
 		}
 	}
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
-
-	private function in_multiarray($needle, $haystack) {
-		if(in_array($needle, $haystack)) {
-			return true;
-		}
-		foreach($haystack as $element) {
-			if(is_array($element) && $this->in_multiarray($needle, $element))
-				return true;
-			}
-		return false;
-	}
 
 	/**
 	 * This is the action to handle external exceptions.
