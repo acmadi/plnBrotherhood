@@ -12,13 +12,13 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 	
 		<div id="menuform">
 		<?php
-								$this->widget('zii.widgets.CMenu', array(
-										'items'=>array(
-											array('label'=>'Surat Kontrak', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Kontrak"') == null)?'/kontrak/suratkontrak':'/kontrak/editsuratkontrak','id'=>$id)),
-											array('label'=>'Nota Dinas Pengawasan', 'url'=>array((Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Kontrak"') == null?'':(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Pengawasan"') == null?'/kontrak/notadinaspengawasan':'/kontrak/editnotadinaspengawasan')),'id'=>$id)),
-										),
-								));
-								?>
+			$this->widget('zii.widgets.CMenu', array(
+					'items'=>array(
+						array('label'=>'Surat Kontrak', 'url'=>array((Dokumen::model()->find('id_pengadaan = ' .$id. ' and nama_dokumen = "Surat Kontrak"') == null)?'/kontrak/suratkontrak':'/kontrak/editsuratkontrak','id'=>$id)),
+						array('label'=>'Nota Dinas Pengawasan', 'url'=>array((Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Surat Kontrak"') == null?'':(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Pengawasan"') == null?'/kontrak/notadinaspengawasan':'/kontrak/editnotadinaspengawasan')),'id'=>$id)),
+					),
+			));
+			?>
 		</div>
 		
 		<?php if(Yii::app()->user->hasFlash('sukses')): ?>

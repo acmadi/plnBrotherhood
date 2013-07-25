@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2013 at 09:36 AM
+-- Generation Time: Jul 25, 2013 at 10:04 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -562,7 +562,7 @@ CREATE TABLE IF NOT EXISTS `nota_dinas_pengawasan` (
   `jabatan_pengawas` varchar(255) NOT NULL,
   `email_pengawas` varchar(255) NOT NULL,
   KEY `id_dokumen` (`id_dokumen`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `nota_dinas_pengawasan`
@@ -1309,6 +1309,12 @@ ALTER TABLE `nota_dinas_penetapan_pemenang`
 --
 ALTER TABLE `nota_dinas_pengadaan_gagal_panitia`
   ADD CONSTRAINT `nota_dinas_pengadaan_gagal_panitia_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nota_dinas_pengawasan`
+--
+ALTER TABLE `nota_dinas_pengawasan`
+  ADD CONSTRAINT `nota_dinas_pengawasan_ibfk_1` FOREIGN KEY (`id_dokumen`) REFERENCES `dokumen` (`id_dokumen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nota_dinas_perintah_pengadaan`

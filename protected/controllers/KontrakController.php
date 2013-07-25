@@ -89,7 +89,48 @@
 				$this->render('suratkontrak',array('id'=>$id, 'suratkontrak'=>$suratkontrak,'dokumenkontrak'=>$DokumenKontrak));	
 		}
 		
-		public function actionNotadinaspengawas(){}
+		public function actionNotadinaspengawas(){
+			$id = Yii::app()->getRequest()->getQuery("id");
+			if(Yii::app()->user->isGuest){
+				$this->redirect(array('site/login'));				
+			} else {
+				if(Dokumen::model()->find('id_pengadaan = '.$id. ' and nama_dokumen = "Nota Dinas Pengawasan"') != null){
+					$this->redirect(array('editnotadinaspengawasa', 'id'=>$id));		
+				}
+						
+				$newDokumen= new Dokumen;
+				$criteria=new CDbcriteria;
+				$criteria->select='max(id_dokumen) AS maxId';
+				$row = $newDokumen->model()->find($criteria);
+				$somevariable = $row['maxId'];
+				$newDokumen->id_dokumen=$somevariable + 1;
+				$newDokumen->nama_dokumen="Surat Kontrak";
+				date_default_timezone_set("Asia/Jakarta");
+				$newDokumen->tanggal=date('Y-m-d');
+				$newDokumen->tempat="Jakarta";
+				$newDokumenKontrak->id_pengadaan=$id;
+				$newDokumen->status_upload="Belum Selesai";
+				
+				$notadinaspengawasan = new NotaDinasPengawasan;
+				$notadinaspengawasan->id_dokumen = $newDokumen->id_dokumen;
+				
+				if(isset($_POST['NotaDinasPengawasan'])){
+				$notadinaspengawasan->attributes=$_POST['NotaDinasPengawasan'];
+				$valid=$notadinaspengawasan->validate();
+				$valid=$valid&&$newDokumen->validate();
+				if($valid){
+					if($Pengadaan->save(false)){
+						if($newDokumen->save(false)){
+							if($notadinaspengawasan->save(false)){
+								$this->redirect(array('editnotadinaspengawasa', 'id'=>$id, 'notadinaspengawasan'=>$notadinaspengawasan));											
+							}
+						}
+					}
+				}
+				}
+				$this->render('notadinaspengawasan',array('id'=>$id, 'notadinaspengawasan'=>$notadinaspengawasan));				
+			}
+		}
 		
 	}
 ?>
