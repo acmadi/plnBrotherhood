@@ -41,7 +41,7 @@
 					'items'=>array(
 						array('label'=>'Beranda', 'url'=>array('/site/dashboard'), 'visible'=>!Yii::app()->user->getState('asAdmin')),
 						array('label'=>'Permintaan', 'url'=>array('/site/permintaan'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (Yii::app()->user->getState('role') == 'kdivmum' || Yii::app()->user->getState('role') == 'divisi')),
-						array('label'=>'Kontrak', 'url'=>array('/kontrak/dashboardkontrak'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"'))),
+						array('label'=>'Kontrak', 'url'=>array('/kontrak/dashboardkontrak'), 'visible'=>!Yii::app()->user->getState('asAdmin') && ((UserKontrak::model()->exists('username = "' . Yii::app()->user->name . '"')) || Yii::app()->user->getState('role') == 'kdivmum')),
 						array('label'=>'Arsip', 'url'=>array('/site/history'), 'visible'=>!Yii::app()->user->getState('asAdmin')),
 						array('label'=>'Statistik', 'url'=>array('/statistik'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (Yii::app()->user->getState('role') == 'kdivmum')),
 						array('label'=>'Kontrol Anggaran', 'url'=>array('/anggaran/kontrolanggaran'), 'visible'=>!Yii::app()->user->getState('asAdmin') && (Yii::app()->user->getState('role') == 'kdivmum')),

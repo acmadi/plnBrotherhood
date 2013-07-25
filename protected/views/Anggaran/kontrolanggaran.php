@@ -10,6 +10,41 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 		<?php echo CHtml::submitButton('OK',array("class"=>'sidafbutton')); ?>
 	<?php echo CHtml::endForm();?>
 </div></div>
+
+<br/><br/>
+<?php $this->widget('HighchartsWidget', array(
+			'options'=>array(
+				'chart'=>array(
+					'type'=>'column',
+				),
+				'tooltip'=>array(
+					'valueSuffix' => ' millions'
+				),
+				'title'=>array('Anggaran'),
+				'subtitle'=>array('text'=>array('')),
+				'plotOptions'=>array(
+					'column'=>array(
+						'dataLabels'=>array (
+							'enabled'=> true
+						)					
+					),
+				),
+				'series'=>$chartdata,
+				'xAxis'=>array (
+					'categories'=>array ('Pagu Anggaran','RAB', 'HPS', 'Kontrak', 'Penghematan')
+				),
+				'yAxis'=>array (
+					'min' => 0,
+						'title'=>array (
+							'text'=> 'Nilai',
+						),
+						'labels'=>array(
+							'overflow'=> 'justify'
+						)
+				),
+			),
+		));
+?>
 <br/><br/>
 <?php
 	$this->widget('zii.widgets.CDetailView', array(
@@ -49,3 +84,4 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran';
 		'summaryText' => 'Keterangan : Angka dalam satuan rupiah.',
 	));
 ?>
+

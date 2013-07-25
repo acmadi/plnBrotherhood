@@ -14,7 +14,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrak';
 			'filter'=>$model,
 			"ajaxUpdate"=>false,	            
 			'htmlOptions'=>array('style'=>'cursor: pointer;'),			
-			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
+			'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("kontrak/detailkontrak", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 			'columns'=>array(
 	//			array(
 	//				'name'=>'No',
@@ -124,24 +124,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrak';
 					'name'=>'statusgan',
 					'value'=>'$data->dapatkanStatus()',
 					'filter'=>'',
-				),			
-				
-				array (
-					  'name'=>'progressgan',                                    
-					  'value'=>'$this->grid->Controller->createWidget(
-										  "zii.widgets.jui.CJuiProgressBar",array(
-												"value"=>$data->progressPengadaan(),
-												"htmlOptions"=>array(
-													"style"=>"width:100px; height:20px; float:left;margin-left:30px; background-color:#44F44F ;background:#EFFDFF;",
-												"color" => "red",
-													// "options"=>array(
-													  // "change"=>new CJavaScriptExpression("function(event, ui)) {}
-													// ),
-												),					
-										  )
-									   )->run()',
-								'filter'=>'',
-				),							
+				),										
 			),
 			'pager'=>array(
 					'class'=>'CLinkPager',
