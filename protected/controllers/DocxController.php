@@ -1289,6 +1289,12 @@ class DocxController extends Controller
 			$biaya = RupiahMaker::convertInt($NDPP->pagu_anggaran);
 			$biayaterbilang = RupiahMaker::terbilangMaker($NDPP->pagu_anggaran);
 			
+			$tanggalpengambilan1 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pengambilan1);
+			$tanggalpengambilan2 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pengambilan2);
+			$waktupengambilan1 = Tanggal::getJamMenit($DPK->waktu_pengambilan1);
+			$waktupengambilan2 = Tanggal::getJamMenit($DPK->waktu_pengambilan2);
+			$tempatpengambilan = $DPK->tempat_pengambilan;
+			
 			$tanggalpemasukan1 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pemasukan1);
 			$tanggalpemasukan2 = Tanggal::getHariTanggalLengkap($DPK->tanggal_pemasukan2);
 			$waktupemasukan1 = Tanggal::getJamMenit($DPK->waktu_pemasukan1);
@@ -1310,6 +1316,12 @@ class DocxController extends Controller
 			$kurunwaktu = $DPK->kurun_waktu_pengalaman;
 			$kurunwaktuterbilang = RupiahMaker::terbilangMaker($DPK->kurun_waktu_pengalaman);
 			
+			$tanggalpengambilandokumen1 = Tanggal::getHariTanggalLengkap($RKS->tanggal_pengambilan_dokumen1);
+			$tanggalpengambilandokumen2 = Tanggal::getHariTanggalLengkap($RKS->tanggal_pengambilan_dokumen2);
+			$waktupengambilandokumen1 = Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen1);
+			$waktupengambilandokumen2 = Tanggal::getJamMenit($RKS->waktu_pengambilan_dokumen2);
+			$tempatpengambilandokumen = $RKS->tempat_pengambilan_dokumen;
+			
 			$penyetuju = Jabatan::model()->findByPk($NDPP->dari)->jabatan;
 			$namapenyetuju = kdivmum::model()->find('id_jabatan = '.$NDPP->dari)->nama;
 				
@@ -1329,6 +1341,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#sumberdana#', $sumberdana);
 			$this->doccy->phpdocx->assign('#biaya#', $biaya);
 			$this->doccy->phpdocx->assign('#biayaterbilang#', $biayaterbilang);
+			$this->doccy->phpdocx->assign('#tanggalpengambilan1#', $tanggalpengambilan1);
+			$this->doccy->phpdocx->assign('#tanggalpengambilan2#', $tanggalpengambilan2);
+			$this->doccy->phpdocx->assign('#waktupengambilan1#', $waktupengambilan1);
+			$this->doccy->phpdocx->assign('#waktupengambilan2#', $waktupengambilan2);
+			$this->doccy->phpdocx->assign('#tempatpengambilan#', $tempatpengambilan);
 			$this->doccy->phpdocx->assign('#tanggalpemasukan1#', $tanggalpemasukan1);
 			$this->doccy->phpdocx->assign('#tanggalpemasukan2#', $tanggalpemasukan2);
 			$this->doccy->phpdocx->assign('#waktupemasukan1#', $waktupemasukan1);
@@ -1337,6 +1354,11 @@ class DocxController extends Controller
 			$this->doccy->phpdocx->assign('#tanggalevaluasi#', $tanggalevaluasi);
 			$this->doccy->phpdocx->assign('#waktuevaluasi#', $waktuevaluasi);
 			$this->doccy->phpdocx->assign('#tempatevaluasi#', $tempatevaluasi);
+			$this->doccy->phpdocx->assign('#tanggalpengambilandokumenpengadaan1#', $tanggalpengambilandokumen1);
+			$this->doccy->phpdocx->assign('#tanggalpengambilandokumenpengadaan2#', $tanggalpengambilandokumen2);
+			$this->doccy->phpdocx->assign('#waktupengambilandokumenpengadaan1#', $waktupengambilandokumen1);
+			$this->doccy->phpdocx->assign('#waktupengambilandokumenpengadaan2#', $waktupengambilandokumen2);
+			$this->doccy->phpdocx->assign('#tempatpengambilandokumenpengadaan#', $tempatpengambilandokumen);
 			$this->doccy->phpdocx->assign('#tanggalpenetapan#', $tanggalpenetapan);
 			$this->doccy->phpdocx->assign('#waktupenetapan#', $waktupenetapan);
 			$this->doccy->phpdocx->assign('#tempatpenetapan#', $tempatpenetapan);

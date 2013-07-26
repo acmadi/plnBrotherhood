@@ -108,6 +108,8 @@ class AnggaranController extends Controller
 			$kontraktotal=0;
 			$pengadaan= Pengadaan::model()->findAll('divisi_peminta = "'.$id.'" and year(tanggal_masuk) = '.$tahun.' and status = "100"');
 			$i=0;
+			$chartdata = array();
+			
 			foreach($pengadaan as $item) {
 				$paguanggaran=NotaDinasPerintahPengadaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$item->id_pengadaan.' and nama_dokumen = "Nota Dinas Perintah Pengadaan"')->id_dokumen)->pagu_anggaran;
 				$rab=NotaDinasPermintaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$item->id_pengadaan.' and nama_dokumen = "Nota Dinas Permintaan"')->id_dokumen)->nilai_biaya_rab;
@@ -117,13 +119,21 @@ class AnggaranController extends Controller
 				$rabtotal=$rabtotal+$rab;
 				$hpstotal=$hpstotal+$hps;
 				$kontraktotal=$kontraktotal+$kontrak;
+				$penghematan=$paguanggaran-$kontrak;
 				$jumlahkontrak++;
+
+				$data=array();
+				array_push($data,$paguanggaran);
+				array_push($data,$rab);
+				array_push($data,$hps);
+				array_push($data,$kontrak);
+				array_push($data,$penghematan);
+				
 				if($kontrak!=0) {
 					$rab=RupiahMaker::convertIntTanpaRp($rab);
 					$paguanggaran=RupiahMaker::convertIntTanpaRp($paguanggaran);
 					$hps=RupiahMaker::convertIntTanpaRp($hps);
 					$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
-					$penghematan=$paguanggaran-$kontrak;
 					$persenpenghematan=$penghematan*100/$paguanggaran;
 					$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
 				} else {
@@ -136,6 +146,7 @@ class AnggaranController extends Controller
 				}
 				$anggaran[$i]= array('id_pengadaan'=>$item->id_pengadaan,'nama_pengadaan'=>$item->nama_pengadaan,'pagu_anggaran'=>$paguanggaran,'nilai_rab'=>$rab,'nilai_hps'=>$hps,'nilai_kontrak'=>$kontrak,'penghematan'=>$penghematan,'persentase'=>$persenpenghematan);
 				$i++;
+				array_push($chartdata, array('name'=>array($item->nama_pengadaan), 'data'=>$data));
 			}
 			if($kontraktotal!=0) {
 				$rabtotal=RupiahMaker::convertInt($rabtotal);
@@ -162,7 +173,7 @@ class AnggaranController extends Controller
 				),
 				'keyField'=>'id_pengadaan',
 			));
-			$this->render('kontrolanggarandivisi', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,
+			$this->render('kontrolanggarandivisi', array('dataanggaran'=>$dataanggaran,'anggarantotal'=>$anggarantotal,'tahun'=>$tahun,'chartdata'=>$chartdata,
 			));
 		}
 		else {

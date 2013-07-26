@@ -126,9 +126,7 @@ $this->pageTitle=Yii::app()->name . ' | '.$Pengadaan->nama_pengadaan;
 			<?php echo $form->labelEx($BAEP,'tempat'); ?>
 			<?php echo $form->textArea($BAEP,'tempat',array('cols'=>43,'rows'=>3, 'maxlength'=>100)); ?>
 			<?php echo $form->error($BAEP,'tempat'); ?>
-		</div>
-	
-		
+		</div>		
 		
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($BAEP->isNewRecord ? 'Simpan' : 'Perbarui',array('class'=>'sidafbutton')); ?>
