@@ -256,7 +256,7 @@ $dataProvider = new CActiveDataProvider(Dokumen::model(), array(
 			));
 		?>
 	</div>
-<?php }
+<?php } ?>
 
 <?php 
 	if($cpengadaan->status==100 || $cpengadaan->status==99){
