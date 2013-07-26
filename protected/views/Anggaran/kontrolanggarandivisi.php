@@ -13,7 +13,6 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran '.$divisi->nama_divisi;
 	<?php echo CHtml::endForm();?>
 </div></div>
 
-
 <br/><br/>
 <?php $this->widget('HighchartsWidget', array(
 			'options'=>array(
@@ -32,7 +31,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran '.$divisi->nama_divisi;
 						)					
 					),
 				),
-				'series'=>$chartdata,
+				'series' => $chartdata,
 				'xAxis'=>array (
 					'categories'=>array ('Pagu Anggaran','RAB', 'HPS', 'Kontrak', 'Penghematan')
 				),
