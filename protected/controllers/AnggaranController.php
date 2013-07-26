@@ -19,6 +19,7 @@ class AnggaranController extends Controller
 			$kontraktotal=0;
 			$i=0;
 			$chartdata = array();
+			
 			foreach ($divisi as $item) {
 				$paguanggaran=0;
 				$rab=0;
@@ -99,6 +100,9 @@ class AnggaranController extends Controller
 	{
 		$id = Yii::app()->getRequest()->getQuery('id');
 		$tahun = Yii::app()->getRequest()->getQuery('tahun');
+		if(isset($_POST['tahun'])) {				
+			$tahun = $_POST['tahun'];
+		}
 		if (Yii::app()->user->getState('role') == 'kdivmum') {
 			$anggaran = array();
 			$jumlahkontrak=0;
@@ -115,6 +119,7 @@ class AnggaranController extends Controller
 				$rab=NotaDinasPermintaan::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$item->id_pengadaan.' and nama_dokumen = "Nota Dinas Permintaan"')->id_dokumen)->nilai_biaya_rab;
 				$hps=Hps::model()->findByPk(Dokumen::model()->find('id_pengadaan = '.$item->id_pengadaan.' and nama_dokumen = "HPS"')->id_dokumen)->nilai_hps;
 				$kontrak=$item->biaya;
+				
 				$pagutotal=$pagutotal+$paguanggaran;
 				$rabtotal=$rabtotal+$rab;
 				$hpstotal=$hpstotal+$hps;
@@ -123,11 +128,11 @@ class AnggaranController extends Controller
 				$jumlahkontrak++;
 
 				$data=array();
-				array_push($data,$paguanggaran);
-				array_push($data,$rab);
-				array_push($data,$hps);
-				array_push($data,$kontrak);
-				array_push($data,$penghematan);
+				array_push($data,(int)$paguanggaran);
+				array_push($data,(int)$rab);
+				array_push($data,(int)$hps);
+				array_push($data,(int)$kontrak);
+				array_push($data,(int)$penghematan);
 				
 				if($kontrak!=0) {					
 					$persenpenghematan=$penghematan*100/$paguanggaran;
