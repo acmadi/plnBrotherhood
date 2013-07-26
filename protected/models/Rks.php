@@ -109,8 +109,9 @@ class Rks extends CActiveRecord
 			array('waktu_penunjukan_pemenang','check12'),
 			array('waktu_pengambilan_dokumen1','check13'),
 			array('waktu_pengambilan_dokumen2','check14'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			
+			array('tanggal_permintaan_penawaran','checkLibur'),
+			
 			array('id_dokumen, nomor, tipe_rks, bidang_usaha, sub_bidang_usaha, kualifikasi, klasifikasi, tanggal_pendaftaran, tanggal_pengambilan_dokumen1, tanggal_pengambilan_dokumen2, waktu_pengambilan_dokumen1, waktu_pengambilan_dokumen2, tempat_pengambilan_dokumen, tanggal_permintaan_penawaran, tanggal_penjelasan, waktu_penjelasan, tempat_penjelasan, tanggal_awal_pemasukan_penawaran1, tanggal_akhir_pemasukan_penawaran1, waktu_pemasukan_penawaran1, tempat_pemasukan_penawaran1, tanggal_pembukaan_penawaran1, waktu_pembukaan_penawaran1, tempat_pembukaan_penawaran1, tanggal_evaluasi_penawaran1, waktu_evaluasi_penawaran1, tempat_evaluasi_penawaran1, tanggal_awal_pemasukan_penawaran2, tanggal_akhir_pemasukan_penawaran2, waktu_pemasukan_penawaran2, tempat_pemasukan_penawaran2, tanggal_pembukaan_penawaran2, waktu_pembukaan_penawaran2, tempat_pembukaan_penawaran2, tanggal_evaluasi_penawaran2, waktu_evaluasi_penawaran2, tempat_evaluasi_penawaran2, tanggal_negosiasi, waktu_negosiasi, tempat_negosiasi, tanggal_usulan_pemenang, waktu_usulan_pemenang, tanggal_penetapan_pemenang, waktu_penetapan_pemenang, tanggal_pemberitahuan_pemenang, waktu_pemberitahuan_pemenang, tanggal_penunjukan_pemenang, waktu_penunjukan_pemenang, sistem_evaluasi_penawaran, jangka_waktu_penyerahan, tempat_penyerahan, lama_pelaksanaan, jangka_waktu_berlaku_jaminan, biaya_jaminan_pelaksanaan', 'safe', 'on'=>'search'),
 		);
 	}
@@ -345,4 +346,33 @@ class Rks extends CActiveRecord
 			$this->addError($attribute, 'Waktu tidak sesuai dengan format');
 		}
 	}
+	
+	public function checkLibur($attribute,$params){
+		$arrayLibur = Libur::model()->findAll();
+		$jmlLibur = count(Libur::model()->findAll());
+		$arrayLibur2 = array();
+		
+		for($i=0;$i<$jmlLibur;$i++){
+			$arrayLibur2[$i] = $arrayLibur[$i]->tanggal;
+		} 
+		
+		if($this->isTglLibur($this->attributes['tanggal_permintaan_penawaran'],$arrayLibur2)){
+			$this->addError($attribute, 'Tanggal tidak boleh tanggal libur');
+			// $this->addError($attribute, 'Tanggal tidak dapat dipilih karena tanggal tersebut merupakan ' . );
+		}
+	}
+	
+	public function isTglLibur($tgl,$arrayTgl){
+		$a = false;
+		$i = 0;
+		while($a==false && $i!=count($arrayTgl)){
+			// if(($tgl('y')==$arrayTgl[$i]('y'))&&($tgl('m')==$arrayTgl[$i]('m'))&&($tgl('d')==$arrayTgl[$i]('d'))){
+			if(Tanggal::getTanggalLengkap($tgl)==Tanggal::getTanggalLengkap($arrayTgl[$i])){
+				$a = true;
+			}
+			$i++;
+		}
+		return $a;
+	}
+	
 }
