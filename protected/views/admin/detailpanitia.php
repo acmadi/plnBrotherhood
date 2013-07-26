@@ -37,8 +37,9 @@
 	</div>
 <?php endif; ?>
 
+<h2><?php echo $panitia->nama_panitia ?></h2>
+
 <div class="kelompokform">
-	<h2><?php echo $panitia->nama_panitia ?></h2>
 	<div class="form">
 		<?php $form=$this->beginWidget('CActiveForm', array(
 			'enableAjaxValidation'=>false,
