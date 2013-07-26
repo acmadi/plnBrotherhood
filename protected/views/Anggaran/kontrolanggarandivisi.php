@@ -21,7 +21,7 @@ $this->pageTitle=Yii::app()->name . ' | Kontrol Anggaran '.$divisi->nama_divisi;
 					'type'=>'column',
 				),
 				'tooltip'=>array(
-					'valueSuffix' => ' millions'
+					'valueSuffix' => ''
 				),
 				'title'=>array('Anggaran'),
 				'subtitle'=>array('text'=>array('')),

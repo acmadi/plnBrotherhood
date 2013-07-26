@@ -18,10 +18,10 @@ $this->pageTitle=Yii::app()->name . ' | Statistik Pengadaan per Divisi';
 	<div id="menuform">
 		<?php $this->widget('zii.widgets.CMenu', array(
 			'items'=>array(
-				array('label'=>'Berlangsung', 'url'=>array('statistik/divisi', 'chart'=>'1')),
-				array('label'=>'Selesai', 'url'=>array('statistik/divisi', 'chart'=>'2')),
-				array('label'=>'Gagal', 'url'=>array('statistik/divisi', 'chart'=>'3')),
-				array('label'=>'Total', 'url'=>array('statistik/divisi', 'chart'=>'4')),
+				array('label'=>'Berlangsung', 'url'=>array('statistik/pic', 'chart'=>'1')),
+				array('label'=>'Selesai', 'url'=>array('statistik/pic', 'chart'=>'2')),
+				array('label'=>'Gagal', 'url'=>array('statistik/pic', 'chart'=>'3')),
+				array('label'=>'Total', 'url'=>array('statistik/pic', 'chart'=>'4')),
 			),
 		));
 		?>

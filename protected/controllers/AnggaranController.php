@@ -44,12 +44,12 @@ class AnggaranController extends Controller
 				array_push($data,$hps);
 				array_push($data,$kontrak);
 				array_push($data,$penghematan);
-				if($kontrak!=0) {
+				if($kontrak!=0) {					
+					$persenpenghematan=$penghematan*100/$paguanggaran;
 					$rab=RupiahMaker::convertIntTanpaRp($rab);
 					$paguanggaran=RupiahMaker::convertIntTanpaRp($paguanggaran);
 					$hps=RupiahMaker::convertIntTanpaRp($hps);
 					$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
-					$persenpenghematan=$penghematan*100/$paguanggaran;
 					$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
 				} else {
 					$rab='-';
@@ -64,11 +64,11 @@ class AnggaranController extends Controller
 				array_push($chartdata, array('name'=>array($item->nama_singkat), 'data'=>$data));
 			}
 			if($kontraktotal!=0) {
+				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
 				$rabtotal=RupiahMaker::convertInt($rabtotal);
 				$pagutotal=RupiahMaker::convertInt($pagutotal);
 				$hpstotal=RupiahMaker::convertInt($hpstotal);
 				$kontraktotal=RupiahMaker::convertInt($kontraktotal);
-				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
 				$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
 			} else {
 				$pagutotal='-';
@@ -129,12 +129,12 @@ class AnggaranController extends Controller
 				array_push($data,$kontrak);
 				array_push($data,$penghematan);
 				
-				if($kontrak!=0) {
+				if($kontrak!=0) {					
+					$persenpenghematan=$penghematan*100/$paguanggaran;
 					$rab=RupiahMaker::convertIntTanpaRp($rab);
 					$paguanggaran=RupiahMaker::convertIntTanpaRp($paguanggaran);
 					$hps=RupiahMaker::convertIntTanpaRp($hps);
 					$kontrak=RupiahMaker::convertIntTanpaRp($kontrak);
-					$persenpenghematan=$penghematan*100/$paguanggaran;
 					$penghematan=RupiahMaker::convertIntTanpaRp($penghematan); 
 				} else {
 					$rab='-';
@@ -148,13 +148,14 @@ class AnggaranController extends Controller
 				$i++;
 				array_push($chartdata, array('name'=>array($item->nama_pengadaan), 'data'=>$data));
 			}
+			
+			$penghematantotal=$pagutotal-$kontraktotal;
 			if($kontraktotal!=0) {
+				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
 				$rabtotal=RupiahMaker::convertInt($rabtotal);
 				$pagutotal=RupiahMaker::convertInt($pagutotal);
 				$hpstotal=RupiahMaker::convertInt($hpstotal);
 				$kontraktotal=RupiahMaker::convertInt($kontraktotal);
-				$penghematantotal=$pagutotal-$kontraktotal;
-				$persenpenghematantotal=$penghematantotal*100/$pagutotal;
 				$penghematantotal=RupiahMaker::convertInt($penghematantotal); 
 			} else {
 				$pagutotal='-';
